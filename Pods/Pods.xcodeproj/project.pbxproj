@@ -1,0 +1,734 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00AB9667C6E85C84AA87F4055C95475D /* MMDrawerController+Subclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8C7441C9AF44704A488A065856C7B1 /* MMDrawerController+Subclass.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		127B9CA9F4343EFD865F7B9C38310B4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E38116E3E114EC5EEB8BDD8FC278AAD /* Foundation.framework */; };
+		1421E39CEE61D3429713A6CED01F976B /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0828402DCE440D28BFC9B8F6F40EFA /* MMDrawerBarButtonItem.m */; };
+		2550DF6FF42DCDC754EA66884350A548 /* MMDrawerBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F2D1253B19A3063BCA241F37774BA92 /* MMDrawerBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26B6064A86BDE84BE64CAD7BB331BCAC /* Pods-StudyBox_iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7404B27FE1E32253D37BB6C50B108944 /* Pods-StudyBox_iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0E7B14F4D9D011CDD02BE012EA02A5 /* MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C2F3A9B628F4420BA94F2EB35ED7951 /* MMDrawerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5EE766352167603EBBB487AF0852199A /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F5E77DBB226BAD089273E51309E202 /* MMDrawerController.m */; };
+		6710265C430A9681C2A7E140903B0EB8 /* Pods-StudyBox_iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E231E66223BBB8D04D02B206E9D561B /* Pods-StudyBox_iOS-dummy.m */; };
+		7F237B9CF6A4287B8D339031E9EF8491 /* Pods-StudyBox_iOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F38D6C38DF4AD7AB26A27A99148C7 /* Pods-StudyBox_iOSTests-dummy.m */; };
+		85D4AF32F0DADEEA93210F4698E8CA3E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC46D8E1725AFCDC92AC218208534CEB /* QuartzCore.framework */; };
+		9B192323ACA16866654291344D73E760 /* Pods-StudyBox_iOSTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 48AA3487F513135A0A634D8EEF190FF0 /* Pods-StudyBox_iOSTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F05BEE347DB5337FB5FA2BF9EC4693B /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5145DE96C5B17941DBCE7CABB846E154 /* UIViewController+MMDrawerController.m */; };
+		A071D0EC0B86BECDB1F5D44511AB4E1A /* MMDrawerVisualState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F6790485C21650BC51E59B5B3FC7FBB /* MMDrawerVisualState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A839EBBBCA86D330FC9C0638452877F0 /* MMDrawerController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDEE3A0134A907C31BB37CC27C1D77A /* MMDrawerController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC6B56B0A84A8EC4267D3BB01FADC31A /* MMDrawerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9129A8CE3825C2329BA3871995A105 /* MMDrawerController-dummy.m */; };
+		C2959FB7B565AB17B2C42BD301D7AD78 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 803033B054D215233ED28F75F0479E85 /* MMDrawerVisualState.m */; };
+		CAE2EF6171328E8B33AE6E7A2E96597B /* UIViewController+MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819A5105E6C346BD24FF9B552A2D5F8 /* UIViewController+MMDrawerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DBE59382CE3D54AE37614244FEB379D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E38116E3E114EC5EEB8BDD8FC278AAD /* Foundation.framework */; };
+		E27CC9CA4425CF9C36A8EE66F122E021 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E38116E3E114EC5EEB8BDD8FC278AAD /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B1413CB2AFC6E7D99CD837129FCC99A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96D3562E47E4792B0A6093A0323EB398;
+			remoteInfo = MMDrawerController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		196742628E2AEE1DE793D5E834EF327A /* MMDrawerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMDrawerController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CE45380AA674A6C66E9FE9BCEA64ADB /* Pods-StudyBox_iOSTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-StudyBox_iOSTests.modulemap"; sourceTree = "<group>"; };
+		1E231E66223BBB8D04D02B206E9D561B /* Pods-StudyBox_iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StudyBox_iOS-dummy.m"; sourceTree = "<group>"; };
+		29F5E77DBB226BAD089273E51309E202 /* MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerController.m; path = MMDrawerController/MMDrawerController.m; sourceTree = "<group>"; };
+		2C8C7441C9AF44704A488A065856C7B1 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MMDrawerController+Subclass.h"; path = "MMDrawerController/MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		3724077DB51404C3570CA191DE702D9A /* Pods-StudyBox_iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StudyBox_iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3B9129A8CE3825C2329BA3871995A105 /* MMDrawerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMDrawerController-dummy.m"; sourceTree = "<group>"; };
+		3C7E9B4876C2C2988DEC91CD5F471FEA /* Pods-StudyBox_iOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOS-resources.sh"; sourceTree = "<group>"; };
+		3F2D1253B19A3063BCA241F37774BA92 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerBarButtonItem.h; path = MMDrawerController/MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		4819A5105E6C346BD24FF9B552A2D5F8 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MMDrawerController.h"; path = "MMDrawerController/UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		482D1915D6142BA7E8973E59E221F680 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48AA3487F513135A0A634D8EEF190FF0 /* Pods-StudyBox_iOSTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StudyBox_iOSTests-umbrella.h"; sourceTree = "<group>"; };
+		4EF7E95436853A5C853E2BE071467F3A /* MMDrawerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController-prefix.pch"; sourceTree = "<group>"; };
+		5145DE96C5B17941DBCE7CABB846E154 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MMDrawerController.m"; path = "MMDrawerController/UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		557D55C22B4E6564E6E3748C134B07FA /* Pods-StudyBox_iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudyBox_iOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		5709943A39C039E3DBF6A992BC117509 /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5E38116E3E114EC5EEB8BDD8FC278AAD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		5F6790485C21650BC51E59B5B3FC7FBB /* MMDrawerVisualState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerVisualState.h; path = MMDrawerController/MMDrawerVisualState.h; sourceTree = "<group>"; };
+		7404B27FE1E32253D37BB6C50B108944 /* Pods-StudyBox_iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StudyBox_iOS-umbrella.h"; sourceTree = "<group>"; };
+		797E6CC91B91A301F37594ED7A86D39F /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		7E182B764BA5B8A41E0DB4794980BE80 /* Pods-StudyBox_iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-StudyBox_iOS.modulemap"; sourceTree = "<group>"; };
+		803033B054D215233ED28F75F0479E85 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerVisualState.m; path = MMDrawerController/MMDrawerVisualState.m; sourceTree = "<group>"; };
+		8252A05D33FB273BE15B9065D952865B /* MMDrawerController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MMDrawerController.modulemap; sourceTree = "<group>"; };
+		86DBFD10A8FB67386366432433496E0C /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		8C2F3A9B628F4420BA94F2EB35ED7951 /* MMDrawerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerController.h; path = MMDrawerController/MMDrawerController.h; sourceTree = "<group>"; };
+		8E0828402DCE440D28BFC9B8F6F40EFA /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerBarButtonItem.m; path = MMDrawerController/MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		8EE5090D509515A0651F50ECEFA83568 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92E300FA19DDC36DFFAE5D8881CCFFA2 /* Pods-StudyBox_iOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudyBox_iOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		A421093279A40E783589D923661289FA /* Pods-StudyBox_iOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOS-frameworks.sh"; sourceTree = "<group>"; };
+		ADDEE3A0134A907C31BB37CC27C1D77A /* MMDrawerController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController-umbrella.h"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BA90F8C3AFDDEF13CBC59A0CE490B060 /* Pods-StudyBox_iOSTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOSTests-frameworks.sh"; sourceTree = "<group>"; };
+		C98F38D6C38DF4AD7AB26A27A99148C7 /* Pods-StudyBox_iOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StudyBox_iOSTests-dummy.m"; sourceTree = "<group>"; };
+		CB103AC3CC3D8E7D53116EFC41E4368E /* Pods-StudyBox_iOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOSTests-resources.sh"; sourceTree = "<group>"; };
+		D701108BACD178D4A7380A26D18400B9 /* MMDrawerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMDrawerController.xcconfig; sourceTree = "<group>"; };
+		D78741CC2757835E7B7BD17846F3689A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFB4F68B265B62354243BECEC24F38F5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F63E81BF2F92BFC86E5EB5A484B3BDF6 /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		FC46D8E1725AFCDC92AC218208534CEB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		FD09AC5B74EF533CF55BAB764C85F87F /* Pods-StudyBox_iOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StudyBox_iOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FF21E815C9801154DEC63EA015B3686D /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6C3E6B00443065C899C5A7C99F878327 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				127B9CA9F4343EFD865F7B9C38310B4A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE46F03F680D2CA1FFC849F4A1D92B53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E27CC9CA4425CF9C36A8EE66F122E021 /* Foundation.framework in Frameworks */,
+				85D4AF32F0DADEEA93210F4698E8CA3E /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1A8F856C2389D2685B7A0DED8FE7675 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBE59382CE3D54AE37614244FEB379D8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0EF829A62FEC75F75FE9D5DEC715AAB3 /* Subclass */ = {
+			isa = PBXGroup;
+			children = (
+				2C8C7441C9AF44704A488A065856C7B1 /* MMDrawerController+Subclass.h */,
+			);
+			name = Subclass;
+			sourceTree = "<group>";
+		};
+		188B896382982B07CCD5903DBE442EF7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				44E863F16BECCD5A714FF42F4AAF66F7 /* MMDrawerController */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B0525A0EB9A9840C5D1396127AE7FEAF /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		44E863F16BECCD5A714FF42F4AAF66F7 /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				D32F2888C7DF64C1F3E055D04DA9A75A /* Core */,
+				AD08BA7FFDC16556BC248284DE265CAF /* MMDrawerBarButtonItem */,
+				5C67D1DB2EB3476A56F51441664805EC /* MMDrawerVisualStates */,
+				0EF829A62FEC75F75FE9D5DEC715AAB3 /* Subclass */,
+				8998B70C570DFF42141CA890394552C9 /* Support Files */,
+			);
+			path = MMDrawerController;
+			sourceTree = "<group>";
+		};
+		5C67D1DB2EB3476A56F51441664805EC /* MMDrawerVisualStates */ = {
+			isa = PBXGroup;
+			children = (
+				5F6790485C21650BC51E59B5B3FC7FBB /* MMDrawerVisualState.h */,
+				803033B054D215233ED28F75F0479E85 /* MMDrawerVisualState.m */,
+			);
+			name = MMDrawerVisualStates;
+			sourceTree = "<group>";
+		};
+		6ADE472B52D9048C66BC2D80B73CB127 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F0A6B133FB17420F6D3562FA03D032E6 /* Pods-StudyBox_iOS */,
+				73B51710B65052A331B04A12F3774401 /* Pods-StudyBox_iOSTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		73B51710B65052A331B04A12F3774401 /* Pods-StudyBox_iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				D78741CC2757835E7B7BD17846F3689A /* Info.plist */,
+				1CE45380AA674A6C66E9FE9BCEA64ADB /* Pods-StudyBox_iOSTests.modulemap */,
+				FD09AC5B74EF533CF55BAB764C85F87F /* Pods-StudyBox_iOSTests-acknowledgements.markdown */,
+				92E300FA19DDC36DFFAE5D8881CCFFA2 /* Pods-StudyBox_iOSTests-acknowledgements.plist */,
+				C98F38D6C38DF4AD7AB26A27A99148C7 /* Pods-StudyBox_iOSTests-dummy.m */,
+				BA90F8C3AFDDEF13CBC59A0CE490B060 /* Pods-StudyBox_iOSTests-frameworks.sh */,
+				CB103AC3CC3D8E7D53116EFC41E4368E /* Pods-StudyBox_iOSTests-resources.sh */,
+				48AA3487F513135A0A634D8EEF190FF0 /* Pods-StudyBox_iOSTests-umbrella.h */,
+				5709943A39C039E3DBF6A992BC117509 /* Pods-StudyBox_iOSTests.debug.xcconfig */,
+				86DBFD10A8FB67386366432433496E0C /* Pods-StudyBox_iOSTests.release.xcconfig */,
+			);
+			name = "Pods-StudyBox_iOSTests";
+			path = "Target Support Files/Pods-StudyBox_iOSTests";
+			sourceTree = "<group>";
+		};
+		76ADBF49A1714C6CF87DB2A10C7E7BAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				196742628E2AEE1DE793D5E834EF327A /* MMDrawerController.framework */,
+				482D1915D6142BA7E8973E59E221F680 /* Pods_StudyBox_iOS.framework */,
+				FF21E815C9801154DEC63EA015B3686D /* Pods_StudyBox_iOSTests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				188B896382982B07CCD5903DBE442EF7 /* Pods */,
+				76ADBF49A1714C6CF87DB2A10C7E7BAC /* Products */,
+				6ADE472B52D9048C66BC2D80B73CB127 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8998B70C570DFF42141CA890394552C9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DFB4F68B265B62354243BECEC24F38F5 /* Info.plist */,
+				8252A05D33FB273BE15B9065D952865B /* MMDrawerController.modulemap */,
+				D701108BACD178D4A7380A26D18400B9 /* MMDrawerController.xcconfig */,
+				3B9129A8CE3825C2329BA3871995A105 /* MMDrawerController-dummy.m */,
+				4EF7E95436853A5C853E2BE071467F3A /* MMDrawerController-prefix.pch */,
+				ADDEE3A0134A907C31BB37CC27C1D77A /* MMDrawerController-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MMDrawerController";
+			sourceTree = "<group>";
+		};
+		AD08BA7FFDC16556BC248284DE265CAF /* MMDrawerBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				3F2D1253B19A3063BCA241F37774BA92 /* MMDrawerBarButtonItem.h */,
+				8E0828402DCE440D28BFC9B8F6F40EFA /* MMDrawerBarButtonItem.m */,
+			);
+			name = MMDrawerBarButtonItem;
+			sourceTree = "<group>";
+		};
+		B0525A0EB9A9840C5D1396127AE7FEAF /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5E38116E3E114EC5EEB8BDD8FC278AAD /* Foundation.framework */,
+				FC46D8E1725AFCDC92AC218208534CEB /* QuartzCore.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D32F2888C7DF64C1F3E055D04DA9A75A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8C2F3A9B628F4420BA94F2EB35ED7951 /* MMDrawerController.h */,
+				29F5E77DBB226BAD089273E51309E202 /* MMDrawerController.m */,
+				4819A5105E6C346BD24FF9B552A2D5F8 /* UIViewController+MMDrawerController.h */,
+				5145DE96C5B17941DBCE7CABB846E154 /* UIViewController+MMDrawerController.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		F0A6B133FB17420F6D3562FA03D032E6 /* Pods-StudyBox_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8EE5090D509515A0651F50ECEFA83568 /* Info.plist */,
+				7E182B764BA5B8A41E0DB4794980BE80 /* Pods-StudyBox_iOS.modulemap */,
+				3724077DB51404C3570CA191DE702D9A /* Pods-StudyBox_iOS-acknowledgements.markdown */,
+				557D55C22B4E6564E6E3748C134B07FA /* Pods-StudyBox_iOS-acknowledgements.plist */,
+				1E231E66223BBB8D04D02B206E9D561B /* Pods-StudyBox_iOS-dummy.m */,
+				A421093279A40E783589D923661289FA /* Pods-StudyBox_iOS-frameworks.sh */,
+				3C7E9B4876C2C2988DEC91CD5F471FEA /* Pods-StudyBox_iOS-resources.sh */,
+				7404B27FE1E32253D37BB6C50B108944 /* Pods-StudyBox_iOS-umbrella.h */,
+				797E6CC91B91A301F37594ED7A86D39F /* Pods-StudyBox_iOS.debug.xcconfig */,
+				F63E81BF2F92BFC86E5EB5A484B3BDF6 /* Pods-StudyBox_iOS.release.xcconfig */,
+			);
+			name = "Pods-StudyBox_iOS";
+			path = "Target Support Files/Pods-StudyBox_iOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		079E9ACE8A655D5FED855E204442BDBD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2550DF6FF42DCDC754EA66884350A548 /* MMDrawerBarButtonItem.h in Headers */,
+				00AB9667C6E85C84AA87F4055C95475D /* MMDrawerController+Subclass.h in Headers */,
+				A839EBBBCA86D330FC9C0638452877F0 /* MMDrawerController-umbrella.h in Headers */,
+				2C0E7B14F4D9D011CDD02BE012EA02A5 /* MMDrawerController.h in Headers */,
+				A071D0EC0B86BECDB1F5D44511AB4E1A /* MMDrawerVisualState.h in Headers */,
+				CAE2EF6171328E8B33AE6E7A2E96597B /* UIViewController+MMDrawerController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		892AD77647C3B4123D1C352574CEB0FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26B6064A86BDE84BE64CAD7BB331BCAC /* Pods-StudyBox_iOS-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9638DDD4361EB37FA83C4E2ED4A6DC6A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B192323ACA16866654291344D73E760 /* Pods-StudyBox_iOSTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		179CAE53233260BE7AA8D85B7A39F50C /* Pods-StudyBox_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B8A9ABBA611317D59D4BDDCD2D3332E /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOS" */;
+			buildPhases = (
+				0AF65C3FF14845D014010F393D888894 /* Sources */,
+				D1A8F856C2389D2685B7A0DED8FE7675 /* Frameworks */,
+				892AD77647C3B4123D1C352574CEB0FC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6824249B91C87A4E970BF29E28569C19 /* PBXTargetDependency */,
+			);
+			name = "Pods-StudyBox_iOS";
+			productName = "Pods-StudyBox_iOS";
+			productReference = 482D1915D6142BA7E8973E59E221F680 /* Pods_StudyBox_iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		96D3562E47E4792B0A6093A0323EB398 /* MMDrawerController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 410F9B5264E3B131C74C0402F62B1BFE /* Build configuration list for PBXNativeTarget "MMDrawerController" */;
+			buildPhases = (
+				028CFEF24FF14F3EA36C26123757E0D7 /* Sources */,
+				AE46F03F680D2CA1FFC849F4A1D92B53 /* Frameworks */,
+				079E9ACE8A655D5FED855E204442BDBD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MMDrawerController;
+			productName = MMDrawerController;
+			productReference = 196742628E2AEE1DE793D5E834EF327A /* MMDrawerController.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ADB8D8F2D05E1619564483D85298F13B /* Pods-StudyBox_iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91E8EB4DC8E0B018C651FC4A9633F749 /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOSTests" */;
+			buildPhases = (
+				ED123F1509E3522D105EBCEF7C24DDC3 /* Sources */,
+				6C3E6B00443065C899C5A7C99F878327 /* Frameworks */,
+				9638DDD4361EB37FA83C4E2ED4A6DC6A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-StudyBox_iOSTests";
+			productName = "Pods-StudyBox_iOSTests";
+			productReference = FF21E815C9801154DEC63EA015B3686D /* Pods_StudyBox_iOSTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 76ADBF49A1714C6CF87DB2A10C7E7BAC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				96D3562E47E4792B0A6093A0323EB398 /* MMDrawerController */,
+				179CAE53233260BE7AA8D85B7A39F50C /* Pods-StudyBox_iOS */,
+				ADB8D8F2D05E1619564483D85298F13B /* Pods-StudyBox_iOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		028CFEF24FF14F3EA36C26123757E0D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1421E39CEE61D3429713A6CED01F976B /* MMDrawerBarButtonItem.m in Sources */,
+				AC6B56B0A84A8EC4267D3BB01FADC31A /* MMDrawerController-dummy.m in Sources */,
+				5EE766352167603EBBB487AF0852199A /* MMDrawerController.m in Sources */,
+				C2959FB7B565AB17B2C42BD301D7AD78 /* MMDrawerVisualState.m in Sources */,
+				9F05BEE347DB5337FB5FA2BF9EC4693B /* UIViewController+MMDrawerController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0AF65C3FF14845D014010F393D888894 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6710265C430A9681C2A7E140903B0EB8 /* Pods-StudyBox_iOS-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED123F1509E3522D105EBCEF7C24DDC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F237B9CF6A4287B8D339031E9EF8491 /* Pods-StudyBox_iOSTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6824249B91C87A4E970BF29E28569C19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMDrawerController;
+			target = 96D3562E47E4792B0A6093A0323EB398 /* MMDrawerController */;
+			targetProxy = B1413CB2AFC6E7D99CD837129FCC99A5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		095B8635AC67E9104B1B5001E9DC12E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86DBFD10A8FB67386366432433496E0C /* Pods-StudyBox_iOSTests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_StudyBox_iOSTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		23438D652B568A5805B7F86EE00DC7F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F63E81BF2F92BFC86E5EB5A484B3BDF6 /* Pods-StudyBox_iOS.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_StudyBox_iOS;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2CE16AC72762C01C5DC595053F1F2EF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		4BC862293915C25941D9A32197E84158 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D701108BACD178D4A7380A26D18400B9 /* MMDrawerController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MMDrawerController/MMDrawerController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MMDrawerController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MMDrawerController/MMDrawerController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = MMDrawerController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		55BFDE73C6CA9B0593CFFB8D87F16D98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5709943A39C039E3DBF6A992BC117509 /* Pods-StudyBox_iOSTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_StudyBox_iOSTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A29F7D0C251D0B63DCB5605259C1BDBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 797E6CC91B91A301F37594ED7A86D39F /* Pods-StudyBox_iOS.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_StudyBox_iOS;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C6544A1F1139551CE6C6C9B43404CFA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C9F0A6AD934BDF9BEE7AE6CB051AAB7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D701108BACD178D4A7380A26D18400B9 /* MMDrawerController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MMDrawerController/MMDrawerController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MMDrawerController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MMDrawerController/MMDrawerController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MMDrawerController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CE16AC72762C01C5DC595053F1F2EF4 /* Debug */,
+				C6544A1F1139551CE6C6C9B43404CFA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3B8A9ABBA611317D59D4BDDCD2D3332E /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A29F7D0C251D0B63DCB5605259C1BDBF /* Debug */,
+				23438D652B568A5805B7F86EE00DC7F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		410F9B5264E3B131C74C0402F62B1BFE /* Build configuration list for PBXNativeTarget "MMDrawerController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9F0A6AD934BDF9BEE7AE6CB051AAB7D /* Debug */,
+				4BC862293915C25941D9A32197E84158 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		91E8EB4DC8E0B018C651FC4A9633F749 /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55BFDE73C6CA9B0593CFFB8D87F16D98 /* Debug */,
+				095B8635AC67E9104B1B5001E9DC12E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

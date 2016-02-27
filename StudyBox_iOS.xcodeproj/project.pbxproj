@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BBF6515BCA59B54C59DD225 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3874D04EAEB001FC653BD7 /* Pods_StudyBox_iOSTests.framework */; };
+		6060F82D4846043A88C368BB /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E51599E3A6FD5DC93406231 /* Pods_StudyBox_iOS.framework */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
 		A1341DC21C81E76900AFD04E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DC11C81E76900AFD04E /* ViewController.swift */; };
 		A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC31C81E76900AFD04E /* Main.storyboard */; };
@@ -27,6 +29,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		148285BF22DCC2B654AF5E7D /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		2E3874D04EAEB001FC653BD7 /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E51599E3A6FD5DC93406231 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CB48FDCA6C59EE3F07F7E2C /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1341DC11C81E76900AFD04E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +44,8 @@
 		A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyBox_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBox_iOSTests.swift; sourceTree = "<group>"; };
 		A1341DD91C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5FA90293A312F297BD76B3B /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD4CF8DC76B9EC9A2E06DD71 /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6060F82D4846043A88C368BB /* Pods_StudyBox_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,18 +61,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BBF6515BCA59B54C59DD225 /* Pods_StudyBox_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38B1F5B29A6C985E3C63E020 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E51599E3A6FD5DC93406231 /* Pods_StudyBox_iOS.framework */,
+				2E3874D04EAEB001FC653BD7 /* Pods_StudyBox_iOSTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A1341DB31C81E76800AFD04E = {
 			isa = PBXGroup;
 			children = (
 				A1341DBE1C81E76900AFD04E /* StudyBox_iOS */,
 				A1341DD61C81E76900AFD04E /* StudyBox_iOSTests */,
 				A1341DBD1C81E76900AFD04E /* Products */,
+				C969B9927E1496A5062BBD84 /* Pods */,
+				38B1F5B29A6C985E3C63E020 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +120,17 @@
 			path = StudyBox_iOSTests;
 			sourceTree = "<group>";
 		};
+		C969B9927E1496A5062BBD84 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DD4CF8DC76B9EC9A2E06DD71 /* Pods-StudyBox_iOS.debug.xcconfig */,
+				148285BF22DCC2B654AF5E7D /* Pods-StudyBox_iOS.release.xcconfig */,
+				A5FA90293A312F297BD76B3B /* Pods-StudyBox_iOSTests.debug.xcconfig */,
+				9CB48FDCA6C59EE3F07F7E2C /* Pods-StudyBox_iOSTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +138,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1341DDC1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOS" */;
 			buildPhases = (
+				3D077DB37C93D4A5A0539DD7 /* Check Pods Manifest.lock */,
 				A1341DB81C81E76900AFD04E /* Sources */,
 				A1341DB91C81E76900AFD04E /* Frameworks */,
 				A1341DBA1C81E76900AFD04E /* Resources */,
+				5C3E9CCBC83BECADB9D6E52F /* Embed Pods Frameworks */,
+				8B6D99404CB7CCFB761DCAD2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,9 +158,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1341DDF1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOSTests" */;
 			buildPhases = (
+				EBBBBA979F9A7999A0C55771 /* Check Pods Manifest.lock */,
 				A1341DCF1C81E76900AFD04E /* Sources */,
 				A1341DD01C81E76900AFD04E /* Frameworks */,
 				A1341DD11C81E76900AFD04E /* Resources */,
+				CDF04BEAEBBA49C9A9DEF50A /* Embed Pods Frameworks */,
+				EB6496101B524B4363C5ABDF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -194,6 +232,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3D077DB37C93D4A5A0539DD7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5C3E9CCBC83BECADB9D6E52F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B6D99404CB7CCFB761DCAD2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDF04BEAEBBA49C9A9DEF50A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB6496101B524B4363C5ABDF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBBBBA979F9A7999A0C55771 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A1341DB81C81E76900AFD04E /* Sources */ = {
@@ -329,6 +460,7 @@
 		};
 		A1341DDD1C81E76900AFD04E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD4CF8DC76B9EC9A2E06DD71 /* Pods-StudyBox_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
@@ -340,6 +472,7 @@
 		};
 		A1341DDE1C81E76900AFD04E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 148285BF22DCC2B654AF5E7D /* Pods-StudyBox_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
@@ -351,6 +484,7 @@
 		};
 		A1341DE01C81E76900AFD04E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5FA90293A312F297BD76B3B /* Pods-StudyBox_iOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
@@ -363,6 +497,7 @@
 		};
 		A1341DE11C81E76900AFD04E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CB48FDCA6C59EE3F07F7E2C /* Pods-StudyBox_iOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
@@ -392,6 +527,7 @@
 				A1341DDE1C81E76900AFD04E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A1341DDF1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -400,6 +536,7 @@
 				A1341DE11C81E76900AFD04E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
