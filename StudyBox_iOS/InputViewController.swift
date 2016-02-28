@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InputViewControllerDataSource {
-    var inputViews:[UITextField]! { get set }
+    var inputViews:[UITextField] { get set }
 }
 
 
