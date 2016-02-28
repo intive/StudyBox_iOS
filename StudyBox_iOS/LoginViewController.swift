@@ -21,8 +21,12 @@ class LoginViewController: InputViewController,InputViewControllerDataSource {
         inputViews.append(emailTextField)
         inputViews.append(passwordTextField)
         logInButton.layer.cornerRadius = 10.0
-        dataSource = self
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        dataSource = self
     }
 
 }

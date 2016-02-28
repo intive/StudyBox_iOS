@@ -15,7 +15,7 @@ protocol InputViewControllerDataSource {
 
 /**
 Basic input view controller, which can dismiss keyboard by a down swipe gesture and adjust view origin for given `UITextField` inputs 
- - precondition: dataSource:`InputViewControllerDataSource` must not be nil
+ - precondition: dataSource:`InputViewControllerDataSource` must not be nil before entering `viewDidAppear` method
  - important: on method `viewWillDisappear:`, `dataSource` will be set to nil, otherwise there would be a risk of reference cycle
 */
 class InputViewController: UIViewController,UITextFieldDelegate  {
@@ -40,24 +40,24 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
         swipeGestureRecognizer.direction = .Down
         view.addGestureRecognizer(swipeGestureRecognizer)
     
-        let defaultCenter = NSNotificationCenter.defaultCenter()
-        defaultCenter.addObserver(self, selector: Selector("keyboardChangedFrame:"), name: UIKeyboardWillShowNotification, object: nil)
-        defaultCenter.addObserver(self, selector: Selector("keyboardChangedFrame:"), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         dataSourcePrecondition()
         dataSource!.inputViews.forEach {
             $0.delegate = self
         }
-        
+        let defaultCenter = NSNotificationCenter.defaultCenter()
+        defaultCenter.addObserver(self, selector: Selector("keyboardChangedFrame:"), name: UIKeyboardWillShowNotification, object: nil)
+        defaultCenter.addObserver(self, selector: Selector("keyboardChangedFrame:"), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        dataSource = nil 
+        dataSource = nil
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
@@ -107,10 +107,6 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
         dataSource!.inputViews.forEach {
             $0.resignFirstResponder()
         }
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
 }
