@@ -2,4 +2,4 @@
 set -e
 
 brew update
-brew install xctool
+brew install xctool || brew outdated xctool || brew upgrade xctool
