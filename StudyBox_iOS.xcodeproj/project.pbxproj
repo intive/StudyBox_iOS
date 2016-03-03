@@ -12,6 +12,11 @@
 		2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */; };
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		6060F82D4846043A88C368BB /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E51599E3A6FD5DC93406231 /* Pods_StudyBox_iOS.framework */; };
+		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
+		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
+		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
+		723849401C88851A009605EE /* EditFicheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFicheViewController.swift */; };
+		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
 		A1341DC21C81E76900AFD04E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DC11C81E76900AFD04E /* ViewController.swift */; };
@@ -39,6 +44,11 @@
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2E3874D04EAEB001FC653BD7 /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E51599E3A6FD5DC93406231 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
+		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
+		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		7238493F1C88851A009605EE /* EditFicheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFicheViewController.swift; sourceTree = "<group>"; };
+		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		9CB48FDCA6C59EE3F07F7E2C /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,16 +118,21 @@
 		A1341DBE1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
+				A1341DCE1C81E76900AFD04E /* Info.plist */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
+				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
 				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
 				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
+				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
+				723849411C8885F7009605EE /* ScoreViewController.swift */,
+				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
+				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				2D07C02D1C82FC5E00BF0107 /* Utils.swift */,
 				A1341DC11C81E76900AFD04E /* ViewController.swift */,
-				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
-				A1341DCE1C81E76900AFD04E /* Info.plist */,
+				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
 			);
 			path = StudyBox_iOS;
@@ -343,13 +358,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
+				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
 				A1341DC21C81E76900AFD04E /* ViewController.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
+				723849401C88851A009605EE /* EditFicheViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
+				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
+				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
