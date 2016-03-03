@@ -4,23 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="uUO-ii-Urr">
             <objects>
@@ -54,6 +37,9 @@
                                 <state key="normal" title="ZALOGUJ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="aro-8v-1NI" kind="show" identifier="LoginSegue" id="JP2-Sf-XfB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8E-Lg-vrU">
                                 <rect key="frame" x="175" y="399" width="250" height="28"/>
@@ -113,10 +99,87 @@
             </objects>
             <point key="canvasLocation" x="1373.25" y="355.5"/>
         </scene>
+        <!--Decks View Controller-->
+        <scene sceneID="3WR-l3-OEa">
+            <objects>
+                <viewController storyboardIdentifier="DecksViewControllerID" id="Ffq-5i-cZ4" customClass="DecksViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IKl-DI-6B1"/>
+                        <viewControllerLayoutGuide type="bottom" id="ciV-JI-n2z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a8B-r0-wHt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UXn-sV-c38" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2129" y="1105"/>
+        </scene>
+        <!--Edit Fiche View Controller-->
+        <scene sceneID="7mE-Ma-p0K">
+            <objects>
+                <viewController storyboardIdentifier="EditFicheViewControllerID" id="ymO-2a-kIL" customClass="EditFicheViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JEz-sa-tXr"/>
+                        <viewControllerLayoutGuide type="bottom" id="aWM-Xy-cjF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y4P-X8-cdB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Au-sZ-6dd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lRj-W9-DEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3703" y="17"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="c8G-O5-Kc4">
+            <objects>
+                <viewController storyboardIdentifier="TestViewControllerID" id="R1n-Jg-6st" customClass="TestViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2oJ-56-WsE"/>
+                        <viewControllerLayoutGuide type="bottom" id="UQ7-P5-IZu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XLk-2a-jl0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xWr-p3-6uJ"/>
+                    <connections>
+                        <segue destination="iPr-WN-tEa" kind="show" identifier="ScoreSegue" id="Cj2-Rh-J4e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RRb-xd-1f6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2983" y="692"/>
+        </scene>
+        <!--Score View Controller-->
+        <scene sceneID="Txw-WI-BOL">
+            <objects>
+                <viewController storyboardIdentifier="ScoreViewControllerID" id="iPr-WN-tEa" customClass="ScoreViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aHy-dx-DHa"/>
+                        <viewControllerLayoutGuide type="bottom" id="68g-el-gC1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="P8M-BQ-d77">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u35-3R-GDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3703" y="692"/>
+        </scene>
         <!--Registration View Controller-->
         <scene sceneID="mNW-uR-h94">
             <objects>
-                <viewController id="MeD-mH-qFY" customClass="RegistrationViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewControllerID" id="MeD-mH-qFY" customClass="RegistrationViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X2v-HG-tFC"/>
                         <viewControllerLayoutGuide type="bottom" id="9w1-Td-v16"/>
@@ -170,6 +233,9 @@
                                         <state key="normal" title="ZAREJESTRUJ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="aro-8v-1NI" kind="show" identifier="RegisterSegue" id="thT-h8-77P"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zs-qr-d1p">
                                         <rect key="frame" x="70" y="313" width="38" height="28"/>
@@ -208,10 +274,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Pi-fz-1nu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1369" y="1044"/>
+            <point key="canvasLocation" x="1373" y="1105"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Onc-Ed-41u">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationControllerMainID" automaticallyAdjustsScrollViewInsets="NO" id="aro-8v-1NI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Svu-LR-MjX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="R1n-Jg-6st" kind="relationship" relationship="rootViewController" id="kSR-pY-yAU"/>
+                        <segue destination="A3p-Ld-x0F" kind="presentation" identifier="EditFicheSegue" id="pUv-3q-a2a"/>
+                        <segue destination="Ffq-5i-cZ4" kind="show" identifier="DecksViewSegue" id="kaO-g4-SgC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kXA-fg-MRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2129" y="355"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="o9V-6l-qjk">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationControllerSecondaryID" automaticallyAdjustsScrollViewInsets="NO" id="A3p-Ld-x0F" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kbC-CG-zgL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ymO-2a-kIL" kind="relationship" relationship="rootViewController" id="SED-53-pqF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aUB-N5-SUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2983" y="17"/>
         </scene>
     </scenes>
     <resources>
         <image name="Logo" width="381" height="539"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="thT-h8-77P"/>
+    </inferredMetricsTieBreakers>
 </document>
