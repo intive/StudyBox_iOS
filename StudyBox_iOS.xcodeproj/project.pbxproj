@@ -25,6 +25,9 @@
 		A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC91C81E76900AFD04E /* Assets.xcassets */; };
 		A1341DCD1C81E76900AFD04E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */; };
 		A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */; };
+		CEE9F6961C8A231D00961ABA /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9F6951C8A231D00961ABA /* Fonts.swift */; };
+		CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */; };
+		CEE9F69A1C8AE1F800961ABA /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,11 +61,14 @@
 		A1341DC71C81E76900AFD04E /* StudyBox_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyBox_iOS.xcdatamodel; sourceTree = "<group>"; };
 		A1341DC91C81E76900AFD04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1341DCC1C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A1341DCE1C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1341DCE1C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = StudyBox_iOS/Info.plist; sourceTree = "<group>"; };
 		A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyBox_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBox_iOSTests.swift; sourceTree = "<group>"; };
 		A1341DD91C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5FA90293A312F297BD76B3B /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CEE9F6951C8A231D00961ABA /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
+		CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		DD4CF8DC76B9EC9A2E06DD71 /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +109,7 @@
 				A1341DBD1C81E76900AFD04E /* Products */,
 				C969B9927E1496A5062BBD84 /* Pods */,
 				38B1F5B29A6C985E3C63E020 /* Frameworks */,
+				CEE9F6901C8A159100961ABA /* Fonts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,12 +125,12 @@
 		A1341DBE1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A1341DCE1C81E76900AFD04E /* Info.plist */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
 				7238493B1C88847F009605EE /* DecksViewController.swift */,
 				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
 				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
 				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
+				CEE9F6951C8A231D00961ABA /* Fonts.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
 				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
@@ -156,6 +163,16 @@
 				9CB48FDCA6C59EE3F07F7E2C /* Pods-StudyBox_iOSTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CEE9F6901C8A159100961ABA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A1341DCE1C81E76900AFD04E /* Info.plist */,
+				CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */,
+				CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +264,8 @@
 			files = (
 				A1341DCD1C81E76900AFD04E /* LaunchScreen.storyboard in Resources */,
 				A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */,
+				CEE9F69A1C8AE1F800961ABA /* Lato-Regular.ttf in Resources */,
+				CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */,
 				A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +379,7 @@
 			files = (
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
+				CEE9F6961C8A231D00961ABA /* Fonts.swift in Sources */,
 				A1341DC21C81E76900AFD04E /* ViewController.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
 				723849401C88851A009605EE /* EditFicheViewController.swift in Sources */,
