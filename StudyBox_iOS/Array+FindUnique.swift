@@ -8,25 +8,36 @@
 
 import Foundation
 
-extension Array {
+extension Array where Element: UniquelyIdentifiable {
     
     
-    /**
-     If array elements are of type `UniqueModelId` the method will return element with ID param
-     - parameter withId: id to look for
-    */
     func findUniqe(withId id:String)->Element? {
-        var i = 0;
-        while (i < self.count){
-            if let current = self[i] as? UniqueModelId {
-                if (current.id == id){
-                    return self[i]
-                }
+        for element in self {
+            if element.id == id {
+                return element
             }
-            i = i + 1;
         }
+        return nil 
+    }
+    
+    func indexOfUnique(id:String)->Int? {
+        for (index,element) in self.enumerate() {
+            if element.id == id {
+                return index
+            }
+        }
+        return nil 
+    }
+    
+    func generateNewId()->String {
+        var id = ""
+        var found:Element?
+        repeat {
+            id = NSUUID().UUIDString
+            found = findUniqe(withId: id)
+        }while(found != nil)
         
-        return nil
+        return id
     }
     
 }

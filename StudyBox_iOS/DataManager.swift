@@ -31,48 +31,33 @@ class DataManager {
         return decks;
     }
     
-    
-    func downloadDecks()->[Deck]? {
-        //TODO wait for backend
-        return nil 
-    }
-    
     func getDeck(byId id:String)->Deck? {
-        let unique:Deck? = decks.findUniqe(withId: id)
-        return unique
+        return decks.findUniqe(withId: id)
         
     }
     
     func updateDeck(data:Deck)throws {
-        
-        if let index = decks.indexOf(data) {
+        if let index = decks.indexOfUnique(data.id){
             decks[index] = data
         }else {
-            throw DataManagerError.NoDeckWithGivenId
+            DataManagerError.NoDeckWithGivenId
         }
         
     }
     
     func addDeck(name:String)->String {
         
-        var validId = false
-        var id = ""
-        while(!validId){
-            id = randomId()
-            
-            validId = !Bool(decks.filter( { $0.id == id }).count)
-        }
-        
+        let id = decks.generateNewId()
         decks.append(Deck(id: id, name: name))
         
         return id
     }
     
-    func removeDeck(data:Deck)throws {
-        if let index = decks.indexOf(data){
+    func removeDeck(withId id:String) throws {
+        if let index = decks.indexOfUnique(id){
             
             flashcards = flashcards.filter {
-                $0.deckId != data.id
+                $0.deckId != id
             }
             
             decks.removeAtIndex(index)
@@ -80,40 +65,35 @@ class DataManager {
             throw DataManagerError.NoDeckWithGivenId
         }
     }
-    
-    
-    func downloadFlashcards()->[Flashcard]? {
-        //TODO wait for backend 
-        return nil
+    func removeDeck(data:Deck)throws {
+        return try removeDeck(withId: data.id)
     }
     
+    
     func getFlashcard(byId id:String)->Flashcard? {
-        let unique:Flashcard? = flashcards.findUniqe(withId: id)
-        return unique
+        return flashcards.findUniqe(withId: id)
     }
     
     
     func getFlashcards(forDeckWithId id:String) throws ->[Flashcard] {
         
-        if (decks.findUniqe(withId: id) == nil){
+        if let deck = decks.findUniqe(withId: id){
+            return flashcards.filter {
+                $0.deckId == deck.id
+            }
+        }else {
             throw DataManagerError.NoDeckWithGivenId
         }
-        let result = flashcards.filter {
-            $0.deckId == id
-        }
         
-        return result
     }
     
     func getFlashcards(forDeck deck:Deck)throws ->[Flashcard] {
-        if let result = try? getFlashcards(forDeckWithId: deck.id){
-            return result
-        }
-        throw DataManagerError.NoDeckWithGivenId
+        return try getFlashcards(forDeckWithId: deck.id)
+        
     }
     
     func updateFlashcard(data:Flashcard)throws {
-        if let index = flashcards.indexOf(data){
+        if let index = flashcards.indexOfUnique(data.id){
             flashcards[index] = data
         }else {
             throw DataManagerError.NoFlashcardWithGivenId
@@ -126,13 +106,7 @@ class DataManager {
             throw DataManagerError.NoDeckWithGivenId
         }
         
-        var validId = false
-        var flashcardId = ""
-        while(!validId){
-            flashcardId = randomId()
-            
-            validId = !Bool(flashcards.filter( { $0.id == flashcardId }).count)
-        }
+        let flashcardId = flashcards.generateNewId()
         
         flashcards.append(Flashcard(id: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip))
         return flashcardId
@@ -140,37 +114,22 @@ class DataManager {
     
     func addFlashcard(forDeck deck:Deck, question:String,answer:String,tip:Tip?)throws -> String  {
         
-        if let resultId = try? addFlashcard(forDeckWithId: deck.id, question: question, answer: answer, tip: tip){
-            return resultId
-        }
-        throw DataManagerError.NoDeckWithGivenId
+        return try addFlashcard(forDeckWithId: deck.id, question: question, answer: answer, tip: tip)
+        
     }
     
-    
-    func removeFlashcard(data:Flashcard)throws{
-        if let index = flashcards.indexOf(data){
+    func removeFlashcard(withId id:String)throws {
+        if let index = flashcards.indexOfUnique(id){
             flashcards.removeAtIndex(index)
         }else {
             throw DataManagerError.NoFlashcardWithGivenId
         }
-        
     }
     
-    
-    func randomId()->String {
-        var i = 0;
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".characters
-        let length = UInt32(letters.count)
-        
-        var random = String()
-        while (i < 32){
-            let rand = Int(arc4random_uniform(length))
-            
-            random.append(letters[letters.startIndex.advancedBy(rand)])
-            i = i + 1;
-        }
-        return random
+    func removeFlashcard(data:Flashcard)throws {
+        return try removeFlashcard(withId: data.id)
     }
+    
     
     
 }

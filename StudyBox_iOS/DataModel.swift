@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UniqueModelId {
+protocol UniquelyIdentifiable {
     var id:String {get }
 }
 
@@ -26,10 +26,7 @@ enum Tip:CustomStringConvertible,Equatable  {
     
 }
 
-/**
- Flashcards are equall if their IDs are, use `equals` method to compare their contents and IDs
-*/
-struct Flashcard:Equatable,UniqueModelId {
+struct Flashcard:Equatable,UniquelyIdentifiable {
     private var _id:String
     var id:String  {
         get {
@@ -56,15 +53,9 @@ struct Flashcard:Equatable,UniqueModelId {
         self.tip = tip
     }
     
-    func equals(another:Flashcard)->Bool {
-        return id == another.id && deckId == another.deckId && question == another.question && answer == another.answer && tip == another.tip
-    }
 }
 
-/**
- Decks are equall if their IDs are, use `equals` method to compare their contents and IDs
- */
-struct Deck:Equatable,UniqueModelId {
+struct Deck:Equatable,UniquelyIdentifiable {
     
     private var _id:String
     var id:String {
@@ -79,19 +70,15 @@ struct Deck:Equatable,UniqueModelId {
         self.name = name
     }
     
-    func equals(another:Deck)->Bool {
-        return id == another.id && name == another.name
-    }
-    
 }
 
 
 func ==(lhs:Deck,rhs:Deck)->Bool {
-    return lhs.id == rhs.id 
+    return lhs.id == rhs.id && lhs.name == rhs.name
 }
 
 func ==(lhs:Flashcard,rhs:Flashcard)->Bool {
-    return lhs.id == rhs.id 
+    return lhs.id == rhs.id && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer && lhs.tip == rhs.tip
 }
 
 
