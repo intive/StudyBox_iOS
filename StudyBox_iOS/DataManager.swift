@@ -93,29 +93,23 @@ class DataManager {
     }
     
     
-    func getFlashcards(forDeck deck:Deck)throws ->[Flashcard] {
-        if (!decks.contains(deck)){
+    func getFlashcards(forDeckWithId id:String) throws ->[Flashcard] {
+        
+        if (decks.findUniqe(withId: id) == nil){
             throw DataManagerError.NoDeckWithGivenId
         }
-        var result = [Flashcard]()
-        
-        flashcards.forEach {
-            if $0.deckId == deck.id {
-                result.append($0)
-            }
+        let result = flashcards.filter {
+            $0.deckId == id
         }
         
         return result
     }
     
-    func getFlashcards(forDeckWithId id:String) throws ->[Flashcard] {
-        let dummyDeck = Deck(id: id, name: "")
-        if let result = try? getFlashcards(forDeck: dummyDeck) {
+    func getFlashcards(forDeck deck:Deck)throws ->[Flashcard] {
+        if let result = try? getFlashcards(forDeckWithId: deck.id){
             return result
-        }else {
-            throw DataManagerError.NoDeckWithGivenId
         }
-        
+        throw DataManagerError.NoDeckWithGivenId
     }
     
     func updateFlashcard(data:Flashcard)throws {
@@ -126,31 +120,30 @@ class DataManager {
         }
     }
     
+    func addFlashcard(forDeckWithId deckId:String, question:String,answer:String,tip:Tip?)throws -> String  {
+        
+        if (decks.findUniqe(withId: deckId) == nil){
+            throw DataManagerError.NoDeckWithGivenId
+        }
+        
+        var validId = false
+        var flashcardId = ""
+        while(!validId){
+            flashcardId = randomId()
+            
+            validId = !Bool(flashcards.filter( { $0.id == flashcardId }).count)
+        }
+        
+        flashcards.append(Flashcard(id: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip))
+        return flashcardId
+    }
     
     func addFlashcard(forDeck deck:Deck, question:String,answer:String,tip:Tip?)throws -> String  {
         
-        if (!decks.contains(deck)){
-            throw DataManagerError.NoDeckWithGivenId
+        if let resultId = try? addFlashcard(forDeckWithId: deck.id, question: question, answer: answer, tip: tip){
+            return resultId
         }
-        var validId = false
-        var id = ""
-        while(!validId){
-            id = randomId()
-            
-            validId = !Bool(flashcards.filter( { $0.id == id }).count)
-        }
-        
-        flashcards.append(Flashcard(id: id, deckId: deck.id, question: question, answer: answer, tip: tip))
-        return id
-    }
-    
-    func addFlashcard(forDeckWithId id:String, question:String,answer:String,tip:Tip?)throws -> String  {
-        
-        let dummyDeck = Deck(id: id, name: "")
-        guard let id = try? addFlashcard(forDeck: dummyDeck, question: question, answer: answer, tip: tip) else {
-            throw DataManagerError.NoDeckWithGivenId
-        }
-        return id
+        throw DataManagerError.NoDeckWithGivenId
     }
     
     
@@ -162,7 +155,6 @@ class DataManager {
         }
         
     }
-    
     
     
     func randomId()->String {
