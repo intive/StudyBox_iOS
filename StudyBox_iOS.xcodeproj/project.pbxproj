@@ -150,7 +150,11 @@
 				2D2843651C88CEDE006E5E21 /* Model */,
 				A1341DCE1C81E76900AFD04E /* Info.plist */,
 =======
+<<<<<<< Updated upstream
 >>>>>>> b370d82d5e63c6fb423d5d653be2a11d494aef6a
+=======
+>>>>>>> 77f9535c32a9688059143a5a75aa46b19d78e2dc
+>>>>>>> Stashed changes
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
 				7238493B1C88847F009605EE /* DecksViewController.swift */,
 				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
