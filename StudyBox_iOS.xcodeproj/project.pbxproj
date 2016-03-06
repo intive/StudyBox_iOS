@@ -25,7 +25,7 @@
 		A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC91C81E76900AFD04E /* Assets.xcassets */; };
 		A1341DCD1C81E76900AFD04E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */; };
 		A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */; };
-		CE686D6A1C89F3D600BEFDD6 /* Logic_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE686D691C89F3D600BEFDD6 /* Logic_Test.swift */; };
+		CEFE29A51C8C69B60043E219 /* LogicTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE29A41C8C69B60043E219 /* LogicTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,7 @@
 		A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBox_iOSTests.swift; sourceTree = "<group>"; };
 		A1341DD91C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5FA90293A312F297BD76B3B /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CE686D691C89F3D600BEFDD6 /* Logic_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logic_Test.swift; sourceTree = "<group>"; };
+		CEFE29A41C8C69B60043E219 /* LogicTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicTest.swift; sourceTree = "<group>"; };
 		DD4CF8DC76B9EC9A2E06DD71 /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,7 +100,6 @@
 		A1341DB31C81E76800AFD04E = {
 			isa = PBXGroup;
 			children = (
-				CE686D691C89F3D600BEFDD6 /* Logic_Test.swift */,
 				A1341DBE1C81E76900AFD04E /* StudyBox_iOS */,
 				A1341DD61C81E76900AFD04E /* StudyBox_iOSTests */,
 				A1341DBD1C81E76900AFD04E /* Products */,
@@ -137,6 +136,7 @@
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
+				CEFE29A41C8C69B60043E219 /* LogicTest.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -363,7 +363,6 @@
 			files = (
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
-				CE686D6A1C89F3D600BEFDD6 /* Logic_Test.swift in Sources */,
 				A1341DC21C81E76900AFD04E /* ViewController.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
 				723849401C88851A009605EE /* EditFicheViewController.swift in Sources */,
@@ -371,6 +370,7 @@
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
+				CEFE29A51C8C69B60043E219 /* LogicTest.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
 				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,
