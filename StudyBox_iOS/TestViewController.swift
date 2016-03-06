@@ -77,8 +77,7 @@ class TestViewController: StudyBoxViewController {
   @IBAction func correctAnswerAction(sender: AnyObject) {
     
     //TODO: check if there are any questions left
-    /*
-    */
+    
     answeredQuestionTransition()
     testScore++
     scoreLabel.text = "\(testScore) / \(questionsInDeck)"
@@ -112,15 +111,12 @@ class TestViewController: StudyBoxViewController {
     
   }
   
-  func setNewFlashcard(newFlashcard:Int) -> (Bool) {
+  func isLastFlashcard(newFlashcard:Int) -> (Bool) {
     //returns true if Flashcard that is about to be set is the last one
     
     if (newFlashcard == questionsInDeck){
     return true
     } else {
-      
-      
-      
       return false
     }
   
