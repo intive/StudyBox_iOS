@@ -147,7 +147,7 @@
         <!--Edit Fiche View Controller-->
         <scene sceneID="7mE-Ma-p0K">
             <objects>
-                <viewController storyboardIdentifier="EditFicheViewControllerID" id="ymO-2a-kIL" customClass="EditFicheViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ymO-2a-kIL" customClass="EditFicheViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JEz-sa-tXr"/>
                         <viewControllerLayoutGuide type="bottom" id="aWM-Xy-cjF"/>
@@ -161,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRj-W9-DEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3753" y="429"/>
+            <point key="canvasLocation" x="4565" y="429"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="c8G-O5-Kc4">
@@ -217,7 +217,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-Xe-scq">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrawerCellId" textLabel="m86-hQ-g9n" style="IBUITableViewCellStyleDefault" id="yFe-bm-kgx">
                                         <rect key="frame" x="0.0" y="50" width="600" height="44"/>
@@ -230,7 +230,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="570" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -377,6 +377,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CMC-Ji-ZLG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2941" y="1189"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VXf-gi-gbi">
+            <objects>
+                <navigationController storyboardIdentifier="EditFicheViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivF-VU-xcN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ymO-2a-kIL" kind="relationship" relationship="rootViewController" id="MET-Y3-8Ff"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a4y-HT-Gb0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3753" y="429"/>
         </scene>
     </scenes>
     <resources>
