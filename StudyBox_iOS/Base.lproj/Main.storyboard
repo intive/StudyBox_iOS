@@ -114,7 +114,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="tEk-2O-Rit" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DecksViewCellID" id="tEk-2O-Rit" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="216" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -134,10 +134,16 @@
                                     <constraint firstItem="pTH-nG-DZZ" firstAttribute="centerX" secondItem="tEk-2O-Rit" secondAttribute="centerX" id="HPC-B0-3J3"/>
                                     <constraint firstItem="pTH-nG-DZZ" firstAttribute="centerY" secondItem="tEk-2O-Rit" secondAttribute="centerY" id="OM8-5K-e0V"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="deckNameLabel" destination="pTH-nG-DZZ" id="piW-pY-isW"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                     </collectionView>
                     <navigationItem key="navigationItem" id="A5s-mE-wGR"/>
+                    <connections>
+                        <outlet property="decksCollectionView" destination="GYH-gI-OCB" id="rNF-sl-T7O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXn-sV-c38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,4 +10,6 @@ import UIKit
 
 class DecksViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var deckNameLabel: UILabel!
+    
 }
