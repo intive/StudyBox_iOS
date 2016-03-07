@@ -112,6 +112,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="A5s-mE-wGR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXn-sV-c38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -287,9 +288,9 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="R1n-Jg-6st" kind="relationship" relationship="rootViewController" id="kSR-pY-yAU"/>
                         <segue destination="A3p-Ld-x0F" kind="presentation" identifier="EditFicheSegue" id="pUv-3q-a2a"/>
-                        <segue destination="Ffq-5i-cZ4" kind="show" identifier="DecksViewSegue" id="kaO-g4-SgC"/>
+                        <segue destination="R1n-Jg-6st" kind="show" identifier="TestSegue" id="xcf-Iv-zdU"/>
+                        <segue destination="Ffq-5i-cZ4" kind="relationship" relationship="rootViewController" id="ODg-ZI-zAB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kXA-fg-MRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
