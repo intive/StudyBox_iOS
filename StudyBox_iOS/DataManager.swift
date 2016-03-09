@@ -21,24 +21,23 @@ class DataManager {
     private var decks = [Deck]()
     private var flashcards = [Flashcard]()
     
-    func getDecks(sorted:Bool )->[Deck] {
+    func decks(sorted:Bool )->[Deck] {
         if (sorted){
             return decks.sort {
                 $0.name > $1.name
             }
         }
-        
         return decks;
     }
     
-    func getDeck(byId id:String)->Deck? {
+    func deck(withId id:String)->Deck? {
         return decks.findUniqe(withId: id)
         
     }
     
-    func updateDeck(data:Deck)throws {
-        if let index = decks.indexOfUnique(data.id){
-            decks[index] = data
+    func updateDeck(deck:Deck)throws {
+        if let index = decks.indexOfUnique(deck.id){
+            decks[index] = deck
         }else {
             DataManagerError.NoDeckWithGivenId
         }
@@ -65,19 +64,20 @@ class DataManager {
             throw DataManagerError.NoDeckWithGivenId
         }
     }
-    func removeDeck(data:Deck)throws {
-        return try removeDeck(withId: data.id)
+    
+    func removeDeck(deck:Deck)throws {
+        return try removeDeck(withId: deck.id)
     }
     
     
-    func getFlashcard(byId id:String)->Flashcard? {
+    func flashcard(withId id:String)->Flashcard? {
         return flashcards.findUniqe(withId: id)
     }
     
     
-    func getFlashcards(forDeckWithId id:String) throws ->[Flashcard] {
+    func flashcards(forDeckWithId deckId:String) throws ->[Flashcard] {
         
-        if let deck = decks.findUniqe(withId: id){
+        if let deck = decks.findUniqe(withId: deckId){
             return flashcards.filter {
                 $0.deckId == deck.id
             }
@@ -87,8 +87,9 @@ class DataManager {
         
     }
     
-    func getFlashcards(forDeck deck:Deck)throws ->[Flashcard] {
-        return try getFlashcards(forDeckWithId: deck.id)
+    
+    func flashcards(forDeck deck:Deck)throws ->[Flashcard] {
+        return try flashcards(forDeckWithId: deck.id)
         
     }
     

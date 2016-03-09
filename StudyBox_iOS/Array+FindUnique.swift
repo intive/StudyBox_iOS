@@ -30,14 +30,7 @@ extension Array where Element: UniquelyIdentifiable {
     }
     
     func generateNewId()->String {
-        var id = ""
-        var found:Element?
-        repeat {
-            id = NSUUID().UUIDString
-            found = findUniqe(withId: id)
-        }while(found != nil)
-        
-        return id
+        return NSUUID().UUIDString
     }
     
 }
