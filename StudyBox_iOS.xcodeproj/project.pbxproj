@@ -11,6 +11,11 @@
 		2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */; };
 		2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */; };
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
+		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
+		2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843681C88D03D006E5E21 /* DataManager.swift */; };
+		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
+		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
+		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		6060F82D4846043A88C368BB /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E51599E3A6FD5DC93406231 /* Pods_StudyBox_iOS.framework */; };
 		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
@@ -45,6 +50,11 @@
 		2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		2D2843681C88D03D006E5E21 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
+		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
+		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
 		2E3874D04EAEB001FC653BD7 /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E51599E3A6FD5DC93406231 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +102,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D2843651C88CEDE006E5E21 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D2843661C88CEEC006E5E21 /* DataModel.swift */,
+				2D2843681C88D03D006E5E21 /* DataManager.swift */,
+				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
+				2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		38B1F5B29A6C985E3C63E020 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +120,22 @@
 				2E3874D04EAEB001FC653BD7 /* Pods_StudyBox_iOSTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		725DE1FF1C8C3F0100C89BB8 /* View Controllers classes */ = {
+			isa = PBXGroup;
+			children = (
+				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
+				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
+				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
+				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
+				723849411C8885F7009605EE /* ScoreViewController.swift */,
+				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
+				7238493D1C8884DD009605EE /* TestViewController.swift */,
+				A1341DC11C81E76900AFD04E /* ViewController.swift */,
+			);
+			name = "View Controllers classes";
 			sourceTree = "<group>";
 		};
 		A1341DB31C81E76800AFD04E = {
@@ -125,18 +162,11 @@
 		A1341DBE1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				725DE1FF1C8C3F0100C89BB8 /* View Controllers classes */,
+				2D2843651C88CEDE006E5E21 /* Model */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
-				7238493B1C88847F009605EE /* DecksViewController.swift */,
-				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
-				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
-				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
 				CEE9F6951C8A231D00961ABA /* Fonts.swift */,
-				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
-				723849411C8885F7009605EE /* ScoreViewController.swift */,
-				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
-				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				2D07C02D1C82FC5E00BF0107 /* Utils.swift */,
-				A1341DC11C81E76900AFD04E /* ViewController.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
@@ -150,6 +180,7 @@
 			children = (
 				A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */,
 				A1341DD91C81E76900AFD04E /* Info.plist */,
+				2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */,
 			);
 			path = StudyBox_iOSTests;
 			sourceTree = "<group>";
@@ -395,6 +426,8 @@
 				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
 				CEE9F6961C8A231D00961ABA /* Fonts.swift in Sources */,
 				A1341DC21C81E76900AFD04E /* ViewController.swift in Sources */,
+				2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */,
+				2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
 				723849401C88851A009605EE /* EditFicheViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
@@ -402,6 +435,8 @@
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
+				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
+				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
 				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,
 			);
@@ -412,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */,
+				2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
