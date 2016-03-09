@@ -182,12 +182,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1341DDC1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOS" */;
 			buildPhases = (
-				3D077DB37C93D4A5A0539DD7 /* Check Pods Manifest.lock */,
+				3D077DB37C93D4A5A0539DD7 /* 📦 Check Pods Manifest.lock */,
 				A1341DB81C81E76900AFD04E /* Sources */,
 				A1341DB91C81E76900AFD04E /* Frameworks */,
 				A1341DBA1C81E76900AFD04E /* Resources */,
-				5C3E9CCBC83BECADB9D6E52F /* Embed Pods Frameworks */,
-				8B6D99404CB7CCFB761DCAD2 /* Copy Pods Resources */,
+				5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */,
+				8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */,
+				239883ED1C907D1300B87667 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -202,12 +203,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1341DDF1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOSTests" */;
 			buildPhases = (
-				EBBBBA979F9A7999A0C55771 /* Check Pods Manifest.lock */,
+				EBBBBA979F9A7999A0C55771 /* 📦 Check Pods Manifest.lock */,
 				A1341DCF1C81E76900AFD04E /* Sources */,
 				A1341DD01C81E76900AFD04E /* Frameworks */,
 				A1341DD11C81E76900AFD04E /* Resources */,
-				CDF04BEAEBBA49C9A9DEF50A /* Embed Pods Frameworks */,
-				EB6496101B524B4363C5ABDF /* Copy Pods Resources */,
+				CDF04BEAEBBA49C9A9DEF50A /* 📦 Embed Pods Frameworks */,
+				EB6496101B524B4363C5ABDF /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,14 +281,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3D077DB37C93D4A5A0539DD7 /* Check Pods Manifest.lock */ = {
+		239883ED1C907D1300B87667 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/Fabric/run df5c0e5c314f7db69f78f9f1846ca9a3a4b6efa3 0ed0b0f4cdb9339dd1e65f808f9417c12a33106a13ef08382e849d15844dffd4\n";
+		};
+		3D077DB37C93D4A5A0539DD7 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,14 +309,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		5C3E9CCBC83BECADB9D6E52F /* Embed Pods Frameworks */ = {
+		5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,14 +324,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8B6D99404CB7CCFB761DCAD2 /* Copy Pods Resources */ = {
+		8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,14 +339,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CDF04BEAEBBA49C9A9DEF50A /* Embed Pods Frameworks */ = {
+		CDF04BEAEBBA49C9A9DEF50A /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,14 +354,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB6496101B524B4363C5ABDF /* Copy Pods Resources */ = {
+		EB6496101B524B4363C5ABDF /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,14 +369,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EBBBBA979F9A7999A0C55771 /* Check Pods Manifest.lock */ = {
+		EBBBBA979F9A7999A0C55771 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,6 +533,7 @@
 			baseConfigurationReference = DD4CF8DC76B9EC9A2E06DD71 /* Pods-StudyBox_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
