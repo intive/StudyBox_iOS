@@ -42,11 +42,11 @@ class TestViewController: StudyBoxViewController {
     questionLabel.backgroundColor = UIColor.lightGrayColor()
     answerLabel.backgroundColor = UIColor.lightGrayColor()
     
-    tipButton.titleLabel?.font = UIFont.studyBoxRegular()
-    correctButton.titleLabel?.font = UIFont.studyBoxRegular()
-    incorrectButton.titleLabel?.font = UIFont.studyBoxRegular()
-    questionLabel.font = UIFont.studyBoxRegular()
-    answerLabel.font = UIFont.studyBoxRegular()
+    tipButton.titleLabel?.font = UIFont.studyBoxFont(size: SBFontSizeLarge, bold: false)
+    correctButton.titleLabel?.font = UIFont.studyBoxFont(size: SBFontSizeLarge, bold: false)
+    incorrectButton.titleLabel?.font = UIFont.studyBoxFont(size: SBFontSizeLarge, bold: false)
+    questionLabel.font = UIFont.studyBoxFont(size: SBFontSizeLarge, bold: false)
+    answerLabel.font = UIFont.studyBoxFont(size: SBFontSizeLarge, bold: false)
     
     //TODO: set values of questionsInDeck from recieved deck, set first question and answer labels
     testScore = 0
