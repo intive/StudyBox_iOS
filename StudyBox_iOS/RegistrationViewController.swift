@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class RegistrationViewController: InputViewController, InputViewControllerDataSource {
+class RegistrationViewController: UserViewController, InputViewControllerDataSource {
   
   @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
@@ -86,5 +86,17 @@ class RegistrationViewController: InputViewController, InputViewControllerDataSo
     
     
   }
+    
   
+    @IBAction func cancelRegistration(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func register(sender: UIButton) {
+        dismissViewControllerAnimated(true) {[unowned self] () -> Void in
+            self.successfulLoginTransition()
+
+        }
+    }
+    
 }

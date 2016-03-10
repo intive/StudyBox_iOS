@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-class LoginViewController: InputViewController,InputViewControllerDataSource {
+class LoginViewController: UserViewController,InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -29,4 +28,11 @@ class LoginViewController: InputViewController,InputViewControllerDataSource {
         dataSource = self
     }
 
+    @IBAction func login(sender: UIButton) {
+        //dummy login
+        successfulLoginTransition()
+    }
+    @IBAction func loginWithoutAccount(sender: AnyObject) {
+        successfulLoginTransition()
+    }
 }
