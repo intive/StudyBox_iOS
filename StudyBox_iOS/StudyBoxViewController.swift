@@ -16,7 +16,7 @@ class StudyBoxViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let drawer = UIApplication.sharedApplication().keyWindow?.rootViewController as? MMDrawerController {
+        if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
             if let controller = navigationController?.viewControllers[0] where controller == self {
                 drawer.openDrawerGestureModeMask = .None
                 let hamburgerImage = UIImage(named: "Hamburger")
@@ -27,12 +27,10 @@ class StudyBoxViewController: UIViewController {
                 drawer.openDrawerGestureModeMask = .PanningCenterView
             }
         }
-        
-        
     }
     
     func changeDrawer(){
-        if let drawer = UIApplication.sharedApplication().keyWindow?.rootViewController as? MMDrawerController {
+        if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
             
             if (drawer.visibleLeftDrawerWidth == 0){
                 drawer.openDrawerSide(.Left, animated: true, completion: nil)

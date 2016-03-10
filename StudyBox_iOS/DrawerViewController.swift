@@ -8,10 +8,11 @@
 
 import UIKit
 import MMDrawerController
+
 struct DrawerNavigationChild {
     let name:String
     let viewController:UIViewController?
-    let viewControllerSelector:Selector?
+    let viewControllerBlock:(()->Void)?
 }
 
 class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
@@ -23,12 +24,18 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto", viewController: nil,viewControllerSelector: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje talie", viewController: nil,viewControllerSelector: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,viewControllerSelector: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę", viewController: nil,viewControllerSelector: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki", viewController: nil,viewControllerSelector: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Wyloguj", viewController: nil,viewControllerSelector: Selector("logout") ))
+        
+        drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto", viewController: nil,viewControllerBlock: nil))
+        drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje talie", viewController: nil,viewControllerBlock: nil))
+        drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,viewControllerBlock: nil))
+        drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę", viewController: nil,viewControllerBlock: nil))
+        drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki", viewController: nil,viewControllerBlock: nil))
+        drawerNavigationControllers.append(DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
+            if let storyboard = self?.storyboard {
+                UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
+            }
+        })
+        
         tableView.backgroundColor = UIColor.grayColor()
     }
 
@@ -37,7 +44,7 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCellWithIdentifier(DrawerViewController.DrawerCellId)!
+        let cell = tableView.dequeueReusableCellWithIdentifier(DrawerViewController.DrawerCellId, forIndexPath: indexPath)
         cell.textLabel?.text = drawerNavigationControllers[indexPath.section].name
         cell.backgroundColor = UIColor.grayColor()
         cell.textLabel?.textColor = UIColor.whiteColor()
@@ -53,21 +60,14 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
         let navigationChild = drawerNavigationControllers[indexPath.section]
         
         if let controller = navigationChild.viewController {
-            if let mmDrawer = UIApplication.sharedApplication().keyWindow?.rootViewController as? MMDrawerController {
+            if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController {
                 mmDrawer.centerViewController = controller
             }
-        }else if let selector = navigationChild.viewControllerSelector {
-            performSelector(selector)
+        }else if let block = navigationChild.viewControllerBlock {
+            block()
         }else {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }
     }
     
-    
-
-
-    func logout(){
-        UIApplication.sharedApplication().keyWindow?.rootViewController =  storyboard!.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
-        
-    }
 }

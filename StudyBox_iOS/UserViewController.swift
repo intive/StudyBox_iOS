@@ -11,17 +11,20 @@ import MMDrawerController
 class UserViewController: InputViewController {
     
     func successfulLoginTransition(){
-        
-            let window = UIApplication.sharedApplication().keyWindow!
-            let root = window.rootViewController
-            let drawerNav = root!.storyboard!.instantiateViewControllerWithIdentifier(Utils.UIIds.DrawerViewControllerId)
+
+        if let board = storyboard {
+            let drawerNav = board.instantiateViewControllerWithIdentifier(Utils.UIIds.DrawerViewControllerId)
             drawerNav.view.backgroundColor = UIColor.grayColor()
-            let center = root!.storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.DecksViewControllerID)
+            
+            let center = board.instantiateViewControllerWithIdentifier(Utils.UIIds.DecksViewControllerID)
+            
             let mmDrawer = MMDrawerController(centerViewController: center, leftDrawerViewController: drawerNav)
             mmDrawer.openDrawerGestureModeMask = .None
-            
             mmDrawer.closeDrawerGestureModeMask = [.PanningCenterView,.TapCenterView ]
-            window.rootViewController = mmDrawer
+            
+            UIApplication.sharedRootViewController = mmDrawer
+        }
+        
         
     }
 }
