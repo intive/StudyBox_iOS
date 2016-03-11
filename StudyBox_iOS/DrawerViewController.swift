@@ -48,6 +48,7 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
         cell.textLabel?.text = drawerNavigationControllers[indexPath.section].name
         cell.backgroundColor = UIColor.grayColor()
         cell.textLabel?.textColor = UIColor.whiteColor()
+        cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         return cell
     }
     
