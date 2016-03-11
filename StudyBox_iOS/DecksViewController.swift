@@ -10,4 +10,9 @@ import UIKit
 
 class DecksViewController: StudyBoxViewController {
 
+    @IBAction func manualTest(sender: AnyObject) {
+        if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
+            navigationController?.viewControllers = [ test ]
+        }
+    }
 }

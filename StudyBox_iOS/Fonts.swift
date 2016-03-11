@@ -8,11 +8,18 @@
 
 import UIKit
 
+internal let SBFontSizeSmall:CGFloat = 10
+internal let SBFontSizeMedium:CGFloat = 15
+internal let SBFontSizeLarge:CGFloat = 20
+
 extension UIFont{
-    class func studyBoxRegular(size: CGFloat = 13)->UIFont {
-            return UIFont(name: "Lato-Regular", size: size)!
+  class func studyBoxFont(size size: CGFloat = 13, bold:Bool)->UIFont {
+    
+    if !bold {
+      return UIFont(name: "Lato-Regular", size: size)!
+    } else {
+      return UIFont(name: "Lato-Black", size: size)!
     }
-    class func studyBoxBlack(size: CGFloat = 13)->UIFont {
-        return UIFont(name: "Lato-Black", size: size)!
-    }
+    
+  }
 }
