@@ -9,14 +9,14 @@
 import UIKit
 import Foundation
 
-class RegistrationViewController: InputViewController, InputViewControllerDataSource {
+class RegistrationViewController: UserViewController, InputViewControllerDataSource {
   
   @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
   @IBOutlet weak var registerButtonOutlet: UIButton!
-  
+  @IBOutlet weak var cancelButton: UIButton!
   
   var inputViews = [UITextField]()
   let studyBoxRedColor = UIColor(red: 0.87890625, green: 0.1640625, blue: 0.3203125, alpha: 1.0)
@@ -37,6 +37,13 @@ class RegistrationViewController: InputViewController, InputViewControllerDataSo
     inputViews.append(emailTextField)
     inputViews.append(passwordTextField)
     inputViews.append(repeatPasswordTextField)
+    
+    loginTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+    emailTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+    passwordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+    repeatPasswordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+    registerButtonOutlet.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+    cancelButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
   }
 
   
@@ -86,5 +93,17 @@ class RegistrationViewController: InputViewController, InputViewControllerDataSo
     
     
   }
+    
   
+    @IBAction func cancelRegistration(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func register(sender: UIButton) {
+        dismissViewControllerAnimated(true) {[unowned self] () -> Void in
+            self.successfulLoginTransition()
+
+        }
+    }
+    
 }
