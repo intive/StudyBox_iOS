@@ -15,6 +15,7 @@ class Utils {
         static let DrawerViewControllerId = "DrawerViewControllerId"
         static let DecksViewControllerID = "DecksViewControllerID"
         static let TestViewControllerID = "TestViewControllerID"
+        static let DecksViewCellID = "DecksViewCellID"
     }
 
 }

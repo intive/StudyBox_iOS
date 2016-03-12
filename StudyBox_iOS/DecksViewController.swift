@@ -10,19 +10,15 @@ import UIKit
 
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    // czeka na DataModel
-    // private var decksArray: [Deck]?
+    
+    private var decksArray: [Deck]?
+    static private(set) var selectedDeckForTesting: Deck?
     @IBOutlet var decksCollectionView: UICollectionView!
     
-    @IBAction func manualTest(sender: AnyObject) {
-        if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
-            navigationController?.viewControllers = [ test ]
-        }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        // czeka na DataModel
-        // Coś w stylu: decksArray = Deck.loadDecks().map{$0 < $1}
+    // TODO: in future replace managerWithDummyData()
+    override func viewWillAppear(animated: Bool) {
+        let dataManager = DataManager.managerWithDummyData()
+        decksArray = dataManager.decks(true)
     }
     
     override func viewDidLoad() {
@@ -35,6 +31,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         super.init(coder: aDecoder)
     }
     
+    /*
     // Before segue do this
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "StartTest" {
@@ -43,42 +40,47 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             }
         }
     }
+    */
     
-    // Populate cells
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
+    // Calculate number of decks. If no decks, return 0
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // czeka na DataModel
-        // return decksArray.count
-        return 5
+        var cellsNumber = 0
+        if let decksArrayCount = decksArray?.count{
+            cellsNumber = decksArrayCount
+        }
+        return cellsNumber
     }
     
+    // Populate cells with decks data. Change cells style
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DecksViewCellID", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
             as! DecksViewCell
-        // czeka na DataModel
-        // Coś w stylu: cell.deckNameLabel.text = decksArray[indexPath.row].name
-        cell.deckNameLabel.text = "Przykład"
-        
+
+        if let deckName = decksArray?[indexPath.row].name{
+            cell.deckNameLabel.text = deckName
+        }
+        cell.deckNameLabel.font = UIFont.sbFont(bold: false)
         return cell
     }
     
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // ustawianie wybranej talii
-        // let selectedDeck = decksArray[indexPath.row]
-        // Coś w stylu: TestViewController.actualTest = selectedDeck
-        self.performSegueWithIdentifier("StartTest", sender: nil)
-    }
-    
-    // Change cell color and font
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DecksViewCellID", forIndexPath: indexPath)
-            as! DecksViewCell
-        cell.deckNameLabel.font = UIFont.sbFont(bold: false)
-        // tu można jeszcze zmienić kolor
-    }
+        if let notNilDecksArray = decksArray{
+            DecksViewController.selectedDeckForTesting(changeWithDeck: notNilDecksArray[indexPath.row])
+        }
 
+        // self.performSegueWithIdentifier("StartTest", sender: nil)
+        if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
+            navigationController?.viewControllers = [ test ]
+        }
+    }
+ 
+    // Change static property selectedDeckForTesting
+    private class func selectedDeckForTesting(changeWithDeck deck: Deck){
+        DecksViewController.selectedDeckForTesting = deck
+    }
 }
