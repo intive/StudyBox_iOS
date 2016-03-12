@@ -30,7 +30,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     super.viewWillAppear(animated)
     dataSource = self
   }
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -56,12 +56,12 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     registerButtonOutlet.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     cancelButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
   }
-
+  
   func keyboardWillShow(sender: NSNotification) {
     let userInfo: [NSObject : AnyObject] = sender.userInfo!
     
     let keyboardHeight: CGFloat = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue.size.height
-   
+    
     self.scrollView.contentOffset = CGPointMake(0, keyboardHeight / 2)
   }
   
@@ -77,38 +77,44 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     
     if !result {
       textField.textColor = UIColor.redColor()
-      registerButtonOutlet.backgroundColor = UIColor.grayColor()
-      registerButtonOutlet.enabled = false
-
+      disableRegisterButton()
     }
     else {
+      //TODO: check if email exists in database, if not then emailIsTakenAlert() and code below
       textField.textColor = studyBoxBlueColor
-      registerButtonOutlet.backgroundColor = studyBoxRedColor
-      registerButtonOutlet.enabled = true
-      
+      enableRegisterButton()
     }
   }
   
-  func checkPasswords(password1 password1:UITextField, password2:UITextField) {
+  func checkPasswordLengthAndSpaces(password: UITextField) {
+    if let characterCount = password.text?.characters.count {
+      if characterCount < 8 {
+        passwordTooShortAlert()
+      }
+    }
+    
+    if (password.text?.containsString(" ") == true) {
+      passwordContainsSpaceAlert()
+    }
+  }
+  
+  func checkPasswordsMatch(password1 password1:UITextField, password2:UITextField) {
     
     if (password1.text != "" && password2.text != "") {
       if (password1.text != password2.text){
         password1.textColor = UIColor.redColor()
         password2.textColor = UIColor.redColor()
-
-        registerButtonOutlet.backgroundColor = UIColor.grayColor()
-        registerButtonOutlet.enabled = false
+        passwordsDontMatchAlert()
+        disableRegisterButton()
       }
       else {
         password1.textColor = studyBoxBlueColor
         password2.textColor = studyBoxBlueColor
         
-        registerButtonOutlet.backgroundColor = studyBoxRedColor
-        registerButtonOutlet.enabled = true
+        enableRegisterButton()
       }
     } else {
-      registerButtonOutlet.backgroundColor = UIColor.grayColor()
-      registerButtonOutlet.enabled = false
+      disableRegisterButton()
     }
     
     
@@ -117,12 +123,17 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   func textFieldDidEndEditing(editedTextField: UITextField) {
     
     switch editedTextField {
+      
     case emailTextField:
       checkEmail(editedTextField)
-      checkPasswords(password1: passwordTextField, password2: repeatPasswordTextField)
+      checkPasswordsMatch(password1: passwordTextField, password2: repeatPasswordTextField)
       
-    case repeatPasswordTextField,passwordTextField:
-      checkPasswords(password1: passwordTextField, password2: repeatPasswordTextField)
+    case passwordTextField:
+      checkPasswordLengthAndSpaces(passwordTextField)
+      
+    case repeatPasswordTextField:
+      checkPasswordsMatch(password1: passwordTextField, password2: repeatPasswordTextField)
+      
     default:
       return
     }
@@ -148,10 +159,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     return false
   }
   
-    @IBAction func cancelRegistration(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+  @IBAction func cancelRegistration(sender: UIButton) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
   @IBAction func register(sender: UIButton) {
     
     if (loginTextField.text != "" &&
@@ -175,5 +186,59 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
   }
+  
+  func disableRegisterButton() {
+    registerButtonOutlet.backgroundColor = UIColor.grayColor()
+    registerButtonOutlet.enabled = false
+  }
+  
+  func enableRegisterButton() {
+    registerButtonOutlet.backgroundColor = studyBoxRedColor
+    registerButtonOutlet.enabled = true
+  }
+  
+  func passwordTooShortAlert() {
     
+    let alertController = UIAlertController(title: "Za krótkie hasło",
+      message: "Hasło musi mieć co najmniej 8 znaków.",
+      preferredStyle: .Alert)
+    
+    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alertController.addAction(actionOk)
+    self.presentViewController(alertController, animated: true, completion: nil)
+  }
+  
+  func passwordsDontMatchAlert() {
+    
+    let alertController = UIAlertController(title: "Hasła są różne",
+      message: "Oba hasła muszą być identyczne.",
+      preferredStyle: .Alert)
+    
+    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alertController.addAction(actionOk)
+    self.presentViewController(alertController, animated: true, completion: nil)
+  }
+  
+  func emailIsTakenAlert() {
+    
+    let alertController = UIAlertController(title: "Adres e-mail zajęty",
+      message: "Już istnieje konto z takim adresem e-mail.",
+      preferredStyle: .Alert)
+    
+    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alertController.addAction(actionOk)
+    self.presentViewController(alertController, animated: true, completion: nil)
+  }
+  
+  func passwordContainsSpaceAlert() {
+    
+    let alertController = UIAlertController(title: "Spacja w haśle",
+      message: "Hasło hasło nie może zawierać spacji.",
+      preferredStyle: .Alert)
+    
+    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alertController.addAction(actionOk)
+    self.presentViewController(alertController, animated: true, completion: nil)
+  }
+  
 }
