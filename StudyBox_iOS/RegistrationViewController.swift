@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import Reachability
 
 class RegistrationViewController: UserViewController, InputViewControllerDataSource {
   
@@ -37,6 +38,9 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     /* the login button is by default disabled,
     user has to enter some data and it has to be verified
     */
+    
+    connectedToInternet()
+    
     registerButtonOutlet.enabled = false
     registerButtonOutlet.backgroundColor = UIColor.grayColor()
     registerButtonOutlet.layer.cornerRadius = 10.0
@@ -57,6 +61,17 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     cancelButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
   }
   
+  func connectedToInternet() -> Bool {
+    let reachability = Reachability.reachabilityForInternetConnection()
+    
+    if reachability.currentReachabilityStatus() == .NotReachable {
+      showAlert(.noInternet)
+      return false
+    } else {
+      return true
+    }
+  }
+
   func keyboardWillShow(sender: NSNotification) {
     let userInfo: [NSObject : AnyObject] = sender.userInfo!
     
@@ -77,6 +92,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     
     if !result {
       textField.textColor = UIColor.redColor()
+      showAlert(.emailIncorrect)
       disableRegisterButton()
     }
     else {
@@ -88,13 +104,13 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   
   func checkPasswordLengthAndSpaces(password: UITextField) {
     if let characterCount = password.text?.characters.count {
-      if characterCount < 8 {
-        passwordTooShortAlert()
+      if characterCount < 8 && characterCount != 0 {
+        showAlert(.passwordTooShort)
       }
     }
     
     if (password.text?.containsString(" ") == true) {
-      passwordContainsSpaceAlert()
+      showAlert(.passwordContainsSpace)
     }
   }
   
@@ -104,7 +120,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
       if (password1.text != password2.text){
         password1.textColor = UIColor.redColor()
         password2.textColor = UIColor.redColor()
-        passwordsDontMatchAlert()
+        showAlert(.passwordContainsSpace)
         disableRegisterButton()
       }
       else {
@@ -164,11 +180,12 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   }
   
   @IBAction func register(sender: UIButton) {
-    
+
     if (loginTextField.text != "" &&
       emailTextField.text != "" &&
       passwordTextField.text != "" &&
-      repeatPasswordTextField.text != "") {
+      repeatPasswordTextField.text != "" &&
+      connectedToInternet()) {
         userDataForRegistration["username"] = loginTextField.text
         userDataForRegistration["email"] = emailTextField.text
         userDataForRegistration["password"] = repeatPasswordTextField.text
@@ -197,43 +214,28 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     registerButtonOutlet.enabled = true
   }
   
-  func passwordTooShortAlert() {
-    
-    let alertController = UIAlertController(title: "Za krótkie hasło",
-      message: "Hasło musi mieć co najmniej 8 znaków.",
-      preferredStyle: .Alert)
-    
-    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
-    alertController.addAction(actionOk)
-    self.presentViewController(alertController, animated: true, completion: nil)
+  enum alertType {
+    case passwordTooShort
+    case passwordsDontMatch
+    case emailIsTaken
+    case passwordContainsSpace
+    case noInternet
+    case emailIncorrect
   }
   
-  func passwordsDontMatchAlert() {
-    
-    let alertController = UIAlertController(title: "Hasła są różne",
-      message: "Oba hasła muszą być identyczne.",
-      preferredStyle: .Alert)
-    
-    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
-    alertController.addAction(actionOk)
-    self.presentViewController(alertController, animated: true, completion: nil)
-  }
+  let alertMessagesDict:[alertType : (String,String)] = [
+    .noInternet : ("Brak połączenia","Nie można połączyć się z Internetem. Sprawdź połączenie"),
+    .emailIsTaken : ("Adres e-mail zajęty", "Już istnieje konto z takim adresem e-mail."),
+    .passwordContainsSpace : ("Spacja w haśle", "Hasło hasło nie może zawierać spacji."),
+    .emailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację, niedozwolone znaki lub jest w złym formacie."),
+    .passwordsDontMatch : ("Hasła są różne","Oba hasła muszą być identyczne."),
+    .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków."),
+  ]
   
-  func emailIsTakenAlert() {
+  func showAlert(type: alertType) {
     
-    let alertController = UIAlertController(title: "Adres e-mail zajęty",
-      message: "Już istnieje konto z takim adresem e-mail.",
-      preferredStyle: .Alert)
-    
-    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
-    alertController.addAction(actionOk)
-    self.presentViewController(alertController, animated: true, completion: nil)
-  }
-  
-  func passwordContainsSpaceAlert() {
-    
-    let alertController = UIAlertController(title: "Spacja w haśle",
-      message: "Hasło hasło nie może zawierać spacji.",
+    let alertController = UIAlertController(title: alertMessagesDict[type]!.0,
+      message: alertMessagesDict[type]!.1,
       preferredStyle: .Alert)
     
     let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)

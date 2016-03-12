@@ -5,6 +5,7 @@ target 'StudyBox_iOS' do
     pod 'MMDrawerController', '~> 0.6.0'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'Reachability', '~> 3.2'
 end
 
 target 'StudyBox_iOSTests' do
