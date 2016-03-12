@@ -321,7 +321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "releaseConfig=\"Release\"\n\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\necho \"Running Fabric\"\n${PODS_ROOT}/Fabric/run df5c0e5c314f7db69f78f9f1846ca9a3a4b6efa3 0ed0b0f4cdb9339dd1e65f808f9417c12a33106a13ef08382e849d15844dffd4\nfi\n";
+			shellScript = "releaseConfig=\"Release\"\n\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\necho \"Running Fabric\"\n\"${PODS_ROOT}/Fabric/run\" df5c0e5c314f7db69f78f9f1846ca9a3a4b6efa3 0ed0b0f4cdb9339dd1e65f808f9417c12a33106a13ef08382e849d15844dffd4\nfi\n";
 		};
 		3D077DB37C93D4A5A0539DD7 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
