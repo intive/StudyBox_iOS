@@ -12,6 +12,9 @@ class Utils {
 
     struct UIIds {
         static let LoginControllerId = "LoginViewControllerId"
+        static let DrawerViewControllerId = "DrawerViewControllerId"
+        static let DecksViewControllerID = "DecksViewControllerID"
+        static let TestViewControllerID = "TestViewControllerID"
     }
 
 }

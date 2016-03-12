@@ -8,10 +8,17 @@
 
 import UIKit
 
+
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     // czeka na DataModel
     // private var decksArray: [Deck]?
     @IBOutlet var decksCollectionView: UICollectionView!
+    
+    @IBAction func manualTest(sender: AnyObject) {
+        if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
+            navigationController?.viewControllers = [ test ]
+        }
+    }
     
     override func viewDidAppear(animated: Bool) {
         // czeka na DataModel
@@ -70,7 +77,8 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DecksViewCellID", forIndexPath: indexPath)
             as! DecksViewCell
-        cell.deckNameLabel.font = UIFont.studyBoxBlack()
+        cell.deckNameLabel.font = UIFont.sbFont(bold: false)
         // tu można jeszcze zmienić kolor
     }
+
 }
