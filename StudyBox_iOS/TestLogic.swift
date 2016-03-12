@@ -14,20 +14,22 @@ class Test {
     private var currentCard : Flashcard?
     private var passedFlashcards = 0
     private var index = 0
+    private var numberOfFlashcardsInFullDeck : Int
     
     init(deck : [Flashcard]) {
         
         self.deck = deck
         currentFlashcard()
+        self.numberOfFlashcardsInFullDeck = deck.count
     }
     
-    func currentFlashcard() -> Flashcard? {
+    func currentFlashcard() {
         
         var rand : Int
         
         if(deck.count == 0) {
             
-            return nil
+            currentCard = nil
         }
         else {
             
@@ -35,19 +37,17 @@ class Test {
             currentCard = deck[rand]
             deck.removeAtIndex(rand)
             index += 1
-            return currentCard
         }
     }
     
-    func correctAnswer(){ //funkcja podpieta pod przycisk dobra odpowiedz
+    func correctAnswer() { //funkcja podpieta pod przycisk dobra odpowiedz
         
         passedFlashcards += 1
         currentFlashcard()
     }
     
-    func IncorrectAnswer(){   //funkcja podpieta pod przycisk zla odpowiedz
+    func IncorrectAnswer() {   //funkcja podpieta pod przycisk zla odpowiedz
         
         currentFlashcard()
     }
-    
 }
