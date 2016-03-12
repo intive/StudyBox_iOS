@@ -19,8 +19,8 @@ class Test {
     init(deck : [Flashcard]) {
         
         self.deck = deck
-        currentFlashcard()
         self.numberOfFlashcardsInFullDeck = deck.count
+        currentFlashcard()
     }
     
     func currentFlashcard() {
