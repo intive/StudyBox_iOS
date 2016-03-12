@@ -17,6 +17,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
+        DecksViewController.selectedDeckForTesting(changeWithDeck: nil)
         let dataManager = DataManager.managerWithDummyData()
         decksArray = dataManager.decks(true)
     }
@@ -80,7 +81,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     }
  
     // Change static property selectedDeckForTesting
-    private class func selectedDeckForTesting(changeWithDeck deck: Deck){
+    private class func selectedDeckForTesting(changeWithDeck deck: Deck?){
         DecksViewController.selectedDeckForTesting = deck
     }
 }
