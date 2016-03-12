@@ -12,20 +12,15 @@ import Reachability
 
 class RegistrationViewController: UserViewController, InputViewControllerDataSource {
   
-  @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
-  @IBOutlet weak var registerButtonOutlet: UIButton!
+  @IBOutlet weak var registerButton: UIButton!
   @IBOutlet weak var cancelButton: UIButton!
-  @IBOutlet weak var studyBoxImage: UIImageView!
   
   var userDataForRegistration = [String : String]()
-  
   var inputViews = [UITextField]()
-  let studyBoxRedColor = UIColor(red: 0.87890625, green: 0.1640625, blue: 0.3203125, alpha: 1.0)
-  let studyBoxBlueColor = UIColor(red: 23/255, green: 82/255, blue: 165/255, alpha: 1.0)
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
@@ -41,12 +36,9 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     
     connectedToInternet()
     
-    registerButtonOutlet.enabled = false
-    registerButtonOutlet.backgroundColor = UIColor.grayColor()
-    registerButtonOutlet.layer.cornerRadius = 10.0
-    
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    registerButton.enabled = false
+    registerButton.backgroundColor = UIColor.grayColor()
+    registerButton.layer.cornerRadius = 10.0
     
     inputViews.append(loginTextField)
     inputViews.append(emailTextField)
@@ -57,7 +49,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     emailTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     passwordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     repeatPasswordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-    registerButtonOutlet.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+    registerButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     cancelButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
   }
   
@@ -71,18 +63,6 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
       return true
     }
   }
-
-  func keyboardWillShow(sender: NSNotification) {
-    let userInfo: [NSObject : AnyObject] = sender.userInfo!
-    
-    let keyboardHeight: CGFloat = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue.size.height
-    
-    self.scrollView.contentOffset = CGPointMake(0, keyboardHeight / 2)
-  }
-  
-  func keyboardWillHide(sender: NSNotification) {
-    self.scrollView.contentOffset = CGPointZero
-  }
   
   func checkEmail(textField: UITextField) -> () {
     let text = textField.text
@@ -91,13 +71,13 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     let result = emailTest.evaluateWithObject(text)
     
     if !result {
-      textField.textColor = UIColor.redColor()
+      textField.textColor = UIColor.sb_Raspberry()
       showAlert(.emailIncorrect)
       disableRegisterButton()
     }
     else {
-      //TODO: check if email exists in database, if not then emailIsTakenAlert() and code below
-      textField.textColor = studyBoxBlueColor
+      //TODO: check if email exists in database, if not then showAlert(.emailIsTaken) and code below
+      textField.textColor = UIColor.sb_DarkBlue()
       enableRegisterButton()
     }
   }
@@ -118,22 +98,20 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     
     if (password1.text != "" && password2.text != "") {
       if (password1.text != password2.text){
-        password1.textColor = UIColor.redColor()
-        password2.textColor = UIColor.redColor()
+        password1.textColor = UIColor.sb_Raspberry()
+        password2.textColor = UIColor.sb_Raspberry()
         showAlert(.passwordContainsSpace)
         disableRegisterButton()
       }
       else {
-        password1.textColor = studyBoxBlueColor
-        password2.textColor = studyBoxBlueColor
+        password1.textColor = UIColor.sb_DarkBlue()
+        password2.textColor = UIColor.sb_DarkBlue()
         
         enableRegisterButton()
       }
     } else {
       disableRegisterButton()
     }
-    
-    
   }
   
   func textFieldDidEndEditing(editedTextField: UITextField) {
@@ -153,7 +131,6 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     default:
       return
     }
-    
   }
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -199,19 +176,14 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     }
   }
   
-  override func viewWillDisappear(animated: Bool) {
-    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-  }
-  
   func disableRegisterButton() {
-    registerButtonOutlet.backgroundColor = UIColor.grayColor()
-    registerButtonOutlet.enabled = false
+    registerButton.backgroundColor = UIColor.grayColor()
+    registerButton.enabled = false
   }
   
   func enableRegisterButton() {
-    registerButtonOutlet.backgroundColor = studyBoxRedColor
-    registerButtonOutlet.enabled = true
+    registerButton.backgroundColor = UIColor.sb_Raspberry()
+    registerButton.enabled = true
   }
   
   enum alertType {
@@ -226,10 +198,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   let alertMessagesDict:[alertType : (String,String)] = [
     .noInternet : ("Brak połączenia","Nie można połączyć się z Internetem. Sprawdź połączenie"),
     .emailIsTaken : ("Adres e-mail zajęty", "Już istnieje konto z takim adresem e-mail."),
-    .passwordContainsSpace : ("Spacja w haśle", "Hasło hasło nie może zawierać spacji."),
+    .passwordContainsSpace : ("Spacja w haśle", "Hasło nie może zawierać spacji."),
     .emailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację, niedozwolone znaki lub jest w złym formacie."),
     .passwordsDontMatch : ("Hasła są różne","Oba hasła muszą być identyczne."),
-    .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków."),
+    .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków.")
   ]
   
   func showAlert(type: alertType) {

@@ -273,23 +273,23 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-MAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dY-gB-BHf">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-MAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dY-gB-BHf">
                                         <rect key="frame" x="0.0" y="160" width="177" height="30"/>
                                         <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MsS-od-E0r">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MsS-od-E0r">
                                         <rect key="frame" x="0.0" y="195" width="177" height="30"/>
                                         <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="POWTÓRZ HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTh-fE-OH6">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="POWTÓRZ HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTh-fE-OH6">
                                         <rect key="frame" x="0.0" y="230" width="177" height="30"/>
                                         <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="join"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HvJ-RZ-puj">
                                         <rect key="frame" x="28" y="265" width="122" height="28"/>
@@ -334,7 +334,7 @@
                         <outlet property="emailTextField" destination="5dY-gB-BHf" id="Pzt-2P-cxi"/>
                         <outlet property="loginTextField" destination="qZ2-EM-Lab" id="SR2-j3-bU6"/>
                         <outlet property="passwordTextField" destination="MsS-od-E0r" id="Kr6-O6-8CX"/>
-                        <outlet property="registerButtonOutlet" destination="HvJ-RZ-puj" id="A2r-18-WHd"/>
+                        <outlet property="registerButton" destination="HvJ-RZ-puj" id="vOE-9Z-zJw"/>
                         <outlet property="repeatPasswordTextField" destination="vTh-fE-OH6" id="XZW-Y9-qY4"/>
                     </connections>
                 </viewController>
