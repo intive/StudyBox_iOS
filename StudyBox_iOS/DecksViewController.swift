@@ -17,7 +17,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
-        DecksViewController.selectedDeckForTesting(changeWithDeck: nil)
+        DecksViewController.selectedDeckForTesting = nil
         let dataManager = DataManager.managerWithDummyData()
         decksArray = dataManager.decks(true)
     }
@@ -71,7 +71,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let notNilDecksArray = decksArray{
-            DecksViewController.selectedDeckForTesting(changeWithDeck: notNilDecksArray[indexPath.row])
+            DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
         }
 
         // self.performSegueWithIdentifier("StartTest", sender: nil)
@@ -80,8 +80,4 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         }
     }
  
-    // Change static property selectedDeckForTesting
-    private class func selectedDeckForTesting(changeWithDeck deck: Deck?){
-        DecksViewController.selectedDeckForTesting = deck
-    }
 }
