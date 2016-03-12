@@ -83,16 +83,15 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
                 
             case UIKeyboardWillShowNotification:
                 
-                var originChange:CGFloat?
-                let lowestBeginOriginY = lowestView.frame.height + lowestView.frame.origin.y
+                var originChange:CGFloat = 0
+                let yOffset = lowestView.convertRect(lowestView.frame, fromView: view).origin.y
+                let lowestBeginOriginY = lowestView.frame.height + lowestView.frame.origin.y - yOffset
                 
                 if rect.origin.y <= lowestBeginOriginY {
                     originChange = CGFloat((lowestBeginOriginY - rect.origin.y + 8) )
                 }
     
-                if let change = originChange {
-                    self.view.bounds.origin.y = change
-                }
+                self.view.bounds.origin.y = originChange
                 
             case UIKeyboardWillHideNotification:
                 self.view.bounds.origin.y = 0
