@@ -113,7 +113,6 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="9VM-hJ-ElA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iBZ-oN-EyI">
                             <size key="itemSize" width="100" height="100"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -128,18 +127,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udC-ac-677">
-                                            <rect key="frame" x="29" y="40" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udC-ac-677">
+                                            <rect key="frame" x="8" y="8" width="84" height="84"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="udC-ac-677" firstAttribute="centerY" secondItem="Jiw-Xz-iyX" secondAttribute="centerY" id="mR2-Pf-2CN"/>
-                                    <constraint firstItem="udC-ac-677" firstAttribute="centerX" secondItem="Jiw-Xz-iyX" secondAttribute="centerX" id="wLx-zO-LD3"/>
+                                    <constraint firstItem="udC-ac-677" firstAttribute="bottom" secondItem="Jiw-Xz-iyX" secondAttribute="bottomMargin" id="8bS-Hq-H1X"/>
+                                    <constraint firstItem="udC-ac-677" firstAttribute="top" secondItem="Jiw-Xz-iyX" secondAttribute="topMargin" id="F30-HS-bJd"/>
+                                    <constraint firstItem="udC-ac-677" firstAttribute="leading" secondItem="Jiw-Xz-iyX" secondAttribute="leadingMargin" id="SH9-f5-9VQ"/>
+                                    <constraint firstItem="udC-ac-677" firstAttribute="trailing" secondItem="Jiw-Xz-iyX" secondAttribute="trailingMargin" id="xMl-Pz-akx"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="deckNameLabel" destination="udC-ac-677" id="NJP-4N-T65"/>

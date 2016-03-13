@@ -26,22 +26,27 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         decksCollectionView.delegate = self
         decksCollectionView.dataSource = self
+        
+        let layout = decksCollectionView.collectionViewLayout
+        let flow = layout as! UICollectionViewFlowLayout
+        let screenSize = self.view.bounds.size
+        let spacing = Utils.DecksSpacing
+        let deckWidth = screenSize.width/2 - (spacing*1.5)
+        // section spacing: top, left, right, bottom
+        flow.sectionInset = UIEdgeInsetsMake(spacing,spacing,spacing,spacing)
+        // spacing between decks
+        flow.minimumInteritemSpacing = spacing
+        // spacing between rows
+        flow.minimumLineSpacing = spacing
+        // size for every deck
+        flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
+        
+        decksCollectionView.backgroundColor = UIColor.whiteColor()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    /*
-    // Before segue do this
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "StartTest" {
-            if let _ = segue.destinationViewController as? TestViewController {
-                // destinationTestView.currentDeckForTesting = selectedDeck
-            }
-        }
-    }
-    */
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -61,10 +66,21 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
             as! DecksViewCell
 
-        if let deckName = decksArray?[indexPath.row].name{
+        if var deckName = decksArray?[indexPath.row].name{
+            if deckName.isEmpty {
+                deckName = "Bez tytułu"
+            }
             cell.deckNameLabel.text = deckName
         }
+        // changing label UI
         cell.deckNameLabel.font = UIFont.sbFont(bold: false)
+        cell.deckNameLabel.textColor = UIColor.whiteColor()
+        cell.deckNameLabel.numberOfLines = 0
+        // adding line breaks
+        cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
+        cell.contentView.backgroundColor = UIColor.sb_Graphite()
+        
         return cell
     }
     
@@ -74,7 +90,6 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
         }
 
-        // self.performSegueWithIdentifier("StartTest", sender: nil)
         if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
             navigationController?.viewControllers = [ test ]
         }

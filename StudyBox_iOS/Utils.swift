@@ -6,7 +6,7 @@
 //  Copyright © 2016 BLStream. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Utils {
 
@@ -17,5 +17,7 @@ class Utils {
         static let TestViewControllerID = "TestViewControllerID"
         static let DecksViewCellID = "DecksViewCellID"
     }
+    
+    static let DecksSpacing: CGFloat = 20
 
 }
