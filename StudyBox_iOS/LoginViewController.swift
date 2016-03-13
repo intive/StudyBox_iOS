@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reachability 
 class LoginViewController: UserViewController,InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
@@ -38,18 +39,24 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         dataSource = self
     }
     
-    func login(){
-        if let emailText = emailTextField.text, let passwordText = passwordTextField.text where emailText != "" && passwordText != "" {
-            successfulLoginTransition()
+    func loginLogic(){
+        
+        let reach = Reachability.reachabilityForInternetConnection()
+        let isReachable = reach.currentReachabilityStatus() != .NotReachable
+        
+        if isReachable {
+            if let emailText = emailTextField.text, let passwordText = passwordTextField.text where emailText != "" && passwordText != "" {
+                successfulLoginTransition()
+            }else {
+                UIAlertController.basicAlertCall(self, title: "", message: "Wypełnij wszystkie pola!", buttonText: "Ok")
+            }
         }else {
-            let faultAlert = UIAlertController(title: "", message: "Wypełnij wszystkie pola!", preferredStyle: .Alert)
-            faultAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:nil ))
-            presentViewController(faultAlert, animated: true, completion: nil)
+            UIAlertController.basicAlertCall(self, title: "", message: "Brak połączenia z Internetem", buttonText: "Ok")
         }
     }
 
     @IBAction func login(sender: UIButton) {
-        login()
+        loginLogic()
     }
     
     
@@ -59,11 +66,8 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        if textField == emailTextField {
-            if let text = textField.text {
-                textField.text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                
-            }
+        if let text = textField.text where textField == emailTextField {
+            textField.text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         }
     }
     
@@ -72,7 +76,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == passwordTextField {
             textField.resignFirstResponder()
-            login()
+            loginLogic()
             return false
         }else if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
