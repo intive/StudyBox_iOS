@@ -24,7 +24,7 @@ class DataManager {
     func decks(sorted:Bool )->[Deck] {
         if (sorted){
             return decks.sort {
-                $0.name > $1.name
+                $0.name < $1.name
             }
         }
         return decks;
