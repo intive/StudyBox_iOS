@@ -11,15 +11,17 @@ import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    private var decksArray: [Deck]?
+    // points selected deck
     static private(set) var selectedDeckForTesting: Deck?
+    
+    private var decksArray: [Deck]?
     @IBOutlet var decksCollectionView: UICollectionView!
     
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
         DecksViewController.selectedDeckForTesting = nil
         let dataManager = DataManager.managerWithDummyData()
-        decksArray = dataManager.decks(true)
+        decksArray = dataManager.decks(false)
     }
     
     override func viewDidLoad() {
@@ -29,19 +31,36 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         
         let layout = decksCollectionView.collectionViewLayout
         let flow = layout as! UICollectionViewFlowLayout
+        let spacing = Utils.DeckViewLayout.DecksSpacing
+        equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneV, spacing: spacing, collectionFlowLayout: flow)
+        
+        // teraz korzystam z funkcji powyżej
+        /*
         let screenSize = self.view.bounds.size
-        let spacing = Utils.DecksSpacing
         let deckWidth = screenSize.width/2 - (spacing*1.5)
-        // section spacing: top, left, right, bottom
+        section spacing: top, left, right, bottom
         flow.sectionInset = UIEdgeInsetsMake(spacing,spacing,spacing,spacing)
+        flow.minimumInteritemSpacing = spacing
+        flow.minimumLineSpacing = spacing
+        flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
+      */
+        
+        decksCollectionView.backgroundColor = UIColor.whiteColor()
+    }
+    
+    // this function calculate size of decks, by given spacing and number of cells in row
+    private func equalSizeAndSpacing(numberOfCellsInRow crNumber: CGFloat, spacing: CGFloat,
+        collectionFlowLayout flow: UICollectionViewFlowLayout){
+            
+        let screenSize = self.view.bounds.size
+        let deckWidth = screenSize.width/crNumber - (spacing + spacing/crNumber)
+        flow.sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
         flow.minimumLineSpacing = spacing
         // size for every deck
         flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
-        
-        decksCollectionView.backgroundColor = UIColor.whiteColor()
     }
     
     required init?(coder aDecoder: NSCoder) {

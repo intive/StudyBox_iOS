@@ -17,7 +17,9 @@ class Utils {
         static let TestViewControllerID = "TestViewControllerID"
         static let DecksViewCellID = "DecksViewCellID"
     }
-    
-    static let DecksSpacing: CGFloat = 20
-
+    struct DeckViewLayout{
+        static let DecksSpacing: CGFloat = 20
+        // V od Vertically
+        static let DecksInRowIPhoneV: CGFloat = 2
+    }
 }
