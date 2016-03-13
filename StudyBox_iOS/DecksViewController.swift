@@ -92,7 +92,8 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             cell.deckNameLabel.text = deckName
         }
         // changing label UI
-        cell.deckNameLabel.font = UIFont.sbFont(bold: false)
+        // cell.deckNameLabel.font = UIFont.sbFont(bold: false)
+        cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
         cell.deckNameLabel.textColor = UIColor.whiteColor()
         cell.deckNameLabel.numberOfLines = 0
         // adding line breaks
@@ -114,4 +115,23 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         }
     }
  
+}
+
+// this extension dynamically change the size of the fonts, so text can fit
+extension UILabel {
+    func adjustFontSizeToHeight(font: UIFont, max:CGFloat,min:CGFloat)
+    {
+        // Initial size is max and the condition the min.
+        for var size = max ; size >= min ; size--
+        {
+            let font = UIFont(name: font.fontName, size: size)!
+            let attrString = NSAttributedString(string: self.text!, attributes: [NSFontAttributeName : font])
+            let rectSize = attrString.boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat.max), options: .UsesLineFragmentOrigin, context: nil)
+            if rectSize.size.height <= self.bounds.height
+            {
+                self.font = font
+                break
+            }
+        }
+    }
 }
