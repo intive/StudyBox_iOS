@@ -32,20 +32,10 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         let layout = decksCollectionView.collectionViewLayout
         let flow = layout as! UICollectionViewFlowLayout
         let spacing = Utils.DeckViewLayout.DecksSpacing
-        equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneV, spacing: spacing, collectionFlowLayout: flow)
-        
-        // teraz korzystam z funkcji powyżej
-        /*
-        let screenSize = self.view.bounds.size
-        let deckWidth = screenSize.width/2 - (spacing*1.5)
-        section spacing: top, left, right, bottom
-        flow.sectionInset = UIEdgeInsetsMake(spacing,spacing,spacing,spacing)
-        flow.minimumInteritemSpacing = spacing
-        flow.minimumLineSpacing = spacing
-        flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
-      */
+        equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
         
         decksCollectionView.backgroundColor = UIColor.whiteColor()
+
     }
     
     // this function calculate size of decks, by given spacing and number of cells in row
@@ -84,16 +74,17 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
             as! DecksViewCell
+        
+        cell.layoutIfNeeded()
 
         if var deckName = decksArray?[indexPath.row].name{
             if deckName.isEmpty {
-                deckName = "Bez tytułu"
+                deckName = Utils.DeckViewLayout.DeckWithoutTitle
             }
             cell.deckNameLabel.text = deckName
         }
         // changing label UI
-        // cell.deckNameLabel.font = UIFont.sbFont(bold: false)
-        cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
+        cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(size: sbFontSizeLarge, bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
         cell.deckNameLabel.textColor = UIColor.whiteColor()
         cell.deckNameLabel.numberOfLines = 0
         // adding line breaks
@@ -119,19 +110,24 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 
 // this extension dynamically change the size of the fonts, so text can fit
 extension UILabel {
-    func adjustFontSizeToHeight(font: UIFont, max:CGFloat,min:CGFloat)
+    func adjustFontSizeToHeight(var font: UIFont, max:CGFloat, min:CGFloat)
     {
         // Initial size is max and the condition the min.
-        for var size = max ; size >= min ; size--
+        for var size = max ; size >= min ; size -= 0.1
         {
-            let font = UIFont(name: font.fontName, size: size)!
+            
+            font = font.fontWithSize(size)
             let attrString = NSAttributedString(string: self.text!, attributes: [NSFontAttributeName : font])
             let rectSize = attrString.boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat.max), options: .UsesLineFragmentOrigin, context: nil)
+            
             if rectSize.size.height <= self.bounds.height
             {
                 self.font = font
                 break
             }
+
         }
+        // in case, it is better to have the smallest possible font
+        self.font = font
     }
 }
