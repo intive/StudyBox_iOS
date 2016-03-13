@@ -22,8 +22,13 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         
         inputViews.append(emailTextField)
         inputViews.append(passwordTextField)
+        inputViews.forEach {
+            $0.textColor = UIColor.sb_DarkBlue()
+        }
+        
         logInButton.layer.cornerRadius = 10.0
         logInButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        logInButton.backgroundColor = UIColor.sb_Raspberry()
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     }
@@ -32,12 +37,46 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         super.viewWillAppear(animated)
         dataSource = self
     }
+    
+    func login(){
+        if let emailText = emailTextField.text, let passwordText = passwordTextField.text where emailText != "" && passwordText != "" {
+            successfulLoginTransition()
+        }else {
+            let faultAlert = UIAlertController(title: "", message: "Wypełnij wszystkie pola!", preferredStyle: .Alert)
+            faultAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:nil ))
+            presentViewController(faultAlert, animated: true, completion: nil)
+        }
+    }
 
     @IBAction func login(sender: UIButton) {
-        //dummy login
-        successfulLoginTransition()
+        login()
     }
+    
+    
+    
     @IBAction func loginWithoutAccount(sender: AnyObject) {
         successfulLoginTransition()
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == emailTextField {
+            if let text = textField.text {
+                textField.text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                
+            }
+        }
+    }
+    
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == passwordTextField {
+            textField.resignFirstResponder()
+            login()
+            return false
+        }else if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        }
+        return true
     }
 }

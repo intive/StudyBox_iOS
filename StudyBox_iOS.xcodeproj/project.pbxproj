@@ -119,6 +119,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		2DA0E6981C949AE200DAB6B5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2D07C02D1C82FC5E00BF0107 /* Utils.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		38B1F5B29A6C985E3C63E020 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +160,7 @@
 		A1341DBE1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				2DA0E6981C949AE200DAB6B5 /* Utils */,
 				2D2843651C88CEDE006E5E21 /* Model */,
 				A1341DCE1C81E76900AFD04E /* Info.plist */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
@@ -165,7 +174,6 @@
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
 				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
-				2D07C02D1C82FC5E00BF0107 /* Utils.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
