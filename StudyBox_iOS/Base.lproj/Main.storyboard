@@ -454,7 +454,6 @@
                                                         <connections>
                                                             <action selector="correctAnswer:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="uNT-5r-V7W"/>
                                                             <action selector="correctButtonTouchDown:" destination="6tt-KQ-lf6" eventType="touchDown" id="1xJ-lK-hpx"/>
-                                                            <action selector="correctButtonTouchDown:" destination="6tt-KQ-lf6" eventType="touchDownRepeat" id="vfZ-Fs-nQI"/>
                                                             <action selector="correctTouchDragExit:" destination="6tt-KQ-lf6" eventType="touchDragExit" id="ttS-sJ-PCc"/>
                                                         </connections>
                                                     </button>
@@ -465,7 +464,6 @@
                                                         <state key="normal" image="incorrect"/>
                                                         <connections>
                                                             <action selector="incorrectAnswer:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="LfA-kU-Nw6"/>
-                                                            <action selector="incorrectButtonTouchDown:" destination="6tt-KQ-lf6" eventType="touchDownRepeat" id="9eM-Km-wdC"/>
                                                             <action selector="incorrectButtonTouchDown:" destination="6tt-KQ-lf6" eventType="touchDown" id="Maw-pF-I1U"/>
                                                             <action selector="incorrectTouchDragExit:" destination="6tt-KQ-lf6" eventType="touchDragExit" id="mVf-MI-9ah"/>
                                                         </connections>

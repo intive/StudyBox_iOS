@@ -41,6 +41,10 @@ class TestViewController: StudyBoxViewController {
     questionLabel.backgroundColor = UIColor.sb_Grey()
     answerLabel.backgroundColor = UIColor.sb_Grey()
     
+    correctButton.imageView!.contentMode = .ScaleAspectFit
+    incorrectButton.imageView!.contentMode = .ScaleAspectFit
+
+    
     tipButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
     correctButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
     incorrectButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
@@ -74,56 +78,49 @@ class TestViewController: StudyBoxViewController {
   
   @IBAction func correctAnswer(sender: AnyObject) {
     //type is Touch Up Inside
+    
     //TODO: check if there are any questions left
     answeredQuestionTransition()
     
     testScore++
     scoreLabel.text = "\(testScore) / \(questionsInDeck)"
+      
   }
+  
+  let animationTime:NSTimeInterval = 0.1
   
   @IBAction func correctButtonTouchDown(sender: AnyObject) {
     
-    UIView.animateWithDuration(0.6 ,
-      animations: {
-        self.correctButton.imageView?.transform = CGAffineTransformMakeScale(1.2, 1.2)
-      },
-      completion:nil)
-    correctButton.imageView?.transform = CGAffineTransformIdentity
-    print("correctButtonTouchDown")
+    UIView.animateWithDuration(animationTime,delay:0, options: .CurveEaseOut, animations: {
+        self.correctButton.transform = CGAffineTransformMakeScale(0.85, 0.85)
+      }, completion:nil )
   }
   
   @IBAction func correctTouchDragExit(sender: AnyObject) {
 
-    
-    UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
-      self.correctButton.imageView?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+    UIView.animateWithDuration(animationTime, delay: 0, options: .CurveEaseOut, animations: {
+      self.correctButton.transform = CGAffineTransformIdentity
       }, completion:nil)
-    
-        correctButton.imageView?.transform = CGAffineTransformIdentity
-    print("correctTouchDragExit")
-    
   }
   
   @IBAction func incorrectAnswer(sender: AnyObject) {
     //type is Touch Up Inside
-    
+
     //TODO: check if there are any questions left
     answeredQuestionTransition()
     
   }
   
   @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
-    UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
-      self.incorrectButton.imageView?.transform = CGAffineTransformMakeScale(0.8, 0.8)
-    }, completion:nil)
+    UIView.animateWithDuration(animationTime,delay:0, options: .CurveEaseOut, animations: {
+      self.incorrectButton.transform = CGAffineTransformMakeScale(0.85, 0.85)
+      }, completion:nil )
   }
   
   @IBAction func incorrectTouchDragExit(sender: AnyObject) {
-    UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
-      self.incorrectButton.imageView?.transform = CGAffineTransformIdentity
+    UIView.animateWithDuration(animationTime, delay: 0, options: .CurveEaseOut, animations: {
+      self.incorrectButton.transform = CGAffineTransformIdentity
       }, completion:nil)
-    print("incorrectTouchDragExit")
-    
   }
   
   func answeredQuestionTransition(){
@@ -145,7 +142,8 @@ class TestViewController: StudyBoxViewController {
         (value: Bool) in
         self.answerView.alpha = 1
     })
-    
+    incorrectButton.transform = CGAffineTransformIdentity
+    correctButton.transform = CGAffineTransformIdentity
     //TODO: set new answer in label after animation
   }
 }
