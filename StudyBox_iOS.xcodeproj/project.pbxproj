@@ -13,8 +13,8 @@
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
 		2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843681C88D03D006E5E21 /* DataManager.swift */; };
+		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
 		2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */; };
-		2D515ADC1C960D8C00E40E1C /* UIAlertController+BasicAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D515ADB1C960D8C00E40E1C /* UIAlertController+BasicAlert.swift */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
 		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
@@ -56,8 +56,8 @@
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		2D2843681C88D03D006E5E21 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
 		2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
-		2D515ADB1C960D8C00E40E1C /* UIAlertController+BasicAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+BasicAlert.swift"; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
 		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
@@ -182,8 +182,8 @@
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
 				2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */,
 				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
-				2D515ADB1C960D8C00E40E1C /* UIAlertController+BasicAlert.swift */,
 				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
+				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -435,7 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
-				2D515ADC1C960D8C00E40E1C /* UIAlertController+BasicAlert.swift in Sources */,
+				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
 				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
 				CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */,

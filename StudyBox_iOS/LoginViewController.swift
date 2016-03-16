@@ -21,8 +21,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        inputViews.append(emailTextField)
-        inputViews.append(passwordTextField)
+        inputViews.appendContentsOf([emailTextField,passwordTextField])
         inputViews.forEach {
             $0.textColor = UIColor.sb_DarkBlue()
         }
@@ -39,7 +38,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         dataSource = self
     }
     
-    func loginLogic(){
+    func loginWithInputData(){
         
         let reach = Reachability.reachabilityForInternetConnection()
         let isReachable = reach.currentReachabilityStatus() != .NotReachable
@@ -48,15 +47,15 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
             if let emailText = emailTextField.text, let passwordText = passwordTextField.text where emailText != "" && passwordText != "" {
                 successfulLoginTransition()
             }else {
-                UIAlertController.basicAlertCall(self, title: "", message: "Wypełnij wszystkie pola!", buttonText: "Ok")
+                presentAlertController(withTitle: "", message: "Wypełnij wszystkie pola!", buttonText: "Ok")
             }
         }else {
-            UIAlertController.basicAlertCall(self, title: "", message: "Brak połączenia z Internetem", buttonText: "Ok")
+            presentAlertController(withTitle: "", message: "Brak połączenia z Internetem", buttonText: "Ok")
         }
     }
 
     @IBAction func login(sender: UIButton) {
-        loginLogic()
+        loginWithInputData()
     }
     
     
@@ -76,7 +75,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == passwordTextField {
             textField.resignFirstResponder()
-            loginLogic()
+            loginWithInputData()
             return false
         }else if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
