@@ -33,7 +33,9 @@
 		A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC91C81E76900AFD04E /* Assets.xcassets */; };
 		A1341DCD1C81E76900AFD04E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */; };
 		A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */; };
+		AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */; };
 		CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */; };
+		CEC69B531C946CC100295808 /* TestLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC69B521C946CC100295808 /* TestLogic.swift */; };
 		CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */; };
 		CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */; };
 		CEE9F69A1C8AE1F800961ABA /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */; };
@@ -83,7 +85,9 @@
 		A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBox_iOSTests.swift; sourceTree = "<group>"; };
 		A1341DD91C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5FA90293A312F297BD76B3B /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
+		CEC69B521C946CC100295808 /* TestLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogic.swift; sourceTree = "<group>"; };
 		CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+sbFont.swift"; sourceTree = "<group>"; };
 		CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
 		CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
@@ -180,10 +184,13 @@
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
+				AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */,
 				2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */,
 				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
 				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
 				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
+				CEC69B521C946CC100295808 /* TestLogic.swift */,
+
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -434,6 +441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
@@ -451,6 +459,7 @@
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
+				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
 				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
