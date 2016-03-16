@@ -19,6 +19,8 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         DecksViewController.selectedDeckForTesting = nil
         let dataManager = DataManager.managerWithDummyData()
         decksArray = dataManager.decks(false)
