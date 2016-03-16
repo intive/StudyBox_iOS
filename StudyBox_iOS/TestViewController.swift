@@ -52,8 +52,18 @@ class TestViewController: StudyBoxViewController {
     //TODO: set values of questionsInDeck from recieved deck, set first question and answer labels
     testScore = 0
     questionsInDeck = 20
+    
+    //score label displays score; onclick moves to Score View Controller
+    let tapScore = UITapGestureRecognizer(target: self, action: Selector("tapScore:"))
+    scoreLabel.userInteractionEnabled = true
+    scoreLabel.addGestureRecognizer(tapScore)
   }
   
+  func tapScore(sender: UITapGestureRecognizer) {
+    let scoreStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+    self.presentViewController(scoreStoryBoard.instantiateViewControllerWithIdentifier("ScoreViewControllerID"), animated: false, completion: nil)
+  }
+    
   func swipedLeft(){
     
     UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {

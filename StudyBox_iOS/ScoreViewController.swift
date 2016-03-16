@@ -9,5 +9,15 @@
 import UIKit
 
 class ScoreViewController: StudyBoxViewController {
-  
+    @IBOutlet weak var scoreLabel: UILabel!
+    override func viewDidLoad() {
+        
+        completeData()
+    }
+    
+    func completeData() {
+        //temporary variables based on TestViewController
+        let tmpData = TestViewController()
+        scoreLabel.text = "\(tmpData.testScore) / \(tmpData.questionsInDeck)"
+    }
 }
