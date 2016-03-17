@@ -33,7 +33,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     user has to enter some data and it has to be verified
     */
     
-    if !checkInternetConnection() {
+    if !isConnectedToInternet() {
       showAlert(.noInternet)
     }
     
@@ -50,7 +50,8 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     registerButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
   }
   
-  func checkInternetConnection() -> Bool {
+  func isConnectedToInternet() -> Bool {
+    //returns true if connected, false if disconnected
     let reachability = Reachability.reachabilityForInternetConnection()
     
     if reachability.currentReachabilityStatus() == .NotReachable {
@@ -155,7 +156,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
 
     let areTextFieldsNotEmpty = emailTextField.text != "" && passwordTextField.text != "" && repeatPasswordTextField.text != ""
     
-    if (areTextFieldsNotEmpty && checkInternetConnection()) {
+    if (areTextFieldsNotEmpty && isConnectedToInternet()) {
         userDataForRegistration["email"] = emailTextField.text
         userDataForRegistration["password"] = repeatPasswordTextField.text
         
@@ -165,7 +166,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     }
     else if !areTextFieldsNotEmpty {
       showAlert(.fieldsNotEmpty)
-    } else if !checkInternetConnection() {
+    } else if !isConnectedToInternet() {
       showAlert(.noInternet)
     }
   }
