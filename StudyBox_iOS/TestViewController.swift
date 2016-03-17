@@ -16,10 +16,9 @@ class TestViewController: StudyBoxViewController {
   @IBOutlet weak var scoreLabel: UILabel!
   
   //temporary variables
-  var testScore=0, questionsInDeck=20
+  var testScore=0, questionsInDeck=5
   
   override func viewDidLayoutSubviews() {
-    
     //answerView is set outside of screen to appear later at swipe
     //and after answering the question
     answerView.center.x = testView.center.x + testView.frame.size.width
@@ -35,15 +34,20 @@ class TestViewController: StudyBoxViewController {
     questionView.userInteractionEnabled = true
     questionView.addGestureRecognizer(swipeLeftForAnswer)
     
+    let swipeUpForIgnore = UISwipeGestureRecognizer()
+    swipeUpForIgnore.direction = .Up
+    swipeUpForIgnore.addTarget(self, action: "swipedDown")
+    testView.userInteractionEnabled = true
+    testView.addGestureRecognizer(swipeUpForIgnore)
+    
     tipButton.backgroundColor = UIColor.sb_Grey()
     correctButton.backgroundColor = UIColor.sb_Grey()
     incorrectButton.backgroundColor = UIColor.sb_Grey()
     questionLabel.backgroundColor = UIColor.sb_Grey()
     answerLabel.backgroundColor = UIColor.sb_Grey()
     
-    correctButton.imageView!.contentMode = .ScaleAspectFit
-    incorrectButton.imageView!.contentMode = .ScaleAspectFit
-
+    correctButton.imageView?.contentMode = .ScaleAspectFit
+    incorrectButton.imageView?.contentMode = .ScaleAspectFit
     
     tipButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
     correctButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
@@ -53,22 +57,48 @@ class TestViewController: StudyBoxViewController {
     scoreLabel.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     
     //TODO: set values of questionsInDeck from recieved deck, set first question and answer labels
-    testScore = 0
-    questionsInDeck = 20
+    
   }
   
   func swipedLeft(){
-    
     UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
       self.answerView.center.x = self.testView.center.x
       self.questionView.center.x = self.testView.center.x - self.testView.frame.size.width
       }, completion: nil)
   }
   
+  func swipedDown(){
+    UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
+      //move views up
+      self.questionView.center.y = self.questionView.center.y - self.testView.frame.size.height
+      self.answerView.center.y = self.answerView.center.y - self.testView.frame.size.height
+      }, completion: { finished in
+        //set views to show questionView after animation
+        self.questionView.center.x = self.testView.center.x
+        self.answerView.center.x = self.testView.center.x + self.testView.frame.size.width
+        
+        //set buttons size back to normal in case they were being pressed while swiping
+        self.correctButton.transform = CGAffineTransformIdentity
+        self.incorrectButton.transform = CGAffineTransformIdentity
+        
+        //move views back to their correct Y position
+        self.questionView.center.y = self.questionView.center.y + self.testView.frame.size.height
+        self.answerView.center.y = self.answerView.center.y + self.testView.frame.size.height
+        
+        //set alpha to 0 to prepare for next animation
+        self.questionView.alpha = 0
+        self.answerView.alpha = 0
+        
+        //animate alpha back to 1
+        UIView.animateWithDuration(0.5, delay: 0,options: [.CurveEaseOut], animations: {
+          self.questionView.alpha = 1
+          self.answerView.alpha = 1
+          }, completion: nil)
+    })
+  }
+  
   @IBAction func showTip(sender: AnyObject) {
-    
-    let alertController = UIAlertController(title: "Podpowiedź:",
-      message: "Message", //TODO: set tip text
+    let alertController = UIAlertController(title: "Podpowiedź:", message: "Message", //TODO: set tip text
       preferredStyle: .Alert)
     
     let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -76,74 +106,86 @@ class TestViewController: StudyBoxViewController {
     self.presentViewController(alertController, animated: true, completion: nil)
   }
   
+  ///TouchUpInside event
   @IBAction func correctAnswer(sender: AnyObject) {
-    //type is Touch Up Inside
-    
-    //TODO: check if there are any questions left
-    answeredQuestionTransition()
-    
     testScore++
-    scoreLabel.text = "\(testScore) / \(questionsInDeck)"
-      
+    if testScore > questionsInDeck {
+      //TODO: preform segue to ScoreViewController
+    } else {
+      scoreLabel.text = "\(testScore) / \(questionsInDeck)"
+      answeredQuestionTransition()
+    }
   }
   
-  let animationTime:NSTimeInterval = 0.1
+  ///Global time setting for button scale animations
+  let buttonsAnimationTime: NSTimeInterval = 0.1
+  ///Global scale setting for button scale animations
+  let buttonsScaleWhenPressed: (CGFloat,CGFloat) = (0.85,0.85)
   
   @IBAction func correctButtonTouchDown(sender: AnyObject) {
-    
-    UIView.animateWithDuration(animationTime,delay:0, options: .CurveEaseOut, animations: {
-        self.correctButton.transform = CGAffineTransformMakeScale(0.85, 0.85)
+    UIView.animateWithDuration(buttonsAnimationTime,delay: 0, options: .CurveEaseOut, animations: {
+      self.correctButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
       }, completion:nil )
   }
   
   @IBAction func correctTouchDragExit(sender: AnyObject) {
-
-    UIView.animateWithDuration(animationTime, delay: 0, options: .CurveEaseOut, animations: {
+    UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
       self.correctButton.transform = CGAffineTransformIdentity
       }, completion:nil)
   }
   
+  @IBAction func correctTouchCancel(sender: AnyObject) {
+    UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
+      self.correctButton.transform = CGAffineTransformIdentity
+      }, completion:nil)
+  }
+  
+  ///TouchUpInside event
   @IBAction func incorrectAnswer(sender: AnyObject) {
-    //type is Touch Up Inside
-
-    //TODO: check if there are any questions left
+    //TODO: check if there are any questions left?
     answeredQuestionTransition()
-    
   }
   
   @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
-    UIView.animateWithDuration(animationTime,delay:0, options: .CurveEaseOut, animations: {
-      self.incorrectButton.transform = CGAffineTransformMakeScale(0.85, 0.85)
+    UIView.animateWithDuration(buttonsAnimationTime,delay:0, options: .CurveEaseOut, animations: {
+      self.incorrectButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
       }, completion:nil )
   }
   
   @IBAction func incorrectTouchDragExit(sender: AnyObject) {
-    UIView.animateWithDuration(animationTime, delay: 0, options: .CurveEaseOut, animations: {
+    UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
       self.incorrectButton.transform = CGAffineTransformIdentity
       }, completion:nil)
   }
   
+  @IBAction func incorrectTouchCancel(sender: AnyObject) {
+    UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
+      self.incorrectButton.transform = CGAffineTransformIdentity
+      }, completion:nil)
+  }
+  
+  ///Animation sequence to go back to starting point and display `questionView`
   func answeredQuestionTransition(){
-    
-    //TODO: if there aren't any flashcards left, then segue to result view
-    //else: below
-    
     questionView.alpha = 0
     questionView.center.x = testView.center.x
     
     //TODO: set new question in label before dissolve
     
+    //move answerView outside of the screen
     answerView.center.x = testView.center.x + testView.frame.size.width
     
+    //animate dissolving of views
     UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: {
       self.answerView.alpha = 0
       self.questionView.alpha = 1
-      }, completion: {
-        (value: Bool) in
+      }, completion: { Void in
         self.answerView.alpha = 1
     })
+    
+    //set buttons size back to normal
     incorrectButton.transform = CGAffineTransformIdentity
     correctButton.transform = CGAffineTransformIdentity
+    
     //TODO: set new answer in label after animation
   }
 }

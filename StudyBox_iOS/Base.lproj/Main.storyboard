@@ -454,6 +454,7 @@
                                                         <connections>
                                                             <action selector="correctAnswer:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="uNT-5r-V7W"/>
                                                             <action selector="correctButtonTouchDown:" destination="6tt-KQ-lf6" eventType="touchDown" id="1xJ-lK-hpx"/>
+                                                            <action selector="correctTouchCancel:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="Mr3-tg-g4M"/>
                                                             <action selector="correctTouchDragExit:" destination="6tt-KQ-lf6" eventType="touchDragExit" id="ttS-sJ-PCc"/>
                                                         </connections>
                                                     </button>
@@ -465,6 +466,7 @@
                                                         <connections>
                                                             <action selector="incorrectAnswer:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="LfA-kU-Nw6"/>
                                                             <action selector="incorrectButtonTouchDown:" destination="6tt-KQ-lf6" eventType="touchDown" id="Maw-pF-I1U"/>
+                                                            <action selector="incorrectTouchCancel:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="HWW-Ae-oxv"/>
                                                             <action selector="incorrectTouchDragExit:" destination="6tt-KQ-lf6" eventType="touchDragExit" id="mVf-MI-9ah"/>
                                                         </connections>
                                                     </button>
@@ -529,7 +531,7 @@
                         <outlet property="questionLabel" destination="8Tv-ua-ypq" id="Aaq-Vz-sEy"/>
                         <outlet property="questionView" destination="qd1-B0-NOL" id="MdX-Xc-2go"/>
                         <outlet property="scoreLabel" destination="9qH-5l-kfE" id="Fhc-fP-jJj"/>
-                        <outlet property="testView" destination="2Up-NT-O2j" id="mp7-wv-ygH"/>
+                        <outlet property="testView" destination="2Up-NT-O2j" id="vGx-U9-nof"/>
                         <outlet property="tipButton" destination="AYi-mT-KA8" id="Nhz-UG-xWQ"/>
                         <segue destination="iPr-WN-tEa" kind="show" identifier="ScoreSegue" id="CT3-PM-FJM"/>
                     </connections>
