@@ -10,16 +10,15 @@ import UIKit
 import Foundation
 import Reachability
 
+var userDataForRegistration = [String : String]()
+
 class RegistrationViewController: UserViewController, InputViewControllerDataSource {
   
-  @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
   @IBOutlet weak var registerButton: UIButton!
-  @IBOutlet weak var cancelButton: UIButton!
-  
-  var userDataForRegistration = [String : String]()
+
   var inputViews = [UITextField]()
   
   override func viewWillAppear(animated: Bool) {
@@ -34,30 +33,27 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     user has to enter some data and it has to be verified
     */
     
-    connectedToInternet()
+    if !checkInternetConnection() {
+      showAlert(.noInternet)
+    }
     
-    registerButton.enabled = false
-    registerButton.backgroundColor = UIColor.grayColor()
+    disableRegisterButton()
     registerButton.layer.cornerRadius = 10.0
     
-    inputViews.append(loginTextField)
     inputViews.append(emailTextField)
     inputViews.append(passwordTextField)
     inputViews.append(repeatPasswordTextField)
     
-    loginTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     emailTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     passwordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     repeatPasswordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     registerButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-    cancelButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
   }
   
-  func connectedToInternet() -> Bool {
+  func checkInternetConnection() -> Bool {
     let reachability = Reachability.reachabilityForInternetConnection()
     
     if reachability.currentReachabilityStatus() == .NotReachable {
-      showAlert(.noInternet)
       return false
     } else {
       return true
@@ -88,7 +84,6 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         showAlert(.passwordTooShort)
       }
     }
-    
     if (password.text?.containsString(" ") == true) {
       showAlert(.passwordContainsSpace)
     }
@@ -135,12 +130,12 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     
-    let nextTag=textField.tag+1;
+    let nextTag = textField.tag + 1
     
     // Try to find next responder
-    let nextResponder=textField.superview?.viewWithTag(nextTag) as UIResponder!
+    let nextResponder = textField.superview?.viewWithTag(nextTag) as UIResponder!
     
-    if (nextResponder != nil){
+    if (nextResponder != nil) {
       // Found next responder, so set it.
       nextResponder?.becomeFirstResponder()
     }
@@ -158,12 +153,9 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   
   @IBAction func register(sender: UIButton) {
 
-    if (loginTextField.text != "" &&
-      emailTextField.text != "" &&
-      passwordTextField.text != "" &&
-      repeatPasswordTextField.text != "" &&
-      connectedToInternet()) {
-        userDataForRegistration["username"] = loginTextField.text
+    let areTextFieldsNotEmpty = emailTextField.text != "" && passwordTextField.text != "" && repeatPasswordTextField.text != ""
+    
+    if (areTextFieldsNotEmpty && checkInternetConnection()) {
         userDataForRegistration["email"] = emailTextField.text
         userDataForRegistration["password"] = repeatPasswordTextField.text
         
@@ -171,8 +163,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         dismissViewControllerAnimated(true) {[unowned self] () -> Void in
           self.successfulLoginTransition() }
     }
-    else {
-      return
+    else if !areTextFieldsNotEmpty {
+      showAlert(.fieldsNotEmpty)
+    } else if !checkInternetConnection() {
+      showAlert(.noInternet)
     }
   }
   
@@ -193,6 +187,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     case passwordContainsSpace
     case noInternet
     case emailIncorrect
+    case fieldsNotEmpty
   }
   
   let alertMessagesDict:[alertType : (String,String)] = [
@@ -201,7 +196,8 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     .passwordContainsSpace : ("Spacja w haśle", "Hasło nie może zawierać spacji."),
     .emailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację, niedozwolone znaki lub jest w złym formacie."),
     .passwordsDontMatch : ("Hasła są różne","Oba hasła muszą być identyczne."),
-    .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków.")
+    .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków."),
+    .fieldsNotEmpty : ("Wypełnij pola","Sprawdź czy wszystkie pola formularza są wypełnione.")
   ]
   
   func showAlert(type: alertType) {

@@ -253,11 +253,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rS8-96-6Si">
-                                <rect key="frame" x="211" y="137" width="177" height="326"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rS8-96-6Si">
+                                <rect key="frame" x="230" y="142" width="141" height="316"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="xRc-dO-Ky5">
-                                        <rect key="frame" x="46" y="0.0" width="85" height="120"/>
+                                        <rect key="frame" x="28" y="0.0" width="85" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="mnr-kD-7he">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="190"/>
@@ -267,32 +267,26 @@
                                             </constraint>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NAZWA UŻYTKOWNIKA" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZ2-EM-Lab">
-                                        <rect key="frame" x="0.0" y="125" width="177" height="30"/>
-                                        <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-MAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dY-gB-BHf">
-                                        <rect key="frame" x="0.0" y="160" width="177" height="30"/>
+                                        <rect key="frame" x="0.0" y="130" width="141" height="30"/>
                                         <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MsS-od-E0r">
-                                        <rect key="frame" x="0.0" y="195" width="177" height="30"/>
+                                        <rect key="frame" x="0.0" y="170" width="141" height="30"/>
                                         <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="POWTÓRZ HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTh-fE-OH6">
-                                        <rect key="frame" x="0.0" y="230" width="177" height="30"/>
+                                        <rect key="frame" x="0.0" y="210" width="141" height="30"/>
                                         <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HvJ-RZ-puj">
-                                        <rect key="frame" x="28" y="265" width="122" height="28"/>
+                                        <rect key="frame" x="10" y="250" width="122" height="28"/>
                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1647058824" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="ZAREJESTRUJ">
@@ -303,7 +297,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zs-qr-d1p">
-                                        <rect key="frame" x="70" y="298" width="38" height="28"/>
+                                        <rect key="frame" x="52" y="288" width="38" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Anuluj">
                                             <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -330,9 +324,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Tzp-W6-ESQ"/>
                     <connections>
-                        <outlet property="cancelButton" destination="2zs-qr-d1p" id="vIJ-RQ-QIP"/>
                         <outlet property="emailTextField" destination="5dY-gB-BHf" id="Pzt-2P-cxi"/>
-                        <outlet property="loginTextField" destination="qZ2-EM-Lab" id="SR2-j3-bU6"/>
                         <outlet property="passwordTextField" destination="MsS-od-E0r" id="Kr6-O6-8CX"/>
                         <outlet property="registerButton" destination="HvJ-RZ-puj" id="vOE-9Z-zJw"/>
                         <outlet property="repeatPasswordTextField" destination="vTh-fE-OH6" id="XZW-Y9-qY4"/>
