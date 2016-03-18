@@ -190,7 +190,6 @@
 				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
 				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
 				CEC69B521C946CC100295808 /* TestLogic.swift */,
-
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
