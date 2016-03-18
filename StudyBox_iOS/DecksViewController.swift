@@ -237,6 +237,8 @@ extension DecksViewController: UISearchBarDelegate {
         if searchText.characters.count > 0 {
             searchDecks = decksArray?.filter {
                 return $0.name.containsString(searchText)
+                }.sort {
+                    return $0.0.name < $0.1.name
             }
             
         }else {
