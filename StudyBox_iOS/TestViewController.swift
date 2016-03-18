@@ -34,11 +34,20 @@ class TestViewController: StudyBoxViewController {
     questionView.userInteractionEnabled = true
     questionView.addGestureRecognizer(swipeLeftForAnswer)
     
-    let swipeUpForIgnore = UISwipeGestureRecognizer()
-    swipeUpForIgnore.direction = .Up
-    swipeUpForIgnore.addTarget(self, action: "swipedDown")
-    testView.userInteractionEnabled = true
-    testView.addGestureRecognizer(swipeUpForIgnore)
+    let swipeUpQuestionLabel = UISwipeGestureRecognizer()
+    swipeUpQuestionLabel.direction = .Up
+    swipeUpQuestionLabel.addTarget(self, action: "swipedUp")
+    questionLabel.userInteractionEnabled = true
+    questionLabel.addGestureRecognizer(swipeUpQuestionLabel)
+    
+    /*
+    Because one Gesture Rec. can be added only to one view, we have to make a second one. There are seperate GR's to avoid situation when user presses the button and moves out of the button upwards because he changes his mind as to answering correct/incorrect or showing the tip. 
+    */
+    let swipeUpAnswerLabel = UISwipeGestureRecognizer()
+    swipeUpAnswerLabel.direction = .Up
+    swipeUpAnswerLabel.addTarget(self, action: "swipedUp")
+    answerLabel.userInteractionEnabled = true
+    answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
     
     tipButton.backgroundColor = UIColor.sb_Grey()
     correctButton.backgroundColor = UIColor.sb_Grey()
@@ -67,7 +76,7 @@ class TestViewController: StudyBoxViewController {
       }, completion: nil)
   }
   
-  func swipedDown(){
+  func swipedUp(){
     UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
       //move views up
       self.questionView.center.y = self.questionView.center.y - self.testView.frame.size.height
