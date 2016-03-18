@@ -13,13 +13,16 @@ class ScoreViewController: StudyBoxViewController {
     @IBOutlet weak var deckListButton: UIButton!
     @IBOutlet weak var runTestButton: UIButton!
     
+    var questionsInDeck = 0
+    var testScore = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        deckListButton.backgroundColor = UIColor(red: 0.88, green: 0.16, blue: 0.32, alpha: 1.0)
+        deckListButton.backgroundColor = UIColor.sb_Raspberry()
         deckListButton.setTitleColor(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), forState: UIControlState.Normal)
         deckListButton.titleLabel?.font = UIFont.sbFont(bold: false)
         
-        runTestButton.backgroundColor = UIColor(red: 0.88, green: 0.16, blue: 0.32, alpha: 1.0)
+        runTestButton.backgroundColor = UIColor.sb_Raspberry()
         runTestButton.setTitleColor(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), forState: UIControlState.Normal)
         runTestButton.titleLabel?.font = UIFont.sbFont(bold: false)
         
@@ -28,7 +31,6 @@ class ScoreViewController: StudyBoxViewController {
     
     func completeData() {
         //temporary variables based on TestViewController
-        let tmpData = TestViewController()
-        scoreLabel.text = "\(tmpData.testScore) / \(tmpData.questionsInDeck)"
+        scoreLabel.text = "\(testScore) / \(questionsInDeck)"
     }
 }
