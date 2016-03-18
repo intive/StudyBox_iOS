@@ -31,7 +31,7 @@
                                 <rect key="frame" x="225" y="313" width="150" height="30"/>
                                 <color key="textColor" red="0.090196078431372548" green="0.32156862745098042" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ib1-31-XT5">
                                 <rect key="frame" x="225" y="351" width="150" height="30"/>
