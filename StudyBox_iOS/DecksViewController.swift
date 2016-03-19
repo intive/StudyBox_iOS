@@ -33,11 +33,18 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         return 0
     }()
     
+    /**
+     * CollectionView content offset is determined by status bar and navigation bar height
+    */
     lazy private var topItemOffset:CGFloat = {
         return -(self.statusBarHeight + self.navbarHeight)
     }()
     
     private var searchBarHeight:CGFloat = 44
+    private var marginValue:CGFloat = 8
+
+    private var softAnimationDuration = 0.2
+    private var accurateAnimationDuration = 0.5
     
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
@@ -184,16 +191,17 @@ extension DecksViewController: UISearchBarDelegate {
         if animated {
             UIView.beginAnimations("cancel", context: nil)
             UIView.setAnimationDelay(0)
-            UIView.setAnimationDuration(0.5)
+            UIView.setAnimationDuration(accurateAnimationDuration)
             UIView.setAnimationCurve(.EaseOut)
             
         }
+        
         if let navigation = navigationController?.navigationBar {
             
-            let top = -self.topItemOffset + self.searchBarHeight
+            let top = self.topItemOffset - self.searchBarHeight
             
-            self.decksCollectionView.contentInset = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
-            self.decksCollectionView.contentOffset.y = -top
+            self.decksCollectionView.contentInset = UIEdgeInsets(top: -top, left: 0, bottom: 0, right: 0)
+            self.decksCollectionView.contentOffset.y = top
             
             navigation.frame.origin.y = self.statusBarHeight
             
@@ -214,7 +222,7 @@ extension DecksViewController: UISearchBarDelegate {
         if animated {
             UIView.beginAnimations("cancel", context: nil)
             UIView.setAnimationDelay(0)
-            UIView.setAnimationDuration(0.5)
+            UIView.setAnimationDuration(accurateAnimationDuration)
             UIView.setAnimationCurve(.EaseOut)
             
         }
@@ -224,7 +232,8 @@ extension DecksViewController: UISearchBarDelegate {
             
             searchBar.frame.origin.y = 0
             searchBar.frame.size.height = self.searchBarHeight + self.statusBarHeight
-            self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + 8, left: 0, bottom: 0, right: 0)
+    
+            self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + self.marginValue, left: 0, bottom: 0, right: 0)
         }
         
         if animated {
@@ -260,21 +269,22 @@ extension DecksViewController: UISearchBarDelegate {
         startSearchReposition(searchBar, animated: true)
     }
     
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y < topItemOffset) {
             
             if (!isSearchBarVisible) {
                 isSearchBarVisible = true
                 decksCollectionView.contentInset = UIEdgeInsets(top: searchBarHeight - topItemOffset, left: 0, bottom: 0, right: 0)
-                UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut, animations: {
+                    
                     self.searchBar?.frame.origin.y = -self.topItemOffset
                 }, completion:nil)
             }
         }else {
             isSearchBarVisible = false
             decksCollectionView.contentInset = UIEdgeInsets(top: -topItemOffset, left: 0, bottom: 0, right: 0)
-            UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+            UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut, animations: {
+                
                 self.searchBar?.frame.origin.y = 0
                 
             }, completion:nil)
