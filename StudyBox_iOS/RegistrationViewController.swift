@@ -11,7 +11,6 @@ import Foundation
 
 class RegistrationViewController: UserViewController, InputViewControllerDataSource {
   
-  @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
@@ -33,12 +32,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     registerButtonOutlet.backgroundColor = UIColor.grayColor()
     registerButtonOutlet.layer.cornerRadius = 10.0
     dataSource = self
-    inputViews.append(loginTextField)
     inputViews.append(emailTextField)
     inputViews.append(passwordTextField)
     inputViews.append(repeatPasswordTextField)
     
-    loginTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     emailTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     passwordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     repeatPasswordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
