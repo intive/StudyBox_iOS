@@ -428,8 +428,8 @@
 			buildConfigurationList = 0DE84E633E073F69CE19213F4B21E5FB /* Build configuration list for PBXNativeTarget "Reachability" */;
 			buildPhases = (
 				A3309E415CFE7C7723C9A151859E6AD6 /* Sources */,
-				4456C7F25B3A52EE8B2875CF2CF66272 /* Headers */,
 				C28AF7FA931DF473519AD5A4C36CC336 /* Frameworks */,
+				4456C7F25B3A52EE8B2875CF2CF66272 /* Headers */,
 			);
 			buildRules = (
 			);
