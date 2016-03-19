@@ -8,22 +8,22 @@
 
 import Foundation
 
-enum NumberOfQuestions {
+enum StudyType {
     
-    case Test(uint), Learn
+    case Test(flashcardsAmount: uint), Learn
 }
 
 class Test {
     
     private var deck : [Flashcard]
-    private var currentCard : Flashcard?
+    private(set) var currentCard : Flashcard?
     private var passedFlashcards = 0
     private var index = 0
     private var numberOfFlashcardsInFullDeck : Int
-    private let testType : NumberOfQuestions
+    private let testType : StudyType
     private let cardsInTest : Int
     
-    init(deck : [Flashcard], testType : NumberOfQuestions) {
+    init(deck : [Flashcard], testType : StudyType) {
         
         self.deck = deck
         self.numberOfFlashcardsInFullDeck = deck.count
