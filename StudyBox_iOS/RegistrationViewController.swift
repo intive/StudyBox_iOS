@@ -18,10 +18,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   @IBOutlet weak var cancelButton: UIButton!
   
   var inputViews = [UITextField]()
-  let studyBoxRedColor = UIColor(red: 0.87890625, green: 0.1640625, blue: 0.3203125, alpha: 1.0)
-  let studyBoxBlueColor = UIColor(red: 23/255, green: 82/255, blue: 165/255, alpha: 1.0)
-  
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -29,7 +26,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     user has to enter some data and it has to be verified
     */
     registerButtonOutlet.enabled = false
-    registerButtonOutlet.backgroundColor = UIColor.grayColor()
+    registerButtonOutlet.backgroundColor = UIColor.sb_Grey()
     registerButtonOutlet.layer.cornerRadius = 10.0
     dataSource = self
     inputViews.append(emailTextField)
@@ -51,28 +48,28 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     let result = emailTest.evaluateWithObject(text)
     
     if !result {
-      textField.textColor = UIColor.redColor()
-      registerButtonOutlet.backgroundColor = UIColor.grayColor()
+      textField.textColor = UIColor.sb_Raspberry()
+      registerButtonOutlet.backgroundColor = UIColor.sb_Grey()
       registerButtonOutlet.enabled = false
     }
     else {
-      textField.textColor = studyBoxBlueColor
-      registerButtonOutlet.backgroundColor = studyBoxRedColor
+      textField.textColor = UIColor.sb_DarkBlue()
+      registerButtonOutlet.backgroundColor = UIColor.sb_Raspberry()
       registerButtonOutlet.enabled = true
     }
   }
   
   func checkPasswords(password1 password1:UITextField, password2:UITextField) {
     if password1.text != password2.text{
-      password1.textColor = UIColor.redColor()
-      password2.textColor = UIColor.redColor()
-      registerButtonOutlet.backgroundColor = UIColor.grayColor()
+      password1.textColor = UIColor.sb_Raspberry()
+      password2.textColor = UIColor.sb_Raspberry()
+      registerButtonOutlet.backgroundColor = UIColor.sb_Grey()
       registerButtonOutlet.enabled = false
     }
     else {
-      password1.textColor = studyBoxBlueColor
-      password2.textColor = studyBoxBlueColor
-      registerButtonOutlet.backgroundColor = studyBoxRedColor
+      password1.textColor = UIColor.sb_DarkBlue()
+      password2.textColor = UIColor.sb_DarkBlue()
+      registerButtonOutlet.backgroundColor = UIColor.sb_Raspberry()
       registerButtonOutlet.enabled = true
     }
   }
