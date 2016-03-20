@@ -41,7 +41,7 @@ struct DrawerNavigationChild {
     }
 }
 
-class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SBDrawerLeftDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     static let DrawerCellId = "DrawerCellId"
@@ -49,7 +49,8 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    
+    private var hideStatusBar = true
+
     private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
@@ -157,8 +158,17 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
         return .Slide
     }
     
+    func hidingDrawer() {
+        hideStatusBar = !hideStatusBar
+        UIView.animateWithDuration(0.5, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }) { (_) in
+            self.hideStatusBar = !self.hideStatusBar
+        }
+    }
+    
     override func prefersStatusBarHidden() -> Bool {
-        return true
+        return hideStatusBar
     }
     
     func deactiveAllChildViewControllers() {
@@ -172,7 +182,7 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
         super.didReceiveMemoryWarning()
         for (index,_) in drawerNavigationControllers.enumerate() {
             if (!drawerNavigationControllers[index].isActive ) {
-                drawerNavigationControllers[index].viewController = nil 
+                drawerNavigationControllers[index].viewController = nil
             }
         }
     }

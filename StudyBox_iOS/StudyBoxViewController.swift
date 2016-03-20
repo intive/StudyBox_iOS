@@ -10,10 +10,10 @@ import UIKit
 import MMDrawerController
 //View Controller, which will be inherited by other VC's
 
-class StudyBoxViewController: UIViewController {
+class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
 
     private var isDrawerVisible = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
@@ -27,22 +27,43 @@ class StudyBoxViewController: UIViewController {
             }
             
         }
+
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController  {
+
+            var isCenter = false
+            if let centerNavigation = sbDrawer.centerViewController as? UINavigationController {
+                centerNavigation.viewControllers.forEach {
+                    if $0 === self {
+                        isCenter = true
+                    }
+                }
+            }else if sbDrawer.centerViewController === self  {
+                isCenter = true
+            }
+            if (isCenter) {
+                sbDrawer.centerDelegate = self
+            }
+        }
+    }
     
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
-            if (drawer.openSide == .None){
-                isDrawerVisible = true
-            }else {
-                isDrawerVisible = false
-            }
-            drawer.toggleDrawerSide(.Left, animated: true,completion: {[weak self] (_) in
-                if let strongSelf = self {
-                    strongSelf.isDrawerVisible = !strongSelf.isDrawerVisible
-                }
+            drawer.toggleDrawerSide(.Left, animated: true,completion: { (_) in
             })
-            
+  
+        }
+    }
+    
+    func showingDrawer() {
+        isDrawerVisible = !isDrawerVisible
+        UIView.animateWithDuration(0.5, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }) { (_) in
+            self.isDrawerVisible = !self.isDrawerVisible
         }
     }
     

@@ -21,7 +21,7 @@ class UserViewController: InputViewController {
             guard let center = drawerNav.initialCenterController() else {
                 fatalError("DrawerViewController doesn't have initial view controller")
             }            
-            let mmDrawer = MMDrawerController(centerViewController: center, leftDrawerViewController: drawerNav)
+            let mmDrawer = SBDrawerController(centerViewController: center, leftDrawerViewController: drawerNav)
             mmDrawer.openDrawerGestureModeMask = .None
             mmDrawer.closeDrawerGestureModeMask = [.PanningCenterView ]
             

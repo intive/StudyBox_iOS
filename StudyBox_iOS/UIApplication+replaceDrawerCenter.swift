@@ -11,7 +11,7 @@ import MMDrawerController
 extension UIApplication {
     
     class func replaceCurrentCenter(withViewController viewController: UIViewController, embedInNavigationController: Bool) {
-        if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController{
+        if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController {
             var controller:UIViewController?
             if (embedInNavigationController) {
                 controller = UINavigationController(rootViewController: viewController)
