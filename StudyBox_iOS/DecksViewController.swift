@@ -104,7 +104,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         }
 
         if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
-            navigationController?.viewControllers = [ test ]
+            UIApplication.replaceCurrentCenter(withViewController: test, embedInNavigationController: true)
         }
     }
  

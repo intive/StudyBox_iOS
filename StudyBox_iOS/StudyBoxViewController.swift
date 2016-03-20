@@ -12,33 +12,45 @@ import MMDrawerController
 
 class StudyBoxViewController: UIViewController {
 
+    private var isDrawerVisible = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
-            if let controller = navigationController?.viewControllers[0] where controller == self {
-                drawer.openDrawerGestureModeMask = .None
+            if let controller = navigationController?.viewControllers[0] where controller === self {
                 let hamburgerImage = UIImage(named: "Hamburger")
-                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("changeDrawer"))
-                
+                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("toggleDrawer"))
                 navigationItem.leftBarButtonItem = button
+                drawer.openDrawerGestureModeMask = .Custom
             }else {
-                drawer.openDrawerGestureModeMask = .PanningCenterView
+                drawer.openDrawerGestureModeMask = .None
             }
+            
         }
     }
     
-    func changeDrawer(){
+    
+    func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
-            
-            if (drawer.visibleLeftDrawerWidth == 0){
-                drawer.openDrawerSide(.Left, animated: true, completion: nil)
+            if (drawer.openSide == .None){
+                isDrawerVisible = true
             }else {
-                drawer.closeDrawerAnimated(true, completion: nil)
+                isDrawerVisible = false
             }
+            drawer.toggleDrawerSide(.Left, animated: true,completion: {[weak self] (_) in
+                if let strongSelf = self {
+                    strongSelf.isDrawerVisible = !strongSelf.isDrawerVisible
+                }
+            })
+            
         }
     }
-  
+    
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Slide
+    }
+    override func prefersStatusBarHidden() -> Bool {
+        return isDrawerVisible
+    }
   
 }

@@ -19,6 +19,7 @@ class TestViewController: StudyBoxViewController {
   var testScore=0, questionsInDeck=5
   
   override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     //answerView is set outside of screen to appear later at swipe
     //and after answering the question
     answerView.center.x = testView.center.x + testView.frame.size.width
@@ -30,12 +31,14 @@ class TestViewController: StudyBoxViewController {
     
     let swipeLeftForAnswer = UISwipeGestureRecognizer()
     swipeLeftForAnswer.direction = .Left
+    swipeLeftForAnswer.delegate = self
     swipeLeftForAnswer.addTarget(self, action: "swipedLeft")
     questionView.userInteractionEnabled = true
     questionView.addGestureRecognizer(swipeLeftForAnswer)
     
     let swipeUpQuestionLabel = UISwipeGestureRecognizer()
     swipeUpQuestionLabel.direction = .Up
+    swipeUpQuestionLabel.delegate = self
     swipeUpQuestionLabel.addTarget(self, action: "swipedUp")
     questionLabel.userInteractionEnabled = true
     questionLabel.addGestureRecognizer(swipeUpQuestionLabel)
@@ -199,3 +202,10 @@ class TestViewController: StudyBoxViewController {
   }
 }
 
+
+extension TestViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}

@@ -11,8 +11,34 @@ import MMDrawerController
 
 struct DrawerNavigationChild {
     let name:String
-    let viewController:UIViewController?
     let viewControllerBlock:(()->Void)?
+    let lazyLoadViewControllerBlock:(()->UIViewController?)?
+    var isActive = false
+    
+    private var _viewController:UIViewController? = nil
+    var viewController:UIViewController? {
+        mutating get {
+            if _viewController == nil {
+                _viewController = lazyLoadViewControllerBlock?()
+            }
+            return _viewController
+        }
+        set {
+            _viewController = newValue
+        }
+    }
+    
+    init(name:String,viewController:UIViewController? = nil,lazyLoadViewControllerBlock:(()->UIViewController?)? = nil,viewControllerBlock:(()->Void)? = nil) {
+        self.name = name
+        self.lazyLoadViewControllerBlock = lazyLoadViewControllerBlock
+        self.viewControllerBlock = viewControllerBlock
+        self.viewController = viewController
+
+    }
+    
+    init(name:String,viewControllerBlock:(()->Void)?) {
+        self.init(name: name,viewController: nil,lazyLoadViewControllerBlock: nil,viewControllerBlock: viewControllerBlock)
+    }
 }
 
 class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
@@ -20,54 +46,124 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     static let DrawerCellId = "DrawerCellId"
     
-    var drawerNavigationControllers = [DrawerNavigationChild]()
+    private var drawerNavigationControllers = [DrawerNavigationChild]()
+    private static var initialControllerIndex = 1
+    private var currentControllerIndex = 1
+    
+    private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
+        if let board = self.storyboard {
+            let controller = board.instantiateViewControllerWithIdentifier(id)
+            return controller
+        }
+        return nil
+    }
+    
+    func setupDrawer() {
+        if (drawerNavigationControllers.count == 0) {
+            drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Moje talie",viewController: nil,lazyLoadViewControllerBlock: {[weak self] in
+                    return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.DecksViewControllerID)
+                })
+            )
+            drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę"))
+            drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
+            drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
+                    if let storyboard = self?.storyboard {
+                        UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
+                    }
+                }
+            )
+        }
+        
+    }
+    
+    func initialCenterController()->UIViewController? {
+        setupDrawer()
+        if (drawerNavigationControllers.count > 0) {
+            var index = 0
+            if (DrawerViewController.initialControllerIndex < drawerNavigationControllers.count) {
+                index = DrawerViewController.initialControllerIndex
+            }
+            drawerNavigationControllers[index].isActive = true
+            return drawerNavigationControllers[index].viewController
+        }
+        return nil
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto", viewController: nil,viewControllerBlock: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje talie", viewController: nil,viewControllerBlock: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,viewControllerBlock: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę", viewController: nil,viewControllerBlock: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki", viewController: nil,viewControllerBlock: nil))
-        drawerNavigationControllers.append(DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
-            if let storyboard = self?.storyboard {
-                UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
-            }
-        })
-        
-        tableView.backgroundColor = UIColor.grayColor()
+        setupDrawer()
+        tableView.backgroundColor = UIColor.sb_Graphite()
     }
 
+    
+   
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return drawerNavigationControllers.count
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(DrawerViewController.DrawerCellId, forIndexPath: indexPath)
-        cell.textLabel?.text = drawerNavigationControllers[indexPath.section].name
-        cell.backgroundColor = UIColor.grayColor()
+        let drawerChild = drawerNavigationControllers[indexPath.row]
+        cell.textLabel?.text = drawerChild.name
+        
+        if (drawerChild.isActive) {
+            cell.backgroundColor = UIColor.sb_Raspberry()
+        }else {
+            cell.backgroundColor = UIColor.sb_Graphite()
+        }
+        
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 
+        return drawerNavigationControllers.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
-        let navigationChild = drawerNavigationControllers[indexPath.section]
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
+        var navigationChild = drawerNavigationControllers[indexPath.row]
+        navigationChild.isActive = true
         
         if let controller = navigationChild.viewController {
+            // viewController getter is mutating, it's possible that it was instantiated for the first time so the value was changed
+            drawerNavigationControllers[indexPath.row] = navigationChild
+            
             if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController {
-                mmDrawer.centerViewController = controller
+                mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
+            
         }else if let block = navigationChild.viewControllerBlock {
             block()
         }else {
-            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            navigationChild.isActive = false
+            drawerNavigationControllers[currentControllerIndex].isActive = true
+            return
+        }
+        currentControllerIndex = indexPath.row
+        tableView.reloadData()
+        
+    }
+    
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Slide
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    func deactiveAllChildViewControllers() {
+        for (index,_) in drawerNavigationControllers.enumerate() {
+            drawerNavigationControllers[index].isActive = false
         }
     }
     
