@@ -26,7 +26,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     user has to enter some data and it has to be verified
     */
     registerButtonOutlet.enabled = false
-    registerButtonOutlet.backgroundColor = UIColor.sb_Grey()
+    registerButtonOutlet.backgroundColor = UIColor.grayColor()
     registerButtonOutlet.layer.cornerRadius = 10.0
     dataSource = self
     inputViews.append(emailTextField)
@@ -49,7 +49,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     
     if !result {
       textField.textColor = UIColor.sb_Raspberry()
-      registerButtonOutlet.backgroundColor = UIColor.sb_Grey()
+      registerButtonOutlet.backgroundColor = UIColor.grayColor()
       registerButtonOutlet.enabled = false
     }
     else {
@@ -63,7 +63,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     if password1.text != password2.text{
       password1.textColor = UIColor.sb_Raspberry()
       password2.textColor = UIColor.sb_Raspberry()
-      registerButtonOutlet.backgroundColor = UIColor.sb_Grey()
+      registerButtonOutlet.backgroundColor = UIColor.grayColor()
       registerButtonOutlet.enabled = false
     }
     else {
