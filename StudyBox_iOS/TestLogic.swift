@@ -40,9 +40,18 @@ class Test {
     newFlashcard(answeredCorrect:true)
   }
   
-  /// Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
-  /// - Parameter answeredCorrect: was the last card marked correct or not
-  func newFlashcard(answeredCorrect answeredCorrect:Bool) {
+  /** Returns a tuple of numbers of flashcards that were answered correctly and how many flashcards are in the test
+   - returns: `(passedFlashcards,cardsInTest)`
+  */
+  func cardsAnsweredAndPossible() -> (Int,Int) {
+    return (passedFlashcards,cardsInTest)
+  }
+  
+  /** Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
+  - Parameter answeredCorrect: Was the last card marked correct or not
+  - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
+  */
+  func newFlashcard(answeredCorrect answeredCorrect:Bool) -> Flashcard? {
     var rand : Int
     
     if(cardsInTest == index) {
@@ -66,6 +75,8 @@ class Test {
       }
     }
     index += 1
+    
+    return currentCard
   }
   
   ///Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
