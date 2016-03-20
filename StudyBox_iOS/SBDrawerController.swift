@@ -19,6 +19,8 @@ class SBDrawerController:MMDrawerController {
     var drawerDelegate:SBDrawerLeftDelegate?
     var centerDelegate:SBDrawerCenterDelegate?
     
+    static var statusBarAnimationTime = 0.5
+    
     override var centerViewController: UIViewController! {
         didSet {
             if let delegate = centerViewController as? SBDrawerCenterDelegate {

@@ -60,7 +60,7 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
     
     func showingDrawer() {
         isDrawerVisible = !isDrawerVisible
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
         }) { (_) in
             self.isDrawerVisible = !self.isDrawerVisible
