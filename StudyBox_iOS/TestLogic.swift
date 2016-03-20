@@ -8,18 +8,37 @@
 
 import Foundation
 
+enum StudyType {
+    
+    case Test(flashcardsAmount: uint), Learn
+}
+
 class Test {
     
     private var deck : [Flashcard]
-    private var currentCard : Flashcard?
+    private(set) var currentCard : Flashcard?
     private var passedFlashcards = 0
     private var index = 0
     private var numberOfFlashcardsInFullDeck : Int
+    private let testType : StudyType
+    private let cardsInTest : Int
     
-    init(deck : [Flashcard]) {
+    init(deck : [Flashcard], testType : StudyType) {
         
         self.deck = deck
         self.numberOfFlashcardsInFullDeck = deck.count
+        self.testType = testType
+        
+        switch testType {
+        case .Learn:
+            cardsInTest = deck.count
+        case .Test(let questionsNumber):
+            if questionsNumber > uint(deck.count) {
+                cardsInTest = deck.count
+            } else {
+                cardsInTest = Int(questionsNumber)
+            }
+        }
         currentFlashcard()
     }
     
@@ -27,7 +46,7 @@ class Test {
         
         var rand : Int
         
-        if(deck.count == 0) {
+        if(cardsInTest == index) {
             
             currentCard = nil
         }
