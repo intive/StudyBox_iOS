@@ -9,64 +9,73 @@
 import Foundation
 
 enum StudyType {
-    
-    case Test(flashcardsAmount: uint), Learn
+  case Test(uint), Learn
 }
 
 class Test {
+  private var deck : [Flashcard]
+  private(set) var currentCard : Flashcard?
+  private var passedFlashcards = 0
+  private var index = 0
+  private var numberOfFlashcardsInFullDeck : Int
+  private let testType : StudyType
+  private let cardsInTest : Int
+  
+  init(deck : [Flashcard], testType : StudyType) {
+    self.deck = deck
+    self.numberOfFlashcardsInFullDeck = deck.count
+    self.testType = testType
     
-    private var deck : [Flashcard]
-    private(set) var currentCard : Flashcard?
-    private var passedFlashcards = 0
-    private var index = 0
-    private var numberOfFlashcardsInFullDeck : Int
-    private let testType : StudyType
-    private let cardsInTest : Int
+    switch testType {
+    case .Learn:
+      cardsInTest = deck.count
+    case .Test(let questionsNumber):
+      if questionsNumber > uint(deck.count) {
+        cardsInTest = deck.count
+      } else {
+        cardsInTest = Int(questionsNumber)
+      }
+    }
     
-    init(deck : [Flashcard], testType : StudyType) {
-        
-        self.deck = deck
-        self.numberOfFlashcardsInFullDeck = deck.count
-        self.testType = testType
-        
-        switch testType {
+    newFlashcard(answeredCorrect:true)
+  }
+  
+  /// Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
+  /// - Parameter answeredCorrect: was the last card marked correct or not
+  func newFlashcard(answeredCorrect answeredCorrect:Bool) {
+    var rand : Int
+    
+    if(cardsInTest == index) {
+      currentCard = nil
+    } else {
+      rand = Int(arc4random_uniform(UInt32(deck.count)))
+      currentCard = deck[rand]
+      deck.removeAtIndex(rand)
+      if !answeredCorrect{
+        switch testType{
         case .Learn:
-            cardsInTest = deck.count
-        case .Test(let questionsNumber):
-            if questionsNumber > uint(deck.count) {
-                cardsInTest = deck.count
-            } else {
-                cardsInTest = Int(questionsNumber)
-            }
+          //moves card to end of deck, if currentCard is not nil
+          if let moveCardToEnd = currentCard {
+            deck.append(moveCardToEnd)
+          }
+        case .Test(uint(cardsInTest)):
+          break
+        default:
+          break
         }
-        currentFlashcard()
+      }
     }
-    
-    func currentFlashcard() {
-        
-        var rand : Int
-        
-        if(cardsInTest == index) {
-            
-            currentCard = nil
-        }
-        else {
-            
-            rand = Int(arc4random_uniform(UInt32(deck.count)))
-            currentCard = deck[rand]
-            deck.removeAtIndex(rand)
-            index += 1
-        }
-    }
-    
-    func correctAnswer() { //funkcja podpieta pod przycisk dobra odpowiedz
-        
-        passedFlashcards += 1
-        currentFlashcard()
-    }
-    
-    func IncorrectAnswer() {   //funkcja podpieta pod przycisk zla odpowiedz
-        
-        currentFlashcard()
-    }
+    index += 1
+  }
+  
+  ///Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
+  func correctAnswer() {
+    passedFlashcards += 1
+    newFlashcard(answeredCorrect:true)
+  }
+  
+  ///Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
+  func incorrectAnswer(testType:StudyType) {
+    newFlashcard(answeredCorrect:false)
+  }
 }
