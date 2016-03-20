@@ -167,4 +167,14 @@ class DrawerViewController: UIViewController,UITableViewDataSource,UITableViewDe
         }
     }
     
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        for (index,_) in drawerNavigationControllers.enumerate() {
+            if (!drawerNavigationControllers[index].isActive ) {
+                drawerNavigationControllers[index].viewController = nil 
+            }
+        }
+    }
+    
 }
