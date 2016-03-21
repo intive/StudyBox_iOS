@@ -23,7 +23,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         
         DecksViewController.selectedDeckForTesting = nil
         let dataManager = DataManager.managerWithDummyData()
-        decksArray = dataManager.decks(false)
+        decksArray = dataManager.decks(true)
     }
     
     override func viewDidLoad() {
