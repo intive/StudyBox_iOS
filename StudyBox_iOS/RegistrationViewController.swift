@@ -63,9 +63,16 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   }
   
   func checkEmail(textField: UITextField) -> () {
-    
     if let text = textField.text where textField == emailTextField {
-      textField.text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+      
+      //Trim spaces at the beginning and end of email
+      let trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+      textField.text = trimmedText
+      
+      //Trimmed text must contain `@` but mustn't contain whitespace inside
+      if (trimmedText.containsString(" ") || !trimmedText.containsString("@") == true) {
+        showAlert(.emailIncorrect)
+      }
     }
   }
   
@@ -73,10 +80,13 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     if let characterCount = password.text?.characters.count {
       if characterCount < 8 && characterCount != 0 {
         showAlert(.passwordTooShort)
+        //To prevent popping up multiple error alerts
+        repeatPasswordTextField.resignFirstResponder()
       }
     }
     if (password.text?.containsString(" ") == true) {
       showAlert(.passwordContainsSpace)
+      repeatPasswordTextField.resignFirstResponder()
     }
   }
   
@@ -86,7 +96,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
       if (password1.text != password2.text){
         password1.textColor = UIColor.sb_Raspberry()
         password2.textColor = UIColor.sb_Raspberry()
-        showAlert(.passwordContainsSpace)
+        showAlert(.passwordsDontMatch)
         disableRegisterButton()
       }
       else {
@@ -185,7 +195,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     .noInternet : ("Brak połączenia","Nie można połączyć się z Internetem. Sprawdź połączenie"),
     .emailIsTaken : ("Adres e-mail zajęty", "Już istnieje konto z takim adresem e-mail."),
     .passwordContainsSpace : ("Spacja w haśle", "Hasło nie może zawierać spacji."),
-    .emailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację, niedozwolone znaki lub jest w złym formacie."),
+    .emailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację lub jest w złym formacie."),
     .passwordsDontMatch : ("Hasła są różne","Oba hasła muszą być identyczne."),
     .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków."),
     .fieldsNotEmpty : ("Wypełnij pola","Sprawdź czy wszystkie pola formularza są wypełnione.")
