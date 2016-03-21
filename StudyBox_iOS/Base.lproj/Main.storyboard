@@ -151,7 +151,7 @@
                     <navigationItem key="navigationItem" id="Bco-pG-cRr"/>
                     <connections>
                         <outlet property="decksCollectionView" destination="9VM-hJ-ElA" id="upw-p9-nF4"/>
-                        <segue destination="6tt-KQ-lf6" kind="show" identifier="StartTest" id="IWt-ao-u5P"/>
+                        <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="IWt-ao-u5P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXn-sV-c38" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -416,20 +416,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qd1-B0-NOL" userLabel="QuestionView">
-                                <rect key="frame" x="20" y="74" width="560" height="476"/>
+                                <rect key="frame" x="20" y="30" width="560" height="520"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Cv-mK-csu" userLabel="Stack View1">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="476"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="520"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pytanie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-ua-ypq" userLabel="QuestionLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="323"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="354"/>
                                                 <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYi-mT-KA8">
-                                                <rect key="frame" x="0.0" y="333" width="560" height="143"/>
+                                                <rect key="frame" x="0.0" y="364" width="560" height="156"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Podpowiedź">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -455,23 +455,23 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbe-Fw-hsa" userLabel="AnswerView">
-                                <rect key="frame" x="20" y="74" width="560" height="476"/>
+                                <rect key="frame" x="20" y="30" width="560" height="520"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-uF-MfH" userLabel="Stack View1">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="476"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="520"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Odpowiedź" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZB-4x-LNY" userLabel="AnswerLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="323"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="354"/>
                                                 <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0Q-OR-x3g">
-                                                <rect key="frame" x="0.0" y="333" width="560" height="143"/>
+                                                <rect key="frame" x="0.0" y="364" width="560" height="156"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKv-dV-bFU" userLabel="YesBtn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="143"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="156"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="tintColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" image="correct"/>
@@ -483,7 +483,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrx-Hp-csN" userLabel="NoBtn">
-                                                        <rect key="frame" x="285" y="0.0" width="275" height="143"/>
+                                                        <rect key="frame" x="285" y="0.0" width="275" height="156"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="tintColor" red="1" green="0.23120318092490566" blue="0.24729550240503795" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" image="incorrect"/>

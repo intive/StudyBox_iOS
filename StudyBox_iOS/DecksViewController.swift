@@ -103,9 +103,8 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
         }
 
-        if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
-            navigationController?.viewControllers = [ test ]
-        }
+        performSegueWithIdentifier("StartTest", sender: self)
+        
     }
  
 }

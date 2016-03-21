@@ -1,3 +1,6 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$CONFIGURATION_BUILD_DIR/MMDrawerController"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/MMDrawerController/MMDrawerController.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "MMDrawerController"
 PODS_ROOT = ${SRCROOT}/Pods

@@ -9,6 +9,6 @@ target 'StudyBox_iOS' do
 end
 
 target 'StudyBox_iOSTests' do
-
+    pod 'MMDrawerController', '~> 0.6.0'
 end
 
