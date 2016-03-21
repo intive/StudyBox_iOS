@@ -67,11 +67,29 @@ class TestViewController: StudyBoxViewController {
     questionLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
     answerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
     scoreLabel.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+
     
     //TODO: set values of questionsInDeck from recieved deck, set first question and answer labels
+    testScore = 0
+    questionsInDeck = 20
     
+    //score label displays score; onclick moves to Score View Controller
+    let tapScore = UITapGestureRecognizer(target: self, action: Selector("tapScore:"))
+    scoreLabel.userInteractionEnabled = true
+    scoreLabel.addGestureRecognizer(tapScore)
   }
-  
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if let nextViewController = segue.destinationViewController as? ScoreViewController {
+      nextViewController.testScore = self.testScore
+      nextViewController.questionsInDeck = self.questionsInDeck
+    }
+  }
+    
+  func tapScore(sender: UITapGestureRecognizer) {
+    self.performSegueWithIdentifier("ScoreSegue", sender: self)
+  }
+    
   func swipedLeft(){
     UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
       self.answerView.center.x = self.testView.center.x
