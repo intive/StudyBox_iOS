@@ -61,9 +61,10 @@ class TestViewController: StudyBoxViewController {
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    let nexts = segue.destinationViewController as! ScoreViewController
-    nexts.testScore = self.testScore
-    nexts.questionsInDeck = self.questionsInDeck
+    if let nextViewController = segue.destinationViewController as? ScoreViewController {
+      nextViewController.testScore = self.testScore
+      nextViewController.questionsInDeck = self.questionsInDeck
+    }
   }
     
   func tapScore(sender: UITapGestureRecognizer) {
