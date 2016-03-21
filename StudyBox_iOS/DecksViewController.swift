@@ -103,9 +103,8 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
         }
 
-        if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
-            UIApplication.replaceCurrentCenter(withViewController: test, embedInNavigationController: true)
-        }
+        performSegueWithIdentifier("StartTest", sender: self)
+        
     }
  
 }
