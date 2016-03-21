@@ -275,20 +275,24 @@ extension DecksViewController: UISearchBarDelegate {
             if (!isSearchBarVisible) {
                 isSearchBarVisible = true
                 decksCollectionView.contentInset = UIEdgeInsets(top: searchBarHeight - topItemOffset, left: 0, bottom: 0, right: 0)
-                UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut, animations: {
-                    
-                    self.searchBar?.frame.origin.y = -self.topItemOffset
-                }, completion:nil)
+                
+                UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
+                    animations: {
+                        self.searchBar?.frame.origin.y = -self.topItemOffset
+                    },
+                    completion: nil
+                )
             }
         }else {
             isSearchBarVisible = false
             decksCollectionView.contentInset = UIEdgeInsets(top: -topItemOffset, left: 0, bottom: 0, right: 0)
-            UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut, animations: {
-                
-                self.searchBar?.frame.origin.y = 0
-                
-            }, completion:nil)
             
+            UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
+                animations: {
+                    self.searchBar?.frame.origin.y = 0
+                },
+                completion: nil
+            )
         }
     }
 }
