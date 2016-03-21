@@ -282,16 +282,16 @@
                                 </constraints>
                                 <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="POWTÓRZ HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTh-fE-OH6">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="POWTÓRZ HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTh-fE-OH6">
                                 <rect key="frame" x="215" y="359" width="170" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="png-us-oFN"/>
                                 </constraints>
                                 <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="join"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="png-us-oFN"/>
@@ -319,14 +319,14 @@
                                     <action selector="register:" destination="MeD-mH-qFY" eventType="touchUpInside" id="3Bd-c6-IHw"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MsS-od-E0r">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="HASŁO" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MsS-od-E0r">
                                 <rect key="frame" x="215" y="317" width="170" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="pAJ-gq-Vha"/>
                                 </constraints>
                                 <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="pAJ-gq-Vha"/>
@@ -358,7 +358,7 @@
                         <outlet property="cancelButton" destination="2zs-qr-d1p" id="vIJ-RQ-QIP"/>
                         <outlet property="emailTextField" destination="5dY-gB-BHf" id="Pzt-2P-cxi"/>
                         <outlet property="passwordTextField" destination="MsS-od-E0r" id="Kr6-O6-8CX"/>
-                        <outlet property="registerButtonOutlet" destination="HvJ-RZ-puj" id="A2r-18-WHd"/>
+                        <outlet property="registerButton" destination="HvJ-RZ-puj" id="82n-Io-2oU"/>
                         <outlet property="repeatPasswordTextField" destination="vTh-fE-OH6" id="XZW-Y9-qY4"/>
                     </connections>
                 </viewController>
