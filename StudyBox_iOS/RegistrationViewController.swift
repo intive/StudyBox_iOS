@@ -18,7 +18,8 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
   @IBOutlet weak var registerButton: UIButton!
-
+  @IBOutlet weak var cancelButton: UIButton!
+  
   var inputViews = [UITextField]()
   
   override func viewWillAppear(animated: Bool) {
@@ -62,20 +63,9 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   }
   
   func checkEmail(textField: UITextField) -> () {
-    let text = textField.text
-    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-    let result = emailTest.evaluateWithObject(text)
     
-    if !result {
-      textField.textColor = UIColor.sb_Raspberry()
-      showAlert(.emailIncorrect)
-      disableRegisterButton()
-    }
-    else {
-      //TODO: check if email exists in database, if not then showAlert(.emailIsTaken) and code below
-      textField.textColor = UIColor.sb_DarkBlue()
-      enableRegisterButton()
+    if let text = textField.text where textField == emailTextField {
+      textField.text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     }
   }
   

@@ -291,7 +291,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="join"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="join" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="png-us-oFN"/>
@@ -326,7 +326,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="pAJ-gq-Vha"/>
@@ -358,7 +358,7 @@
                         <outlet property="cancelButton" destination="2zs-qr-d1p" id="vIJ-RQ-QIP"/>
                         <outlet property="emailTextField" destination="5dY-gB-BHf" id="Pzt-2P-cxi"/>
                         <outlet property="passwordTextField" destination="MsS-od-E0r" id="Kr6-O6-8CX"/>
-                        <outlet property="registerButtonOutlet" destination="HvJ-RZ-puj" id="A2r-18-WHd"/>
+                        <outlet property="registerButton" destination="HvJ-RZ-puj" id="82n-Io-2oU"/>
                         <outlet property="repeatPasswordTextField" destination="vTh-fE-OH6" id="XZW-Y9-qY4"/>
                     </connections>
                 </viewController>
