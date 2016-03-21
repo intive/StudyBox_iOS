@@ -52,19 +52,21 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
     
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
-            drawer.toggleDrawerSide(.Left, animated: true,completion: { (_) in
-            })
-  
+            drawer.toggleDrawerSide(.Left, animated: true,completion: nil)
         }
     }
     
     func showingDrawer() {
         isDrawerVisible = !isDrawerVisible
-        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime, animations: {
-            self.setNeedsStatusBarAppearanceUpdate()
-        }) { (_) in
-            self.isDrawerVisible = !self.isDrawerVisible
-        }
+        
+        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
+            animations: {
+                self.setNeedsStatusBarAppearanceUpdate()
+            },
+            completion: { finished in
+                self.isDrawerVisible = !self.isDrawerVisible
+            }
+        )
     }
     
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {

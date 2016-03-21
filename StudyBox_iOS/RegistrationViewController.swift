@@ -11,7 +11,6 @@ import Foundation
 
 class RegistrationViewController: UserViewController, InputViewControllerDataSource {
   
-  @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var repeatPasswordTextField: UITextField!
@@ -19,10 +18,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
   @IBOutlet weak var cancelButton: UIButton!
   
   var inputViews = [UITextField]()
-  let studyBoxRedColor = UIColor(red: 0.87890625, green: 0.1640625, blue: 0.3203125, alpha: 1.0)
-  let studyBoxBlueColor = UIColor(red: 23/255, green: 82/255, blue: 165/255, alpha: 1.0)
-  
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -33,12 +29,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     registerButtonOutlet.backgroundColor = UIColor.grayColor()
     registerButtonOutlet.layer.cornerRadius = 10.0
     dataSource = self
-    inputViews.append(loginTextField)
     inputViews.append(emailTextField)
     inputViews.append(passwordTextField)
     inputViews.append(repeatPasswordTextField)
     
-    loginTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     emailTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     passwordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     repeatPasswordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
@@ -54,28 +48,28 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     let result = emailTest.evaluateWithObject(text)
     
     if !result {
-      textField.textColor = UIColor.redColor()
+      textField.textColor = UIColor.sb_Raspberry()
       registerButtonOutlet.backgroundColor = UIColor.grayColor()
       registerButtonOutlet.enabled = false
     }
     else {
-      textField.textColor = studyBoxBlueColor
-      registerButtonOutlet.backgroundColor = studyBoxRedColor
+      textField.textColor = UIColor.sb_DarkBlue()
+      registerButtonOutlet.backgroundColor = UIColor.sb_Raspberry()
       registerButtonOutlet.enabled = true
     }
   }
   
   func checkPasswords(password1 password1:UITextField, password2:UITextField) {
     if password1.text != password2.text{
-      password1.textColor = UIColor.redColor()
-      password2.textColor = UIColor.redColor()
+      password1.textColor = UIColor.sb_Raspberry()
+      password2.textColor = UIColor.sb_Raspberry()
       registerButtonOutlet.backgroundColor = UIColor.grayColor()
       registerButtonOutlet.enabled = false
     }
     else {
-      password1.textColor = studyBoxBlueColor
-      password2.textColor = studyBoxBlueColor
-      registerButtonOutlet.backgroundColor = studyBoxRedColor
+      password1.textColor = UIColor.sb_DarkBlue()
+      password2.textColor = UIColor.sb_DarkBlue()
+      registerButtonOutlet.backgroundColor = UIColor.sb_Raspberry()
       registerButtonOutlet.enabled = true
     }
   }

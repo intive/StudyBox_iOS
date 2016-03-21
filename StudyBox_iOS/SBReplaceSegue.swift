@@ -24,12 +24,15 @@ class SBReplaceSegue: UIStoryboardSegue {
             mmDrawer.setCenterViewController(navigation, withCloseAnimation: false, completion: nil)
             let source = sourceViewController
         
-            UIView.animateWithDuration(0.5, animations: {
-                source.view.alpha = 0.2
-                navigation.view.alpha = 1
-            }, completion: { (_) in
+            UIView.animateWithDuration(0.5,
+                animations: {
+                    source.view.alpha = 0.2
+                    navigation.view.alpha = 1
+                },
+                completion: { finished in
                     source.view.alpha = 1
-            })
+                }
+            )
         }
     }
 }

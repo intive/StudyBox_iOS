@@ -1,939 +1,2415 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		00AB9667C6E85C84AA87F4055C95475D /* MMDrawerController+Subclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 19EC4072B43CA6FC8E8CDF795412577B /* MMDrawerController+Subclass.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		127B9CA9F4343EFD865F7B9C38310B4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89EB83AACEC518D8F2A6B7B6CA0AA21 /* Foundation.framework */; };
-		1421E39CEE61D3429713A6CED01F976B /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7298815CFF443798712B63E610FE5D /* MMDrawerBarButtonItem.m */; };
-		1F81DC823ECBA2FEEEFDFDEEAF40B907 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68AE097377277E8D45297B5370AC5BF6 /* SystemConfiguration.framework */; };
-		2550DF6FF42DCDC754EA66884350A548 /* MMDrawerBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = BACAAA68BBDC9E7AD4B6B54BB50031EA /* MMDrawerBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2C0E7B14F4D9D011CDD02BE012EA02A5 /* MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = D19117CAF1A63D40CF7B3BDAA426F36A /* MMDrawerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49D93CCAB982474092E00F0E72BFC056 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89EB83AACEC518D8F2A6B7B6CA0AA21 /* Foundation.framework */; };
-		558EACAEC016F2F4852C272991A86EF7 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A95C4955D05D4BAE2E3F76417A7C402 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5EE766352167603EBBB487AF0852199A /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5A3E1F2CEC44F79896086BE4FFB950 /* MMDrawerController.m */; };
-		634D3EDCE12CC8858FAB0BE880C67A14 /* Reachability-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4829788283968DAB4AC4CFBD7DF2CFA8 /* Reachability-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7DB260204A6AA004FC5DB86CA635C0C0 /* Pods-StudyBox_iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E231E66223BBB8D04D02B206E9D561B /* Pods-StudyBox_iOS-dummy.m */; };
-		7F237B9CF6A4287B8D339031E9EF8491 /* Pods-StudyBox_iOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C98F38D6C38DF4AD7AB26A27A99148C7 /* Pods-StudyBox_iOSTests-dummy.m */; };
-		85D4AF32F0DADEEA93210F4698E8CA3E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFF07EE6F70D55D8A85E4D8ED6A41DB /* QuartzCore.framework */; };
-		913DA6A1D56CDFB5ACDB6D56F9ABFAB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89EB83AACEC518D8F2A6B7B6CA0AA21 /* Foundation.framework */; };
-		9B192323ACA16866654291344D73E760 /* Pods-StudyBox_iOSTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 48AA3487F513135A0A634D8EEF190FF0 /* Pods-StudyBox_iOSTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9F05BEE347DB5337FB5FA2BF9EC4693B /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD454ED6CAA86C24475AFF3EF7BC78BB /* UIViewController+MMDrawerController.m */; };
-		A071D0EC0B86BECDB1F5D44511AB4E1A /* MMDrawerVisualState.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5D95762C755BE77B2A87303B394F46 /* MMDrawerVisualState.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A839EBBBCA86D330FC9C0638452877F0 /* MMDrawerController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D486226E2AA9E7D284D1CF23EFBCBB /* MMDrawerController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AC6B56B0A84A8EC4267D3BB01FADC31A /* MMDrawerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC5E8083A9BAC2322CEF1436C6BEE4 /* MMDrawerController-dummy.m */; };
-		B612E74F190558CFACBAECC01AB06405 /* Pods-StudyBox_iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7404B27FE1E32253D37BB6C50B108944 /* Pods-StudyBox_iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C2959FB7B565AB17B2C42BD301D7AD78 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9974E062320320C147B742E0DFF2C /* MMDrawerVisualState.m */; };
-		CAE2EF6171328E8B33AE6E7A2E96597B /* UIViewController+MMDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 926D58346C6FB8E7E5CB3FC5736A8666 /* UIViewController+MMDrawerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D82AF2EF1F661F088C10D4192058D6D4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C911461847F1F32688FC0EECE91E25 /* Reachability.m */; };
-		E27CC9CA4425CF9C36A8EE66F122E021 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89EB83AACEC518D8F2A6B7B6CA0AA21 /* Foundation.framework */; };
-		E640B82A5743241A7376DF07475FDBA3 /* Reachability-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F7278014CCF4DA2611E1306491E64F /* Reachability-dummy.m */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3721ADA10F493FEE1A4F1960188A27AA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 96D3562E47E4792B0A6093A0323EB398;
-			remoteInfo = MMDrawerController;
-		};
-		E0144A63934CD18EEC65F37E5F8B0D1F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B91C7460AE81B04BD808CDAD7DD8B46;
-			remoteInfo = Reachability;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		0DEE17E89295DAE92AB51B265857F613 /* MMDrawerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController-prefix.pch"; sourceTree = "<group>"; };
-		19EC4072B43CA6FC8E8CDF795412577B /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MMDrawerController+Subclass.h"; path = "MMDrawerController/MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
-		1CE45380AA674A6C66E9FE9BCEA64ADB /* Pods-StudyBox_iOSTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-StudyBox_iOSTests.modulemap"; sourceTree = "<group>"; };
-		1E231E66223BBB8D04D02B206E9D561B /* Pods-StudyBox_iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StudyBox_iOS-dummy.m"; sourceTree = "<group>"; };
-		20F7278014CCF4DA2611E1306491E64F /* Reachability-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Reachability-dummy.m"; sourceTree = "<group>"; };
-		26C911461847F1F32688FC0EECE91E25 /* Reachability.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		2D7298815CFF443798712B63E610FE5D /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerBarButtonItem.m; path = MMDrawerController/MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
-		3278A1943ABF498E37D7D7FC4C2C8377 /* Reachability.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Reachability.modulemap; sourceTree = "<group>"; };
-		3724077DB51404C3570CA191DE702D9A /* Pods-StudyBox_iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StudyBox_iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		39BEAD108574B951DD3329A5605919FE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
-		3C7E9B4876C2C2988DEC91CD5F471FEA /* Pods-StudyBox_iOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOS-resources.sh"; sourceTree = "<group>"; };
-		4485EE8AD708A0FBF65A8F1376261F16 /* Reachability.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Reachability.xcconfig; sourceTree = "<group>"; };
-		4829788283968DAB4AC4CFBD7DF2CFA8 /* Reachability-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Reachability-umbrella.h"; sourceTree = "<group>"; };
-		48AA3487F513135A0A634D8EEF190FF0 /* Pods-StudyBox_iOSTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StudyBox_iOSTests-umbrella.h"; sourceTree = "<group>"; };
-		4A95C4955D05D4BAE2E3F76417A7C402 /* Reachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		4BE44CF0A0272B665EF5EFDDA6C33D36 /* MMDrawerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMDrawerController.xcconfig; sourceTree = "<group>"; };
-		4DC238901273203B9D156D86FA83C842 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		557D55C22B4E6564E6E3748C134B07FA /* Pods-StudyBox_iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudyBox_iOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		5709943A39C039E3DBF6A992BC117509 /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		619897C0373DF221707D30B10849B89B /* MMDrawerController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MMDrawerController.modulemap; sourceTree = "<group>"; };
-		6599E92F7EF851C319508C5C303EA24A /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		68AE097377277E8D45297B5370AC5BF6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		7404B27FE1E32253D37BB6C50B108944 /* Pods-StudyBox_iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StudyBox_iOS-umbrella.h"; sourceTree = "<group>"; };
-		797E6CC91B91A301F37594ED7A86D39F /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		7BFF07EE6F70D55D8A85E4D8ED6A41DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		7E182B764BA5B8A41E0DB4794980BE80 /* Pods-StudyBox_iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-StudyBox_iOS.modulemap"; sourceTree = "<group>"; };
-		7E5D95762C755BE77B2A87303B394F46 /* MMDrawerVisualState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerVisualState.h; path = MMDrawerController/MMDrawerVisualState.h; sourceTree = "<group>"; };
-		86DBFD10A8FB67386366432433496E0C /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		8EE5090D509515A0651F50ECEFA83568 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F5A3E1F2CEC44F79896086BE4FFB950 /* MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerController.m; path = MMDrawerController/MMDrawerController.m; sourceTree = "<group>"; };
-		926D58346C6FB8E7E5CB3FC5736A8666 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MMDrawerController.h"; path = "MMDrawerController/UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
-		92E300FA19DDC36DFFAE5D8881CCFFA2 /* Pods-StudyBox_iOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudyBox_iOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9BC9974E062320320C147B742E0DFF2C /* MMDrawerVisualState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMDrawerVisualState.m; path = MMDrawerController/MMDrawerVisualState.m; sourceTree = "<group>"; };
-		9CDB22C8D3E2E28577C0F467266929AE /* Reachability-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Reachability-prefix.pch"; sourceTree = "<group>"; };
-		A3D486226E2AA9E7D284D1CF23EFBCBB /* MMDrawerController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController-umbrella.h"; sourceTree = "<group>"; };
-		A421093279A40E783589D923661289FA /* Pods-StudyBox_iOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOS-frameworks.sh"; sourceTree = "<group>"; };
-		A972D0B0585CFFF1EBE750054D69B89F /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF2C1F5959E65C6E006C59FB258B4887 /* MMDrawerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMDrawerController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA90F8C3AFDDEF13CBC59A0CE490B060 /* Pods-StudyBox_iOSTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOSTests-frameworks.sh"; sourceTree = "<group>"; };
-		BACAAA68BBDC9E7AD4B6B54BB50031EA /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerBarButtonItem.h; path = MMDrawerController/MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
-		BC2FE2B06DDC5C08A88ACFD4AECD8213 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE445A3B9E9E2D0D00BB080BABAE40C2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C98F38D6C38DF4AD7AB26A27A99148C7 /* Pods-StudyBox_iOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StudyBox_iOSTests-dummy.m"; sourceTree = "<group>"; };
-		CB103AC3CC3D8E7D53116EFC41E4368E /* Pods-StudyBox_iOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StudyBox_iOSTests-resources.sh"; sourceTree = "<group>"; };
-		CD454ED6CAA86C24475AFF3EF7BC78BB /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MMDrawerController.m"; path = "MMDrawerController/UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
-		D15D239D71ED5AE43DBCC6E2088484BD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
-		D19117CAF1A63D40CF7B3BDAA426F36A /* MMDrawerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMDrawerController.h; path = MMDrawerController/MMDrawerController.h; sourceTree = "<group>"; };
-		D78741CC2757835E7B7BD17846F3689A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D89EB83AACEC518D8F2A6B7B6CA0AA21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		F63E81BF2F92BFC86E5EB5A484B3BDF6 /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
-		F9BC5E8083A9BAC2322CEF1436C6BEE4 /* MMDrawerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMDrawerController-dummy.m"; sourceTree = "<group>"; };
-		FD09AC5B74EF533CF55BAB764C85F87F /* Pods-StudyBox_iOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StudyBox_iOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		6C3E6B00443065C899C5A7C99F878327 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				127B9CA9F4343EFD865F7B9C38310B4A /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AE46F03F680D2CA1FFC849F4A1D92B53 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E27CC9CA4425CF9C36A8EE66F122E021 /* Foundation.framework in Frameworks */,
-				85D4AF32F0DADEEA93210F4698E8CA3E /* QuartzCore.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C28AF7FA931DF473519AD5A4C36CC336 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				49D93CCAB982474092E00F0E72BFC056 /* Foundation.framework in Frameworks */,
-				1F81DC823ECBA2FEEEFDFDEEAF40B907 /* SystemConfiguration.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CF97CA4FE910EA555EE9912F4AA178CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				913DA6A1D56CDFB5ACDB6D56F9ABFAB3 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		028913F1EEE8ABEC0906C5761C4714F5 /* Subclass */ = {
-			isa = PBXGroup;
-			children = (
-				19EC4072B43CA6FC8E8CDF795412577B /* MMDrawerController+Subclass.h */,
-			);
-			name = Subclass;
-			sourceTree = "<group>";
-		};
-		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C6B4B99C00B2011DF864D2C1B8A71EB7 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2D6B18748B07AE8884CB23ACF10B0EEF /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				BC2FE2B06DDC5C08A88ACFD4AECD8213 /* Info.plist */,
-				3278A1943ABF498E37D7D7FC4C2C8377 /* Reachability.modulemap */,
-				4485EE8AD708A0FBF65A8F1376261F16 /* Reachability.xcconfig */,
-				20F7278014CCF4DA2611E1306491E64F /* Reachability-dummy.m */,
-				9CDB22C8D3E2E28577C0F467266929AE /* Reachability-prefix.pch */,
-				4829788283968DAB4AC4CFBD7DF2CFA8 /* Reachability-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Reachability";
-			sourceTree = "<group>";
-		};
-		467135AFF4949CCA392379A4CEC33C30 /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				F67C1CA7E43326293AF942D09FD28034 /* Frameworks */,
-			);
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		4B49A60F8EE5BE32AC6DB8BA3C8BB0DC /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				D19117CAF1A63D40CF7B3BDAA426F36A /* MMDrawerController.h */,
-				8F5A3E1F2CEC44F79896086BE4FFB950 /* MMDrawerController.m */,
-				926D58346C6FB8E7E5CB3FC5736A8666 /* UIViewController+MMDrawerController.h */,
-				CD454ED6CAA86C24475AFF3EF7BC78BB /* UIViewController+MMDrawerController.m */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		58B5E687F7D12556006A62037D0FBF17 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				39BEAD108574B951DD3329A5605919FE /* Crashlytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5A367E747D98E513E64228CEDDE1354F /* MMDrawerBarButtonItem */ = {
-			isa = PBXGroup;
-			children = (
-				BACAAA68BBDC9E7AD4B6B54BB50031EA /* MMDrawerBarButtonItem.h */,
-				2D7298815CFF443798712B63E610FE5D /* MMDrawerBarButtonItem.m */,
-			);
-			name = MMDrawerBarButtonItem;
-			sourceTree = "<group>";
-		};
-		644B2D41503E241815B18DF88877D0E9 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				BE445A3B9E9E2D0D00BB080BABAE40C2 /* Info.plist */,
-				619897C0373DF221707D30B10849B89B /* MMDrawerController.modulemap */,
-				4BE44CF0A0272B665EF5EFDDA6C33D36 /* MMDrawerController.xcconfig */,
-				F9BC5E8083A9BAC2322CEF1436C6BEE4 /* MMDrawerController-dummy.m */,
-				0DEE17E89295DAE92AB51B265857F613 /* MMDrawerController-prefix.pch */,
-				A3D486226E2AA9E7D284D1CF23EFBCBB /* MMDrawerController-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MMDrawerController";
-			sourceTree = "<group>";
-		};
-		6ADE472B52D9048C66BC2D80B73CB127 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				F0A6B133FB17420F6D3562FA03D032E6 /* Pods-StudyBox_iOS */,
-				73B51710B65052A331B04A12F3774401 /* Pods-StudyBox_iOSTests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		6E8102290468DDB8D8A801C25EA5BA21 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F71968B8884E3B99F0C73BE3F8B5B96C /* Crashlytics */,
-				467135AFF4949CCA392379A4CEC33C30 /* Fabric */,
-				AFF6A05FDAAD15A9D1A82F6C375C0C06 /* MMDrawerController */,
-				FACA0D022BC414BFEFAB0BC571B971AF /* Reachability */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		73B51710B65052A331B04A12F3774401 /* Pods-StudyBox_iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				D78741CC2757835E7B7BD17846F3689A /* Info.plist */,
-				1CE45380AA674A6C66E9FE9BCEA64ADB /* Pods-StudyBox_iOSTests.modulemap */,
-				FD09AC5B74EF533CF55BAB764C85F87F /* Pods-StudyBox_iOSTests-acknowledgements.markdown */,
-				92E300FA19DDC36DFFAE5D8881CCFFA2 /* Pods-StudyBox_iOSTests-acknowledgements.plist */,
-				C98F38D6C38DF4AD7AB26A27A99148C7 /* Pods-StudyBox_iOSTests-dummy.m */,
-				BA90F8C3AFDDEF13CBC59A0CE490B060 /* Pods-StudyBox_iOSTests-frameworks.sh */,
-				CB103AC3CC3D8E7D53116EFC41E4368E /* Pods-StudyBox_iOSTests-resources.sh */,
-				48AA3487F513135A0A634D8EEF190FF0 /* Pods-StudyBox_iOSTests-umbrella.h */,
-				5709943A39C039E3DBF6A992BC117509 /* Pods-StudyBox_iOSTests.debug.xcconfig */,
-				86DBFD10A8FB67386366432433496E0C /* Pods-StudyBox_iOSTests.release.xcconfig */,
-			);
-			name = "Pods-StudyBox_iOSTests";
-			path = "Target Support Files/Pods-StudyBox_iOSTests";
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				6E8102290468DDB8D8A801C25EA5BA21 /* Pods */,
-				DF49E69BEB789E25E76B37A84E3E7FF5 /* Products */,
-				6ADE472B52D9048C66BC2D80B73CB127 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		AFF6A05FDAAD15A9D1A82F6C375C0C06 /* MMDrawerController */ = {
-			isa = PBXGroup;
-			children = (
-				4B49A60F8EE5BE32AC6DB8BA3C8BB0DC /* Core */,
-				5A367E747D98E513E64228CEDDE1354F /* MMDrawerBarButtonItem */,
-				F9B414791480E1DC6D8ACCAB96DA8FDC /* MMDrawerVisualStates */,
-				028913F1EEE8ABEC0906C5761C4714F5 /* Subclass */,
-				644B2D41503E241815B18DF88877D0E9 /* Support Files */,
-			);
-			path = MMDrawerController;
-			sourceTree = "<group>";
-		};
-		C6B4B99C00B2011DF864D2C1B8A71EB7 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				D89EB83AACEC518D8F2A6B7B6CA0AA21 /* Foundation.framework */,
-				7BFF07EE6F70D55D8A85E4D8ED6A41DB /* QuartzCore.framework */,
-				68AE097377277E8D45297B5370AC5BF6 /* SystemConfiguration.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		DF49E69BEB789E25E76B37A84E3E7FF5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AF2C1F5959E65C6E006C59FB258B4887 /* MMDrawerController.framework */,
-				4DC238901273203B9D156D86FA83C842 /* Pods_StudyBox_iOS.framework */,
-				6599E92F7EF851C319508C5C303EA24A /* Pods_StudyBox_iOSTests.framework */,
-				A972D0B0585CFFF1EBE750054D69B89F /* Reachability.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		F0A6B133FB17420F6D3562FA03D032E6 /* Pods-StudyBox_iOS */ = {
-			isa = PBXGroup;
-			children = (
-				8EE5090D509515A0651F50ECEFA83568 /* Info.plist */,
-				7E182B764BA5B8A41E0DB4794980BE80 /* Pods-StudyBox_iOS.modulemap */,
-				3724077DB51404C3570CA191DE702D9A /* Pods-StudyBox_iOS-acknowledgements.markdown */,
-				557D55C22B4E6564E6E3748C134B07FA /* Pods-StudyBox_iOS-acknowledgements.plist */,
-				1E231E66223BBB8D04D02B206E9D561B /* Pods-StudyBox_iOS-dummy.m */,
-				A421093279A40E783589D923661289FA /* Pods-StudyBox_iOS-frameworks.sh */,
-				3C7E9B4876C2C2988DEC91CD5F471FEA /* Pods-StudyBox_iOS-resources.sh */,
-				7404B27FE1E32253D37BB6C50B108944 /* Pods-StudyBox_iOS-umbrella.h */,
-				797E6CC91B91A301F37594ED7A86D39F /* Pods-StudyBox_iOS.debug.xcconfig */,
-				F63E81BF2F92BFC86E5EB5A484B3BDF6 /* Pods-StudyBox_iOS.release.xcconfig */,
-			);
-			name = "Pods-StudyBox_iOS";
-			path = "Target Support Files/Pods-StudyBox_iOS";
-			sourceTree = "<group>";
-		};
-		F67C1CA7E43326293AF942D09FD28034 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D15D239D71ED5AE43DBCC6E2088484BD /* Fabric.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F71968B8884E3B99F0C73BE3F8B5B96C /* Crashlytics */ = {
-			isa = PBXGroup;
-			children = (
-				58B5E687F7D12556006A62037D0FBF17 /* Frameworks */,
-			);
-			path = Crashlytics;
-			sourceTree = "<group>";
-		};
-		F9B414791480E1DC6D8ACCAB96DA8FDC /* MMDrawerVisualStates */ = {
-			isa = PBXGroup;
-			children = (
-				7E5D95762C755BE77B2A87303B394F46 /* MMDrawerVisualState.h */,
-				9BC9974E062320320C147B742E0DFF2C /* MMDrawerVisualState.m */,
-			);
-			name = MMDrawerVisualStates;
-			sourceTree = "<group>";
-		};
-		FACA0D022BC414BFEFAB0BC571B971AF /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				4A95C4955D05D4BAE2E3F76417A7C402 /* Reachability.h */,
-				26C911461847F1F32688FC0EECE91E25 /* Reachability.m */,
-				2D6B18748B07AE8884CB23ACF10B0EEF /* Support Files */,
-			);
-			path = Reachability;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		079E9ACE8A655D5FED855E204442BDBD /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2550DF6FF42DCDC754EA66884350A548 /* MMDrawerBarButtonItem.h in Headers */,
-				00AB9667C6E85C84AA87F4055C95475D /* MMDrawerController+Subclass.h in Headers */,
-				A839EBBBCA86D330FC9C0638452877F0 /* MMDrawerController-umbrella.h in Headers */,
-				2C0E7B14F4D9D011CDD02BE012EA02A5 /* MMDrawerController.h in Headers */,
-				A071D0EC0B86BECDB1F5D44511AB4E1A /* MMDrawerVisualState.h in Headers */,
-				CAE2EF6171328E8B33AE6E7A2E96597B /* UIViewController+MMDrawerController.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		133E830FAC080D58E9150F02BD24A601 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B612E74F190558CFACBAECC01AB06405 /* Pods-StudyBox_iOS-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4456C7F25B3A52EE8B2875CF2CF66272 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				634D3EDCE12CC8858FAB0BE880C67A14 /* Reachability-umbrella.h in Headers */,
-				558EACAEC016F2F4852C272991A86EF7 /* Reachability.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9638DDD4361EB37FA83C4E2ED4A6DC6A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9B192323ACA16866654291344D73E760 /* Pods-StudyBox_iOSTests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		14FD5A699F57EE8BF6C1132C8B4A7730 /* Pods-StudyBox_iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 495AD6CA7304C0FEA244D2448904EF42 /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOS" */;
-			buildPhases = (
-				117E77A46974CBE0D1037001BE057FEF /* Sources */,
-				CF97CA4FE910EA555EE9912F4AA178CD /* Frameworks */,
-				133E830FAC080D58E9150F02BD24A601 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2ACE91EFE18EAE1F9FDC56DA5DE0E750 /* PBXTargetDependency */,
-				62E1316A90C918AC69C0A0B982F7D313 /* PBXTargetDependency */,
-			);
-			name = "Pods-StudyBox_iOS";
-			productName = "Pods-StudyBox_iOS";
-			productReference = 4DC238901273203B9D156D86FA83C842 /* Pods_StudyBox_iOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		8B91C7460AE81B04BD808CDAD7DD8B46 /* Reachability */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0DE84E633E073F69CE19213F4B21E5FB /* Build configuration list for PBXNativeTarget "Reachability" */;
-			buildPhases = (
-				A3309E415CFE7C7723C9A151859E6AD6 /* Sources */,
-				C28AF7FA931DF473519AD5A4C36CC336 /* Frameworks */,
-				4456C7F25B3A52EE8B2875CF2CF66272 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Reachability;
-			productName = Reachability;
-			productReference = A972D0B0585CFFF1EBE750054D69B89F /* Reachability.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		96D3562E47E4792B0A6093A0323EB398 /* MMDrawerController */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 410F9B5264E3B131C74C0402F62B1BFE /* Build configuration list for PBXNativeTarget "MMDrawerController" */;
-			buildPhases = (
-				028CFEF24FF14F3EA36C26123757E0D7 /* Sources */,
-				AE46F03F680D2CA1FFC849F4A1D92B53 /* Frameworks */,
-				079E9ACE8A655D5FED855E204442BDBD /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MMDrawerController;
-			productName = MMDrawerController;
-			productReference = AF2C1F5959E65C6E006C59FB258B4887 /* MMDrawerController.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		ADB8D8F2D05E1619564483D85298F13B /* Pods-StudyBox_iOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 91E8EB4DC8E0B018C651FC4A9633F749 /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOSTests" */;
-			buildPhases = (
-				ED123F1509E3522D105EBCEF7C24DDC3 /* Sources */,
-				6C3E6B00443065C899C5A7C99F878327 /* Frameworks */,
-				9638DDD4361EB37FA83C4E2ED4A6DC6A /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-StudyBox_iOSTests";
-			productName = "Pods-StudyBox_iOSTests";
-			productReference = 6599E92F7EF851C319508C5C303EA24A /* Pods_StudyBox_iOSTests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
-			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = DF49E69BEB789E25E76B37A84E3E7FF5 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				96D3562E47E4792B0A6093A0323EB398 /* MMDrawerController */,
-				14FD5A699F57EE8BF6C1132C8B4A7730 /* Pods-StudyBox_iOS */,
-				ADB8D8F2D05E1619564483D85298F13B /* Pods-StudyBox_iOSTests */,
-				8B91C7460AE81B04BD808CDAD7DD8B46 /* Reachability */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		028CFEF24FF14F3EA36C26123757E0D7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1421E39CEE61D3429713A6CED01F976B /* MMDrawerBarButtonItem.m in Sources */,
-				AC6B56B0A84A8EC4267D3BB01FADC31A /* MMDrawerController-dummy.m in Sources */,
-				5EE766352167603EBBB487AF0852199A /* MMDrawerController.m in Sources */,
-				C2959FB7B565AB17B2C42BD301D7AD78 /* MMDrawerVisualState.m in Sources */,
-				9F05BEE347DB5337FB5FA2BF9EC4693B /* UIViewController+MMDrawerController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		117E77A46974CBE0D1037001BE057FEF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7DB260204A6AA004FC5DB86CA635C0C0 /* Pods-StudyBox_iOS-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A3309E415CFE7C7723C9A151859E6AD6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E640B82A5743241A7376DF07475FDBA3 /* Reachability-dummy.m in Sources */,
-				D82AF2EF1F661F088C10D4192058D6D4 /* Reachability.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ED123F1509E3522D105EBCEF7C24DDC3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F237B9CF6A4287B8D339031E9EF8491 /* Pods-StudyBox_iOSTests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2ACE91EFE18EAE1F9FDC56DA5DE0E750 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MMDrawerController;
-			target = 96D3562E47E4792B0A6093A0323EB398 /* MMDrawerController */;
-			targetProxy = 3721ADA10F493FEE1A4F1960188A27AA /* PBXContainerItemProxy */;
-		};
-		62E1316A90C918AC69C0A0B982F7D313 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Reachability;
-			target = 8B91C7460AE81B04BD808CDAD7DD8B46 /* Reachability */;
-			targetProxy = E0144A63934CD18EEC65F37E5F8B0D1F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		095B8635AC67E9104B1B5001E9DC12E6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86DBFD10A8FB67386366432433496E0C /* Pods-StudyBox_iOSTests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_StudyBox_iOSTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		158589AD4DF57AB4EFDE50B35BB40E3F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4485EE8AD708A0FBF65A8F1376261F16 /* Reachability.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Reachability/Reachability-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Reachability/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Reachability/Reachability.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = Reachability;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		2CE16AC72762C01C5DC595053F1F2EF4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_DEBUG=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = YES;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		2E6138B9843F47D934A6038E185474CC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F63E81BF2F92BFC86E5EB5A484B3BDF6 /* Pods-StudyBox_iOS.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_StudyBox_iOS;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4BC862293915C25941D9A32197E84158 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BE44CF0A0272B665EF5EFDDA6C33D36 /* MMDrawerController.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MMDrawerController/MMDrawerController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MMDrawerController/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MMDrawerController/MMDrawerController.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = MMDrawerController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		55BFDE73C6CA9B0593CFFB8D87F16D98 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709943A39C039E3DBF6A992BC117509 /* Pods-StudyBox_iOSTests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_StudyBox_iOSTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5AB5B7612D6B28FB359AE523F872F217 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4485EE8AD708A0FBF65A8F1376261F16 /* Reachability.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Reachability/Reachability-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Reachability/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Reachability/Reachability.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Reachability;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7DF2B40DCE5D8AF5AFC373404F689949 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 797E6CC91B91A301F37594ED7A86D39F /* Pods-StudyBox_iOS.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-StudyBox_iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_StudyBox_iOS;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C6544A1F1139551CE6C6C9B43404CFA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		C9F0A6AD934BDF9BEE7AE6CB051AAB7D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BE44CF0A0272B665EF5EFDDA6C33D36 /* MMDrawerController.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MMDrawerController/MMDrawerController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MMDrawerController/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MMDrawerController/MMDrawerController.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = MMDrawerController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		0DE84E633E073F69CE19213F4B21E5FB /* Build configuration list for PBXNativeTarget "Reachability" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				158589AD4DF57AB4EFDE50B35BB40E3F /* Debug */,
-				5AB5B7612D6B28FB359AE523F872F217 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2CE16AC72762C01C5DC595053F1F2EF4 /* Debug */,
-				C6544A1F1139551CE6C6C9B43404CFA3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		410F9B5264E3B131C74C0402F62B1BFE /* Build configuration list for PBXNativeTarget "MMDrawerController" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C9F0A6AD934BDF9BEE7AE6CB051AAB7D /* Debug */,
-				4BC862293915C25941D9A32197E84158 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		495AD6CA7304C0FEA244D2448904EF42 /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7DF2B40DCE5D8AF5AFC373404F689949 /* Debug */,
-				2E6138B9843F47D934A6038E185474CC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		91E8EB4DC8E0B018C651FC4A9633F749 /* Build configuration list for PBXNativeTarget "Pods-StudyBox_iOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				55BFDE73C6CA9B0593CFFB8D87F16D98 /* Debug */,
-				095B8635AC67E9104B1B5001E9DC12E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>00AB9667C6E85C84AA87F4055C95475D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>19EC4072B43CA6FC8E8CDF795412577B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>028913F1EEE8ABEC0906C5761C4714F5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>19EC4072B43CA6FC8E8CDF795412577B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Subclass</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>028CFEF24FF14F3EA36C26123757E0D7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1421E39CEE61D3429713A6CED01F976B</string>
+				<string>AC6B56B0A84A8EC4267D3BB01FADC31A</string>
+				<string>5EE766352167603EBBB487AF0852199A</string>
+				<string>C2959FB7B565AB17B2C42BD301D7AD78</string>
+				<string>9F05BEE347DB5337FB5FA2BF9EC4693B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>079E9ACE8A655D5FED855E204442BDBD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>2550DF6FF42DCDC754EA66884350A548</string>
+				<string>00AB9667C6E85C84AA87F4055C95475D</string>
+				<string>A839EBBBCA86D330FC9C0638452877F0</string>
+				<string>2C0E7B14F4D9D011CDD02BE012EA02A5</string>
+				<string>A071D0EC0B86BECDB1F5D44511AB4E1A</string>
+				<string>CAE2EF6171328E8B33AE6E7A2E96597B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0DE84E633E073F69CE19213F4B21E5FB</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>158589AD4DF57AB4EFDE50B35BB40E3F</string>
+				<string>5AB5B7612D6B28FB359AE523F872F217</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>0DEE17E89295DAE92AB51B265857F613</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MMDrawerController-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>117E77A46974CBE0D1037001BE057FEF</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>7DB260204A6AA004FC5DB86CA635C0C0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>122DA2E5084A4393C29BE363C764795C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>C6B4B99C00B2011DF864D2C1B8A71EB7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>133E830FAC080D58E9150F02BD24A601</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>B612E74F190558CFACBAECC01AB06405</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>1421E39CEE61D3429713A6CED01F976B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D7298815CFF443798712B63E610FE5D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>14F3D592B7B99A6AD719237345C185A2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C98F38D6C38DF4AD7AB26A27A99148C7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>14FD5A699F57EE8BF6C1132C8B4A7730</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>495AD6CA7304C0FEA244D2448904EF42</string>
+			<key>buildPhases</key>
+			<array>
+				<string>117E77A46974CBE0D1037001BE057FEF</string>
+				<string>CF97CA4FE910EA555EE9912F4AA178CD</string>
+				<string>133E830FAC080D58E9150F02BD24A601</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>2ACE91EFE18EAE1F9FDC56DA5DE0E750</string>
+				<string>62E1316A90C918AC69C0A0B982F7D313</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOS</string>
+			<key>productName</key>
+			<string>Pods-StudyBox_iOS</string>
+			<key>productReference</key>
+			<string>4DC238901273203B9D156D86FA83C842</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>158589AD4DF57AB4EFDE50B35BB40E3F</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>4485EE8AD708A0FBF65A8F1376261F16</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/Reachability/Reachability-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Reachability/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Reachability/Reachability.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>Reachability</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>19EC4072B43CA6FC8E8CDF795412577B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMDrawerController+Subclass.h</string>
+			<key>path</key>
+			<string>MMDrawerController/MMDrawerController+Subclass.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1CE45380AA674A6C66E9FE9BCEA64ADB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1E231E66223BBB8D04D02B206E9D561B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F81DC823ECBA2FEEEFDFDEEAF40B907</key>
+		<dict>
+			<key>fileRef</key>
+			<string>68AE097377277E8D45297B5370AC5BF6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>20F7278014CCF4DA2611E1306491E64F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Reachability-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2550DF6FF42DCDC754EA66884350A548</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BACAAA68BBDC9E7AD4B6B54BB50031EA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>26C911461847F1F32688FC0EECE91E25</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Reachability.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2ACE91EFE18EAE1F9FDC56DA5DE0E750</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>MMDrawerController</string>
+			<key>target</key>
+			<string>96D3562E47E4792B0A6093A0323EB398</string>
+			<key>targetProxy</key>
+			<string>3721ADA10F493FEE1A4F1960188A27AA</string>
+		</dict>
+		<key>2C0E7B14F4D9D011CDD02BE012EA02A5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D19117CAF1A63D40CF7B3BDAA426F36A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>2CE16AC72762C01C5DC595053F1F2EF4</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>ENABLE_TESTABILITY</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>POD_CONFIGURATION_DEBUG=1</string>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>2D6B18748B07AE8884CB23ACF10B0EEF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BC2FE2B06DDC5C08A88ACFD4AECD8213</string>
+				<string>3278A1943ABF498E37D7D7FC4C2C8377</string>
+				<string>4485EE8AD708A0FBF65A8F1376261F16</string>
+				<string>20F7278014CCF4DA2611E1306491E64F</string>
+				<string>9CDB22C8D3E2E28577C0F467266929AE</string>
+				<string>4829788283968DAB4AC4CFBD7DF2CFA8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/Reachability</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D7298815CFF443798712B63E610FE5D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMDrawerBarButtonItem.m</string>
+			<key>path</key>
+			<string>MMDrawerController/MMDrawerBarButtonItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>2CE16AC72762C01C5DC595053F1F2EF4</string>
+				<string>C6544A1F1139551CE6C6C9B43404CFA3</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>2DE66D57721984E42A7F37F68FB284B0</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>93066C140BFB9A47071ABF46024DC994</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>2E6138B9843F47D934A6038E185474CC</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>F63E81BF2F92BFC86E5EB5A484B3BDF6</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOS/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_StudyBox_iOS</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>3278A1943ABF498E37D7D7FC4C2C8377</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Reachability.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3721ADA10F493FEE1A4F1960188A27AA</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>96D3562E47E4792B0A6093A0323EB398</string>
+			<key>remoteInfo</key>
+			<string>MMDrawerController</string>
+		</dict>
+		<key>3724077DB51404C3570CA191DE702D9A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>39BEAD108574B951DD3329A5605919FE</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Crashlytics.framework</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3C7E9B4876C2C2988DEC91CD5F471FEA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>410F9B5264E3B131C74C0402F62B1BFE</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>C9F0A6AD934BDF9BEE7AE6CB051AAB7D</string>
+				<string>4BC862293915C25941D9A32197E84158</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>4456C7F25B3A52EE8B2875CF2CF66272</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>634D3EDCE12CC8858FAB0BE880C67A14</string>
+				<string>558EACAEC016F2F4852C272991A86EF7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4485EE8AD708A0FBF65A8F1376261F16</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Reachability.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>467135AFF4949CCA392379A4CEC33C30</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F67C1CA7E43326293AF942D09FD28034</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Fabric</string>
+			<key>path</key>
+			<string>Fabric</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4829788283968DAB4AC4CFBD7DF2CFA8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Reachability-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>48AA3487F513135A0A634D8EEF190FF0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>495AD6CA7304C0FEA244D2448904EF42</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>7DF2B40DCE5D8AF5AFC373404F689949</string>
+				<string>2E6138B9843F47D934A6038E185474CC</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>49D93CCAB982474092E00F0E72BFC056</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D89EB83AACEC518D8F2A6B7B6CA0AA21</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4A95C4955D05D4BAE2E3F76417A7C402</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Reachability.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4B49A60F8EE5BE32AC6DB8BA3C8BB0DC</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D19117CAF1A63D40CF7B3BDAA426F36A</string>
+				<string>8F5A3E1F2CEC44F79896086BE4FFB950</string>
+				<string>926D58346C6FB8E7E5CB3FC5736A8666</string>
+				<string>CD454ED6CAA86C24475AFF3EF7BC78BB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Core</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BC862293915C25941D9A32197E84158</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>4BE44CF0A0272B665EF5EFDDA6C33D36</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/MMDrawerController/MMDrawerController-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/MMDrawerController/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/MMDrawerController/MMDrawerController.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>MMDrawerController</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>4BE44CF0A0272B665EF5EFDDA6C33D36</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>MMDrawerController.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4DC238901273203B9D156D86FA83C842</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_StudyBox_iOS.framework</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>548AA3A09AFD169F5892F4ED63E6208F</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>96D3562E47E4792B0A6093A0323EB398</string>
+			<key>remoteInfo</key>
+			<string>MMDrawerController</string>
+		</dict>
+		<key>557D55C22B4E6564E6E3748C134B07FA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>558EACAEC016F2F4852C272991A86EF7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4A95C4955D05D4BAE2E3F76417A7C402</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>5709943A39C039E3DBF6A992BC117509</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>58B5E687F7D12556006A62037D0FBF17</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>39BEAD108574B951DD3329A5605919FE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5A367E747D98E513E64228CEDDE1354F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BACAAA68BBDC9E7AD4B6B54BB50031EA</string>
+				<string>2D7298815CFF443798712B63E610FE5D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MMDrawerBarButtonItem</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5AB5B7612D6B28FB359AE523F872F217</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>4485EE8AD708A0FBF65A8F1376261F16</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/Reachability/Reachability-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Reachability/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Reachability/Reachability.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>Reachability</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>5EE766352167603EBBB487AF0852199A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8F5A3E1F2CEC44F79896086BE4FFB950</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>619897C0373DF221707D30B10849B89B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>MMDrawerController.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>62E1316A90C918AC69C0A0B982F7D313</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>Reachability</string>
+			<key>target</key>
+			<string>8B91C7460AE81B04BD808CDAD7DD8B46</string>
+			<key>targetProxy</key>
+			<string>E0144A63934CD18EEC65F37E5F8B0D1F</string>
+		</dict>
+		<key>634D3EDCE12CC8858FAB0BE880C67A14</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4829788283968DAB4AC4CFBD7DF2CFA8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>644B2D41503E241815B18DF88877D0E9</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BE445A3B9E9E2D0D00BB080BABAE40C2</string>
+				<string>619897C0373DF221707D30B10849B89B</string>
+				<string>4BE44CF0A0272B665EF5EFDDA6C33D36</string>
+				<string>F9BC5E8083A9BAC2322CEF1436C6BEE4</string>
+				<string>0DEE17E89295DAE92AB51B265857F613</string>
+				<string>A3D486226E2AA9E7D284D1CF23EFBCBB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/MMDrawerController</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6599E92F7EF851C319508C5C303EA24A</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_StudyBox_iOSTests.framework</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>68AE097377277E8D45297B5370AC5BF6</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>SystemConfiguration.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/SystemConfiguration.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>6ADE472B52D9048C66BC2D80B73CB127</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F0A6B133FB17420F6D3562FA03D032E6</string>
+				<string>73B51710B65052A331B04A12F3774401</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6C405BFC964E576423C5154D01170C1B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>48AA3487F513135A0A634D8EEF190FF0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>6E8102290468DDB8D8A801C25EA5BA21</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F71968B8884E3B99F0C73BE3F8B5B96C</string>
+				<string>467135AFF4949CCA392379A4CEC33C30</string>
+				<string>AFF6A05FDAAD15A9D1A82F6C375C0C06</string>
+				<string>FACA0D022BC414BFEFAB0BC571B971AF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>73B51710B65052A331B04A12F3774401</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D78741CC2757835E7B7BD17846F3689A</string>
+				<string>1CE45380AA674A6C66E9FE9BCEA64ADB</string>
+				<string>FD09AC5B74EF533CF55BAB764C85F87F</string>
+				<string>92E300FA19DDC36DFFAE5D8881CCFFA2</string>
+				<string>C98F38D6C38DF4AD7AB26A27A99148C7</string>
+				<string>BA90F8C3AFDDEF13CBC59A0CE490B060</string>
+				<string>CB103AC3CC3D8E7D53116EFC41E4368E</string>
+				<string>48AA3487F513135A0A634D8EEF190FF0</string>
+				<string>5709943A39C039E3DBF6A992BC117509</string>
+				<string>86DBFD10A8FB67386366432433496E0C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOSTests</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-StudyBox_iOSTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7404B27FE1E32253D37BB6C50B108944</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>797E6CC91B91A301F37594ED7A86D39F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7BFF07EE6F70D55D8A85E4D8ED6A41DB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>QuartzCore.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/QuartzCore.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>7CD8B4597E1511DC9CC2E57C24303CDB</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>14F3D592B7B99A6AD719237345C185A2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>7DB260204A6AA004FC5DB86CA635C0C0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1E231E66223BBB8D04D02B206E9D561B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7DB346D0F39D3F0E887471402A8071AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>93A4A3777CF96A4AAC1D13BA6DCCEA73</string>
+				<string>122DA2E5084A4393C29BE363C764795C</string>
+				<string>6E8102290468DDB8D8A801C25EA5BA21</string>
+				<string>DF49E69BEB789E25E76B37A84E3E7FF5</string>
+				<string>6ADE472B52D9048C66BC2D80B73CB127</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7DF2B40DCE5D8AF5AFC373404F689949</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>797E6CC91B91A301F37594ED7A86D39F</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOS/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_StudyBox_iOS</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>7E182B764BA5B8A41E0DB4794980BE80</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7E5D95762C755BE77B2A87303B394F46</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMDrawerVisualState.h</string>
+			<key>path</key>
+			<string>MMDrawerController/MMDrawerVisualState.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>85D4AF32F0DADEEA93210F4698E8CA3E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7BFF07EE6F70D55D8A85E4D8ED6A41DB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>86DBFD10A8FB67386366432433496E0C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89A486F1DA69262CD9CFF4F7B4994D17</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>6C405BFC964E576423C5154D01170C1B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>8B91C7460AE81B04BD808CDAD7DD8B46</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>0DE84E633E073F69CE19213F4B21E5FB</string>
+			<key>buildPhases</key>
+			<array>
+				<string>A3309E415CFE7C7723C9A151859E6AD6</string>
+				<string>C28AF7FA931DF473519AD5A4C36CC336</string>
+				<string>4456C7F25B3A52EE8B2875CF2CF66272</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Reachability</string>
+			<key>productName</key>
+			<string>Reachability</string>
+			<key>productReference</key>
+			<string>A972D0B0585CFFF1EBE750054D69B89F</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>8EE5090D509515A0651F50ECEFA83568</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8F5A3E1F2CEC44F79896086BE4FFB950</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMDrawerController.m</string>
+			<key>path</key>
+			<string>MMDrawerController/MMDrawerController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>913DA6A1D56CDFB5ACDB6D56F9ABFAB3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D89EB83AACEC518D8F2A6B7B6CA0AA21</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9172FD1B8DA6C33429AF7AD0D44D6C12</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>5709943A39C039E3DBF6A992BC117509</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOSTests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_StudyBox_iOSTests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>926D58346C6FB8E7E5CB3FC5736A8666</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIViewController+MMDrawerController.h</string>
+			<key>path</key>
+			<string>MMDrawerController/UIViewController+MMDrawerController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>92E300FA19DDC36DFFAE5D8881CCFFA2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>93066C140BFB9A47071ABF46024DC994</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D89EB83AACEC518D8F2A6B7B6CA0AA21</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>93A4A3777CF96A4AAC1D13BA6DCCEA73</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>text.script.ruby</string>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>name</key>
+			<string>Podfile</string>
+			<key>path</key>
+			<string>../Podfile</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.ruby</string>
+		</dict>
+		<key>96D3562E47E4792B0A6093A0323EB398</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>410F9B5264E3B131C74C0402F62B1BFE</string>
+			<key>buildPhases</key>
+			<array>
+				<string>028CFEF24FF14F3EA36C26123757E0D7</string>
+				<string>AE46F03F680D2CA1FFC849F4A1D92B53</string>
+				<string>079E9ACE8A655D5FED855E204442BDBD</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>MMDrawerController</string>
+			<key>productName</key>
+			<string>MMDrawerController</string>
+			<key>productReference</key>
+			<string>AF2C1F5959E65C6E006C59FB258B4887</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>9BC9974E062320320C147B742E0DFF2C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMDrawerVisualState.m</string>
+			<key>path</key>
+			<string>MMDrawerController/MMDrawerVisualState.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9CDB22C8D3E2E28577C0F467266929AE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Reachability-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9F05BEE347DB5337FB5FA2BF9EC4693B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD454ED6CAA86C24475AFF3EF7BC78BB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A071D0EC0B86BECDB1F5D44511AB4E1A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7E5D95762C755BE77B2A87303B394F46</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A3309E415CFE7C7723C9A151859E6AD6</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>E640B82A5743241A7376DF07475FDBA3</string>
+				<string>D82AF2EF1F661F088C10D4192058D6D4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A3D486226E2AA9E7D284D1CF23EFBCBB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MMDrawerController-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A421093279A40E783589D923661289FA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A5D47C693641E503DE3D38093E9E81D3</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>86DBFD10A8FB67386366432433496E0C</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOSTests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_StudyBox_iOSTests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>A839EBBBCA86D330FC9C0638452877F0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A3D486226E2AA9E7D284D1CF23EFBCBB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A972D0B0585CFFF1EBE750054D69B89F</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Reachability.framework</string>
+			<key>path</key>
+			<string>Reachability.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>A9E5EB3C8D3974539828C33EFEF5809B</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>MMDrawerController</string>
+			<key>target</key>
+			<string>96D3562E47E4792B0A6093A0323EB398</string>
+			<key>targetProxy</key>
+			<string>548AA3A09AFD169F5892F4ED63E6208F</string>
+		</dict>
+		<key>AC6B56B0A84A8EC4267D3BB01FADC31A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F9BC5E8083A9BAC2322CEF1436C6BEE4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AE46F03F680D2CA1FFC849F4A1D92B53</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>E27CC9CA4425CF9C36A8EE66F122E021</string>
+				<string>85D4AF32F0DADEEA93210F4698E8CA3E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>AF2C1F5959E65C6E006C59FB258B4887</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MMDrawerController.framework</string>
+			<key>path</key>
+			<string>MMDrawerController.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>AFF6A05FDAAD15A9D1A82F6C375C0C06</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4B49A60F8EE5BE32AC6DB8BA3C8BB0DC</string>
+				<string>5A367E747D98E513E64228CEDDE1354F</string>
+				<string>F9B414791480E1DC6D8ACCAB96DA8FDC</string>
+				<string>028913F1EEE8ABEC0906C5761C4714F5</string>
+				<string>644B2D41503E241815B18DF88877D0E9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MMDrawerController</string>
+			<key>path</key>
+			<string>MMDrawerController</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B612E74F190558CFACBAECC01AB06405</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7404B27FE1E32253D37BB6C50B108944</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>B6ED3EAA8D85428E94C5E797B8B39474</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>CB56D93F655DCFDFB27E55607B6395CF</string>
+			<key>buildPhases</key>
+			<array>
+				<string>7CD8B4597E1511DC9CC2E57C24303CDB</string>
+				<string>2DE66D57721984E42A7F37F68FB284B0</string>
+				<string>89A486F1DA69262CD9CFF4F7B4994D17</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>A9E5EB3C8D3974539828C33EFEF5809B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOSTests</string>
+			<key>productName</key>
+			<string>Pods-StudyBox_iOSTests</string>
+			<key>productReference</key>
+			<string>6599E92F7EF851C319508C5C303EA24A</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>BA90F8C3AFDDEF13CBC59A0CE490B060</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BACAAA68BBDC9E7AD4B6B54BB50031EA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMDrawerBarButtonItem.h</string>
+			<key>path</key>
+			<string>MMDrawerController/MMDrawerBarButtonItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BC2FE2B06DDC5C08A88ACFD4AECD8213</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BE445A3B9E9E2D0D00BB080BABAE40C2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C28AF7FA931DF473519AD5A4C36CC336</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>49D93CCAB982474092E00F0E72BFC056</string>
+				<string>1F81DC823ECBA2FEEEFDFDEEAF40B907</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>C2959FB7B565AB17B2C42BD301D7AD78</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BC9974E062320320C147B742E0DFF2C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C6544A1F1139551CE6C6C9B43404CFA3</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>POD_CONFIGURATION_RELEASE=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>C6B4B99C00B2011DF864D2C1B8A71EB7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D89EB83AACEC518D8F2A6B7B6CA0AA21</string>
+				<string>7BFF07EE6F70D55D8A85E4D8ED6A41DB</string>
+				<string>68AE097377277E8D45297B5370AC5BF6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C98F38D6C38DF4AD7AB26A27A99148C7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C9F0A6AD934BDF9BEE7AE6CB051AAB7D</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>4BE44CF0A0272B665EF5EFDDA6C33D36</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/MMDrawerController/MMDrawerController-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/MMDrawerController/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/MMDrawerController/MMDrawerController.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>MMDrawerController</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>CAE2EF6171328E8B33AE6E7A2E96597B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>926D58346C6FB8E7E5CB3FC5736A8666</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>CB103AC3CC3D8E7D53116EFC41E4368E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CB56D93F655DCFDFB27E55607B6395CF</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>9172FD1B8DA6C33429AF7AD0D44D6C12</string>
+				<string>A5D47C693641E503DE3D38093E9E81D3</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>CD454ED6CAA86C24475AFF3EF7BC78BB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIViewController+MMDrawerController.m</string>
+			<key>path</key>
+			<string>MMDrawerController/UIViewController+MMDrawerController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CF97CA4FE910EA555EE9912F4AA178CD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>913DA6A1D56CDFB5ACDB6D56F9ABFAB3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>D15D239D71ED5AE43DBCC6E2088484BD</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Fabric.framework</string>
+			<key>path</key>
+			<string>iOS/Fabric.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D19117CAF1A63D40CF7B3BDAA426F36A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMDrawerController.h</string>
+			<key>path</key>
+			<string>MMDrawerController/MMDrawerController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D41D8CD98F00B204E9800998ECF8427E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0720</string>
+				<key>LastUpgradeCheck</key>
+				<string>0700</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>7DB346D0F39D3F0E887471402A8071AB</string>
+			<key>productRefGroup</key>
+			<string>DF49E69BEB789E25E76B37A84E3E7FF5</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>96D3562E47E4792B0A6093A0323EB398</string>
+				<string>14FD5A699F57EE8BF6C1132C8B4A7730</string>
+				<string>B6ED3EAA8D85428E94C5E797B8B39474</string>
+				<string>8B91C7460AE81B04BD808CDAD7DD8B46</string>
+			</array>
+		</dict>
+		<key>D78741CC2757835E7B7BD17846F3689A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D82AF2EF1F661F088C10D4192058D6D4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>26C911461847F1F32688FC0EECE91E25</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D89EB83AACEC518D8F2A6B7B6CA0AA21</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>DF49E69BEB789E25E76B37A84E3E7FF5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>AF2C1F5959E65C6E006C59FB258B4887</string>
+				<string>4DC238901273203B9D156D86FA83C842</string>
+				<string>6599E92F7EF851C319508C5C303EA24A</string>
+				<string>A972D0B0585CFFF1EBE750054D69B89F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E0144A63934CD18EEC65F37E5F8B0D1F</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>8B91C7460AE81B04BD808CDAD7DD8B46</string>
+			<key>remoteInfo</key>
+			<string>Reachability</string>
+		</dict>
+		<key>E27CC9CA4425CF9C36A8EE66F122E021</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D89EB83AACEC518D8F2A6B7B6CA0AA21</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E640B82A5743241A7376DF07475FDBA3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>20F7278014CCF4DA2611E1306491E64F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F0A6B133FB17420F6D3562FA03D032E6</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>8EE5090D509515A0651F50ECEFA83568</string>
+				<string>7E182B764BA5B8A41E0DB4794980BE80</string>
+				<string>3724077DB51404C3570CA191DE702D9A</string>
+				<string>557D55C22B4E6564E6E3748C134B07FA</string>
+				<string>1E231E66223BBB8D04D02B206E9D561B</string>
+				<string>A421093279A40E783589D923661289FA</string>
+				<string>3C7E9B4876C2C2988DEC91CD5F471FEA</string>
+				<string>7404B27FE1E32253D37BB6C50B108944</string>
+				<string>797E6CC91B91A301F37594ED7A86D39F</string>
+				<string>F63E81BF2F92BFC86E5EB5A484B3BDF6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOS</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-StudyBox_iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F63E81BF2F92BFC86E5EB5A484B3BDF6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOS.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F67C1CA7E43326293AF942D09FD28034</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D15D239D71ED5AE43DBCC6E2088484BD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F71968B8884E3B99F0C73BE3F8B5B96C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>58B5E687F7D12556006A62037D0FBF17</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Crashlytics</string>
+			<key>path</key>
+			<string>Crashlytics</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F9B414791480E1DC6D8ACCAB96DA8FDC</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7E5D95762C755BE77B2A87303B394F46</string>
+				<string>9BC9974E062320320C147B742E0DFF2C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MMDrawerVisualStates</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F9BC5E8083A9BAC2322CEF1436C6BEE4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MMDrawerController-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FACA0D022BC414BFEFAB0BC571B971AF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4A95C4955D05D4BAE2E3F76417A7C402</string>
+				<string>26C911461847F1F32688FC0EECE91E25</string>
+				<string>2D6B18748B07AE8884CB23ACF10B0EEF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Reachability</string>
+			<key>path</key>
+			<string>Reachability</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FD09AC5B74EF533CF55BAB764C85F87F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-StudyBox_iOSTests-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>D41D8CD98F00B204E9800998ECF8427E</string>
+</dict>
+</plist>

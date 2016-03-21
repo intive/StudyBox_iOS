@@ -27,7 +27,7 @@ class UserViewController: InputViewController {
             
             let offset = centerOffset
             
-            mmDrawer.setGestureShouldRecognizeTouchBlock({(drawer, gesture, touch) -> Bool in
+            mmDrawer.setGestureShouldRecognizeTouchBlock({ (drawer, gesture, touch) -> Bool in
                 if let _ = gesture as? UIPanGestureRecognizer {
                     if (drawer.visibleLeftDrawerWidth == 0) {
                         let touchLocation = touch.locationInView(drawer.centerViewController.view)

@@ -160,11 +160,14 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     
     func hidingDrawer() {
         hideStatusBar = !hideStatusBar
-        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime, animations: {
-            self.setNeedsStatusBarAppearanceUpdate()
-        }) { (_) in
-            self.hideStatusBar = !self.hideStatusBar
-        }
+        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
+            animations: {
+                self.setNeedsStatusBarAppearanceUpdate()
+            },
+            completion: { finished in
+                self.hideStatusBar = !self.hideStatusBar
+            }
+        )
     }
     
     override func prefersStatusBarHidden() -> Bool {
