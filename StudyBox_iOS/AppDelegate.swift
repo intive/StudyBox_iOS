@@ -49,20 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - DataManager stack 
     
-    func initializeDataManager(dummy:Bool)->DataManager? {
-        if dummy {
-            _dataManager = DataManager.managerWithDummyData()
-        }else {
-            _dataManager = DataManager()
-        }
-        return dataManager
-    }
-    
-    private var _dataManager:DataManager?
-    
-    var dataManager:DataManager? {
-        return _dataManager
-    }
+    private(set) var dataManager:DataManager = DataManager.managerWithDummyData()
     
 
     // MARK: - Core Data stack

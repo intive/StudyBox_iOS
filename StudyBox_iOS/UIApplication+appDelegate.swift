@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIApplication {
-    static func appDelegate()->AppDelegate? {
-        return UIApplication.sharedApplication().delegate as? AppDelegate
+    static func appDelegate()->AppDelegate {
+        return UIApplication.sharedApplication().delegate as! AppDelegate
     }
 }

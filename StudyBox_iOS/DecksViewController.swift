@@ -11,25 +11,18 @@ import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    private var deckToTest: Deck?
-    
-    // points selected deck
-    static private(set) var selectedDeckForTesting: Deck?
-    
     private var decksArray: [Deck]?
-    private var dataManager:DataManager?
+    
+    lazy private var dataManager:DataManager? = {
+       return UIApplication.appDelegate().dataManager
+    }()
+    
     @IBOutlet var decksCollectionView: UICollectionView!
     
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        DecksViewController.selectedDeckForTesting = nil
-        
-        if let appDelegate = UIApplication.appDelegate() {
-            dataManager = appDelegate.dataManager ?? appDelegate.initializeDataManager(true)
-            decksArray = dataManager?.decks(true)
-        }
+        decksArray = dataManager?.decks(true)
         
     }
     
@@ -106,33 +99,23 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if let deck = decksArray?[indexPath.row] {
+            do {
+                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
+                    //Adjust type with aciton sheet
+                    performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
+                    
+                }
+            }catch let e {
+                debugPrint(e)
+            }
+        }
         
-        deckToTest = decksArray?[indexPath.row]
-
-        performSegueWithIdentifier("StartTest", sender: self)
-        
-    }
-
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        return deckToTest != nil && dataManager != nil
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController {
-            
-            if let deck = deckToTest {
-                do {
-                    if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
-                        
-                        //Adjust type with aciton sheet
-                        testViewController.testLogicSource = Test(deck: flashcards, testType: .Learn)
-
-                    }
-                }catch let e {
-                    debugPrint(e)
-                }
-                
-            }
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, let testLogic = sender as? Test {
+            testViewController.testLogicSource = testLogic
         }
     }
  
