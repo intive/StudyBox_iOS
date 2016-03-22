@@ -11,10 +11,13 @@ import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    private var deckToTest: Deck?
+    
     // points selected deck
     static private(set) var selectedDeckForTesting: Deck?
     
     private var decksArray: [Deck]?
+    private var dataManager:DataManager?
     @IBOutlet var decksCollectionView: UICollectionView!
     
     // TODO: in future replace managerWithDummyData()
@@ -22,8 +25,12 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         super.viewWillAppear(animated)
         
         DecksViewController.selectedDeckForTesting = nil
-        let dataManager = DataManager.managerWithDummyData()
-        decksArray = dataManager.decks(true)
+        
+        if let appDelegate = UIApplication.appDelegate() {
+            dataManager = appDelegate.dataManager ?? appDelegate.initializeDataManager(true)
+            decksArray = dataManager?.decks(true)
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -99,12 +106,34 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let notNilDecksArray = decksArray{
-            DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
-        }
+        
+        deckToTest = decksArray?[indexPath.row]
 
         performSegueWithIdentifier("StartTest", sender: self)
         
+    }
+
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        return deckToTest != nil && dataManager != nil
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController {
+            
+            if let deck = deckToTest {
+                do {
+                    if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
+                        
+                        //Adjust type with aciton sheet
+                        testViewController.testLogicSource = Test(deck: flashcards, testType: .Learn)
+
+                    }
+                }catch let e {
+                    debugPrint(e)
+                }
+                
+            }
+        }
     }
  
 }
