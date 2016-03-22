@@ -47,7 +47,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         super.viewWillAppear(animated)
         DecksViewController.selectedDeckForTesting = nil
         let dataManager = DataManager.managerWithDummyData()
-        decksArray = dataManager.decks(false)
+        decksArray = dataManager.decks(true)
         searchBar?.delegate = self
     }
 
@@ -139,13 +139,12 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         } else if let notNilDecksArray = decksArray {
             DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
         }
-        if let test = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.TestViewControllerID) {
 
-            if let bar = searchBar {
-                cancelSearchReposition(bar, animated: false)
-            }
-            navigationController?.viewControllers = [test]
+        if let bar = searchBar {
+            cancelSearchReposition(bar, animated: false)
         }
+        performSegueWithIdentifier("StartTest", sender: self)
+        
     }
 }
 

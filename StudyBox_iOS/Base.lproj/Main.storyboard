@@ -166,7 +166,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Bco-pG-cRr"/>
                     <connections>
-                        <outlet property="decksCollectionView" destination="9VM-hJ-ElA" id="upw-p9-nF4"/>
+                        <outlet property="decksCollectionView" destination="meI-g7-XY6" id="J1V-nQ-a56"/>
                         <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="IWt-ao-u5P"/>
                     </connections>
                 </viewController>
@@ -216,8 +216,8 @@
                                     <segue destination="6tt-KQ-lf6" kind="show" id="4Xn-wF-Mn2"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graturacje!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYF-UE-PxQ">
-                                <rect key="frame" x="258" y="169" width="85" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratulacje" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYF-UE-PxQ">
+                                <rect key="frame" x="261" y="169" width="78" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="feZ-7a-AHl"/>
                                 </constraints>
@@ -226,7 +226,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twój wynik" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHv-0V-q5S">
-                                <rect key="frame" x="259" y="215" width="83.5" height="30"/>
+                                <rect key="frame" x="258" y="215" width="84" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="TPv-G9-6WA"/>
                                 </constraints>
@@ -297,7 +297,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrawerCellId" textLabel="m86-hQ-g9n" style="IBUITableViewCellStyleDefault" id="yFe-bm-kgx">
-                                        <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yFe-bm-kgx" id="SRS-Mc-WcA">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -656,7 +656,7 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Xn-wF-Mn2"/>
         <segue reference="kaO-g4-SgC"/>
+        <segue reference="4Xn-wF-Mn2"/>
     </inferredMetricsTieBreakers>
 </document>
