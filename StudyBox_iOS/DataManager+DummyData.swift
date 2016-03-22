@@ -29,6 +29,7 @@ extension DataManager {
             var answer = "\(name) answer"
             
             var tip:Tip?
+            var cardId:String //Helps in hiding
             
             
             for i in 0...limit {
@@ -50,7 +51,15 @@ extension DataManager {
                     tip = nil
                 }
                 
-                try! manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
+                try! cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
+                
+                //The draw made to hide randomly some of the flashcards
+                let hidingDraw = arc4random_uniform(3) + 1
+                
+                if (hidingDraw % 3 == 1) {
+                    try! manager.hideFlashcard(withId: cardId)
+                }
+
                 
             }
             
