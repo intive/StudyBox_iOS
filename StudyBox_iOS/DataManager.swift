@@ -139,4 +139,12 @@ class DataManager {
         }
     }
     
+    func unhideFlashcard(withId id:String)throws{
+        if let index = flashcards.indexOfUnique(id){
+            flashcards[index].hidden = false
+        }else {
+            throw DataManagerError.NoFlashcardWithGivenId
+        }
+    }
+    
 }

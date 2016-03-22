@@ -30,7 +30,7 @@ extension DataManager {
             
             var tip:Tip?
             var cardId:String //Helps in hiding
-            
+            var countToHide:Int = 0 //Helps in hiding too
             
             for i in 0...limit {
                 let clear = (i == limit || i == limit - 1 || i == limit / 2 || i == limit / 2 - 1)
@@ -52,11 +52,10 @@ extension DataManager {
                 }
                 
                 try! cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
+                countToHide++
                 
-                //The draw made to hide randomly some of the flashcards
-                let hidingDraw = arc4random_uniform(3) + 1
-                
-                if (hidingDraw % 3 == 1) {
+                //Hides every 3th generated flashcard
+                if (countToHide % 3 == 0) {
                     try! manager.hideFlashcard(withId: cardId)
                 }
 

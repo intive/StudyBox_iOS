@@ -44,14 +44,7 @@ struct Flashcard:Equatable,UniquelyIdentifiable {
     var question:String
     var answer:String
     var tip:Tip?
-    var hidden:Bool{
-        get{
-            return self.hidden
-        }
-        set(value){
-            hidden = value
-        }
-    }
+    var hidden:Bool
 
     init(id:String,deckId:String,question:String,answer:String,tip:Tip?){
         _id = id
