@@ -24,7 +24,7 @@ class Test {
   private var numberOfFlashcardsInFullDeck : Int
   private let testType : StudyType
   private let cardsInTest : Int
-  // last 2 properties are made to determinate if passed deck was empty from the begginging 
+  // last 2 properties are made to determinate if passed deck was empty from the beginning 
   // or if all flashcards in passed deck was hidden
   private let passedDeckWasEmpty :Bool
   private let allFlashcardsMaybeHidden:Bool
