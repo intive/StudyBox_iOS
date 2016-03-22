@@ -32,7 +32,7 @@ extension DataManager {
             
             
             for i in 0...limit {
-                let clear = (i == limit || i == limit - 1 || i == limit / 2 || i == limit / 2 - 1)
+                let clear = (i == limit || i == limit / 2)
                 if ( i % 2  == 0){
                     tip = Tip.Text(text: "\(name) tip")
                     let choice = Int(arc4random_uniform(UInt32(size)))
