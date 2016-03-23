@@ -40,7 +40,7 @@ class ScoreViewController: StudyBoxViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.viewDidAppear(false)
+        super.viewDidAppear(false)
         animateProgressView()
     }
     
