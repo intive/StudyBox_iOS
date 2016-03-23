@@ -9,8 +9,7 @@
 import UIKit
 
 class ScoreViewController: StudyBoxViewController {
-    
-    
+
     @IBOutlet weak var circularProgressView: UIView!
     @IBOutlet weak var congratulationsBigLabel: UILabel!
     @IBOutlet weak var congratulationsSmallLabel: UILabel!
@@ -66,17 +65,9 @@ class ScoreViewController: StudyBoxViewController {
     ///Animating the circular progress view to testPercentage value
     func animateProgressView() {
         let progressViewFrame = circularProgressView.bounds
-        let progress = KDCircularProgress(frame: progressViewFrame)
-        progress.startAngle = -90
-        progress.angle = 0
-        progress.progressThickness = 0.25
-        progress.trackThickness = 0.25
-        progress.clockwise = true
-        progress.glowMode = .NoGlow
+        let progress = KDCircularProgress(frame: progressViewFrame, startAngle: -90, angle: 0, thickness: 0.4, clockwise: true, glowMode: .NoGlow, color: UIColor.sb_DarkBlue(), roundedCorners: true)
         progress.center = view.center
-        progress.trackColor = UIColor.sb_DarkBlue().colorWithAlphaComponent(0.3)
-        progress.roundedCorners = true
-        progress.setColors(UIColor.sb_DarkBlue())
+        
         view.addSubview(progress)
         
         //Convert float to degree angle
@@ -114,10 +105,5 @@ class ScoreViewController: StudyBoxViewController {
     }
 }
 
-extension Double {
-    /// Rounds the double to decimal places value
-    func roundToPlaces(places:Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return round(self * divisor) / divisor
-    }
-}
+
+
