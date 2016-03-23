@@ -45,7 +45,7 @@ class Test {
         }
         
         self.deck = tmpDeck
-        self.numberOfFlashcardsInFullDeck = deck.count
+        self.numberOfFlashcardsInFullDeck = self.deck.count
         self.testType = testType
         
         //This parameter helps function to determinate if all flashcards in passed deck are hidden.
