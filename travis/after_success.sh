@@ -11,6 +11,17 @@ fi
 #   exit 0
 # fi
 
+echo "Decrypt files"
+
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PROFILE.enc" -d -a -out "$PROFILE"
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$CERTIFICATE.enc" -d -a -out "$CERTIFICATE"
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PRIVATE_KEY.enc" -d -a -out "$PRIVATE_KEY"
+
+echo "Create constants"
+
+PLIST_BUDDY="/usr/libexec/PlistBuddy"
+INFO_PLIST="$PWD/StudyBox_iOS/Info.plist"
+
 WORKSPACE="StudyBox_iOS.xcworkspace"
 SCHEME="StudyBox_iOS"
 APP_NAME="StudyBox_iOS"
@@ -22,7 +33,7 @@ CERTIFICATE="$PWD/travis/certs/dist.cer"
 PRIVATE_KEY="$PWD/travis/certs/dist.p12"
 PROFILE="$PWD/travis/profile/profile.mobileprovision"
 
-UUID=`/usr/libexec/plistbuddy -c Print:UUID /dev/stdin <<< \`security cms -D -i $PROFILE\``
+UUID=`$PLIST_BUDDY -c Print:UUID /dev/stdin <<< \`security cms -D -i $PROFILE\``
 PROFILES_PATH="$HOME/Library/MobileDevice/Provisioning Profiles"
 PROFILE_TARGET="$PROFILES_PATH/$UUID.mobileprovision"
 
@@ -37,23 +48,9 @@ IPA_PATH="$PWD/build/$APP_NAME.ipa"
 FABRIC="$PWD/Pods/Fabric/upload-symbols"
 CRASHLYTICS="$PWD/Pods/Crashlytics/submit"
 
-PLIST_BUDDY="/usr/libexec/PlistBuddy"
-INFO_PLIST="$PWD/StudyBox_iOS/Info.plist"
-
-echo "KEYCHAIN_PATH: $KEYCHAIN_PATH"
-echo "PROFILE_TARGET: $PROFILE_TARGET"
-echo "ARCHIVE_PATH: $ARCHIVE_PATH"
-echo "IPA_PATH: $IPA_PATH"
-
 echo "Update build number"
 
 "$PLIST_BUDDY" -c "Set :CFBundleVersion travis-$TRAVIS_BUILD_NUMBER" "$INFO_PLIST"
-
-echo "Decrypt files"
-
-openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PROFILE.enc" -d -a -out "$PROFILE"
-openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$CERTIFICATE.enc" -d -a -out "$CERTIFICATE"
-openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PRIVATE_KEY.enc" -d -a -out "$PRIVATE_KEY"
 
 echo "Setting up certificates and keys"
 
