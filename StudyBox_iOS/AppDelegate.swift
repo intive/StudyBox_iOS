@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
+        
         return true
     }
 
@@ -44,6 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    // MARK: - DataManager stack 
+    
+    private(set) var dataManager:DataManager = DataManager.managerWithDummyData()
+    
 
     // MARK: - Core Data stack
 

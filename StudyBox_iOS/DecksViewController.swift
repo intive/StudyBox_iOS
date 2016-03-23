@@ -11,19 +11,19 @@ import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    // points selected deck
-    static private(set) var selectedDeckForTesting: Deck?
-    
     private var decksArray: [Deck]?
+    
+    lazy private var dataManager:DataManager? = {
+       return UIApplication.appDelegate().dataManager
+    }()
+    
     @IBOutlet var decksCollectionView: UICollectionView!
     
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        decksArray = dataManager?.decks(true)
         
-        DecksViewController.selectedDeckForTesting = nil
-        let dataManager = DataManager.managerWithDummyData()
-        decksArray = dataManager.decks(true)
     }
     
     override func viewDidLoad() {
@@ -120,7 +120,24 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         presentViewController(alert, animated: true, completion:nil)
         
         performSegueWithIdentifier("StartTest", sender: self)
+        if let deck = decksArray?[indexPath.row] {
+            do {
+                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
+                    //Adjust type with aciton sheet
+                    performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
+                    
+                }
+            }catch let e {
+                debugPrint(e)
+            }
+        }
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, let testLogic = sender as? Test {
+            testViewController.testLogicSource = testLogic
+        }
     }
  
 }
