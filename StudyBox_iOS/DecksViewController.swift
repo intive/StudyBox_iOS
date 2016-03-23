@@ -100,14 +100,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        
-        
-        
         if let notNilDecksArray = decksArray{
             DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
         }
         
-        let alert = UIAlertController(title: "Test or Study ?", message: "Choose mode would you like to start", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Test or Study?", message: "Choose mode would you like to start", preferredStyle: .Alert)
         
         let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
             print("You chosen test mode")
