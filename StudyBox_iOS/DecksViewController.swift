@@ -14,7 +14,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     private var decksArray: [Deck]?
     
     lazy private var dataManager:DataManager? = {
-       return UIApplication.appDelegate().dataManager
+        return UIApplication.appDelegate().dataManager
     }()
     
     @IBOutlet var decksCollectionView: UICollectionView!
@@ -37,22 +37,22 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
         
         decksCollectionView.backgroundColor = UIColor.whiteColor()
-
+        
     }
     
     // this function calculate size of decks, by given spacing and number of cells in row
     private func equalSizeAndSpacing(numberOfCellsInRow crNumber: CGFloat, spacing: CGFloat,
         collectionFlowLayout flow: UICollectionViewFlowLayout){
             
-        let screenSize = self.view.bounds.size
-        let deckWidth = screenSize.width/crNumber - (spacing + spacing/crNumber)
-        flow.sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing)
-        // spacing between decks
-        flow.minimumInteritemSpacing = spacing
-        // spacing between rows
-        flow.minimumLineSpacing = spacing
-        // size for every deck
-        flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
+            let screenSize = self.view.bounds.size
+            let deckWidth = screenSize.width/crNumber - (spacing + spacing/crNumber)
+            flow.sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing)
+            // spacing between decks
+            flow.minimumInteritemSpacing = spacing
+            // spacing between rows
+            flow.minimumLineSpacing = spacing
+            // size for every deck
+            flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -78,7 +78,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             as! DecksViewCell
         
         cell.layoutIfNeeded()
-
+        
         if var deckName = decksArray?[indexPath.row].name{
             if deckName.isEmpty {
                 deckName = Utils.DeckViewLayout.DeckWithoutTitle
@@ -97,34 +97,30 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         return cell
     }
     
+    
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        if let notNilDecksArray = decksArray{
-            DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
-        }
-        
-        let alert = UIAlertController(title: "Test or Study?", message: "Choose mode would you like to start", preferredStyle: .Alert)
-        
-        let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-            print("You chosen test mode")
-        }
-
-        let studyButton = UIAlertAction(title: "Study", style: .Default) { (alert: UIAlertAction!) -> Void in
-            print("You chosen study mode")
-        }
-        
-        alert.addAction(testButton)
-        alert.addAction(studyButton)
-        
-        presentViewController(alert, animated: true, completion:nil)
-        
-        performSegueWithIdentifier("StartTest", sender: self)
         if let deck = decksArray?[indexPath.row] {
+            
             do {
+                
                 if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
-                    //Adjust type with aciton sheet
-                    performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
+                   
+                    let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
+                    
+                    let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
+                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(5)))
+                    }
+                    
+                    let studyButton = UIAlertAction(title: "Learn", style: .Default) { (alert: UIAlertAction!) -> Void in
+                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
+                    }
+                    
+                    alert.addAction(testButton)
+                    alert.addAction(studyButton)
+
+                    presentViewController(alert, animated: true, completion:nil)
                     
                 }
             }catch let e {
@@ -139,7 +135,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             testViewController.testLogicSource = testLogic
         }
     }
- 
+    
 }
 
 // this extension dynamically change the size of the fonts, so text can fit
@@ -159,7 +155,7 @@ extension UILabel {
                 self.font = font
                 break
             }
-
+            
         }
         // in case, it is better to have the smallest possible font
         self.font = font
