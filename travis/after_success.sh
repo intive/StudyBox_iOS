@@ -13,6 +13,11 @@ fi
 
 echo "Decrypt files"
 
+APPLE_CERTIFICATE="$PWD/travis/certs/apple.cer"
+CERTIFICATE="$PWD/travis/certs/dist.cer"
+PRIVATE_KEY="$PWD/travis/certs/dist.p12"
+PROFILE="$PWD/travis/profile/profile.mobileprovision"
+
 openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PROFILE.enc" -d -a -out "$PROFILE"
 openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$CERTIFICATE.enc" -d -a -out "$CERTIFICATE"
 openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PRIVATE_KEY.enc" -d -a -out "$PRIVATE_KEY"
@@ -27,11 +32,6 @@ SCHEME="StudyBox_iOS"
 APP_NAME="StudyBox_iOS"
 SDK="iphoneos"
 CONFIGURATION="Release"
-
-APPLE_CERTIFICATE="$PWD/travis/certs/apple.cer"
-CERTIFICATE="$PWD/travis/certs/dist.cer"
-PRIVATE_KEY="$PWD/travis/certs/dist.p12"
-PROFILE="$PWD/travis/profile/profile.mobileprovision"
 
 UUID=`$PLIST_BUDDY -c Print:UUID /dev/stdin <<< \`security cms -D -i $PROFILE\``
 PROFILES_PATH="$HOME/Library/MobileDevice/Provisioning Profiles"
