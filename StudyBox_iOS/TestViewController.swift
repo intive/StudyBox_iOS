@@ -37,14 +37,14 @@ class TestViewController: StudyBoxViewController {
         let swipeLeftForAnswer = UISwipeGestureRecognizer()
         swipeLeftForAnswer.direction = .Left
         swipeLeftForAnswer.delegate = self
-        swipeLeftForAnswer.addTarget(self, action: "swipedLeft")
+        swipeLeftForAnswer.addTarget(self, action: #selector(TestViewController.swipedLeft))
         questionView.userInteractionEnabled = true
         questionView.addGestureRecognizer(swipeLeftForAnswer)
         
         let swipeUpQuestionLabel = UISwipeGestureRecognizer()
         swipeUpQuestionLabel.direction = .Up
         swipeUpQuestionLabel.delegate = self
-        swipeUpQuestionLabel.addTarget(self, action: "swipedUp")
+        swipeUpQuestionLabel.addTarget(self, action: #selector(TestViewController.swipedUp))
         questionLabel.userInteractionEnabled = true
         questionLabel.addGestureRecognizer(swipeUpQuestionLabel)
         
@@ -53,7 +53,7 @@ class TestViewController: StudyBoxViewController {
          */
         let swipeUpAnswerLabel = UISwipeGestureRecognizer()
         swipeUpAnswerLabel.direction = .Up
-        swipeUpAnswerLabel.addTarget(self, action: "swipedUp")
+        swipeUpAnswerLabel.addTarget(self, action: #selector(TestViewController.swipedUp))
         answerLabel.userInteractionEnabled = true
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
@@ -82,7 +82,7 @@ class TestViewController: StudyBoxViewController {
         currentQuestionNumber.text = "#1"
         
         //score label displays score; onclick moves to Score View Controller
-        let tapScore = UITapGestureRecognizer(target: self, action: Selector("tapScore:"))
+        let tapScore = UITapGestureRecognizer(target: self, action: #selector(TestViewController.tapScore(_:)))
         scoreLabel.userInteractionEnabled = true
         scoreLabel.addGestureRecognizer(tapScore)
         try! testLogicSource?.checkIfPassedDeckIsEmpty()
@@ -216,7 +216,7 @@ class TestViewController: StudyBoxViewController {
         
         if let testLogic = testLogicSource {
             
-            if let _ = correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer() {
+            if (correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer()) != nil {
                 answeredQuestionTransition()
             }else {
                 if shouldPerformSegueWithIdentifier("ScoreSegue", sender: self) {
@@ -237,11 +237,11 @@ class TestViewController: StudyBoxViewController {
     ///Global time setting for button scale animations
     let buttonsAnimationTime: NSTimeInterval = 0.1
     ///Global scale setting for button scale animations
-    let buttonsScaleWhenPressed: (CGFloat,CGFloat) = (0.85,0.85)
+    let buttonsScaleWhenPressed = CGAffineTransformMakeScale(0.85,0.85)
     
     @IBAction func correctButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime,delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
+            self.correctButton.transform = self.buttonsScaleWhenPressed
             }, completion:nil )
     }
     
@@ -264,7 +264,7 @@ class TestViewController: StudyBoxViewController {
     
     @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime,delay:0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
+            self.incorrectButton.transform = self.buttonsScaleWhenPressed
             }, completion:nil )
     }
     
