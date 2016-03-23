@@ -44,6 +44,7 @@ struct Flashcard:Equatable,UniquelyIdentifiable {
     var question:String
     var answer:String
     var tip:Tip?
+    var hidden:Bool
     
     init(id:String,deckId:String,question:String,answer:String,tip:Tip?){
         _id = id
@@ -51,6 +52,7 @@ struct Flashcard:Equatable,UniquelyIdentifiable {
         self.question = question
         self.answer = answer
         self.tip = tip
+        self.hidden = false
     }
     
 }

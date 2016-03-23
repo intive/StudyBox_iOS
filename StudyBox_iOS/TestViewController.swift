@@ -73,6 +73,8 @@ class TestViewController: StudyBoxViewController {
         let tapScore = UITapGestureRecognizer(target: self, action: Selector("tapScore:"))
         scoreLabel.userInteractionEnabled = true
         scoreLabel.addGestureRecognizer(tapScore)
+        try! testLogicSource?.checkIfPassedDeckIsEmpty()
+        try! testLogicSource?.checkIfAllFlashcardsHidden()
         if let _ = testLogicSource {
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
