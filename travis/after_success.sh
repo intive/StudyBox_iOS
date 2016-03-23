@@ -59,6 +59,7 @@ if [[ -f "$KEYCHAIN_PATH" ]]; then
 fi
 
 security create-keychain -p travis "$KEYCHAIN_NAME"
+security default-keychain -s "$KEYCHAIN_NAME"
 security unlock-keychain -p travis "$KEYCHAIN_NAME"
 security set-keychain-settings -t 3600 -l "$KEYCHAIN_PATH"
 security import "$APPLE_CERTIFICATE" -k "$KEYCHAIN_PATH" -T /usr/bin/codesign
@@ -78,7 +79,6 @@ xctool \
     -configuration "$CONFIGURATION" \
     ONLY_ACTIVE_ARCH="NO" \
     CODE_SIGN_IDENTITY="$DEVELOPER_NAME" \
-    OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_NAME" \
     PROVISIONING_PROFILE="$UUID" \
     archive -archivePath "$ARCHIVE_PATH"
 
