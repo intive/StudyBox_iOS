@@ -17,10 +17,10 @@ PODS:
   - Reachability (3.2)
 
 DEPENDENCIES:
-  - Crashlytics
-  - Fabric
+  - Crashlytics (~> 3.7.0)
+  - Fabric (~> 1.6.7)
   - MMDrawerController (~> 0.6.0)
-  - Reachability
+  - Reachability (~> 3.2)
 
 SPEC CHECKSUMS:
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
@@ -28,6 +28,6 @@ SPEC CHECKSUMS:
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
-PODFILE CHECKSUM: d61b87315f3945dd6d4cadabcec0d40a886747bf
+PODFILE CHECKSUM: 6dc0d098272ffb7fb18d7862ba95c677226153ca
 
-COCOAPODS: 1.0.0.beta.6
+COCOAPODS: 1.0.0.beta.5
