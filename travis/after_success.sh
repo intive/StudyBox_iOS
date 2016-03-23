@@ -42,6 +42,12 @@ echo "PROFILE_TARGET: $PROFILE_TARGET"
 echo "ARCHIVE_PATH: $ARCHIVE_PATH"
 echo "IPA_PATH: $IPA_PATH"
 
+echo "Decrypt files"
+
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PROFILE.enc" -d -a -out "$PROFILE"
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$CERTIFICATE.enc" -d -a -out "$CERTIFICATE"
+openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PRIVATE_KEY.enc" -d -a -out "$PRIVATE_KEY"
+
 echo "Setting up certificates and keys"
 
 if [[ -f "$KEYCHAIN_PATH" ]]; then
