@@ -19,7 +19,7 @@ class ScoreViewController: StudyBoxViewController {
     @IBOutlet weak var runTestButton: UIButton!
     
     var testLogicSource:Test?
-    var testPercentage:Double = 0.0
+    var testScoreFraction:Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,14 +46,13 @@ class ScoreViewController: StudyBoxViewController {
     
     func completeData() {
         if let testLogic = testLogicSource {
-            
             let cardsResult = testLogic.cardsAnsweredAndPossible()
             
-            self.testPercentage = Double(cardsResult.0 / cardsResult.1)
-            let percentageString = String(format:"%.2f", testPercentage)
+            self.testScoreFraction = Double(cardsResult.0) / Double(cardsResult.1)
+            let testScorePercentage = Int(testScoreFraction*100)
             
             scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
-            scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n" + percentageString + " %"
+            scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n\(testScorePercentage) %"
             
             switch testLogic.testType {
             case .Learn:
@@ -81,7 +80,7 @@ class ScoreViewController: StudyBoxViewController {
         view.addSubview(progress)
         
         //Convert float to degree angle
-        let percentageAngle = Int(self.testPercentage*360)
+        let percentageAngle = Int(self.testScoreFraction*360)
 
         //Delay the animation by 1 second
         let triggerTime = (Int64(NSEC_PER_SEC) * 1)
