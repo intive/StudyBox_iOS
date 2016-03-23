@@ -37,10 +37,17 @@ IPA_PATH="$PWD/build/$APP_NAME.ipa"
 FABRIC="$PWD/Pods/Fabric/upload-symbols"
 CRASHLYTICS="$PWD/Pods/Crashlytics/submit"
 
+PLIST_BUDDY="/usr/libexec/PlistBuddy"
+INFO_PLIST="$PWD/StudyBox_iOS/Info.plist"
+
 echo "KEYCHAIN_PATH: $KEYCHAIN_PATH"
 echo "PROFILE_TARGET: $PROFILE_TARGET"
 echo "ARCHIVE_PATH: $ARCHIVE_PATH"
 echo "IPA_PATH: $IPA_PATH"
+
+echo "Update build number"
+
+"$PLIST_BUDDY" -c "Set :CFBundleVersion travis-$TRAVIS_BUILD_NUMBER" "$INFO_PLIST"
 
 echo "Decrypt files"
 
