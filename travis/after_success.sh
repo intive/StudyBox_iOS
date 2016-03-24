@@ -88,7 +88,8 @@ xcrun xcodebuild \
     -exportArchive \
     -archivePath "$ARCHIVE_PATH" \
     -exportPath "$IPA_PATH" \
-    -exportFormat ipa
+    -exportFormat ipa \
+        | xcpretty
 
 echo "Uploading IPA"
 
