@@ -5,6 +5,7 @@ use_frameworks!
 
 def shared_pods
     pod 'MMDrawerController', '~> 0.6.0'
+    pod 'RealmSwift', '~> 0.98.5'
 end
 
 target 'StudyBox_iOS' do

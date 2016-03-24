@@ -15,19 +15,25 @@ PODS:
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
   - Reachability (3.2)
+  - Realm (0.98.5):
+    - Realm/Headers (= 0.98.5)
+  - Realm/Headers (0.98.5)
+  - RealmSwift (0.98.5):
+    - Realm (= 0.98.5)
 
 DEPENDENCIES:
   - Crashlytics (~> 3.7.0)
   - Fabric (~> 1.6.7)
   - MMDrawerController (~> 0.6.0)
   - Reachability (~> 3.2)
+  - RealmSwift (~> 0.98.5)
 
 SPEC CHECKSUMS:
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  Realm: db08379969e45cea2edd1c3c0a090fe9e22d2d2f
+  RealmSwift: cb11ad1c35e15dc982f2dbf5afe2a3124193a358
 
-PODFILE CHECKSUM: 6dc0d098272ffb7fb18d7862ba95c677226153ca
-
-COCOAPODS: 1.0.0.beta.5
+COCOAPODS: 0.39.0
