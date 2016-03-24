@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import RealmSwift
 
 enum DataManagerError:ErrorType {
     case NoDeckWithGivenId, NoFlashcardWithGivenId
@@ -19,9 +19,30 @@ enum DataManagerError:ErrorType {
 class DataManager {
     
     private var decks = [Deck]()
-    private var flashcards = [Flashcard]()
+    // private var flashcards = [Flashcard]()
+    private let realm = try! Realm()
+    
+    init(){
+        // usuwanie tylko wtedy gdy jest internet i najpewniej nie w tym miejscu. Na razie ze względu na 
+        // DummyData
+        // TODO: relocate deleteAll() and check for internet connection
+        try! realm.write {
+            realm.deleteAll()
+        }
+        // adding notification, with this decks are going to be loaded again, when database changed
+        _ = realm.addNotificationBlock { notification, realm in
+            if !self.decks.isEmpty {
+                self.decks.removeAll()
+            }
+        }
+    }
     
     func decks(sorted:Bool )->[Deck] {
+        // load all Deck from database to memory, if not loaded
+        if decks.isEmpty {
+            decks = realm.objects(Deck).toArray()
+        }
+        
         if (sorted){
             return decks.sort {
                 $0.name < $1.name
@@ -31,13 +52,19 @@ class DataManager {
     }
     
     func deck(withId id:String)->Deck? {
-        return decks.findUniqe(withId: id)
         
+        let selectedDeck = realm.objects(Deck).filter("_id == '\(id)'").first
+
+        return selectedDeck
     }
     
     func updateDeck(deck:Deck)throws {
-        if let index = decks.indexOfUnique(deck.id){
-            decks[index] = deck
+        
+        let selectedDeck = realm.objects(Deck).filter("_id == '\(deck.id)'").first
+        if let updatingDeck = selectedDeck{
+            try! realm.write {
+                updatingDeck.name = deck.name
+            }
         }else {
             DataManagerError.NoDeckWithGivenId
         }
@@ -45,21 +72,29 @@ class DataManager {
     }
     
     func addDeck(name:String)->String {
-        
+
         let id = decks.generateNewId()
-        decks.append(Deck(id: id, name: name))
+        let newDeck = Deck(id: id, name: name)
+        
+        
+        try! realm.write {
+            realm.add(newDeck)
+        }
         
         return id
     }
-    
+
     func removeDeck(withId id:String) throws {
-        if let index = decks.indexOfUnique(id){
+        
+        let selectedDeck = realm.objects(Deck).filter("_id == '\(id)'").first
+        if let deck = selectedDeck {
             
-            flashcards = flashcards.filter {
-                $0.deckId != id
+            let toRemove = deck.flashcards
+            try! realm.write {
+                realm.delete(toRemove)
+                realm.delete(deck)
             }
             
-            decks.removeAtIndex(index)
         }else {
             throw DataManagerError.NoDeckWithGivenId
         }
@@ -70,17 +105,22 @@ class DataManager {
     }
     
     
-    func flashcard(withId id:String)->Flashcard? {
-        return flashcards.findUniqe(withId: id)
+    func flashcard(withId id:String)throws ->Flashcard? {
+        
+        let selectedFlashcard = realm.objects(Flashcard).filter("_id == '\(id)'").first
+        if let flashcard = selectedFlashcard{
+            return flashcard
+        } else {
+            throw DataManagerError.NoFlashcardWithGivenId
+        }
     }
     
     
     func flashcards(forDeckWithId deckId:String) throws ->[Flashcard] {
         
-        if let deck = decks.findUniqe(withId: deckId){
-            return flashcards.filter {
-                $0.deckId == deck.id
-            }
+        let selectedDeck = realm.objects(Deck).filter("_id == '\(deckId)'").first
+        if let deck = selectedDeck {
+            return deck.flashcards
         }else {
             throw DataManagerError.NoDeckWithGivenId
         }
@@ -92,10 +132,18 @@ class DataManager {
         return try flashcards(forDeckWithId: deck.id)
         
     }
-    
+
     func updateFlashcard(data:Flashcard)throws {
-        if let index = flashcards.indexOfUnique(data.id){
-            flashcards[index] = data
+        
+        let selectedFlashcard = realm.objects(Flashcard).filter("_id == '\(data.id)'").first
+        if let flashcard = selectedFlashcard {
+            try! realm.write {
+                flashcard.question = data.question
+                flashcard.answer = data.answer
+                flashcard.tip = data.tip
+                flashcard.hidden = data.hidden
+                flashcard.deck = data.deck
+            }
         }else {
             throw DataManagerError.NoFlashcardWithGivenId
         }
@@ -103,13 +151,20 @@ class DataManager {
     
     func addFlashcard(forDeckWithId deckId:String, question:String,answer:String,tip:Tip?)throws -> String  {
         
-        if (decks.findUniqe(withId: deckId) == nil){
+        let selectedDeck = realm.objects(Deck).filter("_id == '\(deckId)'").first
+        if (selectedDeck == nil){
             throw DataManagerError.NoDeckWithGivenId
         }
         
-        let flashcardId = flashcards.generateNewId()
+        let flashcardId = NSUUID().UUIDString
+        let newFlashcard = Flashcard(id: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
         
-        flashcards.append(Flashcard(id: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip))
+        newFlashcard.deck = selectedDeck
+        
+        try! realm.write {
+            realm.add(newFlashcard)
+        }
+        
         return flashcardId
     }
     
@@ -120,8 +175,12 @@ class DataManager {
     }
     
     func removeFlashcard(withId id:String)throws {
-        if let index = flashcards.indexOfUnique(id){
-            flashcards.removeAtIndex(index)
+        
+        let selectedFlashcard = realm.objects(Flashcard).filter("_id == '\(id)'").first
+        if let flashcardToremove = selectedFlashcard {
+            try! realm.write {
+                realm.delete(flashcardToremove)
+            }
         }else {
             throw DataManagerError.NoFlashcardWithGivenId
         }
@@ -132,20 +191,29 @@ class DataManager {
     }
     
     func hideFlashcard(withId id:String)throws {
-        if let index = flashcards.indexOfUnique(id) {
-                flashcards[index].hidden = true
-            } else {
-                throw DataManagerError.NoFlashcardWithGivenId
+        
+        let selectedFlashcard = realm.objects(Flashcard).filter("_id == '\(id)'").first
+        if let flashcardToUnHide = selectedFlashcard {
+
+            try! realm.write {
+                flashcardToUnHide.hidden = true
             }
+        } else {
+            throw DataManagerError.NoFlashcardWithGivenId
         }
+    }
     
     func unhideFlashcard(withId id:String)throws {
-        if let index = flashcards.indexOfUnique(id) {
-                flashcards[index].hidden = false
-            } else {
-                throw DataManagerError.NoFlashcardWithGivenId
+        
+        let selectedFlashcard = realm.objects(Flashcard).filter("_id == '\(id)'").first
+        if let flashcardToHide = selectedFlashcard {
+            
+            try! realm.write {
+                flashcardToHide.hidden = false
             }
+        } else {
+            throw DataManagerError.NoFlashcardWithGivenId
         }
-    
+    }
     
 }

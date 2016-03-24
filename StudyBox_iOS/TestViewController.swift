@@ -169,7 +169,7 @@ class TestViewController: StudyBoxViewController {
     @IBAction func showTip(sender: AnyObject) {
         var message = ""
         if let currentCard = testLogicSource?.currentCard?.tip {
-            message = currentCard.description
+            message = currentCard
         }else {
             message = "Brak podpowiedzi"
         }
