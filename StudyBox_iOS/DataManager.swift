@@ -30,11 +30,11 @@ class DataManager {
             realm.deleteAll()
         }
         // adding notification, with this decks are going to be loaded again, when database changed
-        _ = realm.addNotificationBlock { notification, realm in
+        /* let token = realm.addNotificationBlock { notification, realm in
             if !self.decks.isEmpty {
                 self.decks.removeAll()
             }
-        }
+        }*/
     }
     
     func decks(sorted:Bool )->[Deck] {
