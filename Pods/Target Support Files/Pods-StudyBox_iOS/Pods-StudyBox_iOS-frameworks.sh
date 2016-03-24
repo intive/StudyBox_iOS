@@ -84,10 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$CONFIGURATION_BUILD_DIR/MMDrawerController/MMDrawerController.framework"
-  install_framework "$CONFIGURATION_BUILD_DIR/Reachability/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/MMDrawerController.framework"
+  install_framework "Pods-StudyBox_iOS/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/Realm.framework"
+  install_framework "Pods-StudyBox_iOS/RealmSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$CONFIGURATION_BUILD_DIR/MMDrawerController/MMDrawerController.framework"
-  install_framework "$CONFIGURATION_BUILD_DIR/Reachability/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/MMDrawerController.framework"
+  install_framework "Pods-StudyBox_iOS/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/Realm.framework"
+  install_framework "Pods-StudyBox_iOS/RealmSwift.framework"
 fi
