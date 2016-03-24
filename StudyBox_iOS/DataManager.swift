@@ -105,13 +105,13 @@ class DataManager {
     }
     
     
-    func flashcard(withId id:String)throws ->Flashcard? {
+    func flashcard(withId id:String)->Flashcard? {
         
         let selectedFlashcard = realm.objects(Flashcard).filter("_id == '\(id)'").first
         if let flashcard = selectedFlashcard{
             return flashcard
         } else {
-            throw DataManagerError.NoFlashcardWithGivenId
+            return nil
         }
     }
     
