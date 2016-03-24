@@ -90,8 +90,6 @@ xcrun xcodebuild \
     -exportPath "$IPA_PATH" \
     -exportFormat ipa
 
-security delete-keychain ios-build.keychain
-
 echo "Uploading IPA"
 
 "$CRASHLYTICS" \
@@ -108,3 +106,5 @@ echo "Uploading dSYM"
     --platform ios \
     -- \
     "$DSYM_PATH"
+
+security delete-keychain ios-build.keychain
