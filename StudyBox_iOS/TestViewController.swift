@@ -14,6 +14,7 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var incorrectButton: UIButton!
     
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var currentQuestionNumber: UILabel!
     
     
     var testLogicSource:Test?
@@ -32,14 +33,14 @@ class TestViewController: StudyBoxViewController {
         let swipeLeftForAnswer = UISwipeGestureRecognizer()
         swipeLeftForAnswer.direction = .Left
         swipeLeftForAnswer.delegate = self
-        swipeLeftForAnswer.addTarget(self, action: "swipedLeft")
+        swipeLeftForAnswer.addTarget(self, action: #selector(TestViewController.swipedLeft))
         questionView.userInteractionEnabled = true
         questionView.addGestureRecognizer(swipeLeftForAnswer)
         
         let swipeUpQuestionLabel = UISwipeGestureRecognizer()
         swipeUpQuestionLabel.direction = .Up
         swipeUpQuestionLabel.delegate = self
-        swipeUpQuestionLabel.addTarget(self, action: "swipedUp")
+        swipeUpQuestionLabel.addTarget(self, action: #selector(TestViewController.swipedUp))
         questionLabel.userInteractionEnabled = true
         questionLabel.addGestureRecognizer(swipeUpQuestionLabel)
         
@@ -48,7 +49,7 @@ class TestViewController: StudyBoxViewController {
          */
         let swipeUpAnswerLabel = UISwipeGestureRecognizer()
         swipeUpAnswerLabel.direction = .Up
-        swipeUpAnswerLabel.addTarget(self, action: "swipedUp")
+        swipeUpAnswerLabel.addTarget(self, action: #selector(TestViewController.swipedUp))
         answerLabel.userInteractionEnabled = true
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
@@ -67,10 +68,12 @@ class TestViewController: StudyBoxViewController {
         questionLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         answerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         scoreLabel.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        currentQuestionNumber.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         
+        currentQuestionNumber.text = "#1"
         
         //score label displays score; onclick moves to Score View Controller
-        let tapScore = UITapGestureRecognizer(target: self, action: Selector("tapScore:"))
+        let tapScore = UITapGestureRecognizer(target: self, action: #selector(TestViewController.tapScore(_:)))
         scoreLabel.userInteractionEnabled = true
         scoreLabel.addGestureRecognizer(tapScore)
         try! testLogicSource?.checkIfPassedDeckIsEmpty()
@@ -194,8 +197,9 @@ class TestViewController: StudyBoxViewController {
     }
     
     func updateAnswerUiForCurrentCard() {
-        if let card = testLogicSource?.currentCard {
+        if let test = testLogicSource, card = test.currentCard {
             answerLabel.text = card.answer
+            currentQuestionNumber.text = "#\(test.index)"
         }
     }
     
@@ -203,7 +207,7 @@ class TestViewController: StudyBoxViewController {
         
         if let testLogic = testLogicSource {
             
-            if let card = correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer() {
+            if let _ = correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer() {
                 answeredQuestionTransition()
             }else {
                 if shouldPerformSegueWithIdentifier("ScoreSegue", sender: self) {
@@ -228,7 +232,7 @@ class TestViewController: StudyBoxViewController {
     
     @IBAction func correctButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime,delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
+            self.correctButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed.0,self.buttonsScaleWhenPressed.1)
             }, completion:nil )
     }
     
@@ -251,7 +255,7 @@ class TestViewController: StudyBoxViewController {
     
     @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime,delay:0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
+            self.incorrectButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed.0,self.buttonsScaleWhenPressed.1)
             }, completion:nil )
     }
     
