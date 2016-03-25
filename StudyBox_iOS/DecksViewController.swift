@@ -10,12 +10,15 @@ import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    // points selected deck
-    static private(set) var selectedDeckForTesting: Deck?
-
+class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     private var decksArray: [Deck]?
     private var searchDecks: [Deck]?
-
+    
+    lazy private var dataManager:DataManager? = {
+        return UIApplication.appDelegate().dataManager
+    }()
+    
     @IBOutlet var decksCollectionView: UICollectionView!
     private var searchBar: UISearchBar?
 
@@ -68,14 +71,15 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
 
         decksCollectionView.backgroundColor = UIColor.whiteColor()
+        
     }
-
+    
     // this function calculate size of decks, by given spacing and number of cells in row
     private func equalSizeAndSpacing(numberOfCellsInRow crNumber: CGFloat, spacing: CGFloat,
-        collectionFlowLayout flow: UICollectionViewFlowLayout) {
-
+        collectionFlowLayout flow: UICollectionViewFlowLayout){
+            
             let screenSize = self.view.bounds.size
-            let deckWidth = screenSize.width / crNumber - (spacing + spacing / crNumber)
+            let deckWidth = screenSize.width/crNumber - (spacing + spacing/crNumber)
             flow.sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing)
             // spacing between decks
             flow.minimumInteritemSpacing = spacing
@@ -113,8 +117,8 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         as! DecksViewCell
 
         cell.layoutIfNeeded()
-
-        if var deckName = source?[indexPath.row].name {
+        
+        if var deckName = decksArray?[indexPath.row].name{
             if deckName.isEmpty {
                 deckName = Utils.DeckViewLayout.DeckWithoutTitle
             }
@@ -131,21 +135,79 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 
         return cell
     }
-
+    
+    
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let decks = searchDecks {
-            DecksViewController.selectedDeckForTesting = decks[indexPath.row]
-        } else if let notNilDecksArray = decksArray {
-            DecksViewController.selectedDeckForTesting = notNilDecksArray[indexPath.row]
-        }
+        
+        if let deck = decksArray?[indexPath.row] {
+            
+            do {
+                
+                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
 
-        if let bar = searchBar {
-            cancelSearchReposition(bar, animated: false)
+					if let bar = searchBar {
+            			cancelSearchReposition(bar, animated: false)
+        			}
+                   
+                    let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
+                    
+                    let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
+                        let alertAmount = UIAlertController(title: "How many flashcards?", message: "Choose amount of flashcards in the test", preferredStyle: .Alert)
+                        
+                        let amountOne = UIAlertAction(title: "1", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(1)))
+                        }
+                        
+                        let amountFive = UIAlertAction(title: "5", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(5)))
+                        }
+                        
+                        let amountTen = UIAlertAction(title: "10", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(10)))
+                        }
+                        
+                        let amountFifteen = UIAlertAction(title: "15", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(15)))
+                        }
+                        
+                        let amountTwenty = UIAlertAction(title: "20", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(20)))
+                        }
+                        
+                        alertAmount.addAction(amountOne)
+                        alertAmount.addAction(amountFive)
+                        alertAmount.addAction(amountTen)
+                        alertAmount.addAction(amountFifteen)
+                        alertAmount.addAction(amountTwenty)
+                        
+                        self.presentViewController(alertAmount, animated: true, completion:nil)
+
+                    }
+                    
+                    let studyButton = UIAlertAction(title: "Learn", style: .Default) { (alert: UIAlertAction!) -> Void in
+                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
+                    }
+                    
+                    alert.addAction(testButton)
+                    alert.addAction(studyButton)
+
+                    presentViewController(alert, animated: true, completion:nil)
+                    
+                }
+            }catch let e {
+                debugPrint(e)
+            }
         }
-        performSegueWithIdentifier("StartTest", sender: self)
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, let testLogic = sender as? Test {
+            testViewController.testLogicSource = testLogic
+        }
+    }
+    
 }
 
 // MARK: UISearchBar implementaton
@@ -285,6 +347,7 @@ extension UILabel {
                 self.font = font
                 break
             }
+            
         }
         // in case, it is better to have the smallest possible font
         self.font = font

@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -84,10 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/MMDrawerController/MMDrawerController.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Reachability/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/MMDrawerController.framework"
+  install_framework "Pods-StudyBox_iOS/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/Realm.framework"
+  install_framework "Pods-StudyBox_iOS/RealmSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/MMDrawerController/MMDrawerController.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Reachability/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/MMDrawerController.framework"
+  install_framework "Pods-StudyBox_iOS/Reachability.framework"
+  install_framework "Pods-StudyBox_iOS/Realm.framework"
+  install_framework "Pods-StudyBox_iOS/RealmSwift.framework"
 fi

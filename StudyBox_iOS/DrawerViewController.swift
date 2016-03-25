@@ -131,13 +131,18 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-        var navigationChild = drawerNavigationControllers[indexPath.row]
+        selectMenuOptionAtIndex(indexPath.row)
+        
+    }
+    
+    func selectMenuOptionAtIndex(index:Int) {
+        var navigationChild = drawerNavigationControllers[index]
         navigationChild.isActive = true
         
         drawerNavigationControllers[currentControllerIndex].isActive = false
         if let controller = navigationChild.viewController {
             // viewController getter is mutating, it's possible that it was instantiated for the first time so the value was changed
-            drawerNavigationControllers[indexPath.row] = navigationChild
+            drawerNavigationControllers[index] = navigationChild
             
             if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController {
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
@@ -150,9 +155,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers[currentControllerIndex].isActive = true
             return
         }
-        currentControllerIndex = indexPath.row
+        currentControllerIndex = index
         tableView.reloadData()
-        
     }
     
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
@@ -191,4 +195,14 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+}
+
+
+extension DrawerViewController {
+    
+    class func sharedSbDrawerViewControllerChooseMenuOption(atIndex index:Int) {
+        if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController, let drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {
+            drawer.selectMenuOptionAtIndex(index)
+        }
+    }
 }
