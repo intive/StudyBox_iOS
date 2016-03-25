@@ -25,30 +25,38 @@ class DataManager {
     init(){
         // usuwanie tylko wtedy gdy jest internet i najpewniej nie w tym miejscu. Na razie ze względu na 
         // DummyData
-        // TODO: relocate deleteAll() and check for internet connection
-        try! realm.write {
-            realm.deleteAll()
-        }
-        // adding notification, with this decks are going to be loaded again, when database changed
-        /* let token = realm.addNotificationBlock { notification, realm in
-            if !self.decks.isEmpty {
-                self.decks.removeAll()
-            }
-        }*/
+        // TODO: relocate removeDecksFromDatabase() and check for internet connection
+        removeDecksFromDatabase()
+        
     }
     
     func decks(sorted:Bool )->[Deck] {
+        
         // load all Deck from database to memory, if not loaded
-        if decks.isEmpty {
-            decks = realm.objects(Deck).toArray()
-        }
+        loadDecksFromDatabase()
 
         if (sorted){
             return decks.sort {
                 $0.name < $1.name
             }
         }
-        return decks.copy();
+        return decks.copy()
+    }
+    
+    // loading decks from Realm. Use for refresh after changing decks in db
+    func loadDecksFromDatabase() {
+        
+        if !decks.isEmpty {
+            decks.removeAll()
+        }
+        decks = realm.objects(Deck).toArray()
+    }
+    
+    // remove all decks from database
+    func removeDecksFromDatabase() {
+        try! realm.write {
+            realm.deleteAll()
+        }
     }
     
     func deck(withId id:String)->Deck? {
