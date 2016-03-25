@@ -21,19 +21,24 @@ class DataManager {
     private var decks = [Deck]()
     // private var flashcards = [Flashcard]()
     private let realm = try! Realm()
+    // dzięki deckDBChanged talie będą wczytywane z bazy tylko w przypadku zmiany tabeli Deck
+    // !!! Zmiana tabeli Flashcard nie jest brana pod uwagę
+    private var deckDBChanged: Bool = true
     
     init(){
+        
         // usuwanie tylko wtedy gdy jest internet i najpewniej nie w tym miejscu. Na razie ze względu na 
         // DummyData
         // TODO: relocate removeDecksFromDatabase() and check for internet connection
         removeDecksFromDatabase()
-        
     }
     
     func decks(sorted:Bool )->[Deck] {
         
-        // load all Deck from database to memory, if not loaded
-        loadDecksFromDatabase()
+        // wczytuje talie jeśli nastąpiła zmiana w tabeli talii w bazie lub puste
+        if deckDBChanged || decks.isEmpty {
+            loadDecksFromDatabase()
+        }
 
         if (sorted){
             return decks.sort {
@@ -43,20 +48,25 @@ class DataManager {
         return decks.copy()
     }
     
-    // loading decks from Realm. Use for refresh after changing decks in db
-    func loadDecksFromDatabase() {
+    // loading decks from Realm. Used for refresh after changing decks in db
+    func loadDecksFromDatabase(forced: Bool = false) {
         
-        if !decks.isEmpty {
+        if !decks.isEmpty || forced{
             decks.removeAll()
         }
+        
         decks = realm.objects(Deck).toArray()
+        // jako że załadowane talie z pamięci zgadzają się z tymi z bazy, to false
+        deckDBChanged = false
     }
     
-    // remove all decks from database
     func removeDecksFromDatabase() {
         try! realm.write {
             realm.deleteAll()
         }
+        
+        deckDBChanged = true
+        
     }
     
     func deck(withId id:String)->Deck? {
@@ -77,6 +87,9 @@ class DataManager {
             try! realm.write {
                 updatingDeck.name = deck.name
             }
+            
+            deckDBChanged = true
+            
         }else {
             DataManagerError.NoDeckWithGivenId
         }
@@ -93,6 +106,8 @@ class DataManager {
             realm.add(newDeck)
         }
         
+        deckDBChanged = true
+        
         return id
     }
 
@@ -106,6 +121,8 @@ class DataManager {
                 realm.delete(toRemove)
                 realm.delete(deck)
             }
+            
+            deckDBChanged = true
             
         }else {
             throw DataManagerError.NoDeckWithGivenId
