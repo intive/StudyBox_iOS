@@ -39,6 +39,7 @@
 		A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */; };
 		AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */; };
 		AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */; };
+		AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */; };
 		CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */; };
 		CEC69B531C946CC100295808 /* TestLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC69B521C946CC100295808 /* TestLogic.swift */; };
 		CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */; };
@@ -96,6 +97,7 @@
 		A5FA90293A312F297BD76B3B /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
 		AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
+		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
 		CEC69B521C946CC100295808 /* TestLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogic.swift; sourceTree = "<group>"; };
 		CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+sbFont.swift"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
 				2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */,
 				AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */,
+				AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
 				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
+				AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */,
 				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
 				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,

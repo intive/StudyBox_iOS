@@ -42,20 +42,24 @@ class DataManager {
         if decks.isEmpty {
             decks = realm.objects(Deck).toArray()
         }
-        
+
         if (sorted){
             return decks.sort {
                 $0.name < $1.name
             }
         }
-        return decks;
+        return decks.copy();
     }
     
     func deck(withId id:String)->Deck? {
         
         let selectedDeck = realm.objects(Deck).filter("_id == '\(id)'").first
+        if let deck = selectedDeck {
+            return deck.copy() as? Deck
+        } else {
+            return nil
+        }
 
-        return selectedDeck
     }
     
     func updateDeck(deck:Deck)throws {
@@ -109,7 +113,7 @@ class DataManager {
         
         let selectedFlashcard = realm.objects(Flashcard).filter("_id == '\(id)'").first
         if let flashcard = selectedFlashcard{
-            return flashcard
+            return flashcard.copy() as? Flashcard
         } else {
             return nil
         }
@@ -117,10 +121,10 @@ class DataManager {
     
     
     func flashcards(forDeckWithId deckId:String) throws ->[Flashcard] {
-        
+
         let selectedDeck = realm.objects(Deck).filter("_id == '\(deckId)'").first
         if let deck = selectedDeck {
-            return deck.flashcards
+            return deck.flashcards.copy()
         }else {
             throw DataManagerError.NoDeckWithGivenId
         }
