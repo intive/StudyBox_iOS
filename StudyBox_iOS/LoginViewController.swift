@@ -16,6 +16,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     @IBOutlet weak var unregisteredUserButton: UIButton!
     @IBOutlet weak var registerUserButton: UIButton!
     
+    var shouldAllowTextFieldEdition = true
     var inputViews = [UITextField]()
     
     override func viewDidLoad() {
@@ -65,8 +66,25 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        var message:String?
         if let text = textField.text where textField == emailTextField {
-            textField.text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            let validation = validateEmail(text)
+            textField.text = validation.adjustedValue
+            if !validation.isValid {
+                message = "Niepoprawny e-mail!"
+            }
+        }else if let text = textField.text where textField == passwordTextField {
+            
+            if !validatePasswordLengthAndSpaces(text) {
+                message = "Niepoprawne hasło!"
+                
+            }
+        }
+        if let alertMessage = message where shouldAllowTextFieldEdition {
+            shouldAllowTextFieldEdition = false
+            presentAlertController(withTitle: "", message: alertMessage, buttonText: "Ok",actionCompletion: {
+                self.shouldAllowTextFieldEdition = true
+            })
         }
     }
     

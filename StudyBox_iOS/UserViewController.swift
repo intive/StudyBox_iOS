@@ -44,4 +44,26 @@ class UserViewController: InputViewController {
         }
         
     }
+    
+    func validateEmail(text:String)->(adjustedValue:String,isValid:Bool) {
+        
+        // * Validation logic inherited from `RegistrationViewController` by Kacper Cz
+        
+        //Trim spaces at the beginning and end of email
+        let adjusted = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        //Trimmed text must contain `@` but mustn't contain whitespace inside
+        if (adjusted.containsString(" ") || !adjusted.containsString("@")) {
+            return (adjusted,false)
+        }
+        return (adjusted,true)
+    }
+    
+    
+    func validatePasswordLengthAndSpaces(text:String)->Bool {
+        if text.characters.count < 8 || text.rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) != nil {
+            return false
+        }
+        return true
+    }
 }

@@ -65,12 +65,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     func checkEmail(textField: UITextField) -> () {
         if let text = textField.text where textField == emailTextField {
             
-            //Trim spaces at the beginning and end of email
-            let trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            textField.text = trimmedText
+            let validation = validateEmail(text)
+            textField.text = validation.adjustedValue
             
-            //Trimmed text must contain `@` but mustn't contain whitespace inside
-            if (trimmedText.containsString(" ") || !trimmedText.containsString("@") == true) {
+            if (!validation.isValid) {
                 showAlert(.emailIncorrect)
             }
         }
