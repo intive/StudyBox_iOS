@@ -9,8 +9,8 @@
 import UIKit
 
 class ScoreViewController: StudyBoxViewController {
-    
-    
+
+    @IBOutlet weak var circularProgressView: UIView!
     @IBOutlet weak var congratulationsBigLabel: UILabel!
     @IBOutlet weak var congratulationsSmallLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -18,10 +18,12 @@ class ScoreViewController: StudyBoxViewController {
     @IBOutlet weak var runTestButton: UIButton!
     
     var testLogicSource:Test?
+    var testScoreFraction:Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        congratulationsBigLabel.font = UIFont.sbFont(size: sbFontSizeSuperLarge, bold: false)
+        congratulationsBigLabel.font = UIFont.sbFont(size: sbFontSizeSuperLarge, bold: true)
         congratulationsSmallLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         
         deckListButton.backgroundColor = UIColor.sb_Raspberry()
@@ -37,22 +39,50 @@ class ScoreViewController: StudyBoxViewController {
         completeData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+        animateProgressView()
+    }
+    
     func completeData() {
         if let testLogic = testLogicSource {
-            
             let cardsResult = testLogic.cardsAnsweredAndPossible()
-            scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-            scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)"
+            
+            self.testScoreFraction = Double(cardsResult.0) / Double(cardsResult.1)
+            let testScorePercentage = Int(testScoreFraction*100)
+            
+            scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
+            scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n\(testScorePercentage) %"
             
             switch testLogic.testType {
             case .Learn:
-                runTestButton.hidden = true
+                runTestButton.enabled = false
             default:
                 break
             }
         }
+    }
+    
+    ///Animating the circular progress view to testPercentage value
+    func animateProgressView() {
+        let progressViewFrame = circularProgressView.bounds
+        let progress = KDCircularProgress(frame: progressViewFrame, startAngle: -90, angle: 0, thickness: 0.4, clockwise: true, glowMode: .NoGlow, color: UIColor.sb_DarkBlue(), roundedCorners: true)
+        progress.center = view.center
+        
+        view.addSubview(progress)
+        
+        //Convert float to degree angle
+        let percentageAngle = Int(self.testScoreFraction*360)
+
+        //Delay the animation by 1 second
+        let triggerTime = (Int64(NSEC_PER_SEC) * 1)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+            progress.animateToAngle(percentageAngle, duration: 1, completion: nil)
+        })
+        
         
     }
+    
     @IBAction func deckListButtonAction(sender: UIButton) {
         // TODO refactor for Drawer menu options
         DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
@@ -75,3 +105,6 @@ class ScoreViewController: StudyBoxViewController {
         }
     }
 }
+
+
+
