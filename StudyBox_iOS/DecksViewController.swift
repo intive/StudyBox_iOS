@@ -110,7 +110,36 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                     let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
                     
                     let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(5)))
+                        let alertAmount = UIAlertController(title: "How many flashcards?", message: "Choose amount of flashcards in the test", preferredStyle: .Alert)
+                        
+                        let amountOne = UIAlertAction(title: "1", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(1)))
+                        }
+                        
+                        let amountFive = UIAlertAction(title: "5", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(5)))
+                        }
+                        
+                        let amountTen = UIAlertAction(title: "10", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(10)))
+                        }
+                        
+                        let amountFifteen = UIAlertAction(title: "15", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(15)))
+                        }
+                        
+                        let amountTwenty = UIAlertAction(title: "20", style: .Default) { (alert: UIAlertAction!) -> Void in
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(20)))
+                        }
+                        
+                        alertAmount.addAction(amountOne)
+                        alertAmount.addAction(amountFive)
+                        alertAmount.addAction(amountTen)
+                        alertAmount.addAction(amountFifteen)
+                        alertAmount.addAction(amountTwenty)
+                        
+                        self.presentViewController(alertAmount, animated: true, completion:nil)
+
                     }
                     
                     let studyButton = UIAlertAction(title: "Learn", style: .Default) { (alert: UIAlertAction!) -> Void in

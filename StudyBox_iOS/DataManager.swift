@@ -131,6 +131,21 @@ class DataManager {
         return try removeFlashcard(withId: data.id)
     }
     
+    func hideFlashcard(withId id:String)throws {
+        if let index = flashcards.indexOfUnique(id) {
+                flashcards[index].hidden = true
+            } else {
+                throw DataManagerError.NoFlashcardWithGivenId
+            }
+        }
+    
+    func unhideFlashcard(withId id:String)throws {
+        if let index = flashcards.indexOfUnique(id) {
+                flashcards[index].hidden = false
+            } else {
+                throw DataManagerError.NoFlashcardWithGivenId
+            }
+        }
     
     
 }

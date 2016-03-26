@@ -14,6 +14,7 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var incorrectButton: UIButton!
     
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var currentQuestionNumber: UILabel!
     
     
     var testLogicSource:Test?
@@ -67,12 +68,16 @@ class TestViewController: StudyBoxViewController {
         questionLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         answerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         scoreLabel.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        currentQuestionNumber.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         
+        currentQuestionNumber.text = "#1"
         
         //score label displays score; onclick moves to Score View Controller
         let tapScore = UITapGestureRecognizer(target: self, action: Selector("tapScore:"))
         scoreLabel.userInteractionEnabled = true
         scoreLabel.addGestureRecognizer(tapScore)
+        try! testLogicSource?.checkIfPassedDeckIsEmpty()
+        try! testLogicSource?.checkIfAllFlashcardsHidden()
         if let _ = testLogicSource {
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
@@ -192,8 +197,9 @@ class TestViewController: StudyBoxViewController {
     }
     
     func updateAnswerUiForCurrentCard() {
-        if let card = testLogicSource?.currentCard {
+        if let test = testLogicSource, card = test.currentCard {
             answerLabel.text = card.answer
+            currentQuestionNumber.text = "#\(test.index)"
         }
     }
     
@@ -201,7 +207,7 @@ class TestViewController: StudyBoxViewController {
         
         if let testLogic = testLogicSource {
             
-            if let card = correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer() {
+            if let _ = correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer() {
                 answeredQuestionTransition()
             }else {
                 if shouldPerformSegueWithIdentifier("ScoreSegue", sender: self) {

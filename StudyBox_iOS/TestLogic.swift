@@ -8,6 +8,9 @@
 
 import Foundation
 
+enum TestLogicError: ErrorType {
+    case PassedDeckIsEmpty , AllFlashcardsHidden
+}
 enum StudyType {
     case Test(uint), Learn
 }
@@ -18,24 +21,48 @@ class Test {
     private(set) var repeatDeck:[Flashcard]?
     private(set) var currentCard : Flashcard?
     private var passedFlashcards = 0
-    private var index = 0
+    var index = 0
     private var numberOfFlashcardsInFullDeck : Int
     let testType : StudyType
-    private let cardsInTest : Int
+    private var cardsInTest : Int
+    //last 2 properties are amde to determinate if passed deck was empty from the beginning or if all flashcards was hidden
+    private let passedDeckWasEmpty:Bool
+    private let allFlashcardsMaybeHidden:Bool
     
     init(deck : [Flashcard], testType : StudyType) {
-        self.deck = deck
-        self.numberOfFlashcardsInFullDeck = deck.count
+        if deck.isEmpty {
+            passedDeckWasEmpty = true
+        } else {
+            passedDeckWasEmpty = false
+        }
+        
+        //Making a temporary deck with only not hidden flashcards
+        var tmpDeck: [Flashcard] = []
+        for flashcard in deck {
+            if ( flashcard.hidden == false) {
+                tmpDeck.append(flashcard)
+            }
+        }
+        
+        self.deck = tmpDeck
+        self.numberOfFlashcardsInFullDeck = self.deck.count
         self.testType = testType
+        
+        //This parameter helps function to determinate if all flashcards in passed deck are hidden.
+        if numberOfFlashcardsInFullDeck == 0 {
+            allFlashcardsMaybeHidden = true
+        } else {
+            allFlashcardsMaybeHidden = false
+        }
         
         switch testType {
         case .Learn:
-            cardsInTest = deck.count
-            repeatDeck = deck
+            cardsInTest = self.deck.count
+            repeatDeck = self.deck
         case .Test(let questionsNumber):
             notPassedInTestDeck = [Flashcard]()
-            if questionsNumber > uint(deck.count) {
-                cardsInTest = deck.count
+            if questionsNumber > uint(self.deck.count) {
+                cardsInTest = self.deck.count
             } else {
                 cardsInTest = Int(questionsNumber)
             }
@@ -85,6 +112,20 @@ class Test {
             currentCard = nil
         }
         return currentCard
+    }
+    
+    //Fuction is checking if all of flashcards in test are hidden
+    func checkIfAllFlashcardsHidden() throws {
+        if passedDeckWasEmpty == false && allFlashcardsMaybeHidden == true {
+            throw TestLogicError.AllFlashcardsHidden
+        }
+    }
+    
+    //Function is checking if passed deck was empty at the beggining
+    func checkIfPassedDeckIsEmpty() throws {
+        if passedDeckWasEmpty {
+            throw TestLogicError.PassedDeckIsEmpty
+        }
     }
     
     ///Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
