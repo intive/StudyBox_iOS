@@ -9,8 +9,6 @@
 import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
-class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     private var decksArray: [Deck]?
     private var searchDecks: [Deck]?
@@ -20,6 +18,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     }()
     
     @IBOutlet var decksCollectionView: UICollectionView!
+    
     private var searchBar: UISearchBar?
 
     var isSearchBarVisible = false
@@ -27,11 +26,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     lazy private var statusBarHeight: CGFloat = {
         return UIApplication.sharedApplication().statusBarFrame.height
     }()
-
+    
     lazy private var navbarHeight: CGFloat = {
         return self.navigationController?.navigationBar.frame.height ?? 0
     }()
-
+    
     /**
      * CollectionView content offset is determined by status bar and navigation bar height
      */
@@ -48,23 +47,31 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     // TODO: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        DecksViewController.selectedDeckForTesting = nil
-        let dataManager = DataManager.managerWithDummyData()
-        decksArray = dataManager.decks(true)
+        
+        if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
+            drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
+            
+        }
+        decksArray = dataManager?.decks(true)
         searchBar?.delegate = self
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         searchBar?.delegate = nil
+        if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
+            drawer.removeObserver(self, forKeyPath: "openSide")
+            
+        }
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
+        
         decksCollectionView.delegate = self
         decksCollectionView.dataSource = self
-
         let layout = decksCollectionView.collectionViewLayout
         let flow = layout as! UICollectionViewFlowLayout
         let spacing = Utils.DeckViewLayout.DecksSpacing
@@ -72,6 +79,19 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 
         decksCollectionView.backgroundColor = UIColor.whiteColor()
         
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+            
+            if newSide != 0 {
+                hideSearchBar(navbarHeight)
+
+            }else {
+                hideSearchBar(-topItemOffset)
+            }
+
+        }
     }
     
     // this function calculate size of decks, by given spacing and number of cells in row
@@ -118,7 +138,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 
         cell.layoutIfNeeded()
         
-        if var deckName = decksArray?[indexPath.row].name{
+        if var deckName = source?[indexPath.row].name {
             if deckName.isEmpty {
                 deckName = Utils.DeckViewLayout.DeckWithoutTitle
             }
@@ -140,14 +160,15 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        if let deck = decksArray?[indexPath.row] {
+        let source = searchDecks ?? decksArray
+        if let deck = source?[indexPath.row] {
             
             do {
                 
                 if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
 
 					if let bar = searchBar {
-            			cancelSearchReposition(bar, animated: false)
+                        hideSearchBar(-topItemOffset)
         			}
                    
                     let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
@@ -226,62 +247,63 @@ extension DecksViewController: UISearchBarDelegate {
     }
    
     func cancelSearchReposition(searchBar: UISearchBar, animated: Bool) {
-        searchDecks = nil
-        decksCollectionView.reloadData()
-
         searchBar.text = nil
-        searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: animated)
 
-        if animated {
-            UIView.beginAnimations("cancel", context: nil)
-            UIView.setAnimationDelay(0)
-            UIView.setAnimationDuration(accurateAnimationDuration)
-            UIView.setAnimationCurve(.EaseOut)
-        }
-        
         UIView.animateWithDuration(animated ? accurateAnimationDuration : 0,
             animations: {
-                if let navigationBar = self.navigationController?.navigationBar {
-                    
-                    let top = self.topItemOffset - self.searchBarHeight
-                    
-                    self.decksCollectionView.contentInset = UIEdgeInsets(top: -top, left: 0, bottom: 0, right: 0)
-                    self.decksCollectionView.contentOffset.y = top
-                    
+                if let navigationBar = self.navigationController?.navigationBar where navigationBar.frame.origin.y < 0 {
                     navigationBar.frame.origin.y = self.statusBarHeight
-                    
-                    searchBar.frame = CGRect(x: 0, y: -self.topItemOffset, width: searchBar.frame.width, height: self.searchBarHeight)
                 }
-            }, completion: nil
+                
+                let top = self.topItemOffset - self.searchBarHeight
+                
+                self.decksCollectionView.contentInset = UIEdgeInsets(top: -top, left: 0, bottom: 0, right: 0)
+                self.decksCollectionView.contentOffset.y = top
+                searchBar.frame = CGRect(x: 0, y: self.navbarHeight + self.statusBarHeight, width: searchBar.frame.width, height: self.searchBarHeight)
+            }, completion: { _ in
+                if let rootVC = UIApplication.sharedRootViewController as? SBDrawerController {
+                    rootVC.openDrawerGestureModeMask = .Custom
+                }
+                self.decksCollectionView.reloadData()
+            }
         )
     }
 
     func startSearchReposition(searchBar: UISearchBar, animated: Bool) {
 
-        searchBar.setShowsCancelButton(true, animated: true)
+        searchDecks = nil
+        
+        if let rootVC = UIApplication.sharedRootViewController as? SBDrawerController {
+            rootVC.openDrawerGestureModeMask = .None
+        }
+        
+        searchBar.text = nil
+        searchBar.setShowsCancelButton(true, animated: animated)
         
         UIView.animateWithDuration(animated ? accurateAnimationDuration : 0,
             animations: {
                 if let navigationBar = self.navigationController?.navigationBar {
                     
-                    navigationBar.frame.origin.y = -navigationBar.frame.height
+                    self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + self.marginValue * 2, left: 0, bottom: 0, right: 0)
+
+                    navigationBar.frame.origin.y = -self.navbarHeight
                     
                     searchBar.frame.origin.y = 0
-                    searchBar.frame.size.height = self.searchBarHeight + self.statusBarHeight
+                    searchBar.frame.size.height = self.statusBarHeight + self.searchBarHeight + self.marginValue
+                    searchBar.layoutIfNeeded()
+                    self.view.layoutIfNeeded()
                     
-                    self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + self.marginValue, left: 0, bottom: 0, right: 0)
                 }
             },
             completion: nil
         )
-
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 0 {
             searchDecks = decksArray?.filter {
-                return $0.name.containsString(searchText)
+                return $0.name.containsString(searchText) || ( $0.name == "" && Utils.DeckViewLayout.DeckWithoutTitle.containsString(searchText) )
             }.sort { a, b in
                 return a.name < b.name
             }
@@ -293,39 +315,51 @@ extension DecksViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-
-        cancelSearchReposition(searchBar, animated: true)
+        searchBar.resignFirstResponder()
     }
 
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-
         startSearchReposition(searchBar, animated: true)
     }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchDecks = nil
+        cancelSearchReposition(searchBar, animated: true)
+    }
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y < topItemOffset) {
-
-            if (!isSearchBarVisible) {
-                isSearchBarVisible = true
-                decksCollectionView.contentInset = UIEdgeInsets(top: searchBarHeight - topItemOffset, left: 0, bottom: 0, right: 0)
-
-                UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
-                    animations: {
-                        self.searchBar?.frame.origin.y = -self.topItemOffset
-                    },
-                    completion: nil
-                )
-            }
-        } else {
-            isSearchBarVisible = false
-            decksCollectionView.contentInset = UIEdgeInsets(top: -topItemOffset, left: 0, bottom: 0, right: 0)
-
+    func showSearchBar() {
+        if (!isSearchBarVisible) {
+            isSearchBarVisible = true
+            decksCollectionView.contentInset = UIEdgeInsets(top: searchBarHeight - topItemOffset, left: 0, bottom: 0, right: 0)
+            
             UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
                 animations: {
-                    self.searchBar?.frame.origin.y = 0
+                    self.searchBar?.frame.origin.y = -self.topItemOffset
                 },
                 completion: nil
             )
+        }
+    }
+    
+    func hideSearchBar(top:CGFloat) {
+        isSearchBarVisible = false
+        self.searchBar?.resignFirstResponder()
+
+        UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
+            animations: {
+                self.searchBar?.frame.origin.y = 0
+                self.decksCollectionView.contentInset = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
+
+            },
+            completion: nil
+        )
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y < topItemOffset) {
+            showSearchBar()
+            
+        }else {
+            hideSearchBar(-topItemOffset)
         }
     }
 }
