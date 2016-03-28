@@ -19,7 +19,7 @@ class TestViewController: StudyBoxViewController {
     
     var testLogicSource:Test?
     
-    lazy private var dataManager:DataManager? = {
+    private var dataManager:DataManager? = {
         return UIApplication.appDelegate().dataManager
     }()
     
