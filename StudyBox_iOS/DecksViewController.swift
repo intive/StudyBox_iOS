@@ -302,8 +302,10 @@ extension DecksViewController: UISearchBarDelegate {
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 0 {
+            let searchLowercase = searchText.lowercaseString
+            let deckWithoutTitleLowercase = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
             searchDecks = decksArray?.filter {
-                return $0.name.containsString(searchText) || ( $0.name == "" && Utils.DeckViewLayout.DeckWithoutTitle.containsString(searchText) )
+                return $0.name.lowercaseString.containsString(searchLowercase) || ( $0.name == "" && deckWithoutTitleLowercase.containsString(searchLowercase) )
             }.sort { a, b in
                 return a.name < b.name
             }
@@ -342,17 +344,21 @@ extension DecksViewController: UISearchBarDelegate {
     }
     
     func hideSearchBar(top:CGFloat) {
-        isSearchBarVisible = false
-        self.searchBar?.resignFirstResponder()
+        
+        if isSearchBarVisible {
+        
+            isSearchBarVisible = false
+            self.searchBar?.resignFirstResponder()
 
-        UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
-            animations: {
-                self.searchBar?.frame.origin.y = 0
-                self.decksCollectionView.contentInset = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
+            UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
+                animations: {
+                    self.searchBar?.frame.origin.y = 0
+                    self.decksCollectionView.contentInset = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
 
-            },
-            completion: nil
-        )
+                },
+                completion: nil
+            )
+        }
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y < topItemOffset) {
