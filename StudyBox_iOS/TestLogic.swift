@@ -21,7 +21,7 @@ class Test {
     private(set) var repeatDeck:[Flashcard]?
     private(set) var currentCard : Flashcard?
     private var passedFlashcards = 0
-    private var index = 0
+    var index = 0
     private var numberOfFlashcardsInFullDeck : Int
     let testType : StudyType
     private var cardsInTest : Int
