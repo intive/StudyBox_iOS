@@ -19,6 +19,10 @@ class TestViewController: StudyBoxViewController {
     
     var testLogicSource:Test?
     
+    lazy private var dataManager:DataManager? = {
+        return UIApplication.appDelegate().dataManager
+    }()
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //answerView is set outside of screen to appear later at swipe
@@ -53,6 +57,11 @@ class TestViewController: StudyBoxViewController {
         answerLabel.userInteractionEnabled = true
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
+        //Set the navigation bar title to current deck name
+        if let test = testLogicSource, deckID = test.currentCard?.deckId, manager = dataManager {
+            self.title = manager.deck(withId: deckID)?.name
+        }
+
         tipButton.backgroundColor = UIColor.sb_Grey()
         correctButton.backgroundColor = UIColor.sb_Grey()
         incorrectButton.backgroundColor = UIColor.sb_Grey()
