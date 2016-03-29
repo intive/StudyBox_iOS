@@ -227,7 +227,7 @@ public class KDCircularProgress: UIView {
         setColors(UIColor.whiteColor(), UIColor.redColor())
     }
     
-    private func refreshValues() {
+    func refreshValues() {
         progressLayer.angle = angle
         progressLayer.startAngle = UtilityFunctions.Mod(startAngle, range: 360, minMax: (0,360))
         progressLayer.clockwise = clockwise
