@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol UniquelyIdentifiable {
     var id:String {get }
@@ -26,51 +27,69 @@ enum Tip:CustomStringConvertible,Equatable  {
     
 }
 
-struct Flashcard:Equatable,UniquelyIdentifiable {
-    private var _id:String
+class Flashcard: Object, Equatable, UniquelyIdentifiable {
+    dynamic private var _id:String = NSUUID().UUIDString
     var id:String  {
         get {
             return self._id
         }
     }
     
-    private var _deckId:String
+    dynamic private var _deckId:String = ""
     var deckId:String {
         get {
             return self._deckId;
         }
     }
     
-    var question:String
-    var answer:String
-    var tip:Tip?
-    var hidden:Bool
+    dynamic var deck: Deck?
+    dynamic var question:String = ""
+    dynamic var answer:String = ""
+    dynamic var tip = Tip.Text(text: "").description
+    var tipEnum:Tip? {
+        get {
+            return Tip.Text(text: tip)
+        }
+        set {
+            if let value = newValue {
+                tip = value.description
+            }
+        }
+    }
+    dynamic var hidden:Bool = false
     
-    init(id:String,deckId:String,question:String,answer:String,tip:Tip?){
+    convenience init(id:String,deckId:String,question:String,answer:String,tip:Tip?){
+        self.init()
         _id = id
         self._deckId = deckId
         self.question = question
         self.answer = answer
-        self.tip = tip
+        self.tipEnum = tip
         self.hidden = false
     }
-    
+ 
 }
 
-struct Deck:Equatable,UniquelyIdentifiable {
+class Deck: Object, Equatable, UniquelyIdentifiable {
     
-    private var _id:String
+    dynamic private var _id:String = NSUUID().UUIDString
     var id:String {
         get {
             return self._id;
         }
     }
-    var name:String
+    dynamic var name:String = ""
+
+    var flashcards: [Flashcard] {
+        return linkingObjects(Flashcard.self, forProperty: "deck")
+    }
     
-    init(id:String,name:String){
+    convenience init(id:String, name:String){
+        self.init()
         self._id = id
         self.name = name
     }
+    
     
 }
 
