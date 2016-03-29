@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
     
     private var decksArray: [Deck]?
     private var searchDecks: [Deck]?
@@ -22,6 +22,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     private var searchBar: UISearchBar?
 
     var isSearchBarVisible = false
+    var isSearching = false
 
     lazy private var statusBarHeight: CGFloat = {
         return UIApplication.sharedApplication().statusBarFrame.height
@@ -78,6 +79,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
 
         decksCollectionView.backgroundColor = UIColor.whiteColor()
+        
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("hideKeyboard"))
+        swipeGestureRecognizer.direction = [.Down,.Up]
+        decksCollectionView.addGestureRecognizer(swipeGestureRecognizer)
+        swipeGestureRecognizer.delegate = self
         
     }
     
@@ -168,7 +174,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                 if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
 
 					if let bar = searchBar {
+                        searchDecks = nil
                         hideSearchBar(-topItemOffset)
+                        if let bar = self.searchBar {
+                            self.cancelSearchReposition(bar, animated: true)
+                        }
         			}
                    
                     let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
@@ -247,57 +257,69 @@ extension DecksViewController: UISearchBarDelegate {
     }
    
     func cancelSearchReposition(searchBar: UISearchBar, animated: Bool) {
-        searchBar.text = nil
-        searchBar.setShowsCancelButton(false, animated: animated)
-
-        UIView.animateWithDuration(animated ? accurateAnimationDuration : 0,
-            animations: {
-                if let navigationBar = self.navigationController?.navigationBar where navigationBar.frame.origin.y < 0 {
-                    navigationBar.frame.origin.y = self.statusBarHeight
+        if (isSearching) {
+            searchBar.text = nil
+            searchBar.setShowsCancelButton(false, animated: animated)
+            
+            UIView.animateWithDuration(animated ? accurateAnimationDuration : 0,
+                animations: {
+                    if let navigationBar = self.navigationController?.navigationBar where navigationBar.frame.origin.y < 0 {
+                        navigationBar.frame.origin.y = self.statusBarHeight
+                    }
+                    
+                    let top = self.topItemOffset - self.searchBarHeight
+                    
+                    self.decksCollectionView.contentInset = UIEdgeInsets(top: -top, left: 0, bottom: 0, right: 0)
+                    self.decksCollectionView.contentOffset.y = top
+                    searchBar.frame = CGRect(x: 0, y: self.navbarHeight + self.statusBarHeight, width: searchBar.frame.width, height: self.searchBarHeight)
+                }, completion: { _ in
+                    if let rootVC = UIApplication.sharedRootViewController as? SBDrawerController {
+                        rootVC.openDrawerGestureModeMask = .Custom
+                    }
+                    self.searchDecks = nil
+                    self.decksCollectionView.reloadData()
+                    self.isSearching = false
                 }
-                
-                let top = self.topItemOffset - self.searchBarHeight
-                
-                self.decksCollectionView.contentInset = UIEdgeInsets(top: -top, left: 0, bottom: 0, right: 0)
-                self.decksCollectionView.contentOffset.y = top
-                searchBar.frame = CGRect(x: 0, y: self.navbarHeight + self.statusBarHeight, width: searchBar.frame.width, height: self.searchBarHeight)
-            }, completion: { _ in
-                if let rootVC = UIApplication.sharedRootViewController as? SBDrawerController {
-                    rootVC.openDrawerGestureModeMask = .Custom
-                }
-                self.decksCollectionView.reloadData()
-            }
-        )
+            )
+        }
+        
     }
 
     func startSearchReposition(searchBar: UISearchBar, animated: Bool) {
 
-        searchDecks = nil
-        
-        if let rootVC = UIApplication.sharedRootViewController as? SBDrawerController {
-            rootVC.openDrawerGestureModeMask = .None
-        }
-        
-        searchBar.text = nil
-        searchBar.setShowsCancelButton(true, animated: animated)
-        
-        UIView.animateWithDuration(animated ? accurateAnimationDuration : 0,
-            animations: {
-                if let navigationBar = self.navigationController?.navigationBar {
-                    
-                    self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + self.marginValue * 2, left: 0, bottom: 0, right: 0)
-
-                    navigationBar.frame.origin.y = -self.navbarHeight
-                    
-                    searchBar.frame.origin.y = 0
-                    searchBar.frame.size.height = self.statusBarHeight + self.searchBarHeight + self.marginValue
-                    searchBar.layoutIfNeeded()
-                    self.view.layoutIfNeeded()
+        if (!isSearching) {
+            searchDecks = nil
+            
+            if let rootVC = UIApplication.sharedRootViewController as? SBDrawerController {
+                rootVC.openDrawerGestureModeMask = .None
+            }
+            
+            searchBar.text = nil
+            searchBar.setShowsCancelButton(true, animated: animated)
+            
+            UIView.animateWithDuration(animated ? accurateAnimationDuration : 0,
+                animations: {
+                    if let navigationBar = self.navigationController?.navigationBar {
+                        
+                        self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + self.marginValue * 2, left: 0, bottom: 0, right: 0)
+                        
+                        navigationBar.frame.origin.y = -self.navbarHeight
+                        
+                        searchBar.frame.origin.y = 0
+                        searchBar.frame.size.height = self.statusBarHeight + self.searchBarHeight + self.marginValue
+                        searchBar.layoutIfNeeded()
+                        self.view.layoutIfNeeded()
+                        
+                    }
+                },
+                completion: { _ in
+                    self.isSearching = true
                     
                 }
-            },
-            completion: nil
-        )
+            )
+            
+        }
+        
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -317,18 +339,14 @@ extension DecksViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        hideKeyboard()
+        cancelSearchReposition(searchBar, animated: true)
     }
 
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         startSearchReposition(searchBar, animated: true)
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchDecks = nil
-        cancelSearchReposition(searchBar, animated: true)
-    }
-
     func showSearchBar() {
         if (!isSearchBarVisible) {
             isSearchBarVisible = true
@@ -343,12 +361,21 @@ extension DecksViewController: UISearchBarDelegate {
         }
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        hideKeyboard()
+    }
+    
+    func hideKeyboard() {
+        searchBar?.resignFirstResponder()
+    }
+    
     func hideSearchBar(top:CGFloat) {
         
         if isSearchBarVisible {
         
             isSearchBarVisible = false
-            self.searchBar?.resignFirstResponder()
+            hideKeyboard()
+            
 
             UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
                 animations: {
@@ -361,12 +388,20 @@ extension DecksViewController: UISearchBarDelegate {
         }
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y < topItemOffset) {
-            showSearchBar()
-            
-        }else {
-            hideSearchBar(-topItemOffset)
+        
+        if (!isSearching) {
+            if (scrollView.contentOffset.y < topItemOffset) {
+                showSearchBar()
+                
+            }else {
+                hideSearchBar(-topItemOffset)
+            }
         }
+        
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true 
     }
 }
 
