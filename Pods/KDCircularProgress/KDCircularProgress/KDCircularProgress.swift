@@ -37,28 +37,6 @@ public class KDCircularProgress: UIView {
             }
         }
         
-        static func InverseLerp(value: CGFloat, minMax: (CGFloat, CGFloat)) -> CGFloat {
-            return (value - minMax.0) / (minMax.1 - minMax.0)
-        }
-        
-        static func Lerp(value: CGFloat, minMax: (CGFloat, CGFloat)) -> CGFloat {
-            return (minMax.1 - minMax.0) * value + minMax.0
-        }
-        
-        static func ColorLerp(value: CGFloat, minMax: (UIColor, UIColor)) -> UIColor {
-            let clampedValue = Clamp(value, minMax: (0, 1))
-            
-            let zero: CGFloat = 0
-            
-            var (r0, g0, b0, a0) = (zero, zero, zero, zero)
-            minMax.0.getRed(&r0, green: &g0, blue: &b0, alpha: &a0)
-            
-            var (r1, g1, b1, a1) = (zero, zero, zero, zero)
-            minMax.1.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
-            
-            return UIColor(red: Lerp(clampedValue, minMax: (r0, r1)), green: Lerp(clampedValue, minMax: (g0, g1)), blue: Lerp(clampedValue, minMax: (b0, b1)), alpha: Lerp(clampedValue, minMax: (a0, a1)))
-        }
-        
         static func Mod(value: Int, range: Int, minMax: (Int, Int)) -> Int {
             let (min, max) = minMax
             assert(abs(range) <= abs(max - min), "range should be <= than the interval")
@@ -110,12 +88,6 @@ public class KDCircularProgress: UIView {
     @IBInspectable public var roundedCorners: Bool = true {
         didSet {
             progressLayer.roundedCorners = roundedCorners
-        }
-    }
-    
-    @IBInspectable public var lerpColorMode: Bool = false {
-        didSet {
-            progressLayer.lerpColorMode = lerpColorMode
         }
     }
     
@@ -227,12 +199,11 @@ public class KDCircularProgress: UIView {
         setColors(UIColor.whiteColor(), UIColor.redColor())
     }
     
-    func refreshValues() {
+    public func refreshValues() {
         progressLayer.angle = angle
         progressLayer.startAngle = UtilityFunctions.Mod(startAngle, range: 360, minMax: (0,360))
         progressLayer.clockwise = clockwise
         progressLayer.roundedCorners = roundedCorners
-        progressLayer.lerpColorMode = lerpColorMode
         progressLayer.gradientRotateSpeed = gradientRotateSpeed
         progressLayer.glowAmount = UtilityFunctions.Clamp(glowAmount, minMax: (0, 1))
         progressLayer.glowMode = glowMode
@@ -348,7 +319,6 @@ public class KDCircularProgress: UIView {
             }
         }
         var roundedCorners: Bool!
-        var lerpColorMode: Bool!
         var gradientRotateSpeed: CGFloat! {
             didSet {
                 invalidateGradientCache()
@@ -396,7 +366,6 @@ public class KDCircularProgress: UIView {
             startAngle = progressLayer.startAngle
             clockwise = progressLayer.clockwise
             roundedCorners = progressLayer.roundedCorners
-            lerpColorMode = progressLayer.lerpColorMode
             gradientRotateSpeed = progressLayer.gradientRotateSpeed
             glowAmount = progressLayer.glowAmount
             glowMode = progressLayer.glowMode
@@ -452,7 +421,7 @@ public class KDCircularProgress: UIView {
             CGContextClipToMask(ctx, bounds, drawMask)
             
             //Gradient - Fill
-            if !lerpColorMode && colorsArray.count > 1 {
+            if colorsArray.count > 1 {
                 var componentsArray: [CGFloat] = []
                 let rgbColorsArray: [UIColor] = colorsArray.map {c in // Make sure every color in colors array is in RGB color space
                     if CGColorGetNumberOfComponents(c.CGColor) == 2 {
@@ -470,30 +439,11 @@ public class KDCircularProgress: UIView {
                 
                 drawGradientWithContext(ctx, componentsArray: componentsArray)
             } else {
-                
-                var color: UIColor! = nil
-                if colorsArray.count == 0 {
-                    color = UIColor.whiteColor()
-                } else if colorsArray.count == 1 {
-                    color = colorsArray[0]
+                if colorsArray.count == 1 {
+                    fillRectWithContext(ctx, color: colorsArray[0])
                 } else {
-                    
-                    // lerpColorMode is true
-                    
-                    let t = CGFloat(reducedAngle) / 360
-                    let steps = colorsArray.count - 1;
-                    let step = 1 / CGFloat(steps);
-                    for i in 1...steps {
-                        let fi = CGFloat(i)
-                        if (t <= fi * step || i == steps) {
-                            let colorT = UtilityFunctions.InverseLerp(t, minMax: ((fi - 1) * step, fi * step))
-                            color = UtilityFunctions.ColorLerp(colorT, minMax: (colorsArray[i - 1], colorsArray[i]));
-                            break;
-                        }
-                    }
+                    fillRectWithContext(ctx, color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
                 }
-                
-                fillRectWithContext(ctx, color: color)
             }
             CGContextRestoreGState(ctx)
             UIGraphicsPopContext()
