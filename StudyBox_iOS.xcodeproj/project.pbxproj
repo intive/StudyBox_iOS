@@ -30,6 +30,8 @@
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFicheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFicheViewController.swift */; };
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
+		72B4C51B1CAA7D8E00DA9D00 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B4C51A1CAA7D8E00DA9D00 /* KDCircularProgress.swift */; };
+		72B4C51D1CAA7DB600DA9D00 /* KDCircularProgress+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B4C51C1CAA7DB600DA9D00 /* KDCircularProgress+init.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
 		A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC31C81E76900AFD04E /* Main.storyboard */; };
@@ -80,6 +82,8 @@
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFicheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFicheViewController.swift; sourceTree = "<group>"; };
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		72B4C51A1CAA7D8E00DA9D00 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KDCircularProgress.swift; path = ../Pods/KDCircularProgress/KDCircularProgress/KDCircularProgress.swift; sourceTree = "<group>"; };
+		72B4C51C1CAA7DB600DA9D00 /* KDCircularProgress+init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KDCircularProgress+init.swift"; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC06317D35E2C9044A462B5 /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
 				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
 				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
+				72B4C51A1CAA7D8E00DA9D00 /* KDCircularProgress.swift */,
+				72B4C51C1CAA7DB600DA9D00 /* KDCircularProgress+init.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -477,6 +483,8 @@
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
+				72B4C51D1CAA7DB600DA9D00 /* KDCircularProgress+init.swift in Sources */,
+				72B4C51B1CAA7D8E00DA9D00 /* KDCircularProgress.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
