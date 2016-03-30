@@ -52,7 +52,7 @@ extension DataManager {
                 }
                 
                 try! cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
-                countToHide++
+                countToHide += 1
                 
                 //Hides every 3th generated flashcard
                 if ( countToHide % 3 == 0 ) {

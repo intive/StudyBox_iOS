@@ -80,7 +80,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 
         decksCollectionView.backgroundColor = UIColor.whiteColor()
         
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("hideKeyboard"))
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(DecksViewController.hideKeyboard))
         swipeGestureRecognizer.direction = [.Down,.Up]
         decksCollectionView.addGestureRecognizer(swipeGestureRecognizer)
         swipeGestureRecognizer.delegate = self
@@ -176,9 +176,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 					if let bar = searchBar {
                         searchDecks = nil
                         hideSearchBar(-topItemOffset)
-                        if let bar = self.searchBar {
-                            self.cancelSearchReposition(bar, animated: true)
-                        }
+                        self.cancelSearchReposition(bar, animated: true)
         			}
                    
                     let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
@@ -226,7 +224,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                     presentViewController(alert, animated: true, completion:nil)
                     
                 }
-            }catch let e {
+            } catch let e {
                 debugPrint(e)
             }
         }
@@ -407,12 +405,11 @@ extension DecksViewController: UISearchBarDelegate {
 
 // this extension dynamically change the size of the fonts, so text can fit
 extension UILabel {
-    func adjustFontSizeToHeight(var font: UIFont, max: CGFloat, min: CGFloat)
+    func adjustFontSizeToHeight(font: UIFont, max:CGFloat, min:CGFloat)
     {
+        var font = font;
         // Initial size is max and the condition the min.
-        for var size = max ; size >= min ; size -= 0.1
-        {
-
+        for size in max.stride(through: min, by: -0.1) {
             font = font.fontWithSize(size)
             let attrString = NSAttributedString(string: self.text!, attributes: [NSFontAttributeName: font])
             let rectSize = attrString.boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat.max), options: .UsesLineFragmentOrigin, context: nil)
@@ -422,7 +419,6 @@ extension UILabel {
                 self.font = font
                 break
             }
-            
         }
         // in case, it is better to have the smallest possible font
         self.font = font
