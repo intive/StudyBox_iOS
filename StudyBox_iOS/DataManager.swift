@@ -8,6 +8,8 @@
 
 import Foundation
 import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 enum DataManagerError:ErrorType {
     case NoDeckWithGivenId, NoFlashcardWithGivenId
@@ -31,6 +33,40 @@ class DataManager {
         // DummyData
         // TODO: relocate removeDecksFromDatabase() and check for internet connection
         removeDecksFromDatabase()
+    }
+    
+    func getDecksFromServer(){
+        Alamofire.request(.GET, "https://private-anon-595007b68-studybox.apiary-mock.com/decks")
+            .responseJSON { response in
+            
+                switch response.result {
+                case .Success:
+                    if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        for (_, subJson) in json {
+                            
+                            let newDeck = Deck(id: subJson["id"].stringValue, name: subJson["name"].stringValue)
+                            
+                            let selectedDeck = self.realm.objects(Deck).filter("_id == '\(newDeck.id)'").first
+                            if let updatingDeck = selectedDeck{
+                                try! self.realm.write {
+                                    updatingDeck.name = newDeck.name
+                                }
+                                
+                            }else {
+                                try! self.realm.write {
+                                    self.realm.add(newDeck)
+                                }
+                            }
+                        }
+                        self.deckDBChanged = true
+                    }
+                case .Failure(let error):
+                   print("Request failed with error: \(error)")
+                    
+                }
+        }
     }
     
     func decks(sorted:Bool )->[Deck] {
