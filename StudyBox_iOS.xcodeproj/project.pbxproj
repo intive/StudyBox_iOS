@@ -1,712 +1,1853 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>08693245C02D2C63F02EEEC5</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods_StudyBox_iOSTests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>1CAF5499FA51A2184C8B2422</key>
+		<dict>
+			<key>fileRef</key>
+			<string>08693245C02D2C63F02EEEC5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>239883ED1C907D1300B87667</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>releaseConfig="Release"
 
-/* Begin PBXBuildFile section */
-		1CAF5499FA51A2184C8B2422 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08693245C02D2C63F02EEEC5 /* Pods_StudyBox_iOSTests.framework */; };
-		2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */; };
-		2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */; };
-		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
-		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
-		2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843681C88D03D006E5E21 /* DataManager.swift */; };
-		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
-		2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */; };
-		2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */; };
-		2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */; };
-		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
-		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
-		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
-		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
-		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
-		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
-		6EF92CEC8F1A94A91BA6EADD /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */; };
-		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
-		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
-		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
-		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
-		723849401C88851A009605EE /* EditFicheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFicheViewController.swift */; };
-		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
-		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
-		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
-		A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC31C81E76900AFD04E /* Main.storyboard */; };
-		A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */; };
-		A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC91C81E76900AFD04E /* Assets.xcassets */; };
-		A1341DCD1C81E76900AFD04E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */; };
-		A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */; };
-		AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */; };
-		AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */; };
-		AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */; };
-		CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */; };
-		CEC69B531C946CC100295808 /* TestLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC69B521C946CC100295808 /* TestLogic.swift */; };
-		CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */; };
-		CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */; };
-		CEE9F69A1C8AE1F800961ABA /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A1341DD41C81E76900AFD04E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A1341DB41C81E76800AFD04E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A1341DBB1C81E76900AFD04E;
-			remoteInfo = StudyBox_iOS;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		08693245C02D2C63F02EEEC5 /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
-		2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		2D2843681C88D03D006E5E21 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
-		2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+appDelegate.swift"; sourceTree = "<group>"; };
-		2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
-		2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBDrawerController.swift; sourceTree = "<group>"; };
-		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
-		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
-		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
-		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
-		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
-		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
-		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
-		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
-		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		7238493F1C88851A009605EE /* EditFicheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFicheViewController.swift; sourceTree = "<group>"; };
-		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
-		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BC06317D35E2C9044A462B5 /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A1341DC41C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A1341DC71C81E76900AFD04E /* StudyBox_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyBox_iOS.xcdatamodel; sourceTree = "<group>"; };
-		A1341DC91C81E76900AFD04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A1341DCC1C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A1341DCE1C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyBox_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBox_iOSTests.swift; sourceTree = "<group>"; };
-		A1341DD91C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
-		AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
-		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
-		C7B6436C8ADEC918DBC3BCA6 /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
-		CEC69B521C946CC100295808 /* TestLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogic.swift; sourceTree = "<group>"; };
-		CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+sbFont.swift"; sourceTree = "<group>"; };
-		CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
-		CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
-		D52C856090977DC3425F3CA6 /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		EAE865E60264C049CA41FB15 /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		A1341DB91C81E76900AFD04E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */,
-				6EF92CEC8F1A94A91BA6EADD /* Pods_StudyBox_iOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A1341DD01C81E76900AFD04E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1CAF5499FA51A2184C8B2422 /* Pods_StudyBox_iOSTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		2D2843651C88CEDE006E5E21 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2D2843661C88CEEC006E5E21 /* DataModel.swift */,
-				2D2843681C88D03D006E5E21 /* DataManager.swift */,
-				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
-				2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */,
-				AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */,
-				AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		2DA0E6981C949AE200DAB6B5 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				2D07C02D1C82FC5E00BF0107 /* Utils.swift */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
-		38B1F5B29A6C985E3C63E020 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */,
-				866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */,
-				08693245C02D2C63F02EEEC5 /* Pods_StudyBox_iOSTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		841F26CEBA6537971FFC5B8C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8BC06317D35E2C9044A462B5 /* Pods-StudyBox_iOS.debug.xcconfig */,
-				EAE865E60264C049CA41FB15 /* Pods-StudyBox_iOS.release.xcconfig */,
-				C7B6436C8ADEC918DBC3BCA6 /* Pods-StudyBox_iOSTests.debug.xcconfig */,
-				D52C856090977DC3425F3CA6 /* Pods-StudyBox_iOSTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		A1341DB31C81E76800AFD04E = {
-			isa = PBXGroup;
-			children = (
-				A1341DBE1C81E76900AFD04E /* StudyBox_iOS */,
-				A1341DD61C81E76900AFD04E /* StudyBox_iOSTests */,
-				A1341DBD1C81E76900AFD04E /* Products */,
-				38B1F5B29A6C985E3C63E020 /* Frameworks */,
-				CEE9F6901C8A159100961ABA /* Fonts */,
-				841F26CEBA6537971FFC5B8C /* Pods */,
-			);
-			sourceTree = "<group>";
-		};
-		A1341DBD1C81E76900AFD04E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */,
-				A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		A1341DBE1C81E76900AFD04E /* StudyBox_iOS */ = {
-			isa = PBXGroup;
-			children = (
-				2DA0E6981C949AE200DAB6B5 /* Utils */,
-				2D2843651C88CEDE006E5E21 /* Model */,
-				A1341DCE1C81E76900AFD04E /* Info.plist */,
-				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
-				7238493B1C88847F009605EE /* DecksViewController.swift */,
-				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
-				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
-				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
-				CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */,
-				CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */,
-				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
-				723849411C8885F7009605EE /* ScoreViewController.swift */,
-				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
-				7238493D1C8884DD009605EE /* TestViewController.swift */,
-				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
-				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
-				A1341DC31C81E76900AFD04E /* Main.storyboard */,
-				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
-				AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */,
-				2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */,
-				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
-				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
-				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
-				CEC69B521C946CC100295808 /* TestLogic.swift */,
-				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
-				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
-				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
-			);
-			path = StudyBox_iOS;
-			sourceTree = "<group>";
-		};
-		A1341DD61C81E76900AFD04E /* StudyBox_iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */,
-				A1341DD91C81E76900AFD04E /* Info.plist */,
-				2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */,
-			);
-			path = StudyBox_iOSTests;
-			sourceTree = "<group>";
-		};
-		CEE9F6901C8A159100961ABA /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */,
-				CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */,
-			);
-			name = Fonts;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		A1341DBB1C81E76900AFD04E /* StudyBox_iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A1341DDC1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOS" */;
-			buildPhases = (
-				3D077DB37C93D4A5A0539DD7 /* 📦 Check Pods Manifest.lock */,
-				A1341DB81C81E76900AFD04E /* Sources */,
-				A1341DB91C81E76900AFD04E /* Frameworks */,
-				A1341DBA1C81E76900AFD04E /* Resources */,
-				5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */,
-				8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */,
-				239883ED1C907D1300B87667 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = StudyBox_iOS;
-			productName = StudyBox_iOS;
-			productReference = A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */;
-			productType = "com.apple.product-type.application";
-		};
-		A1341DD21C81E76900AFD04E /* StudyBox_iOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A1341DDF1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOSTests" */;
-			buildPhases = (
-				EBBBBA979F9A7999A0C55771 /* 📦 Check Pods Manifest.lock */,
-				A1341DCF1C81E76900AFD04E /* Sources */,
-				A1341DD01C81E76900AFD04E /* Frameworks */,
-				A1341DD11C81E76900AFD04E /* Resources */,
-				CDF04BEAEBBA49C9A9DEF50A /* 📦 Embed Pods Frameworks */,
-				EB6496101B524B4363C5ABDF /* 📦 Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A1341DD51C81E76900AFD04E /* PBXTargetDependency */,
-			);
-			name = StudyBox_iOSTests;
-			productName = StudyBox_iOSTests;
-			productReference = A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		A1341DB41C81E76800AFD04E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = BLStream;
-				TargetAttributes = {
-					A1341DBB1C81E76900AFD04E = {
-						CreatedOnToolsVersion = 7.2.1;
-					};
-					A1341DD21C81E76900AFD04E = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = A1341DBB1C81E76900AFD04E;
-					};
-				};
-			};
-			buildConfigurationList = A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox_iOS" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = A1341DB31C81E76800AFD04E;
-			productRefGroup = A1341DBD1C81E76900AFD04E /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				A1341DBB1C81E76900AFD04E /* StudyBox_iOS */,
-				A1341DD21C81E76900AFD04E /* StudyBox_iOSTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		A1341DBA1C81E76900AFD04E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A1341DCD1C81E76900AFD04E /* LaunchScreen.storyboard in Resources */,
-				A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */,
-				CEE9F69A1C8AE1F800961ABA /* Lato-Regular.ttf in Resources */,
-				CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */,
-				A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A1341DD11C81E76900AFD04E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		239883ED1C907D1300B87667 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "releaseConfig=\"Release\"\n\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\necho \"Running Fabric\"\n\"${PODS_ROOT}/Fabric/run\" df5c0e5c314f7db69f78f9f1846ca9a3a4b6efa3 0ed0b0f4cdb9339dd1e65f808f9417c12a33106a13ef08382e849d15844dffd4\nfi\n";
-		};
-		3D077DB37C93D4A5A0539DD7 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CDF04BEAEBBA49C9A9DEF50A /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EB6496101B524B4363C5ABDF /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EBBBBA979F9A7999A0C55771 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		A1341DB81C81E76900AFD04E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
-				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
-				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
-				AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */,
-				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
-				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
-				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
-				CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */,
-				CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */,
-				2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */,
-				2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */,
-				2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */,
-				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
-				2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */,
-				723849401C88851A009605EE /* EditFicheViewController.swift in Sources */,
-				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
-				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
-				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
-				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
-				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
-				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
-				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
-				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
-				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
-				AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */,
-				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
-				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
-				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A1341DCF1C81E76900AFD04E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */,
-				2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A1341DD51C81E76900AFD04E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A1341DBB1C81E76900AFD04E /* StudyBox_iOS */;
-			targetProxy = A1341DD41C81E76900AFD04E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		A1341DC31C81E76900AFD04E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A1341DC41C81E76900AFD04E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A1341DCC1C81E76900AFD04E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		A1341DDA1C81E76900AFD04E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		A1341DDB1C81E76900AFD04E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		A1341DDD1C81E76900AFD04E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BC06317D35E2C9044A462B5 /* Pods-StudyBox_iOS.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		A1341DDE1C81E76900AFD04E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EAE865E60264C049CA41FB15 /* Pods-StudyBox_iOS.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		A1341DE01C81E76900AFD04E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7B6436C8ADEC918DBC3BCA6 /* Pods-StudyBox_iOSTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyBox_iOS.app/StudyBox_iOS";
-			};
-			name = Debug;
-		};
-		A1341DE11C81E76900AFD04E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D52C856090977DC3425F3CA6 /* Pods-StudyBox_iOSTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyBox_iOS.app/StudyBox_iOS";
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox_iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1341DDA1C81E76900AFD04E /* Debug */,
-				A1341DDB1C81E76900AFD04E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A1341DDC1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1341DDD1C81E76900AFD04E /* Debug */,
-				A1341DDE1C81E76900AFD04E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A1341DDF1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1341DE01C81E76900AFD04E /* Debug */,
-				A1341DE11C81E76900AFD04E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A1341DC71C81E76900AFD04E /* StudyBox_iOS.xcdatamodel */,
-			);
-			currentVersion = A1341DC71C81E76900AFD04E /* StudyBox_iOS.xcdatamodel */;
-			path = StudyBox_iOS.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
-	};
-	rootObject = A1341DB41C81E76800AFD04E /* Project object */;
-}
+if [ "$releaseConfig" = "${CONFIGURATION}" ]; then
+echo "Running Fabric"
+"${PODS_ROOT}/Fabric/run" df5c0e5c314f7db69f78f9f1846ca9a3a4b6efa3 0ed0b0f4cdb9339dd1e65f808f9417c12a33106a13ef08382e849d15844dffd4
+fi
+</string>
+		</dict>
+		<key>2D07C02B1C82FC5E00BF0107</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>InputViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D07C02C1C82FC5E00BF0107</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>LoginViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D07C02D1C82FC5E00BF0107</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Utils.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D07C02E1C82FC5E00BF0107</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D07C02B1C82FC5E00BF0107</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D07C02F1C82FC5E00BF0107</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D07C02C1C82FC5E00BF0107</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D07C0301C82FC5E00BF0107</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D07C02D1C82FC5E00BF0107</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D2843651C88CEDE006E5E21</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2D2843661C88CEEC006E5E21</string>
+				<string>2D2843681C88D03D006E5E21</string>
+				<string>2DFB7B221C88F7EE00164464</string>
+				<string>2DBC00171C89AAF5006B4DC0</string>
+				<string>AEE35B8B1CA4747200D17A3C</string>
+				<string>AEE35B8D1CA4BCA800D17A3C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Model</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D2843661C88CEEC006E5E21</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DataModel.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D2843671C88CEEC006E5E21</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D2843661C88CEEC006E5E21</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D2843681C88D03D006E5E21</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DataManager.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D2843691C88D03D006E5E21</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D2843681C88D03D006E5E21</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D3A23901C99EEBD00CC90FF</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UIViewController+presentAlertController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D3A23911C99EEBD00CC90FF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D3A23901C99EEBD00CC90FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D40788E1CA19E4300A782A9</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UIApplication+appDelegate.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D40788F1CA19E4300A782A9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D40788E1CA19E4300A782A9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D45ABAA1C8CB855009C3CF4</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DrawerViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D45ABAB1C8CB855009C3CF4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D45ABAA1C8CB855009C3CF4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D53E2FF1C9F41CB00436588</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SBDrawerController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D53E3001C9F41CB00436588</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D53E2FF1C9F41CB00436588</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2D70F7BE1C9FFBF1003DF156</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SBReplaceSegue.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D70F7BF1C9FFBF1003DF156</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2D70F7BE1C9FFBF1003DF156</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2DA0E6981C949AE200DAB6B5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2D07C02D1C82FC5E00BF0107</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Utils</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2DB984961C9161E300BFBF72</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UIApplication+sharedRootViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2DB984971C9161E300BFBF72</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2DB984961C9161E300BFBF72</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2DBB4D3A1C88E020004F4725</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DataManagerTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2DBB4D3B1C88E020004F4725</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2DBB4D3A1C88E020004F4725</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2DBC00171C89AAF5006B4DC0</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Array+FindUnique.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2DBC00181C89AAF5006B4DC0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2DBC00171C89AAF5006B4DC0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2DD02DAA1C8CCE2B00A6FED9</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UserViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2DD02DAB1C8CCE2B00A6FED9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2DD02DAA1C8CCE2B00A6FED9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2DFB7B221C88F7EE00164464</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DataManager+DummyData.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2DFB7B231C88F7EE00164464</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2DFB7B221C88F7EE00164464</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>38B1F5B29A6C985E3C63E020</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7206C0ED1C94586B0030FA0F</string>
+				<string>866820CDA984658ED5127F27</string>
+				<string>08693245C02D2C63F02EEEC5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3D077DB37C93D4A5A0539DD7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>&#128230; Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>5C3E9CCBC83BECADB9D6E52F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>&#128230; Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>6EF92CEC8F1A94A91BA6EADD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>866820CDA984658ED5127F27</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7206C0ED1C94586B0030FA0F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>SystemConfiguration.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/SystemConfiguration.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>7206C0EE1C94586B0030FA0F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7206C0ED1C94586B0030FA0F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>723849391C8882DE009605EE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>StudyBoxViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7238493A1C8882DE009605EE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>723849391C8882DE009605EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7238493B1C88847F009605EE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DecksViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7238493C1C88847F009605EE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7238493B1C88847F009605EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7238493D1C8884DD009605EE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TestViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7238493E1C8884DD009605EE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7238493D1C8884DD009605EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7238493F1C88851A009605EE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>EditFicheViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>723849401C88851A009605EE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7238493F1C88851A009605EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>723849411C8885F7009605EE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>ScoreViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>723849421C8885F7009605EE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>723849411C8885F7009605EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>72F23FEC1C836E0A0063BD43</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>RegistrationViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>72F23FED1C836E0A0063BD43</key>
+		<dict>
+			<key>fileRef</key>
+			<string>72F23FEC1C836E0A0063BD43</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>75A62C91F540D4F1D52FB182</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>841F26CEBA6537971FFC5B8C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>8BC06317D35E2C9044A462B5</string>
+				<string>EAE865E60264C049CA41FB15</string>
+				<string>C7B6436C8ADEC918DBC3BCA6</string>
+				<string>D52C856090977DC3425F3CA6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>866820CDA984658ED5127F27</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods_StudyBox_iOS.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>8B6D99404CB7CCFB761DCAD2</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>&#128230; Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>8BC06317D35E2C9044A462B5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOS.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9C372C2895826E821A6CBD55</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>A1341DB31C81E76800AFD04E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1341DBE1C81E76900AFD04E</string>
+				<string>A1341DD61C81E76900AFD04E</string>
+				<string>A1341DBD1C81E76900AFD04E</string>
+				<string>38B1F5B29A6C985E3C63E020</string>
+				<string>CEE9F6901C8A159100961ABA</string>
+				<string>841F26CEBA6537971FFC5B8C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DB41C81E76800AFD04E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0720</string>
+				<key>LastUpgradeCheck</key>
+				<string>0720</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>BLStream</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>A1341DBB1C81E76900AFD04E</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>7.2.1</string>
+					</dict>
+					<key>A1341DD21C81E76900AFD04E</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>7.2.1</string>
+						<key>TestTargetID</key>
+						<string>A1341DBB1C81E76900AFD04E</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>A1341DB71C81E76800AFD04E</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+				<string>Base</string>
+			</array>
+			<key>mainGroup</key>
+			<string>A1341DB31C81E76800AFD04E</string>
+			<key>productRefGroup</key>
+			<string>A1341DBD1C81E76900AFD04E</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>A1341DBB1C81E76900AFD04E</string>
+				<string>A1341DD21C81E76900AFD04E</string>
+			</array>
+		</dict>
+		<key>A1341DB71C81E76800AFD04E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>A1341DDA1C81E76900AFD04E</string>
+				<string>A1341DDB1C81E76900AFD04E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>A1341DB81C81E76900AFD04E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>CEC69B531C946CC100295808</string>
+				<string>7238493E1C8884DD009605EE</string>
+				<string>2D3A23911C99EEBD00CC90FF</string>
+				<string>AEE35B8C1CA4747200D17A3C</string>
+				<string>2DD02DAB1C8CCE2B00A6FED9</string>
+				<string>7238493A1C8882DE009605EE</string>
+				<string>2D70F7BF1C9FFBF1003DF156</string>
+				<string>CE96BC6F1C92F09F0026F80F</string>
+				<string>CEE9F6961C8A231D00961ABA</string>
+				<string>2DBC00181C89AAF5006B4DC0</string>
+				<string>2D2843691C88D03D006E5E21</string>
+				<string>2D53E3001C9F41CB00436588</string>
+				<string>A1341DC81C81E76900AFD04E</string>
+				<string>2D45ABAB1C8CB855009C3CF4</string>
+				<string>723849401C88851A009605EE</string>
+				<string>2DB984971C9161E300BFBF72</string>
+				<string>A1341DC01C81E76900AFD04E</string>
+				<string>2D07C02F1C82FC5E00BF0107</string>
+				<string>72F23FED1C836E0A0063BD43</string>
+				<string>2D07C02E1C82FC5E00BF0107</string>
+				<string>2D07C0301C82FC5E00BF0107</string>
+				<string>AE2AFB751C8DC274003EF985</string>
+				<string>2D40788F1CA19E4300A782A9</string>
+				<string>2D2843671C88CEEC006E5E21</string>
+				<string>AEE35B8E1CA4BCA800D17A3C</string>
+				<string>2DFB7B231C88F7EE00164464</string>
+				<string>7238493C1C88847F009605EE</string>
+				<string>723849421C8885F7009605EE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1341DB91C81E76900AFD04E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>7206C0EE1C94586B0030FA0F</string>
+				<string>6EF92CEC8F1A94A91BA6EADD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1341DBA1C81E76900AFD04E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A1341DCD1C81E76900AFD04E</string>
+				<string>A1341DCA1C81E76900AFD04E</string>
+				<string>CEE9F69A1C8AE1F800961ABA</string>
+				<string>CEE9F6991C8AE1F800961ABA</string>
+				<string>A1341DC51C81E76900AFD04E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1341DBB1C81E76900AFD04E</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>A1341DDC1C81E76900AFD04E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>3D077DB37C93D4A5A0539DD7</string>
+				<string>A1341DB81C81E76900AFD04E</string>
+				<string>A1341DB91C81E76900AFD04E</string>
+				<string>A1341DBA1C81E76900AFD04E</string>
+				<string>5C3E9CCBC83BECADB9D6E52F</string>
+				<string>8B6D99404CB7CCFB761DCAD2</string>
+				<string>239883ED1C907D1300B87667</string>
+				<string>9C372C2895826E821A6CBD55</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>StudyBox_iOS</string>
+			<key>productName</key>
+			<string>StudyBox_iOS</string>
+			<key>productReference</key>
+			<string>A1341DBC1C81E76900AFD04E</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>A1341DBC1C81E76900AFD04E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>StudyBox_iOS.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>A1341DBD1C81E76900AFD04E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1341DBC1C81E76900AFD04E</string>
+				<string>A1341DD31C81E76900AFD04E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DBE1C81E76900AFD04E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2DA0E6981C949AE200DAB6B5</string>
+				<string>2D2843651C88CEDE006E5E21</string>
+				<string>A1341DCE1C81E76900AFD04E</string>
+				<string>A1341DBF1C81E76900AFD04E</string>
+				<string>7238493B1C88847F009605EE</string>
+				<string>7238493F1C88851A009605EE</string>
+				<string>2D07C02B1C82FC5E00BF0107</string>
+				<string>2D07C02C1C82FC5E00BF0107</string>
+				<string>CE96BC6E1C92F09F0026F80F</string>
+				<string>CEE9F6951C8A231D00961ABA</string>
+				<string>72F23FEC1C836E0A0063BD43</string>
+				<string>723849411C8885F7009605EE</string>
+				<string>723849391C8882DE009605EE</string>
+				<string>7238493D1C8884DD009605EE</string>
+				<string>A1341DC91C81E76900AFD04E</string>
+				<string>A1341DCB1C81E76900AFD04E</string>
+				<string>A1341DC31C81E76900AFD04E</string>
+				<string>A1341DC61C81E76900AFD04E</string>
+				<string>AE2AFB741C8DC274003EF985</string>
+				<string>2D45ABAA1C8CB855009C3CF4</string>
+				<string>2DD02DAA1C8CCE2B00A6FED9</string>
+				<string>2DB984961C9161E300BFBF72</string>
+				<string>2D3A23901C99EEBD00CC90FF</string>
+				<string>CEC69B521C946CC100295808</string>
+				<string>2D53E2FF1C9F41CB00436588</string>
+				<string>2D70F7BE1C9FFBF1003DF156</string>
+				<string>2D40788E1CA19E4300A782A9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>StudyBox_iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DBF1C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AppDelegate.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DC01C81E76900AFD04E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1341DBF1C81E76900AFD04E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1341DC31C81E76900AFD04E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1341DC41C81E76900AFD04E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>Main.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DC41C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>name</key>
+			<string>Base</string>
+			<key>path</key>
+			<string>Base.lproj/Main.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DC51C81E76900AFD04E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1341DC31C81E76900AFD04E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1341DC61C81E76900AFD04E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1341DC71C81E76900AFD04E</string>
+			</array>
+			<key>currentVersion</key>
+			<string>A1341DC71C81E76900AFD04E</string>
+			<key>isa</key>
+			<string>XCVersionGroup</string>
+			<key>path</key>
+			<string>StudyBox_iOS.xcdatamodeld</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+			<key>versionGroupType</key>
+			<string>wrapper.xcdatamodel</string>
+		</dict>
+		<key>A1341DC71C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.xcdatamodel</string>
+			<key>path</key>
+			<string>StudyBox_iOS.xcdatamodel</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DC81C81E76900AFD04E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1341DC61C81E76900AFD04E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1341DC91C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Assets.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DCA1C81E76900AFD04E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1341DC91C81E76900AFD04E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1341DCB1C81E76900AFD04E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1341DCC1C81E76900AFD04E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>LaunchScreen.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DCC1C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>name</key>
+			<string>Base</string>
+			<key>path</key>
+			<string>Base.lproj/LaunchScreen.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DCD1C81E76900AFD04E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1341DCB1C81E76900AFD04E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1341DCE1C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DCF1C81E76900AFD04E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A1341DD81C81E76900AFD04E</string>
+				<string>2DBB4D3B1C88E020004F4725</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1341DD01C81E76900AFD04E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1CAF5499FA51A2184C8B2422</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1341DD11C81E76900AFD04E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A1341DD21C81E76900AFD04E</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>A1341DDF1C81E76900AFD04E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>EBBBBA979F9A7999A0C55771</string>
+				<string>A1341DCF1C81E76900AFD04E</string>
+				<string>A1341DD01C81E76900AFD04E</string>
+				<string>A1341DD11C81E76900AFD04E</string>
+				<string>CDF04BEAEBBA49C9A9DEF50A</string>
+				<string>EB6496101B524B4363C5ABDF</string>
+				<string>75A62C91F540D4F1D52FB182</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>A1341DD51C81E76900AFD04E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>StudyBox_iOSTests</string>
+			<key>productName</key>
+			<string>StudyBox_iOSTests</string>
+			<key>productReference</key>
+			<string>A1341DD31C81E76900AFD04E</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>A1341DD31C81E76900AFD04E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>StudyBox_iOSTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>A1341DD41C81E76900AFD04E</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>A1341DB41C81E76800AFD04E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>A1341DBB1C81E76900AFD04E</string>
+			<key>remoteInfo</key>
+			<string>StudyBox_iOS</string>
+		</dict>
+		<key>A1341DD51C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>A1341DBB1C81E76900AFD04E</string>
+			<key>targetProxy</key>
+			<string>A1341DD41C81E76900AFD04E</string>
+		</dict>
+		<key>A1341DD61C81E76900AFD04E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1341DD71C81E76900AFD04E</string>
+				<string>A1341DD91C81E76900AFD04E</string>
+				<string>2DBB4D3A1C88E020004F4725</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>StudyBox_iOSTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DD71C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>StudyBox_iOSTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DD81C81E76900AFD04E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A1341DD71C81E76900AFD04E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1341DD91C81E76900AFD04E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1341DDA1C81E76900AFD04E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>ENABLE_TESTABILITY</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>A1341DDB1C81E76900AFD04E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>A1341DDC1C81E76900AFD04E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>A1341DDD1C81E76900AFD04E</string>
+				<string>A1341DDE1C81E76900AFD04E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>A1341DDD1C81E76900AFD04E</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>8BC06317D35E2C9044A462B5</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>INFOPLIST_FILE</key>
+				<string>StudyBox_iOS/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.blstream.StudyBox-iOS</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>A1341DDE1C81E76900AFD04E</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>EAE865E60264C049CA41FB15</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>INFOPLIST_FILE</key>
+				<string>StudyBox_iOS/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.blstream.StudyBox-iOS</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>A1341DDF1C81E76900AFD04E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>A1341DE01C81E76900AFD04E</string>
+				<string>A1341DE11C81E76900AFD04E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>A1341DE01C81E76900AFD04E</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>C7B6436C8ADEC918DBC3BCA6</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(TEST_HOST)</string>
+				<key>INFOPLIST_FILE</key>
+				<string>StudyBox_iOSTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.blstream.StudyBox-iOSTests</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUILT_PRODUCTS_DIR)/StudyBox_iOS.app/StudyBox_iOS</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>A1341DE11C81E76900AFD04E</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>D52C856090977DC3425F3CA6</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(TEST_HOST)</string>
+				<key>INFOPLIST_FILE</key>
+				<string>StudyBox_iOSTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.blstream.StudyBox-iOSTests</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUILT_PRODUCTS_DIR)/StudyBox_iOS.app/StudyBox_iOS</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>AE2AFB741C8DC274003EF985</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DecksViewCell.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AE2AFB751C8DC274003EF985</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AE2AFB741C8DC274003EF985</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AEE35B8B1CA4747200D17A3C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Results+toArray.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AEE35B8C1CA4747200D17A3C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AEE35B8B1CA4747200D17A3C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AEE35B8D1CA4BCA800D17A3C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DataModel+NSCopying.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AEE35B8E1CA4BCA800D17A3C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AEE35B8D1CA4BCA800D17A3C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C7B6436C8ADEC918DBC3BCA6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOSTests.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CDF04BEAEBBA49C9A9DEF50A</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>&#128230; Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>CE96BC6E1C92F09F0026F80F</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UIColor+StudyBox.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CE96BC6F1C92F09F0026F80F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CE96BC6E1C92F09F0026F80F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CEC69B521C946CC100295808</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TestLogic.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CEC69B531C946CC100295808</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CEC69B521C946CC100295808</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CEE9F6901C8A159100961ABA</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>CEE9F6971C8AE1F800961ABA</string>
+				<string>CEE9F6981C8AE1F800961ABA</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Fonts</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CEE9F6951C8A231D00961ABA</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UIFont+sbFont.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CEE9F6961C8A231D00961ABA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CEE9F6951C8A231D00961ABA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CEE9F6971C8AE1F800961ABA</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>name</key>
+			<string>Lato-Black.ttf</string>
+			<key>path</key>
+			<string>Fonts/Lato-Black.ttf</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CEE9F6981C8AE1F800961ABA</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>name</key>
+			<string>Lato-Regular.ttf</string>
+			<key>path</key>
+			<string>Fonts/Lato-Regular.ttf</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CEE9F6991C8AE1F800961ABA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CEE9F6971C8AE1F800961ABA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CEE9F69A1C8AE1F800961ABA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CEE9F6981C8AE1F800961ABA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D52C856090977DC3425F3CA6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOSTests.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EAE865E60264C049CA41FB15</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-StudyBox_iOS.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EB6496101B524B4363C5ABDF</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>&#128230; Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>EBBBBA979F9A7999A0C55771</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>&#128230; Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>A1341DB41C81E76800AFD04E</string>
+</dict>
+</plist>
