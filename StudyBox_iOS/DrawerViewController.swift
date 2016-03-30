@@ -139,6 +139,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         var navigationChild = drawerNavigationControllers[index]
         navigationChild.isActive = true
         
+        drawerNavigationControllers[currentControllerIndex].isActive = false
         if let controller = navigationChild.viewController {
             // viewController getter is mutating, it's possible that it was instantiated for the first time so the value was changed
             drawerNavigationControllers[index] = navigationChild
