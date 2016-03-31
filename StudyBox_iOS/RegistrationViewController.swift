@@ -65,11 +65,13 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     func checkEmail(textField: UITextField) -> () {
         if let text = textField.text where textField == emailTextField {
             
-            let validation = validateEmail(text)
-            textField.text = validation.adjustedValue
+            textField.text = text.trimWhiteCharacters()
             
-            if (!validation.isValid) {
-                showAlert(.emailIncorrect)
+            if let text = textField.text {
+                if !text.isValidEmail() {
+                    showAlert(.emailIncorrect)
+
+                }
             }
         }
     }

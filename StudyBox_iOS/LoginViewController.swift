@@ -11,8 +11,8 @@ import Reachability
 class LoginViewController: UserViewController,InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
-    @IBOutlet weak var emailTextField: ValidableTextField!
-    @IBOutlet weak var passwordTextField: ValidableTextField!
+    @IBOutlet weak var emailTextField: ValidatableTextField!
+    @IBOutlet weak var passwordTextField: ValidatableTextField!
     @IBOutlet weak var unregisteredUserButton: UIButton!
     @IBOutlet weak var registerUserButton: UIButton!
     
@@ -22,7 +22,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         super.viewDidLoad()
         inputViews.appendContentsOf([emailTextField,passwordTextField])
         inputViews.forEach {
-            if let validable = $0 as? ValidableTextField {
+            if let validable = $0 as? ValidatableTextField {
                 validable.validColor = UIColor.sb_DarkBlue()
                 validable.invalidColor = UIColor.sb_Raspberry()
                 validable.textColor = validable.validColor
@@ -31,7 +31,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         
         logInButton.layer.cornerRadius = 10.0
         logInButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-        logInButton.backgroundColor = UIColor.grayColor()
+        logInButton.backgroundColor = UIColor.sb_DarkGrey()
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     }
@@ -65,7 +65,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         
         if let message = alertMessage {
             presentAlertController(withTitle: "", message: message, buttonText: "Ok")
-        }else {
+        } else {
             successfulLoginTransition()
         }
     }
@@ -78,30 +78,28 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var validationResult = true
         
-        defer {
-            if let validableTextField = textField as? ValidableTextField {
-                validableTextField.isValid = validationResult
-            }
-            if textFieldsAreValid() {
-                logInButton.backgroundColor = UIColor.sb_Raspberry()
-            }else {
-                logInButton.backgroundColor = UIColor.grayColor()
-            }
-        }
         
         var resultText = (textField.text as NSString?)?.stringByReplacingCharactersInRange(range, withString: string)
         
         if let text = resultText where textField == emailTextField {
-            let validation = validateEmail(text)
-            resultText = validation.adjustedValue
-            validationResult = validation.isValid
+            resultText = text.trimWhiteCharacters()
+            validationResult = text.isValidEmail()
             
-        }else if let text = resultText where textField == passwordTextField {
-            validationResult = validatePasswordLengthAndSpaces(text)
+        } else if let text = resultText where textField == passwordTextField {
+            validationResult = text.isValidPassword()
             
         }
         textField.text = resultText
         
+        if let validableTextField = textField as? ValidatableTextField {
+            validableTextField.isValid = validationResult
+        }
+        
+        if areTextFieldsValid() {
+            logInButton.backgroundColor = UIColor.sb_Raspberry()
+        } else {
+            logInButton.backgroundColor = UIColor.sb_DarkGrey()
+        }
         
         return false
         
@@ -116,7 +114,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
             textField.resignFirstResponder()
             loginWithInputData()
             return false
-        }else if textField == emailTextField {
+        } else if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
         }
         return true

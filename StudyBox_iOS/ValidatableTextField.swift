@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ValidableTextField: UITextField {
+class ValidatableTextField: UITextField {
 
     var isValid:Bool = false {
         didSet {

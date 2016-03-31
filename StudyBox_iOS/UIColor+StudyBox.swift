@@ -21,4 +21,8 @@ extension UIColor{
     class func sb_Grey() -> UIColor{
         return UIColor(red: (250 / 255.0), green: (250 / 255.0), blue: (250 / 255.0), alpha: 1)
     }
+    
+    class func sb_DarkGrey() -> UIColor {
+        return UIColor.grayColor()
+    }
 }

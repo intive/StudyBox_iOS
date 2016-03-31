@@ -45,28 +45,6 @@ class UserViewController: InputViewController {
         
     }
     
-    func validateEmail(text:String)->(adjustedValue:String,isValid:Bool) {
-        
-        // * Validation logic inherited from `RegistrationViewController` by Kacper Cz
-        
-        //Trim spaces at the beginning and end of email
-        let adjusted = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        
-        //Trimmed text must contain `@` but mustn't contain whitespace inside
-        if (adjusted.containsString(" ") || !adjusted.containsString("@")) {
-            return (adjusted,false)
-        }
-        return (adjusted,true)
-    }
-    
-    
-    func validatePasswordLengthAndSpaces(text:String)->Bool {
-        if text.characters.count < 8 || text.rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) != nil {
-            return false
-        }
-        return true
-    }
-    
     func validateTextFieldsNotEmpty()->Bool {
         
         if let inputViews = dataSource?.inputViews {
@@ -80,10 +58,10 @@ class UserViewController: InputViewController {
         return true
     }
     
-    func textFieldsAreValid()-> Bool {
+    func areTextFieldsValid()-> Bool {
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
-                if let validableField = field as? ValidableTextField {
+                if let validableField = field as? ValidatableTextField {
                     if !validableField.isValid {
                         return false 
                     }

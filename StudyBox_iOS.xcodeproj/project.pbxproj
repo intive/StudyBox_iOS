@@ -11,7 +11,8 @@
 		2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */; };
 		2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */; };
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
-		2D0F98291CAB28B2003D1857 /* ValidableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidableTextField.swift */; };
+		2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0939A61CAD19CF00886A1B /* String+validation.swift */; };
+		2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */; };
 		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
 		2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843681C88D03D006E5E21 /* DataManager.swift */; };
 		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
@@ -63,7 +64,8 @@
 		2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		2D0F98281CAB28B2003D1857 /* ValidableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidableTextField.swift; sourceTree = "<group>"; };
+		2D0939A61CAD19CF00886A1B /* String+validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
+		2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableTextField.swift; sourceTree = "<group>"; };
 		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		2D2843681C88D03D006E5E21 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
@@ -210,8 +212,9 @@
 				CEC69B521C946CC100295808 /* TestLogic.swift */,
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
 				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
-				2D0F98281CAB28B2003D1857 /* ValidableTextField.swift */,
+				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
 				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
+				2D0939A61CAD19CF00886A1B /* String+validation.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -502,13 +505,14 @@
 				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
 				CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */,
-				2D0F98291CAB28B2003D1857 /* ValidableTextField.swift in Sources */,
+				2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */,
 				CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */,
 				2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */,
 				2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */,
 				2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
 				2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */,
+				2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */,
 				723849401C88851A009605EE /* EditFicheViewController.swift in Sources */,
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
