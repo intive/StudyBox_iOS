@@ -111,47 +111,63 @@
         <scene sceneID="3WR-l3-OEa">
             <objects>
                 <viewController id="Ffq-5i-cZ4" customClass="DecksViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="9VM-hJ-ElA">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ICs-dx-wqn"/>
+                        <viewControllerLayoutGuide type="bottom" id="LY6-KN-Pjc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Xh-8g-2oR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iBZ-oN-EyI">
-                            <size key="itemSize" width="100" height="100"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DecksViewCellID" id="Jiw-Xz-iyX" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udC-ac-677">
-                                            <rect key="frame" x="8" y="8" width="84" height="84"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="udC-ac-677" firstAttribute="bottom" secondItem="Jiw-Xz-iyX" secondAttribute="bottomMargin" id="8bS-Hq-H1X"/>
-                                    <constraint firstItem="udC-ac-677" firstAttribute="top" secondItem="Jiw-Xz-iyX" secondAttribute="topMargin" id="F30-HS-bJd"/>
-                                    <constraint firstItem="udC-ac-677" firstAttribute="leading" secondItem="Jiw-Xz-iyX" secondAttribute="leadingMargin" id="SH9-f5-9VQ"/>
-                                    <constraint firstItem="udC-ac-677" firstAttribute="trailing" secondItem="Jiw-Xz-iyX" secondAttribute="trailingMargin" id="xMl-Pz-akx"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="deckNameLabel" destination="udC-ac-677" id="NJP-4N-T65"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                    </collectionView>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xMT-IG-TEx">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6fk-bh-Wei">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DecksViewCellID" id="9hr-eg-eXj" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="64" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzs-Dz-y5m">
+                                                    <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="trailing" secondItem="9hr-eg-eXj" secondAttribute="trailingMargin" id="Qc5-0E-yiv"/>
+                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="bottom" secondItem="9hr-eg-eXj" secondAttribute="bottomMargin" id="X0K-nq-GOh"/>
+                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="top" secondItem="9hr-eg-eXj" secondAttribute="topMargin" id="gRh-BU-eyJ"/>
+                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="leading" secondItem="9hr-eg-eXj" secondAttribute="leadingMargin" id="uJf-Vf-Ukl"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="deckNameLabel" destination="bzs-Dz-y5m" id="9VW-ov-DwE"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="xMT-IG-TEx" secondAttribute="trailing" constant="-20" id="Rkc-RA-S2Y"/>
+                            <constraint firstItem="xMT-IG-TEx" firstAttribute="height" secondItem="8Xh-8g-2oR" secondAttribute="height" id="Suv-M2-ekv"/>
+                            <constraint firstItem="xMT-IG-TEx" firstAttribute="leading" secondItem="8Xh-8g-2oR" secondAttribute="leadingMargin" constant="-20" id="VVs-jY-94u"/>
+                            <constraint firstItem="LY6-KN-Pjc" firstAttribute="top" secondItem="xMT-IG-TEx" secondAttribute="bottom" id="gZx-hx-f0b"/>
+                        </constraints>
+                    </view>
                     <navigationItem key="navigationItem" id="Bco-pG-cRr"/>
                     <connections>
-                        <outlet property="decksCollectionView" destination="9VM-hJ-ElA" id="upw-p9-nF4"/>
+                        <outlet property="decksCollectionView" destination="xMT-IG-TEx" id="bYA-cU-mHh"/>
                         <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="IWt-ao-u5P"/>
                     </connections>
                 </viewController>
@@ -303,7 +319,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrawerCellId" textLabel="m86-hQ-g9n" style="IBUITableViewCellStyleDefault" id="yFe-bm-kgx">
-                                        <rect key="frame" x="0.0" y="50" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yFe-bm-kgx" id="SRS-Mc-WcA">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>

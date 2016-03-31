@@ -19,7 +19,7 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
             if let controller = navigationController?.viewControllers[0] where controller === self {
                 let hamburgerImage = UIImage(named: "Hamburger")
-                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("toggleDrawer"))
+                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StudyBoxViewController.toggleDrawer))
                 navigationItem.leftBarButtonItem = button
                 drawer.openDrawerGestureModeMask = .Custom
             }else {
