@@ -19,6 +19,7 @@ class ScoreViewController: StudyBoxViewController {
     
     var testLogicSource:Test?
     var testScoreFraction:Double = 0.0
+    var progress = KDCircularProgress()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +38,17 @@ class ScoreViewController: StudyBoxViewController {
         runTestButton.layer.cornerRadius = 10
         
         completeData()
+        setupProgressView()
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(false)
+        super.viewDidAppear(animated)
         animateProgressView()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        progress.pauseAnimation()
     }
     
     func completeData() {
@@ -62,25 +69,27 @@ class ScoreViewController: StudyBoxViewController {
             }
         }
     }
-    
-    ///Animating the circular progress view to testPercentage value
-    func animateProgressView() {
+
+    func setupProgressView() {
+        
         let progressViewFrame = circularProgressView.bounds
-        let progress = KDCircularProgress(frame: progressViewFrame, startAngle: -90, angle: 0, thickness: 0.4, clockwise: true, glowMode: .NoGlow, color: UIColor.sb_DarkBlue(), roundedCorners: true)
-        progress.center = view.center
+        //let progressViewFrame = CGRect(x:circularProgressView.frame.origin.x,y:circularProgressView.frame.origin.y,width:circularProgressView.frame.width*0.75,height: circularProgressView.frame.height*0.75)
+        progress.center = circularProgressView.center
+        progress = KDCircularProgress(frame: progressViewFrame, color: UIColor.sb_DarkBlue())
         
-        view.addSubview(progress)
-        
+        circularProgressView.addSubview(progress)
+    }
+    
+    ///Animating the circular progress view to testPercentage value, after 1 second from calling
+    func animateProgressView() {
         //Convert float to degree angle
         let percentageAngle = Int(self.testScoreFraction*360)
-
+        
         //Delay the animation by 1 second
         let triggerTime = (Int64(NSEC_PER_SEC) * 1)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
-            progress.animateToAngle(percentageAngle, duration: 1, completion: nil)
+            self.progress.animateToAngle(percentageAngle, duration: 3, completion: nil)
         })
-        
-        
     }
     
     @IBAction func deckListButtonAction(sender: UIButton) {

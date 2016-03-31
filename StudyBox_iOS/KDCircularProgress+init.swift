@@ -9,20 +9,20 @@
 import UIKit
 
 extension KDCircularProgress {
-    convenience init(frame:CGRect, startAngle: Int, angle: Int, thickness: Float, clockwise:Bool, glowMode: KDCircularProgressGlowMode, color:UIColor, roundedCorners: Bool ){
+    convenience init(frame:CGRect, color:UIColor) {
         self.init(frame: frame)
         
-        self.angle = angle
-        self.clockwise = clockwise
+        self.angle = 0
+        self.clockwise = true
         self.frame = frame
-        self.glowMode = glowMode
-        self.progressThickness = CGFloat(thickness)
+        self.glowMode = KDCircularProgressGlowMode.NoGlow
+        self.progressThickness = 0.4
         self.roundedCorners = true
-        self.startAngle = startAngle
+        self.startAngle = -90
         self.trackColor = color.colorWithAlphaComponent(0.3)
-        self.trackThickness = CGFloat(thickness)
-
+        self.trackThickness = 0.4
+        
         self.setColors(color)
         self.refreshValues()
-        }
+    }
 }
