@@ -257,7 +257,8 @@
 				5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */,
 				8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */,
 				239883ED1C907D1300B87667 /* Fabric */,
-				235264651CAC3EC500C9037F /* Swiftlint */,
+				725261525A63C6F3D5F0B3F1 /* Embed Pods Frameworks */,
+				233B4F061CAD2D5700EC5173 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -278,6 +279,7 @@
 				A1341DD11C81E76900AFD04E /* Resources */,
 				CDF04BEAEBBA49C9A9DEF50A /* 📦 Embed Pods Frameworks */,
 				EB6496101B524B4363C5ABDF /* 📦 Copy Pods Resources */,
+				7B3765BEADFCD49C922A7B4D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -350,7 +352,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		235264651CAC3EC500C9037F /* Swiftlint */ = {
+		233B4F061CAD2D5700EC5173 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -362,7 +364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/StudyBox_iOS/\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/StudyBox_iOS/\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		239883ED1C907D1300B87667 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -406,6 +408,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		725261525A63C6F3D5F0B3F1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B3765BEADFCD49C922A7B4D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */ = {
