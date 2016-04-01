@@ -10,7 +10,7 @@ import UIKit
 
 class ScoreViewController: StudyBoxViewController {
 
-    @IBOutlet weak var circularProgressView: UIView!
+    @IBOutlet weak var circularProgressView: CircularLoaderView!
     @IBOutlet weak var congratulationsBigLabel: UILabel!
     @IBOutlet weak var congratulationsSmallLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -19,8 +19,8 @@ class ScoreViewController: StudyBoxViewController {
     
     var testLogicSource:Test?
     var testScoreFraction:Double = 0.0
-    var progress = KDCircularProgress()
-    
+    //var circularProgressView = CircularLoaderView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,9 +46,14 @@ class ScoreViewController: StudyBoxViewController {
         animateProgressView()
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        progress.pauseAnimation()
+    func setupProgressView() {
+        circularProgressView.frame = circularProgressView.bounds
+        circularProgressView.circleRadius = circularProgressView.frame.width/2
+        circularProgressView.progress = 0
+    }
+    
+    func animateProgressView() {
+        circularProgressView.animateProgress(CGFloat(testScoreFraction))
     }
     
     func completeData() {
@@ -69,29 +74,7 @@ class ScoreViewController: StudyBoxViewController {
             }
         }
     }
-
-    func setupProgressView() {
-        
-        let progressViewFrame = circularProgressView.bounds
-        //let progressViewFrame = CGRect(x:circularProgressView.frame.origin.x,y:circularProgressView.frame.origin.y,width:circularProgressView.frame.width*0.75,height: circularProgressView.frame.height*0.75)
-        progress.center = circularProgressView.center
-        progress = KDCircularProgress(frame: progressViewFrame, color: UIColor.sb_DarkBlue())
-        
-        circularProgressView.addSubview(progress)
-    }
-    
-    ///Animating the circular progress view to testPercentage value, after 1 second from calling
-    func animateProgressView() {
-        //Convert float to degree angle
-        let percentageAngle = Int(self.testScoreFraction*360)
-        
-        //Delay the animation by 1 second
-        let triggerTime = (Int64(NSEC_PER_SEC) * 1)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
-            self.progress.animateToAngle(percentageAngle, duration: 3, completion: nil)
-        })
-    }
-    
+ 
     @IBAction func deckListButtonAction(sender: UIButton) {
         // TODO refactor for Drawer menu options
         DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)

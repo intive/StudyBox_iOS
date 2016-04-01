@@ -25,6 +25,7 @@
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		6EF92CEC8F1A94A91BA6EADD /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
+		721C5ADC1CAE654F008B4C8A /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C5ADB1CAE654F008B4C8A /* CircularLoaderView.swift */; };
 		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
@@ -77,6 +78,7 @@
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		721C5ADB1CAE654F008B4C8A /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
+				721C5ADB1CAE654F008B4C8A /* CircularLoaderView.swift */,
 				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
@@ -497,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				721C5ADC1CAE654F008B4C8A /* CircularLoaderView.swift in Sources */,
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
