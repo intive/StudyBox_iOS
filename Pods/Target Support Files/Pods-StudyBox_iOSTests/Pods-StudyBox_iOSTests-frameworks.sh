@@ -84,16 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-StudyBox_iOSTests/Alamofire.framework"
-  install_framework "Pods-StudyBox_iOSTests/MMDrawerController.framework"
-  install_framework "Pods-StudyBox_iOSTests/Realm.framework"
-  install_framework "Pods-StudyBox_iOSTests/RealmSwift.framework"
-  install_framework "Pods-StudyBox_iOSTests/SwiftyJSON.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/MMDrawerController/MMDrawerController.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Realm/Realm.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/RealmSwift/RealmSwift.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-StudyBox_iOSTests/Alamofire.framework"
-  install_framework "Pods-StudyBox_iOSTests/MMDrawerController.framework"
-  install_framework "Pods-StudyBox_iOSTests/Realm.framework"
-  install_framework "Pods-StudyBox_iOSTests/RealmSwift.framework"
-  install_framework "Pods-StudyBox_iOSTests/SwiftyJSON.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/MMDrawerController/MMDrawerController.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Realm/Realm.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/RealmSwift/RealmSwift.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/SwiftyJSON/SwiftyJSON.framework"
 fi
