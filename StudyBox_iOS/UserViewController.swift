@@ -44,4 +44,32 @@ class UserViewController: InputViewController {
         }
         
     }
+    
+    func validateTextFieldsNotEmpty()->Bool {
+        
+        if let inputViews = dataSource?.inputViews {
+            for field in inputViews {
+                guard let text = field.text where text.characters.count > 0 else {
+                    return false
+                }
+            }
+        }
+
+        return true
+    }
+    
+    func areTextFieldsValid()-> Bool {
+        if let inputViews = dataSource?.inputViews {
+            for field in inputViews {
+                if let validableField = field as? ValidatableTextField {
+                    if !validableField.isValid {
+                        return false 
+                    }
+                }
+            }
+        }
+        
+        return true
+    }
+    
 }
