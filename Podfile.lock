@@ -3,7 +3,6 @@ PODS:
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
-  - KDCircularProgress (1.3.4)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -28,7 +27,6 @@ DEPENDENCIES:
   - Alamofire (~> 3.0)
   - Crashlytics (~> 3.7.0)
   - Fabric (~> 1.6.7)
-  - KDCircularProgress (~> 1.3)
   - MMDrawerController (~> 0.6.0)
   - Reachability (~> 3.2)
   - RealmSwift (~> 0.98.5)
@@ -47,13 +45,12 @@ SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  KDCircularProgress: 4b29bf9bc9a915a731b8745ede6b89a55cda95ef
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: 44803f35418c5d89b27825a564247fcd190de37e
   RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 809b174f6758a6f90843523d03bf91e0da5ceba5
+PODFILE CHECKSUM: 87405373e936a1102280b742194b9cd4e8efdaff
 
-COCOAPODS: 1.0.0.beta.5
+COCOAPODS: 1.0.0.beta.6
