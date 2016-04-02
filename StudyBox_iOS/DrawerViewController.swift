@@ -41,7 +41,7 @@ struct DrawerNavigationChild {
     }
 }
 
-class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SBDrawerLeftDelegate {
+class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     static let DrawerCellId = "DrawerCellId"
@@ -49,8 +49,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    private var hideStatusBar = true
-
     private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
@@ -163,20 +161,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         return .Slide
     }
     
-    func hidingDrawer() {
-        hideStatusBar = !hideStatusBar
-        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
-            animations: {
-                self.setNeedsStatusBarAppearanceUpdate()
-            },
-            completion: { finished in
-                self.hideStatusBar = !self.hideStatusBar
-            }
-        )
-    }
-    
     override func prefersStatusBarHidden() -> Bool {
-        return hideStatusBar
+        return true
     }
     
     func deactiveAllChildViewControllers() {

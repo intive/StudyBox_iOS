@@ -12,7 +12,7 @@ import MMDrawerController
 
 class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
 
-    private var isDrawerVisible = false
+    var isDrawerVisible = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,26 +29,7 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
         }
 
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController  {
 
-            var isCenter = false
-            if let centerNavigation = sbDrawer.centerViewController as? UINavigationController {
-                centerNavigation.viewControllers.forEach {
-                    if $0 === self {
-                        isCenter = true
-                    }
-                }
-            }else if sbDrawer.centerViewController === self  {
-                isCenter = true
-            }
-            if (isCenter) {
-                sbDrawer.centerDelegate = self
-            }
-        }
-    }
     
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
@@ -56,16 +37,14 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
         }
     }
     
-    func showingDrawer() {
+    func drawerToggleAnimation() {
         isDrawerVisible = !isDrawerVisible
         
         UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
             animations: {
                 self.setNeedsStatusBarAppearanceUpdate()
             },
-            completion: { finished in
-                self.isDrawerVisible = !self.isDrawerVisible
-            }
+            completion: nil
         )
     }
     
