@@ -72,7 +72,8 @@ class CircularLoaderView: UIView {
         let toOrigin = CGAffineTransformMakeTranslation(-center.x, -center.y)
         path.applyTransform(toOrigin)
         
-        let rotate: CGAffineTransform = CGAffineTransformMakeRotation(degreesToRadians(-90))
+        //Rotate by -90 degrees
+        let rotate: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(-M_PI / 2))
         path.applyTransform(rotate)
         
         let fromOrigin = CGAffineTransformMakeTranslation(center.x, center.y)
@@ -98,9 +99,5 @@ class CircularLoaderView: UIView {
         animation.fillMode = kCAFillModeBoth // keep to value after finishing
         animation.removedOnCompletion = false
         foregroundCircleLayer.addAnimation(animation, forKey: animation.keyPath)
-    }
-    
-    func degreesToRadians(degrees: Double) -> CGFloat {
-        return CGFloat(degrees * M_PI / 180)
     }
 }

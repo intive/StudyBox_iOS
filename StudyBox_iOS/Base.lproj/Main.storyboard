@@ -263,6 +263,9 @@
                                             <constraint firstAttribute="width" constant="180" id="Nti-KF-vXc"/>
                                         </constraints>
                                         <state key="normal" title="Uruchom test ponownie"/>
+                                        <connections>
+                                            <segue destination="6tt-KQ-lf6" kind="custom" identifier="RepeatTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="bb9-zC-jZN"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -692,6 +695,7 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bb9-zC-jZN"/>
         <segue reference="kaO-g4-SgC"/>
     </inferredMetricsTieBreakers>
 </document>
