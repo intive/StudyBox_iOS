@@ -9,7 +9,7 @@
 import UIKit
 
 class ScoreViewController: StudyBoxViewController {
-
+    
     @IBOutlet weak var circularProgressView: CircularLoaderView!
     @IBOutlet weak var congratulationsBigLabel: UILabel!
     @IBOutlet weak var congratulationsSmallLabel: UILabel!
@@ -19,8 +19,7 @@ class ScoreViewController: StudyBoxViewController {
     
     var testLogicSource:Test?
     var testScoreFraction:Double = 0.0
-    //var circularProgressView = CircularLoaderView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,8 +46,11 @@ class ScoreViewController: StudyBoxViewController {
     }
     
     func setupProgressView() {
-        circularProgressView.frame = circularProgressView.bounds
-        circularProgressView.circleRadius = circularProgressView.frame.width/2
+        let frameWidth = circularProgressView.frame.width
+        let frameHeight = circularProgressView.frame.height
+        
+        //We set the radius based on width or height, whichever is smaller
+        circularProgressView.circleRadius = (frameWidth < frameHeight) ? frameWidth/2 : frameHeight/2
         circularProgressView.progress = 0
     }
     
@@ -56,6 +58,7 @@ class ScoreViewController: StudyBoxViewController {
         circularProgressView.animateProgress(CGFloat(testScoreFraction))
     }
     
+    ///Sets labels and `testScoreFraction` based on test results
     func completeData() {
         if let testLogic = testLogicSource {
             let cardsResult = testLogic.cardsAnsweredAndPossible()
@@ -65,16 +68,9 @@ class ScoreViewController: StudyBoxViewController {
             
             scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
             scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n\(testScorePercentage) %"
-            
-            switch testLogic.testType {
-            case .Learn:
-                runTestButton.enabled = false
-            default:
-                break
-            }
         }
     }
- 
+    
     @IBAction func deckListButtonAction(sender: UIButton) {
         // TODO refactor for Drawer menu options
         DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)

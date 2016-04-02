@@ -9,22 +9,21 @@
 import UIKit
 
 class CircularLoaderView: UIView {
-
-    let circlePathLayer = CAShapeLayer()
+    
+    let foregroundCircleLayer = CAShapeLayer()
     let backgroundCircleLayer = CAShapeLayer()
     var circleRadius: CGFloat = 0
     
     var progress: CGFloat {
         get {
-            return circlePathLayer.strokeEnd
+            return foregroundCircleLayer.strokeEnd
         } set {
-            circlePathLayer.strokeEnd = newValue
+            foregroundCircleLayer.strokeEnd = newValue
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //self.progress = CGFloat(progress)
         setupLayer()
     }
     
@@ -33,33 +32,34 @@ class CircularLoaderView: UIView {
         setupLayer()
     }
     
+    ///Redraws circles when `layoutSubviews` is called
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("layoutSubviews")
+        foregroundCircleLayer.frame = bounds
+        foregroundCircleLayer.path = drawPath().CGPath
+        
         backgroundCircleLayer.frame = bounds
         backgroundCircleLayer.path = drawPath().CGPath
-        
-        circlePathLayer.frame = bounds
-        circlePathLayer.path = drawPath().CGPath
     }
     
+    ///Sets colors, end caps and width; adds circles to the view's `layer`
     func setupLayer() {
-        circlePathLayer.lineCap = kCALineCapRound
-        circlePathLayer.lineWidth = 20
-        circlePathLayer.fillColor = UIColor.clearColor().CGColor
-        circlePathLayer.strokeColor = UIColor.sb_DarkBlue().CGColor
+        foregroundCircleLayer.lineCap = kCALineCapRound
+        foregroundCircleLayer.lineWidth = 20
+        foregroundCircleLayer.fillColor = UIColor.clearColor().CGColor
+        foregroundCircleLayer.strokeColor = UIColor.sb_DarkBlue().CGColor
         
         backgroundCircleLayer.lineCap = kCALineCapRound
         backgroundCircleLayer.lineWidth = 20
         backgroundCircleLayer.fillColor = UIColor.clearColor().CGColor
         backgroundCircleLayer.strokeColor = UIColor.sb_DarkBlue().colorWithAlphaComponent(0.3).CGColor
-
+        
         layer.addSublayer(backgroundCircleLayer)
-        layer.addSublayer(circlePathLayer)
+        layer.addSublayer(foregroundCircleLayer)
         backgroundColor = UIColor.clearColor()
     }
     
-    ///Draws the curve inside `circleFrame`
+    ///Draws the circle inside `circleFrame`
     func drawPath() -> UIBezierPath {
         
         //Draw circle in its frame
@@ -84,19 +84,20 @@ class CircularLoaderView: UIView {
     ///Returns a frame in which the circle will be drawn
     func circleFrame() -> CGRect {
         var circleFrame = CGRect(x: 0, y: 0, width: circleRadius, height: circleRadius)
-        circleFrame.origin.x = CGRectGetMidX(circlePathLayer.bounds) - CGRectGetMidX(circleFrame)
-        circleFrame.origin.y = CGRectGetMidY(circlePathLayer.bounds) - CGRectGetMidY(circleFrame)
+        circleFrame.origin.x = CGRectGetMidX(foregroundCircleLayer.bounds) - CGRectGetMidX(circleFrame)
+        circleFrame.origin.y = CGRectGetMidY(foregroundCircleLayer.bounds) - CGRectGetMidY(circleFrame)
         return circleFrame
     }
     
+    ///Animates the `foregroundCircleLayer` to `toValue`
     func animateProgress(toValue: CGFloat) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.toValue = toValue
-        animation.duration = 1.5
+        animation.duration = 1
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animation.fillMode = kCAFillModeBoth // keep to value after finishing
         animation.removedOnCompletion = false
-        circlePathLayer.addAnimation(animation, forKey: animation.keyPath)
+        foregroundCircleLayer.addAnimation(animation, forKey: animation.keyPath)
     }
     
     func degreesToRadians(degrees: Double) -> CGFloat {
