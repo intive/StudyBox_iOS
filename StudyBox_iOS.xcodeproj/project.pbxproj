@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1CAF5499FA51A2184C8B2422 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08693245C02D2C63F02EEEC5 /* Pods_StudyBox_iOSTests.framework */; };
 		2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */; };
 		2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */; };
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
@@ -23,17 +22,16 @@
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
-		6EF92CEC8F1A94A91BA6EADD /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */; };
+		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
-		721C5ADC1CAE654F008B4C8A /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721C5ADB1CAE654F008B4C8A /* CircularLoaderView.swift */; };
 		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFicheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFicheViewController.swift */; };
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
+		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
-		72F260601CAD7E25008984D5 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2605F1CAD7E25008984D5 /* KDCircularProgress.swift */; };
-		72F260621CAD7E2B008984D5 /* KDCircularProgress+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F260611CAD7E2B008984D5 /* KDCircularProgress+init.swift */; };
+		79EA1987D472DAC7E169D8C4 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
 		A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC31C81E76900AFD04E /* Main.storyboard */; };
 		A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */; };
@@ -61,7 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08693245C02D2C63F02EEEC5 /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		15DF27037DBE00D8638065FC /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		218E2E16B606C528CF03A0ED /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -78,17 +77,15 @@
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		721C5ADB1CAE654F008B4C8A /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFicheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFicheViewController.swift; sourceTree = "<group>"; };
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		72F2605F1CAD7E25008984D5 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KDCircularProgress.swift; path = ../Pods/KDCircularProgress/KDCircularProgress/KDCircularProgress.swift; sourceTree = "<group>"; };
-		72F260611CAD7E2B008984D5 /* KDCircularProgress+init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KDCircularProgress+init.swift"; sourceTree = "<group>"; };
-		866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BC06317D35E2C9044A462B5 /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1341DC41C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -102,14 +99,13 @@
 		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
 		AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
 		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
-		C7B6436C8ADEC918DBC3BCA6 /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
 		CEC69B521C946CC100295808 /* TestLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogic.swift; sourceTree = "<group>"; };
 		CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+sbFont.swift"; sourceTree = "<group>"; };
 		CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
 		CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
-		D52C856090977DC3425F3CA6 /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		EAE865E60264C049CA41FB15 /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		F5BA2448978A3424AEC6B8EB /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */,
-				6EF92CEC8F1A94A91BA6EADD /* Pods_StudyBox_iOS.framework in Frameworks */,
+				33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CAF5499FA51A2184C8B2422 /* Pods_StudyBox_iOSTests.framework in Frameworks */,
+				79EA1987D472DAC7E169D8C4 /* Pods_StudyBox_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,21 +154,10 @@
 			isa = PBXGroup;
 			children = (
 				7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */,
-				866820CDA984658ED5127F27 /* Pods_StudyBox_iOS.framework */,
-				08693245C02D2C63F02EEEC5 /* Pods_StudyBox_iOSTests.framework */,
+				874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */,
+				93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		841F26CEBA6537971FFC5B8C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8BC06317D35E2C9044A462B5 /* Pods-StudyBox_iOS.debug.xcconfig */,
-				EAE865E60264C049CA41FB15 /* Pods-StudyBox_iOS.release.xcconfig */,
-				C7B6436C8ADEC918DBC3BCA6 /* Pods-StudyBox_iOSTests.debug.xcconfig */,
-				D52C856090977DC3425F3CA6 /* Pods-StudyBox_iOSTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		A1341DB31C81E76800AFD04E = {
@@ -183,7 +168,7 @@
 				A1341DBD1C81E76900AFD04E /* Products */,
 				38B1F5B29A6C985E3C63E020 /* Frameworks */,
 				CEE9F6901C8A159100961ABA /* Fonts */,
-				841F26CEBA6537971FFC5B8C /* Pods */,
+				D1A10843EFEC22C4E41A7830 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -211,7 +196,7 @@
 				CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
-				721C5ADB1CAE654F008B4C8A /* CircularLoaderView.swift */,
+				72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */,
 				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
@@ -227,8 +212,6 @@
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
 				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
 				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
-				72F2605F1CAD7E25008984D5 /* KDCircularProgress.swift */,
-				72F260611CAD7E2B008984D5 /* KDCircularProgress+init.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -252,6 +235,17 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		D1A10843EFEC22C4E41A7830 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				218E2E16B606C528CF03A0ED /* Pods-StudyBox_iOS.debug.xcconfig */,
+				D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */,
+				15DF27037DBE00D8638065FC /* Pods-StudyBox_iOSTests.debug.xcconfig */,
+				F5BA2448978A3424AEC6B8EB /* Pods-StudyBox_iOSTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -266,7 +260,6 @@
 				5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */,
 				8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */,
 				239883ED1C907D1300B87667 /* ShellScript */,
-				725261525A63C6F3D5F0B3F1 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -287,7 +280,6 @@
 				A1341DD11C81E76900AFD04E /* Resources */,
 				CDF04BEAEBBA49C9A9DEF50A /* 📦 Embed Pods Frameworks */,
 				EB6496101B524B4363C5ABDF /* 📦 Copy Pods Resources */,
-				7B3765BEADFCD49C922A7B4D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -403,36 +395,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		725261525A63C6F3D5F0B3F1 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B3765BEADFCD49C922A7B4D /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -500,7 +462,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				721C5ADC1CAE654F008B4C8A /* CircularLoaderView.swift in Sources */,
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
@@ -519,8 +480,6 @@
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
-				72F260621CAD7E2B008984D5 /* KDCircularProgress+init.swift in Sources */,
-				72F260601CAD7E25008984D5 /* KDCircularProgress.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
@@ -531,6 +490,7 @@
 				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
 				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,
+				72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,7 +618,7 @@
 		};
 		A1341DDD1C81E76900AFD04E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BC06317D35E2C9044A462B5 /* Pods-StudyBox_iOS.debug.xcconfig */;
+			baseConfigurationReference = 218E2E16B606C528CF03A0ED /* Pods-StudyBox_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -671,7 +631,7 @@
 		};
 		A1341DDE1C81E76900AFD04E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EAE865E60264C049CA41FB15 /* Pods-StudyBox_iOS.release.xcconfig */;
+			baseConfigurationReference = D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
@@ -683,7 +643,7 @@
 		};
 		A1341DE01C81E76900AFD04E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7B6436C8ADEC918DBC3BCA6 /* Pods-StudyBox_iOSTests.debug.xcconfig */;
+			baseConfigurationReference = 15DF27037DBE00D8638065FC /* Pods-StudyBox_iOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
@@ -696,7 +656,7 @@
 		};
 		A1341DE11C81E76900AFD04E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D52C856090977DC3425F3CA6 /* Pods-StudyBox_iOSTests.release.xcconfig */;
+			baseConfigurationReference = F5BA2448978A3424AEC6B8EB /* Pods-StudyBox_iOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
