@@ -179,10 +179,10 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                         self.cancelSearchReposition(bar, animated: true)
         			}
                    
-                    let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
                     
                     let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                        let alertAmount = UIAlertController(title: "How many flashcards?", message: "Choose amount of flashcards in the test", preferredStyle: .Alert)
+                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek na teście", preferredStyle: .Alert)
                         
                         func handler(act:UIAlertAction) {
                             if((act.title) != nil)
@@ -216,7 +216,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 
                     }
                     
-                    let studyButton = UIAlertAction(title: "Learn", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                         self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
                     }
                     
