@@ -644,34 +644,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="mbe-Fw-hsa" secondAttribute="leading" id="1T4-7o-UcW"/>
                             <constraint firstItem="oSi-SD-67e" firstAttribute="top" secondItem="mbe-Fw-hsa" secondAttribute="bottom" constant="40" id="2cI-gh-OcR"/>
                             <constraint firstItem="mbe-Fw-hsa" firstAttribute="top" secondItem="cdB-el-cJu" secondAttribute="bottom" constant="42" id="8gN-HP-nne"/>
                             <constraint firstItem="oSi-SD-67e" firstAttribute="top" secondItem="9qH-5l-kfE" secondAttribute="bottom" constant="10" id="9IZ-Da-Bcu"/>
                             <constraint firstItem="CN8-h0-Hn7" firstAttribute="top" secondItem="cdB-el-cJu" secondAttribute="bottom" constant="10" id="KGq-oZ-0n1"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mbe-Fw-hsa" secondAttribute="trailing" id="Lge-bp-SKi"/>
                             <constraint firstItem="qd1-B0-NOL" firstAttribute="top" secondItem="cdB-el-cJu" secondAttribute="bottom" constant="42" id="TV6-pR-zvM"/>
+                            <constraint firstItem="mbe-Fw-hsa" firstAttribute="leading" secondItem="2Up-NT-O2j" secondAttribute="leadingMargin" id="Tpp-oK-v73"/>
+                            <constraint firstItem="mbe-Fw-hsa" firstAttribute="trailing" secondItem="2Up-NT-O2j" secondAttribute="trailingMargin" id="V1Z-OP-fIv"/>
                             <constraint firstItem="qd1-B0-NOL" firstAttribute="leading" secondItem="2Up-NT-O2j" secondAttribute="leadingMargin" id="bId-Sl-vYg"/>
                             <constraint firstItem="9qH-5l-kfE" firstAttribute="centerX" secondItem="2Up-NT-O2j" secondAttribute="centerX" id="ceS-Sp-VGs"/>
-                            <constraint firstItem="qd1-B0-NOL" firstAttribute="centerX" secondItem="2Up-NT-O2j" secondAttribute="centerX" id="d6I-iA-cjA"/>
-                            <constraint firstItem="CN8-h0-Hn7" firstAttribute="top" secondItem="cdB-el-cJu" secondAttribute="bottom" constant="10" id="dmE-rc-gKG"/>
                             <constraint firstItem="9qH-5l-kfE" firstAttribute="centerX" secondItem="2Up-NT-O2j" secondAttribute="centerX" id="fqB-Sn-nD4"/>
                             <constraint firstItem="CN8-h0-Hn7" firstAttribute="centerX" secondItem="2Up-NT-O2j" secondAttribute="centerX" id="i7e-ad-h61"/>
-                            <constraint firstItem="qd1-B0-NOL" firstAttribute="centerX" secondItem="2Up-NT-O2j" secondAttribute="centerX" id="tQe-OK-jO3"/>
                             <constraint firstItem="qd1-B0-NOL" firstAttribute="trailing" secondItem="2Up-NT-O2j" secondAttribute="trailingMargin" id="ua1-x2-0MD"/>
-                            <constraint firstItem="mbe-Fw-hsa" firstAttribute="centerX" secondItem="2Up-NT-O2j" secondAttribute="centerX" id="vhe-r4-ArN"/>
                             <constraint firstItem="oSi-SD-67e" firstAttribute="top" secondItem="qd1-B0-NOL" secondAttribute="bottom" constant="40" id="ydI-6S-2mv"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="tQe-OK-jO3"/>
-                                <exclude reference="dmE-rc-gKG"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="nyQ-60-stZ"/>
                     <connections>
                         <outlet property="answerLabel" destination="RZB-4x-LNY" id="m42-ul-uQT"/>
+                        <outlet property="answerLeading" destination="Tpp-oK-v73" id="qcr-Y6-fnT"/>
+                        <outlet property="answerTrailing" destination="V1Z-OP-fIv" id="FZk-y2-ReW"/>
                         <outlet property="answerView" destination="mbe-Fw-hsa" id="Lq5-Qs-Jc4"/>
                         <outlet property="correctButton" destination="HKv-dV-bFU" id="Aan-ab-YyV"/>
                         <outlet property="currentQuestionNumber" destination="CN8-h0-Hn7" id="F2W-R0-BmT"/>
