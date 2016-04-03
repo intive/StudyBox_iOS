@@ -155,6 +155,17 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers[index] = navigationChild
             
             if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController {
+                
+                var sbController = controller as? StudyBoxViewController
+                
+                if sbController == nil {
+                    if let navigationController = controller as? UINavigationController {
+                        sbController = navigationController.childViewControllers[0] as? StudyBoxViewController
+                    }
+                }
+                sbController?.isDrawerVisible = true
+                sbController?.setNeedsStatusBarAppearanceUpdate()
+    
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
             
