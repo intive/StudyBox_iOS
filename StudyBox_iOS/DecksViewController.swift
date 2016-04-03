@@ -9,7 +9,6 @@
 import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
-    
     private var decksArray: [Deck]?
     private var searchDecks: [Deck]?
     
@@ -51,7 +50,6 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
-            
         }
         decksArray = dataManager?.decks(true)
         searchBar?.delegate = self
@@ -62,9 +60,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         searchBar?.delegate = nil
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.removeObserver(self, forKeyPath: "openSide")
-            
         }
-        
     }
 
     override func viewDidLoad() {
@@ -78,26 +74,22 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         let spacing = Utils.DeckViewLayout.DecksSpacing
         equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
 
-        decksCollectionView.backgroundColor = UIColor.whiteColor()
+        decksCollectionView.backgroundColor = UIColor.sb_Grey()
         
         let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(DecksViewController.hideKeyboard))
         swipeGestureRecognizer.direction = [.Down,.Up]
         decksCollectionView.addGestureRecognizer(swipeGestureRecognizer)
         swipeGestureRecognizer.delegate = self
-        
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
-            
-            if newSide != 0 {
-                hideSearchBar(navbarHeight)
-
-            }else {
-                hideSearchBar(-topItemOffset)
+            if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+                if newSide != 0 {
+                    hideSearchBar(navbarHeight)
+                } else {
+                    hideSearchBar(-topItemOffset)
+                }
             }
-
-        }
     }
     
     // this function calculate size of decks, by given spacing and number of cells in row
@@ -162,17 +154,13 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         return cell
     }
     
-    
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
         let source = searchDecks ?? decksArray
+        
         if let deck = source?[indexPath.row] {
-            
             do {
-                
                 if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
-
 					if let bar = searchBar {
                         searchDecks = nil
                         hideSearchBar(-topItemOffset)
@@ -213,9 +201,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                         alertAmount.addAction(UIAlertAction(title: "20", style: .Default, handler: handler))
                         
                         self.presentViewController(alertAmount, animated: true, completion:nil)
-
                     }
-                    
                     let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                         self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
                     }
@@ -224,13 +210,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                     alert.addAction(studyButton)
 
                     presentViewController(alert, animated: true, completion:nil)
-                    
                 }
             } catch let e {
                 debugPrint(e)
             }
         }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -238,14 +222,12 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             testViewController.testLogicSource = testLogic
         }
     }
-    
 }
 
 // MARK: UISearchBar implementaton
 extension DecksViewController: UISearchBarDelegate {
 
     func setupSearchBar() {
-
         let bar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         bar.searchBarStyle = .Default
         bar.tintColor = UIColor.whiteColor()
@@ -253,7 +235,6 @@ extension DecksViewController: UISearchBarDelegate {
         bar.delegate = self
         view.insertSubview(bar, aboveSubview: decksCollectionView)
         searchBar = bar
-        
     }
    
     func cancelSearchReposition(searchBar: UISearchBar, animated: Bool) {
@@ -282,7 +263,6 @@ extension DecksViewController: UISearchBarDelegate {
                 }
             )
         }
-        
     }
 
     func startSearchReposition(searchBar: UISearchBar, animated: Bool) {
@@ -317,9 +297,7 @@ extension DecksViewController: UISearchBarDelegate {
                     
                 }
             )
-            
         }
-        
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -334,7 +312,6 @@ extension DecksViewController: UISearchBarDelegate {
         } else {
             searchDecks = nil
         }
-
         decksCollectionView.reloadData()
     }
 
@@ -372,10 +349,8 @@ extension DecksViewController: UISearchBarDelegate {
     func hideSearchBar(top:CGFloat) {
         
         if isSearchBarVisible {
-        
             isSearchBarVisible = false
             hideKeyboard()
-            
 
             UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
                 animations: {
@@ -393,7 +368,7 @@ extension DecksViewController: UISearchBarDelegate {
             if (scrollView.contentOffset.y < topItemOffset) {
                 showSearchBar()
                 
-            }else {
+            } else {
                 hideSearchBar(-topItemOffset)
             }
         }
