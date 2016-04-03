@@ -10,13 +10,36 @@ import UIKit
 import MMDrawerController
 
 protocol SBDrawerCenterDelegate {
+    var isDrawerVisible:Bool {get set}
     func drawerToggleAnimation()
 }
 
 class SBDrawerController:MMDrawerController {
+    
     var centerDelegate:SBDrawerCenterDelegate?
     
     static var statusBarAnimationTime = 0.25
+    
+    override func panGestureCallback(panGesture: UIPanGestureRecognizer!) {
+        
+        switch panGesture.state {
+            
+        case .Changed,
+             .Began:
+            if visibleLeftDrawerWidth > 0 {
+                centerDelegate?.isDrawerVisible = true
+            }
+        case .Failed,
+             .Ended:
+            if centerDelegate?.isDrawerVisible == true {
+                centerDelegate?.drawerToggleAnimation()
+            }
+            
+        default:
+            break
+        }
+        super.panGestureCallback(panGesture)
+    }
     
     private func updateCenterDelegate() {
         var sbController = self.centerViewController as? StudyBoxViewController
@@ -26,12 +49,8 @@ class SBDrawerController:MMDrawerController {
                 sbController = navigationController.childViewControllers[0] as? StudyBoxViewController
             }
         }
-        
-        if let delegate = sbController as? SBDrawerCenterDelegate {
-            centerDelegate = delegate
-        }else {
-            centerDelegate = nil
-        }
+        centerDelegate = sbController as? SBDrawerCenterDelegate
+
     }
     
     override func setCenterViewController(newCenterViewController: UIViewController!, withFullCloseAnimation fullCloseAnimated: Bool, completion: ((Bool) -> Void)!) {
@@ -52,19 +71,22 @@ class SBDrawerController:MMDrawerController {
     override func closeDrawerAnimated(animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions, completion: ((Bool) -> Void)!) {
         var completionBlock = completion
         
-        if let sbController = centerDelegate as? StudyBoxViewController {
-            sbController.isDrawerVisible = true
-            
-            if sbController.isViewLoaded() == false  {
-                sbController.setNeedsStatusBarAppearanceUpdate()
-            }
+        
             completionBlock = {[completion] (success:Bool) -> Void in
-                sbController.drawerToggleAnimation()
+                if let sbController = self.centerDelegate as? StudyBoxViewController {
+                    
+                    sbController.isDrawerVisible = true
+                    sbController.setNeedsStatusBarAppearanceUpdate()
+                    
+                    
+                    sbController.drawerToggleAnimation()
+
+                }
                 
                 completion?(success)
             }
             
-        }
+        
         
         super.closeDrawerAnimated(animated, velocity: velocity, animationOptions: options, completion: completionBlock)
         
