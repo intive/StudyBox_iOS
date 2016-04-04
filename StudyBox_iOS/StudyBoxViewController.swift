@@ -12,14 +12,14 @@ import MMDrawerController
 
 class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
 
-    private var isDrawerVisible = false
+    var isDrawerVisible = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
             if let controller = navigationController?.viewControllers[0] where controller === self {
                 let hamburgerImage = UIImage(named: "Hamburger")
-                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("toggleDrawer"))
+                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StudyBoxViewController.toggleDrawer))
                 navigationItem.leftBarButtonItem = button
                 drawer.openDrawerGestureModeMask = .Custom
             }else {
@@ -29,26 +29,7 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
         }
 
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController  {
 
-            var isCenter = false
-            if let centerNavigation = sbDrawer.centerViewController as? UINavigationController {
-                centerNavigation.viewControllers.forEach {
-                    if $0 === self {
-                        isCenter = true
-                    }
-                }
-            }else if sbDrawer.centerViewController === self  {
-                isCenter = true
-            }
-            if (isCenter) {
-                sbDrawer.centerDelegate = self
-            }
-        }
-    }
     
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
@@ -56,16 +37,14 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
         }
     }
     
-    func showingDrawer() {
+    func drawerToggleAnimation() {
         isDrawerVisible = !isDrawerVisible
         
         UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
             animations: {
                 self.setNeedsStatusBarAppearanceUpdate()
             },
-            completion: { finished in
-                self.isDrawerVisible = !self.isDrawerVisible
-            }
+            completion: nil
         )
     }
     

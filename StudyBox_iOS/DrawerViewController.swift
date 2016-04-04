@@ -41,7 +41,7 @@ struct DrawerNavigationChild {
     }
 }
 
-class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SBDrawerLeftDelegate {
+class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     static let DrawerCellId = "DrawerCellId"
@@ -49,8 +49,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    private var hideStatusBar = true
-
     private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
@@ -139,11 +137,23 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         var navigationChild = drawerNavigationControllers[index]
         navigationChild.isActive = true
         
+        drawerNavigationControllers[currentControllerIndex].isActive = false
         if let controller = navigationChild.viewController {
             // viewController getter is mutating, it's possible that it was instantiated for the first time so the value was changed
             drawerNavigationControllers[index] = navigationChild
             
             if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController {
+                
+                var sbController = controller as? StudyBoxViewController
+                
+                if sbController == nil {
+                    if let navigationController = controller as? UINavigationController {
+                        sbController = navigationController.childViewControllers[0] as? StudyBoxViewController
+                    }
+                }
+                sbController?.isDrawerVisible = true
+                sbController?.setNeedsStatusBarAppearanceUpdate()
+    
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
             
@@ -162,20 +172,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         return .Slide
     }
     
-    func hidingDrawer() {
-        hideStatusBar = !hideStatusBar
-        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
-            animations: {
-                self.setNeedsStatusBarAppearanceUpdate()
-            },
-            completion: { finished in
-                self.hideStatusBar = !self.hideStatusBar
-            }
-        )
-    }
-    
     override func prefersStatusBarHidden() -> Bool {
-        return hideStatusBar
+        return true
     }
     
     func deactiveAllChildViewControllers() {

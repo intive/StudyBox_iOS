@@ -2,6 +2,7 @@
 set -e
 
 brew update
-brew install xctool || brew outdated xctool || brew upgrade xctool
 
-gem install xcpretty
+# brew install xctool || brew outdated xctool || brew upgrade xctool
+brew uninstall xctool
+brew install --HEAD xctool

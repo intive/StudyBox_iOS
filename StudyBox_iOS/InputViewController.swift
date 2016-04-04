@@ -36,7 +36,7 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("hideKeyboard"))
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(InputViewController.hideKeyboard))
         swipeGestureRecognizer.direction = .Down
         view.addGestureRecognizer(swipeGestureRecognizer)
     
@@ -50,8 +50,8 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
             $0.delegate = self
         }
         let defaultCenter = NSNotificationCenter.defaultCenter()
-        defaultCenter.addObserver(self, selector: Selector("keyboardChangedFrame:"), name: UIKeyboardWillShowNotification, object: nil)
-        defaultCenter.addObserver(self, selector: Selector("keyboardChangedFrame:"), name: UIKeyboardWillHideNotification, object: nil)
+        defaultCenter.addObserver(self, selector: #selector(InputViewController.keyboardChangedFrame(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        defaultCenter.addObserver(self, selector: #selector(InputViewController.keyboardChangedFrame(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {

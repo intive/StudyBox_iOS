@@ -29,7 +29,8 @@ extension DataManager {
             var answer = "\(name) answer"
             
             var tip:Tip?
-            
+            var cardId:String //Helps in hiding
+            var countToHide:Int = 0 //Helps in hiding too
             
             for i in 0...limit {
                 let clear = (i == limit || i == limit / 2)
@@ -50,8 +51,13 @@ extension DataManager {
                     tip = nil
                 }
                 
-                try! manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
+                try! cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
+                countToHide += 1
                 
+                //Hides every 3th generated flashcard
+                if ( countToHide % 3 == 0 ) {
+                    try! manager.hideFlashcard(withId: cardId)
+                }
             }
             
         }

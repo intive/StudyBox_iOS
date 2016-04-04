@@ -14,17 +14,15 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var incorrectButton: UIButton!
     
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var currentQuestionNumber: UILabel!
     
-    
+    @IBOutlet weak var answerLeading: NSLayoutConstraint!
+    @IBOutlet var answerTrailing: NSLayoutConstraint!
     var testLogicSource:Test?
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //answerView is set outside of screen to appear later at swipe
-        //and after answering the question
-        answerView.center.x = testView.center.x + testView.frame.size.width
-        
-    }
+    private var dataManager:DataManager? = {
+        return UIApplication.appDelegate().dataManager
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +30,14 @@ class TestViewController: StudyBoxViewController {
         let swipeLeftForAnswer = UISwipeGestureRecognizer()
         swipeLeftForAnswer.direction = .Left
         swipeLeftForAnswer.delegate = self
-        swipeLeftForAnswer.addTarget(self, action: "swipedLeft")
+        swipeLeftForAnswer.addTarget(self, action: #selector(TestViewController.swipedLeft))
         questionView.userInteractionEnabled = true
         questionView.addGestureRecognizer(swipeLeftForAnswer)
         
         let swipeUpQuestionLabel = UISwipeGestureRecognizer()
         swipeUpQuestionLabel.direction = .Up
         swipeUpQuestionLabel.delegate = self
-        swipeUpQuestionLabel.addTarget(self, action: "swipedUp")
+        swipeUpQuestionLabel.addTarget(self, action: #selector(TestViewController.swipedUp))
         questionLabel.userInteractionEnabled = true
         questionLabel.addGestureRecognizer(swipeUpQuestionLabel)
         
@@ -48,10 +46,15 @@ class TestViewController: StudyBoxViewController {
          */
         let swipeUpAnswerLabel = UISwipeGestureRecognizer()
         swipeUpAnswerLabel.direction = .Up
-        swipeUpAnswerLabel.addTarget(self, action: "swipedUp")
+        swipeUpAnswerLabel.addTarget(self, action: #selector(TestViewController.swipedUp))
         answerLabel.userInteractionEnabled = true
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
+        //Set the navigation bar title to current deck name
+        if let test = testLogicSource, deckID = test.currentCard?.deckId, manager = dataManager {
+            self.title = manager.deck(withId: deckID)?.name
+        }
+
         tipButton.backgroundColor = UIColor.sb_Grey()
         correctButton.backgroundColor = UIColor.sb_Grey()
         incorrectButton.backgroundColor = UIColor.sb_Grey()
@@ -67,18 +70,24 @@ class TestViewController: StudyBoxViewController {
         questionLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         answerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         scoreLabel.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        currentQuestionNumber.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         
+        currentQuestionNumber.text = "#1"
         
         //score label displays score; onclick moves to Score View Controller
-        let tapScore = UITapGestureRecognizer(target: self, action: Selector("tapScore:"))
+        let tapScore = UITapGestureRecognizer(target: self, action: #selector(TestViewController.tapScore(_:)))
         scoreLabel.userInteractionEnabled = true
         scoreLabel.addGestureRecognizer(tapScore)
+        try! testLogicSource?.checkIfPassedDeckIsEmpty()
+        try! testLogicSource?.checkIfAllFlashcardsHidden()
         if let _ = testLogicSource {
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
         }else {
             // TODO unhandled case
         }
+        answerTrailing.active = false
+        answerLeading.constant = view.frame.width
     }
     
     
@@ -128,8 +137,12 @@ class TestViewController: StudyBoxViewController {
     }
     
     func swipedLeft(){
+        view.layoutIfNeeded()
+        self.answerLeading.constant = 0
+
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
-            self.answerView.center.x = self.testView.center.x
+            self.answerTrailing.active = true 
+            self.view.layoutIfNeeded()
             self.questionView.center.x = self.testView.center.x - self.testView.frame.size.width
             }, completion: nil)
     }
@@ -142,8 +155,8 @@ class TestViewController: StudyBoxViewController {
             }, completion: { finished in
                 //set views to show questionView after animation
                 self.questionView.center.x = self.testView.center.x
-                self.answerView.center.x = self.testView.center.x + self.testView.frame.size.width
-                
+                self.answerTrailing.active = false
+                self.answerLeading.constant = self.view.frame.width
                 //set buttons size back to normal in case they were being pressed while swiping
                 self.correctButton.transform = CGAffineTransformIdentity
                 self.incorrectButton.transform = CGAffineTransformIdentity
@@ -167,7 +180,7 @@ class TestViewController: StudyBoxViewController {
     @IBAction func showTip(sender: AnyObject) {
         var message = ""
         if let currentCard = testLogicSource?.currentCard?.tip {
-            message = currentCard.description
+            message = currentCard
         }else {
             message = "Brak podpowiedzi"
         }
@@ -192,8 +205,9 @@ class TestViewController: StudyBoxViewController {
     }
     
     func updateAnswerUiForCurrentCard() {
-        if let card = testLogicSource?.currentCard {
+        if let test = testLogicSource, card = test.currentCard {
             answerLabel.text = card.answer
+            currentQuestionNumber.text = "#\(test.index)"
         }
     }
     
@@ -201,7 +215,7 @@ class TestViewController: StudyBoxViewController {
         
         if let testLogic = testLogicSource {
             
-            if let card = correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer() {
+            if (correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer()) != nil {
                 answeredQuestionTransition()
             }else {
                 if shouldPerformSegueWithIdentifier("ScoreSegue", sender: self) {
@@ -222,11 +236,11 @@ class TestViewController: StudyBoxViewController {
     ///Global time setting for button scale animations
     let buttonsAnimationTime: NSTimeInterval = 0.1
     ///Global scale setting for button scale animations
-    let buttonsScaleWhenPressed: (CGFloat,CGFloat) = (0.85,0.85)
+    let buttonsScaleWhenPressed = CGAffineTransformMakeScale(0.85,0.85)
     
     @IBAction func correctButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime,delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
+            self.correctButton.transform = self.buttonsScaleWhenPressed
             }, completion:nil )
     }
     
@@ -249,7 +263,7 @@ class TestViewController: StudyBoxViewController {
     
     @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime,delay:0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = CGAffineTransformMakeScale(self.buttonsScaleWhenPressed)
+            self.incorrectButton.transform = self.buttonsScaleWhenPressed
             }, completion:nil )
     }
     
@@ -273,7 +287,8 @@ class TestViewController: StudyBoxViewController {
         //TODO: set new question in label before dissolve
         updateQuestionUiForCurrentCard()
         //move answerView outside of the screen
-        answerView.center.x = testView.center.x + testView.frame.size.width
+        answerTrailing.active = false
+        answerLeading.constant = view.frame.width
         
         //animate dissolving of views
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: {

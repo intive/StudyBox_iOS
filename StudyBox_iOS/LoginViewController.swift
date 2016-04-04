@@ -11,8 +11,8 @@ import Reachability
 class LoginViewController: UserViewController,InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: ValidatableTextField!
+    @IBOutlet weak var passwordTextField: ValidatableTextField!
     @IBOutlet weak var unregisteredUserButton: UIButton!
     @IBOutlet weak var registerUserButton: UIButton!
     
@@ -20,15 +20,18 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         inputViews.appendContentsOf([emailTextField,passwordTextField])
         inputViews.forEach {
-            $0.textColor = UIColor.sb_DarkBlue()
+            if let validable = $0 as? ValidatableTextField {
+                validable.validColor = UIColor.sb_DarkBlue()
+                validable.invalidColor = UIColor.sb_Raspberry()
+                validable.textColor = validable.validColor
+            }
         }
         
         logInButton.layer.cornerRadius = 10.0
         logInButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-        logInButton.backgroundColor = UIColor.sb_Raspberry()
+        logInButton.backgroundColor = UIColor.sb_DarkGrey()
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     }
@@ -42,15 +45,28 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         
         let reach = Reachability.reachabilityForInternetConnection()
         let isReachable = reach.currentReachabilityStatus() != .NotReachable
+        var alertMessage:String?
         
-        if isReachable {
-            if let emailText = emailTextField.text, let passwordText = passwordTextField.text where emailText != "" && passwordText != "" {
-                successfulLoginTransition()
-            }else {
-                presentAlertController(withTitle: "", message: "Wypełnij wszystkie pola!", buttonText: "Ok")
-            }
-        }else {
-            presentAlertController(withTitle: "", message: "Brak połączenia z Internetem", buttonText: "Ok")
+        if !isReachable {
+            alertMessage = "Brak połączenia z Internetem"
+        }
+        
+        if !passwordTextField.isValid {
+            alertMessage = "Niepoprawne hasło!"
+        }
+        
+        if !emailTextField.isValid {
+            alertMessage = "Niepoprawny email!"
+        }
+        
+        if !validateTextFieldsNotEmpty() {
+            alertMessage = "Wypełnij wszystkie pola!"
+        }
+        
+        if let message = alertMessage {
+            presentAlertController(withTitle: "", message: message, buttonText: "Ok")
+        } else {
+            successfulLoginTransition()
         }
     }
 
@@ -59,25 +75,46 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     }
     
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        var validationResult = true
+        
+        
+        var resultText = (textField.text as NSString?)?.stringByReplacingCharactersInRange(range, withString: string)
+        
+        if let text = resultText where textField == emailTextField {
+            resultText = text.trimWhiteCharacters()
+            validationResult = text.isValidEmail()
+            
+        } else if let text = resultText where textField == passwordTextField {
+            validationResult = text.isValidPassword()
+            
+        }
+        textField.text = resultText
+        
+        if let validableTextField = textField as? ValidatableTextField {
+            validableTextField.isValid = validationResult
+        }
+        
+        if areTextFieldsValid() {
+            logInButton.backgroundColor = UIColor.sb_Raspberry()
+        } else {
+            logInButton.backgroundColor = UIColor.sb_DarkGrey()
+        }
+        
+        return false
+        
+    }
     
     @IBAction func loginWithoutAccount(sender: AnyObject) {
         successfulLoginTransition()
     }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        if let text = textField.text where textField == emailTextField {
-            textField.text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        }
-    }
-    
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == passwordTextField {
             textField.resignFirstResponder()
             loginWithInputData()
             return false
-        }else if textField == emailTextField {
+        } else if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
         }
         return true

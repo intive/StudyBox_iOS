@@ -10,7 +10,7 @@ import UIKit
 
 class ScoreViewController: StudyBoxViewController {
     
-    
+    @IBOutlet weak var circularProgressView: CircularLoaderView!
     @IBOutlet weak var congratulationsBigLabel: UILabel!
     @IBOutlet weak var congratulationsSmallLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -18,10 +18,12 @@ class ScoreViewController: StudyBoxViewController {
     @IBOutlet weak var runTestButton: UIButton!
     
     var testLogicSource:Test?
+    var testScoreFraction:Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        congratulationsBigLabel.font = UIFont.sbFont(size: sbFontSizeSuperLarge, bold: false)
+        congratulationsBigLabel.font = UIFont.sbFont(size: sbFontSizeSuperLarge, bold: true)
         congratulationsSmallLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         
         deckListButton.backgroundColor = UIColor.sb_Raspberry()
@@ -35,24 +37,40 @@ class ScoreViewController: StudyBoxViewController {
         runTestButton.layer.cornerRadius = 10
         
         completeData()
+        setupProgressView()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        animateProgressView()
+    }
+    
+    func setupProgressView() {
+        let frameWidth = circularProgressView.frame.width
+        let frameHeight = circularProgressView.frame.height
+        
+        //We set the radius based on width or height, whichever is smaller
+        circularProgressView.circleRadius = (frameWidth < frameHeight) ? frameWidth/2 : frameHeight/2
+        circularProgressView.progress = 0
+    }
+    
+    func animateProgressView() {
+        circularProgressView.animateProgress(CGFloat(testScoreFraction))
+    }
+    
+    ///Sets labels and `testScoreFraction` based on test results
     func completeData() {
         if let testLogic = testLogicSource {
-            
             let cardsResult = testLogic.cardsAnsweredAndPossible()
-            scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-            scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)"
             
-            switch testLogic.testType {
-            case .Learn:
-                runTestButton.hidden = true
-            default:
-                break
-            }
+            self.testScoreFraction = Double(cardsResult.0) / Double(cardsResult.1)
+            let testScorePercentage = Int(testScoreFraction*100)
+            
+            scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
+            scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n\(testScorePercentage) %"
         }
-        
     }
+    
     @IBAction func deckListButtonAction(sender: UIButton) {
         // TODO refactor for Drawer menu options
         DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
@@ -75,3 +93,6 @@ class ScoreViewController: StudyBoxViewController {
         }
     }
 }
+
+
+
