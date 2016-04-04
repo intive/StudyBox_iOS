@@ -16,7 +16,7 @@ extension UIViewController {
         alert.addAction( UIAlertAction(title: buttonText, style: .Default) { (_) in
             actionCompletion?()
             
-            self.dismissViewControllerAnimated(true) {
+            alert.dismissViewControllerAnimated(true) {
                 dismissCompletion?()
             }
         })

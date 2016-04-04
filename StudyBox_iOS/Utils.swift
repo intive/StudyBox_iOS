@@ -22,4 +22,8 @@ class Utils {
         static let DecksInRowIPhoneVer: CGFloat = 2
         static let DeckWithoutTitle = "Bez tytułu"
     }
+    
+    struct UserAccount {
+        static let MinimumPasswordLength = 8
+    }
 }

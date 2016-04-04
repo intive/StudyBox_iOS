@@ -14,9 +14,9 @@ var userDataForRegistration = [String : String]()
 
 class RegistrationViewController: UserViewController, InputViewControllerDataSource {
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var repeatPasswordTextField: UITextField!
+    @IBOutlet weak var emailTextField: EmailValidatableTextField!
+    @IBOutlet weak var passwordTextField: ValidatableTextField!
+    @IBOutlet weak var repeatPasswordTextField: ValidatableTextField!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
@@ -30,103 +30,117 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* the login button is by default disabled,
+        /* the register button is by default disabled,
          user has to enter some data and it has to be verified
          */
-        
-        if !isConnectedToInternet() {
-            showAlert(.noInternet)
-        }
-        
-        disableRegisterButton()
+        disableButton(registerButton)
         registerButton.layer.cornerRadius = 10.0
         
         inputViews.append(emailTextField)
         inputViews.append(passwordTextField)
         inputViews.append(repeatPasswordTextField)
-        
+        inputViews.forEach {
+            if let validable = $0 as? ValidatableTextField {
+                validable.validColor = UIColor.sb_DarkBlue()
+                validable.invalidColor = UIColor.sb_Raspberry()
+                validable.textColor = validable.validColor
+            }
+        }
         emailTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         passwordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         repeatPasswordTextField.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     }
     
-    func isConnectedToInternet() -> Bool {
-        //returns true if connected, false if disconnected
-        let reachability = Reachability.reachabilityForInternetConnection()
-        
-        if reachability.currentReachabilityStatus() == .NotReachable {
-            return false
-        } else {
-            return true
-        }
-    }
     
-    func checkEmail(textField: UITextField) -> () {
-        if let text = textField.text where textField == emailTextField {
-            
-            textField.text = text.trimWhiteCharacters()
-            
-            if let text = textField.text {
-                if !text.isValidEmail() {
-                    showAlert(.emailIncorrect)
-
+    func registerWithInputData() {
+        var alertMessage:String?
+        
+        if !Reachability.isConnected() {
+            alertMessage = ValidationMessage.noInternet.rawValue
+        }
+        
+        inputViews.reverse().forEach {
+            if let validatableTextField = $0 as? ValidatableTextField {
+                if let message = validatableTextField.invalidMessage {
+                    alertMessage = message
                 }
             }
         }
-    }
-    
-    func checkPasswordLengthAndSpaces(password: UITextField) {
-        if let characterCount = password.text?.characters.count {
-            if characterCount < 8 && characterCount != 0 {
-                showAlert(.passwordTooShort)
-                //To prevent popping up multiple error alerts
-                repeatPasswordTextField.resignFirstResponder()
-            }
-        }
-        if (password.text?.containsString(" ") == true) {
-            showAlert(.passwordContainsSpace)
-            repeatPasswordTextField.resignFirstResponder()
-        }
-    }
-    
-    func checkPasswordsMatch(password1 password1:UITextField, password2:UITextField) {
         
-        if (password1.text != "" && password2.text != "") {
-            if (password1.text != password2.text){
-                password1.textColor = UIColor.sb_Raspberry()
-                password2.textColor = UIColor.sb_Raspberry()
-                showAlert(.passwordsDontMatch)
-                disableRegisterButton()
-            }
-            else {
-                password1.textColor = UIColor.sb_DarkBlue()
-                password2.textColor = UIColor.sb_DarkBlue()
-                
-                enableRegisterButton()
-            }
+        if areTextFieldsEmpty() {
+            alertMessage = ValidationMessage.fieldsAreEmpty.rawValue
+        }
+        
+        if let message = alertMessage {
+            presentAlertController(withTitle: "", message: message, buttonText: "Ok")
         } else {
-            disableRegisterButton()
+            dismissViewControllerAnimated(true) {[unowned self] in
+                self.successfulLoginTransition()
+            }
         }
     }
     
-    func textFieldDidEndEditing(editedTextField: UITextField) {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        var validationResult = true
         
-        switch editedTextField {
+        
+        textField.text = (textField.text as NSString?)?.stringByReplacingCharactersInRange(range, withString: string)
+        var invalidMessage:String? = nil 
+        if textField == emailTextField, let _ = textField.text {
+            validationResult = emailTextField.isValid()
+            if !validationResult {
+                invalidMessage = ValidationMessage.emailIncorrect.rawValue
+            }
             
-        case emailTextField:
-            checkEmail(editedTextField)
-            checkPasswordsMatch(password1: passwordTextField, password2: repeatPasswordTextField)
+        } else if let text = textField.text {
+            validationResult = text.hasMinimumCharacters(minimum: Utils.UserAccount.MinimumPasswordLength)
             
-        case passwordTextField:
-            checkPasswordLengthAndSpaces(passwordTextField)
+            if !validationResult {
+                invalidMessage = ValidationMessage.passwordTooShort.rawValue
+            } else {
+                validationResult = !text.hasWhitespaceOrNewLineCharacter()
+                
+                if !validationResult {
+                    invalidMessage = ValidationMessage.passwordIncorrect.rawValue
+                } else {
+                    var matchingField:UITextField?
+                    
+                    if textField == passwordTextField {
+                        matchingField = repeatPasswordTextField
+                    } else {
+                        matchingField = passwordTextField
+                    }
+                    
+                    if let validatableMatchingField = matchingField as? ValidatableTextField where validatableMatchingField.text != "" {
+                        validationResult = text == validatableMatchingField.text
+                        if !validationResult {
+                            invalidMessage = ValidationMessage.passwordsDontMatch.rawValue
+                            validatableMatchingField.invalidMessage = invalidMessage
+                        }else {
+                            validatableMatchingField.invalidMessage = nil
+                        }
+                        
+                    }
+                    
+                }
+            }
             
-        case repeatPasswordTextField:
-            checkPasswordsMatch(password1: passwordTextField, password2: repeatPasswordTextField)
             
-        default:
-            return
         }
+        
+        if let validatableTextField = textField as? ValidatableTextField {
+            validatableTextField.invalidMessage = invalidMessage
+        }
+        
+        if areTextFieldsValid() {
+            enableButton(registerButton)
+        } else {
+            disableButton(registerButton)
+        }
+        
+        return false
+        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -139,9 +153,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         if (nextResponder != nil) {
             // Found next responder, so set it.
             nextResponder?.becomeFirstResponder()
-        }
-        else
-        {
+        } else {
             // Not found, so hide keyboard
             textField.resignFirstResponder()
         }
@@ -153,63 +165,6 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     }
     
     @IBAction func register(sender: UIButton) {
-        
-        let areTextFieldsNotEmpty = emailTextField.text != "" && passwordTextField.text != "" && repeatPasswordTextField.text != ""
-        
-        if (areTextFieldsNotEmpty && isConnectedToInternet()) {
-            userDataForRegistration["email"] = emailTextField.text
-            userDataForRegistration["password"] = repeatPasswordTextField.text
-            
-            //TODO: pass over the dictionary with data
-            dismissViewControllerAnimated(true) {[unowned self] () -> Void in
-                self.successfulLoginTransition() }
-        }
-        else if !areTextFieldsNotEmpty {
-            showAlert(.fieldsNotEmpty)
-        } else if !isConnectedToInternet() {
-            showAlert(.noInternet)
-        }
+        registerWithInputData()
     }
-    
-    func disableRegisterButton() {
-        registerButton.backgroundColor = UIColor.grayColor()
-        registerButton.enabled = false
-    }
-    
-    func enableRegisterButton() {
-        registerButton.backgroundColor = UIColor.sb_Raspberry()
-        registerButton.enabled = true
-    }
-    
-    enum alertType {
-        case passwordTooShort
-        case passwordsDontMatch
-        case emailIsTaken
-        case passwordContainsSpace
-        case noInternet
-        case emailIncorrect
-        case fieldsNotEmpty
-    }
-    
-    let alertMessagesDict:[alertType : (String,String)] = [
-        .noInternet : ("Brak połączenia","Nie można połączyć się z Internetem. Sprawdź połączenie"),
-        .emailIsTaken : ("Adres e-mail zajęty", "Już istnieje konto z takim adresem e-mail."),
-        .passwordContainsSpace : ("Spacja w haśle", "Hasło nie może zawierać spacji."),
-        .emailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację lub jest w złym formacie."),
-        .passwordsDontMatch : ("Hasła są różne","Oba hasła muszą być identyczne."),
-        .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków."),
-        .fieldsNotEmpty : ("Wypełnij pola","Sprawdź czy wszystkie pola formularza są wypełnione.")
-    ]
-    
-    func showAlert(type: alertType) {
-        
-        let alertController = UIAlertController(title: alertMessagesDict[type]!.0,
-                                                message: alertMessagesDict[type]!.1,
-                                                preferredStyle: .Alert)
-        
-        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertController.addAction(actionOk)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
 }

@@ -11,7 +11,7 @@ import Reachability
 class LoginViewController: UserViewController,InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
-    @IBOutlet weak var emailTextField: ValidatableTextField!
+    @IBOutlet weak var emailTextField: EmailValidatableTextField!
     @IBOutlet weak var passwordTextField: ValidatableTextField!
     @IBOutlet weak var unregisteredUserButton: UIButton!
     @IBOutlet weak var registerUserButton: UIButton!
@@ -31,7 +31,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         
         logInButton.layer.cornerRadius = 10.0
         logInButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-        logInButton.backgroundColor = UIColor.sb_DarkGrey()
+        disableButton(logInButton)
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     }
@@ -43,23 +43,21 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     
     func loginWithInputData(){
         
-        let reach = Reachability.reachabilityForInternetConnection()
-        let isReachable = reach.currentReachabilityStatus() != .NotReachable
         var alertMessage:String?
         
-        if !isReachable {
+        if !Reachability.isConnected() {
             alertMessage = "Brak połączenia z Internetem"
         }
         
-        if !passwordTextField.isValid {
-            alertMessage = "Niepoprawne hasło!"
+        inputViews.reverse().forEach {
+            if let validatableTextField = $0 as? ValidatableTextField {
+                if let message = validatableTextField.invalidMessage {
+                    alertMessage = message
+                }
+            }
         }
         
-        if !emailTextField.isValid {
-            alertMessage = "Niepoprawny email!"
-        }
-        
-        if !validateTextFieldsNotEmpty() {
+        if areTextFieldsEmpty() {
             alertMessage = "Wypełnij wszystkie pola!"
         }
         
@@ -78,27 +76,31 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var validationResult = true
         
+        var invalidMessage:String?
+        textField.text = (textField.text as NSString?)?.stringByReplacingCharactersInRange(range, withString: string)
         
-        var resultText = (textField.text as NSString?)?.stringByReplacingCharactersInRange(range, withString: string)
-        
-        if let text = resultText where textField == emailTextField {
-            resultText = text.trimWhiteCharacters()
-            validationResult = text.isValidEmail()
+        if textField == emailTextField, let _ = textField.text  {
+            validationResult = emailTextField.isValid()
+            if !validationResult {
+                invalidMessage = ValidationMessage.emailIncorrect.rawValue
+            }
             
-        } else if let text = resultText where textField == passwordTextField {
-            validationResult = text.isValidPassword()
+        } else if textField == passwordTextField, let text = textField.text {
+            validationResult = text.isValidPassword(minimumCharacters: Utils.UserAccount.MinimumPasswordLength)
+            if !validationResult {
+                invalidMessage = ValidationMessage.passwordIncorrect.rawValue
+            }
             
         }
-        textField.text = resultText
         
-        if let validableTextField = textField as? ValidatableTextField {
-            validableTextField.isValid = validationResult
+        if let validatableTextField = textField as? ValidatableTextField {
+            validatableTextField.invalidMessage = invalidMessage
         }
         
         if areTextFieldsValid() {
-            logInButton.backgroundColor = UIColor.sb_Raspberry()
+            enableButton(logInButton)
         } else {
-            logInButton.backgroundColor = UIColor.sb_DarkGrey()
+            disableButton(logInButton)
         }
         
         return false
