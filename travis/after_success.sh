@@ -47,6 +47,7 @@ IPA_PATH="$PWD/build/$APP_NAME.ipa"
 
 FABRIC="$PWD/Pods/Fabric/upload-symbols"
 CRASHLYTICS="$PWD/Pods/Crashlytics/submit"
+FABRIC_GROUP_ALIASES="patronage-2016-qa"
 
 echo "Update build number"
 
@@ -97,7 +98,8 @@ echo "Uploading IPA"
     "$FABRIC_API_KEY" \
     "$FABRIC_BUILD_SECRET" \
     -ipaPath "$IPA_PATH" \
-    -notifications "NO" \
+    -notifications "YES" \
+	-groupAliases "$FABRIC_GROUP_ALIASES"
     -debug "YES"
 
 echo "Uploading dSYM"
