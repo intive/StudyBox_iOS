@@ -13,6 +13,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     let frequencyCellID = "frequencyCell"
     let decksCellID = "decksCell"
     let pickerCellID = "pickerCell"
+    var frequencyTitle = "aa"
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
@@ -38,11 +39,15 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         var cell:UITableViewCell?
         
         switch (indexPath.section,indexPath.row){
-        case (0,0): cell = tableView.dequeueReusableCellWithIdentifier(frequencyCellID)
+        case (0,0): cell = tableView.dequeueReusableCellWithIdentifier(frequencyCellID, forIndexPath: indexPath)
+            cell?.detailTextLabel?.text = "częstotliwość"
         case (0,1): cell = tableView.dequeueReusableCellWithIdentifier(pickerCellID)
         case (1,0): cell = tableView.dequeueReusableCellWithIdentifier(decksCellID)
+            cell?.detailTextLabel?.text = "x wybranych"
         default: break
         }
+        
+        
         cell?.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         cell?.detailTextLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         return cell!

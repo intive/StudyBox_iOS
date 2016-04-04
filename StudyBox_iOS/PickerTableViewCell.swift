@@ -58,7 +58,11 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-
+        switch component {
+        case 0: print(pickerFrequencyNumbers[row])
+        case 1: print(pickerFrequencyTypes[row])
+        default: break
+        }
     }
     
     override func awakeFromNib() {
