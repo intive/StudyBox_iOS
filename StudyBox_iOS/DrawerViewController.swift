@@ -71,12 +71,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Ustawienia",viewController: nil,
                     lazyLoadViewControllerBlock: {[weak self] in
-                        let vc = self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID) as? UINavigationController
-                        
-                        if let settingsVC = vc?.childViewControllers[0] as? SettingsViewController {
-                            return settingsVC
-                        }
-                        return nil
+                        return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
                     }
                 )
             )
