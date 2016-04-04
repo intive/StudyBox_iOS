@@ -8,6 +8,8 @@
 
 import Foundation
 import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 enum DataManagerError:ErrorType {
     case NoDeckWithGivenId, NoFlashcardWithGivenId
@@ -243,6 +245,26 @@ class DataManager {
         } else {
             throw DataManagerError.NoFlashcardWithGivenId
         }
+    }
+    
+    func addFlashcardToServer(flashcard:Flashcard , deckId:String) {
+        let values = [
+            "question": flashcard.question ,
+            "answer": flashcard.answer
+        ]
+        
+        Alamofire.request(.POST, "http://private-anon-57cfd8c26-studybox.apiary-mock.com/decks/" + deckId + "/flashcards" , parameters: values , encoding:.JSON)
+            .responseJSON{ response in
+                
+                switch response.result {
+                case .Success:
+                    try! self.addFlashcard(forDeckWithId: deckId, question: flashcard.question, answer: flashcard.answer, tip:nil)
+                    
+                case .Failure(_):
+                    print("Request failed with error")
+                }
+        }
+        
     }
     
 }
