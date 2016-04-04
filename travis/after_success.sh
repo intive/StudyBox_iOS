@@ -99,7 +99,7 @@ echo "Uploading IPA"
     "$FABRIC_BUILD_SECRET" \
     -ipaPath "$IPA_PATH" \
     -notifications "YES" \
-	-groupAliases "$FABRIC_GROUP_ALIASES"
+	-groupAliases "$FABRIC_GROUP_ALIASES" \
     -debug "YES"
 
 echo "Uploading dSYM"
