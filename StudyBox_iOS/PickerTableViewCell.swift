@@ -14,7 +14,14 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     
     let pickerFrequencyNumbers = ["1","2","3","4","5","10","15","20","30","45","60"]
     let pickerFrequencyTypes = ["minut","godzin","dni"]
-    var settingsVC = SettingsViewController()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
+
+    }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
@@ -30,7 +37,7 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         
-        var pickerLabel = view as? UILabel;
+        var pickerLabel = view as? UILabel
         if pickerLabel == nil {
             pickerLabel = UILabel()
             pickerLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
@@ -48,24 +55,7 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        if let cell = settingsVC.settingsTableView?.cellForRowAtIndexPath(indexPath) {
-            cell.detailTextLabel?.text = "updated text"
-            print("a")
-        }
-        //TODO save to NSUserDefaults
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-       
-        self.pickerView.dataSource = self
-        self.pickerView.delegate = self
-        
-        if let aView: UIView = self.superview {
-            settingsVC.settingsTableView = aView as? UITableView
-        }
-        
+        //TODO: update NSUserDefaults
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
