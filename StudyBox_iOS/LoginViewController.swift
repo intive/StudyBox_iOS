@@ -8,7 +8,7 @@
 
 import UIKit
 import Reachability 
-class LoginViewController: UserViewController,InputViewControllerDataSource {
+class LoginViewController: UserViewController, InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: ValidatableTextField!
@@ -20,7 +20,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputViews.appendContentsOf([emailTextField,passwordTextField])
+        inputViews.appendContentsOf([emailTextField, passwordTextField])
         inputViews.forEach {
             if let validable = $0 as? ValidatableTextField {
                 validable.validColor = UIColor.sb_DarkBlue()
@@ -45,7 +45,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         
         let reach = Reachability.reachabilityForInternetConnection()
         let isReachable = reach.currentReachabilityStatus() != .NotReachable
-        var alertMessage:String?
+        var alertMessage: String?
         
         if !isReachable {
             alertMessage = "Brak połączenia z Internetem"

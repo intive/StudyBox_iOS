@@ -35,7 +35,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
          */
         
         if !isConnectedToInternet() {
-            showAlert(.noInternet)
+            showAlert(.NoInternet)
         }
         
         disableRegisterButton()
@@ -69,7 +69,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
             
             if let text = textField.text {
                 if !text.isValidEmail() {
-                    showAlert(.emailIncorrect)
+                    showAlert(.EmailIncorrect)
 
                 }
             }
@@ -79,27 +79,26 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     func checkPasswordLengthAndSpaces(password: UITextField) {
         if let characterCount = password.text?.characters.count {
             if characterCount < 8 && characterCount != 0 {
-                showAlert(.passwordTooShort)
+                showAlert(.PasswordTooShort)
                 //To prevent popping up multiple error alerts
                 repeatPasswordTextField.resignFirstResponder()
             }
         }
-        if (password.text?.containsString(" ") == true) {
-            showAlert(.passwordContainsSpace)
+        if password.text?.containsString(" ") == true {
+            showAlert(.PasswordContainsSpace)
             repeatPasswordTextField.resignFirstResponder()
         }
     }
     
-    func checkPasswordsMatch(password1 password1:UITextField, password2:UITextField) {
+    func checkPasswordsMatch(password1 password1: UITextField, password2: UITextField) {
         
-        if (password1.text != "" && password2.text != "") {
-            if (password1.text != password2.text){
+        if password1.text != "" && password2.text != "" {
+            if password1.text != password2.text {
                 password1.textColor = UIColor.sb_Raspberry()
                 password2.textColor = UIColor.sb_Raspberry()
-                showAlert(.passwordsDontMatch)
+                showAlert(.PasswordsDontMatch)
                 disableRegisterButton()
-            }
-            else {
+            } else {
                 password1.textColor = UIColor.sb_DarkBlue()
                 password2.textColor = UIColor.sb_DarkBlue()
                 
@@ -136,11 +135,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         // Try to find next responder
         let nextResponder = textField.superview?.viewWithTag(nextTag) as UIResponder!
         
-        if (nextResponder != nil) {
+        if nextResponder != nil {
             // Found next responder, so set it.
             nextResponder?.becomeFirstResponder()
-        }
-        else
+        } else
         {
             // Not found, so hide keyboard
             textField.resignFirstResponder()
@@ -156,18 +154,17 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         
         let areTextFieldsNotEmpty = emailTextField.text != "" && passwordTextField.text != "" && repeatPasswordTextField.text != ""
         
-        if (areTextFieldsNotEmpty && isConnectedToInternet()) {
+        if areTextFieldsNotEmpty && isConnectedToInternet() {
             userDataForRegistration["email"] = emailTextField.text
             userDataForRegistration["password"] = repeatPasswordTextField.text
             
-            //TODO: pass over the dictionary with data
+            //TODOs: pass over the dictionary with data
             dismissViewControllerAnimated(true) {[unowned self] () -> Void in
                 self.successfulLoginTransition() }
-        }
-        else if !areTextFieldsNotEmpty {
-            showAlert(.fieldsNotEmpty)
+        } else if !areTextFieldsNotEmpty {
+            showAlert(.FieldsNotEmpty)
         } else if !isConnectedToInternet() {
-            showAlert(.noInternet)
+            showAlert(.NoInternet)
         }
     }
     
@@ -181,27 +178,27 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         registerButton.enabled = true
     }
     
-    enum alertType {
-        case passwordTooShort
-        case passwordsDontMatch
-        case emailIsTaken
-        case passwordContainsSpace
-        case noInternet
-        case emailIncorrect
-        case fieldsNotEmpty
+    enum AlertType {
+        case PasswordTooShort
+        case PasswordsDontMatch
+        case EmailIsTaken
+        case PasswordContainsSpace
+        case NoInternet
+        case EmailIncorrect
+        case FieldsNotEmpty
     }
     
-    let alertMessagesDict:[alertType : (String,String)] = [
-        .noInternet : ("Brak połączenia","Nie można połączyć się z Internetem. Sprawdź połączenie"),
-        .emailIsTaken : ("Adres e-mail zajęty", "Już istnieje konto z takim adresem e-mail."),
-        .passwordContainsSpace : ("Spacja w haśle", "Hasło nie może zawierać spacji."),
-        .emailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację lub jest w złym formacie."),
-        .passwordsDontMatch : ("Hasła są różne","Oba hasła muszą być identyczne."),
-        .passwordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków."),
-        .fieldsNotEmpty : ("Wypełnij pola","Sprawdź czy wszystkie pola formularza są wypełnione.")
+    let alertMessagesDict: [AlertType : (String, String)] = [
+        .NoInternet : ("Brak połączenia", "Nie można połączyć się z Internetem. Sprawdź połączenie"),
+        .EmailIsTaken : ("Adres e-mail zajęty", "Już istnieje konto z takim adresem e-mail."),
+        .PasswordContainsSpace : ("Spacja w haśle", "Hasło nie może zawierać spacji."),
+        .EmailIncorrect : ("Niepoprawny adres e-mail", "Adres e-mail zawiera spację lub jest w złym formacie."),
+        .PasswordsDontMatch : ("Hasła są różne", "Oba hasła muszą być identyczne."),
+        .PasswordTooShort : ("Za krótkie hasło", "Hasło musi mieć co najmniej 8 znaków."),
+        .FieldsNotEmpty : ("Wypełnij pola", "Sprawdź czy wszystkie pola formularza są wypełnione.")
     ]
     
-    func showAlert(type: alertType) {
+    func showAlert(type: AlertType) {
         
         let alertController = UIAlertController(title: alertMessagesDict[type]!.0,
                                                 message: alertMessagesDict[type]!.1,

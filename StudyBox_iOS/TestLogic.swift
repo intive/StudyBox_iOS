@@ -9,27 +9,27 @@
 import Foundation
 
 enum TestLogicError: ErrorType {
-    case PassedDeckIsEmpty , AllFlashcardsHidden
+    case PassedDeckIsEmpty, AllFlashcardsHidden
 }
 enum StudyType {
     case Test(uint), Learn
 }
 
 class Test {
-    private var deck : [Flashcard]
+    private var deck: [Flashcard]
     private(set) var notPassedInTestDeck: [Flashcard]?
-    private(set) var repeatDeck:[Flashcard]?
-    private(set) var currentCard : Flashcard?
+    private(set) var repeatDeck: [Flashcard]?
+    private(set) var currentCard: Flashcard?
     private var passedFlashcards = 0
     var index = 0
-    private var numberOfFlashcardsInFullDeck : Int
-    let testType : StudyType
-    private var cardsInTest : Int
+    private var numberOfFlashcardsInFullDeck: Int
+    let testType: StudyType
+    private var cardsInTest: Int
     //last 2 properties are amde to determinate if passed deck was empty from the beginning or if all flashcards was hidden
-    private let passedDeckWasEmpty:Bool
-    private let allFlashcardsMaybeHidden:Bool
+    private let passedDeckWasEmpty: Bool
+    private let allFlashcardsMaybeHidden: Bool
     
-    init(deck : [Flashcard], testType : StudyType) {
+    init(deck: [Flashcard], testType: StudyType) {
         if deck.isEmpty {
             passedDeckWasEmpty = true
         } else {
@@ -39,7 +39,7 @@ class Test {
         //Making a temporary deck with only not hidden flashcards
         var tmpDeck: [Flashcard] = []
         for flashcard in deck {
-            if ( flashcard.hidden == false) {
+            if flashcard.hidden == false {
                 tmpDeck.append(flashcard)
             }
         }
@@ -74,16 +74,16 @@ class Test {
     /** Returns a tuple of numbers of flashcards that were answered correctly and how many flashcards are in the test
      - returns: `(passedFlashcards,cardsInTest)`
      */
-    func cardsAnsweredAndPossible() -> (Int,Int) {
-        return (passedFlashcards,cardsInTest)
+    func cardsAnsweredAndPossible() -> (Int, Int) {
+        return (passedFlashcards, cardsInTest)
     }
     
     /** Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
      - Parameter answeredCorrect: Was the last card marked correct or not
      - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
      */
-    func newFlashcard(answeredCorrect answeredCorrect:Bool) -> Flashcard? {
-        var rand : Int
+    func newFlashcard(answeredCorrect answeredCorrect: Bool) -> Flashcard? {
+        var rand: Int
         
         if !answeredCorrect{
             switch testType{
@@ -101,14 +101,14 @@ class Test {
             default:
                 break
             }
-        }else {
+        } else {
             index += 1
         }
         rand = Int(arc4random_uniform(UInt32(deck.count)))
         if rand < deck.count && cardsInTest + 1 > index {
             currentCard = deck[rand]
             deck.removeAtIndex(rand)
-        }else {
+        } else {
             currentCard = nil
         }
         return currentCard
@@ -129,13 +129,13 @@ class Test {
     }
     
     ///Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
-    func correctAnswer()->Flashcard? {
+    func correctAnswer() -> Flashcard? {
         passedFlashcards += 1
         return newFlashcard(answeredCorrect:true)
     }
     
     ///Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
-    func incorrectAnswer()->Flashcard? {
+    func incorrectAnswer() -> Flashcard? {
         return newFlashcard(answeredCorrect:false)
     }
 }

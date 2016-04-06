@@ -18,9 +18,9 @@ class TestViewController: StudyBoxViewController {
     
     @IBOutlet weak var answerLeading: NSLayoutConstraint!
     @IBOutlet var answerTrailing: NSLayoutConstraint!
-    var testLogicSource:Test?
+    var testLogicSource: Test?
     
-    private var dataManager:DataManager? = {
+    private var dataManager: DataManager? = {
         return UIApplication.appDelegate().dataManager
     }()
     
@@ -42,7 +42,9 @@ class TestViewController: StudyBoxViewController {
         questionLabel.addGestureRecognizer(swipeUpQuestionLabel)
         
         /*
-         Because one Gesture Rec. can be added only to one view, we have to make a second one. There are seperate GR's to avoid situation when user presses the button and moves out of the button upwards because he changes his mind as to answering correct/incorrect or showing the tip.
+         Because one Gesture Rec. can be added only to one view, we have to make a second one. 
+         There are seperate GR's to avoid situation when user presses the button and 
+         moves out of the button upwards because he changes his mind as to answering correct/incorrect or showing the tip.
          */
         let swipeUpAnswerLabel = UISwipeGestureRecognizer()
         swipeUpAnswerLabel.direction = .Up
@@ -83,8 +85,8 @@ class TestViewController: StudyBoxViewController {
         if let _ = testLogicSource {
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
-        }else {
-            // TODO unhandled case
+        } else {
+            // TODOs: unhandled case
         }
         answerTrailing.active = false
         answerLeading.constant = view.frame.width
@@ -97,7 +99,8 @@ class TestViewController: StudyBoxViewController {
             if identifier == "ScoreSegue" {
                 switch testLogic.testType {
                 case .Learn:
-                    let controller = UIAlertController(title: "Koniec", message: "To już wszystkie fiszki, czy chcesz rozpocząć naukę od nowa?", preferredStyle: .Alert)
+                    let controller = UIAlertController(title: "Koniec", message: "To już wszystkie fiszki, czy chcesz rozpocząć naukę od nowa?",
+                                                       preferredStyle: .Alert)
                     controller.addAction(
                         UIAlertAction(title: "Tak", style: .Default,
                             handler: { _ in
@@ -105,16 +108,14 @@ class TestViewController: StudyBoxViewController {
                                     self.testLogicSource = Test(deck: repeatDeck, testType: .Learn)
                                     self.answeredQuestionTransition()
                                 }
-                            }
-                        )
+                            })
                     )
                     controller.addAction(
                         UIAlertAction(title: "Nie", style: .Default,
                             handler: { _ in
-                                // TODO refactor, make enums for DrawerViewControllers menu options
+                                // TODOs: refactor, make enums for DrawerViewControllers menu options
                                 DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
-                            }
-                        )
+                            })
                     )
                     presentViewController(controller, animated: true, completion: nil)
                     return false
@@ -170,7 +171,7 @@ class TestViewController: StudyBoxViewController {
                 self.answerView.alpha = 0
                 
                 //animate alpha back to 1
-                UIView.animateWithDuration(0.5, delay: 0,options: [.CurveEaseOut], animations: {
+                UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
                     self.questionView.alpha = 1
                     self.answerView.alpha = 1
                     }, completion: nil)
@@ -181,10 +182,10 @@ class TestViewController: StudyBoxViewController {
         var message = ""
         if let currentCard = testLogicSource?.currentCard?.tip {
             message = currentCard
-        }else {
+        } else {
             message = "Brak podpowiedzi"
         }
-        let alertController = UIAlertController(title: "Podpowiedź:", message: message, //TODO: set tip text
+        let alertController = UIAlertController(title: "Podpowiedź:", message: message, //TODOs: set tip text
             preferredStyle: .Alert)
         
         let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -211,20 +212,18 @@ class TestViewController: StudyBoxViewController {
         }
     }
     
-    func updateForAnswer(correct:Bool) {
+    func updateForAnswer(correct: Bool) {
         
         if let testLogic = testLogicSource {
             
             if (correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer()) != nil {
                 answeredQuestionTransition()
-            }else {
+            } else {
                 if shouldPerformSegueWithIdentifier("ScoreSegue", sender: self) {
                     performSegueWithIdentifier("ScoreSegue", sender: self)
                 }
             }
-            
         }
-        
     }
     
     ///TouchUpInside event
@@ -236,10 +235,10 @@ class TestViewController: StudyBoxViewController {
     ///Global time setting for button scale animations
     let buttonsAnimationTime: NSTimeInterval = 0.1
     ///Global scale setting for button scale animations
-    let buttonsScaleWhenPressed = CGAffineTransformMakeScale(0.85,0.85)
+    let buttonsScaleWhenPressed = CGAffineTransformMakeScale(0.85, 0.85)
     
     @IBAction func correctButtonTouchDown(sender: AnyObject) {
-        UIView.animateWithDuration(buttonsAnimationTime,delay: 0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
             self.correctButton.transform = self.buttonsScaleWhenPressed
             }, completion:nil )
     }
@@ -262,7 +261,7 @@ class TestViewController: StudyBoxViewController {
     }
     
     @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
-        UIView.animateWithDuration(buttonsAnimationTime,delay:0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(buttonsAnimationTime, delay:0, options: .CurveEaseOut, animations: {
             self.incorrectButton.transform = self.buttonsScaleWhenPressed
             }, completion:nil )
     }
@@ -284,7 +283,7 @@ class TestViewController: StudyBoxViewController {
         questionView.alpha = 0
         questionView.center.x = testView.center.x
         
-        //TODO: set new question in label before dissolve
+        //TODOs: set new question in label before dissolve
         updateQuestionUiForCurrentCard()
         //move answerView outside of the screen
         answerTrailing.active = false
@@ -302,7 +301,7 @@ class TestViewController: StudyBoxViewController {
         incorrectButton.transform = CGAffineTransformIdentity
         correctButton.transform = CGAffineTransformIdentity
         
-        //TODO: set new answer in label after animation
+        //TODOs: set new answer in label after animation
         updateAnswerUiForCurrentCard()
     }
 }
@@ -310,7 +309,8 @@ class TestViewController: StudyBoxViewController {
 
 extension TestViewController: UIGestureRecognizerDelegate {
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }

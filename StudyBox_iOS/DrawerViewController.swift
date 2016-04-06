@@ -10,13 +10,13 @@ import UIKit
 import MMDrawerController
 
 struct DrawerNavigationChild {
-    let name:String
-    let viewControllerBlock:(()->Void)?
-    let lazyLoadViewControllerBlock:(()->UIViewController?)?
+    let name: String
+    let viewControllerBlock:(() -> Void)?
+    let lazyLoadViewControllerBlock: (() -> UIViewController?)?
     var isActive = false
     
-    private var _viewController:UIViewController? = nil
-    var viewController:UIViewController? {
+    private var _viewController: UIViewController? = nil
+    var viewController: UIViewController? {
         mutating get {
             if _viewController == nil {
                 _viewController = lazyLoadViewControllerBlock?()
@@ -28,16 +28,16 @@ struct DrawerNavigationChild {
         }
     }
     
-    init(name:String,viewController:UIViewController? = nil,lazyLoadViewControllerBlock:(()->UIViewController?)? = nil,viewControllerBlock:(()->Void)? = nil) {
+    init(name: String, viewController: UIViewController? = nil, lazyLoadViewControllerBlock: (() -> UIViewController?)? = nil,
+         viewControllerBlock:( () -> Void)? = nil) {
         self.name = name
         self.lazyLoadViewControllerBlock = lazyLoadViewControllerBlock
         self.viewControllerBlock = viewControllerBlock
         self.viewController = viewController
-
     }
     
-    init(name:String,viewControllerBlock:(()->Void)?) {
-        self.init(name: name,viewController: nil,lazyLoadViewControllerBlock: nil,viewControllerBlock: viewControllerBlock)
+    init(name: String, viewControllerBlock: (() -> Void)?) {
+        self.init(name: name, viewController: nil, lazyLoadViewControllerBlock: nil, viewControllerBlock: viewControllerBlock)
     }
 }
 
@@ -49,7 +49,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
+    private func lazyLoadViewControllerFromStoryboard(withStoryboardId id: String) -> UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
             return controller
@@ -58,10 +58,10 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func setupDrawer() {
-        if (drawerNavigationControllers.count == 0) {
+        if drawerNavigationControllers.isEmpty {
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto"))
             drawerNavigationControllers.append(
-                DrawerNavigationChild(name: "Moje talie",viewController: nil,lazyLoadViewControllerBlock: {[weak self] in
+                DrawerNavigationChild(name: "Moje talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
                     return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.DecksViewControllerID)
                 })
             )
@@ -73,17 +73,15 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                     if let storyboard = self?.storyboard {
                         UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
                     }
-                }
-            )
+                })
         }
-        
     }
     
-    func initialCenterController()->UIViewController? {
+    func initialCenterController() -> UIViewController? {
         setupDrawer()
-        if (drawerNavigationControllers.count > 0) {
+        if !drawerNavigationControllers.isEmpty {
             var index = 0
-            if (DrawerViewController.initialControllerIndex < drawerNavigationControllers.count) {
+            if DrawerViewController.initialControllerIndex < drawerNavigationControllers.count {
                 index = DrawerViewController.initialControllerIndex
             }
             drawerNavigationControllers[index].isActive = true
@@ -110,9 +108,9 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         let drawerChild = drawerNavigationControllers[indexPath.row]
         cell.textLabel?.text = drawerChild.name
         
-        if (drawerChild.isActive) {
+        if drawerChild.isActive {
             cell.backgroundColor = UIColor.sb_Raspberry()
-        }else {
+        } else {
             cell.backgroundColor = UIColor.sb_Graphite()
         }
         
@@ -133,7 +131,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
-    func selectMenuOptionAtIndex(index:Int) {
+    func selectMenuOptionAtIndex(index: Int) {
         var navigationChild = drawerNavigationControllers[index]
         navigationChild.isActive = true
         
@@ -157,9 +155,9 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
             
-        }else if let block = navigationChild.viewControllerBlock {
+        } else if let block = navigationChild.viewControllerBlock {
             block()
-        }else {
+        } else {
             navigationChild.isActive = false
             drawerNavigationControllers[currentControllerIndex].isActive = true
             return
@@ -177,7 +175,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func deactiveAllChildViewControllers() {
-        for (index,_) in drawerNavigationControllers.enumerate() {
+        for (index, _) in drawerNavigationControllers.enumerate() {
             drawerNavigationControllers[index].isActive = false
         }
     }
@@ -185,8 +183,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        for (index,_) in drawerNavigationControllers.enumerate() {
-            if (!drawerNavigationControllers[index].isActive ) {
+        for (index, _) in drawerNavigationControllers.enumerate() {
+            if !drawerNavigationControllers[index].isActive {
                 drawerNavigationControllers[index].viewController = nil
             }
         }
@@ -197,8 +195,9 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
 
 extension DrawerViewController {
     
-    class func sharedSbDrawerViewControllerChooseMenuOption(atIndex index:Int) {
-        if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController, let drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {
+    class func sharedSbDrawerViewControllerChooseMenuOption(atIndex index: Int) {
+        if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController,
+            let drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {
             drawer.selectMenuOptionAtIndex(index)
         }
     }

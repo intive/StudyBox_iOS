@@ -11,25 +11,25 @@ import Foundation
 extension Array where Element: UniquelyIdentifiable {
     
     
-    func findUniqe(withId id:String)->Element? {
+    func findUniqe(withId idUniqe: String) -> Element? {
         for element in self {
-            if element.id == id {
+            if element.id == idUniqe {
                 return element
             }
         }
         return nil 
     }
     
-    func indexOfUnique(id:String)->Int? {
-        for (index,element) in self.enumerate() {
-            if element.id == id {
+    func indexOfUnique(idUniqe: String) -> Int? {
+        for (index, element) in self.enumerate() {
+            if element.id == idUniqe {
                 return index
             }
         }
         return nil 
     }
     
-    func generateNewId()->String {
+    func generateNewId() -> String {
         return NSUUID().UUIDString
     }
     

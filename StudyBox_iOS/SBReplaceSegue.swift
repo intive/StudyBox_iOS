@@ -31,8 +31,7 @@ class SBReplaceSegue: UIStoryboardSegue {
                 },
                 completion: { finished in
                     source.view.alpha = 1
-                }
-            )
+                })
         }
     }
 }

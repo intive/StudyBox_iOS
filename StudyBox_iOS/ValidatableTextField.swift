@@ -10,15 +10,15 @@ import UIKit
 
 class ValidatableTextField: UITextField {
 
-    var isValid:Bool = false {
+    var isValid: Bool = false {
         didSet {
             if isValid {
                 textColor = validColor
-            }else {
+            } else {
                 textColor = invalidColor
             }
         }
     }
-    var validColor:UIColor!
-    var invalidColor:UIColor!
+    var validColor: UIColor!
+    var invalidColor: UIColor!
 }

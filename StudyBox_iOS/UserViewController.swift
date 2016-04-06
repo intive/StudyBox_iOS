@@ -10,7 +10,7 @@ import UIKit
 import MMDrawerController
 class UserViewController: InputViewController {
     
-    var centerOffset:CGFloat = 100
+    var centerOffset: CGFloat = 100
     func successfulLoginTransition(){
 
         if let board = storyboard {
@@ -29,7 +29,7 @@ class UserViewController: InputViewController {
             
             mmDrawer.setGestureShouldRecognizeTouchBlock({ (drawer, gesture, touch) -> Bool in
                 if let _ = gesture as? UIPanGestureRecognizer {
-                    if (drawer.visibleLeftDrawerWidth == 0) {
+                    if drawer.visibleLeftDrawerWidth.isZero {
                         let touchLocation = touch.locationInView(drawer.centerViewController.view)
                         let center = drawer.centerViewController.view.center
                         if touchLocation.x < center.x + offset && touchLocation.x > center.x - offset {
@@ -45,20 +45,19 @@ class UserViewController: InputViewController {
         
     }
     
-    func validateTextFieldsNotEmpty()->Bool {
+    func validateTextFieldsNotEmpty() -> Bool {
         
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
-                guard let text = field.text where text.characters.count > 0 else {
+                guard let text = field.text where text.characters.isEmpty else {
                     return false
                 }
             }
         }
-
         return true
     }
     
-    func areTextFieldsValid()-> Bool {
+    func areTextFieldsValid() -> Bool {
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
                 if let validableField = field as? ValidatableTextField {
@@ -68,7 +67,6 @@ class UserViewController: InputViewController {
                 }
             }
         }
-        
         return true
     }
     

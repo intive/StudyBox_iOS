@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InputViewControllerDataSource {
-    var inputViews:[UITextField] { get set }
+    var inputViews: [UITextField] { get set }
 }
 
 
@@ -18,18 +18,18 @@ Basic input view controller, which can dismiss keyboard by a down swipe gesture 
  - precondition: dataSource:`InputViewControllerDataSource` must not be nil before entering `viewDidAppear` method
  - important: on method `viewWillDisappear:`, `dataSource` will be set to nil, otherwise there would be a risk of reference cycle
 */
-class InputViewController: UIViewController,UITextFieldDelegate  {
+class InputViewController: UIViewController, UITextFieldDelegate  {
 
    /**
      Data source gives information about each `UITextField` of the subclass
      
     */
-    var dataSource:InputViewControllerDataSource?
+    var dataSource: InputViewControllerDataSource?
     
     /**
      Current edit field input, so the view origin can be adjusted
      */
-    private var currentLowestInputView:UIView? = nil
+    private var currentLowestInputView: UIView? = nil
     
     
     
@@ -66,7 +66,7 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
     }
     
     private func dataSourcePrecondition(){
-        assert(dataSource != nil,"No data source for InputViewController")
+        assert(dataSource != nil, "No data source for InputViewController")
     }
     
     
@@ -75,7 +75,7 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
      
      With keyboard disappearance vertical origin is set to it's initial position
     */
-    func keyboardChangedFrame(notification:NSNotification){
+    func keyboardChangedFrame(notification: NSNotification){
         dataSourcePrecondition()
         if let rect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(), let lowestView = currentLowestInputView {
             
@@ -83,7 +83,7 @@ class InputViewController: UIViewController,UITextFieldDelegate  {
                 
             case UIKeyboardWillShowNotification:
                 
-                var originChange:CGFloat = 0
+                var originChange: CGFloat = 0
                 let yOffset = lowestView.convertRect(lowestView.frame, fromView: view).origin.y
                 let lowestBeginOriginY = lowestView.frame.height + lowestView.frame.origin.y - yOffset
                 

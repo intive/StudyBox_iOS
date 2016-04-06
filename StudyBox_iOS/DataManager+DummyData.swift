@@ -10,14 +10,14 @@ import Foundation
 
 extension DataManager {
     static let DummyDecks = [
-        "Swift","Obj-C","Very long name of the deck, so I can remember everything for a very long time : ) ",
-        "Math","Physics","English","Just a decent length name \nhere",
+        "Swift", "Obj-C", "Very long name of the deck, so I can remember everything for a very long time : ) ",
+        "Math", "Physics", "English", "Just a decent length name \nhere",
         "Even longer name of the deck, so I can remember everything for at least double as long. \n" +
         "No need to study something twice sounds very promising, hope it will really work. I will try hard!",
-        "","Sh"
+        "", "Sh"
     ]
 
-    static func managerWithDummyData()->DataManager {
+    static func managerWithDummyData() -> DataManager {
         let manager = DataManager()
         let size = DataManager.DummyDecks.count
         let limit = size - 1
@@ -28,24 +28,24 @@ extension DataManager {
             var question = "\(name) question"
             var answer = "\(name) answer"
             
-            var tip:Tip?
-            var cardId:String //Helps in hiding
-            var countToHide:Int = 0 //Helps in hiding too
+            var tip: Tip?
+            var cardId: String //Helps in hiding
+            var countToHide: Int = 0 //Helps in hiding too
             
             for i in 0...limit {
                 let clear = (i == limit || i == limit / 2)
-                if ( i % 2  == 0){
+                if i % 2  == 0 {
                     tip = Tip.Text(text: "\(name) tip")
                     let choice = Int(arc4random_uniform(UInt32(size)))
                     
                     question.appendContentsOf("\n \(DataManager.DummyDecks[choice])")
                     answer.appendContentsOf("\n \(DataManager.DummyDecks[choice])")
-                    if (clear) {
+                    if clear {
                         answer = ""
                     }
 
-                }else {
-                    if (clear) {
+                } else {
+                    if clear {
                         question = ""
                     }
                     tip = nil
@@ -55,7 +55,7 @@ extension DataManager {
                 countToHide += 1
                 
                 //Hides every 3th generated flashcard
-                if ( countToHide % 3 == 0 ) {
+                if countToHide % 3 == 0 {
                     try! manager.hideFlashcard(withId: cardId)
                 }
             }

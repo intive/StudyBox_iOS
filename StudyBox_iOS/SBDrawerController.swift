@@ -10,13 +10,13 @@ import UIKit
 import MMDrawerController
 
 protocol SBDrawerCenterDelegate {
-    var isDrawerVisible:Bool {get set}
+    var isDrawerVisible: Bool {get set}
     func drawerToggleAnimation()
 }
 
-class SBDrawerController:MMDrawerController {
+class SBDrawerController: MMDrawerController {
     
-    var centerDelegate:SBDrawerCenterDelegate?
+    var centerDelegate: SBDrawerCenterDelegate?
     
     static var statusBarAnimationTime = 0.25
     
@@ -53,11 +53,13 @@ class SBDrawerController:MMDrawerController {
 
     }
     
-    override func setCenterViewController(newCenterViewController: UIViewController!, withFullCloseAnimation fullCloseAnimated: Bool, completion: ((Bool) -> Void)!) {
+    override func setCenterViewController(newCenterViewController: UIViewController!,
+                                          withFullCloseAnimation fullCloseAnimated: Bool, completion: ((Bool) -> Void)!) {
         super.setCenterViewController(newCenterViewController, withFullCloseAnimation: fullCloseAnimated, completion: completion)
         updateCenterDelegate()
     }
-    override func setCenterViewController(centerViewController: UIViewController!, withCloseAnimation closeAnimated: Bool, completion: ((Bool) -> Void)!) {
+    override func setCenterViewController(centerViewController: UIViewController!,
+                                          withCloseAnimation closeAnimated: Bool, completion: ((Bool) -> Void)!) {
         super.setCenterViewController(centerViewController, withCloseAnimation: closeAnimated, completion: completion)
         updateCenterDelegate()
     }
@@ -68,11 +70,12 @@ class SBDrawerController:MMDrawerController {
         }
     }
     
-    override func closeDrawerAnimated(animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions, completion: ((Bool) -> Void)!) {
+    override func closeDrawerAnimated(animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions,
+                                      completion: ((Bool) -> Void)!) {
         var completionBlock = completion
         
         
-            completionBlock = {[completion] (success:Bool) -> Void in
+            completionBlock = {[completion] (success: Bool) -> Void in
                 if let sbController = self.centerDelegate as? StudyBoxViewController {
                     
                     sbController.isDrawerVisible = true
