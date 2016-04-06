@@ -12,6 +12,10 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
 
     @IBOutlet weak var pickerView: UIPickerView!
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let pickerFrequencyNumberKey = "pickerFrequencyNumber"
+    let pickerFrequencyTypeKey = "pickerFrequencyType"
+    
     let pickerFrequencyNumbers = ["1","2","3","4","5","10","15","20","30","45","60"]
     let pickerFrequencyTypes = ["minut","godzin","dni"]
     
@@ -21,12 +25,14 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
 
+        //TODO: Set picker to data from NSUserDefaults
+        
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
     }
-    
+
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0: return pickerFrequencyNumbers.count
@@ -35,6 +41,7 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    //Set labels and fonts of picker view
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         
         var pickerLabel = view as? UILabel
@@ -53,15 +60,13 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         return pickerLabel!
     }
     
+    //Handle selecting a new frequency interval
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        //TODO: update NSUserDefaults
+        switch component {
+        case 0: defaults.setObject(pickerFrequencyNumbers[row], forKey: pickerFrequencyNumberKey)
+        case 1: defaults.setObject(pickerFrequencyTypes[row], forKey: pickerFrequencyTypeKey)
+        default: break
+        }
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

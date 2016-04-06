@@ -14,6 +14,9 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var settingsTableView: UITableView!
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let pickerFrequencyNumberKey = "pickerFrequencyNumber"
+    let pickerFrequencyTypeKey = "pickerFrequencyType"
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
@@ -30,8 +33,13 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         switch (indexPath.section,indexPath.row){
         case (0,0):
             cell.textLabel?.text = "Częstotliwość"
-            //TODO: set to data from NSUserDefaults
-            cell.detailTextLabel?.text = "Nie wybrano"
+            if let number = defaults.stringForKey(pickerFrequencyNumberKey), let type = defaults.stringForKey(pickerFrequencyTypeKey)
+            {
+                cell.detailTextLabel?.text = "\(number) \(type)"
+            } else {
+                cell.detailTextLabel?.text = "Nie wybrano"
+            }
+            
         case (1,0):
             cell.textLabel?.text = "Talie"
             //TODO: set to data from NSUserDefaults
@@ -75,7 +83,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //settingsTableView.reloadData()
+        settingsTableView.reloadData()
     }
     
     override func viewDidLoad() {

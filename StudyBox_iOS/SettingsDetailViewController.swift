@@ -15,31 +15,32 @@ enum settingsDetailVCType {
 
 class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var mode:settingsDetailVCType?
+    let defaults = NSUserDefaults.standardUserDefaults()
     let pickerCellID = "pickerCell"
     let checkmarkCellID = "checkmarkCell"
-    
+    var mode:settingsDetailVCType?
+    lazy private var dataManager:DataManager? = { return UIApplication.appDelegate().dataManager }()
+    var decksArray: [Deck]?
+
     @IBOutlet weak var detailTableView: UITableView!
-    
-    lazy private var dataManager:DataManager? = {
-        return UIApplication.appDelegate().dataManager
-    }()
-    
-    private var decksArray: [Deck]?
-    
+
     override func viewDidLoad() {
         //for test purposes
-        mode = .DecksForWatch
+        mode = .Frequency
         
-        if let mode = self.mode where mode == .DecksForWatch {
-            decksArray = dataManager?.decks(true)
+        if let aMode = self.mode {
+            switch aMode {
+            case .DecksForWatch:
+                self.title = "Wybór talii"
+                decksArray = dataManager?.decks(true)
+            case .Frequency:
+                self.title = "Powiadomienia"
+            }
         }
+        
+        
     }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:UITableViewCell?
@@ -57,7 +58,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                     }
                     cell?.textLabel?.text = deckName
                 }
-                //cell?.layoutIfNeeded()
                 cell?.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
             }
         }
@@ -70,10 +70,10 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         if let selectedCell = cell {
             if selectedCell.accessoryType == .None {
                 selectedCell.accessoryType = .Checkmark
-                //TODO add selected deck to NSUserDefaults
+                //TODO add selected deck to NSUserDefaults?
             } else {
                 selectedCell.accessoryType = .None
-                //TODO remove selected deck from NSUserDefaults
+                //TODO remove selected deck from NSUserDefaults?
             }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -107,7 +107,8 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
         return height
     }
-    
-    
-    
+
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
 }
