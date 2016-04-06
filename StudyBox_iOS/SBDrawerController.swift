@@ -72,21 +72,19 @@ class SBDrawerController:MMDrawerController {
         var completionBlock = completion
         
         
-            completionBlock = {[completion] (success:Bool) -> Void in
-                if let sbController = self.centerDelegate as? StudyBoxViewController {
-                    
-                    sbController.isDrawerVisible = true
-                    sbController.setNeedsStatusBarAppearanceUpdate()
-                    
-                    
-                    sbController.drawerToggleAnimation()
-
-                }
+        completionBlock = {[completion] (success:Bool) -> Void in
+            if let sbController = self.centerDelegate as? StudyBoxViewController {
                 
-                completion?(success)
+                sbController.isDrawerVisible = true
+                sbController.setNeedsStatusBarAppearanceUpdate()
+                
+                
+                sbController.drawerToggleAnimation()
+                
             }
             
-        
+            completion?(success)
+        }
         
         super.closeDrawerAnimated(animated, velocity: velocity, animationOptions: options, completion: completionBlock)
         

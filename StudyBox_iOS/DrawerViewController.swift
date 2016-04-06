@@ -151,8 +151,12 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                         sbController = navigationController.childViewControllers[0] as? StudyBoxViewController
                     }
                 }
-                sbController?.isDrawerVisible = true
-                sbController?.setNeedsStatusBarAppearanceUpdate()
+                
+                //necessary condition check, to handle programmaticall change of center view controller
+                if mmDrawer.openSide != .None {
+                    sbController?.isDrawerVisible = true
+                    sbController?.setNeedsStatusBarAppearanceUpdate()
+                }
     
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
