@@ -83,13 +83,13 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-            if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
-                if newSide != 0 {
-                    hideSearchBar(navbarHeight)
-                } else {
-                    hideSearchBar(-topItemOffset)
-                }
+        if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+            if newSide != 0 {
+                hideSearchBar(navbarHeight)
+            } else {
+                hideSearchBar(-topItemOffset)
             }
+        }
     }
     
     // this function calculate size of decks, by given spacing and number of cells in row
@@ -172,11 +172,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                     let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
                         let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek na teście", preferredStyle: .Alert)
                         
-                        func handler(act:UIAlertAction) {
-                            if((act.title) != nil)
+                        func handler(act: UIAlertAction) {
+                            if let title = act.title
                             {
-                                var amount:UInt32
-                                switch act.title! {
+                                var amount: UInt32
+                                switch title {
                                 case "1":
                                     amount = 1
                                 case "5":
