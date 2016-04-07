@@ -183,6 +183,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                         for amount in amounts {
                             alertAmount.addAction(UIAlertAction(title: amount, style: .Default, handler: handler))
                         }
+                        alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                         
                         self.presentViewController(alertAmount, animated: true, completion:nil)
                     }
@@ -192,6 +193,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                     
                     alert.addAction(testButton)
                     alert.addAction(studyButton)
+                    alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
 
                     presentViewController(alert, animated: true, completion:nil)
                 }
