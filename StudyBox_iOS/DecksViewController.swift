@@ -173,32 +173,16 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                         let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek na teście", preferredStyle: .Alert)
                         
                         func handler(act: UIAlertAction) {
-                            if let title = act.title
+                            if let amount = UInt32(act.title!)
                             {
-                                var amount: UInt32
-                                switch title {
-                                case "1":
-                                    amount = 1
-                                case "5":
-                                    amount = 5
-                                case "10":
-                                    amount = 10
-                                case "15":
-                                    amount = 15
-                                case "20":
-                                    amount = 20
-                                default:
-                                    amount = 20
-                                }
                                 self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
                             }
                         }
                         
-                        alertAmount.addAction(UIAlertAction(title: "1", style: .Default, handler: handler))
-                        alertAmount.addAction(UIAlertAction(title: "5", style: .Default, handler: handler))
-                        alertAmount.addAction(UIAlertAction(title: "10", style: .Default, handler: handler))
-                        alertAmount.addAction(UIAlertAction(title: "15", style: .Default, handler: handler))
-                        alertAmount.addAction(UIAlertAction(title: "20", style: .Default, handler: handler))
+                        let amounts = [ "1", "5", "10", "15", "20"]
+                        for amount in amounts {
+                            alertAmount.addAction(UIAlertAction(title: amount, style: .Default, handler: handler))
+                        }
                         
                         self.presentViewController(alertAmount, animated: true, completion:nil)
                     }
