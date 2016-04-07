@@ -16,8 +16,11 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     let pickerFrequencyNumberKey = "pickerFrequencyNumber"
     let pickerFrequencyTypeKey = "pickerFrequencyType"
     
-    let pickerFrequencyNumbers = ["1","2","3","4","5","10","15","20","30","45","60"]
-    let pickerFrequencyTypes = ["minut","godzin","dni"]
+    let pickerFrequencyNumbers = [1,2,3,4,5,10,15,20,30,45,60]
+    
+    let pickerFrequencyTypes = [("minut",NSCalendarUnit.Minute),
+                                ("godzin",NSCalendarUnit.Hour),
+                                ("dni",NSCalendarUnit.Day)]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,38 +37,38 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     }
 
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var rows = 0
         switch component {
-        case 0: return pickerFrequencyNumbers.count
-        case 1: return pickerFrequencyTypes.count
-        default: return 0
+        case 0: rows = pickerFrequencyNumbers.count
+        case 1: rows = pickerFrequencyTypes.count
+        default: break
         }
+        return rows
     }
-    
+
     //Set labels and fonts of picker view
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         
-        var pickerLabel = view as? UILabel
-        if pickerLabel == nil {
-            pickerLabel = UILabel()
-            pickerLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-            pickerLabel?.textAlignment = NSTextAlignment.Center
-        }
-        
+        let pickerLabel = UILabel()
         switch component {
-        case 0: pickerLabel?.text = pickerFrequencyNumbers[row]
-        case 1: pickerLabel?.text = pickerFrequencyTypes[row]
+        case 0: pickerLabel.text = String(pickerFrequencyNumbers[row])
+        case 1: pickerLabel.text = pickerFrequencyTypes[row].0
         default: break
         }
+        pickerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
+        pickerLabel.textAlignment = NSTextAlignment.Center
+        return pickerLabel
         
-        return pickerLabel!
     }
     
     //Handle selecting a new frequency interval
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
+        
+        //TODO: delete this and change to save to nsuserdefaults when about to leave screen
         switch component {
         case 0: defaults.setObject(pickerFrequencyNumbers[row], forKey: pickerFrequencyNumberKey)
-        case 1: defaults.setObject(pickerFrequencyTypes[row], forKey: pickerFrequencyTypeKey)
+        case 1: defaults.setObject(pickerFrequencyTypes[row].0, forKey: pickerFrequencyTypeKey)
         default: break
         }
     }

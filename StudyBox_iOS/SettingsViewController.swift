@@ -12,27 +12,22 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     let settingsMainCellID = "settingsMainCell"
     
+    
     @IBOutlet weak var settingsTableView: UITableView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
     let pickerFrequencyNumberKey = "pickerFrequencyNumber"
     let pickerFrequencyTypeKey = "pickerFrequencyType"
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //var cell:UITableViewCell?
-        let cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
+        var cell:UITableViewCell!
         
         switch (indexPath.section,indexPath.row){
         case (0,0):
-            cell.textLabel?.text = "Częstotliwość"
+            cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
+            cell.textLabel?.text = "Powiadomienia"
+
             if let number = defaults.stringForKey(pickerFrequencyNumberKey), let type = defaults.stringForKey(pickerFrequencyTypeKey)
             {
                 cell.detailTextLabel?.text = "\(number) \(type)"
@@ -41,6 +36,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             }
             
         case (1,0):
+            cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
             //TODO: set to data from NSUserDefaults
             cell.detailTextLabel?.text = "Nie wybrano"
@@ -51,6 +47,14 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         cell.detailTextLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         return cell
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -69,17 +73,20 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         }
     }
     
-    //TODO: recognize which cell was tapped
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if let cell = sender as? UITableViewCell {
-//            let indexPath = self.settingsTableView.indexPathForCell(cell)!
-//            assert(segue.destinationViewController.isKindOfClass(SettingsDetailViewController))
-//            let detailViewController = segue.destinationViewController as UITable
-//            switch indexPath.inSection {
-//                detailViewController.mode = .Frequency
-//            }
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        
+        let detailViewController = segue.destinationViewController as? SettingsDetailViewController
+        if let section = self.settingsTableView.indexPathForSelectedRow?.section {
+            switch section {
+            case 0:
+                detailViewController?.mode = .Frequency
+            case 1:
+                detailViewController?.mode = .DecksForWatch
+            default: break
+            }
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
