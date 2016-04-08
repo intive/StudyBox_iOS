@@ -19,7 +19,7 @@ class Utils {
     }
     struct DeckViewLayout{
         static let DecksSpacing: CGFloat = 20
-        static let DecksInRowIPhoneVer: CGFloat = 2
+        static let CellSquareSize: CGFloat = 150
         static let DeckWithoutTitle = "Bez tytułu"
     }
 }

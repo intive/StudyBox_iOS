@@ -119,7 +119,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xMT-IG-TEx">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xMT-IG-TEx">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6fk-bh-Wei">
                                     <size key="itemSize" width="100" height="100"/>
@@ -155,25 +155,46 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="44" width="600" height="356"/>
+                                </variation>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="112" width="600" height="820"/>
+                                </variation>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-ZY-Whm">
+                                <rect key="frame" x="0.0" y="64" width="600" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0bK-g0-NLQ"/>
+                                </constraints>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="9" y="-17" width="100" height="100"/>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="eGM-ZY-Whm" secondAttribute="trailing" constant="-20" id="38x-27-mJX"/>
+                            <constraint firstItem="eGM-ZY-Whm" firstAttribute="leading" secondItem="8Xh-8g-2oR" secondAttribute="leadingMargin" constant="-20" id="J5C-i6-3zf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xMT-IG-TEx" secondAttribute="trailing" constant="-20" id="Rkc-RA-S2Y"/>
-                            <constraint firstItem="xMT-IG-TEx" firstAttribute="height" secondItem="8Xh-8g-2oR" secondAttribute="height" id="Suv-M2-ekv"/>
                             <constraint firstItem="xMT-IG-TEx" firstAttribute="leading" secondItem="8Xh-8g-2oR" secondAttribute="leadingMargin" constant="-20" id="VVs-jY-94u"/>
+                            <constraint firstItem="xMT-IG-TEx" firstAttribute="top" secondItem="ICs-dx-wqn" secondAttribute="bottom" constant="-64" id="YEc-6X-99U"/>
                             <constraint firstItem="LY6-KN-Pjc" firstAttribute="top" secondItem="xMT-IG-TEx" secondAttribute="bottom" id="gZx-hx-f0b"/>
+                            <constraint firstItem="eGM-ZY-Whm" firstAttribute="top" secondItem="ICs-dx-wqn" secondAttribute="bottom" id="tqA-je-txt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bco-pG-cRr"/>
                     <connections>
                         <outlet property="decksCollectionView" destination="xMT-IG-TEx" id="bYA-cU-mHh"/>
+                        <outlet property="decksTopConstraint" destination="YEc-6X-99U" id="ttx-HY-dnf"/>
+                        <outlet property="searchBarWrapper" destination="eGM-ZY-Whm" id="QZG-XP-jA8"/>
+                        <outlet property="searchWrapperTopConstraint" destination="tqA-je-txt" id="aLv-Jk-0In"/>
                         <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="IWt-ao-u5P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXn-sV-c38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3753" y="1189"/>
+            <point key="canvasLocation" x="3753" y="1188"/>
         </scene>
         <!--Edit Fiche View Controller-->
         <scene sceneID="7mE-Ma-p0K">
@@ -562,6 +583,9 @@
                                     <constraint firstAttribute="bottom" secondItem="8Cv-mK-csu" secondAttribute="bottom" id="mMG-45-hBc"/>
                                     <constraint firstItem="8Cv-mK-csu" firstAttribute="top" secondItem="qd1-B0-NOL" secondAttribute="top" id="qVh-wg-lXk"/>
                                 </constraints>
+                                <variation key="heightClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="62" width="560" height="298"/>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbe-Fw-hsa" userLabel="AnswerView">
                                 <rect key="frame" x="20" y="62" width="560" height="498"/>
@@ -620,6 +644,9 @@
                                     <constraint firstItem="7Dz-uF-MfH" firstAttribute="leading" secondItem="mbe-Fw-hsa" secondAttribute="leading" id="YBE-6M-XXe"/>
                                     <constraint firstItem="7Dz-uF-MfH" firstAttribute="top" secondItem="mbe-Fw-hsa" secondAttribute="top" id="scr-3e-CPu"/>
                                 </constraints>
+                                <variation key="heightClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="62" width="560" height="298"/>
+                                </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ScoreLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qH-5l-kfE">
                                 <rect key="frame" x="234" y="569" width="132" height="21"/>
@@ -687,7 +714,7 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bb9-zC-jZN"/>
         <segue reference="kaO-g4-SgC"/>
+        <segue reference="IWt-ao-u5P"/>
     </inferredMetricsTieBreakers>
 </document>

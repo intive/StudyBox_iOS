@@ -52,6 +52,9 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
         return .Slide
     }
     override func prefersStatusBarHidden() -> Bool {
+        if traitCollection.verticalSizeClass == .Compact {
+            return true
+        }
         return isDrawerVisible
     }
   
