@@ -68,7 +68,7 @@ class Test {
             }
         }
         
-        newFlashcard(answeredCorrect:true)
+        newFlashcard()
     }
     
     /** Returns a tuple of numbers of flashcards that were answered correctly and how many flashcards are in the test
@@ -82,9 +82,7 @@ class Test {
      - Parameter answeredCorrect: Was the last card marked correct or not
      - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
      */
-    func newFlashcard(answeredCorrect answeredCorrect:Bool) -> Flashcard? {
-        var rand : Int
-        
+    func setFlashcardStatus(answeredCorrect answeredCorrect:Bool) {
         if !answeredCorrect{
             switch testType{
             case .Learn:
@@ -104,11 +102,16 @@ class Test {
         }else {
             index += 1
         }
+    }
+    
+    //Returns new `Flashcard?`; `nil` if no new `Flashcard` is there to set
+    func newFlashcard() -> Flashcard? {
+        var rand : Int
         rand = Int(arc4random_uniform(UInt32(deck.count)))
-        if rand < deck.count && cardsInTest + 1 > index {
+        if rand < deck.count && cardsInTest > index {
             currentCard = deck[rand]
             deck.removeAtIndex(rand)
-        }else {
+        } else {
             currentCard = nil
         }
         return currentCard
@@ -131,11 +134,21 @@ class Test {
     ///Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
     func correctAnswer()->Flashcard? {
         passedFlashcards += 1
-        return newFlashcard(answeredCorrect:true)
+        setFlashcardStatus(answeredCorrect:true)
+        return newFlashcard()
     }
     
     ///Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
     func incorrectAnswer()->Flashcard? {
-        return newFlashcard(answeredCorrect:false)
+        setFlashcardStatus(answeredCorrect:false)
+        return newFlashcard()
+    }
+    
+    //Function skips currentCard to end of deck
+    func skipCard() -> Flashcard? {
+        if let skipCard = currentCard {
+            deck.append(skipCard)
+        }
+        return newFlashcard()
     }
 }
