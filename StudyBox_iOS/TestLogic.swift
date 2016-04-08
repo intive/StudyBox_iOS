@@ -44,7 +44,17 @@ class Test {
             }
         }
         
-        self.deck = tmpDeck
+        switch testType {
+        case .Learn:
+            self.deck = tmpDeck.shuffle()
+            cardsInTest = self.deck.count
+            repeatDeck = self.deck
+        case .Test(let questionsNumber):
+            notPassedInTestDeck = [Flashcard]()
+            self.deck = tmpDeck.shuffle(maxElements: Int(questionsNumber))
+            cardsInTest = self.deck.count
+        }
+        
         self.numberOfFlashcardsInFullDeck = self.deck.count
         self.testType = testType
         
@@ -55,18 +65,6 @@ class Test {
             allFlashcardsMaybeHidden = false
         }
         
-        switch testType {
-        case .Learn:
-            cardsInTest = self.deck.count
-            repeatDeck = self.deck
-        case .Test(let questionsNumber):
-            notPassedInTestDeck = [Flashcard]()
-            if questionsNumber > uint(self.deck.count) {
-                cardsInTest = self.deck.count
-            } else {
-                cardsInTest = Int(questionsNumber)
-            }
-        }
         
         newFlashcard()
     }
@@ -106,15 +104,13 @@ class Test {
     
     //Returns new `Flashcard?`; `nil` if no new `Flashcard` is there to set
     func newFlashcard() -> Flashcard? {
-        var rand : Int
-        rand = Int(arc4random_uniform(UInt32(deck.count)))
-        if rand < deck.count && cardsInTest > index {
-            currentCard = deck[rand]
-            deck.removeAtIndex(rand)
+        if deck.count > 0 {
+            currentCard = deck.first
+            deck.removeFirst()
+            return currentCard
         } else {
-            currentCard = nil
+            return nil
         }
-        return currentCard
     }
     
     //Fuction is checking if all of flashcards in test are hidden
