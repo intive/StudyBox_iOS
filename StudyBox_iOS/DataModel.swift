@@ -70,7 +70,7 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
  
 }
 
-class Deck: Object, Equatable, UniquelyIdentifiable {
+class Deck: Object, Equatable, UniquelyIdentifiable,Searchable {
     
     dynamic private var _id:String = NSUUID().UUIDString
     var id:String {
@@ -90,6 +90,12 @@ class Deck: Object, Equatable, UniquelyIdentifiable {
         self.name = name
     }
     
+    func matches(expression: String?) -> Bool {
+        if let text = expression?.lowercaseString {
+            return name.lowercaseString.containsString(text)
+        }
+        return name == ""
+    }
     
 }
 
