@@ -8,11 +8,11 @@
 
 import UIKit
 
-enum EditFicheViewControllerMode {
+enum EditFlashcardViewControllerMode {
     case Add,Modify(deckName:String,flashcard:Flashcard)
 }
 
-class EditFicheViewController: StudyBoxViewController {
+class EditFlashcardViewController: StudyBoxViewController {
     
     @IBOutlet weak var deckField: UITextField!
     @IBOutlet weak var questionField: UITextField!
@@ -21,7 +21,7 @@ class EditFicheViewController: StudyBoxViewController {
     private var flashcard:Flashcard?
     private var deckName:String?
     
-    var mode:EditFicheViewControllerMode? {
+    var mode:EditFlashcardViewControllerMode? {
         didSet {
             if let editMode = mode {
                 switch editMode {

@@ -174,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="3753" y="1189"/>
         </scene>
-        <!--Edit Fiche View Controller-->
+        <!--Edit Flashcard View Controller-->
         <scene sceneID="7mE-Ma-p0K">
             <objects>
-                <viewController id="ymO-2a-kIL" customClass="EditFicheViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ymO-2a-kIL" customClass="EditFlashcardViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JEz-sa-tXr"/>
                         <viewControllerLayoutGuide type="bottom" id="aWM-Xy-cjF"/>
@@ -528,7 +528,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VXf-gi-gbi">
             <objects>
-                <navigationController storyboardIdentifier="EditFicheViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditFlashcardViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivF-VU-xcN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
