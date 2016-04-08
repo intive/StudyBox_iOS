@@ -12,12 +12,9 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     let settingsMainCellID = "settingsMainCell"
     
-    
     @IBOutlet weak var settingsTableView: UITableView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    let pickerFrequencyNumberKey = "pickerFrequencyNumber"
-    let pickerFrequencyTypeKey = "pickerFrequencyType"
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -27,19 +24,24 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         case (0,0):
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Powiadomienia"
-
-            if let number = defaults.stringForKey(pickerFrequencyNumberKey), let type = defaults.stringForKey(pickerFrequencyTypeKey)
-            {
-                cell.detailTextLabel?.text = "\(number) \(type)"
+            
+            if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
+                if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey), let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
+                {
+                    cell.detailTextLabel?.text = "\(number) \(type)"
+                } else {
+                    cell.detailTextLabel?.text = "Nie wybrano"
+                }
             } else {
-                cell.detailTextLabel?.text = "Nie wybrano"
+                //Notifications disabled
+                cell.detailTextLabel?.text = "Wyłączone"
             }
             
         case (1,0):
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
-            //TODO: set to data from NSUserDefaults
             cell.detailTextLabel?.text = "Nie wybrano"
+            //TODO: set to data from NSUserDefaults, enable or disable cell based on whether Watch is available
             
         default: break
         }
@@ -95,5 +97,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Ustawienia"
     }
 }

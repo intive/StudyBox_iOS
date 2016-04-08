@@ -23,4 +23,10 @@ class Utils {
         static let DecksInRowIPhoneVer: CGFloat = 2
         static let DeckWithoutTitle = "Bez tytułu"
     }
+    
+    struct NSUserDefaultsKeys {
+        static let notificationsEnabledKey = "notificationsEnabledKey"
+        static let pickerFrequencyNumberKey = "pickerFrequencyNumber"
+        static let pickerFrequencyTypeKey = "pickerFrequencyType"
+    }
 }

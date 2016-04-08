@@ -35,6 +35,7 @@
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */; };
+		72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
 		79EA1987D472DAC7E169D8C4 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
@@ -93,6 +94,7 @@
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
+		72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		72F089111CB7A87300BB4898 /* Settings View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				72CA9E881CB10B37005631DC /* SettingsViewController.swift */,
+				72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */,
+				72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */,
+				72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */,
+			);
+			name = "Settings View Controllers";
+			sourceTree = "<group>";
+		};
 		A1341DB31C81E76800AFD04E = {
 			isa = PBXGroup;
 			children = (
@@ -208,9 +221,7 @@
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
 				72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */,
 				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
-				72CA9E881CB10B37005631DC /* SettingsViewController.swift */,
-				72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */,
-				72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */,
+				72F089111CB7A87300BB4898 /* Settings View Controllers */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
@@ -501,6 +512,7 @@
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
+				72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
