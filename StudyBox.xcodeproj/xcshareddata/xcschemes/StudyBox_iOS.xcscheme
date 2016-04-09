@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A1341DBB1C81E76900AFD04E"
-               BuildableName = "StudyBox_iOS.app"
+               BuildableName = "StudyBox.app"
                BlueprintName = "StudyBox_iOS"
-               ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+               ReferencedContainer = "container:StudyBox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A1341DD21C81E76900AFD04E"
-               BuildableName = "StudyBox_iOSTests.xctest"
+               BuildableName = "StudyBox.xctest"
                BlueprintName = "StudyBox_iOSTests"
-               ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+               ReferencedContainer = "container:StudyBox.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A1341DBB1C81E76900AFD04E"
-            BuildableName = "StudyBox_iOS.app"
+            BuildableName = "StudyBox.app"
             BlueprintName = "StudyBox_iOS"
-            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+            ReferencedContainer = "container:StudyBox.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A1341DBB1C81E76900AFD04E"
-            BuildableName = "StudyBox_iOS.app"
+            BuildableName = "StudyBox.app"
             BlueprintName = "StudyBox_iOS"
-            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+            ReferencedContainer = "container:StudyBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -86,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A1341DBB1C81E76900AFD04E"
-            BuildableName = "StudyBox_iOS.app"
+            BuildableName = "StudyBox.app"
             BlueprintName = "StudyBox_iOS"
-            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+            ReferencedContainer = "container:StudyBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

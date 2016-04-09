@@ -90,14 +90,14 @@
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1341DBC1C81E76900AFD04E /* StudyBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1341DC41C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A1341DC71C81E76900AFD04E /* StudyBox_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyBox_iOS.xcdatamodel; sourceTree = "<group>"; };
 		A1341DC91C81E76900AFD04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1341DCC1C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1341DCE1C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyBox_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1341DD31C81E76900AFD04E /* StudyBox.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyBox.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBox_iOSTests.swift; sourceTree = "<group>"; };
 		A1341DD91C81E76900AFD04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
@@ -179,8 +179,8 @@
 		A1341DBD1C81E76900AFD04E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */,
-				A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */,
+				A1341DBC1C81E76900AFD04E /* StudyBox.app */,
+				A1341DD31C81E76900AFD04E /* StudyBox.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,7 +273,7 @@
 			);
 			name = StudyBox_iOS;
 			productName = StudyBox_iOS;
-			productReference = A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */;
+			productReference = A1341DBC1C81E76900AFD04E /* StudyBox.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A1341DD21C81E76900AFD04E /* StudyBox_iOSTests */ = {
@@ -294,7 +294,7 @@
 			);
 			name = StudyBox_iOSTests;
 			productName = StudyBox_iOSTests;
-			productReference = A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */;
+			productReference = A1341DD31C81E76900AFD04E /* StudyBox.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -316,7 +316,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox_iOS" */;
+			buildConfigurationList = A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -634,7 +634,7 @@
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = StudyBox;
 			};
 			name = Debug;
 		};
@@ -646,7 +646,7 @@
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = StudyBox;
 			};
 			name = Release;
 		};
@@ -658,7 +658,7 @@
 				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = StudyBox;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyBox_iOS.app/StudyBox_iOS";
 			};
 			name = Debug;
@@ -671,7 +671,7 @@
 				INFOPLIST_FILE = StudyBox_iOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = StudyBox;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyBox_iOS.app/StudyBox_iOS";
 			};
 			name = Release;
@@ -679,7 +679,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox_iOS" */ = {
+		A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1341DDA1C81E76900AFD04E /* Debug */,
