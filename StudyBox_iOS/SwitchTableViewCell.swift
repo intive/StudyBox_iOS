@@ -18,12 +18,14 @@ class SwitchTableViewCell: UITableViewCell {
         
         if switchOutlet.on {
             defaults.setBool(true, forKey: Utils.NSUserDefaultsKeys.notificationsEnabledKey)
+            let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge], categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         } else {
             defaults.setBool(false, forKey: Utils.NSUserDefaultsKeys.notificationsEnabledKey)
         }
     }
     
-    //Set value of the switch accordingly to NSUD before appearing
+    //Set state of the switch accordingly to NSUD before appearing
     override func awakeFromNib() {
         super.awakeFromNib()
         

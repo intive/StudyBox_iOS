@@ -28,5 +28,6 @@ class Utils {
         static let notificationsEnabledKey = "notificationsEnabledKey"
         static let pickerFrequencyNumberKey = "pickerFrequencyNumber"
         static let pickerFrequencyTypeKey = "pickerFrequencyType"
+        static let decksToSynchronizeKey = "decksToSynchronize"
     }
 }

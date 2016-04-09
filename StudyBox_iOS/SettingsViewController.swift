@@ -21,12 +21,13 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         var cell:UITableViewCell!
         
         switch (indexPath.section,indexPath.row){
-        case (0,0):
+        case (0, 0):
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Powiadomienia"
             
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
-                if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey), let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
+                if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey),
+                    let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
                 {
                     cell.detailTextLabel?.text = "\(number) \(type)"
                 } else {
@@ -37,10 +38,15 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                 cell.detailTextLabel?.text = "Wyłączone"
             }
             
-        case (1,0):
+        case (1, 0):
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
-            cell.detailTextLabel?.text = "Nie wybrano"
+            if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.decksToSynchronizeKey)?.count {
+                cell.detailTextLabel?.text = "\(decksCount) talii"
+            } else {
+                cell.detailTextLabel?.text = "Nie wybrano"
+            }
+            
             //TODO: set to data from NSUserDefaults, enable or disable cell based on whether Watch is available
             
         default: break
@@ -48,6 +54,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         
         cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         cell.detailTextLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
+        cell.backgroundColor = UIColor.sb_Grey()
         return cell
     }
     
@@ -98,5 +105,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Ustawienia"
+        settingsTableView.backgroundColor = UIColor.whiteColor()
     }
 }

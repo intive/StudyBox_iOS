@@ -15,8 +15,8 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     let defaults = NSUserDefaults.standardUserDefaults()
     
     
-    let pickerFrequencyNumbers = [1,2,3,4,5,10,15,20,30,45,60]
-    let pickerFrequencyTypes = ["minut","godzin","dni"]
+    let pickerFrequencyNumbers = [1, 2, 3, 4, 5, 10, 15, 20, 30, 45, 60]
+    let pickerFrequencyTypes = ["minut", "godzin", "dni"]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +28,8 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     
     ///Scroll pickerView to data found in NSUserDefaults before it's shown
     func adjustPickerValues() {
-        if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey) , let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
+        if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey), 
+            let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
         {
             if let indexOfNumber = pickerFrequencyNumbers.indexOf(Int(number)!), let indexOfType = pickerFrequencyTypes.indexOf(type) {
                 self.pickerView.selectRow(indexOfNumber, inComponent: 0, animated: false)
@@ -65,7 +66,6 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         pickerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         pickerLabel.textAlignment = NSTextAlignment.Center
         return pickerLabel
-        
     }
     
     //Handle selecting a new frequency interval

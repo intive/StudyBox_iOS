@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum settingsDetailVCType {
+enum SettingsDetailVCType {
     case Frequency
     case DecksForWatch
 }
@@ -20,13 +20,14 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     let checkmarkCellID = "checkmarkCell"
     let switchCellID = "switchCell"
     
-    var mode:settingsDetailVCType!
-    lazy private var dataManager:DataManager? = { return UIApplication.appDelegate().dataManager }()
+    var mode: SettingsDetailVCType?
+    lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    
     ///Array that holds all user's decks
     var userDecksArray: [Deck]?
-    ///Array that holds
-    var decksToSynchronize: [(Deck,Bool)]?
     //var notificationsEnabled:Bool
+    
+    var fireDate = NSDate()
     
     @IBOutlet weak var detailTableView: UITableView!
     
@@ -42,18 +43,19 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 self.title = "Powiadomienia"
             }
         }
+        detailTableView.backgroundColor = UIColor.whiteColor()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:UITableViewCell!
+        var cell: UITableViewCell!
         
         if let mode = self.mode {
             switch mode {
             case .Frequency:
                 switch (indexPath.section, indexPath.row){
-                case (0,0): cell = tableView.dequeueReusableCellWithIdentifier(switchCellID, forIndexPath: indexPath)
-                case (0,1): cell = tableView.dequeueReusableCellWithIdentifier(pickerCellID, forIndexPath: indexPath)
+                case (0, 0): cell = tableView.dequeueReusableCellWithIdentifier(switchCellID, forIndexPath: indexPath)
+                case (0, 1): cell = tableView.dequeueReusableCellWithIdentifier(pickerCellID, forIndexPath: indexPath)
                 default: break
                 }
                 cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
@@ -70,10 +72,11 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 default: break
                 }
                 cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-                //TODO: set checkmark based on NSUserDefaults
-                
+                //TODO: Set checkmarks based on NSUD
+
             }
         }
+        cell.backgroundColor = UIColor.sb_Grey()
         return cell
     }
     
@@ -111,17 +114,21 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     }
     
     func copyUserDecksToSync() {
-        
-        //TODO: Do this loop only if it's the first time the user chooses decks, set a flag in NSUserDefaults
-        //        if let userDecksArray = userDecksArray, var decksToSynchronize = decksToSynchronize {
-        //            for i in 0...userDecksArray.count {
-        //                decksToSynchronize[i] = (userDecksArray[i],false)
-        //            }
-        //            self.decksToSynchronize! = decksToSynchronize
-        //        }
+        var decksToSynchronize = [String]()
+        if let userDecksArray = userDecksArray {
+            for i in 0..<userDecksArray.count {
+                let cell = detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 1))
+                if cell?.accessoryType == .Checkmark {
+                    decksToSynchronize.append(userDecksArray[i].id)
+                }
+            }
+            //print(decksToSynchronize)
+            defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.decksToSynchronizeKey)
+            //TODO: send decksToSynchronize to the Watch queue
+        }
     }
     
-    func changeSelectionForCell(cell:UITableViewCell) {
+    func changeSelectionForCell(cell: UITableViewCell) {
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
         } else {
@@ -129,14 +136,52 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
     }
     
-    func changeSelectionForCell(cell:UITableViewCell, toState: UITableViewCellAccessoryType) {
+    func changeSelectionForCell(cell: UITableViewCell, toState: UITableViewCellAccessoryType) {
         cell.accessoryType = toState
     }
     
     override func willMoveToParentViewController(parent: UIViewController?) {
-        if parent == nil {
-            //TODO: Register notification and/or send selected decks to NSUD
+            if let mode = self.mode {
+                switch mode {
+                case .Frequency:
+                    if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
+                        scheduleNotification()
+                    }
+                case .DecksForWatch:
+                    copyUserDecksToSync()
+                }
+            }
+    }
+    
+    func scheduleNotification() {
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        let notification = UILocalNotification()
+        notification.alertBody = "Czas poćwiczyć fiszki!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        let calendar = NSCalendar.currentCalendar()
+        let now = NSDate()
+        var newFireDate = NSDate()
+        if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey) {
+            let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey)
+            switch type  {
+            case "minut":
+                if let newDate = calendar.dateByAddingUnit(.Minute, value: number, toDate: now, options: [.MatchStrictly]){
+                    newFireDate = newDate
+                }
+            case "godzin":
+                if let newDate = calendar.dateByAddingUnit(.Hour, value: number, toDate: now, options: [.MatchStrictly]){
+                    newFireDate = newDate
+                }
+            case "dni":
+                if let newDate = calendar.dateByAddingUnit(.Day, value: number, toDate: now, options: [.MatchStrictly]){
+                    newFireDate = newDate
+                }
+            default:
+                break
+            }
         }
+        notification.fireDate = newFireDate
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -167,8 +212,8 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             switch mode {
             case .Frequency:
                 switch (indexPath.section, indexPath.row){
-                case (0,0): height = CGFloat(44) //height of switch cell
-                case (0,1): height = CGFloat(140) //height of pickerView
+                case (0, 0): height = CGFloat(44) //height of switch cell
+                case (0, 1): height = CGFloat(140) //height of pickerView
                 default: break
                 }
             case .DecksForWatch: height = CGFloat(44) //height of checkmarkCell
