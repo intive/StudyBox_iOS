@@ -28,7 +28,7 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     
     ///Scroll pickerView to data found in NSUserDefaults before it's shown
     func adjustPickerValues() {
-        if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey), 
+        if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey),
             let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
         {
             if let indexOfNumber = pickerFrequencyNumbers.indexOf(Int(number)!), let indexOfType = pickerFrequencyTypes.indexOf(type) {

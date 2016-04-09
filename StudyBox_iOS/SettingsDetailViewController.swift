@@ -25,7 +25,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     
     ///Array that holds all user's decks
     var userDecksArray: [Deck]?
-    //var notificationsEnabled:Bool
     
     var fireDate = NSDate()
     
@@ -38,7 +37,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             case .DecksForWatch:
                 self.title = "Wybór talii"
                 userDecksArray = dataManager?.decks(true)
-            //copyUserDecksToSync()
             case .Frequency:
                 self.title = "Powiadomienia"
             }
@@ -58,8 +56,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 case (0, 1): cell = tableView.dequeueReusableCellWithIdentifier(pickerCellID, forIndexPath: indexPath)
                 default: break
                 }
-                cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-                
             case .DecksForWatch:
                 cell = tableView.dequeueReusableCellWithIdentifier(checkmarkCellID, forIndexPath: indexPath)
                 switch indexPath.section {
@@ -69,13 +65,20 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                     if let deckName = userDecksArray?[indexPath.row].name {
                         cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
                     }
+                    cell.accessoryType = .None
+                    //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
+                    if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.decksToSynchronizeKey) as? [String] where !decksToSynchronize.isEmpty, let userDecksArray = userDecksArray {
+                        for deckToSync in decksToSynchronize {
+                            if deckToSync == userDecksArray[indexPath.row].id {
+                                cell.accessoryType = .Checkmark
+                            }
+                        }
+                    }
                 default: break
                 }
-                cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-                //TODO: Set checkmarks based on NSUD
-
             }
         }
+        cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         cell.backgroundColor = UIColor.sb_Grey()
         return cell
     }
@@ -122,12 +125,12 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                     decksToSynchronize.append(userDecksArray[i].id)
                 }
             }
-            //print(decksToSynchronize)
             defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.decksToSynchronizeKey)
             //TODO: send decksToSynchronize to the Watch queue
         }
     }
     
+    ///Inverses cell checkmark on/off
     func changeSelectionForCell(cell: UITableViewCell) {
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
@@ -136,23 +139,27 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
     }
     
+    ///Sets cell checkmark to `toState`
     func changeSelectionForCell(cell: UITableViewCell, toState: UITableViewCellAccessoryType) {
         cell.accessoryType = toState
     }
     
+    //Handle tapping the Back button
     override func willMoveToParentViewController(parent: UIViewController?) {
-            if let mode = self.mode {
-                switch mode {
-                case .Frequency:
-                    if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
-                        scheduleNotification()
-                    }
-                case .DecksForWatch:
-                    copyUserDecksToSync()
+        if let mode = self.mode {
+            switch mode {
+            case .Frequency:
+                if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
+                    scheduleNotification()
                 }
+            case .DecksForWatch:
+                copyUserDecksToSync()
             }
+        }
+        defaults.synchronize()
     }
     
+    ///Schedules a new notification based on NSUD from now
     func scheduleNotification() {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         let notification = UILocalNotification()
@@ -176,8 +183,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 if let newDate = calendar.dateByAddingUnit(.Day, value: number, toDate: now, options: [.MatchStrictly]){
                     newFireDate = newDate
                 }
-            default:
-                break
+            default: break
             }
         }
         notification.fireDate = newFireDate
@@ -185,7 +191,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         var rows = 0
         if let mode = self.mode {
             switch mode {
@@ -205,18 +210,12 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
         var height = tableView.rowHeight
         
-        if let mode = self.mode {
-            switch mode {
-            case .Frequency:
-                switch (indexPath.section, indexPath.row){
-                case (0, 0): height = CGFloat(44) //height of switch cell
-                case (0, 1): height = CGFloat(140) //height of pickerView
-                default: break
-                }
-            case .DecksForWatch: height = CGFloat(44) //height of checkmarkCell
+        if let mode = self.mode where mode == .Frequency{
+            switch (indexPath.section, indexPath.row) {
+            case (0, 1): height = CGFloat(140) //height of pickerView
+            default: break
             }
         }
         return height

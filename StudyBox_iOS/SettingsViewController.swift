@@ -16,14 +16,13 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell!
         
         switch (indexPath.section,indexPath.row){
         case (0, 0):
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
-            cell.textLabel?.text = "Powiadomienia"
+            cell.textLabel?.text = "Powiadomienia co"
             
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
                 if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey),
@@ -34,7 +33,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                     cell.detailTextLabel?.text = "Nie wybrano"
                 }
             } else {
-                //Notifications disabled
                 cell.detailTextLabel?.text = "Wyłączone"
             }
             
@@ -46,8 +44,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
-            
-            //TODO: set to data from NSUserDefaults, enable or disable cell based on whether Watch is available
+            //TODO: enable or disable cell based on whether Watch is available
             
         default: break
         }

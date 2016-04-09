@@ -15,7 +15,7 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var settingsVC = SettingsDetailViewController()
+    var settingsDetailVC = SettingsDetailViewController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        settingsVC.scheduleNotification()
+        settingsDetailVC.scheduleNotification()
     }
 
     func applicationWillResignActive(application: UIApplication) {

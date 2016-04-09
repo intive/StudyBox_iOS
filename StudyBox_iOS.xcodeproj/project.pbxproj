@@ -172,7 +172,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		72F089111CB7A87300BB4898 /* Settings View Controllers */ = {
+		72F089111CB7A87300BB4898 /* Settings Classes */ = {
 			isa = PBXGroup;
 			children = (
 				72CA9E881CB10B37005631DC /* SettingsViewController.swift */,
@@ -180,7 +180,7 @@
 				72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */,
 				72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */,
 			);
-			name = "Settings View Controllers";
+			name = "Settings Classes";
 			sourceTree = "<group>";
 		};
 		A1341DB31C81E76800AFD04E = {
@@ -221,7 +221,7 @@
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
 				72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */,
 				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
-				72F089111CB7A87300BB4898 /* Settings View Controllers */,
+				72F089111CB7A87300BB4898 /* Settings Classes */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
