@@ -16,6 +16,7 @@ struct DrawerNavigationChild {
     var isActive = false
     
     private var _viewController:UIViewController? = nil
+    
     var viewController:UIViewController? {
         mutating get {
             if _viewController == nil {
@@ -49,6 +50,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
+    private var barStyle = UIStatusBarStyle.LightContent
     private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
@@ -172,14 +174,19 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.reloadData()
     }
     
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        barStyle = .LightContent
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        barStyle = .Default
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return barStyle
+    }
     func deactiveAllChildViewControllers() {
         for (index,_) in drawerNavigationControllers.enumerate() {
             drawerNavigationControllers[index].isActive = false

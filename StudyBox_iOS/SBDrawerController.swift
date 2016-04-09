@@ -17,8 +17,26 @@ protocol SBDrawerCenterDelegate {
 class SBDrawerController:MMDrawerController {
     
     var centerDelegate:SBDrawerCenterDelegate?
+        
+    override var centerViewController: UIViewController! {
+        didSet {
+            updateCenterDelegate()
+            
+        }
+    }
+
+    var  drawerAnimationTime:NSTimeInterval {
+        var newFrame:CGRect;
+        let oldFrame = self.centerViewController.view.frame;
+        newFrame = self.centerViewController.view.frame;
+        newFrame.origin.x = self.maximumLeftDrawerWidth;
+        
+        let distance = abs(CGRectGetMinX(oldFrame)-newFrame.origin.x);
+        return max(Double(distance/abs(animationVelocity)),0.1);
+    }
     
-    static var statusBarAnimationTime = 0.25
+    var defaultNavBarColor = UIColor.defaultNavBarColor()
+    var graphiteColor = UIColor.sb_Graphite()
     
     override func panGestureCallback(panGesture: UIPanGestureRecognizer!) {
         
@@ -28,11 +46,16 @@ class SBDrawerController:MMDrawerController {
              .Began:
             if visibleLeftDrawerWidth > 0 {
                 centerDelegate?.isDrawerVisible = true
+                self.statusBarViewBackgroundColor = UIColor.fade(fromColor: defaultNavBarColor, toColor: graphiteColor, currentStep: visibleLeftDrawerWidth, steps: maximumLeftDrawerWidth)
+
             }
         case .Failed,
              .Ended:
-            if centerDelegate?.isDrawerVisible == true {
+            if visibleLeftDrawerWidth == 0 {
+                self.statusBarViewBackgroundColor = defaultNavBarColor
                 centerDelegate?.drawerToggleAnimation()
+            } else {
+                centerDelegate?.isDrawerVisible = true
             }
             
         default:
@@ -61,26 +84,20 @@ class SBDrawerController:MMDrawerController {
         super.setCenterViewController(centerViewController, withCloseAnimation: closeAnimated, completion: completion)
         updateCenterDelegate()
     }
-    override var centerViewController: UIViewController! {
-        didSet {
-            updateCenterDelegate()
-            
-        }
-    }
     
     override func closeDrawerAnimated(animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions, completion: ((Bool) -> Void)!) {
         var completionBlock = completion
         
+        UIView.animateWithDuration(drawerAnimationTime,
+            animations: {
+                self.statusBarViewBackgroundColor = UIColor.defaultNavBarColor()
+            }
+        )
         
-        completionBlock = {[completion] (success:Bool) -> Void in
-            if let sbController = self.centerDelegate as? StudyBoxViewController {
-                
-                sbController.isDrawerVisible = true
-                sbController.setNeedsStatusBarAppearanceUpdate()
-                
-                
-                sbController.drawerToggleAnimation()
-                
+        completionBlock = {[weak self] (success:Bool) -> Void in
+            if let sbController = self?.centerDelegate as? StudyBoxViewController {
+                sbController.isDrawerVisible = false
+                sbController.updateStatusBar()
             }
             
             completion?(success)
@@ -90,9 +107,15 @@ class SBDrawerController:MMDrawerController {
         
     }
     
-    override func openDrawerSide(drawerSide: MMDrawerSide, animated: Bool, completion: ((Bool) -> Void)!) {
-        centerDelegate?.drawerToggleAnimation()
-        super.openDrawerSide(drawerSide, animated: animated, completion: completion)
+    override func openDrawerSide(drawerSide: MMDrawerSide, animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions, completion: ((Bool) -> Void)!) {
+        self.centerDelegate?.drawerToggleAnimation()
+
+        super.openDrawerSide(drawerSide, animated: animated, velocity: velocity, animationOptions: options, completion: completion)
+        UIView.animateWithDuration(drawerAnimationTime,
+            animations: {
+                self.statusBarViewBackgroundColor = UIColor.sb_Graphite()
+            }
+        )
     }
     
 }
