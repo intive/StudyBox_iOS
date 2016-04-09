@@ -49,10 +49,11 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
             alertMessage = "Brak połączenia z Internetem"
         }
         
-        inputViews.reverse().forEach {
-            if let validatableTextField = $0 as? ValidatableTextField {
+        for inputView in inputViews {
+            if let validatableTextField = inputView as? ValidatableTextField {
                 if let message = validatableTextField.invalidMessage {
                     alertMessage = message
+                    break
                 }
             }
         }
@@ -77,7 +78,9 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         var validationResult = true
         
         var invalidMessage:String?
-        textField.text = (textField.text as NSString?)?.stringByReplacingCharactersInRange(range, withString: string)
+        if let text = textField.text as NSString? {
+            textField.text = text.stringByReplacingCharactersInRange(range, withString: string)
+        }
         
         if textField == emailTextField, let _ = textField.text  {
             validationResult = emailTextField.isValid()

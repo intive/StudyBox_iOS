@@ -60,10 +60,11 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
             alertMessage = ValidationMessage.noInternet.rawValue
         }
         
-        inputViews.reverse().forEach {
-            if let validatableTextField = $0 as? ValidatableTextField {
+        for inputView in inputViews {
+            if let validatableTextField = inputView as? ValidatableTextField {
                 if let message = validatableTextField.invalidMessage {
                     alertMessage = message
+                    break
                 }
             }
         }
@@ -85,7 +86,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         var validationResult = true
         
         
-        textField.text = (textField.text as NSString?)?.stringByReplacingCharactersInRange(range, withString: string)
+        if let text = textField.text as NSString? {
+            textField.text = text.stringByReplacingCharactersInRange(range, withString: string)
+        }
+        
         var invalidMessage:String? = nil 
         if textField == emailTextField, let _ = textField.text {
             validationResult = emailTextField.isValid()
