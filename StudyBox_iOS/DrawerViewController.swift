@@ -50,7 +50,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    private var barStyle = UIStatusBarStyle.LightContent
+    var barStyle = UIStatusBarStyle.Default
     private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
@@ -172,11 +172,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         }
         currentControllerIndex = index
         tableView.reloadData()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        barStyle = .LightContent
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -41,28 +41,54 @@ class SBDrawerController:MMDrawerController {
     override func panGestureCallback(panGesture: UIPanGestureRecognizer!) {
         
         switch panGesture.state {
-            
-        case .Changed,
-             .Began:
+        
+        case .Began:
+            if let drawer = leftDrawerViewController as? DrawerViewController where drawer.barStyle == .LightContent {
+                drawer.barStyle = .Default
+            }
+        case .Changed:
             if visibleLeftDrawerWidth > 0 {
-                centerDelegate?.isDrawerVisible = true
                 self.statusBarViewBackgroundColor = UIColor.fade(fromColor: defaultNavBarColor, toColor: graphiteColor, currentStep: visibleLeftDrawerWidth, steps: maximumLeftDrawerWidth)
-
             }
         case .Failed,
              .Ended:
             if visibleLeftDrawerWidth == 0 {
                 self.statusBarViewBackgroundColor = defaultNavBarColor
-                centerDelegate?.drawerToggleAnimation()
-            } else {
-                centerDelegate?.isDrawerVisible = true
+                if let delegate = centerDelegate where delegate.isDrawerVisible {
+                    centerDelegate?.drawerToggleAnimation()
+
+                }
+            }
+
+            
+        default:
+            break
+        }
+        let animationTime = drawerAnimationTime
+        super.panGestureCallback(panGesture)
+        
+        switch panGesture.state {
+        case .Failed,
+             .Ended:
+            if let drawer = leftDrawerViewController as? DrawerViewController {
+                UIView.animateWithDuration(animationTime, animations: {
+                    if self.visibleLeftDrawerWidth != 0 {
+                        drawer.barStyle = .LightContent
+
+                    } else {
+                        drawer.barStyle = .Default
+                    }
+                    drawer.setNeedsStatusBarAppearanceUpdate()
+                })
+                
             }
             
         default:
             break
         }
-        super.panGestureCallback(panGesture)
+        
     }
+
     
     private func updateCenterDelegate() {
         var sbController = self.centerViewController as? StudyBoxViewController
@@ -111,8 +137,14 @@ class SBDrawerController:MMDrawerController {
         self.centerDelegate?.drawerToggleAnimation()
 
         super.openDrawerSide(drawerSide, animated: animated, velocity: velocity, animationOptions: options, completion: completion)
+        
         UIView.animateWithDuration(drawerAnimationTime,
             animations: {
+                if let drawer = self.leftDrawerViewController as? DrawerViewController {
+                    drawer.barStyle = .LightContent
+                    drawer.setNeedsStatusBarAppearanceUpdate()
+                    
+                }
                 self.statusBarViewBackgroundColor = UIColor.sb_Graphite()
             }
         )
