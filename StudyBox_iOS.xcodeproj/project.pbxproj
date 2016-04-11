@@ -31,6 +31,14 @@
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFicheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFicheViewController.swift */; };
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
+		726EA9B71CBBFAE5008C90CD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B51CBBFAE5008C90CD /* Interface.storyboard */; };
+		726EA9B91CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B81CBBFAE5008C90CD /* Assets.xcassets */; };
+		726EA9C01CBBFAE5008C90CD /* StudyBox Watch App Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */; };
+		726EA9C91CBBFAE5008C90CD /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */; };
+		726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */; };
+		726EA9CD1CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */; };
+		726EA9D11CBBFAE5008C90CD /* StudyBox Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
 		79EA1987D472DAC7E169D8C4 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */; };
@@ -51,6 +59,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		726EA9C11CBBFAE5008C90CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1341DB41C81E76800AFD04E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 726EA9BE1CBBFAE5008C90CD;
+			remoteInfo = "StudyBox Watch App Extension";
+		};
+		726EA9CF1CBBFAE5008C90CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1341DB41C81E76800AFD04E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 726EA9B21CBBFAE5008C90CD;
+			remoteInfo = "StudyBox Watch App";
+		};
 		A1341DD41C81E76900AFD04E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A1341DB41C81E76800AFD04E /* Project object */;
@@ -59,6 +81,31 @@
 			remoteInfo = StudyBox_iOS;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		726EA9B01CBBFAA7008C90CD /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				726EA9D11CBBFAE5008C90CD /* StudyBox Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		726EA9D51CBBFAE5008C90CD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				726EA9C01CBBFAE5008C90CD /* StudyBox Watch App Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		15DF27037DBE00D8638065FC /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +133,17 @@
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFicheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFicheViewController.swift; sourceTree = "<group>"; };
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StudyBox Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		726EA9B61CBBFAE5008C90CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		726EA9B81CBBFAE5008C90CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		726EA9BA1CBBFAE5008C90CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "StudyBox Watch App Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		726EA9C51CBBFAE5008C90CD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		726EA9CE1CBBFAE5008C90CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +171,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		726EA9BC1CBBFAE5008C90CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1341DB91C81E76900AFD04E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,11 +229,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		726EA9B41CBBFAE5008C90CD /* StudyBox Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				726EA9B51CBBFAE5008C90CD /* Interface.storyboard */,
+				726EA9B81CBBFAE5008C90CD /* Assets.xcassets */,
+				726EA9BA1CBBFAE5008C90CD /* Info.plist */,
+			);
+			path = "StudyBox Watch App";
+			sourceTree = "<group>";
+		};
+		726EA9C31CBBFAE5008C90CD /* StudyBox Watch App Extension */ = {
+			isa = PBXGroup;
+			children = (
+				726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */,
+				726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */,
+				726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */,
+				726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */,
+				726EA9CE1CBBFAE5008C90CD /* Info.plist */,
+				726EA9C41CBBFAE5008C90CD /* Supporting Files */,
+			);
+			path = "StudyBox Watch App Extension";
+			sourceTree = "<group>";
+		};
+		726EA9C41CBBFAE5008C90CD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				726EA9C51CBBFAE5008C90CD /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		A1341DB31C81E76800AFD04E = {
 			isa = PBXGroup;
 			children = (
 				A1341DBE1C81E76900AFD04E /* StudyBox_iOS */,
 				A1341DD61C81E76900AFD04E /* StudyBox_iOSTests */,
+				726EA9B41CBBFAE5008C90CD /* StudyBox Watch App */,
+				726EA9C31CBBFAE5008C90CD /* StudyBox Watch App Extension */,
 				A1341DBD1C81E76900AFD04E /* Products */,
 				38B1F5B29A6C985E3C63E020 /* Frameworks */,
 				CEE9F6901C8A159100961ABA /* Fonts */,
@@ -181,6 +279,8 @@
 			children = (
 				A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */,
 				A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */,
+				726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */,
+				726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -255,6 +355,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		726EA9B21CBBFAE5008C90CD /* StudyBox Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 726EA9D61CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App" */;
+			buildPhases = (
+				726EA9B11CBBFAE5008C90CD /* Resources */,
+				726EA9D51CBBFAE5008C90CD /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				726EA9C21CBBFAE5008C90CD /* PBXTargetDependency */,
+			);
+			name = "StudyBox Watch App";
+			productName = "StudyBox Watch App";
+			productReference = 726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		726EA9BE1CBBFAE5008C90CD /* StudyBox Watch App Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 726EA9D21CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App Extension" */;
+			buildPhases = (
+				726EA9BB1CBBFAE5008C90CD /* Sources */,
+				726EA9BC1CBBFAE5008C90CD /* Frameworks */,
+				726EA9BD1CBBFAE5008C90CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "StudyBox Watch App Extension";
+			productName = "StudyBox Watch App Extension";
+			productReference = 726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		A1341DBB1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1341DDC1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOS" */;
@@ -266,10 +400,12 @@
 				5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */,
 				8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */,
 				23AEC3FD1CB06407004358AB /* Swiftlint */,
+				726EA9B01CBBFAA7008C90CD /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				726EA9D01CBBFAE5008C90CD /* PBXTargetDependency */,
 			);
 			name = StudyBox_iOS;
 			productName = StudyBox_iOS;
@@ -303,10 +439,16 @@
 		A1341DB41C81E76800AFD04E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = BLStream;
 				TargetAttributes = {
+					726EA9B21CBBFAE5008C90CD = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					726EA9BE1CBBFAE5008C90CD = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					A1341DBB1C81E76900AFD04E = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -331,11 +473,30 @@
 			targets = (
 				A1341DBB1C81E76900AFD04E /* StudyBox_iOS */,
 				A1341DD21C81E76900AFD04E /* StudyBox_iOSTests */,
+				726EA9B21CBBFAE5008C90CD /* StudyBox Watch App */,
+				726EA9BE1CBBFAE5008C90CD /* StudyBox Watch App Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		726EA9B11CBBFAE5008C90CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				726EA9B91CBBFAE5008C90CD /* Assets.xcassets in Resources */,
+				726EA9B71CBBFAE5008C90CD /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		726EA9BD1CBBFAE5008C90CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				726EA9CD1CBBFAE5008C90CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1341DBA1C81E76900AFD04E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +626,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		726EA9BB1CBBFAE5008C90CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */,
+				726EA9C91CBBFAE5008C90CD /* ExtensionDelegate.swift in Sources */,
+				726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1341DB81C81E76900AFD04E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -515,6 +686,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		726EA9C21CBBFAE5008C90CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 726EA9BE1CBBFAE5008C90CD /* StudyBox Watch App Extension */;
+			targetProxy = 726EA9C11CBBFAE5008C90CD /* PBXContainerItemProxy */;
+		};
+		726EA9D01CBBFAE5008C90CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 726EA9B21CBBFAE5008C90CD /* StudyBox Watch App */;
+			targetProxy = 726EA9CF1CBBFAE5008C90CD /* PBXContainerItemProxy */;
+		};
 		A1341DD51C81E76900AFD04E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A1341DBB1C81E76900AFD04E /* StudyBox_iOS */;
@@ -523,6 +704,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		726EA9B51CBBFAE5008C90CD /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				726EA9B61CBBFAE5008C90CD /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		A1341DC31C81E76900AFD04E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -542,6 +731,70 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		726EA9D31CBBFAE5008C90CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "StudyBox Watch App Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		726EA9D41CBBFAE5008C90CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "StudyBox Watch App Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		726EA9D71CBBFAE5008C90CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = StudyBox_Watch_App_Extension;
+				INFOPLIST_FILE = "StudyBox Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		726EA9D81CBBFAE5008C90CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = StudyBox_Watch_App_Extension;
+				INFOPLIST_FILE = "StudyBox Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 		A1341DDA1C81E76900AFD04E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -679,6 +932,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		726EA9D21CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				726EA9D31CBBFAE5008C90CD /* Debug */,
+				726EA9D41CBBFAE5008C90CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		726EA9D61CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				726EA9D71CBBFAE5008C90CD /* Debug */,
+				726EA9D81CBBFAE5008C90CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
