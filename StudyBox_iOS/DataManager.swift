@@ -8,6 +8,8 @@
 
 import Foundation
 import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 enum DataManagerError:ErrorType {
     case NoDeckWithGivenId, NoFlashcardWithGivenId
@@ -24,6 +26,7 @@ class DataManager {
     // dzięki deckDBChanged talie będą wczytywane z bazy tylko w przypadku zmiany tabeli Deck
     // !!! Zmiana tabeli Flashcard nie jest brana pod uwagę
     private var deckDBChanged: Bool = true
+    private let decksURL = "http://78.133.154.70:2000/decks/"
     
     init(){
         
@@ -31,6 +34,45 @@ class DataManager {
         // DummyData
         // TODO: relocate removeDecksFromDatabase() and check for internet connection
         removeDecksFromDatabase()
+    }
+    
+    func getDecksFromServer(user: String, password: String){
+        Alamofire.request(.GET, decksURL)
+            .authenticate(user: user, password: password)
+            .responseJSON { response in
+                
+                switch response.result {
+                case .Success:
+                    if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        for (_, subJson) in json {
+                            
+                            if (subJson["isPublic"].stringValue == "true"){
+                                
+                                let newDeck = Deck(id: subJson["id"].stringValue, name: subJson["name"].stringValue)
+                                
+                                let selectedDeck = self.realm.objects(Deck).filter("_id == '\(newDeck.id)'").first
+                                
+                                if let updatingDeck = selectedDeck{
+                                    try! self.realm.write {
+                                        updatingDeck.name = newDeck.name
+                                    }
+                                    
+                                }else {
+                                    try! self.realm.write {
+                                        self.realm.add(newDeck)
+                                    }
+                                }
+                            }
+                        }
+                        self.deckDBChanged = true
+                    }
+                case .Failure(let error):
+                    print("Request failed with error: \(error)")
+                    
+                }
+        }
     }
     
     func decks(sorted:Bool )->[Deck] {
