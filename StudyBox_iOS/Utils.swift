@@ -16,6 +16,7 @@ class Utils {
         static let DecksViewControllerID = "DecksViewControllerID"
         static let TestViewControllerID = "TestViewControllerID"
         static let DecksViewCellID = "DecksViewCellID"
+        static let EditFicheViewControllerId = "EditFicheViewControllerId"
     }
     struct DeckViewLayout{
         static let DecksSpacing: CGFloat = 20

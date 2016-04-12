@@ -186,13 +186,65 @@
                     <view key="view" contentMode="scaleToFill" id="y4P-X8-cdB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Nazwa talii" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9G-lA-XZ1">
+                                <rect key="frame" x="20" y="72" width="560" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Pytanie" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f9O-8o-KoL">
+                                <rect key="frame" x="20" y="128" width="560" height="120"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Odpowiedź" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqM-Cv-6Mv">
+                                <rect key="frame" x="20" y="312" width="560" height="120"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Podpowiedź" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWh-AY-ia9">
+                                <rect key="frame" x="20" y="256" width="560" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iWh-AY-ia9" firstAttribute="leading" secondItem="y4P-X8-cdB" secondAttribute="leadingMargin" id="1uV-Vo-fyI"/>
+                            <constraint firstItem="h9G-lA-XZ1" firstAttribute="height" secondItem="y4P-X8-cdB" secondAttribute="height" multiplier="0.08" id="FPg-Ke-b6E"/>
+                            <constraint firstItem="kqM-Cv-6Mv" firstAttribute="width" secondItem="y4P-X8-cdB" secondAttribute="width" constant="-40" id="Jaz-fl-US9"/>
+                            <constraint firstItem="h9G-lA-XZ1" firstAttribute="leading" secondItem="y4P-X8-cdB" secondAttribute="leadingMargin" id="Llw-EA-izP"/>
+                            <constraint firstItem="f9O-8o-KoL" firstAttribute="top" secondItem="h9G-lA-XZ1" secondAttribute="bottom" constant="8" id="Nvz-Ku-5uR"/>
+                            <constraint firstItem="f9O-8o-KoL" firstAttribute="leading" secondItem="y4P-X8-cdB" secondAttribute="leadingMargin" id="P1e-vC-v0v"/>
+                            <constraint firstItem="kqM-Cv-6Mv" firstAttribute="leading" secondItem="y4P-X8-cdB" secondAttribute="leadingMargin" id="Xvt-dB-wrd"/>
+                            <constraint firstItem="h9G-lA-XZ1" firstAttribute="top" secondItem="JEz-sa-tXr" secondAttribute="bottom" constant="8" id="aMy-F9-pzy"/>
+                            <constraint firstItem="iWh-AY-ia9" firstAttribute="top" secondItem="f9O-8o-KoL" secondAttribute="bottom" constant="8" id="cPK-Sh-iiF"/>
+                            <constraint firstItem="f9O-8o-KoL" firstAttribute="height" secondItem="y4P-X8-cdB" secondAttribute="height" multiplier="0.2" id="fVQ-X3-i6x"/>
+                            <constraint firstItem="iWh-AY-ia9" firstAttribute="height" secondItem="y4P-X8-cdB" secondAttribute="height" multiplier="0.08" id="gc9-zE-wIR"/>
+                            <constraint firstItem="f9O-8o-KoL" firstAttribute="width" secondItem="y4P-X8-cdB" secondAttribute="width" constant="-40" id="l5p-yM-9Ti"/>
+                            <constraint firstItem="h9G-lA-XZ1" firstAttribute="width" secondItem="y4P-X8-cdB" secondAttribute="width" constant="-40" id="le7-nk-fLp"/>
+                            <constraint firstItem="kqM-Cv-6Mv" firstAttribute="top" secondItem="iWh-AY-ia9" secondAttribute="bottom" constant="8" id="oGn-8f-DFe"/>
+                            <constraint firstItem="kqM-Cv-6Mv" firstAttribute="height" secondItem="y4P-X8-cdB" secondAttribute="height" multiplier="0.2" id="pkg-LJ-E8z"/>
+                            <constraint firstItem="iWh-AY-ia9" firstAttribute="width" secondItem="y4P-X8-cdB" secondAttribute="width" constant="-40" id="w6W-Qo-Sk6"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9Au-sZ-6dd"/>
+                    <navigationItem key="navigationItem" id="9Au-sZ-6dd">
+                        <barButtonItem key="rightBarButtonItem" title="Zapisz" id="lF3-ka-wXW">
+                            <connections>
+                                <action selector="saveAction:" destination="ymO-2a-kIL" id="FkQ-ue-hm2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="answerField" destination="kqM-Cv-6Mv" id="J8z-tb-yhn"/>
+                        <outlet property="deckField" destination="h9G-lA-XZ1" id="yOd-A3-oTk"/>
+                        <outlet property="questionField" destination="f9O-8o-KoL" id="ODT-Qc-RPZ"/>
+                        <outlet property="tipField" destination="iWh-AY-ia9" id="oDm-8Q-teW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRj-W9-DEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4565" y="429"/>
+            <point key="canvasLocation" x="4485" y="429"/>
         </scene>
         <!--Score View Controller-->
         <scene sceneID="Txw-WI-BOL">
@@ -497,7 +549,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VXf-gi-gbi">
             <objects>
-                <navigationController storyboardIdentifier="EditFicheViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditFicheViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivF-VU-xcN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
