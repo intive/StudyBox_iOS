@@ -5,19 +5,96 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--StudyBox-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="StudyBox_Watch_App" customModuleProvider="target"/>
+                <controller title="StudyBox" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="StudyBox_Watch_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="VOL-cn-YJm">
+                            <items>
+                                <button width="1" height="63.5" alignment="center" verticalAlignment="center" title="Rozpocznij szybki test" id="d4a-ER-yYt">
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                    <connections>
+                                        <action selector="startButtonPress" destination="AgC-eL-Hgc" id="c27-jd-3r5"/>
+                                    </connections>
+                                </button>
+                                <label alignment="center" verticalAlignment="center" text="Nie można rozpocząć testu" textAlignment="center" numberOfLines="2" id="hbK-x0-Wci">
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                </label>
+                                <label alignment="center" verticalAlignment="center" text="Nie zostały wybrane żadne talie do synchronizacji z zegarkiem lub nie zostały one jeszcze zsynchronizowane." textAlignment="center" numberOfLines="0" id="fsI-vC-vQ6">
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <menu key="menu" id="fpQ-H0-2OB">
+                        <items>
+                            <menuItem title="Wymuś synchronizację" icon="repeat" id="bnM-ZW-DoY"/>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="detailLabel" destination="fsI-vC-vQ6" id="uQE-Hq-SuH"/>
+                        <outlet property="startButton" destination="d4a-ER-yYt" id="bu4-Uv-VtZ"/>
+                        <outlet property="titleLabel" destination="hbK-x0-Wci" id="gKu-5C-OXP"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="291"/>
+        </scene>
+        <!--QuestionViewController-->
+        <scene sceneID="cZX-BV-P1z">
+            <objects>
+                <controller identifier="QuestionViewController" id="pbX-d6-PWg" customClass="QuestionViewController" customModule="StudyBox_Watch_App_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" spacing="20" id="Vfq-JY-t3O">
+                            <items>
+                                <label width="1" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="Z2z-eJ-Xce"/>
+                                <separator alignment="left" id="lB2-5X-nXP"/>
+                                <label width="1" alignment="center" text="Tip" textAlignment="center" id="A3u-IN-A4J"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="questionLabel" destination="Z2z-eJ-Xce" id="rZN-6n-vrh"/>
+                        <outlet property="separatorOutlet" destination="lB2-5X-nXP" id="SxW-xM-prh"/>
+                        <outlet property="tipLabel" destination="A3u-IN-A4J" id="j0h-fD-IM7"/>
+                        <segue destination="fIA-P1-TDZ" kind="relationship" relationship="nextPage" id="BaM-Bc-uia"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="468" y="291"/>
+        </scene>
+        <!--AnswerViewController-->
+        <scene sceneID="KbI-ap-NfR">
+            <objects>
+                <controller identifier="AnswerViewController" id="fIA-P1-TDZ" customClass="AnswerViewController" customModule="StudyBox_Watch_App_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="WRN-dq-mIK">
+                            <items>
+                                <label width="1" alignment="center" text="Answer" textAlignment="center" numberOfLines="0" id="4D9-iy-k3F"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="6f8-gr-Pr8">
+                            <items>
+                                <button width="0.5" height="44" alignment="left" title="Button" id="Ae6-x2-75C"/>
+                                <button width="0.5" height="44" alignment="left" title="Button" id="qHW-cU-giA"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="answerLabel" destination="4D9-iy-k3F" id="HFB-UT-WsZ"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="719" y="291"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
             <objects>
                 <notificationController id="YCC-NB-fut">
                     <items>
-                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                        <label alignment="left" text="Najwyższy czas poćwiczyć fiszki!" textAlignment="left" numberOfLines="2" id="IdU-wH-bcW"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
                     <connections>
@@ -26,14 +103,23 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="220" y="643"/>
+            <point key="canvasLocation" x="220" y="718"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="StudyBox_Watch_App" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="StudyBox_Watch_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" id="4fd-h9-Qki">
+                            <items>
+                                <label alignment="left" text="Label" id="efN-Nd-Q4O"/>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="468" y="643"/>
+            <point key="canvasLocation" x="468" y="718"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

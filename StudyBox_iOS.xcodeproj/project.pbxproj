@@ -26,6 +26,8 @@
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
+		7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723772191CBC159800DE0F6D /* QuestionViewController.swift */; };
+		7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */; };
 		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
@@ -128,6 +130,8 @@
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		723772191CBC159800DE0F6D /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
 		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 				726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */,
 				726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */,
 				726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */,
+				723772191CBC159800DE0F6D /* QuestionViewController.swift */,
+				7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */,
 				726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */,
 				726EA9CE1CBBFAE5008C90CD /* Info.plist */,
 				726EA9C41CBBFAE5008C90CD /* Supporting Files */,
@@ -632,6 +638,8 @@
 			files = (
 				726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */,
 				726EA9C91CBBFAE5008C90CD /* ExtensionDelegate.swift in Sources */,
+				7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */,
+				7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */,
 				726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -939,6 +947,7 @@
 				726EA9D41CBBFAE5008C90CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		726EA9D61CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App" */ = {
 			isa = XCConfigurationList;
@@ -947,6 +956,7 @@
 				726EA9D81CBBFAE5008C90CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox_iOS" */ = {
 			isa = XCConfigurationList;
