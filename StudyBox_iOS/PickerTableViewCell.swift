@@ -14,7 +14,6 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    
     let pickerFrequencyNumbers = [1, 2, 3, 4, 5, 10, 15, 20, 30, 45, 60]
     let pickerFrequencyTypes = ["minut", "godzin", "dni"]
     
@@ -24,6 +23,10 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
         adjustPickerValues()
+        
+        //In case user enables notifications but doesn't change the picker
+        defaults.setObject(pickerFrequencyNumbers[pickerView.selectedRowInComponent(0)], forKey: Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey)
+        defaults.setObject(pickerFrequencyTypes[pickerView.selectedRowInComponent(1)], forKey: Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
     }
     
     ///Scroll pickerView to data found in NSUserDefaults before it's shown
@@ -77,4 +80,5 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         default: break
         }
     }
+    
 }

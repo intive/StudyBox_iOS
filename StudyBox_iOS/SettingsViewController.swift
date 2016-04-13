@@ -51,7 +51,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         
         cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         cell.detailTextLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-        cell.backgroundColor = UIColor.sb_Grey()
+        cell.backgroundColor = UIColor.sb_White()
         return cell
     }
     
@@ -102,6 +102,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Ustawienia"
-        settingsTableView.backgroundColor = UIColor.whiteColor()
+        settingsTableView.backgroundColor = UIColor.sb_Grey()
     }
 }

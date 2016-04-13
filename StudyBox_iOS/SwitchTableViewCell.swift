@@ -18,7 +18,7 @@ class SwitchTableViewCell: UITableViewCell {
         
         if switchOutlet.on {
             defaults.setBool(true, forKey: Utils.NSUserDefaultsKeys.notificationsEnabledKey)
-            let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge], categories: nil)
+            let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         } else {
             defaults.setBool(false, forKey: Utils.NSUserDefaultsKeys.notificationsEnabledKey)

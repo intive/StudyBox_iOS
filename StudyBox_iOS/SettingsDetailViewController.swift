@@ -19,67 +19,70 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     let pickerCellID = "pickerCell"
     let checkmarkCellID = "checkmarkCell"
     let switchCellID = "switchCell"
-    
-    var mode: SettingsDetailVCType?
+    var mode: SettingsDetailVCType!
     lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
-    
     ///Array that holds all user's decks
     var userDecksArray: [Deck]?
-    
     var fireDate = NSDate()
-    
     @IBOutlet weak var detailTableView: UITableView!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
-        if let mode = self.mode {
-            switch mode {
-            case .DecksForWatch:
-                self.title = "Wybór talii"
-                userDecksArray = dataManager?.decks(true)
-            case .Frequency:
-                self.title = "Powiadomienia"
-            }
+        switch mode {
+        case .DecksForWatch?:
+            self.title = "Wybór talii"
+            userDecksArray = dataManager?.decks(true)
+        case .Frequency?:
+            self.title = "Powiadomienia"
+        default:
+            break
         }
-        detailTableView.backgroundColor = UIColor.whiteColor()
+        
+        detailTableView.backgroundColor = UIColor.sb_Grey()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell!
         
-        if let mode = self.mode {
-            switch mode {
-            case .Frequency:
-                switch (indexPath.section, indexPath.row){
-                case (0, 0): cell = tableView.dequeueReusableCellWithIdentifier(switchCellID, forIndexPath: indexPath)
-                case (0, 1): cell = tableView.dequeueReusableCellWithIdentifier(pickerCellID, forIndexPath: indexPath)
-                default: break
-                }
-            case .DecksForWatch:
-                cell = tableView.dequeueReusableCellWithIdentifier(checkmarkCellID, forIndexPath: indexPath)
+        switch mode {
+        case .Frequency?:
+            switch (indexPath.section, indexPath.row){
+            case (0, 0): cell = tableView.dequeueReusableCellWithIdentifier(switchCellID, forIndexPath: indexPath)
+            case (0, 1): cell = tableView.dequeueReusableCellWithIdentifier(pickerCellID, forIndexPath: indexPath)
+            default: break
+            }
+        case .DecksForWatch?:
+            cell = tableView.dequeueReusableCellWithIdentifier(checkmarkCellID, forIndexPath: indexPath)
+            
+            if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.decksToSynchronizeKey) as? [String], let userDecksArray = userDecksArray {
                 switch indexPath.section {
                 case 0:
+                    if decksToSynchronize.count == userDecksArray.count {
+                        cell.accessoryType = .Checkmark
+                    }
                     cell.textLabel?.text = "Zaznacz/Odznacz wszystkie"
                 case 1:
-                    if let deckName = userDecksArray?[indexPath.row].name {
-                        cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
-                    }
+                    let deckName = userDecksArray[indexPath.row].name
+                    cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
+                    
                     cell.accessoryType = .None
                     //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
-                    if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.decksToSynchronizeKey) as? [String] where !decksToSynchronize.isEmpty, let userDecksArray = userDecksArray {
-                        for deckToSync in decksToSynchronize {
-                            if deckToSync == userDecksArray[indexPath.row].id {
-                                cell.accessoryType = .Checkmark
-                            }
+                    
+                    for deckToSync in decksToSynchronize {
+                        if deckToSync == userDecksArray[indexPath.row].id {
+                            cell.accessoryType = .Checkmark
                         }
                     }
                 default: break
                 }
             }
+        default: break
+            
         }
         cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
-        cell.backgroundColor = UIColor.sb_Grey()
+        cell.backgroundColor = UIColor.sb_White()
         return cell
     }
     
@@ -87,33 +90,35 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         
         let cell: UITableViewCell? = tableView.cellForRowAtIndexPath(indexPath)
         var selectAllState: UITableViewCellAccessoryType = .None
-        
-        if indexPath == NSIndexPath(forRow: 0, inSection: 0) {
-            //We tap `select/deselect all`
-            if let selectAllCell = tableView.cellForRowAtIndexPath(indexPath), let mode = self.mode where mode == .DecksForWatch
-            {
-                changeSelectionForCell(selectAllCell)
-                selectAllState = selectAllCell.accessoryType
-            }
-            
-            //Change selection to all cells in section 1
-            if let deck = userDecksArray {
-                for row in 0..<deck.count {
-                    if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 1))
-                    {
-                        changeSelectionForCell(cell, toState: selectAllState)
+        if mode == .DecksForWatch {
+            if indexPath == NSIndexPath(forRow: 0, inSection: 0) {
+                //We tap `select/deselect all`
+                if let selectAllCell = tableView.cellForRowAtIndexPath(indexPath) {
+                    changeSelectionForCell(selectAllCell)
+                    selectAllState = selectAllCell.accessoryType
+                }
+                
+                //Change selection to all cells in section 1
+                if let deck = userDecksArray {
+                    for row in 0..<deck.count {
+                        if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 1))
+                        {
+                            changeSelectionForCell(cell, toState: selectAllState)
+                        }
                     }
                 }
-            }
-            
-        } else {
-            //We didn't tap the `select/deselect all` row, so change only selected row
-            if let selectedCell = cell, let mode = self.mode where mode == .DecksForWatch {
-                changeSelectionForCell(selectedCell)
+                
+            } else {
+                //We didn't tap the `select/deselect all` row, so change only selected row and deselect `select/deselect all` row
+                if let selectedCell = cell {
+                    changeSelectionForCell(selectedCell)
+                }
+                if let selectAllCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)){
+                    changeSelectionForCell(selectAllCell, toState: .None)
+                }
             }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
     }
     
     func copyUserDecksToSync() {
@@ -146,15 +151,16 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     
     //Handle tapping the Back button
     override func willMoveToParentViewController(parent: UIViewController?) {
-        if let mode = self.mode {
-            switch mode {
-            case .Frequency:
-                if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
-                    scheduleNotification()
-                }
-            case .DecksForWatch:
-                copyUserDecksToSync()
+        super.willMoveToParentViewController(parent)
+        switch mode {
+        case .Frequency?:
+            if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
+                scheduleNotification()
             }
+        case .DecksForWatch?:
+            copyUserDecksToSync()
+        default:
+            break
         }
         defaults.synchronize()
     }
@@ -192,19 +198,19 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
-        if let mode = self.mode {
-            switch mode {
-            case .Frequency: rows = 2
-            case .DecksForWatch:
-                switch section {
-                case 0: rows = 1
-                case 1:
-                    if let deck = userDecksArray {
-                        rows = deck.count
-                    }
-                default: break
+        switch mode {
+        case .Frequency?: rows = 2
+        case .DecksForWatch?:
+            switch section {
+            case 0: rows = 1
+            case 1:
+                if let deck = userDecksArray {
+                    rows = deck.count
                 }
+            default: break
             }
+        default:
+            break
         }
         return rows
     }
@@ -222,13 +228,10 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        var sections = 0
-        if let mode = self.mode {
-            switch mode {
-            case .Frequency: sections = 1
-            case .DecksForWatch: sections = 2
-            }
+        switch mode {
+        case .Frequency?: return 1
+        case .DecksForWatch?: return 2
+        default: return 0
         }
-        return sections
     }
 }
