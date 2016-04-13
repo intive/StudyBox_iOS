@@ -23,6 +23,9 @@
 		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
+		2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */; };
+		2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */; };
+		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
@@ -79,6 +82,9 @@
 		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+isConnected.swift"; sourceTree = "<group>"; };
+		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
+		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +224,9 @@
 				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
 				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
 				2D0939A61CAD19CF00886A1B /* String+validation.swift */,
+				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
+				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
+				2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -473,6 +482,8 @@
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
 				AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */,
+				2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */,
+				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
 				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
@@ -497,6 +508,7 @@
 				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
 				AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */,
 				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
+				2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
 				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,
 				72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */,
