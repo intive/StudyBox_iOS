@@ -24,10 +24,14 @@ class Utils {
         static let DeckWithoutTitle = "Bez tytułu"
     }
     
+    struct UserAccount {
+        static let MinimumPasswordLength = 8
+    }
+    
     struct NSUserDefaultsKeys {
-        static let notificationsEnabledKey = "notificationsEnabledKey"
-        static let pickerFrequencyNumberKey = "pickerFrequencyNumber"
-        static let pickerFrequencyTypeKey = "pickerFrequencyType"
-        static let decksToSynchronizeKey = "decksToSynchronize"
+        static let NotificationsEnabledKey = "notificationsEnabledKey"
+        static let PickerFrequencyNumberKey = "pickerFrequencyNumber"
+        static let PickerFrequencyTypeKey = "pickerFrequencyType"
+        static let DecksToSynchronizeKey = "decksToSynchronize"
     }
 }
