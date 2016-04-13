@@ -25,14 +25,14 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         adjustPickerValues()
         
         //In case user enables notifications but doesn't change the picker
-        defaults.setObject(pickerFrequencyNumbers[pickerView.selectedRowInComponent(0)], forKey: Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey)
-        defaults.setObject(pickerFrequencyTypes[pickerView.selectedRowInComponent(1)], forKey: Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
+        defaults.setObject(pickerFrequencyNumbers[pickerView.selectedRowInComponent(0)], forKey: Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
+        defaults.setObject(pickerFrequencyTypes[pickerView.selectedRowInComponent(1)], forKey: Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
     }
     
     ///Scroll pickerView to data found in NSUserDefaults before it's shown
     func adjustPickerValues() {
-        if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey),
-            let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
+        if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
+            let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
         {
             if let indexOfNumber = pickerFrequencyNumbers.indexOf(Int(number)!), let indexOfType = pickerFrequencyTypes.indexOf(type) {
                 self.pickerView.selectRow(indexOfNumber, inComponent: 0, animated: false)
@@ -75,8 +75,8 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         switch component {
-        case 0: defaults.setObject(pickerFrequencyNumbers[row], forKey: Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey)
-        case 1: defaults.setObject(pickerFrequencyTypes[row], forKey: Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
+        case 0: defaults.setObject(pickerFrequencyNumbers[row], forKey: Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
+        case 1: defaults.setObject(pickerFrequencyTypes[row], forKey: Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
         default: break
         }
     }

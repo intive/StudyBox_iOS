@@ -15,6 +15,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     @IBOutlet weak var settingsTableView: UITableView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
+    lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell!
@@ -22,11 +23,11 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         switch (indexPath.section,indexPath.row){
         case (0, 0):
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
-            cell.textLabel?.text = "Powiadomienia co"
+            cell.textLabel?.text = "Powiadomienia co..."
             
-            if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
-                if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey),
-                    let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey)
+            if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
+                if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
+                    let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
                 {
                     cell.detailTextLabel?.text = "\(number) \(type)"
                 } else {
@@ -39,7 +40,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         case (1, 0):
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
-            if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.decksToSynchronizeKey)?.count {
+            if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
                 cell.detailTextLabel?.text = "\(decksCount) talii"
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
@@ -80,8 +81,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        
         let detailViewController = segue.destinationViewController as? SettingsDetailViewController
         if let section = self.settingsTableView.indexPathForSelectedRow?.section {
             switch section {
@@ -92,6 +91,18 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             default: break
             }
         }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
+        var doesUserHaveDecks = true
+        if let userDecks = dataManager?.decks(false) {
+            if userDecks.isEmpty {
+                presentAlertController(withTitle: "Brak talii", message: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.", buttonText: "OK")
+                doesUserHaveDecks = false
+                self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1) , animated: true)
+            }
+        }
+        return doesUserHaveDecks
     }
     
     override func viewWillAppear(animated: Bool) {

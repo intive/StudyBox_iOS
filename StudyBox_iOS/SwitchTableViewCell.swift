@@ -17,11 +17,11 @@ class SwitchTableViewCell: UITableViewCell {
     @IBAction func switchFlipped(sender: AnyObject) {
         
         if switchOutlet.on {
-            defaults.setBool(true, forKey: Utils.NSUserDefaultsKeys.notificationsEnabledKey)
+            defaults.setBool(true, forKey: Utils.NSUserDefaultsKeys.NotificationsEnabledKey)
             let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         } else {
-            defaults.setBool(false, forKey: Utils.NSUserDefaultsKeys.notificationsEnabledKey)
+            defaults.setBool(false, forKey: Utils.NSUserDefaultsKeys.NotificationsEnabledKey)
         }
     }
     
@@ -32,7 +32,7 @@ class SwitchTableViewCell: UITableViewCell {
         labelOutlet.text = "Powiadomienia"
         labelOutlet.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         
-        if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
+        if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
             switchOutlet.setOn(true, animated: false)
         } else {
             switchOutlet.setOn(false, animated: false)

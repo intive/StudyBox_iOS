@@ -56,11 +56,13 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         case .DecksForWatch?:
             cell = tableView.dequeueReusableCellWithIdentifier(checkmarkCellID, forIndexPath: indexPath)
             
-            if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.decksToSynchronizeKey) as? [String], let userDecksArray = userDecksArray {
+            if let userDecksArray = userDecksArray {
                 switch indexPath.section {
                 case 0:
-                    if decksToSynchronize.count == userDecksArray.count {
-                        cell.accessoryType = .Checkmark
+                    if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
+                        if decksToSynchronize.count == userDecksArray.count {
+                            cell.accessoryType = .Checkmark
+                        }
                     }
                     cell.textLabel?.text = "Zaznacz/Odznacz wszystkie"
                 case 1:
@@ -69,10 +71,11 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                     
                     cell.accessoryType = .None
                     //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
-                    
-                    for deckToSync in decksToSynchronize {
-                        if deckToSync == userDecksArray[indexPath.row].id {
-                            cell.accessoryType = .Checkmark
+                    if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
+                        for deckToSync in decksToSynchronize {
+                            if deckToSync == userDecksArray[indexPath.row].id {
+                                cell.accessoryType = .Checkmark
+                            }
                         }
                     }
                 default: break
@@ -130,7 +133,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                     decksToSynchronize.append(userDecksArray[i].id)
                 }
             }
-            defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.decksToSynchronizeKey)
+            defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
             //TODO: send decksToSynchronize to the Watch queue
         }
     }
@@ -154,7 +157,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         super.willMoveToParentViewController(parent)
         switch mode {
         case .Frequency?:
-            if defaults.boolForKey(Utils.NSUserDefaultsKeys.notificationsEnabledKey) {
+            if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
                 scheduleNotification()
             }
         case .DecksForWatch?:
@@ -174,8 +177,8 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         let calendar = NSCalendar.currentCalendar()
         let now = NSDate()
         var newFireDate = NSDate()
-        if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.pickerFrequencyTypeKey) {
-            let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.pickerFrequencyNumberKey)
+        if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey) {
+            let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
             switch type  {
             case "minut":
                 if let newDate = calendar.dateByAddingUnit(.Minute, value: number, toDate: now, options: [.MatchStrictly]){
