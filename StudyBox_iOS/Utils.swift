@@ -16,6 +16,7 @@ class Utils {
         static let DecksViewControllerID = "DecksViewControllerID"
         static let TestViewControllerID = "TestViewControllerID"
         static let DecksViewCellID = "DecksViewCellID"
+        static let SettingsViewControllerID = "SettingsViewControllerID"
     }
     struct DeckViewLayout{
         static let DecksSpacing: CGFloat = 20
@@ -25,5 +26,12 @@ class Utils {
     
     struct UserAccount {
         static let MinimumPasswordLength = 8
+    }
+    
+    struct NSUserDefaultsKeys {
+        static let NotificationsEnabledKey = "notificationsEnabledKey"
+        static let PickerFrequencyNumberKey = "pickerFrequencyNumber"
+        static let PickerFrequencyTypeKey = "pickerFrequencyType"
+        static let DecksToSynchronizeKey = "decksToSynchronize"
     }
 }
