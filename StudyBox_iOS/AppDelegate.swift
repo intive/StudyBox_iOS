@@ -15,7 +15,6 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var settingsDetailVC = SettingsDetailViewController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
@@ -24,9 +23,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        settingsDetailVC.scheduleNotification()
+        scheduleNotification()
     }
 
+    ///Schedules a new notification based on NSUD from now
+    func scheduleNotification() {
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        let notification = UILocalNotification()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        notification.alertBody = "Czas poćwiczyć fiszki!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        let calendar = NSCalendar.currentCalendar()
+        let now = NSDate()
+        var newFireDate = NSDate()
+        if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey) {
+            let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
+            switch type  {
+            case "minut":
+                if let newDate = calendar.dateByAddingUnit(.Minute, value: number, toDate: now, options: [.MatchStrictly]){
+                    newFireDate = newDate
+                }
+            case "godzin":
+                if let newDate = calendar.dateByAddingUnit(.Hour, value: number, toDate: now, options: [.MatchStrictly]){
+                    newFireDate = newDate
+                }
+            case "dni":
+                if let newDate = calendar.dateByAddingUnit(.Day, value: number, toDate: now, options: [.MatchStrictly]){
+                    newFireDate = newDate
+                }
+            default: break
+            }
+        }
+        notification.fireDate = newFireDate
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
+
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
