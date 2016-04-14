@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum SettingsDetailVCType {
+enum SettingsDetailVCMode {
     case Frequency
     case DecksForWatch
 }
@@ -19,10 +19,12 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     let pickerCellID = "pickerCell"
     let checkmarkCellID = "checkmarkCell"
     let switchCellID = "switchCell"
-    var mode: SettingsDetailVCType!
+    var mode: SettingsDetailVCMode!
     lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
-    ///Array that holds all user's decks
+    
+    ///Array that holds all user's local decks
     var userDecksArray: [Deck]?
+    
     var fireDate = NSDate()
     @IBOutlet weak var detailTableView: UITableView!
     
@@ -59,6 +61,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             if let userDecksArray = userDecksArray {
                 switch indexPath.section {
                 case 0:
+                    //Check the "Select/deselect all" cell if all decks are already set to sync
                     if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
                         if decksToSynchronize.count == userDecksArray.count {
                             cell.accessoryType = .Checkmark
@@ -101,7 +104,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                     selectAllState = selectAllCell.accessoryType
                 }
                 
-                //Change selection to all cells in section 1
+                //Change selection of all cells in section 1 based on "Select all" cell
                 if let deck = userDecksArray {
                     for row in 0..<deck.count {
                         if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 1))
@@ -222,9 +225,8 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         var height = tableView.rowHeight
         
         if let mode = self.mode where mode == .Frequency{
-            switch (indexPath.section, indexPath.row) {
-            case (0, 1): height = CGFloat(140) //height of pickerView
-            default: break
+            if indexPath.section == 0 && indexPath.row == 1 {
+                height = CGFloat(140) //height of pickerView
             }
         }
         return height

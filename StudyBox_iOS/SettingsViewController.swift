@@ -22,9 +22,10 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         
         switch (indexPath.section,indexPath.row){
         case (0, 0):
+            //Frequency cell configuration
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Powiadomienia co..."
-            
+            //Set detail label to data from NSUD
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
                 if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
                     let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
@@ -38,6 +39,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             }
             
         case (1, 0):
+            //Deck choice cell configuration
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
             if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
@@ -80,6 +82,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         }
     }
     
+    //Set the mode of SettingsDetailVC based on tapped cell
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let detailViewController = segue.destinationViewController as? SettingsDetailViewController
         if let section = self.settingsTableView.indexPathForSelectedRow?.section {
@@ -93,18 +96,20 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         }
     }
     
+    //Check if user has any decks on device before performing segue on second TableViewCell
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
         var doesUserHaveDecks = true
         if let userDecks = dataManager?.decks(false) {
             if userDecks.isEmpty {
                 presentAlertController(withTitle: "Brak talii", message: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.", buttonText: "OK")
                 doesUserHaveDecks = false
-                self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1) , animated: true)
+                self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
             }
         }
         return doesUserHaveDecks
     }
     
+    //Update cells when returning from DetailVC
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         settingsTableView.reloadData()

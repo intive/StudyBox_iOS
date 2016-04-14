@@ -48,13 +48,11 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        var rows = 0
         switch component {
-        case 0: rows = pickerFrequencyNumbers.count
-        case 1: rows = pickerFrequencyTypes.count
-        default: break
+        case 0: return pickerFrequencyNumbers.count
+        case 1: return pickerFrequencyTypes.count
+        default: return 0
         }
-        return rows
     }
     
     //Set labels and fonts of picker view
