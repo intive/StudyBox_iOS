@@ -138,6 +138,35 @@ class DataManager {
         
     }
     
+    func updateDeckFromServer(){
+        
+        ServerCommunication().getDecksFromServer({ (result) in
+            
+            for d in result {
+                if let id = d["id"]{
+                    if let name = d["name"]{
+                        
+                        let newDeck = Deck(id: id, name: name)
+                        let selectedDeck = self.realm.objects(Deck).filter("_id == '\(newDeck.id)'").first
+                        
+                        if let updatingDeck = selectedDeck{
+                            try! self.realm.write {
+                                updatingDeck.name = newDeck.name
+                            }
+                            
+                        }else {
+                            try! self.realm.write {
+                                self.realm.add(newDeck)
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    
     func addDeck(name:String)->String {
 
         let id = decks.generateNewId()
