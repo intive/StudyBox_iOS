@@ -12,10 +12,10 @@
                     <items>
                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="VOL-cn-YJm">
                             <items>
-                                <label alignment="center" verticalAlignment="center" text="Nie można rozpocząć testu" textAlignment="center" numberOfLines="2" id="hbK-x0-Wci">
+                                <label alignment="center" verticalAlignment="center" text="titleLabel" textAlignment="center" numberOfLines="2" id="hbK-x0-Wci">
                                     <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                                 </label>
-                                <label alignment="center" verticalAlignment="center" text="Nie zostały wybrane żadne talie do synchronizacji z zegarkiem lub nie zostały one jeszcze zsynchronizowane." textAlignment="center" numberOfLines="0" id="fsI-vC-vQ6">
+                                <label alignment="center" verticalAlignment="center" text="detailLabel" textAlignment="center" numberOfLines="0" id="fsI-vC-vQ6">
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>

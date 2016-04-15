@@ -152,30 +152,31 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     
     func sendDecksToAppleWatch(decks: [String]) {
         
-        //TODO: convert decks to questions and answers
-        //        var flashcardsToSync = [String:String]()
-        //        for deck in decks {
-        //            if let flashcardsFromManager = dataManager?.deck(withId: deck)?.flashcards {
-        //                for flashcard in flashcardsFromManager {
-        //                    flashcardsToSync[flashcard.question] = flashcard.answer
-        //                }
-        //            }
-        //        }
-        //Try passing the data to Watch
+        var flashcardsQuestions = [String]()
+        var flashcardsAnswers = [String]()
+        for deck in decks {
+            if let flashcardsFromManager = dataManager?.deck(withId: deck)?.flashcards {
+                for i in 0..<flashcardsFromManager.count {
+                    flashcardsQuestions[i] = flashcardsFromManager[i].question
+                    flashcardsAnswers[i] = flashcardsFromManager[i].answer
+                }
+            }
+        }
         if let session = watchSession {
-            do {
-                print("session start")
-                let testData = ["TestQuestion1":"TestAnswer1", "TestQuestion2":"TestAnswer2",
-                                "TestQuestion3":"TestAnswer3", "TestQuestion4":"TestAnswer4",
-                                "TestQuestion5":"TestAnswer5", "TestQuestion6":"TestAnswer6"]
-                try session.updateApplicationContext(["flashcards":testData])
-                print("sent test data")
-            }   catch let error {
-                print(error)
-                presentAlertController(withTitle: "Błąd", message: "Nie można przesłać talii do Apple Watch.", buttonText: "OK")
+            if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
+                do {
+                    //let testData = ["TestQuestion1":"TestAnswer1", "TestQuestion2":"TestAnswer2",
+                    //                "TestQuestion3":"TestAnswer3", "TestQuestion4":"TestAnswer4",
+                    //                "TestQuestion5":"TestAnswer5", "TestQuestion6":"TestAnswer6"]
+                    try session.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions,"flashcardsAnswers":flashcardsAnswers])
+                } catch let error {
+                    print(error)
+                    //presentAlertController(withTitle: "Błąd", message: "Nie można przesłać talii do Apple Watch.", buttonText: "OK")
+                }
             }
         }
     }
+
     
     ///Inverses cell checkmark on/off
     func changeSelectionForCell(cell: UITableViewCell) {

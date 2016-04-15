@@ -26,6 +26,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var questionText = String()
     var answerText = String()
     var storedFlashcards = [String:String]()
+    var userAnswer:Bool?
     
     var session : WCSession!
     
@@ -42,19 +43,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.awakeWithContext(context)
         if context == nil {
             startButton.setHidden(true)
+            detailLabel.setText(detailTextNotAvailable)
+            titleLabel.setText(titleTextNotAvailable)
         } else {
             titleLabel.setHidden(true)
             detailLabel.setHidden(true)
         }
     }
     
+    func didAnswer(answer: Bool) {
+        self.userAnswer = answer
+    }
+    
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        print("recievedappcontext")
-        print(applicationContext)
-        titleLabel.setText("recievedContext")
         startButton.setHidden(false)
-        titleLabel.setHidden(true)
-        detailLabel.setHidden(true)
+        titleLabel.setText("")
+        detailLabel.setText("")
         if let flashcards = applicationContext["flashcards"] as? [String:String] {
             print("recievedappcontext2")
             storedFlashcards = flashcards
@@ -63,9 +67,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     @IBAction func startButtonPress() {
         randomFlashcardData()
-        presentControllerWithNames( ["QuestionViewController", "AnswerViewController"], contexts:
+        presentControllerWithNames(["QuestionViewController", "AnswerViewController"], contexts:
             [["segue": "pagebased", "data": questionText],
-            ["segue": "pagebased", "data": answerText]])
+            ["segue": "pagebased", "data": answerText, "dismissContext": self]])
     }
     
     func randomFlashcardData() {
@@ -76,13 +80,28 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
 
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        if let userAnswer = userAnswer {
+            if userAnswer {
+                titleLabel.setHidden(false)
+                detailLabel.setHidden(false)
+                titleLabel.setText(titleTextSuccess)
+                detailLabel.setText(detailTextSuccess)
+            } else {
+                titleLabel.setHidden(false)
+                detailLabel.setHidden(false)
+                titleLabel.setText(titleTextFailure)
+                detailLabel.setText(detailTextFailure)
+            }
+        }
+        
     }
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        self.userAnswer = nil
     }
 
 }

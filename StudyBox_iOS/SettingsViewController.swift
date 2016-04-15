@@ -49,16 +49,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
             
-            //TODO: enable or disable cell based on whether Watch is available
-//            if WCSession.isSupported() {
-//                let watchSession = WCSession.defaultSession()
-//                if !watchSession.paired || !watchSession.watchAppInstalled {
-//                    cell.textLabel?.textColor = UIColor.sb_Grey()
-//                    cell.userInteractionEnabled = false
-//                }
-//            }
-            
-            
         default: break
         }
         
@@ -87,21 +77,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0 : return "Ustaw jak często chcesz otrzymywać powiadomienia z przypomnieniem o ćwiczeniach."
-        case 1 :
-            var footer = String()
-            if WCSession.isSupported() {
-                let watchSession = WCSession.defaultSession()
-                if !watchSession.paired {
-                    footer = "Nie masz sparowanego Apple Watch na który możnaby wysłać fiszki."
-                } else if !watchSession.watchAppInstalled {
-                    footer = "Na twoim Apple Watch nie ma zainstalowanej aplikacji StudyBox."
-                } else {
-                    footer = "Wybierz które talie chcesz synchronizować ze swoim Apple Watch."
-                }
-            } else {
-                footer = "Twoje urządzenie nie obsługuje Apple Watch."
-            }
-            return footer
+        case 1 : return "Wybierz które talie chcesz synchronizować ze swoim Apple Watch."
         default: return ""
         }
     }
@@ -122,15 +98,21 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     //Check if user has any decks on device before performing segue on second TableViewCell
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
-        var doesUserHaveDecks = true
+        var shouldPerformSegue = true
+        var message = [String]()
         if let userDecks = dataManager?.decks(false) {
             if userDecks.isEmpty {
-                presentAlertController(withTitle: "Brak talii", message: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.", buttonText: "OK")
-                doesUserHaveDecks = false
+                message = ["Brak talii","Nie masz na swoim urządzeniu żadnych talii do synchronizacji."]
+                shouldPerformSegue = false
                 self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
             }
         }
-        return doesUserHaveDecks
+//        if !WCSession.isSupported() {
+//            message = ["Niekompatybilne urządzenie","Twoje urządzenie nie obsługuje komunikacji z Apple Watch"]
+//            self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+//        }
+        //presentAlertController(withTitle: message[0], message: message[1], buttonText: "OK")
+        return shouldPerformSegue
     }
     
     //Update cells when returning from DetailVC
