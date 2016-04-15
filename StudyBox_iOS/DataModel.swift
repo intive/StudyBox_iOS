@@ -93,7 +93,7 @@ class Deck: Object, Equatable, UniquelyIdentifiable,Searchable {
     func matches(expression: String?) -> Bool {
         let noTitle = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString;
         if let text = expression?.lowercaseString {
-            if name.characters.isEmpty, let expr = expression {
+            if name.characters.isEmpty {
                 return noTitle.containsString(text)
             }
             return name.lowercaseString.containsString(text)

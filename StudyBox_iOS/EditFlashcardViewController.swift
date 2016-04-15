@@ -27,7 +27,6 @@ class EditFlashcardViewController: StudyBoxViewController {
         searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.placeholder = "Szukaj talii"
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
         
         return searchController
     }()
@@ -73,7 +72,8 @@ class EditFlashcardViewController: StudyBoxViewController {
         questionField.text = nil
         tipField.text = nil
         answerField.text = nil
-        
+        deck = nil
+        choosenDeckLabel.text = "Wybrana talia"
     }
     
     private func updateUiForCurrentMode() {
@@ -103,6 +103,7 @@ class EditFlashcardViewController: StudyBoxViewController {
         super.viewDidLoad()
         assert(mode != nil, "mode not choosen!")
         searchBarWrapper.addSubview(decksBar)
+        clearInput()
         updateUiForCurrentMode()
     }
     
@@ -135,7 +136,8 @@ class EditFlashcardViewController: StudyBoxViewController {
             if let flashcardDeck = deck {
                 do {
                     try dataManager.addFlashcard(forDeckWithId: flashcardDeck.id, question: question, answer: answer, tip: tip)
-
+                    presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
+                    clearInput()
                 } catch _ as DataManagerError {
                     presentAlertController(withTitle: "Błąd", message: "Nie udało się dodać fiszki", buttonText: "Ok")
                 } catch let err {
@@ -154,6 +156,8 @@ class EditFlashcardViewController: StudyBoxViewController {
             
             do {
                 try dataManager.updateFlashcard(flashcard)
+                presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok")
+
             } catch _ as DataManagerError {
                 presentAlertController(withTitle: "Błąd", message: "Nie udało się zapisać zmian", buttonText: "Ok")
             } catch let err {
@@ -195,15 +199,18 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
         if let foundDecks = searchDecks where foundDecks.isEmpty {
             searchDecks = nil
         }
-        (searchController.searchResultsController as? UITableViewController)?.tableView.reloadData()
+        if let tableController = searchController.searchResultsController as? UITableViewController {
+            tableController.tableView.reloadData()
+        }
         
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        deck = decksTableViewSource[indexPath.row]
         choosenDeckLabel.text = decksTableViewSource[indexPath.row].uiName()
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-        searchController.active = false 
+        searchController.active = false
     }
     
     
