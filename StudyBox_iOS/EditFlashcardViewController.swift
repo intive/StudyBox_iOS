@@ -25,23 +25,26 @@ class EditFlashcardViewController: StudyBoxViewController {
         searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.placeholder = "Szukaj talii"
         searchController.searchResultsUpdater = self
+        searchController.delegate = self
         if isViewLoaded() {
+            searchController.searchBar.sizeToFit()
             searchBarWrapper.addSubview(searchController.searchBar)
         }
+        definesPresentationContext = true 
         return searchController
     }
     
     var _searchController:UISearchController?
     
-    var searchController:UISearchController?  {
+    var searchController:UISearchController!  {
         if _searchController == nil {
             _searchController = setupSearchController()
         }
         return _searchController
     }
 
-    var decksBar: UISearchBar? {
-        return searchController?.searchBar
+    var decksBar: UISearchBar {
+        return searchController.searchBar
     }
     
 
@@ -74,7 +77,7 @@ class EditFlashcardViewController: StudyBoxViewController {
     
     func clearInput(){
       
-        decksBar?.text = nil
+        decksBar.text = nil
         questionField.text = nil
         tipField.text = nil
         answerField.text = nil
@@ -89,7 +92,7 @@ class EditFlashcardViewController: StudyBoxViewController {
             flashcard = card
             deck = card.deck
             
-            decksBar?.text = card.deck?.name
+            decksBar.text = card.deck?.name
             questionField.text = card.question
             tipField.text = card.tip
             answerField.text = card.answer
@@ -104,31 +107,28 @@ class EditFlashcardViewController: StudyBoxViewController {
         }
         
     }
-
+    
     override func disposeResources(isVisible: Bool) {
         super.disposeResources(isVisible)
         if !isVisible {
-            _searchController?.view.removeFromSuperview()
+            _searchController?.searchBar.removeFromSuperview()
             _searchController = nil
+            
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         assert(mode != nil, "mode not choosen!")
-        if let searchBar = decksBar {
-            searchBarWrapper.addSubview(searchBar)
-        }
-        
+        searchBarWrapper.addSubview(decksBar)
+            
         clearInput()
         updateUiForCurrentMode()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if let searchController = searchController where !searchController.active {
-            decksBar?.frame.size.width = searchBarWrapper.frame.size.width
-        }
+        _searchController?.searchBar.sizeToFit()
     }
     @IBAction func saveAction(sender: UIBarButtonItem) {
         
@@ -220,13 +220,17 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
         }
         
     }
+    func didDismissSearchController(searchController: UISearchController) {
+        searchController.searchBar.sizeToFit()
+
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         deck = searchDecks?[indexPath.row]
         choosenDeckLabel.text = searchDecks?[indexPath.row].uiName()
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-        searchController?.active = false
+        searchController.active = false
     }
     
     
