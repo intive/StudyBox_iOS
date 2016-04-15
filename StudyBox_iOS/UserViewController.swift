@@ -47,24 +47,23 @@ class UserViewController: InputViewController {
         
     }
     
-    func validateTextFieldsNotEmpty()->Bool {
+    func areTextFieldsEmpty()->Bool {
         
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
-                guard let text = field.text where text.characters.count > 0 else {
-                    return false
+                if field.isEmpty() {
+                    return true
                 }
             }
         }
-
-        return true
+        return false 
     }
     
     func areTextFieldsValid()-> Bool {
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
-                if let validableField = field as? ValidatableTextField {
-                    if !validableField.isValid {
+                if let validatableField = field as? ValidatableTextField {
+                    if validatableField.isEmpty() || validatableField.invalidMessage != nil {
                         return false 
                     }
                 }
@@ -72,6 +71,24 @@ class UserViewController: InputViewController {
         }
         
         return true
+    }
+    
+    func disableButton(button:UIButton) {
+        button.backgroundColor = UIColor.sb_DarkGrey()
+    }
+    
+    func enableButton(button:UIButton) {
+        button.backgroundColor = UIColor.sb_Raspberry()
+    }
+    
+    enum ValidationMessage:String  {
+        case passwordTooShort = "Hasła są zbyt krótkie"
+        case passwordsDontMatch = "Hasła nie są jednakowe!"
+        case passwordContainsSpace = "Nie można użyć w haśle białych znaków!"
+        case passwordIncorrect = "Niepoprawne hasło"
+        case noInternet = "Brak połączenia z Internetem"
+        case emailIncorrect = "Niepoprawny e-mail!"
+        case fieldsAreEmpty = "Wypełnij wszystkie pola!"
     }
     
 }

@@ -65,11 +65,18 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Moje talie",viewController: nil,lazyLoadViewControllerBlock: {[weak self] in
                     return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.DecksViewControllerID)
-                })
+                    })
             )
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Ustawienia",viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
+                    }
+                )
+            )
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
                     if let storyboard = self?.storyboard {
