@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol Searchable {
-    func matches(expression:String?)->Bool
-}
-
 extension Array where Element:Searchable {
     
     func matching(expression:String?)->[Element] {

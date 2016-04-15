@@ -16,20 +16,13 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var currentQuestionNumber: UILabel!
     
-    
+    @IBOutlet weak var answerLeading: NSLayoutConstraint!
+    @IBOutlet var answerTrailing: NSLayoutConstraint!
     var testLogicSource:Test?
     
     private var dataManager:DataManager? = {
         return UIApplication.appDelegate().dataManager
     }()
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //answerView is set outside of screen to appear later at swipe
-        //and after answering the question
-        answerView.center.x = testView.center.x + testView.frame.size.width
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +86,8 @@ class TestViewController: StudyBoxViewController {
         }else {
             // TODO unhandled case
         }
+        answerTrailing.active = false
+        answerLeading.constant = view.frame.width
     }
     
     
@@ -142,8 +137,12 @@ class TestViewController: StudyBoxViewController {
     }
     
     func swipedLeft(){
+        view.layoutIfNeeded()
+        self.answerLeading.constant = 0
+
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
-            self.answerView.center.x = self.testView.center.x
+            self.answerTrailing.active = true 
+            self.view.layoutIfNeeded()
             self.questionView.center.x = self.testView.center.x - self.testView.frame.size.width
             }, completion: nil)
     }
@@ -156,8 +155,8 @@ class TestViewController: StudyBoxViewController {
             }, completion: { finished in
                 //set views to show questionView after animation
                 self.questionView.center.x = self.testView.center.x
-                self.answerView.center.x = self.testView.center.x + self.testView.frame.size.width
-                
+                self.answerTrailing.active = false
+                self.answerLeading.constant = self.view.frame.width
                 //set buttons size back to normal in case they were being pressed while swiping
                 self.correctButton.transform = CGAffineTransformIdentity
                 self.incorrectButton.transform = CGAffineTransformIdentity
@@ -288,7 +287,8 @@ class TestViewController: StudyBoxViewController {
         //TODO: set new question in label before dissolve
         updateQuestionUiForCurrentCard()
         //move answerView outside of the screen
-        answerView.center.x = testView.center.x + testView.frame.size.width
+        answerTrailing.active = false
+        answerLeading.constant = view.frame.width
         
         //animate dissolving of views
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: {

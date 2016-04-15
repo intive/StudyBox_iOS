@@ -41,7 +41,7 @@ struct DrawerNavigationChild {
     }
 }
 
-class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SBDrawerLeftDelegate {
+class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     static let DrawerCellId = "DrawerCellId"
@@ -49,8 +49,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    private var hideStatusBar = true
-
     private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
@@ -65,7 +63,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Moje talie",viewController: nil,lazyLoadViewControllerBlock: {[weak self] in
                     return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.DecksViewControllerID)
-                })
+                    })
             )
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Stwórz nową fiszkę",viewController: nil,
@@ -82,6 +80,13 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             )
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Ustawienia",viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
+                    }
+                )
+            )
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
                     if let storyboard = self?.storyboard {
@@ -157,6 +162,21 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers[index] = navigationChild
             
             if let mmDrawer = UIApplication.sharedRootViewController as? MMDrawerController {
+                
+                var sbController = controller as? StudyBoxViewController
+                
+                if sbController == nil {
+                    if let navigationController = controller as? UINavigationController {
+                        sbController = navigationController.childViewControllers[0] as? StudyBoxViewController
+                    }
+                }
+                
+                //necessary condition check, to handle programmaticall change of center view controller
+                if mmDrawer.openSide != .None {
+                    sbController?.isDrawerVisible = true
+                    sbController?.setNeedsStatusBarAppearanceUpdate()
+                }
+    
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
             
@@ -175,20 +195,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         return .Slide
     }
     
-    func hidingDrawer() {
-        hideStatusBar = !hideStatusBar
-        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
-            animations: {
-                self.setNeedsStatusBarAppearanceUpdate()
-            },
-            completion: { finished in
-                self.hideStatusBar = !self.hideStatusBar
-            }
-        )
-    }
-    
     override func prefersStatusBarHidden() -> Bool {
-        return hideStatusBar
+        return true
     }
     
     func deactiveAllChildViewControllers() {

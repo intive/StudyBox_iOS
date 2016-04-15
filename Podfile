@@ -16,7 +16,6 @@ target 'StudyBox_iOS' do
     pod 'Fabric', '~> 1.6.7'
     pod 'Crashlytics', '~> 3.7.0'
     pod 'Reachability', '~> 3.2'
-    pod 'KDCircularProgress', '~> 1.3'
 end
 
 target 'StudyBox_iOSTests' do
