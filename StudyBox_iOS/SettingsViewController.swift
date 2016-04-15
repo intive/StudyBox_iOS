@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -47,7 +48,16 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
+            
             //TODO: enable or disable cell based on whether Watch is available
+//            if WCSession.isSupported() {
+//                let watchSession = WCSession.defaultSession()
+//                if !watchSession.paired || !watchSession.watchAppInstalled {
+//                    cell.textLabel?.textColor = UIColor.sb_Grey()
+//                    cell.userInteractionEnabled = false
+//                }
+//            }
+            
             
         default: break
         }
@@ -77,7 +87,21 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0 : return "Ustaw jak często chcesz otrzymywać powiadomienia z przypomnieniem o ćwiczeniach."
-        case 1 : return "Wybierz które talie chcesz synchronizować ze swoim Apple Watch."
+        case 1 :
+            var footer = String()
+            if WCSession.isSupported() {
+                let watchSession = WCSession.defaultSession()
+                if !watchSession.paired {
+                    footer = "Nie masz sparowanego Apple Watch na który możnaby wysłać fiszki."
+                } else if !watchSession.watchAppInstalled {
+                    footer = "Na twoim Apple Watch nie ma zainstalowanej aplikacji StudyBox."
+                } else {
+                    footer = "Wybierz które talie chcesz synchronizować ze swoim Apple Watch."
+                }
+            } else {
+                footer = "Twoje urządzenie nie obsługuje Apple Watch."
+            }
+            return footer
         default: return ""
         }
     }

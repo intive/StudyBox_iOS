@@ -12,12 +12,6 @@
                     <items>
                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="VOL-cn-YJm">
                             <items>
-                                <button width="1" height="63.5" alignment="center" verticalAlignment="center" title="Rozpocznij szybki test" id="d4a-ER-yYt">
-                                    <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
-                                    <connections>
-                                        <action selector="startButtonPress" destination="AgC-eL-Hgc" id="c27-jd-3r5"/>
-                                    </connections>
-                                </button>
                                 <label alignment="center" verticalAlignment="center" text="Nie można rozpocząć testu" textAlignment="center" numberOfLines="2" id="hbK-x0-Wci">
                                     <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                                 </label>
@@ -25,14 +19,15 @@
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
+                                <button width="1" height="63.5" alignment="center" verticalAlignment="center" title="Wylosuj fiszkę" id="d4a-ER-yYt">
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                    <connections>
+                                        <action selector="startButtonPress" destination="AgC-eL-Hgc" id="c27-jd-3r5"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                     </items>
-                    <menu key="menu" id="fpQ-H0-2OB">
-                        <items>
-                            <menuItem title="Wymuś synchronizację" icon="repeat" id="bnM-ZW-DoY"/>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="detailLabel" destination="fsI-vC-vQ6" id="uQE-Hq-SuH"/>
                         <outlet property="startButton" destination="d4a-ER-yYt" id="bu4-Uv-VtZ"/>
@@ -50,15 +45,11 @@
                         <group width="1" alignment="left" layout="vertical" spacing="20" id="Vfq-JY-t3O">
                             <items>
                                 <label width="1" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="Z2z-eJ-Xce"/>
-                                <separator alignment="left" id="lB2-5X-nXP"/>
-                                <label width="1" alignment="center" text="Tip" textAlignment="center" id="A3u-IN-A4J"/>
                             </items>
                         </group>
                     </items>
                     <connections>
                         <outlet property="questionLabel" destination="Z2z-eJ-Xce" id="rZN-6n-vrh"/>
-                        <outlet property="separatorOutlet" destination="lB2-5X-nXP" id="SxW-xM-prh"/>
-                        <outlet property="tipLabel" destination="A3u-IN-A4J" id="j0h-fD-IM7"/>
                         <segue destination="fIA-P1-TDZ" kind="relationship" relationship="nextPage" id="BaM-Bc-uia"/>
                     </connections>
                 </controller>
@@ -70,15 +61,19 @@
             <objects>
                 <controller identifier="AnswerViewController" id="fIA-P1-TDZ" customClass="AnswerViewController" customModule="StudyBox_Watch_App_Extension">
                     <items>
-                        <group width="1" alignment="left" id="WRN-dq-mIK">
+                        <label width="1" alignment="center" text="Answer" textAlignment="center" numberOfLines="0" id="4D9-iy-k3F"/>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="6f8-gr-Pr8">
                             <items>
-                                <label width="1" alignment="center" text="Answer" textAlignment="center" numberOfLines="0" id="4D9-iy-k3F"/>
-                            </items>
-                        </group>
-                        <group width="1" alignment="left" id="6f8-gr-Pr8">
-                            <items>
-                                <button width="0.5" height="44" alignment="left" title="Button" id="Ae6-x2-75C"/>
-                                <button width="0.5" height="44" alignment="left" title="Button" id="qHW-cU-giA"/>
+                                <button width="0.5" height="50" alignment="left" title="Dobrze" id="Ae6-x2-75C">
+                                    <connections>
+                                        <action selector="correctButtonPress" destination="fIA-P1-TDZ" id="s7x-kK-yDQ"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" height="50" alignment="left" title="Źle" id="qHW-cU-giA">
+                                    <connections>
+                                        <action selector="incorrectButtonPress" destination="fIA-P1-TDZ" id="U0R-8W-skX"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                     </items>
@@ -118,7 +113,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="468" y="718"/>
+            <point key="canvasLocation" x="496" y="718"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>

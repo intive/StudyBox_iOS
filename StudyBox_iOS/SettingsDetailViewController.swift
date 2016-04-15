@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 enum SettingsDetailVCMode {
     case Frequency
     case DecksForWatch
 }
 
-class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
+class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate, WCSessionDelegate {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     let pickerCellID = "pickerCell"
@@ -24,6 +25,8 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     
     ///Array that holds all user's local decks
     var userDecksArray: [Deck]?
+    
+    var watchSession : WCSession?
     
     var fireDate = NSDate()
     @IBOutlet weak var detailTableView: UITableView!
@@ -42,6 +45,12 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
         
         detailTableView.backgroundColor = UIColor.sb_Grey()
+        
+        if WCSession.isSupported() {
+            watchSession = WCSession.defaultSession()
+            watchSession?.delegate = self;
+            watchSession?.activateSession()
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -137,7 +146,34 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 }
             }
             defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-            //TODO: send decksToSynchronize to the Watch queue
+            sendDecksToAppleWatch(decksToSynchronize)
+        }
+    }
+    
+    func sendDecksToAppleWatch(decks: [String]) {
+        
+        //TODO: convert decks to questions and answers
+        //        var flashcardsToSync = [String:String]()
+        //        for deck in decks {
+        //            if let flashcardsFromManager = dataManager?.deck(withId: deck)?.flashcards {
+        //                for flashcard in flashcardsFromManager {
+        //                    flashcardsToSync[flashcard.question] = flashcard.answer
+        //                }
+        //            }
+        //        }
+        //Try passing the data to Watch
+        if let session = watchSession {
+            do {
+                print("session start")
+                let testData = ["TestQuestion1":"TestAnswer1", "TestQuestion2":"TestAnswer2",
+                                "TestQuestion3":"TestAnswer3", "TestQuestion4":"TestAnswer4",
+                                "TestQuestion5":"TestAnswer5", "TestQuestion6":"TestAnswer6"]
+                try session.updateApplicationContext(["flashcards":testData])
+                print("sent test data")
+            }   catch let error {
+                print(error)
+                presentAlertController(withTitle: "Błąd", message: "Nie można przesłać talii do Apple Watch.", buttonText: "OK")
+            }
         }
     }
     

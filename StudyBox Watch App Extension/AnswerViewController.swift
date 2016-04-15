@@ -10,7 +10,6 @@ import WatchKit
 
 class AnswerViewController: WKInterfaceController {
     
-
     @IBOutlet var answerLabel: WKInterfaceLabel!
 
     override func awakeWithContext(context: AnyObject?) {
@@ -19,5 +18,12 @@ class AnswerViewController: WKInterfaceController {
             answerLabel.setText(answerText)
         }
     }
+    
+    @IBAction func correctButtonPress() {
+    }
+    
+    @IBAction func incorrectButtonPress() {
+    }
+    
     
 }

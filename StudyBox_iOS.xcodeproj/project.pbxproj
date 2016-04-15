@@ -45,6 +45,7 @@
 		726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */; };
 		726EA9CD1CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */; };
 		726EA9D11CBBFAE5008C90CD /* StudyBox Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */; };
+		729310021CC01E9E002BF87A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */; };
@@ -670,6 +671,7 @@
 				7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */,
 				7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */,
 				726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */,
+				729310021CC01E9E002BF87A /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
