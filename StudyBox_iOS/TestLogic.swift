@@ -79,7 +79,7 @@ class Test {
      - Parameter answeredCorrect: Was the last card marked correct or not
      - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
      */
-    func setFlashcardStatus(answeredCorrect answeredCorrect:Bool) {
+    private func setFlashcardStatus(answeredCorrect answeredCorrect:Bool) {
         if !answeredCorrect{
             switch testType{
             case .Learn:
@@ -102,7 +102,7 @@ class Test {
     }
     
     //Returns new 'Flashcard?' or nil if there's no Flashcard to set
-    func newFlashcard() -> Flashcard? {
+    private func newFlashcard() -> Flashcard? {
         if deck.count > 0 {
             currentCard = deck.first
             deck.removeFirst()

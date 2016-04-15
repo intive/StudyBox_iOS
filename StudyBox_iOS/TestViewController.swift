@@ -152,6 +152,10 @@ class TestViewController: StudyBoxViewController {
             //move views up
             self.questionView.center.y = self.questionView.center.y - self.testView.frame.size.height
             self.answerView.center.y = self.answerView.center.y - self.testView.frame.size.height
+            
+            //set alpha to 0 to prepare for next animation +fade-out effect
+            self.questionView.alpha = 0
+            self.answerView.alpha = 0
             }, completion: { finished in
                 if let testLogic = self.testLogicSource {
                     testLogic.skipCard()
@@ -166,6 +170,12 @@ class TestViewController: StudyBoxViewController {
                 //move views back to their correct Y position
                 self.questionView.center.y = self.questionView.center.y + self.testView.frame.size.height
                 self.answerView.center.y = self.answerView.center.y + self.testView.frame.size.height
+                
+                //animate alpha back to 1
+                UIView.animateWithDuration(0.5, delay: 0,options: [.CurveEaseOut], animations: {
+                    self.questionView.alpha = 1
+                    self.answerView.alpha = 1
+                    }, completion: nil)
         })
     }
     
