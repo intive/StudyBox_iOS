@@ -209,7 +209,19 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         for (index,_) in drawerNavigationControllers.enumerate() {
-            if (!drawerNavigationControllers[index].isActive ) {
+            let isActive = drawerNavigationControllers[index].isActive
+            var mainViewController:UIViewController?
+            
+            if let navigationController = drawerNavigationControllers[index].viewController as? UINavigationController where !navigationController.childViewControllers.isEmpty {
+                mainViewController = navigationController.childViewControllers[0]
+            } else {
+                mainViewController = drawerNavigationControllers[index].viewController
+            }
+            if let resourceDisposableVC = mainViewController as? DrawerResourceDisposable {
+                resourceDisposableVC.disposeResources(isActive)
+            }
+            
+            if (!isActive) {
                 drawerNavigationControllers[index].viewController = nil
             }
         }

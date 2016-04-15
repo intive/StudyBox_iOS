@@ -14,26 +14,36 @@ enum EditFlashcardViewControllerMode {
 
 class EditFlashcardViewController: StudyBoxViewController {
     
-    
-    lazy var searchController:UISearchController = {
-        var searchController:UISearchController!
+    func setupSearchController() -> UISearchController {
         let tableVC =  UITableViewController(style: UITableViewStyle.Plain)
         tableVC.tableView.registerNib(UINib.init(nibName: "BasicTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "DecksCell")
         tableVC.tableView.dataSource = self
         tableVC.tableView.delegate = self
         tableVC.tableView.backgroundColor = UIColor.sb_Grey()
         
-        searchController = UISearchController(searchResultsController: tableVC)
+        let searchController = UISearchController(searchResultsController: tableVC)
         searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.placeholder = "Szukaj talii"
         searchController.searchResultsUpdater = self
-        
+        if isViewLoaded() {
+            searchBarWrapper.addSubview(searchController.searchBar)
+        }
         return searchController
-    }()
-
-    var decksBar: UISearchBar {
-        return searchController.searchBar
     }
+    
+    var _searchController:UISearchController?
+    
+    var searchController:UISearchController?  {
+        if _searchController == nil {
+            _searchController = setupSearchController()
+        }
+        return _searchController
+    }
+
+    var decksBar: UISearchBar? {
+        return searchController?.searchBar
+    }
+    
 
     @IBOutlet weak var choosenDeckLabel: UILabel!
     @IBOutlet weak var searchBarWrapper: UIView!
@@ -62,13 +72,9 @@ class EditFlashcardViewController: StudyBoxViewController {
     
     var searchDecks:[Deck]?
     
-    var decksTableViewSource:[Deck] {
-        return searchDecks ?? decks
-    }
-    
     func clearInput(){
       
-        decksBar.text = nil
+        decksBar?.text = nil
         questionField.text = nil
         tipField.text = nil
         answerField.text = nil
@@ -83,7 +89,7 @@ class EditFlashcardViewController: StudyBoxViewController {
             flashcard = card
             deck = card.deck
             
-            decksBar.text = card.deck?.name
+            decksBar?.text = card.deck?.name
             questionField.text = card.question
             tipField.text = card.tip
             answerField.text = card.answer
@@ -98,22 +104,32 @@ class EditFlashcardViewController: StudyBoxViewController {
         }
         
     }
-    
+
+    override func disposeResources(isVisible: Bool) {
+        super.disposeResources(isVisible)
+        if !isVisible {
+            _searchController?.view.removeFromSuperview()
+            _searchController = nil
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         assert(mode != nil, "mode not choosen!")
-        searchBarWrapper.addSubview(decksBar)
+        if let searchBar = decksBar {
+            searchBarWrapper.addSubview(searchBar)
+        }
+        
         clearInput()
         updateUiForCurrentMode()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if !searchController.active {
-            decksBar.frame.size.width = searchBarWrapper.frame.size.width
+        if let searchController = searchController where !searchController.active {
+            decksBar?.frame.size.width = searchBarWrapper.frame.size.width
         }
     }
-    
     @IBAction func saveAction(sender: UIBarButtonItem) {
         
         guard let answer = answerField.text, question = questionField.text else {
@@ -179,15 +195,15 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return decksTableViewSource.count
+        return searchDecks?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("DecksCell", forIndexPath: indexPath)
       
-        let deck = decksTableViewSource[indexPath.row]
+        let deck = searchDecks?[indexPath.row]
         
-        cell.textLabel?.text = deck.uiName()
+        cell.textLabel?.text = deck?.uiName()
 
         return cell
     }
@@ -206,11 +222,11 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        deck = decksTableViewSource[indexPath.row]
-        choosenDeckLabel.text = decksTableViewSource[indexPath.row].uiName()
+        deck = searchDecks?[indexPath.row]
+        choosenDeckLabel.text = searchDecks?[indexPath.row].uiName()
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-        searchController.active = false
+        searchController?.active = false
     }
     
     
