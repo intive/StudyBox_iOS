@@ -65,7 +65,19 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                     return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.DecksViewControllerID)
                     })
             )
-            drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Stwórz nową fiszkę",viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        let vc = self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerId) as? UINavigationController
+                        
+                        if let editVC = vc?.childViewControllers[0] as? EditFlashcardViewController {
+                            editVC.mode = .Add
+                            return vc
+                        }
+                        return nil 
+                    }
+                )
+            )
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
             drawerNavigationControllers.append(
