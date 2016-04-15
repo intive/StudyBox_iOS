@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Deck: SBPresentable {
+extension Deck: SBRepresentable {
     
     func uiName() -> String {
         switch name {

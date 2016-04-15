@@ -9,7 +9,7 @@
 import UIKit
 
 enum EditFlashcardViewControllerMode {
-    case Add,Modify(deckName:String,flashcard:Flashcard)
+    case Add,Modify(flashcard:Flashcard)
 }
 
 class EditFlashcardViewController: StudyBoxViewController {
@@ -24,7 +24,8 @@ class EditFlashcardViewController: StudyBoxViewController {
         tableVC.tableView.backgroundColor = UIColor.sb_Grey()
         
         searchController = UISearchController(searchResultsController: tableVC)
-        searchController.searchBar.searchBarStyle = .Default
+        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.placeholder = "Szukaj talii"
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         
@@ -42,7 +43,7 @@ class EditFlashcardViewController: StudyBoxViewController {
     @IBOutlet weak var answerField: UITextField!
     
     private var flashcard:Flashcard!
-    private var deckName:String?
+    private var deck:Deck?
     
     var mode:EditFlashcardViewControllerMode! {
         didSet {
@@ -78,11 +79,11 @@ class EditFlashcardViewController: StudyBoxViewController {
     private func updateUiForCurrentMode() {
         clearInput()
         switch mode {
-        case .Modify(let deckName,let card)?:
+        case .Modify(let card)?:
             flashcard = card
-            self.deckName = deckName
+            deck = card.deck
             
-            decksBar.text = deckName
+            decksBar.text = card.deck?.name
             questionField.text = card.question
             tipField.text = card.tip
             answerField.text = card.answer
@@ -93,7 +94,7 @@ class EditFlashcardViewController: StudyBoxViewController {
         default:
             navigationItem.title = nil
             flashcard = nil
-            deckName = nil
+            deck = nil
         }
         
     }
@@ -107,7 +108,6 @@ class EditFlashcardViewController: StudyBoxViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        searchBarWrapper.updateConstraintsIfNeeded()
         if !searchController.active {
             decksBar.frame.size.width = searchBarWrapper.frame.size.width
         }
@@ -120,6 +120,11 @@ class EditFlashcardViewController: StudyBoxViewController {
             return
         }
         
+        guard let flashcardDeck = deck else {
+            presentAlertController(withTitle: "Błąd", message: "Wybierz talię", buttonText: "Ok")
+            return
+        }
+        
         var tip:Tip?
         if let tipText = tipField.text {
             tip = Tip.Text(text: tipText)
@@ -127,17 +132,14 @@ class EditFlashcardViewController: StudyBoxViewController {
         
         if case .Add? = mode {
             
-            if let deckFieldName = decksBar.text {
-                
-                if let dataDeck = dataManager.deck(withName: deckFieldName, caseSensitive: true) {
-                    do {
-                        try dataManager.addFlashcard(forDeckWithId: dataDeck.id, question: question, answer: answer, tip: tip)
-                    } catch _ as DataManagerError {
-                        presentAlertController(withTitle: "Błąd", message: "Nie udało się dodać fiszki", buttonText: "Ok")
-                    } catch let err {
-                        print("EditFlashcardViewController adding error : \(err)")
-                    }
-                    
+            if let flashcardDeck = deck {
+                do {
+                    try dataManager.addFlashcard(forDeckWithId: flashcardDeck.id, question: question, answer: answer, tip: tip)
+
+                } catch _ as DataManagerError {
+                    presentAlertController(withTitle: "Błąd", message: "Nie udało się dodać fiszki", buttonText: "Ok")
+                } catch let err {
+                    print("EditFlashcardViewController adding error : \(err)")
                 }
 
             }
@@ -146,7 +148,10 @@ class EditFlashcardViewController: StudyBoxViewController {
             flashcard.question = question
             flashcard.answer = answer
             flashcard.tipEnum = tip
-        
+            if flashcardDeck.id != flashcard.deckId {
+                flashcard.deck? = flashcardDeck
+            }
+            
             do {
                 try dataManager.updateFlashcard(flashcard)
             } catch _ as DataManagerError {
@@ -175,9 +180,12 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("DecksCell", forIndexPath: indexPath)
+      
+        let deck = decksTableViewSource[indexPath.row]
         
-        cell.textLabel?.text = decksTableViewSource[indexPath.row].name
-        return cell 
+        cell.textLabel?.text = deck.uiName()
+
+        return cell
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -192,8 +200,9 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        choosenDeckLabel.text = decksTableViewSource[indexPath.row].name
+        choosenDeckLabel.text = decksTableViewSource[indexPath.row].uiName()
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         searchController.active = false 
     }
     
