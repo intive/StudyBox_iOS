@@ -36,45 +36,6 @@ class DataManager {
         removeDecksFromDatabase()
     }
     
-    func getDecksFromServer(user: String, password: String){
-        Alamofire.request(.GET, decksURL)
-            .authenticate(user: user, password: password)
-            .responseJSON { response in
-                
-                switch response.result {
-                case .Success:
-                    if let value = response.result.value {
-                        
-                        let json = JSON(value)
-                        for (_, subJson) in json {
-                            
-                            if (subJson["isPublic"].stringValue == "true"){
-                                
-                                let newDeck = Deck(id: subJson["id"].stringValue, name: subJson["name"].stringValue)
-                                
-                                let selectedDeck = self.realm.objects(Deck).filter("_id == '\(newDeck.id)'").first
-                                
-                                if let updatingDeck = selectedDeck{
-                                    try! self.realm.write {
-                                        updatingDeck.name = newDeck.name
-                                    }
-                                    
-                                }else {
-                                    try! self.realm.write {
-                                        self.realm.add(newDeck)
-                                    }
-                                }
-                            }
-                        }
-                        self.deckDBChanged = true
-                    }
-                case .Failure(let error):
-                    print("Request failed with error: \(error)")
-                    
-                }
-        }
-    }
-    
     func decks(sorted:Bool )->[Deck] {
         
         // wczytuje talie jeśli nastąpiła zmiana w tabeli talii w bazie lub puste
@@ -140,9 +101,10 @@ class DataManager {
     
     func updateDeckFromServer(){
         
-        ServerCommunication().getDecksFromServer({ (result) in
+        ServerCommunication().getDecksFromServer({ (result, error) in
             
-            for d in result {
+            if let tmp = result {
+            for d in tmp {
                 if let id = d["id"]{
                     if let name = d["name"]{
                         
@@ -163,6 +125,8 @@ class DataManager {
                     }
                 }
             }
+        }
+        
         })
     }
 

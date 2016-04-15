@@ -37,7 +37,7 @@ class ServerCommunication {
         decksURL = serverURL + "/decks"
     }
     
-    func getDecksFromServer(completion: (result: [[String: String]]) -> Void) {
+    func getDecksFromServer(completion: (result: [[String: String]]?, error: NSError?) -> Void) {
         Alamofire.request(.GET, decksURL)
             .responseJSON { response in
                 switch response.result {
@@ -52,12 +52,10 @@ class ServerCommunication {
                             
                             list.append(["id" : subJson["id"].stringValue , "name" : subJson["name"].stringValue, "isPublic" : subJson["isPublic"].stringValue])
                         }
-                        completion(result: list)
+                        completion(result: list, error: nil)
                     }
                 case .Failure(let error):
-                    print("Request failed with error: \(error)")
-                    
-                    
+                    completion(result: nil, error: error)
                 }
         }
     }
