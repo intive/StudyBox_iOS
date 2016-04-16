@@ -49,9 +49,9 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    private func lazyLoadViewControllerFromStoryboard(withStoryboardId id: String) -> UIViewController? {
+    private func lazyLoadViewControllerFromStoryboard(withStoryboardId identifier: String) -> UIViewController? {
         if let board = self.storyboard {
-            let controller = board.instantiateViewControllerWithIdentifier(id)
+            let controller = board.instantiateViewControllerWithIdentifier(identifier)
             return controller
         }
         return nil

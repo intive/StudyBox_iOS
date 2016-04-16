@@ -73,7 +73,7 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
 class Deck: Object, Equatable, UniquelyIdentifiable {
     
     dynamic private var _id: String = NSUUID().UUIDString
-    var id:String {
+    var id: String {
         get {
             return self._id
         }
@@ -94,15 +94,15 @@ class Deck: Object, Equatable, UniquelyIdentifiable {
 }
 
 
-func ==(lhs: Deck, rhs: Deck) -> Bool {
+func == (lhs: Deck, rhs: Deck) -> Bool {
     return lhs.id == rhs.id && lhs.name == rhs.name
 }
 
-func ==(lhs: Flashcard, rhs: Flashcard) -> Bool {
+func == (lhs: Flashcard, rhs: Flashcard) -> Bool {
     return lhs.id == rhs.id && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer && lhs.tip == rhs.tip
 }
 
 
-func ==(lhs: Tip, rhs: Tip) -> Bool {
+func == (lhs: Tip, rhs: Tip) -> Bool {
     return lhs.description == rhs.description
 }

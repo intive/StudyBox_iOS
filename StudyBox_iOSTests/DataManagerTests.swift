@@ -105,7 +105,7 @@ class DataManagerTests: XCTestCase {
     
     func testUpdateDeck(){
         let dummyManager = DataManager.managerWithDummyData()
-        var deck = dummyManager.decks(false)[0]
+        let deck = dummyManager.decks(false)[0]
         
         deck.name = "update deck name"
         let _ = try? dummyManager.updateDeck(deck)
@@ -118,7 +118,7 @@ class DataManagerTests: XCTestCase {
     func testUpdateFlashcard(){
         let manager = DataManager.managerWithDummyData()
         let deck = manager.decks(false)[0]
-        var flashcard = (try! manager.flashcards(forDeck: deck))[0]
+        let flashcard = (try! manager.flashcards(forDeck: deck))[0]
         
         flashcard.question = "update flash question"
         

@@ -15,6 +15,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     
     lazy private var dataManager: DataManager? = {
         return UIApplication.appDelegate().dataManager
+        
     }()
     
     @IBOutlet var decksCollectionView: UICollectionView!
@@ -70,9 +71,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         decksCollectionView.delegate = self
         decksCollectionView.dataSource = self
         let layout = decksCollectionView.collectionViewLayout
-        let flow = layout as! UICollectionViewFlowLayout
+        let flow = layout as? UICollectionViewFlowLayout
         let spacing = Utils.DeckViewLayout.DecksSpacing
-        equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
+        if let flow = flow {
+            equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
+        }
 
         decksCollectionView.backgroundColor = UIColor.whiteColor()
         
@@ -87,7 +90,6 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             
             if newSide != 0 {
                 hideSearchBar(navbarHeight)
-
             } else {
                 hideSearchBar(-topItemOffset)
             }
@@ -132,30 +134,29 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let source = searchDecks ?? decksArray
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
-        as! DecksViewCell
-
-        cell.layoutIfNeeded()
         
-        if var deckName = source?[indexPath.row].name {
-            if deckName.isEmpty {
-                deckName = Utils.DeckViewLayout.DeckWithoutTitle
+        let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
+        if let cell = view as? DecksViewCell{
+            cell.layoutIfNeeded()
+            
+            if var deckName = source?[indexPath.row].name {
+                if deckName.isEmpty {
+                    deckName = Utils.DeckViewLayout.DeckWithoutTitle
+                }
+                cell.deckNameLabel.text = deckName
             }
-            cell.deckNameLabel.text = deckName
+            // changing label UI
+            cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(size: sbFontSizeLarge, bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
+            cell.deckNameLabel.textColor = UIColor.whiteColor()
+            cell.deckNameLabel.numberOfLines = 0
+            // adding line breaks
+            cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
+            cell.contentView.backgroundColor = UIColor.sb_Graphite()
+            return cell
         }
-        // changing label UI
-        cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(size: sbFontSizeLarge, bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
-        cell.deckNameLabel.textColor = UIColor.whiteColor()
-        cell.deckNameLabel.numberOfLines = 0
-        // adding line breaks
-        cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
-        cell.contentView.backgroundColor = UIColor.sb_Graphite()
-
-        return cell
+        return view
     }
-    
     
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -379,13 +380,16 @@ extension UILabel {
         // Initial size is max and the condition the min.
         for size in max.stride(through: min, by: -0.1) {
             font = font.fontWithSize(size)
-            let attrString = NSAttributedString(string: self.text!, attributes: [NSFontAttributeName: font])
-            let rectSize = attrString.boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat.max), options: .UsesLineFragmentOrigin, context: nil)
-
-            if rectSize.size.height <= self.bounds.height
-            {
-                self.font = font
-                break
+            if let text = self.text{
+                let attrString = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
+                let rectSize = attrString.boundingRectWithSize(CGSize(width: self.bounds.width, height: CGFloat.max),
+                                                               options: .UsesLineFragmentOrigin, context: nil)
+                
+                if rectSize.size.height <= self.bounds.height
+                {
+                    self.font = font
+                    break
+                }
             }
         }
         // in case, it is better to have the smallest possible font

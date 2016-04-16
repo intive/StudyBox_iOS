@@ -51,15 +51,23 @@ extension DataManager {
                     tip = nil
                 }
                 
-                try! cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
-                countToHide += 1
-                
-                //Hides every 3th generated flashcard
-                if countToHide % 3 == 0 {
-                    try! manager.hideFlashcard(withId: cardId)
+                do {
+                    try cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
+                    countToHide += 1
+                    
+                    //Hides every 3th generated flashcard
+                    if countToHide % 3 == 0 {
+                        do {
+                            try manager.hideFlashcard(withId: cardId)
+                        } catch let e {
+                            debugPrint(e)
+                        }
+                    }
+                    
+                } catch let e {
+                    debugPrint(e)
                 }
             }
-            
         }
         
         return manager 
