@@ -189,6 +189,59 @@
 			name = "Settings Classes";
 			sourceTree = "<group>";
 		};
+		9E3730C51CC23B9600928BE4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */,
+				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
+				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
+				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
+				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
+				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
+				CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */,
+				2D0939A61CAD19CF00886A1B /* String+validation.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		9E3730C61CC23C1200928BE4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */,
+				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				7238493D1C8884DD009605EE /* TestViewController.swift */,
+				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
+				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
+				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
+				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
+				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
+				723849411C8885F7009605EE /* ScoreViewController.swift */,
+				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
+				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E3730C71CC23CAA00928BE4 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
+				72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */,
+				AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */,
+				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
+				2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		9E3730C81CC23DFF00928BE4 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CEC69B521C946CC100295808 /* TestLogic.swift */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
 		A1341DB31C81E76800AFD04E = {
 			isa = PBXGroup;
 			children = (
@@ -213,40 +266,19 @@
 		A1341DBE1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				9E3730C81CC23DFF00928BE4 /* Logic */,
+				9E3730C71CC23CAA00928BE4 /* Interface */,
+				9E3730C61CC23C1200928BE4 /* ViewControllers */,
+				9E3730C51CC23B9600928BE4 /* Extensions */,
 				2DA0E6981C949AE200DAB6B5 /* Utils */,
 				2D2843651C88CEDE006E5E21 /* Model */,
 				A1341DCE1C81E76900AFD04E /* Info.plist */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
-				7238493B1C88847F009605EE /* DecksViewController.swift */,
-				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
-				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
-				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
-				CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */,
-				CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */,
-				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
-				723849411C8885F7009605EE /* ScoreViewController.swift */,
-				72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */,
-				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
 				72F089111CB7A87300BB4898 /* Settings Classes */,
-				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
-				AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */,
-				2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */,
-				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
-				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
-				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
-				CEC69B521C946CC100295808 /* TestLogic.swift */,
-				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
-				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
-				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
-				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
-				2D0939A61CAD19CF00886A1B /* String+validation.swift */,
-				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
-				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
-				2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
