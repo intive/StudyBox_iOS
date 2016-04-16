@@ -25,6 +25,8 @@
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
+		2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */; };
+		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
 		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
@@ -94,6 +96,8 @@
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
+		2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBNavigationController.swift; sourceTree = "<group>"; };
+		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
 		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
@@ -256,6 +260,8 @@
 				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
 				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
 				2D0939A61CAD19CF00886A1B /* String+validation.swift */,
+				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
+				2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */,
 				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
 				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
 				2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */,
@@ -533,6 +539,7 @@
 				2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */,
 				CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */,
 				2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */,
+				2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */,
 				CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */,
 				2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */,
 				2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */,
@@ -550,6 +557,7 @@
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
+				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
 				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,

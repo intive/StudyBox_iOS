@@ -24,7 +24,9 @@ class UserViewController: InputViewController {
             let mmDrawer = SBDrawerController(centerViewController: center, leftDrawerViewController: drawerNav)
             mmDrawer.openDrawerGestureModeMask = .None
             mmDrawer.closeDrawerGestureModeMask = [.PanningCenterView ]
-            
+            mmDrawer.statusBarViewBackgroundColor = UIColor.defaultNavBarColor()
+            mmDrawer.showsStatusBarBackgroundView = true 
+
             let offset = centerOffset
             
             mmDrawer.setGestureShouldRecognizeTouchBlock({ (drawer, gesture, touch) -> Bool in
