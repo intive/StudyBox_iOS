@@ -56,7 +56,7 @@ class DataManager {
         }
         
         if let realm = realm {
-            realm.objects(Deck).toArray()
+            decks = realm.objects(Deck).toArray()
         }
         
         // jako że załadowane talie z pamięci zgadzają się z tymi z bazy, to false
