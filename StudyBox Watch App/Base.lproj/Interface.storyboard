@@ -12,7 +12,7 @@
                     <items>
                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="VOL-cn-YJm">
                             <items>
-                                <label alignment="center" verticalAlignment="center" text="titleLabel" textAlignment="center" numberOfLines="2" id="hbK-x0-Wci">
+                                <label alignment="center" verticalAlignment="center" text="titleLabel" textAlignment="center" numberOfLines="0" id="hbK-x0-Wci">
                                     <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                                 </label>
                                 <label alignment="center" verticalAlignment="center" text="detailLabel" textAlignment="center" numberOfLines="0" id="fsI-vC-vQ6">

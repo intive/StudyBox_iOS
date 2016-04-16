@@ -22,12 +22,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     let detailTextNotAvailable = "Nie zostały wybrane żadne talie do synchronizacji z zegarkiem lub nie zostały one jeszcze zsynchronizowane."
     let detailTextSuccess = "Masz dobrą pamięć!"
-    let detailTextFailure = "Może następnym razem się uda."
+    let detailTextFailure = "Następnym razem się uda."
+    
     var questionText = String()
     var answerText = String()
-    var storedFlashcards = [String:String]()
-    var userAnswer:Bool?
     
+    var storedFlashcards = [(String,String)]()
+    var userAnswer: Bool?
     var session : WCSession!
     
     override init() {
@@ -37,6 +38,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             session.delegate = self
             session.activateSession()
         }
+        userAnswer = nil
     }
     
     override func awakeWithContext(context: AnyObject?) {
@@ -59,9 +61,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         startButton.setHidden(false)
         titleLabel.setText("")
         detailLabel.setText("")
-        if let flashcards = applicationContext["flashcards"] as? [String:String] {
-            print("recievedappcontext2")
-            storedFlashcards = flashcards
+        //Update `storedFlashcards` to data recieved from iPhone
+        if let flashcardsQ = applicationContext["flashcardsQuestions"] as? [String], let flashcardsA = applicationContext["flashcardsAnswers"] as? [String] where flashcardsQ.count == flashcardsA.count {
+            for i in 0..<flashcardsQ.count {
+                storedFlashcards.append((flashcardsQ[i],flashcardsA[i]))
+            }
         }
     }
     
@@ -72,9 +76,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             ["segue": "pagebased", "data": answerText, "dismissContext": self]])
     }
     
+    ///Returns a random question and answer from `storedFlashcards`
     func randomFlashcardData() {
             let index = Int(arc4random_uniform(UInt32(storedFlashcards.count)))
-            let randomElement = Array(storedFlashcards)[index]
+            let randomElement = storedFlashcards[index]
             self.questionText = randomElement.0
             self.answerText = randomElement.1
     }
@@ -88,20 +93,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 detailLabel.setHidden(false)
                 titleLabel.setText(titleTextSuccess)
                 detailLabel.setText(detailTextSuccess)
+                detailLabel.setTextColor(UIColor.greenColor())
             } else {
                 titleLabel.setHidden(false)
                 detailLabel.setHidden(false)
                 titleLabel.setText(titleTextFailure)
                 detailLabel.setText(detailTextFailure)
+                detailLabel.setTextColor(UIColor.redColor())
             }
         }
-        
     }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-        self.userAnswer = nil
-    }
-
 }

@@ -107,11 +107,13 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                 self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
             }
         }
-//        if !WCSession.isSupported() {
-//            message = ["Niekompatybilne urządzenie","Twoje urządzenie nie obsługuje komunikacji z Apple Watch"]
-//            self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-//        }
-        //presentAlertController(withTitle: message[0], message: message[1], buttonText: "OK")
+        if !WCSession.isSupported() {
+            message = ["Niekompatybilne urządzenie","Twoje urządzenie nie obsługuje komunikacji z Apple Watch"]
+            self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+        }
+        if !message.isEmpty {
+            presentAlertController(withTitle: message[0], message: message[1], buttonText: "OK")
+        }
         return shouldPerformSegue
     }
     

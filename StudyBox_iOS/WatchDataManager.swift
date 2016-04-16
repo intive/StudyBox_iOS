@@ -12,11 +12,10 @@ import UIKit
 class WatchDataManager: NSObject, WCSessionDelegate {
     
     static let watchManager = WatchDataManager()
-    override init() {
-        super.init()
-    }
+    
     
     lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    
     private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
     
     private var validSession: WCSession? {
@@ -24,6 +23,10 @@ class WatchDataManager: NSObject, WCSessionDelegate {
             return session
         }
         return nil
+    }
+    
+    override init() {
+        super.init()
     }
     
     func startSession() {
@@ -34,31 +37,31 @@ class WatchDataManager: NSObject, WCSessionDelegate {
     ///Try sending decks array with deck IDs to AW, throws success or failure bool
     func sendDecksToAppleWatch(decksIDs: [String]) throws -> Bool {
         var outcome = false
-        var flashcardsQuestions = [String]()
-        var flashcardsAnswers = [String]()
-        if let manager = dataManager {
-            for deck in decksIDs {
-                if let deckFromManager = manager.deck(withId: deck) {
-                    for flashcard in deckFromManager.flashcards {
-                        flashcardsQuestions.append(flashcard.question)
-                        flashcardsAnswers.append(flashcard.answer)
-                    }
-                }
-            }
-        }
+//        var flashcardsQuestions = [String]()
+//        var flashcardsAnswers = [String]()
+//        if let manager = dataManager {
+//            for deck in decksIDs {
+//                if let deckFromManager = manager.deck(withId: deck) {
+//                    for flashcard in deckFromManager.flashcards {
+//                        flashcardsQuestions.append(flashcard.question)
+//                        flashcardsAnswers.append(flashcard.answer)
+//                    }
+//                }
+//            }
+//        }
+        let testDataQuestions = ["TestQuestion1", "TestQuestion2", "TestQuestion3", "TestQuestion4", "TestQuestion5"]
+        let testDataAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "TestAnswer4", "TestAnswer5"]
+        
         if let session = validSession {
-            if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
+            //if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
                 do {
-                    //let testData = ["TestQuestion1":"TestAnswer1", "TestQuestion2":"TestAnswer2",
-                    //                "TestQuestion3":"TestAnswer3", "TestQuestion4":"TestAnswer4",
-                    //                "TestQuestion5":"TestAnswer5", "TestQuestion6":"TestAnswer6"]
-                    try session.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions,"flashcardsAnswers":flashcardsAnswers])
+                    try session.updateApplicationContext(["flashcardsQuestions":testDataQuestions, "flashcardsAnswers":testDataAnswers])
                     outcome = true
                 } catch let error {
                     print(error)
                     outcome = false
                 }
-            }
+            //}
         }
         return outcome
     }
