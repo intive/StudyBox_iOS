@@ -26,8 +26,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     ///Array that holds all user's local decks
     var userDecksArray: [Deck]?
     
-    var watchSession : WCSession?
-    
     var fireDate = NSDate()
     @IBOutlet weak var detailTableView: UITableView!
     
@@ -46,11 +44,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         
         detailTableView.backgroundColor = UIColor.sb_Grey()
         
-        if WCSession.isSupported() {
-            watchSession = WCSession.defaultSession()
-            watchSession?.delegate = self;
-            watchSession?.activateSession()
-        }
+        WatchDataManager.watchManager.startSession()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -136,8 +130,10 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func copyUserDecksToSync() {
+    ///Sends decks selected in TableView to Watch
+    func sendSelectedDecksToSync() {
         var decksToSynchronize = [String]()
+        //Converting to array
         if let userDecksArray = userDecksArray {
             for i in 0..<userDecksArray.count {
                 let cell = detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 1))
@@ -146,37 +142,14 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 }
             }
             defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-            sendDecksToAppleWatch(decksToSynchronize)
-        }
-    }
-    
-    func sendDecksToAppleWatch(decks: [String]) {
-        
-        var flashcardsQuestions = [String]()
-        var flashcardsAnswers = [String]()
-        for deck in decks {
-            if let flashcardsFromManager = dataManager?.deck(withId: deck)?.flashcards {
-                for i in 0..<flashcardsFromManager.count {
-                    flashcardsQuestions[i] = flashcardsFromManager[i].question
-                    flashcardsAnswers[i] = flashcardsFromManager[i].answer
-                }
-            }
-        }
-        if let session = watchSession {
-            if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
-                do {
-                    //let testData = ["TestQuestion1":"TestAnswer1", "TestQuestion2":"TestAnswer2",
-                    //                "TestQuestion3":"TestAnswer3", "TestQuestion4":"TestAnswer4",
-                    //                "TestQuestion5":"TestAnswer5", "TestQuestion6":"TestAnswer6"]
-                    try session.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions,"flashcardsAnswers":flashcardsAnswers])
-                } catch let error {
-                    print(error)
-                    //presentAlertController(withTitle: "Błąd", message: "Nie można przesłać talii do Apple Watch.", buttonText: "OK")
-                }
+            //Sending to Watch
+            do {
+                try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronize)
+            } catch {
+                presentAlertController(withTitle: "Błąd", message: "Nie można obecnie przesłać talii do Apple Watch.", buttonText: "OK")
             }
         }
     }
-
     
     ///Inverses cell checkmark on/off
     func changeSelectionForCell(cell: UITableViewCell) {
@@ -201,7 +174,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 scheduleNotification()
             }
         case .DecksForWatch?:
-            copyUserDecksToSync()
+            sendSelectedDecksToSync()
         default:
             break
         }

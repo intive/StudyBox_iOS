@@ -37,6 +37,7 @@
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFicheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFicheViewController.swift */; };
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
+		7269FCF81CC159CC0075CBAC /* WatchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */; };
 		726EA9B71CBBFAE5008C90CD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B51CBBFAE5008C90CD /* Interface.storyboard */; };
 		726EA9B91CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B81CBBFAE5008C90CD /* Assets.xcassets */; };
 		726EA9C01CBBFAE5008C90CD /* StudyBox Watch App Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -149,6 +150,7 @@
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFicheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFicheViewController.swift; sourceTree = "<group>"; };
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataManager.swift; sourceTree = "<group>"; };
 		726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StudyBox Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		726EA9B61CBBFAE5008C90CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		726EA9B81CBBFAE5008C90CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,7 +170,7 @@
 		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A1341DC41C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A1341DC71C81E76900AFD04E /* StudyBox_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyBox_iOS.xcdatamodel; sourceTree = "<group>"; };
 		A1341DC91C81E76900AFD04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		72F089111CB7A87300BB4898 /* Settings Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */,
 				72CA9E881CB10B37005631DC /* SettingsViewController.swift */,
 				72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */,
 				72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */,
@@ -707,6 +710,7 @@
 				72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
+				7269FCF81CC159CC0075CBAC /* WatchDataManager.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
