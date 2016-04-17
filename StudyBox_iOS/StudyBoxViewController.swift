@@ -71,7 +71,7 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate, DrawerRe
         if traitCollection.verticalSizeClass == .Compact {
             return true 
         }
-        return isDrawerVisible
+        return false
     }
   
 }
