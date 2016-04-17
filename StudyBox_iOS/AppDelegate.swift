@@ -23,7 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        scheduleNotification()
+        if  NSUserDefaults.standardUserDefaults().boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
+            scheduleNotification()
+        }
     }
 
     ///Schedules a new notification based on NSUD from now
