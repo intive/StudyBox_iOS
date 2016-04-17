@@ -132,22 +132,33 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     
     ///Sends decks selected in TableView to Watch
     func sendSelectedDecksToSync() {
-        var decksToSynchronize = [String]()
+        var decksToSynchronizeIDs = [String]()
         //Converting to array
         if let userDecksArray = userDecksArray {
-            for i in 0..<userDecksArray.count {
-                let cell = detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 1))
-                if cell?.accessoryType == .Checkmark {
-                    decksToSynchronize.append(userDecksArray[i].id)
-                }
+            decksToSynchronizeIDs = convertDecksToIDs(userDecksArray)
+            defaults.setObject(decksToSynchronizeIDs, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
+            sendDecksToWatch(decksToSynchronizeIDs)
+        }
+    }
+    
+    ///Converts array of type `[Deck]` to array of their IDs
+    func convertDecksToIDs(userDecksArray: [Deck]) -> [String] {
+        var decksToSynchronize = [String]()
+        for i in 0..<userDecksArray.count {
+            let cell = detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 1))
+            if cell?.accessoryType == .Checkmark {
+                decksToSynchronize.append(userDecksArray[i].id)
             }
-            defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-            //Sending to Watch
-            do {
-                try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronize)
-            } catch {
-                presentAlertController(withTitle: "Błąd", message: "Nie można obecnie przesłać talii do Apple Watch.", buttonText: "OK")
-            }
+        }
+        return decksToSynchronize
+    }
+    
+    ///Sending to Watch
+    func sendDecksToWatch(decksToSynchronizeIDs:[String]) {
+        do {
+            try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
+        } catch {
+            presentAlertController(withTitle: "Błąd", message: "Nie można obecnie przesłać talii do Apple Watch.", buttonText: "OK")
         }
     }
     

@@ -9,13 +9,14 @@
 import WatchConnectivity
 import UIKit
 
+enum SendingToWatchResult:ErrorType {
+    case Success, Failure
+}
+
 class WatchDataManager: NSObject, WCSessionDelegate {
     
     static let watchManager = WatchDataManager()
-    
-    
-    lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
-    
+    private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
     private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
     
     private var validSession: WCSession? {
@@ -34,11 +35,13 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         session?.activateSession()
     }
     
-    ///Try sending decks array with deck IDs to AW, throws success or failure bool
-    func sendDecksToAppleWatch(decksIDs: [String]) throws -> Bool {
-        var outcome = false
-//        var flashcardsQuestions = [String]()
-//        var flashcardsAnswers = [String]()
+    ///Sends an array with deck IDs to Apple Watch
+    func sendDecksToAppleWatch(decksIDs: [String]) throws {
+        
+        var flashcardsQuestions = [String]()
+        var flashcardsAnswers = [String]()
+
+//      TODO: Uncomment when deck/flashcards IDs are permanent
 //        if let manager = dataManager {
 //            for deck in decksIDs {
 //                if let deckFromManager = manager.deck(withId: deck) {
@@ -49,23 +52,20 @@ class WatchDataManager: NSObject, WCSessionDelegate {
 //                }
 //            }
 //        }
-        let testDataQuestions = ["TestQuestion1", "TestQuestion2", "TestQuestion3", "TestQuestion4", "TestQuestion5"]
-        let testDataAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "TestAnswer4", "TestAnswer5"]
         
-        if let session = validSession {
-            //if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
-                do {
-                    try session.updateApplicationContext(["flashcardsQuestions":testDataQuestions, "flashcardsAnswers":testDataAnswers])
-                    outcome = true
-                } catch let error {
-                    print(error)
-                    outcome = false
-                }
-            //}
+        //Dummy Data
+        flashcardsQuestions = ["TestQuestion1", "TestQuestion2", "TestQuestion3", "TestQuestion4", "TestQuestion5"]
+        flashcardsAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "TestAnswer4", "TestAnswer5"]
+
+        //if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
+        do {
+            try self.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions, "flashcardsAnswers":flashcardsAnswers])
+        } catch let error {
+            print("Sending to Watch failed: \(error)")
+            throw error
         }
-        return outcome
+        //}
     }
-    
 }
 
 extension WatchDataManager {
