@@ -9,7 +9,6 @@
 import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
-    
     private var decksArray: [Deck]?
     private var searchDecks: [Deck]?
     
@@ -51,7 +50,6 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
-            
         }
         decksArray = dataManager?.decks(true)
         searchBar?.delegate = self
@@ -62,9 +60,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         searchBar?.delegate = nil
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.removeObserver(self, forKeyPath: "openSide")
-            
         }
-        
     }
 
     override func viewDidLoad() {
@@ -78,25 +74,21 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         let spacing = Utils.DeckViewLayout.DecksSpacing
         equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
 
-        decksCollectionView.backgroundColor = UIColor.whiteColor()
+        decksCollectionView.backgroundColor = UIColor.sb_Grey()
         
         let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(DecksViewController.hideKeyboard))
         swipeGestureRecognizer.direction = [.Down,.Up]
         decksCollectionView.addGestureRecognizer(swipeGestureRecognizer)
         swipeGestureRecognizer.delegate = self
-        
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
-            
             if newSide != 0 {
                 hideSearchBar(navbarHeight)
-
-            }else {
+            } else {
                 hideSearchBar(-topItemOffset)
             }
-
         }
     }
     
@@ -162,73 +154,53 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         return cell
     }
     
-    
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
         let source = searchDecks ?? decksArray
+        
         if let deck = source?[indexPath.row] {
-            
             do {
-                
                 if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
-
 					if let bar = searchBar {
                         searchDecks = nil
                         hideSearchBar(-topItemOffset)
                         self.cancelSearchReposition(bar, animated: true)
         			}
                    
-                    let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
                     
                     let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                        let alertAmount = UIAlertController(title: "How many flashcards?", message: "Choose amount of flashcards in the test", preferredStyle: .Alert)
+                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek na teście", preferredStyle: .Alert)
                         
-                        let amountOne = UIAlertAction(title: "1", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(1)))
+                        func handler(act: UIAlertAction) {
+                            if let amount = UInt32(act.title!)
+                            {
+                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                            }
                         }
                         
-                        let amountFive = UIAlertAction(title: "5", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(5)))
+                        let amounts = [ "1", "5", "10", "15", "20"]
+                        for amount in amounts {
+                            alertAmount.addAction(UIAlertAction(title: amount, style: .Default, handler: handler))
                         }
-                        
-                        let amountTen = UIAlertAction(title: "10", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(10)))
-                        }
-                        
-                        let amountFifteen = UIAlertAction(title: "15", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(15)))
-                        }
-                        
-                        let amountTwenty = UIAlertAction(title: "20", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(20)))
-                        }
-                        
-                        alertAmount.addAction(amountOne)
-                        alertAmount.addAction(amountFive)
-                        alertAmount.addAction(amountTen)
-                        alertAmount.addAction(amountFifteen)
-                        alertAmount.addAction(amountTwenty)
+                        alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                         
                         self.presentViewController(alertAmount, animated: true, completion:nil)
-
                     }
-                    
-                    let studyButton = UIAlertAction(title: "Learn", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                         self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
                     }
                     
                     alert.addAction(testButton)
                     alert.addAction(studyButton)
+                    alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
 
                     presentViewController(alert, animated: true, completion:nil)
-                    
                 }
             } catch let e {
                 debugPrint(e)
             }
         }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -236,14 +208,12 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             testViewController.testLogicSource = testLogic
         }
     }
-    
 }
 
 // MARK: UISearchBar implementaton
 extension DecksViewController: UISearchBarDelegate {
 
     func setupSearchBar() {
-
         let bar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         bar.searchBarStyle = .Default
         bar.tintColor = UIColor.whiteColor()
@@ -251,7 +221,6 @@ extension DecksViewController: UISearchBarDelegate {
         bar.delegate = self
         view.insertSubview(bar, aboveSubview: decksCollectionView)
         searchBar = bar
-        
     }
    
     func cancelSearchReposition(searchBar: UISearchBar, animated: Bool) {
@@ -280,7 +249,6 @@ extension DecksViewController: UISearchBarDelegate {
                 }
             )
         }
-        
     }
 
     func startSearchReposition(searchBar: UISearchBar, animated: Bool) {
@@ -315,9 +283,7 @@ extension DecksViewController: UISearchBarDelegate {
                     
                 }
             )
-            
         }
-        
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -332,7 +298,6 @@ extension DecksViewController: UISearchBarDelegate {
         } else {
             searchDecks = nil
         }
-
         decksCollectionView.reloadData()
     }
 
@@ -370,10 +335,8 @@ extension DecksViewController: UISearchBarDelegate {
     func hideSearchBar(top:CGFloat) {
         
         if isSearchBarVisible {
-        
             isSearchBarVisible = false
             hideKeyboard()
-            
 
             UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
                 animations: {
@@ -391,7 +354,7 @@ extension DecksViewController: UISearchBarDelegate {
             if (scrollView.contentOffset.y < topItemOffset) {
                 showSearchBar()
                 
-            }else {
+            } else {
                 hideSearchBar(-topItemOffset)
             }
         }
