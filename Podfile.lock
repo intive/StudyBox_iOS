@@ -27,16 +27,21 @@ DEPENDENCIES:
   - Alamofire (~> 3.0)
   - Crashlytics (~> 3.7.0)
   - Fabric (~> 1.6.7)
-  - MMDrawerController (~> 0.6.0)
+  - MMDrawerController (from `https://github.com/osjup/MMDrawerController.git`)
   - Reachability (~> 3.2)
   - RealmSwift (~> 0.98.5)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
+  MMDrawerController:
+    :git: https://github.com/osjup/MMDrawerController.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  MMDrawerController:
+    :commit: a540cf47cd48749eeea58147350abd832e98bdef
+    :git: https://github.com/osjup/MMDrawerController.git
   SwiftyJSON:
     :commit: 2a5b70f06001316d4fb54501edc70b4084705da0
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -51,6 +56,6 @@ SPEC CHECKSUMS:
   RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 87405373e936a1102280b742194b9cd4e8efdaff
+PODFILE CHECKSUM: bc61dae9d2b00689a272cb1fa03ac2f2d4d0231f
 
 COCOAPODS: 1.0.0.beta.6
