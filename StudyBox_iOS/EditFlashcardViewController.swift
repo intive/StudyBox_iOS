@@ -132,7 +132,7 @@ class EditFlashcardViewController: StudyBoxViewController {
     }
     @IBAction func saveAction(sender: UIBarButtonItem) {
         
-        guard let answer = answerField.text, question = questionField.text else {
+        guard let answer = answerField.text, question = questionField.text where !answer.isEmpty && !question.isEmpty else {
             presentAlertController(withTitle: "Błąd", message: "Pola odpowiedzi i pytania nie mogą być puste", buttonText: "Ok")
             return
         }
