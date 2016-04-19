@@ -49,7 +49,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
-    private func lazyLoadViewControllerFromStoryboard(withStoryboardId identifier: String) -> UIViewController? {
+    var barStyle = UIStatusBarStyle.Default
+    private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(identifier)
             return controller
@@ -68,6 +69,13 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Ustawienia",viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
+                    }
+                )
+            )
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
                     if let storyboard = self?.storyboard {
@@ -149,8 +157,12 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                         sbController = navigationController.childViewControllers[0] as? StudyBoxViewController
                     }
                 }
-                sbController?.isDrawerVisible = true
-                sbController?.setNeedsStatusBarAppearanceUpdate()
+                
+                //necessary condition check, to handle programmaticall change of center view controller
+                if mmDrawer.openSide != .None {
+                    sbController?.isDrawerVisible = true
+                    sbController?.setNeedsStatusBarAppearanceUpdate()
+                }
     
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
@@ -166,14 +178,14 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.reloadData()
     }
     
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        barStyle = .Default
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return barStyle
     }
-    
     func deactiveAllChildViewControllers() {
         for (index, _) in drawerNavigationControllers.enumerate() {
             drawerNavigationControllers[index].isActive = false

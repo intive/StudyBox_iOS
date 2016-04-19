@@ -9,13 +9,11 @@
 import UIKit
 
 class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
-    
     private var decksArray: [Deck]?
     private var searchDecks: [Deck]?
     
     lazy private var dataManager: DataManager? = {
         return UIApplication.appDelegate().dataManager
-        
     }()
     
     @IBOutlet var decksCollectionView: UICollectionView!
@@ -60,7 +58,6 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         searchBar?.delegate = nil
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.removeObserver(self, forKeyPath: "openSide")
-            
         }
     }
 
@@ -77,7 +74,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
             equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
         }
 
-        decksCollectionView.backgroundColor = UIColor.whiteColor()
+        decksCollectionView.backgroundColor = UIColor.sb_Grey()
         
         let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(DecksViewController.hideKeyboard))
         swipeGestureRecognizer.direction = [.Down, .Up]
@@ -161,53 +158,43 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     // When cell tapped, change to test
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let source = searchDecks ?? decksArray
+        
         if let deck = source?[indexPath.row] {
             do {
                 if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
-
 					if let bar = searchBar {
                         searchDecks = nil
                         hideSearchBar(-topItemOffset)
                         self.cancelSearchReposition(bar, animated: true)
         			}
                    
-                    let alert = UIAlertController(title: "Test or Learn?", message: "Choose the mode which you would like to start", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
                     
                     let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                        let alertAmount = UIAlertController(title: "How many flashcards?", message: "Choose amount of flashcards in the test",
-                                                            preferredStyle: .Alert)
+                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek na teście", preferredStyle: .Alert)
                         
-                        let amountOne = UIAlertAction(title: "1", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(1)))
-                        }
-                        let amountFive = UIAlertAction(title: "5", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(5)))
-                        }
-                        let amountTen = UIAlertAction(title: "10", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(10)))
-                        }
-                        let amountFifteen = UIAlertAction(title: "15", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(15)))
-                        }
-                        let amountTwenty = UIAlertAction(title: "20", style: .Default) { (alert: UIAlertAction!) -> Void in
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(20)))
+                        func handler(act: UIAlertAction) {
+                            if let amount = UInt32(act.title!)
+                            {
+                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                            }
                         }
                         
-                        alertAmount.addAction(amountOne)
-                        alertAmount.addAction(amountFive)
-                        alertAmount.addAction(amountTen)
-                        alertAmount.addAction(amountFifteen)
-                        alertAmount.addAction(amountTwenty)
+                        let amounts = [ "1", "5", "10", "15", "20"]
+                        for amount in amounts {
+                            alertAmount.addAction(UIAlertAction(title: amount, style: .Default, handler: handler))
+                        }
+                        alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                         
                         self.presentViewController(alertAmount, animated: true, completion:nil)
                     }
-                    
-                    let studyButton = UIAlertAction(title: "Learn", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                         self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
                     }
                     
                     alert.addAction(testButton)
                     alert.addAction(studyButton)
+                    alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
 
                     presentViewController(alert, animated: true, completion:nil)
                 }
@@ -295,7 +282,7 @@ extension DecksViewController: UISearchBarDelegate {
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
+        if searchText.characters.count > 0 {
             let searchLowercase = searchText.lowercaseString
             let deckWithoutTitleLowercase = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
             searchDecks = decksArray?.filter {
@@ -344,7 +331,7 @@ extension DecksViewController: UISearchBarDelegate {
         if isSearchBarVisible {
             isSearchBarVisible = false
             hideKeyboard()
-            
+
             UIView.animateWithDuration(softAnimationDuration, delay: 0, options: .CurveEaseOut,
                 animations: {
                     self.searchBar?.frame.origin.y = 0

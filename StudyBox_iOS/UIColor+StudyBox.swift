@@ -25,4 +25,12 @@ extension UIColor{
     class func sb_DarkGrey() -> UIColor {
         return UIColor.grayColor()
     }
+    
+    class func defaultNavBarColor() -> UIColor {
+        return UIColor(red:245.0/255, green:245.0/255, blue:246.0/255, alpha:1)
+    }
+    
+    class func sb_White() -> UIColor {
+        return UIColor.whiteColor()
+    }
 }
