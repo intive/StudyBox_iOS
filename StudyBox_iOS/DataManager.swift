@@ -14,6 +14,9 @@ import SwiftyJSON
 enum DataManagerError:ErrorType {
     case NoDeckWithGivenId, NoFlashcardWithGivenId
 }
+enum Result {
+    case OK, FAILED
+}
 
 /**
  Class responisble for handling data model stored in memory
@@ -26,7 +29,6 @@ class DataManager {
     // dzięki deckDBChanged talie będą wczytywane z bazy tylko w przypadku zmiany tabeli Deck
     // !!! Zmiana tabeli Flashcard nie jest brana pod uwagę
     private var deckDBChanged: Bool = true
-    private let decksURL = "http://78.133.154.70:2000/decks/"
     
     init(){
         
@@ -99,7 +101,7 @@ class DataManager {
         
     }
     
-    func updateDeckFromServer(){
+    func updateDeckFromServer(callback: (Result) -> Void){
         
         ServerCommunication().getDecksFromServer({ (result, error) in
             
@@ -125,7 +127,11 @@ class DataManager {
                     }
                 }
             }
-        }
+                Result.OK
+            }else{
+                debugPrint(error?.description)
+                Result.FAILED
+            }
         
         })
     }

@@ -363,7 +363,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		23AEC3FD1CB06407004358AB /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
