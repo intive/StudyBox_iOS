@@ -173,7 +173,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         switch mode {
         case .Frequency?:
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
-                scheduleNotification()
+                UIApplication.appDelegate().scheduleNotification()
             }
         case .DecksForWatch?:
             saveSelectedDecksToUserDefaultsAndWatch()
@@ -181,37 +181,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             break
         }
         defaults.synchronize()
-    }
-    
-    //Schedules a new notification based on NSUD from now
-    func scheduleNotification() {
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        let notification = UILocalNotification()
-        notification.alertBody = "Czas poćwiczyć fiszki!"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        let calendar = NSCalendar.currentCalendar()
-        let now = NSDate()
-        var newFireDate = NSDate()
-        if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey) {
-            let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
-            switch type  {
-            case "minut":
-                if let newDate = calendar.dateByAddingUnit(.Minute, value: number, toDate: now, options: [.MatchStrictly]){
-                    newFireDate = newDate
-                }
-            case "godzin":
-                if let newDate = calendar.dateByAddingUnit(.Hour, value: number, toDate: now, options: [.MatchStrictly]){
-                    newFireDate = newDate
-                }
-            case "dni":
-                if let newDate = calendar.dateByAddingUnit(.Day, value: number, toDate: now, options: [.MatchStrictly]){
-                    newFireDate = newDate
-                }
-            default: break
-            }
-        }
-        notification.fireDate = newFireDate
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

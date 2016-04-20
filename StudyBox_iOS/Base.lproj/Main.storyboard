@@ -651,7 +651,7 @@
         <!--Navigation Controller-->
         <scene sceneID="pTC-dV-b2n">
             <objects>
-                <navigationController storyboardIdentifier="DecksViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="uXq-J9-QLw" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DecksViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="uXq-J9-QLw" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YmA-rV-H6x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -670,7 +670,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VXf-gi-gbi">
             <objects>
-                <navigationController storyboardIdentifier="EditFicheViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditFicheViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivF-VU-xcN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
