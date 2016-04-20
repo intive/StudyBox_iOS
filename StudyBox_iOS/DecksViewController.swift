@@ -173,7 +173,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                     let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
                     
                     let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek na teście", preferredStyle: .Alert)
+                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
                         
                         func handler(act: UIAlertAction) {
                             if let title = act.title {

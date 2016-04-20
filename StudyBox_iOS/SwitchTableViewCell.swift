@@ -23,6 +23,7 @@ class SwitchTableViewCell: UITableViewCell {
             UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         } else {
             defaults.setBool(false, forKey: Utils.NSUserDefaultsKeys.NotificationsEnabledKey)
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
         }
     }
     

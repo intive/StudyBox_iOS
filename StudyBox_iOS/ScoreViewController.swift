@@ -31,12 +31,17 @@ class ScoreViewController: StudyBoxViewController {
         deckListButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         deckListButton.layer.cornerRadius = 10
         
-        runTestButton.backgroundColor = UIColor.sb_Raspberry()
-        runTestButton.setTitleColor(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), forState: UIControlState.Normal)
-        runTestButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-        runTestButton.layer.cornerRadius = 10
+        
         
         completeData()
+        if testScoreFraction < 1 {
+            runTestButton.backgroundColor = UIColor.sb_Raspberry()
+            runTestButton.setTitleColor(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), forState: UIControlState.Normal)
+            runTestButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+            runTestButton.layer.cornerRadius = 10
+        } else {
+            runTestButton.hidden = true 
+        }
         setupProgressView()
     }
     
