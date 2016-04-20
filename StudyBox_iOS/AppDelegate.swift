@@ -115,8 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. 
         // It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("StudyBox_iOS", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = NSBundle.mainBundle().URLForResource("StudyBox_iOS", withExtension: "momd")! // swiftlint:disable:this force_unwrapping
+        return NSManagedObjectModel(contentsOfURL: modelURL)! // swiftlint:disable:this force_unwrapping
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {

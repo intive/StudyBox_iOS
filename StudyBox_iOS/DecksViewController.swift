@@ -143,7 +143,9 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                 cell.deckNameLabel.text = deckName
             }
             // changing label UI
-            cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(size: sbFontSizeLarge, bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
+            if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
+                cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
+            }
             cell.deckNameLabel.textColor = UIColor.whiteColor()
             cell.deckNameLabel.numberOfLines = 0
             // adding line breaks
@@ -174,9 +176,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                         let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek na teście", preferredStyle: .Alert)
                         
                         func handler(act: UIAlertAction) {
-                            if let amount = UInt32(act.title!)
-                            {
-                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                            if let title = act.title {
+                                if let amount = UInt32(title)
+                                {
+                                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                                }
                             }
                         }
                         
@@ -282,7 +286,7 @@ extension DecksViewController: UISearchBarDelegate {
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 0 {
+        if !searchText.characters.isEmpty {
             let searchLowercase = searchText.lowercaseString
             let deckWithoutTitleLowercase = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
             searchDecks = decksArray?.filter {

@@ -44,10 +44,9 @@ class UserViewController: InputViewController {
             
             UIApplication.sharedRootViewController = mmDrawer
         }
-        
     }
     
-    func areTextFieldsEmpty()->Bool {
+    func areTextFieldsEmpty() -> Bool {
         
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
@@ -72,22 +71,22 @@ class UserViewController: InputViewController {
         return true
     }
     
-    func disableButton(button:UIButton) {
+    func disableButton(button: UIButton) {
         button.backgroundColor = UIColor.sb_DarkGrey()
     }
     
-    func enableButton(button:UIButton) {
+    func enableButton(button: UIButton) {
         button.backgroundColor = UIColor.sb_Raspberry()
     }
     
-    enum ValidationMessage:String  {
-        case passwordTooShort = "Hasła są zbyt krótkie"
-        case passwordsDontMatch = "Hasła nie są jednakowe!"
-        case passwordContainsSpace = "Nie można użyć w haśle białych znaków!"
-        case passwordIncorrect = "Niepoprawne hasło"
-        case noInternet = "Brak połączenia z Internetem"
-        case emailIncorrect = "Niepoprawny e-mail!"
-        case fieldsAreEmpty = "Wypełnij wszystkie pola!"
+    enum ValidationMessage: String  {
+        case PasswordTooShort = "Hasła są zbyt krótkie"
+        case PasswordsDontMatch = "Hasła nie są jednakowe!"
+        case PasswordContainsSpace = "Nie można użyć w haśle białych znaków!"
+        case PasswordIncorrect = "Niepoprawne hasło"
+        case NoInternet = "Brak połączenia z Internetem"
+        case EmailIncorrect = "Niepoprawny e-mail!"
+        case FieldsAreEmpty = "Wypełnij wszystkie pola!"
     }
     
 }

@@ -20,18 +20,11 @@ Basic input view controller, which can dismiss keyboard by a down swipe gesture 
 */
 class InputViewController: UIViewController, UITextFieldDelegate  {
 
-   /**
-     Data source gives information about each `UITextField` of the subclass
-     
-    */
+   //Data source gives information about each `UITextField` of the subclass
     var dataSource: InputViewControllerDataSource?
     
-    /**
-     Current edit field input, so the view origin can be adjusted
-     */
+    //Current edit field input, so the view origin can be adjusted
     private var currentLowestInputView: UIView? = nil
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +32,17 @@ class InputViewController: UIViewController, UITextFieldDelegate  {
         let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(InputViewController.hideKeyboard))
         swipeGestureRecognizer.direction = .Down
         view.addGestureRecognizer(swipeGestureRecognizer)
-    
     }
 
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         dataSourcePrecondition()
-        dataSource!.inputViews.forEach {
-            $0.delegate = self
+        if let dataSource = dataSource {
+            dataSource.inputViews.forEach {
+                $0.delegate = self
+            }
         }
+       
         let defaultCenter = NSNotificationCenter.defaultCenter()
         defaultCenter.addObserver(self, selector: #selector(InputViewController.keyboardChangedFrame(_:)), name: UIKeyboardWillShowNotification, object: nil)
         defaultCenter.addObserver(self, selector: #selector(InputViewController.keyboardChangedFrame(_:)), name: UIKeyboardWillHideNotification, object: nil)
@@ -70,19 +64,15 @@ class InputViewController: UIViewController, UITextFieldDelegate  {
     }
     
     
-    /**
-     With keyboard apperance if `currentLowestInputView` would be covered by keyboard, view's vertical origin will be rised
-     
-     With keyboard disappearance vertical origin is set to it's initial position
-    */
-    func keyboardChangedFrame(notification: NSNotification){
+     // With keyboard apperance if `currentLowestInputView` would be covered by keyboard, view's vertical origin will be rised
+     // With keyboard disappearance vertical origin is set to it's initial position
+    func keyboardChangedFrame(notification: NSNotification) {
         dataSourcePrecondition()
         if let rect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(), let lowestView = currentLowestInputView {
             
             switch notification.name {
                 
             case UIKeyboardWillShowNotification:
-                
                 var originChange: CGFloat = 0
                 let yOffset = lowestView.convertRect(lowestView.frame, fromView: view).origin.y
                 let lowestBeginOriginY = lowestView.frame.height + lowestView.frame.origin.y - yOffset
@@ -90,7 +80,6 @@ class InputViewController: UIViewController, UITextFieldDelegate  {
                 if rect.origin.y <= lowestBeginOriginY {
                     originChange = CGFloat((lowestBeginOriginY - rect.origin.y + 8) )
                 }
-    
                 self.view.bounds.origin.y = originChange
                 
             case UIKeyboardWillHideNotification:
@@ -103,9 +92,10 @@ class InputViewController: UIViewController, UITextFieldDelegate  {
     
     func hideKeyboard(){
         dataSourcePrecondition()
-        dataSource!.inputViews.forEach {
-            $0.resignFirstResponder()
+        if let dataSource = dataSource{
+            dataSource.inputViews.forEach {
+                $0.resignFirstResponder()
+            }
         }
     }
-
 }

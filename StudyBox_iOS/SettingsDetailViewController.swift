@@ -137,11 +137,11 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 }
             }
             defaults.setObject(decksToSynchronize, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-            //TODO: send decksToSynchronize to the Watch queue
+            //TODOs: send decksToSynchronize to the Watch queue
         }
     }
     
-    ///Inverses cell checkmark on/off
+    //Inverses cell checkmark on/off
     func changeSelectionForCell(cell: UITableViewCell) {
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
@@ -150,7 +150,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
     }
     
-    ///Sets cell checkmark to `toState`
+    //Sets cell checkmark to `toState`
     func changeSelectionForCell(cell: UITableViewCell, toState: UITableViewCellAccessoryType) {
         cell.accessoryType = toState
     }

@@ -50,9 +50,9 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
     var barStyle = UIStatusBarStyle.Default
-    private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
+    private func lazyLoadViewControllerFromStoryboard(withStoryboardId idStoryboard: String) -> UIViewController? {
         if let board = self.storyboard {
-            let controller = board.instantiateViewControllerWithIdentifier(identifier)
+            let controller = board.instantiateViewControllerWithIdentifier(idStoryboard)
             return controller
         }
         return nil
@@ -70,11 +70,10 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
             drawerNavigationControllers.append(
-                DrawerNavigationChild(name: "Ustawienia",viewController: nil,
+                DrawerNavigationChild(name: "Ustawienia", viewController: nil,
                     lazyLoadViewControllerBlock: {[weak self] in
                         return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
-                    }
-                )
+                    })
             )
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
@@ -96,7 +95,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             return drawerNavigationControllers[index].viewController
         }
         return nil
-        
     }
     
     override func viewDidLoad() {
@@ -105,8 +103,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.backgroundColor = UIColor.sb_Graphite()
     }
 
-    
-   
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -132,11 +128,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        
         selectMenuOptionAtIndex(indexPath.row)
-        
     }
     
     func selectMenuOptionAtIndex(index: Int) {
@@ -163,7 +156,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                     sbController?.isDrawerVisible = true
                     sbController?.setNeedsStatusBarAppearanceUpdate()
                 }
-    
                 mmDrawer.setCenterViewController(controller, withCloseAnimation: true, completion: nil)
             }
             
@@ -186,12 +178,12 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return barStyle
     }
+    
     func deactiveAllChildViewControllers() {
         for (index, _) in drawerNavigationControllers.enumerate() {
             drawerNavigationControllers[index].isActive = false
         }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -204,9 +196,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     
 }
 
-
 extension DrawerViewController {
-    
     class func sharedSbDrawerViewControllerChooseMenuOption(atIndex index: Int) {
         if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController,
             let drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {

@@ -30,9 +30,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* the register button is by default disabled,
-         user has to enter some data and it has to be verified
-         */
+        //the register button is by default disabled, user has to enter some data and it has to be verified
         disableButton(registerButton)
         registerButton.layer.cornerRadius = 10.0
         
@@ -54,10 +52,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     
     
     func registerWithInputData() {
-        var alertMessage:String?
+        var alertMessage: String?
         
         if !Reachability.isConnected() {
-            alertMessage = ValidationMessage.noInternet.rawValue
+            alertMessage = ValidationMessage.NoInternet.rawValue
         }
         
         for inputView in inputViews {
@@ -70,7 +68,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         }
         
         if areTextFieldsEmpty() {
-            alertMessage = ValidationMessage.fieldsAreEmpty.rawValue
+            alertMessage = ValidationMessage.FieldsAreEmpty.rawValue
         }
         
         if let message = alertMessage {
@@ -85,30 +83,29 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var validationResult = true
         
-        
         if let text = textField.text as NSString? {
             textField.text = text.stringByReplacingCharactersInRange(range, withString: string)
         }
         
-        var invalidMessage:String? = nil 
+        var invalidMessage: String? = nil
         if textField == emailTextField, let _ = textField.text {
             validationResult = emailTextField.isValid()
             if !validationResult {
-                invalidMessage = ValidationMessage.emailIncorrect.rawValue
+                invalidMessage = ValidationMessage.EmailIncorrect.rawValue
             }
             
         } else if let text = textField.text {
             validationResult = text.hasMinimumCharacters(minimum: Utils.UserAccount.MinimumPasswordLength)
             
             if !validationResult {
-                invalidMessage = ValidationMessage.passwordTooShort.rawValue
+                invalidMessage = ValidationMessage.PasswordTooShort.rawValue
             } else {
                 validationResult = !text.hasWhitespaceOrNewLineCharacter()
                 
                 if !validationResult {
-                    invalidMessage = ValidationMessage.passwordIncorrect.rawValue
+                    invalidMessage = ValidationMessage.PasswordIncorrect.rawValue
                 } else {
-                    var matchingField:UITextField?
+                    var matchingField: UITextField?
                     
                     if textField == passwordTextField {
                         matchingField = repeatPasswordTextField
@@ -119,18 +116,14 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
                     if let validatableMatchingField = matchingField as? ValidatableTextField where validatableMatchingField.text != "" {
                         validationResult = text == validatableMatchingField.text
                         if !validationResult {
-                            invalidMessage = ValidationMessage.passwordsDontMatch.rawValue
+                            invalidMessage = ValidationMessage.PasswordsDontMatch.rawValue
                             validatableMatchingField.invalidMessage = invalidMessage
-                        }else {
+                        } else {
                             validatableMatchingField.invalidMessage = nil
                         }
-                        
                     }
-                    
                 }
             }
-            
-            
         }
         
         if let validatableTextField = textField as? ValidatableTextField {

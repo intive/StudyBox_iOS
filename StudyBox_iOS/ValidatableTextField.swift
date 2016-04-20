@@ -10,7 +10,7 @@ import UIKit
 
 class ValidatableTextField: UITextField {
     
-    var invalidMessage:String? {
+    var invalidMessage: String? {
         didSet {
             if invalidMessage == nil {
                 textColor = validColor
@@ -22,4 +22,3 @@ class ValidatableTextField: UITextField {
     var validColor: UIColor!
     var invalidColor: UIColor!
 }
-

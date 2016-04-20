@@ -19,14 +19,14 @@ class Test {
     private(set) var currentCard: Flashcard?
     private var passedFlashcards = 0
     var index = 0
-    private var numberOfFlashcardsInFullDeck : Int
-    let testType : StudyType
-    private var cardsInTest : Int = 0
+    private var numberOfFlashcardsInFullDeck: Int
+    let testType: StudyType
+    private var cardsInTest: Int = 0
     //last 2 properties are amde to determinate if passed deck was empty from the beginning or if all flashcards was hidden
-    private var allFlashcardsHidden:Bool = false
-    private var passedDeckWasEmpty:Bool = false
+    private var allFlashcardsHidden: Bool = false
+    private var passedDeckWasEmpty: Bool = false
     
-    init(deck : [Flashcard], testType : StudyType) {
+    init(deck: [Flashcard], testType: StudyType) {
         
         if deck.isEmpty {
             passedDeckWasEmpty = true
@@ -47,7 +47,7 @@ class Test {
         self.testType = testType
         
         //This parameter helps function to determinate if all flashcards in passed deck are hidden.
-        if ( numberOfFlashcardsInFullDeck == 0 && passedDeckWasEmpty == false ) {
+        if numberOfFlashcardsInFullDeck == 0 && passedDeckWasEmpty == false  {
             allFlashcardsHidden = true
         } else {
             allFlashcardsHidden = false
@@ -116,7 +116,7 @@ class Test {
     func checkIfAllFlashcardsHidden() -> Bool {
         if allFlashcardsHidden {
             return true
-        }else {
+        } else {
             return false
         }
     }
@@ -125,19 +125,19 @@ class Test {
     func checkIfPassedDeckIsEmpty() -> Bool {
         if passedDeckWasEmpty == true {
             return true
-        }else {
+        } else {
             return false
         }
     }
     
-    ///Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
+    //Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
     func correctAnswer() -> Flashcard? {
         passedFlashcards += 1
-        return newFlashcard(answeredCorrect:true)
+        return newFlashcard(answeredCorrect: true)
     }
     
-    ///Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
+    //Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
     func incorrectAnswer() -> Flashcard? {
-        return newFlashcard(answeredCorrect:false)
+        return newFlashcard(answeredCorrect: false)
     }
 }

@@ -14,13 +14,11 @@ internal let sbFontSizeLarge: CGFloat = 20
 internal let sbFontSizeSuperLarge: CGFloat = 28
 
 extension UIFont{
-  class func sbFont(size size: CGFloat = sbFontSizeMedium, bold: Bool) -> UIFont {
-    
+  class func sbFont(size size: CGFloat = sbFontSizeMedium, bold: Bool) -> UIFont? {
     if !bold {
-      return UIFont(name: "Lato-Regular", size: size)!
+      return UIFont(name: "Lato-Regular", size: size)
     } else {
-      return UIFont(name: "Lato-Black", size: size)!
+      return UIFont(name: "Lato-Black", size: size)
     }
-    
   }
 }

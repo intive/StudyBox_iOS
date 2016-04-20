@@ -26,17 +26,15 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
             } else {
                 drawer.openDrawerGestureModeMask = .None
             }
-            
         }
-
     }
-
     
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
             drawer.toggleDrawerSide(.Left, animated: true, completion: nil)
         }
     }
+    
     func updateStatusBar() {
         if let navigationController = self.navigationController {
             navigationController.setNeedsStatusBarAppearanceUpdate()
@@ -44,25 +42,23 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
+    
     func drawerToggleAnimation() {
         isDrawerVisible = !isDrawerVisible
-        var animationTime:NSTimeInterval!
+        var animationTime: NSTimeInterval!
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             animationTime = drawer.drawerAnimationTime
         }
         UIView.animateWithDuration(animationTime,
             animations: {
                 self.updateStatusBar()
-            }
-        )
+            })
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         if isDrawerVisible {
             return .LightContent
         }
-        
         return .Default
     }
-  
 }

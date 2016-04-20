@@ -24,7 +24,6 @@ enum Tip: CustomStringConvertible, Equatable  {
             }
         }
     }
-    
 }
 
 class Flashcard: Object, Equatable, UniquelyIdentifiable {
@@ -67,7 +66,6 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
         self.tipEnum = tip
         self.hidden = false
     }
- 
 }
 
 class Deck: Object, Equatable, UniquelyIdentifiable {
@@ -89,8 +87,6 @@ class Deck: Object, Equatable, UniquelyIdentifiable {
         self._id = id
         self.name = name
     }
-    
-    
 }
 
 

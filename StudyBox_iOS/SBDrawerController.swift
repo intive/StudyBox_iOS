@@ -16,7 +16,7 @@ protocol SBDrawerCenterDelegate {
 
 class SBDrawerController: MMDrawerController {
     
-    var centerDelegate:SBDrawerCenterDelegate?
+    var centerDelegate: SBDrawerCenterDelegate?
         
     override var centerViewController: UIViewController! {
         didSet {
@@ -25,14 +25,14 @@ class SBDrawerController: MMDrawerController {
         }
     }
 
-    var  drawerAnimationTime:NSTimeInterval {
-        var newFrame:CGRect;
-        let oldFrame = self.centerViewController.view.frame;
-        newFrame = self.centerViewController.view.frame;
-        newFrame.origin.x = self.maximumLeftDrawerWidth;
+    var  drawerAnimationTime: NSTimeInterval {
+        var newFrame: CGRect
+        let oldFrame = self.centerViewController.view.frame
+        newFrame = self.centerViewController.view.frame
+        newFrame.origin.x = self.maximumLeftDrawerWidth
         
-        let distance = abs(CGRectGetMinX(oldFrame)-newFrame.origin.x);
-        return max(Double(distance/abs(animationVelocity)),0.1);
+        let distance = abs(CGRectGetMinX(oldFrame)-newFrame.origin.x)
+        return max(Double(distance/abs(animationVelocity)), 0.1)
     }
     
     var defaultNavBarColor = UIColor.defaultNavBarColor()
@@ -48,15 +48,15 @@ class SBDrawerController: MMDrawerController {
             }
         case .Changed:
             if visibleLeftDrawerWidth > 0 {
-                self.statusBarViewBackgroundColor = UIColor.fade(fromColor: defaultNavBarColor, toColor: graphiteColor, currentStep: visibleLeftDrawerWidth, steps: maximumLeftDrawerWidth)
+                self.statusBarViewBackgroundColor = UIColor.fade(fromColor: defaultNavBarColor, toColor: graphiteColor,
+                                                                 currentStep: visibleLeftDrawerWidth, steps: maximumLeftDrawerWidth)
             }
         case .Failed,
              .Ended:
-            if visibleLeftDrawerWidth == 0 {
+            if visibleLeftDrawerWidth.isZero {
                 self.statusBarViewBackgroundColor = defaultNavBarColor
                 if let delegate = centerDelegate where delegate.isDrawerVisible {
                     centerDelegate?.drawerToggleAnimation()
-
                 }
             }
             
@@ -100,33 +100,31 @@ class SBDrawerController: MMDrawerController {
 
     }
     
-    override func setCenterViewController(newCenterViewController: UIViewController!,
-                                          withFullCloseAnimation fullCloseAnimated: Bool, completion: ((Bool) -> Void)!) {
+    override func setCenterViewController(newCenterViewController: UIViewController!, withFullCloseAnimation fullCloseAnimated: Bool,
+                                          completion: ((Bool) -> Void)!) { // swiftlint:disable:this force_unwrapping
         super.setCenterViewController(newCenterViewController, withFullCloseAnimation: fullCloseAnimated, completion: completion)
         updateCenterDelegate()
     }
-    override func setCenterViewController(centerViewController: UIViewController!,
-                                          withCloseAnimation closeAnimated: Bool, completion: ((Bool) -> Void)!) {
+    override func setCenterViewController(centerViewController: UIViewController!, withCloseAnimation closeAnimated: Bool,
+                                          completion: ((Bool) -> Void)!) { // swiftlint:disable:this force_unwrapping
         super.setCenterViewController(centerViewController, withCloseAnimation: closeAnimated, completion: completion)
         updateCenterDelegate()
     }
     
     override func closeDrawerAnimated(animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions,
-                                      completion: ((Bool) -> Void)!) {
+                                      completion: ((Bool) -> Void)!) { // swiftlint:disable:this force_unwrapping
         var completionBlock = completion
         
         UIView.animateWithDuration(drawerAnimationTime,
             animations: {
                 self.statusBarViewBackgroundColor = UIColor.defaultNavBarColor()
-            }
-        )
+            })
         
-        completionBlock = {[weak self] (success:Bool) -> Void in
+        completionBlock = {[weak self] (success: Bool) -> Void in
             if let sbController = self?.centerDelegate as? StudyBoxViewController {
                 sbController.isDrawerVisible = false
                 sbController.updateStatusBar()
             }
-            
             completion?(success)
         }
         
@@ -134,7 +132,8 @@ class SBDrawerController: MMDrawerController {
         
     }
     
-    override func openDrawerSide(drawerSide: MMDrawerSide, animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions, completion: ((Bool) -> Void)!) {
+    override func openDrawerSide(drawerSide: MMDrawerSide, animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions,
+                                 completion: ((Bool) -> Void)!) { // swiftlint:disable:this force_unwrapping
         self.centerDelegate?.drawerToggleAnimation()
 
         super.openDrawerSide(drawerSide, animated: animated, velocity: velocity, animationOptions: options, completion: completion)
@@ -147,8 +146,6 @@ class SBDrawerController: MMDrawerController {
                     
                 }
                 self.statusBarViewBackgroundColor = UIColor.sb_Graphite()
-            }
-        )
+            })
     }
-    
 }

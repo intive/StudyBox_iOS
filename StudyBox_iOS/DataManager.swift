@@ -51,7 +51,7 @@ class DataManager {
     // loading decks from Realm. Used for refresh after changing decks in db
     func loadDecksFromDatabase(forced: Bool = false) {
         
-        if !decks.isEmpty || forced{
+        if !decks.isEmpty || forced {
             decks.removeAll()
         }
         
@@ -65,7 +65,7 @@ class DataManager {
     
     func removeDecksFromDatabase() {
         if let realm = realm {
-            do{
+            do {
                 try realm.write() {
                     realm.deleteAll()
                 }
@@ -73,7 +73,6 @@ class DataManager {
                 debugPrint(e)
             }
         }
-        
         deckDBChanged = true
     }
     
@@ -81,7 +80,7 @@ class DataManager {
         
         if let realm = realm {
             if let deck = realm.objects(Deck).filter("_id == '\(idDeck)'").first {
-                return deck.copy() as? Deck
+                return deck
             } else {
                 return nil
             }
@@ -94,8 +93,8 @@ class DataManager {
         
         if let realm = realm {
             if let updatingDeck = realm.objects(Deck).filter("_id == '\(deck.id)'").first{
-                do{
-                    try realm.write{
+                do {
+                    try realm.write {
                         updatingDeck.name = deck.name
                         deckDBChanged = true
                     }
@@ -115,7 +114,6 @@ class DataManager {
         let id = decks.generateNewId()
         let newDeck = Deck(id: id, name: name)
         
-        
         if let realm = realm {
             do {
                 try realm.write() {
@@ -134,12 +132,12 @@ class DataManager {
         if let realm = realm {
                 if let deck = realm.objects(Deck).filter("_id == '\(idDeck)'").first {
                     let toRemove = deck.flashcards
-                    do{
-                        try realm.write{
+                    do {
+                        try realm.write {
                             realm.delete(toRemove)
                             realm.delete(deck)
                         }
-                    } catch let e{
+                    } catch let e {
                         debugPrint(e)
                     }
                     deckDBChanged = true
@@ -155,7 +153,6 @@ class DataManager {
     func removeDeck(deck: Deck) throws {
         return try removeDeck(withId: deck.id)
     }
-    
     
     func flashcard(withId idFlashcard: String) -> Flashcard? {
         
@@ -183,24 +180,22 @@ class DataManager {
         }
     }
     
-    
     func flashcards(forDeck deck: Deck) throws ->[Flashcard] {
         return try flashcards(forDeckWithId: deck.id)
-        
     }
 
     func updateFlashcard(data: Flashcard) throws {
         if let realm = realm {
             if let flashcard = realm.objects(Flashcard).filter("_id == '\(data.id)'").first {
-                do{
-                    try realm.write{
+                do {
+                    try realm.write {
                         flashcard.question = data.question
                         flashcard.answer = data.answer
                         flashcard.tip = data.tip
                         flashcard.hidden = data.hidden
                         flashcard.deck = data.deck
                     }
-                } catch let e{
+                } catch let e {
                     debugPrint(e)
                 }
             } else {
@@ -218,11 +213,11 @@ class DataManager {
                 let newFlashcard = Flashcard(id: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
             
                 newFlashcard.deck = selectedDeck
-                do{
-                    try realm.write{
+                do {
+                    try realm.write {
                         realm.add(newFlashcard)
                     }
-                } catch let e{
+                } catch let e {
                     debugPrint(e)
                 }
                 
@@ -242,11 +237,11 @@ class DataManager {
     func removeFlashcard(withId idFlashcard: String) throws {
         if let realm = realm {
             if let flashcardToremove = realm.objects(Flashcard).filter("_id == '\(idFlashcard)'").first {
-                do{
-                    try realm.write{
+                do {
+                    try realm.write {
                         realm.delete(flashcardToremove)
                     }
-                } catch let e{
+                } catch let e {
                     debugPrint(e)
                 }
             } else {
@@ -265,7 +260,7 @@ class DataManager {
         if let realm = realm {
             if let flashcardToUnHide = realm.objects(Flashcard).filter("_id == '\(idFlashcard)'").first {
                 do {
-                    try realm.write{
+                    try realm.write {
                         flashcardToUnHide.hidden = true
                     }
                 } catch let e {
@@ -283,11 +278,11 @@ class DataManager {
     func unhideFlashcard(withId idFlashcard: String) throws {
         if let realm = realm {
             if let flashcardToHide = realm.objects(Flashcard).filter("_id == '\(idFlashcard)'").first {
-                do{
-                    try realm.write{
+                do {
+                    try realm.write {
                         flashcardToHide.hidden = false
                     }
-                } catch let e{
+                } catch let e {
                     debugPrint(e)
                 }
             } else {
@@ -297,5 +292,4 @@ class DataManager {
             throw DataManagerError.NoRealm
         }
     }
-    
 }

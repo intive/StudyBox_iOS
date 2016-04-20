@@ -10,8 +10,6 @@ import UIKit
 
 extension UIApplication {
     static func appDelegate() -> AppDelegate {
-        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-        return delegate!
-        
+        return UIApplication.sharedApplication().delegate as! AppDelegate //swiftlint:disable:this force_cast
     }
 }

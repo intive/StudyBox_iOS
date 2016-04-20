@@ -63,7 +63,6 @@ extension DataManager {
                             debugPrint(e)
                         }
                     }
-                    
                 } catch let e {
                     debugPrint(e)
                 }
