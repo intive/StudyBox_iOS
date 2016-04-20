@@ -15,7 +15,7 @@ enum DataManagerError:ErrorType {
     case NoDeckWithGivenId, NoFlashcardWithGivenId
 }
 enum Result {
-    case OK, FAILED
+    case Ok, Failed
 }
 
 /**
@@ -101,7 +101,7 @@ class DataManager {
         
     }
     
-    func updateDeckFromServer(callback: (Result) -> Void){
+    func updateDeckFromServer(callback: ((result:Result) -> Void)?){
         
         ServerCommunication().getDecksFromServer({ (result, error) in
             
@@ -127,10 +127,14 @@ class DataManager {
                     }
                 }
             }
-                Result.OK
+                if let tmp = callback {
+                    tmp(result: Result.Ok)
+                }
             }else{
                 debugPrint(error?.description)
-                Result.FAILED
+                if let tmp = callback {
+                    tmp(result: Result.Failed)
+                }
             }
         
         })
