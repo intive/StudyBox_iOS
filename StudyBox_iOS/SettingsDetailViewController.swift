@@ -47,6 +47,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         WatchDataManager.watchManager.startSession()
     }
     
+    // swiftlint:disable cyclomatic_complexity
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell!
@@ -61,39 +62,30 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         case .DecksForWatch?:
             cell = tableView.dequeueReusableCellWithIdentifier(checkmarkCellID, forIndexPath: indexPath)
             
-            if let userDecksArray = userDecksArray {
+            if let userDecksArray = userDecksArray, let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
                 switch indexPath.section {
                 case 0:
                     //Check the "Select/deselect all" cell if all decks are already set to sync
-                    if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
-                        if decksToSynchronize.count == userDecksArray.count {
-                            cell.accessoryType = .Checkmark
-                        }
-                    }
+                    cell.accessoryType = decksToSynchronize.count == userDecksArray.count ?  .Checkmark : .None
                     cell.textLabel?.text = "Zaznacz/Odznacz wszystkie"
                 case 1:
                     let deckName = userDecksArray[indexPath.row].name
                     cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
-                    
-                    cell.accessoryType = .None
+
                     //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
-                    if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
-                        for deckToSync in decksToSynchronize {
-                            if deckToSync == userDecksArray[indexPath.row].id {
-                                cell.accessoryType = .Checkmark
-                            }
-                        }
+                    for deckToSync in decksToSynchronize {
+                            cell.accessoryType = deckToSync == userDecksArray[indexPath.row].id ? .Checkmark : .None
                     }
                 default: break
                 }
             }
         default: break
-            
         }
         cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         cell.backgroundColor = UIColor.sb_White()
         return cell
     }
+    // swiftlint:enable cylomatic_complexity
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -130,31 +122,30 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    ///Sends decks selected in TableView to Watch
-    func sendSelectedDecksToSync() {
-        var decksToSynchronizeIDs = [String]()
-        //Converting to array
-        if let userDecksArray = userDecksArray {
-            decksToSynchronizeIDs = convertDecksToIDs(userDecksArray)
-            defaults.setObject(decksToSynchronizeIDs, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-            sendDecksToWatch(decksToSynchronizeIDs)
-        }
+    ///Sends decks selected in TableView to NSUD and Watch
+    func saveSelectedDecksToUserDefaultsAndWatch() {
+        let decksToSynchronizeIDs = convertSelectedDecksToIDs()
+        
+        defaults.setObject(decksToSynchronizeIDs, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
+        sendDecksToWatch(decksToSynchronizeIDs)
     }
     
-    ///Converts array of type `[Deck]` to array of their IDs
-    func convertDecksToIDs(userDecksArray: [Deck]) -> [String] {
+    //Converts decks selected in `detailTableView` to array of their IDs
+    func convertSelectedDecksToIDs() -> [String] {
         var decksToSynchronize = [String]()
-        for i in 0..<userDecksArray.count {
-            let cell = detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 1))
-            if cell?.accessoryType == .Checkmark {
-                decksToSynchronize.append(userDecksArray[i].id)
+        if let userDecksArray = userDecksArray {
+            for i in 0..<userDecksArray.count {
+                let cell = detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 1))
+                if cell?.accessoryType == .Checkmark {
+                    decksToSynchronize.append(userDecksArray[i].id)
+                }
             }
         }
         return decksToSynchronize
     }
     
-    ///Sending to Watch
-    func sendDecksToWatch(decksToSynchronizeIDs:[String]) {
+    //Sending to Watch
+    func sendDecksToWatch(decksToSynchronizeIDs: [String]) {
         do {
             try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
         } catch {
@@ -162,7 +153,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
     }
     
-    ///Inverses cell checkmark on/off
+    //Inverses cell checkmark on/off
     func changeSelectionForCell(cell: UITableViewCell) {
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
@@ -171,7 +162,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
     }
     
-    ///Sets cell checkmark to `toState`
+    //Sets cell checkmark to `toState`
     func changeSelectionForCell(cell: UITableViewCell, toState: UITableViewCellAccessoryType) {
         cell.accessoryType = toState
     }
@@ -185,14 +176,14 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 scheduleNotification()
             }
         case .DecksForWatch?:
-            sendSelectedDecksToSync()
+            saveSelectedDecksToUserDefaultsAndWatch()
         default:
             break
         }
         defaults.synchronize()
     }
     
-    ///Schedules a new notification based on NSUD from now
+    //Schedules a new notification based on NSUD from now
     func scheduleNotification() {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         let notification = UILocalNotification()

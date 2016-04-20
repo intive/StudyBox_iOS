@@ -13,6 +13,7 @@ enum SendingToWatchResult:ErrorType {
     case Success, Failure
 }
 
+//WatchDataManager is implemented because updating the Watch data will occur in Settings and later when user edits a deck or flashcard data.
 class WatchDataManager: NSObject, WCSessionDelegate {
     
     static let watchManager = WatchDataManager()
@@ -35,12 +36,13 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         session?.activateSession()
     }
     
-    ///Sends an array with deck IDs to Apple Watch
+    //Sends an array with deck IDs to Apple Watch
     func sendDecksToAppleWatch(decksIDs: [String]) throws {
         
         var flashcardsQuestions = [String]()
         var flashcardsAnswers = [String]()
 
+// swiftlint:disable todo
 //      TODO: Uncomment when deck/flashcards IDs are permanent
 //        if let manager = dataManager {
 //            for deck in decksIDs {
@@ -54,8 +56,8 @@ class WatchDataManager: NSObject, WCSessionDelegate {
 //        }
         
         //Dummy Data
-        flashcardsQuestions = ["TestQuestion1", "TestQuestion2", "TestQuestion3", "TestQuestion4", "TestQuestion5"]
-        flashcardsAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "TestAnswer4", "TestAnswer5"]
+        flashcardsQuestions = ["1\n" + String(NSDate()), "2\n" + String(NSDate()), "3\n" + String(NSDate()), "TestQuestion4", "TestQuestion5"]
+        flashcardsAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "long\nTestAnswer4\nvery\nvery\nvery\nvery\nlong", "TestAnswer5"]
 
         //if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
         do {

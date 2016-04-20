@@ -21,6 +21,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     let titleTextFailure = "😟"
     
     let detailTextNotAvailable = "Nie zostały wybrane żadne talie do synchronizacji z zegarkiem lub nie zostały one jeszcze zsynchronizowane."
+    let detailTextError = "Błąd w otrzymanych danych. Zsynchronizuj talie ponownie."
     let detailTextSuccess = "Masz dobrą pamięć!"
     let detailTextFailure = "Następnym razem się uda."
     
@@ -38,7 +39,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             session.delegate = self
             session.activateSession()
         }
-        userAnswer = nil
     }
     
     override func awakeWithContext(context: AnyObject?) {
@@ -61,11 +61,17 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         startButton.setHidden(false)
         titleLabel.setText("")
         detailLabel.setText("")
+        //Empty old data array
+        storedFlashcards = [(String,String)]()
         //Update `storedFlashcards` to data recieved from iPhone
         if let flashcardsQ = applicationContext["flashcardsQuestions"] as? [String], let flashcardsA = applicationContext["flashcardsAnswers"] as? [String] where flashcardsQ.count == flashcardsA.count {
             for i in 0..<flashcardsQ.count {
                 storedFlashcards.append((flashcardsQ[i],flashcardsA[i]))
             }
+        } else {
+            startButton.setHidden(true)
+            titleLabel.setText(titleTextNotAvailable)
+            detailLabel.setText(detailTextError)
         }
     }
     
@@ -76,10 +82,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             ["segue": "pagebased", "data": answerText, "dismissContext": self]])
     }
     
-    ///Returns a random question and answer from `storedFlashcards`
+    ///Randomizes a question and answer from `storedFlashcards`
     func randomFlashcardData() {
-            let index = Int(arc4random_uniform(UInt32(storedFlashcards.count)))
-            let randomElement = storedFlashcards[index]
+            let randomElement = storedFlashcards[Int(arc4random_uniform(UInt32(storedFlashcards.count)))]
             self.questionText = randomElement.0
             self.answerText = randomElement.1
     }
@@ -88,19 +93,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.willActivate()
         
         if let userAnswer = userAnswer {
-            if userAnswer {
                 titleLabel.setHidden(false)
                 detailLabel.setHidden(false)
-                titleLabel.setText(titleTextSuccess)
-                detailLabel.setText(detailTextSuccess)
-                detailLabel.setTextColor(UIColor.greenColor())
-            } else {
-                titleLabel.setHidden(false)
-                detailLabel.setHidden(false)
-                titleLabel.setText(titleTextFailure)
-                detailLabel.setText(detailTextFailure)
-                detailLabel.setTextColor(UIColor.redColor())
-            }
+
+                titleLabel.setText(userAnswer ? titleTextSuccess : titleTextFailure)
+                detailLabel.setText(userAnswer ? detailTextSuccess : detailTextFailure)
         }
     }
 }
