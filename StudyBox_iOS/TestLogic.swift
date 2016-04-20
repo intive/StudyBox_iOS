@@ -8,9 +8,6 @@
 
 import Foundation
 
-enum TestLogicError: ErrorType {
-    case PassedDeckIsEmpty , AllFlashcardsHidden
-}
 enum StudyType {
     case Test(uint), Learn
 }
@@ -24,12 +21,13 @@ class Test {
     var index = 0
     private var numberOfFlashcardsInFullDeck : Int
     let testType : StudyType
-    private var cardsInTest : Int
+    private var cardsInTest : Int = 0
     //last 2 properties are amde to determinate if passed deck was empty from the beginning or if all flashcards was hidden
-    private let passedDeckWasEmpty:Bool
-    private let allFlashcardsMaybeHidden:Bool
+    private var allFlashcardsHidden:Bool = false
+    private var passedDeckWasEmpty:Bool = false
     
     init(deck : [Flashcard], testType : StudyType) {
+        
         if deck.isEmpty {
             passedDeckWasEmpty = true
         } else {
@@ -59,10 +57,10 @@ class Test {
         self.testType = testType
         
         //This parameter helps function to determinate if all flashcards in passed deck are hidden.
-        if numberOfFlashcardsInFullDeck == 0 {
-            allFlashcardsMaybeHidden = true
+        if ( numberOfFlashcardsInFullDeck == 0 && passedDeckWasEmpty == false ) {
+            allFlashcardsHidden = true
         } else {
-            allFlashcardsMaybeHidden = false
+            allFlashcardsHidden = false
         }
         
         newFlashcard()
@@ -113,16 +111,20 @@ class Test {
     }
     
     //Fuction is checking if all of flashcards in test are hidden
-    func checkIfAllFlashcardsHidden() throws {
-        if passedDeckWasEmpty == false && allFlashcardsMaybeHidden == true {
-            throw TestLogicError.AllFlashcardsHidden
+    func checkIfAllFlashcardsHidden() -> Bool {
+        if allFlashcardsHidden {
+            return true
+        }else {
+            return false
         }
     }
     
     //Function is checking if passed deck was empty at the beggining
-    func checkIfPassedDeckIsEmpty() throws {
-        if passedDeckWasEmpty {
-            throw TestLogicError.PassedDeckIsEmpty
+    func checkIfPassedDeckIsEmpty() -> Bool {
+        if passedDeckWasEmpty == true {
+            return true
+        }else {
+            return false
         }
     }
     

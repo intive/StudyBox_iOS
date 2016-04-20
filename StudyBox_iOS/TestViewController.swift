@@ -78,8 +78,26 @@ class TestViewController: StudyBoxViewController {
         let tapScore = UITapGestureRecognizer(target: self, action: #selector(TestViewController.tapScore(_:)))
         scoreLabel.userInteractionEnabled = true
         scoreLabel.addGestureRecognizer(tapScore)
-        try! testLogicSource?.checkIfPassedDeckIsEmpty()
-        try! testLogicSource?.checkIfAllFlashcardsHidden()
+
+        //Alert if passed deck was empty.
+        if ((testLogicSource?.checkIfPassedDeckIsEmpty()) == true) {
+            let msg = "Talia jest pusta."
+            let alert = UIAlertController(title: "Uwaga!" , message: msg , preferredStyle: .Alert)
+            let action = UIAlertAction(title: "OK" , style: .Default, handler:nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        //Alert if passed deck have all flashcards hidden
+        if ((testLogicSource?.checkIfAllFlashcardsHidden()) == true) {
+            let msg = "Wszystkie fiszki w tali są ukryte"
+            let alert = UIAlertController(title: "Uwaga!" , message: msg , preferredStyle: .Alert)
+            let action = UIAlertAction(title: "OK" , style: .Default, handler:nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        
         if let _ = testLogicSource {
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
