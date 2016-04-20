@@ -68,7 +68,8 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //navigationController?.navigationBar.translucent = false
+       // navigationController?.navigationBar.barTintColor = UIColor.defaultNavBarColor()
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false

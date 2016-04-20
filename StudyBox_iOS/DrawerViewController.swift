@@ -176,9 +176,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         return .Slide
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
     
     func deactiveAllChildViewControllers() {
         for (index,_) in drawerNavigationControllers.enumerate() {
