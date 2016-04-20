@@ -39,9 +39,16 @@ class SBDrawerController: MMDrawerController {
     var graphiteColor = UIColor.sb_Graphite()
     
     override func panGestureCallback(panGesture: UIPanGestureRecognizer!) {
-        
+        prePanGestureCallback(panGesture)
+
+        let animationTime = drawerAnimationTime
+        super.panGestureCallback(panGesture)
+
+        postPanGestureCallback(panGesture, animationTime: animationTime)
+    }
+
+    private func prePanGestureCallback(panGesture: UIPanGestureRecognizer) {
         switch panGesture.state {
-        
         case .Began:
             if let drawer = leftDrawerViewController as? DrawerViewController where drawer.barStyle == .LightContent {
                 drawer.barStyle = .Default
@@ -59,13 +66,12 @@ class SBDrawerController: MMDrawerController {
                     centerDelegate?.drawerToggleAnimation()
                 }
             }
-            
         default:
             break
         }
-        let animationTime = drawerAnimationTime
-        super.panGestureCallback(panGesture)
-        
+    }
+
+    private func postPanGestureCallback(panGesture: UIPanGestureRecognizer, animationTime: NSTimeInterval) {
         switch panGesture.state {
         case .Failed,
              .Ended:
@@ -79,13 +85,10 @@ class SBDrawerController: MMDrawerController {
                     }
                     drawer.setNeedsStatusBarAppearanceUpdate()
                 })
-                
             }
-            
         default:
             break
         }
-        
     }
     
     private func updateCenterDelegate() {

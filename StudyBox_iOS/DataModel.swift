@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 protocol UniquelyIdentifiable {
-    var id: String { get }
+    var serverID: String { get }
 }
 
 enum Tip: CustomStringConvertible, Equatable  {
@@ -27,20 +27,8 @@ enum Tip: CustomStringConvertible, Equatable  {
 }
 
 class Flashcard: Object, Equatable, UniquelyIdentifiable {
-    dynamic private var _id: String = NSUUID().UUIDString
-    var id: String  {
-        get {
-            return self._id
-        }
-    }
-    
-    dynamic private var _deckId: String = ""
-    var deckId: String {
-        get {
-            return self._deckId
-        }
-    }
-    
+    dynamic private(set) var serverID: String = NSUUID().UUIDString
+    dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck?
     dynamic var question: String = ""
     dynamic var answer: String = ""
@@ -57,10 +45,10 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
     }
     dynamic var hidden: Bool = false
     
-    convenience init(id: String, deckId: String, question: String, answer: String, tip: Tip?){
+    convenience init(serverID: String, deckId: String, question: String, answer: String, tip: Tip?){
         self.init()
-        _id = id
-        self._deckId = deckId
+        self.serverID = serverID
+        self.deckId = deckId
         self.question = question
         self.answer = answer
         self.tipEnum = tip
@@ -70,32 +58,27 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
 
 class Deck: Object, Equatable, UniquelyIdentifiable {
     
-    dynamic private var _id: String = NSUUID().UUIDString
-    var id: String {
-        get {
-            return self._id
-        }
-    }
+    dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic var name: String = ""
 
     var flashcards: [Flashcard] {
         return linkingObjects(Flashcard.self, forProperty: "deck")
     }
     
-    convenience init(id: String, name: String){
+    convenience init(serverID: String, name: String){
         self.init()
-        self._id = id
+        self.serverID = serverID
         self.name = name
     }
 }
 
 
 func == (lhs: Deck, rhs: Deck) -> Bool {
-    return lhs.id == rhs.id && lhs.name == rhs.name
+    return lhs.serverID == rhs.serverID && lhs.name == rhs.name
 }
 
 func == (lhs: Flashcard, rhs: Flashcard) -> Bool {
-    return lhs.id == rhs.id && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer && lhs.tip == rhs.tip
+    return lhs.serverID == rhs.serverID && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer && lhs.tip == rhs.tip
 }
 
 

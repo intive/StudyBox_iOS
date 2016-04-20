@@ -79,7 +79,7 @@ class DataManager {
     func deck(withId idDeck: String) -> Deck? {
         
         if let realm = realm {
-            if let deck = realm.objects(Deck).filter("_id == '\(idDeck)'").first {
+            if let deck = realm.objects(Deck).filter("serverID == '\(idDeck)'").first {
                 return deck
             } else {
                 return nil
@@ -92,7 +92,7 @@ class DataManager {
     func updateDeck(deck: Deck) throws {
         
         if let realm = realm {
-            if let updatingDeck = realm.objects(Deck).filter("_id == '\(deck.id)'").first{
+            if let updatingDeck = realm.objects(Deck).filter("serverID == '\(deck.serverID)'").first{
                 do {
                     try realm.write {
                         updatingDeck.name = deck.name
@@ -112,7 +112,7 @@ class DataManager {
     func addDeck(name: String) -> String {
 
         let id = decks.generateNewId()
-        let newDeck = Deck(id: id, name: name)
+        let newDeck = Deck(serverID: id, name: name)
         
         if let realm = realm {
             do {
@@ -130,7 +130,7 @@ class DataManager {
     func removeDeck(withId idDeck: String) throws {
         
         if let realm = realm {
-                if let deck = realm.objects(Deck).filter("_id == '\(idDeck)'").first {
+                if let deck = realm.objects(Deck).filter("serverID == '\(idDeck)'").first {
                     let toRemove = deck.flashcards
                     do {
                         try realm.write {
@@ -151,13 +151,13 @@ class DataManager {
     }
     
     func removeDeck(deck: Deck) throws {
-        return try removeDeck(withId: deck.id)
+        return try removeDeck(withId: deck.serverID)
     }
     
     func flashcard(withId idFlashcard: String) -> Flashcard? {
         
         if let realm = realm {
-            if let flashcard = realm.objects(Flashcard).filter("_id == '\(idFlashcard)'").first{
+            if let flashcard = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first{
                 return flashcard.copy() as? Flashcard
             } else {
                 return nil
@@ -170,7 +170,7 @@ class DataManager {
     
     func flashcards(forDeckWithId deckId: String) throws ->[Flashcard] {
         if let realm = realm {
-            if let deck = realm.objects(Deck).filter("_id == '\(deckId)'").first {
+            if let deck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
                 return deck.flashcards.copy()
             } else {
                 throw DataManagerError.NoDeckWithGivenId
@@ -181,12 +181,12 @@ class DataManager {
     }
     
     func flashcards(forDeck deck: Deck) throws ->[Flashcard] {
-        return try flashcards(forDeckWithId: deck.id)
+        return try flashcards(forDeckWithId: deck.serverID)
     }
 
     func updateFlashcard(data: Flashcard) throws {
         if let realm = realm {
-            if let flashcard = realm.objects(Flashcard).filter("_id == '\(data.id)'").first {
+            if let flashcard = realm.objects(Flashcard).filter("serverID == '\(data.serverID)'").first {
                 do {
                     try realm.write {
                         flashcard.question = data.question
@@ -209,8 +209,8 @@ class DataManager {
     func addFlashcard(forDeckWithId deckId: String, question: String, answer: String, tip: Tip?)throws -> String  {
         let flashcardId = NSUUID().UUIDString
         if let realm = realm {
-            if let selectedDeck = realm.objects(Deck).filter("_id == '\(deckId)'").first {
-                let newFlashcard = Flashcard(id: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
+            if let selectedDeck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
+                let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
             
                 newFlashcard.deck = selectedDeck
                 do {
@@ -231,12 +231,12 @@ class DataManager {
     }
     
     func addFlashcard(forDeck deck: Deck, question: String, answer: String, tip: Tip?)throws -> String  {
-        return try addFlashcard(forDeckWithId: deck.id, question: question, answer: answer, tip: tip)
+        return try addFlashcard(forDeckWithId: deck.serverID, question: question, answer: answer, tip: tip)
     }
     
     func removeFlashcard(withId idFlashcard: String) throws {
         if let realm = realm {
-            if let flashcardToremove = realm.objects(Flashcard).filter("_id == '\(idFlashcard)'").first {
+            if let flashcardToremove = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first {
                 do {
                     try realm.write {
                         realm.delete(flashcardToremove)
@@ -253,12 +253,12 @@ class DataManager {
     }
     
     func removeFlashcard(data: Flashcard)throws {
-        return try removeFlashcard(withId: data.id)
+        return try removeFlashcard(withId: data.serverID)
     }
     
     func hideFlashcard(withId idFlashcard: String) throws {
         if let realm = realm {
-            if let flashcardToUnHide = realm.objects(Flashcard).filter("_id == '\(idFlashcard)'").first {
+            if let flashcardToUnHide = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first {
                 do {
                     try realm.write {
                         flashcardToUnHide.hidden = true
@@ -277,7 +277,7 @@ class DataManager {
     
     func unhideFlashcard(withId idFlashcard: String) throws {
         if let realm = realm {
-            if let flashcardToHide = realm.objects(Flashcard).filter("_id == '\(idFlashcard)'").first {
+            if let flashcardToHide = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first {
                 do {
                     try realm.write {
                         flashcardToHide.hidden = false

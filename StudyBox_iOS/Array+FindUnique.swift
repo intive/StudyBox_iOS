@@ -13,7 +13,7 @@ extension Array where Element: UniquelyIdentifiable {
     
     func findUniqe(withId idUniqe: String) -> Element? {
         for element in self {
-            if element.id == idUniqe {
+            if element.serverID == idUniqe {
                 return element
             }
         }
@@ -22,7 +22,7 @@ extension Array where Element: UniquelyIdentifiable {
     
     func indexOfUnique(idUniqe: String) -> Int? {
         for (index, element) in self.enumerate() {
-            if element.id == idUniqe {
+            if element.serverID == idUniqe {
                 return index
             }
         }

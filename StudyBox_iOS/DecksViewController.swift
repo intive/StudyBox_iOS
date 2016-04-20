@@ -163,7 +163,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         
         if let deck = source?[indexPath.row] {
             do {
-                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
+                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.serverID) {
 					if let bar = searchBar {
                         searchDecks = nil
                         hideSearchBar(-topItemOffset)

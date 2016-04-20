@@ -66,18 +66,16 @@ class Test {
         newFlashcard()
     }
     
-    /** Returns a tuple of numbers of flashcards that were answered correctly and how many flashcards are in the test
-     - returns: `(passedFlashcards,cardsInTest)`
-     */
+//    Returns a tuple of numbers of flashcards that were answered correctly and how many flashcards are in the test
+//     - returns: `(passedFlashcards,cardsInTest)`
     func cardsAnsweredAndPossible() -> (Int, Int) {
         return (passedFlashcards, cardsInTest)
     }
     
-    /** Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
-     - Parameter answeredCorrect: Was the last card marked correct or not
-     - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
-     */
-    private func setFlashcardStatus(answeredCorrect answeredCorrect:Bool) {
+//    Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
+//     - Parameter answeredCorrect: Was the last card marked correct or not
+//     - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
+    private func setFlashcardStatus(answeredCorrect answeredCorrect: Bool) {
         if !answeredCorrect{
             switch testType{
             case .Learn:
@@ -135,8 +133,8 @@ class Test {
         return newFlashcard()
     }
     
-    ///Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
-    func incorrectAnswer()->Flashcard? {
+    //Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
+    func incorrectAnswer() -> Flashcard? {
         setFlashcardStatus(answeredCorrect:false)
         return newFlashcard()
     }

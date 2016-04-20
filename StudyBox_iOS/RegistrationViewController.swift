@@ -81,45 +81,34 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        var validationResult = true
-        
         if let text = textField.text as NSString? {
             textField.text = text.stringByReplacingCharactersInRange(range, withString: string)
         }
         
         var invalidMessage: String? = nil
         if textField == emailTextField, let _ = textField.text {
-            validationResult = emailTextField.isValid()
-            if !validationResult {
+            if !emailTextField.isValid() {
                 invalidMessage = ValidationMessage.EmailIncorrect.rawValue
             }
             
         } else if let text = textField.text {
-            validationResult = text.hasMinimumCharacters(minimum: Utils.UserAccount.MinimumPasswordLength)
-            
-            if !validationResult {
+            if !text.hasMinimumCharacters(minimum: Utils.UserAccount.MinimumPasswordLength) {
                 invalidMessage = ValidationMessage.PasswordTooShort.rawValue
             } else {
-                validationResult = !text.hasWhitespaceOrNewLineCharacter()
-                
-                if !validationResult {
+
+                if text.hasWhitespaceOrNewLineCharacter() {
                     invalidMessage = ValidationMessage.PasswordIncorrect.rawValue
                 } else {
                     var matchingField: UITextField?
-                    
-                    if textField == passwordTextField {
-                        matchingField = repeatPasswordTextField
-                    } else {
-                        matchingField = passwordTextField
-                    }
-                    
+
+                    matchingField = textField == passwordTextField ? repeatPasswordTextField : passwordTextField
+
                     if let validatableMatchingField = matchingField as? ValidatableTextField where validatableMatchingField.text != "" {
-                        validationResult = text == validatableMatchingField.text
-                        if !validationResult {
+                        if text == validatableMatchingField.text {
+                            validatableMatchingField.invalidMessage = nil
+                        } else {
                             invalidMessage = ValidationMessage.PasswordsDontMatch.rawValue
                             validatableMatchingField.invalidMessage = invalidMessage
-                        } else {
-                            validatableMatchingField.invalidMessage = nil
                         }
                     }
                 }
@@ -137,7 +126,6 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         }
         
         return false
-        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
