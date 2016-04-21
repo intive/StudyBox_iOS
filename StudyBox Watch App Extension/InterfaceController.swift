@@ -17,8 +17,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var detailLabel: WKInterfaceLabel!
     
     let titleTextNotAvailable = "Nie można rozpocząć testu"
-    let titleTextSuccess = "😄"
-    let titleTextFailure = "😟"
+    let titleTextSuccess = "👍"
+    let titleTextFailure = "👎"
     
     let detailTextNotAvailable = "Nie zostały wybrane żadne talie do synchronizacji z zegarkiem lub nie zostały one jeszcze zsynchronizowane."
     let detailTextError = "Błąd w otrzymanych danych. Zsynchronizuj talie ponownie."

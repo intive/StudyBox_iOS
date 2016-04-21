@@ -41,32 +41,30 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         
         var flashcardsQuestions = [String]()
         var flashcardsAnswers = [String]()
-
-// swiftlint:disable todo
-//      TODO: Uncomment when deck/flashcards IDs are permanent
-//        if let manager = dataManager {
-//            for deck in decksIDs {
-//                if let deckFromManager = manager.deck(withId: deck) {
-//                    for flashcard in deckFromManager.flashcards {
-//                        flashcardsQuestions.append(flashcard.question)
-//                        flashcardsAnswers.append(flashcard.answer)
-//                    }
-//                }
-//            }
-//        }
         
-        //Dummy Data
-        flashcardsQuestions = ["1\n" + String(NSDate()), "2\n" + String(NSDate()), "3\n" + String(NSDate()), "TestQuestion4", "TestQuestion5"]
-        flashcardsAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "long\nTestAnswer4\nvery\nvery\nvery\nvery\nlong", "TestAnswer5"]
-
-        //if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
-        do {
-            try self.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions, "flashcardsAnswers":flashcardsAnswers])
-        } catch let error {
-            print("Sending to Watch failed: \(error)")
-            throw error
+        if let manager = dataManager {
+            for deck in decksIDs {
+                if let deckFromManager = manager.deck(withId: deck) {
+                    for flashcard in deckFromManager.flashcards {
+                        flashcardsQuestions.append(flashcard.question)
+                        flashcardsAnswers.append(flashcard.answer)
+                    }
+                }
+            }
         }
-        //}
+        
+//        //Dummy Data
+//        flashcardsQuestions = ["1\n" + String(NSDate()), "2\n" + String(NSDate()), "3\n" + String(NSDate()), "TestQuestion4", "TestQuestion5"]
+//        flashcardsAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "long\nTestAnswer4\nvery\nvery\nvery\nvery\nlong", "TestAnswer5"]
+//
+        if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
+            do {
+                try self.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions, "flashcardsAnswers":flashcardsAnswers])
+            } catch let error {
+                print("Sending to Watch failed: \(error)")
+                throw error
+            }
+        }
     }
 }
 

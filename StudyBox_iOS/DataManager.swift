@@ -73,7 +73,7 @@ class DataManager {
         
         let selectedDeck = realm.objects(Deck).filter("_id == '\(id)'").first
         if let deck = selectedDeck {
-            return deck.copy() as? Deck
+            return deck
         } else {
             return nil
         }
