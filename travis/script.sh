@@ -9,5 +9,5 @@ xcodebuild \
     -workspace "$WORKSPACE" \
     -scheme "$SCHEME" \
 	-destination "$PLATFORM" \
-	test \
-	| xcpretty
+    -hideShellScriptEnvironment \
+	test
