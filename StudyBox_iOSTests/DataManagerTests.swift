@@ -34,9 +34,9 @@ class DataManagerTests: XCTestCase {
         
         XCTAssertNotNil(deckById,"Receiving added deck by id, must not be nil")
         
-        let newDeck = Deck(id: "xxxzzz", name: "new some name")
+        let newDeck = Deck(serverID: "xxxzzz", name: "new some name")
         
-        let newDeckById = manager.deck(withId: newDeck.id)
+        let newDeckById = manager.deck(withId: newDeck.serverID)
         
         XCTAssertNil(newDeckById, "Manager does not contain newDeck so it must not be able to find it by id")
         
@@ -72,7 +72,7 @@ class DataManagerTests: XCTestCase {
         let flashcards = try! dummyManager.flashcards(forDeck: deck)
         XCTAssert(Bool(flashcards.count),"Dummy manager must contain at least one flashcard")
         
-        let newDeck = Deck(id: "x", name: deck.name)
+        let newDeck = Deck(serverID: "x", name: deck.name)
         
         let newFlashcards = try? dummyManager.flashcards(forDeck: newDeck)
         
@@ -91,13 +91,13 @@ class DataManagerTests: XCTestCase {
         
         let flashcard = flashcards[0]
         
-        let flashcardById = manager.flashcard(withId: flashcard.id)
+        let flashcardById = manager.flashcard(withId: flashcard.serverID)
         
         XCTAssertNotNil(flashcardById,"Receiving added flashcard by id, must not be nil")
         
-        let newCard = Flashcard(id: "xxxxxz", deckId: "xxxx", question: "question", answer: "answer", tip: nil)
+        let newCard = Flashcard(serverID: "xxxxxz", deckId: "xxxx", question: "question", answer: "answer", tip: nil)
         
-        let newCardById = manager.flashcard(withId: newCard.id)
+        let newCardById = manager.flashcard(withId: newCard.serverID)
         
         XCTAssertNil(newCardById, "Manager doesn't contain newCard so it must not be able to find it by id")
         
@@ -110,7 +110,7 @@ class DataManagerTests: XCTestCase {
         deck.name = "update deck name"
         let _ = try? dummyManager.updateDeck(deck)
         
-        let found = dummyManager.deck(withId: deck.id)
+        let found = dummyManager.deck(withId: deck.serverID)
         
         XCTAssertEqual(found!.name, "update deck name","Deck with the id has been updated, so must be it's name")
     }
@@ -124,7 +124,7 @@ class DataManagerTests: XCTestCase {
         
         let _ = try? manager.updateFlashcard(flashcard)
         
-        let found = manager.flashcard(withId: flashcard.id)
+        let found = manager.flashcard(withId: flashcard.serverID)
         XCTAssertEqual(found?.question, "update flash question","Deck has been updated, so must be it's name")
         
     }
@@ -135,7 +135,7 @@ class DataManagerTests: XCTestCase {
         
         let _ = try? manager.removeDeck(deck)
         
-        let found = manager.deck(withId: deck.id)
+        let found = manager.deck(withId: deck.serverID)
         
         XCTAssertNil(found, "The Deck has been deleted, so it has to be nil")
         
@@ -152,7 +152,7 @@ class DataManagerTests: XCTestCase {
         
         let _ = try? manager.removeFlashcard(flashcard)
         
-        let foundCard = manager.flashcard(withId: flashcard.id)
+        let foundCard = manager.flashcard(withId: flashcard.serverID)
         
         XCTAssertNil(foundCard, "Flashcard has been removed, manager must not contain it")
         
@@ -168,7 +168,7 @@ class DataManagerTests: XCTestCase {
         let docks = manager.decks(false)
         let firstDock = docks[0]
         self.measureBlock {
-            let _ =  docks.filter( { $0.id == firstDock.id })
+            let _ =  docks.filter( { $0.serverID == firstDock.serverID })
             
         }
         
@@ -187,7 +187,7 @@ class DataManagerTests: XCTestCase {
         let firstDock = docks[0]
         
         self.measureBlock {
-            manager.deck(withId: firstDock.id)
+            manager.deck(withId: firstDock.serverID)
         }
     }
     
