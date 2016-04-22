@@ -158,7 +158,7 @@ class DataManager {
         
         if let realm = realm {
             if let flashcard = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first{
-                return flashcard.copy() as? Flashcard
+                return flashcard
             } else {
                 return nil
             }
