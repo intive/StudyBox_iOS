@@ -80,15 +80,25 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         decksCollectionView.dataSource = self
         adjustCollectionLayout()
         decksCollectionView.backgroundColor = UIColor.whiteColor()
+        decksCollectionView.alwaysBounceVertical = true
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
         
         
+    }
+    
+    
+    func keyboardWillShow(notification:NSNotification) {
+        let userInfo = notification.userInfo
+        let frame = userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue()
+        let frame2 = userInfo?["UIKeyboardBoundsUserInfoKey"]?.CGRectValue()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         searchBar.sizeToFit()
         searchBarWrapper.addSubview(searchBar)
-        
+        searchBar.autocorrectionType = UITextAutocorrectionType.No
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
         }
@@ -308,6 +318,7 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
         
     }
     
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
         if let searchText = searchController.searchBar.text where searchText.characters.count > 0 {
@@ -330,27 +341,22 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
     }
     
     func searchBarActiveOffsets(animated:Bool) {
+
+        let decksTop = decksTopConstraint.constant
         
         if animated {
-            if statusBarHeight > 0 {
-                decksTopConstraint.constant =  navbarHeight - searchBarHeight
-                
-            } else {
-                decksTopConstraint.constant = searchBarY - navbarHeight
-            }
+            decksTopConstraint.constant =  navbarHeight - searchBarHeight
+            
         }
         
         let flow = decksCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-        
+        let flowTop = flow?.sectionInset.top
+        print("values, decksTop :\(decksTop), flowtop: \(flowTop)")
         flow?.sectionInset.top = 0
         
         view.layoutIfNeeded()
         
-        if statusBarHeight > 0  {
-            decksTopConstraint.constant = navbarHeight
-        } else {
-            decksTopConstraint.constant = searchBarY
-        }
+        decksTopConstraint.constant = navbarHeight
         
         UIView.animateWithDuration(animated ? 0.3 : 0 , animations: {
             self.view.layoutIfNeeded()
@@ -372,15 +378,11 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
 
         if animated {
             
-            if statusBarHeight > 0 {
-                decksTopConstraint.constant = navbarHeight - searchBarY
-                
-            } else {
-                decksTopConstraint.constant = 0
-            }
-            
+            decksTopConstraint.constant = navbarHeight - searchBarY
+          
         }
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
+        
         decksTopConstraint.constant = topItemOffset
         UIView.animateWithDuration(animated ? 0.3 : 0 , animations: {
             self.view.layoutIfNeeded()
