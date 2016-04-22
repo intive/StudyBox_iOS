@@ -36,20 +36,32 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
             drawer.toggleDrawerSide(.Left, animated: true,completion: nil)
         }
     }
-    
+    func updateStatusBar() {
+        if let navigationController = self.navigationController {
+            navigationController.setNeedsStatusBarAppearanceUpdate()
+        } else {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
     func drawerToggleAnimation() {
         isDrawerVisible = !isDrawerVisible
-        
-        UIView.animateWithDuration(SBDrawerController.statusBarAnimationTime,
+        var animationTime:NSTimeInterval!
+        if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
+            animationTime = drawer.drawerAnimationTime
+        }
+        UIView.animateWithDuration(animationTime,
             animations: {
-                self.setNeedsStatusBarAppearanceUpdate()
-            },
-            completion: nil
+                self.updateStatusBar()
+            }
         )
     }
     
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        if isDrawerVisible {
+            return .LightContent
+        }
+        
+        return .Default
     }
     override func prefersStatusBarHidden() -> Bool {
         if traitCollection.verticalSizeClass == .Compact {

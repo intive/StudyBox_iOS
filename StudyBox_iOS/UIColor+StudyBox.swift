@@ -29,4 +29,8 @@ extension UIColor{
     class func sb_DarkGrey() -> UIColor {
         return UIColor.grayColor()
     }
+    
+    class func sb_White() -> UIColor {
+        return UIColor.whiteColor()
+    }
 }

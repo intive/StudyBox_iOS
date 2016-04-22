@@ -78,8 +78,26 @@ class TestViewController: StudyBoxViewController {
         let tapScore = UITapGestureRecognizer(target: self, action: #selector(TestViewController.tapScore(_:)))
         scoreLabel.userInteractionEnabled = true
         scoreLabel.addGestureRecognizer(tapScore)
-        try! testLogicSource?.checkIfPassedDeckIsEmpty()
-        try! testLogicSource?.checkIfAllFlashcardsHidden()
+
+        //Alert if passed deck was empty.
+        if ((testLogicSource?.checkIfPassedDeckIsEmpty()) == true) {
+            let msg = "Talia jest pusta."
+            let alert = UIAlertController(title: "Uwaga!" , message: msg , preferredStyle: .Alert)
+            let action = UIAlertAction(title: "OK" , style: .Default, handler:nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        //Alert if passed deck have all flashcards hidden
+        if ((testLogicSource?.checkIfAllFlashcardsHidden()) == true) {
+            let msg = "Wszystkie fiszki w tali są ukryte"
+            let alert = UIAlertController(title: "Uwaga!" , message: msg , preferredStyle: .Alert)
+            let action = UIAlertAction(title: "OK" , style: .Default, handler:nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        
         if let _ = testLogicSource {
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
@@ -152,22 +170,24 @@ class TestViewController: StudyBoxViewController {
             //move views up
             self.questionView.center.y = self.questionView.center.y - self.testView.frame.size.height
             self.answerView.center.y = self.answerView.center.y - self.testView.frame.size.height
+            
+            //set alpha to 0 to prepare for next animation +fade-out effect
+            self.questionView.alpha = 0
+            self.answerView.alpha = 0
             }, completion: { finished in
+                if let testLogic = self.testLogicSource {
+                    testLogic.skipCard()
+                }
+                self.updateQuestionUiForCurrentCard()
+                self.updateAnswerUiForCurrentCard()
+
                 //set views to show questionView after animation
                 self.questionView.center.x = self.testView.center.x
                 self.answerTrailing.active = false
                 self.answerLeading.constant = self.view.frame.width
-                //set buttons size back to normal in case they were being pressed while swiping
-                self.correctButton.transform = CGAffineTransformIdentity
-                self.incorrectButton.transform = CGAffineTransformIdentity
-                
                 //move views back to their correct Y position
                 self.questionView.center.y = self.questionView.center.y + self.testView.frame.size.height
                 self.answerView.center.y = self.answerView.center.y + self.testView.frame.size.height
-                
-                //set alpha to 0 to prepare for next animation
-                self.questionView.alpha = 0
-                self.answerView.alpha = 0
                 
                 //animate alpha back to 1
                 UIView.animateWithDuration(0.5, delay: 0,options: [.CurveEaseOut], animations: {
@@ -198,7 +218,7 @@ class TestViewController: StudyBoxViewController {
             let points = testLogic.cardsAnsweredAndPossible()
             scoreLabel.text = "\(points.0) / \(points.1)"
             
-            if let card = testLogic.currentCard != nil ? testLogic.currentCard : testLogic.newFlashcard(answeredCorrect: true) {
+            if let card = testLogic.currentCard {
                 questionLabel.text = card.question
             }
         }

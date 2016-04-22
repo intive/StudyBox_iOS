@@ -16,6 +16,7 @@ struct DrawerNavigationChild {
     var isActive = false
     
     private var _viewController:UIViewController? = nil
+    
     var viewController:UIViewController? {
         mutating get {
             if _viewController == nil {
@@ -49,6 +50,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
+    var barStyle = UIStatusBarStyle.Default
     private func lazyLoadViewControllerFromStoryboard(withStoryboardId id:String)->UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(id)
@@ -63,11 +65,18 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Moje talie",viewController: nil,lazyLoadViewControllerBlock: {[weak self] in
                     return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.DecksViewControllerID)
-                })
+                    })
             )
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Ustawienia",viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
+                    }
+                )
+            )
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
                     if let storyboard = self?.storyboard {
@@ -172,11 +181,14 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.reloadData()
     }
     
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        barStyle = .Default
     }
     
-    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return barStyle
+    }
     func deactiveAllChildViewControllers() {
         for (index,_) in drawerNavigationControllers.enumerate() {
             drawerNavigationControllers[index].isActive = false
