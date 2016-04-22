@@ -18,9 +18,9 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell!
+        var cell: UITableViewCell!
         
-        switch (indexPath.section,indexPath.row){
+        switch (indexPath.section, indexPath.row){
         case (0, 0):
             //Frequency cell configuration
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
@@ -47,7 +47,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
-            //TODO: enable or disable cell based on whether Watch is available
+            //TODOs: enable or disable cell based on whether Watch is available
             
         default: break
         }

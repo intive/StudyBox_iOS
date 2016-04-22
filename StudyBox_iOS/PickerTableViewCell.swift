@@ -34,9 +34,11 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
         if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
             let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
         {
-            if let indexOfNumber = pickerFrequencyNumbers.indexOf(Int(number)!), let indexOfType = pickerFrequencyTypes.indexOf(type) {
-                self.pickerView.selectRow(indexOfNumber, inComponent: 0, animated: false)
-                self.pickerView.selectRow(indexOfType, inComponent: 1, animated: false)
+            if let number = Int(number) {
+                if let indexOfNumber = pickerFrequencyNumbers.indexOf(Int(number)), let indexOfType = pickerFrequencyTypes.indexOf(type) {
+                    self.pickerView.selectRow(indexOfNumber, inComponent: 0, animated: false)
+                    self.pickerView.selectRow(indexOfType, inComponent: 1, animated: false)
+                }
             }
         } else {
             print("Error getting user defaults")

@@ -13,20 +13,20 @@ enum StudyType {
 }
 
 class Test {
-    private var deck : [Flashcard]
+    private var deck: [Flashcard]
     private(set) var notPassedInTestDeck: [Flashcard]?
-    private(set) var repeatDeck:[Flashcard]?
-    private(set) var currentCard : Flashcard?
+    private(set) var repeatDeck: [Flashcard]?
+    private(set) var currentCard: Flashcard?
     private var passedFlashcards = 0
     var index = 0
-    private var numberOfFlashcardsInFullDeck : Int
-    let testType : StudyType
-    private var cardsInTest : Int = 0
+    private var numberOfFlashcardsInFullDeck: Int
+    let testType: StudyType
+    private var cardsInTest: Int = 0
     //last 2 properties are amde to determinate if passed deck was empty from the beginning or if all flashcards was hidden
-    private var allFlashcardsHidden:Bool = false
-    private var passedDeckWasEmpty:Bool = false
+    private var allFlashcardsHidden: Bool = false
+    private var passedDeckWasEmpty: Bool = false
     
-    init(deck : [Flashcard], testType : StudyType) {
+    init(deck: [Flashcard], testType: StudyType) {
         
         if deck.isEmpty {
             passedDeckWasEmpty = true
@@ -37,7 +37,7 @@ class Test {
         //Making a temporary deck with only not hidden flashcards
         var tmpDeck: [Flashcard] = []
         for flashcard in deck {
-            if ( flashcard.hidden == false) {
+            if flashcard.hidden == false {
                 tmpDeck.append(flashcard)
             }
         }
@@ -57,7 +57,7 @@ class Test {
         self.testType = testType
         
         //This parameter helps function to determinate if all flashcards in passed deck are hidden.
-        if ( numberOfFlashcardsInFullDeck == 0 && passedDeckWasEmpty == false ) {
+        if numberOfFlashcardsInFullDeck == 0 && passedDeckWasEmpty == false  {
             allFlashcardsHidden = true
         } else {
             allFlashcardsHidden = false
@@ -66,18 +66,16 @@ class Test {
         newFlashcard()
     }
     
-    /** Returns a tuple of numbers of flashcards that were answered correctly and how many flashcards are in the test
-     - returns: `(passedFlashcards,cardsInTest)`
-     */
-    func cardsAnsweredAndPossible() -> (Int,Int) {
-        return (passedFlashcards,cardsInTest)
+//    Returns a tuple of numbers of flashcards that were answered correctly and how many flashcards are in the test
+//     - returns: `(passedFlashcards,cardsInTest)`
+    func cardsAnsweredAndPossible() -> (Int, Int) {
+        return (passedFlashcards, cardsInTest)
     }
     
-    /** Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
-     - Parameter answeredCorrect: Was the last card marked correct or not
-     - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
-     */
-    private func setFlashcardStatus(answeredCorrect answeredCorrect:Bool) {
+//    Sets new flashcard and depending on `answeredCorrect` moves the card to end of deck
+//     - Parameter answeredCorrect: Was the last card marked correct or not
+//     - returns: Newly set `Flashcard?`; `nil` if no new `Flashcard` is there to set
+    private func setFlashcardStatus(answeredCorrect answeredCorrect: Bool) {
         if !answeredCorrect{
             switch testType{
             case .Learn:
@@ -94,14 +92,14 @@ class Test {
             default:
                 break
             }
-        }else {
+        } else {
             index += 1
         }
     }
     
     //Returns new 'Flashcard?' or nil if there's no Flashcard to set
     private func newFlashcard() -> Flashcard? {
-        if deck.count > 0 {
+        if !deck.isEmpty {
             currentCard = deck.first
             deck.removeFirst()
         } else {
@@ -114,7 +112,7 @@ class Test {
     func checkIfAllFlashcardsHidden() -> Bool {
         if allFlashcardsHidden {
             return true
-        }else {
+        } else {
             return false
         }
     }
@@ -123,20 +121,20 @@ class Test {
     func checkIfPassedDeckIsEmpty() -> Bool {
         if passedDeckWasEmpty == true {
             return true
-        }else {
+        } else {
             return false
         }
     }
     
-    ///Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
-    func correctAnswer()->Flashcard? {
+    //Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`
+    func correctAnswer() -> Flashcard? {
         passedFlashcards += 1
         setFlashcardStatus(answeredCorrect:true)
         return newFlashcard()
     }
     
-    ///Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
-    func incorrectAnswer()->Flashcard? {
+    //Function to call when user taps "incorrect" button, and moves `currentCard` to end of deck
+    func incorrectAnswer() -> Flashcard? {
         setFlashcardStatus(answeredCorrect:false)
         return newFlashcard()
     }

@@ -17,8 +17,8 @@ class ScoreViewController: StudyBoxViewController {
     @IBOutlet weak var deckListButton: UIButton!
     @IBOutlet weak var runTestButton: UIButton!
     
-    var testLogicSource:Test?
-    var testScoreFraction:Double = 0.0
+    var testLogicSource: Test?
+    var testScoreFraction: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,13 +77,13 @@ class ScoreViewController: StudyBoxViewController {
     }
     
     @IBAction func deckListButtonAction(sender: UIButton) {
-        // TODO refactor for Drawer menu options
+        // TODOs: refactor for Drawer menu options
         DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "RepeatTest" {
-            if let flashcards = testLogicSource?.notPassedInTestDeck where flashcards.count == 0 {
+            if let flashcards = testLogicSource?.notPassedInTestDeck where flashcards.isEmpty {
                 presentAlertController(withTitle: "Błąd", message: "Brak fiszek do powtórzenia", buttonText: "Ok")
                 return false
             }
@@ -92,12 +92,10 @@ class ScoreViewController: StudyBoxViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "RepeatTest", let destinationViewController = segue.destinationViewController as? TestViewController, let flashcards = testLogicSource?.notPassedInTestDeck {
+        if segue.identifier == "RepeatTest", let destinationViewController = segue.destinationViewController as? TestViewController,
+            let flashcards = testLogicSource?.notPassedInTestDeck {
             
             destinationViewController.testLogicSource = Test(deck: flashcards, testType: .Test(uint(flashcards.count)))
         }
     }
 }
-
-
-

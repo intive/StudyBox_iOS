@@ -440,7 +440,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/StudyBox_iOS/\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/StudyBox_iOS/\"\nelse\n    echo \"error: SwiftLint not installed, download from https://github.com/realm/SwiftLint or install via \\`brew install swiftlint\\`\"\n    exit 1\nfi\n";
 		};
 		3D077DB37C93D4A5A0539DD7 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
