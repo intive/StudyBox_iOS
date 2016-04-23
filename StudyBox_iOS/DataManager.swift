@@ -89,7 +89,7 @@ class DataManager {
         }
     }
     
-    func deck(withName name: String, caseSensitive: Bool) -> Deck? {
+    func deck(withName name: String, caseSensitive: Bool = false) -> Deck? {
         let decksData = decks(false)
         
         if caseSensitive {
