@@ -20,13 +20,13 @@
 		2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */; };
 		2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */; };
 		2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */; };
+		2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */; };
 		2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */; };
 		2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100141CC0522300F9CB2A /* Searchable.swift */; };
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
-		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
-		2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */; };
 		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
+		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
 		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
@@ -36,6 +36,7 @@
 		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
+		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
 		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
@@ -91,13 +92,13 @@
 		2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+appDelegate.swift"; sourceTree = "<group>"; };
 		2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
 		2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBDrawerController.swift; sourceTree = "<group>"; };
+		2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBNavigationController.swift; sourceTree = "<group>"; };
 		2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+SBRepresentable.swift"; sourceTree = "<group>"; };
 		2D6100141CC0522300F9CB2A /* Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Searchable.swift; sourceTree = "<group>"; };
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
-		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
-		2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBNavigationController.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
+		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
 		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
@@ -106,6 +107,7 @@
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
 		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
+		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
@@ -163,15 +165,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D2843651C88CEDE006E5E21 /* Model */ = {
+		2D0FC8611CCBEBEA003177D1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */,
 				2D2843661C88CEEC006E5E21 /* DataModel.swift */,
 				2D2843681C88D03D006E5E21 /* DataManager.swift */,
 				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
 				2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */,
 				AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */,
 				AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		2D2843651C88CEDE006E5E21 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D6100161CC0527500F9CB2A /* SBRepresentable.swift */,
+				2D6100141CC0522300F9CB2A /* Searchable.swift */,
+				2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */,
+				2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */,
+				2D0FC8611CCBEBEA003177D1 /* Data */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -205,6 +220,62 @@
 			name = "Settings Classes";
 			sourceTree = "<group>";
 		};
+		9E6F89211CC505180027045A /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CEC69B521C946CC100295808 /* TestLogic.swift */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		9E6F89221CC5052A0027045A /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */,
+				AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */,
+				2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */,
+				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
+				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		9E6F89231CC505690027045A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				7238493F1C88851A009605EE /* EditFlashcardViewController.swift */,
+				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
+				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
+				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
+				723849411C8885F7009605EE /* ScoreViewController.swift */,
+				2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */,
+				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
+				7238493D1C8884DD009605EE /* TestViewController.swift */,
+				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
+				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9E6F89241CC505D50027045A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */,
+				CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */,
+				CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */,
+				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
+				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
+				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
+				2D0939A61CAD19CF00886A1B /* String+validation.swift */,
+				2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */,
+				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
+				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
+				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		A1341DB31C81E76800AFD04E = {
 			isa = PBXGroup;
 			children = (
@@ -229,48 +300,20 @@
 		A1341DBE1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				9E6F89241CC505D50027045A /* Extensions */,
+				9E6F89231CC505690027045A /* ViewControllers */,
+				9E6F89221CC5052A0027045A /* Interface */,
+				9E6F89211CC505180027045A /* Logic */,
 				2DA0E6981C949AE200DAB6B5 /* Utils */,
 				2D2843651C88CEDE006E5E21 /* Model */,
 				A1341DCE1C81E76900AFD04E /* Info.plist */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
-				7238493B1C88847F009605EE /* DecksViewController.swift */,
-				7238493F1C88851A009605EE /* EditFlashcardViewController.swift */,
-				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
-				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
-				CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */,
-				CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */,
-				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
-				723849411C8885F7009605EE /* ScoreViewController.swift */,
-				72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */,
-				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
 				72F089111CB7A87300BB4898 /* Settings Classes */,
-				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
-				AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */,
-				2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */,
-				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
-				2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */,
-				2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */,
-				CEC69B521C946CC100295808 /* TestLogic.swift */,
-				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
-				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
-				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
-				2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */,
-				2D0939A61CAD19CF00886A1B /* String+validation.swift */,
-				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
-				2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */,
-				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
-				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
-				2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */,
 				2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */,
-				2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */,
-				2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */,
-				2D6100141CC0522300F9CB2A /* Searchable.swift */,
-				2D6100161CC0527500F9CB2A /* SBRepresentable.swift */,
-				2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -424,7 +467,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/StudyBox_iOS/\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --path \"${SRCROOT}/StudyBox_iOS/\"\nelse\n    echo \"error: SwiftLint not installed, download from https://github.com/realm/SwiftLint or install via \\`brew install swiftlint\\`\"\n    exit 1\nfi\n";
 		};
 		3D077DB37C93D4A5A0539DD7 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -555,6 +598,7 @@
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
 				72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
+				63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,

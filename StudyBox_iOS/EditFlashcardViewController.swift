@@ -151,7 +151,7 @@ class EditFlashcardViewController: StudyBoxViewController {
             
             if let flashcardDeck = deck {
                 do {
-                    try dataManager.addFlashcard(forDeckWithId: flashcardDeck.id, question: question, answer: answer, tip: tip)
+                    try dataManager.addFlashcard(forDeckWithId: flashcardDeck.serverID, question: question, answer: answer, tip: tip)
                     presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
                     clearInput()
                 } catch _ as DataManagerError {
@@ -166,7 +166,7 @@ class EditFlashcardViewController: StudyBoxViewController {
             flashcard.question = question
             flashcard.answer = answer
             flashcard.tipEnum = tip
-            if flashcardDeck.id != flashcard.deckId {
+            if flashcardDeck.serverID != flashcard.deckId {
                 flashcard.deck? = flashcardDeck
             }
             

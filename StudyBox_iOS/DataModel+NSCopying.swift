@@ -8,23 +8,11 @@
 
 import Foundation
 
-extension Flashcard: NSCopying {
-    func copyWithZone(zone: NSZone) -> AnyObject {
-        return Flashcard(value: self)
-    }
-}
-
-extension Deck: NSCopying {
-    func copyWithZone(zone: NSZone) -> AnyObject {
-        return Deck(value: self)
-    }
-}
-
 extension Array where Element: Flashcard {
     func copy() -> [Flashcard] {
         var flashcards = [Flashcard]()
         for element in self {
-            flashcards.append(element.copy() as! Flashcard)
+            flashcards.append(Flashcard(value: element))
         }
         return flashcards
     }
@@ -34,7 +22,7 @@ extension Array where Element: Deck {
     func copy() -> [Deck] {
         var decks = [Deck]()
         for element in self {
-            decks.append(element.copy() as! Deck)
+            decks.append(Deck(value: element))
         }
         return decks
     }

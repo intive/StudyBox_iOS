@@ -10,13 +10,13 @@ import Foundation
 import RealmSwift
 
 protocol UniquelyIdentifiable {
-    var id:String {get }
+    var serverID: String { get }
 }
 
-enum Tip:CustomStringConvertible,Equatable  {
+enum Tip: CustomStringConvertible, Equatable  {
     case Text(text:String)
     
-    var description:String {
+    var description: String {
         get {
             switch self {
             case .Text(let text):
@@ -24,29 +24,16 @@ enum Tip:CustomStringConvertible,Equatable  {
             }
         }
     }
-    
 }
 
 class Flashcard: Object, Equatable, UniquelyIdentifiable {
-    dynamic private var _id:String = NSUUID().UUIDString
-    var id:String  {
-        get {
-            return self._id
-        }
-    }
-    
-    dynamic private var _deckId:String = ""
-    var deckId:String {
-        get {
-            return self._deckId;
-        }
-    }
-    
+    dynamic private(set) var serverID: String = NSUUID().UUIDString
+    dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck?
-    dynamic var question:String = ""
-    dynamic var answer:String = ""
+    dynamic var question: String = ""
+    dynamic var answer: String = ""
     dynamic var tip = Tip.Text(text: "").description
-    var tipEnum:Tip? {
+    var tipEnum: Tip? {
         get {
             return Tip.Text(text: tip)
         }
@@ -56,37 +43,31 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
             }
         }
     }
-    dynamic var hidden:Bool = false
+    dynamic var hidden: Bool = false
     
-    convenience init(id:String,deckId:String,question:String,answer:String,tip:Tip?){
+    convenience init(serverID: String, deckId: String, question: String, answer: String, tip: Tip?){
         self.init()
-        _id = id
-        self._deckId = deckId
+        self.serverID = serverID
+        self.deckId = deckId
         self.question = question
         self.answer = answer
         self.tipEnum = tip
         self.hidden = false
     }
- 
 }
 
 class Deck: Object, Equatable, UniquelyIdentifiable,Searchable {
     
-    dynamic private var _id:String = NSUUID().UUIDString
-    var id:String {
-        get {
-            return self._id;
-        }
-    }
-    dynamic var name:String = ""
+    dynamic private(set) var serverID: String = NSUUID().UUIDString
+    dynamic var name: String = ""
 
     var flashcards: [Flashcard] {
         return linkingObjects(Flashcard.self, forProperty: "deck")
     }
     
-    convenience init(id:String, name:String){
+    convenience init(serverID: String, name: String){
         self.init()
-        self._id = id
+        self.serverID = serverID
         self.name = name
     }
     
@@ -104,15 +85,15 @@ class Deck: Object, Equatable, UniquelyIdentifiable,Searchable {
 }
 
 
-func ==(lhs:Deck,rhs:Deck)->Bool {
-    return lhs.id == rhs.id && lhs.name == rhs.name
+func == (lhs: Deck, rhs: Deck) -> Bool {
+    return lhs.serverID == rhs.serverID && lhs.name == rhs.name
 }
 
-func ==(lhs:Flashcard,rhs:Flashcard)->Bool {
-    return lhs.id == rhs.id && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer && lhs.tip == rhs.tip
+func == (lhs: Flashcard, rhs: Flashcard) -> Bool {
+    return lhs.serverID == rhs.serverID && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer && lhs.tip == rhs.tip
 }
 
 
-func ==(lhs:Tip,rhs:Tip)->Bool {
+func == (lhs: Tip, rhs: Tip) -> Bool {
     return lhs.description == rhs.description
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 import Reachability 
-class LoginViewController: UserViewController,InputViewControllerDataSource {
+class LoginViewController: UserViewController, InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: EmailValidatableTextField!
@@ -20,7 +20,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputViews.appendContentsOf([emailTextField,passwordTextField])
+        inputViews.appendContentsOf([emailTextField, passwordTextField])
         inputViews.forEach {
             if let validable = $0 as? ValidatableTextField {
                 validable.validColor = UIColor.sb_DarkBlue()
@@ -43,7 +43,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     
     func loginWithInputData(){
         
-        var alertMessage:String?
+        var alertMessage: String?
         
         if !Reachability.isConnected() {
             alertMessage = "Brak połączenia z Internetem"
@@ -77,7 +77,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var validationResult = true
         
-        var invalidMessage:String?
+        var invalidMessage: String?
         if let text = textField.text as NSString? {
             textField.text = text.stringByReplacingCharactersInRange(range, withString: string)
         }
@@ -85,15 +85,14 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         if textField == emailTextField, let _ = textField.text  {
             validationResult = emailTextField.isValid()
             if !validationResult {
-                invalidMessage = ValidationMessage.emailIncorrect.rawValue
+                invalidMessage = ValidationMessage.EmailIncorrect.rawValue
             }
             
         } else if textField == passwordTextField, let text = textField.text {
             validationResult = text.isValidPassword(minimumCharacters: Utils.UserAccount.MinimumPasswordLength)
             if !validationResult {
-                invalidMessage = ValidationMessage.passwordIncorrect.rawValue
+                invalidMessage = ValidationMessage.PasswordIncorrect.rawValue
             }
-            
         }
         
         if let validatableTextField = textField as? ValidatableTextField {
@@ -105,9 +104,7 @@ class LoginViewController: UserViewController,InputViewControllerDataSource {
         } else {
             disableButton(logInButton)
         }
-        
         return false
-        
     }
     
     @IBAction func loginWithoutAccount(sender: AnyObject) {
