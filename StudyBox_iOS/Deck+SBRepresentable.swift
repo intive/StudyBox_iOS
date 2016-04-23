@@ -10,7 +10,7 @@ import Foundation
 
 extension Deck: SBRepresentable {
     
-    func uiName() -> String {
+    var uiName: String {
         switch name {
         case "":
            return Utils.DeckViewLayout.DeckWithoutTitle

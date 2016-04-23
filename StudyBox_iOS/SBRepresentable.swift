@@ -10,5 +10,5 @@ import Foundation
 
 
 protocol SBRepresentable {
-    func uiName() -> String
+    var uiName: String { get }
 }

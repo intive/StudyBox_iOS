@@ -266,6 +266,7 @@
                         <outlet property="choosenDeckLabel" destination="7h0-u0-NRa" id="Sf8-T0-3On"/>
                         <outlet property="questionField" destination="f9O-8o-KoL" id="ODT-Qc-RPZ"/>
                         <outlet property="searchBarWrapper" destination="EUD-8B-Kzz" id="kZR-X1-Xam"/>
+                        <outlet property="searchbarWrapperTopConstraint" destination="3xf-BU-f1g" id="JaG-qx-2NV"/>
                         <outlet property="tipField" destination="iWh-AY-ia9" id="oDm-8Q-teW"/>
                     </connections>
                 </viewController>
@@ -748,7 +749,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VXf-gi-gbi">
             <objects>
-                <navigationController storyboardIdentifier="EditFlashcardViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditFlashcardViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivF-VU-xcN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -763,7 +764,7 @@
             </objects>
             <point key="canvasLocation" x="3753" y="429"/>
         </scene>
-        <!--Test View Controller-->
+        <!--Deck name-->
         <scene sceneID="ckv-kG-eJB">
             <objects>
                 <viewController storyboardIdentifier="TestViewControllerID" id="6tt-KQ-lf6" customClass="TestViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -776,20 +777,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qd1-B0-NOL" userLabel="QuestionView">
-                                <rect key="frame" x="20" y="62" width="560" height="498"/>
+                                <rect key="frame" x="20" y="106" width="560" height="454"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Cv-mK-csu" userLabel="Stack View1">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="498"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pytanie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-ua-ypq" userLabel="QuestionLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="339"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="308"/>
                                                 <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYi-mT-KA8">
-                                                <rect key="frame" x="0.0" y="349" width="560" height="149"/>
+                                                <rect key="frame" x="0.0" y="318" width="560" height="136"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Podpowiedź">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -815,23 +816,23 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbe-Fw-hsa" userLabel="AnswerView">
-                                <rect key="frame" x="20" y="62" width="560" height="498"/>
+                                <rect key="frame" x="20" y="106" width="560" height="454"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-uF-MfH" userLabel="Stack View1">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="498"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Odpowiedź" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZB-4x-LNY" userLabel="AnswerLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="339"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="308"/>
                                                 <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0Q-OR-x3g">
-                                                <rect key="frame" x="0.0" y="349" width="560" height="149"/>
+                                                <rect key="frame" x="0.0" y="318" width="560" height="136"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKv-dV-bFU" userLabel="YesBtn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="149"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="136"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="tintColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" image="correct"/>
@@ -843,7 +844,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrx-Hp-csN" userLabel="NoBtn">
-                                                        <rect key="frame" x="285" y="0.0" width="275" height="149"/>
+                                                        <rect key="frame" x="285" y="0.0" width="275" height="136"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="tintColor" red="1" green="0.23120318092490566" blue="0.24729550240503795" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" image="incorrect"/>
@@ -883,7 +884,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CN8-h0-Hn7">
-                                <rect key="frame" x="278" y="30" width="45" height="21"/>
+                                <rect key="frame" x="278" y="74" width="45" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="VbT-Og-zvn"/>
                                     <constraint firstAttribute="width" constant="45" id="uBK-Ii-Da5"/>
@@ -910,7 +911,14 @@
                             <constraint firstItem="oSi-SD-67e" firstAttribute="top" secondItem="qd1-B0-NOL" secondAttribute="bottom" constant="40" id="ydI-6S-2mv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="nyQ-60-stZ"/>
+                    <navigationItem key="navigationItem" title="Deck name" id="nyQ-60-stZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="QAu-5i-Nio">
+                            <connections>
+                                <action selector="editCurrentFlashcard:" destination="6tt-KQ-lf6" id="F3V-lb-Mvc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="answerLabel" destination="RZB-4x-LNY" id="m42-ul-uQT"/>
                         <outlet property="answerLeading" destination="Tpp-oK-v73" id="qcr-Y6-fnT"/>

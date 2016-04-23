@@ -9,31 +9,13 @@
 import UIKit
 
 enum EditFlashcardViewControllerMode {
-    case Add, Modify(flashcard:Flashcard)
+    case Add, Modify(flashcard: Flashcard, updateCallback: ((flashcard: Flashcard) -> Void)?)
 }
 
 class EditFlashcardViewController: StudyBoxViewController {
     
-    func setupSearchController() -> UISearchController {
-        let tableVC =  UITableViewController(style: UITableViewStyle.Plain)
-        tableVC.tableView.registerNib(UINib.init(nibName: "BasicTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "DecksCell")
-        tableVC.tableView.dataSource = self
-        tableVC.tableView.delegate = self
-        tableVC.tableView.backgroundColor = UIColor.sb_Grey()
-        
-        let searchController = UISearchController(searchResultsController: tableVC)
-        searchController.searchBar.searchBarStyle = .Minimal
-        searchController.searchBar.placeholder = "Szukaj talii"
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
-        if isViewLoaded() {
-            searchController.searchBar.sizeToFit()
-            searchBarWrapper.addSubview(searchController.searchBar)
-        }
-        definesPresentationContext = true 
-        return searchController
-    }
-    
+    @IBOutlet weak var searchbarWrapperTopConstraint: NSLayoutConstraint!
+
     var dummySearchController: UISearchController?
     
     var searchController: UISearchController!  {
@@ -46,7 +28,6 @@ class EditFlashcardViewController: StudyBoxViewController {
     var decksBar: UISearchBar {
         return searchController.searchBar
     }
-    
 
     @IBOutlet weak var choosenDeckLabel: UILabel!
     @IBOutlet weak var searchBarWrapper: UIView!
@@ -75,6 +56,26 @@ class EditFlashcardViewController: StudyBoxViewController {
     
     var searchDecks: [Deck]?
     
+    func setupSearchController() -> UISearchController {
+        let tableVC =  UITableViewController(style: UITableViewStyle.Plain)
+        tableVC.tableView.registerNib(UINib.init(nibName: "BasicTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "DecksCell")
+        tableVC.tableView.dataSource = self
+        tableVC.tableView.delegate = self
+        tableVC.tableView.backgroundColor = UIColor.sb_Grey()
+        
+        let searchController = UISearchController(searchResultsController: tableVC)
+        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.placeholder = "Szukaj talii"
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        if isViewLoaded() {
+            searchController.searchBar.sizeToFit()
+            searchBarWrapper.addSubview(searchController.searchBar)
+        }
+        definesPresentationContext = true
+        return searchController
+    }
+    
     func clearInput(){
       
         decksBar.text = nil
@@ -88,17 +89,24 @@ class EditFlashcardViewController: StudyBoxViewController {
     private func updateUiForCurrentMode() {
         clearInput()
         switch mode {
-        case .Modify(let card)?:
+        case .Modify(let card, _)?:
             flashcard = card
             deck = card.deck
-            
-            decksBar.text = card.deck?.name
+            choosenDeckLabel.text = card.deck?.uiName
             questionField.text = card.question
             tipField.text = card.tip
             answerField.text = card.answer
             navigationItem.title = "Edytuj"
+            if presentingViewController != nil {
+                navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(cancelEdition))
+            }
+            searchBarWrapper.hidden = true
+            searchbarWrapperTopConstraint.constant = -searchBarWrapper.frame.height
+            view.layoutIfNeeded()
         case .Add?:
             navigationItem.title = "Stwórz"
+            searchBarWrapper.hidden = false
+            searchbarWrapperTopConstraint.constant = 0
             flashcard = nil
         default:
             navigationItem.title = nil
@@ -106,6 +114,15 @@ class EditFlashcardViewController: StudyBoxViewController {
             deck = nil
         }
         
+    }
+    
+    func cancelEdition() {
+        let alert = UIAlertController(title: "Przerwij", message: "Czy na pewno chcesz przerwać edycję fiszki?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Tak", style: .Default, handler: { (_) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Nie", style: .Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     override func disposeResources(isVisible: Bool) {
@@ -120,10 +137,19 @@ class EditFlashcardViewController: StudyBoxViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         assert(mode != nil, "mode not choosen!")
-        searchBarWrapper.addSubview(decksBar)
-            
+        
         clearInput()
         updateUiForCurrentMode()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        searchBarWrapper.addSubview(decksBar)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchController.view.removeFromSuperview()
     }
     
     override func viewDidLayoutSubviews() {
@@ -169,20 +195,28 @@ class EditFlashcardViewController: StudyBoxViewController {
             if flashcardDeck.serverID != flashcard.deckId {
                 flashcard.deck? = flashcardDeck
             }
+            let completion = {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
             
             do {
                 try dataManager.updateFlashcard(flashcard)
-                presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok")
-
-            } catch _ as DataManagerError {
-                presentAlertController(withTitle: "Błąd", message: "Nie udało się zapisać zmian", buttonText: "Ok")
-            } catch let err {
-                print("EditFlashcardViewController update error : \(err)")
-            }
                 
-            
+                
+                presentAlertController(withTitle: "Suckes", message: "Zaktualizowano fiszkę", buttonText: "Ok",
+                                       actionCompletion: completion,
+                                       dismissCompletion: nil)
+            } catch _ {
+                presentAlertController(withTitle: "Błąd", message: "Nie udało się zapisać zmian", buttonText: "Ok",
+                                       actionCompletion: completion,
+                                       dismissCompletion: nil)
+            }
+            if let mode = mode {
+                if case let EditFlashcardViewControllerMode.Modify( _, callback) = mode {
+                    callback?(flashcard:flashcard)
+                }
+            }
         }
-        
         
     }
 }
@@ -203,7 +237,7 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
       
         let deck = searchDecks?[indexPath.row]
         
-        cell.textLabel?.text = deck?.uiName()
+        cell.textLabel?.text = deck?.uiName
 
         return cell
     }
@@ -227,12 +261,11 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         deck = searchDecks?[indexPath.row]
-        choosenDeckLabel.text = searchDecks?[indexPath.row].uiName()
+        choosenDeckLabel.text = searchDecks?[indexPath.row].uiName
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
         searchController.active = false
     }
-    
     
 
 }
