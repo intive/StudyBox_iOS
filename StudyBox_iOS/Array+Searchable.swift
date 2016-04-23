@@ -10,7 +10,7 @@ import Foundation
 
 extension Array where Element:Searchable {
     
-    func matching(expression:String?)->[Element] {
+    func matching(expression: String?) -> [Element] {
         return filter {
             $0.matches(expression)
         }

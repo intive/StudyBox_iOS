@@ -9,7 +9,7 @@
 import UIKit
 
 enum EditFlashcardViewControllerMode {
-    case Add,Modify(flashcard:Flashcard)
+    case Add, Modify(flashcard:Flashcard)
 }
 
 class EditFlashcardViewController: StudyBoxViewController {
@@ -34,13 +34,13 @@ class EditFlashcardViewController: StudyBoxViewController {
         return searchController
     }
     
-    var _searchController:UISearchController?
+    var dummySearchController: UISearchController?
     
-    var searchController:UISearchController!  {
-        if _searchController == nil {
-            _searchController = setupSearchController()
+    var searchController: UISearchController!  {
+        if dummySearchController == nil {
+            dummySearchController = setupSearchController()
         }
-        return _searchController
+        return dummySearchController
     }
 
     var decksBar: UISearchBar {
@@ -54,10 +54,10 @@ class EditFlashcardViewController: StudyBoxViewController {
     @IBOutlet weak var tipField: UITextField!
     @IBOutlet weak var answerField: UITextField!
     
-    private var flashcard:Flashcard!
-    private var deck:Deck?
+    private var flashcard: Flashcard!
+    private var deck: Deck?
     
-    var mode:EditFlashcardViewControllerMode! {
+    var mode: EditFlashcardViewControllerMode! {
         didSet {
             if isViewLoaded() {
                 updateUiForCurrentMode()
@@ -65,15 +65,15 @@ class EditFlashcardViewController: StudyBoxViewController {
         }
     }
     
-    lazy private var dataManager:DataManager = {
+    lazy private var dataManager: DataManager = {
         return UIApplication.appDelegate().dataManager
     }()
     
-    lazy private var decks:[Deck] = {
+    lazy private var decks: [Deck] = {
         return self.dataManager.decks(true)
     }()
     
-    var searchDecks:[Deck]?
+    var searchDecks: [Deck]?
     
     func clearInput(){
       
@@ -111,8 +111,8 @@ class EditFlashcardViewController: StudyBoxViewController {
     override func disposeResources(isVisible: Bool) {
         super.disposeResources(isVisible)
         if !isVisible {
-            _searchController?.searchBar.removeFromSuperview()
-            _searchController = nil
+            dummySearchController?.searchBar.removeFromSuperview()
+            dummySearchController = nil
             
         }
     }
@@ -128,7 +128,7 @@ class EditFlashcardViewController: StudyBoxViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        _searchController?.searchBar.sizeToFit()
+        dummySearchController?.searchBar.sizeToFit()
     }
     @IBAction func saveAction(sender: UIBarButtonItem) {
         
@@ -142,7 +142,7 @@ class EditFlashcardViewController: StudyBoxViewController {
             return
         }
         
-        var tip:Tip?
+        var tip: Tip?
         if let tipText = tipField.text {
             tip = Tip.Text(text: tipText)
         }

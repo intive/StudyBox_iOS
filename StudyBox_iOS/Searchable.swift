@@ -10,5 +10,5 @@ import Foundation
 
 
 protocol Searchable {
-    func matches(expression:String?)->Bool
+    func matches(expression: String?) -> Bool
 }

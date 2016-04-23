@@ -89,7 +89,7 @@ class DataManager {
         }
     }
     
-    func deck(withName name:String,caseSensitive:Bool)->Deck? {
+    func deck(withName name: String, caseSensitive: Bool) -> Deck? {
         let decksData = decks(false)
         
         if caseSensitive {
@@ -110,7 +110,7 @@ class DataManager {
         return nil
     }
     
-    func updateDeck(deck:Deck) throws {
+    func updateDeck(deck: Deck) throws {
         
         if let realm = realm {
             if let updatingDeck = realm.objects(Deck).filter("serverID == '\(deck.serverID)'").first{

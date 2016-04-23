@@ -10,5 +10,5 @@ import Foundation
 
 
 protocol DrawerResourceDisposable {
-    func disposeResources(isVisible:Bool)
+    func disposeResources(isVisible: Bool)
 }
