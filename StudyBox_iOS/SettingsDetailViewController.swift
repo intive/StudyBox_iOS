@@ -47,7 +47,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         WatchDataManager.watchManager.startSession()
     }
     
-    // swiftlint:disable cyclomatic_complexity
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell!
@@ -61,32 +60,45 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             }
         case .DecksForWatch?:
             cell = tableView.dequeueReusableCellWithIdentifier(checkmarkCellID, forIndexPath: indexPath)
-            
-            if let userDecksArray = userDecksArray, let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
-                switch indexPath.section {
-                case 0:
-                    //Check the "Select/deselect all" cell if all decks are already set to sync
-                    cell.accessoryType = decksToSynchronize.count == userDecksArray.count ?  .Checkmark : .None
-                    cell.textLabel?.text = "Zaznacz/Odznacz wszystkie"
-                case 1:
-                    let deckName = userDecksArray[indexPath.row].name
-                    cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
-
-                    //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
-                    for deckToSync in decksToSynchronize {
-                            cell.accessoryType = deckToSync == userDecksArray[indexPath.row].id ? .Checkmark : .None
-                    }
-                default: break
-                }
-            }
+            configureDecksForWatchCell(cell, atIndexPath: indexPath)
         default: break
         }
         cell.textLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         cell.backgroundColor = UIColor.sb_White()
         return cell
     }
-    // swiftlint:enable cylomatic_complexity
     
+    private func configureDecksForWatchCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        guard let userDecksArray = userDecksArray else {
+            return
+        }
+        
+        if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
+            switch indexPath.section {
+            case 0:
+                //Check the "Select/deselect all" cell if all decks are already set to sync
+                if decksToSynchronize.count == userDecksArray.count {
+                    cell.accessoryType = .Checkmark
+                }
+                
+                cell.textLabel?.text = "Zaznacz/Odznacz wszystkie"
+            case 1:
+                let deckName = userDecksArray[indexPath.row].name
+                cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
+                
+                cell.accessoryType = .None
+                //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
+                for deckToSync in decksToSynchronize {
+                    if deckToSync == userDecksArray[indexPath.row].serverID {
+                        cell.accessoryType = .Checkmark
+                    }
+                }
+                
+            default: break
+            }
+        }
+    }
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let cell: UITableViewCell? = tableView.cellForRowAtIndexPath(indexPath)
@@ -137,7 +149,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             for i in 0..<userDecksArray.count {
                 let cell = detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 1))
                 if cell?.accessoryType == .Checkmark {
-                    decksToSynchronize.append(userDecksArray[i].id)
+                    decksToSynchronize.append(userDecksArray[i].serverID)
                 }
             }
         }

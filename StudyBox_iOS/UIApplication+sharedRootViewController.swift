@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIApplication {
-    class var sharedRootViewController:UIViewController? {
+    class var sharedRootViewController: UIViewController? {
         get {
             return UIApplication.sharedApplication().keyWindow?.rootViewController
         }

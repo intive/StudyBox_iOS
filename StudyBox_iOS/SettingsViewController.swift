@@ -19,9 +19,9 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell!
+        var cell: UITableViewCell!
         
-        switch (indexPath.section,indexPath.row){
+        switch (indexPath.section, indexPath.row){
         case (0, 0):
             //Frequency cell configuration
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
@@ -102,13 +102,13 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         var message = [String]()
         if let userDecks = dataManager?.decks(false) {
             if userDecks.isEmpty {
-                message = ["Brak talii","Nie masz na swoim urządzeniu żadnych talii do synchronizacji."]
+                message = ["Brak talii", "Nie masz na swoim urządzeniu żadnych talii do synchronizacji."]
                 shouldPerformSegue = false
                 self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
             }
         }
         if !WCSession.isSupported() {
-            message = ["Niekompatybilne urządzenie","Twoje urządzenie nie obsługuje komunikacji z Apple Watch"]
+            message = ["Niekompatybilne urządzenie", "Twoje urządzenie nie obsługuje komunikacji z Apple Watch"]
             self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
         }
         if !message.isEmpty {

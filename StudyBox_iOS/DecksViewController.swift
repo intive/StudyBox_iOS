@@ -12,7 +12,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     private var decksArray: [Deck]?
     private var searchDecks: [Deck]?
     
-    lazy private var dataManager:DataManager? = {
+    lazy private var dataManager: DataManager? = {
         return UIApplication.appDelegate().dataManager
     }()
     
@@ -31,9 +31,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         return self.navigationController?.navigationBar.frame.height ?? 0
     }()
     
-    /**
-     * CollectionView content offset is determined by status bar and navigation bar height
-     */
+    // CollectionView content offset is determined by status bar and navigation bar height
     lazy private var topItemOffset: CGFloat = {
         return -(self.statusBarHeight + self.navbarHeight)
     }()
@@ -44,12 +42,12 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     private var softAnimationDuration = 0.2
     private var accurateAnimationDuration = 0.5
 
-    // TODO: in future replace managerWithDummyData()
+    // TODOs: in future replace managerWithDummyData()
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
-            drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
+            drawer.addObserver(self, forKeyPath: "openSide", options: [.New, .Old], context: nil)
         }
         decksArray = dataManager?.decks(true)
         searchBar?.delegate = self
@@ -70,20 +68,23 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         decksCollectionView.delegate = self
         decksCollectionView.dataSource = self
         let layout = decksCollectionView.collectionViewLayout
-        let flow = layout as! UICollectionViewFlowLayout
+        let flow = layout as? UICollectionViewFlowLayout
         let spacing = Utils.DeckViewLayout.DecksSpacing
-        equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
+        if let flow = flow {
+            equalSizeAndSpacing(numberOfCellsInRow: Utils.DeckViewLayout.DecksInRowIPhoneVer, spacing: spacing, collectionFlowLayout: flow)
+        }
 
         decksCollectionView.backgroundColor = UIColor.sb_Grey()
         
         let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(DecksViewController.hideKeyboard))
-        swipeGestureRecognizer.direction = [.Down,.Up]
+        swipeGestureRecognizer.direction = [.Down, .Up]
         decksCollectionView.addGestureRecognizer(swipeGestureRecognizer)
         swipeGestureRecognizer.delegate = self
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+        if keyPath == "openSide", let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+            
             if newSide != 0 {
                 hideSearchBar(navbarHeight)
             } else {
@@ -130,28 +131,30 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let source = searchDecks ?? decksArray
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
-        as! DecksViewCell
-
-        cell.layoutIfNeeded()
         
-        if var deckName = source?[indexPath.row].name {
-            if deckName.isEmpty {
-                deckName = Utils.DeckViewLayout.DeckWithoutTitle
+        let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
+        if let cell = view as? DecksViewCell{
+            cell.layoutIfNeeded()
+            
+            if var deckName = source?[indexPath.row].name {
+                if deckName.isEmpty {
+                    deckName = Utils.DeckViewLayout.DeckWithoutTitle
+                }
+                cell.deckNameLabel.text = deckName
             }
-            cell.deckNameLabel.text = deckName
+            // changing label UI
+            if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
+                cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
+            }
+            cell.deckNameLabel.textColor = UIColor.whiteColor()
+            cell.deckNameLabel.numberOfLines = 0
+            // adding line breaks
+            cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
+            cell.contentView.backgroundColor = UIColor.sb_Graphite()
+            return cell
         }
-        // changing label UI
-        cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(size: sbFontSizeLarge, bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
-        cell.deckNameLabel.textColor = UIColor.whiteColor()
-        cell.deckNameLabel.numberOfLines = 0
-        // adding line breaks
-        cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
-        cell.contentView.backgroundColor = UIColor.sb_Graphite()
-
-        return cell
+        return view
     }
     
     // When cell tapped, change to test
@@ -160,7 +163,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         
         if let deck = source?[indexPath.row] {
             do {
-                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
+                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.serverID) {
 					if let bar = searchBar {
                         searchDecks = nil
                         hideSearchBar(-topItemOffset)
@@ -173,9 +176,11 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
                         let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
                         
                         func handler(act: UIAlertAction) {
-                            if let amount = UInt32(act.title!)
-                            {
-                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                            if let title = act.title {
+                                if let amount = UInt32(title)
+                                {
+                                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                                }
                             }
                         }
                         
@@ -224,7 +229,7 @@ extension DecksViewController: UISearchBarDelegate {
     }
    
     func cancelSearchReposition(searchBar: UISearchBar, animated: Bool) {
-        if (isSearching) {
+        if isSearching {
             searchBar.text = nil
             searchBar.setShowsCancelButton(false, animated: animated)
             
@@ -246,14 +251,12 @@ extension DecksViewController: UISearchBarDelegate {
                     self.searchDecks = nil
                     self.decksCollectionView.reloadData()
                     self.isSearching = false
-                }
-            )
+                })
         }
     }
 
     func startSearchReposition(searchBar: UISearchBar, animated: Bool) {
-
-        if (!isSearching) {
+        if !isSearching {
             searchDecks = nil
             
             if let rootVC = UIApplication.sharedRootViewController as? SBDrawerController {
@@ -266,28 +269,24 @@ extension DecksViewController: UISearchBarDelegate {
             UIView.animateWithDuration(animated ? accurateAnimationDuration : 0,
                 animations: {
                     if let navigationBar = self.navigationController?.navigationBar {
-                        
-                        self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + self.marginValue * 2, left: 0, bottom: 0, right: 0)
+                        self.decksCollectionView.contentInset = UIEdgeInsets(top: self.searchBarHeight + self.statusBarHeight + self.marginValue * 2,
+                            left: 0, bottom: 0, right: 0)
                         
                         navigationBar.frame.origin.y = -self.navbarHeight
-                        
                         searchBar.frame.origin.y = 0
                         searchBar.frame.size.height = self.statusBarHeight + self.searchBarHeight + self.marginValue
                         searchBar.layoutIfNeeded()
                         self.view.layoutIfNeeded()
-                        
                     }
                 },
                 completion: { _ in
                     self.isSearching = true
-                    
-                }
-            )
+                })
         }
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 0 {
+        if !searchText.characters.isEmpty {
             let searchLowercase = searchText.lowercaseString
             let deckWithoutTitleLowercase = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
             searchDecks = decksArray?.filter {
@@ -311,7 +310,7 @@ extension DecksViewController: UISearchBarDelegate {
     }
     
     func showSearchBar() {
-        if (!isSearchBarVisible) {
+        if !isSearchBarVisible {
             isSearchBarVisible = true
             decksCollectionView.contentInset = UIEdgeInsets(top: searchBarHeight - topItemOffset, left: 0, bottom: 0, right: 0)
             
@@ -332,8 +331,7 @@ extension DecksViewController: UISearchBarDelegate {
         searchBar?.resignFirstResponder()
     }
     
-    func hideSearchBar(top:CGFloat) {
-        
+    func hideSearchBar(top: CGFloat) {
         if isSearchBarVisible {
             isSearchBarVisible = false
             hideKeyboard()
@@ -342,7 +340,6 @@ extension DecksViewController: UISearchBarDelegate {
                 animations: {
                     self.searchBar?.frame.origin.y = 0
                     self.decksCollectionView.contentInset = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
-
                 },
                 completion: nil
             )
@@ -350,37 +347,40 @@ extension DecksViewController: UISearchBarDelegate {
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        if (!isSearching) {
-            if (scrollView.contentOffset.y < topItemOffset) {
+        if !isSearching {
+            if scrollView.contentOffset.y < topItemOffset {
                 showSearchBar()
                 
             } else {
                 hideSearchBar(-topItemOffset)
             }
         }
-        
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true 
     }
 }
 
 // this extension dynamically change the size of the fonts, so text can fit
 extension UILabel {
-    func adjustFontSizeToHeight(font: UIFont, max:CGFloat, min:CGFloat)
+    func adjustFontSizeToHeight(font: UIFont, max: CGFloat, min: CGFloat)
     {
-        var font = font;
+        var font = font
         // Initial size is max and the condition the min.
         for size in max.stride(through: min, by: -0.1) {
             font = font.fontWithSize(size)
-            let attrString = NSAttributedString(string: self.text!, attributes: [NSFontAttributeName: font])
-            let rectSize = attrString.boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat.max), options: .UsesLineFragmentOrigin, context: nil)
-
-            if rectSize.size.height <= self.bounds.height
-            {
-                self.font = font
-                break
+            if let text = self.text{
+                let attrString = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
+                let rectSize = attrString.boundingRectWithSize(CGSize(width: self.bounds.width, height: CGFloat.max),
+                                                               options: .UsesLineFragmentOrigin, context: nil)
+                
+                if rectSize.size.height <= self.bounds.height
+                {
+                    self.font = font
+                    break
+                }
             }
         }
         // in case, it is better to have the smallest possible font

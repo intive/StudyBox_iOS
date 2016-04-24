@@ -9,7 +9,7 @@
 import WatchConnectivity
 import UIKit
 
-enum SendingToWatchResult:ErrorType {
+enum SendingToWatchResult: ErrorType {
     case Success, Failure
 }
 

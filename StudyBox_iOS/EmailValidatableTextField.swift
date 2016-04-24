@@ -10,7 +10,7 @@ import UIKit
 
 class EmailValidatableTextField: ValidatableTextField {
 
-    func isValid()-> Bool {
+    func isValid() -> Bool {
         text = text?.trimWhiteCharacters()
         if let textToValidate = text {
             return textToValidate.isValidEmail()
