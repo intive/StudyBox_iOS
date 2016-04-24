@@ -180,8 +180,8 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     }
     
     //Handle tapping the Back button
-    override func willMoveToParentViewController(parent: UIViewController?) {
-        super.willMoveToParentViewController(parent)
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         switch mode {
         case .Frequency?:
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
