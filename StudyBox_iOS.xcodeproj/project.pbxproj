@@ -32,6 +32,7 @@
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
+		72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72311BB21CCA0FA800C49723 /* WatchManager.swift */; };
 		7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723772191CBC159800DE0F6D /* QuestionViewController.swift */; };
 		7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */; };
 		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
@@ -147,6 +148,7 @@
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		72311BB21CCA0FA800C49723 /* WatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchManager.swift; sourceTree = "<group>"; };
 		723772191CBC159800DE0F6D /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
 		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */,
 				723772191CBC159800DE0F6D /* QuestionViewController.swift */,
 				7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */,
+				72311BB21CCA0FA800C49723 /* WatchManager.swift */,
 				726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */,
 				726EA9CE1CBBFAE5008C90CD /* Info.plist */,
 				726EA9C41CBBFAE5008C90CD /* Supporting Files */,
@@ -711,6 +714,7 @@
 				726EA9C91CBBFAE5008C90CD /* ExtensionDelegate.swift in Sources */,
 				7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */,
 				7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */,
+				72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */,
 				726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */,
 				729310021CC01E9E002BF87A /* Utils.swift in Sources */,
 			);
