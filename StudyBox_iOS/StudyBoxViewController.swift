@@ -10,7 +10,7 @@ import UIKit
 import MMDrawerController
 //View Controller, which will be inherited by other VC's
 
-class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
+class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate, DrawerResourceDisposable {
 
     var isDrawerVisible = false
 
@@ -28,6 +28,11 @@ class StudyBoxViewController: UIViewController, SBDrawerCenterDelegate {
             }
         }
     }
+    
+    func disposeResources(isVisible: Bool) {
+        //
+    }
+
     
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {

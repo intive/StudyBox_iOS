@@ -56,7 +56,7 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
     }
 }
 
-class Deck: Object, Equatable, UniquelyIdentifiable {
+class Deck: Object, Equatable, UniquelyIdentifiable, Searchable {
     
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic var name: String = ""
@@ -70,6 +70,18 @@ class Deck: Object, Equatable, UniquelyIdentifiable {
         self.serverID = serverID
         self.name = name
     }
+    
+    func matches(expression: String?) -> Bool {
+        let noTitle = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
+        if let text = expression?.lowercaseString {
+            if name.characters.isEmpty {
+                return noTitle.containsString(text)
+            }
+            return name.lowercaseString.containsString(text)
+        }
+        return name == ""
+    }
+    
 }
 
 

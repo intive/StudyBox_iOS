@@ -50,7 +50,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     private static var initialControllerIndex = 1
     private var currentControllerIndex = 1
     var barStyle = UIStatusBarStyle.Default
-    private func lazyLoadViewControllerFromStoryboard(withStoryboardId idStoryboard: String) -> UIViewController? {
+    private func lazyLoadViewController(withStoryboardId idStoryboard: String) -> UIViewController? {
         if let board = self.storyboard {
             let controller = board.instantiateViewControllerWithIdentifier(idStoryboard)
             return controller
@@ -63,16 +63,27 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto"))
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Moje talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
-                    return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.DecksViewControllerID)
+                    return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
                 })
             )
-            drawerNavigationControllers.append(DrawerNavigationChild(name: "Stwórz nową fiszkę"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        let vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerId) as? UINavigationController
+                        
+                        if let editVC = vc?.childViewControllers[0] as? EditFlashcardViewController {
+                            editVC.mode = .Add
+                            return vc
+                        }
+                        return nil 
+                })
+            )
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Ustawienia", viewController: nil,
                     lazyLoadViewControllerBlock: {[weak self] in
-                        return self?.lazyLoadViewControllerFromStoryboard(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
+                        return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
                     })
             )
             drawerNavigationControllers.append(
@@ -188,7 +199,20 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         for (index, _) in drawerNavigationControllers.enumerate() {
-            if !drawerNavigationControllers[index].isActive {
+            let isActive = drawerNavigationControllers[index].isActive
+            var mainViewController: UIViewController?
+            
+            if let navigationController = drawerNavigationControllers[index].viewController as? UINavigationController
+                where !navigationController.childViewControllers.isEmpty {
+                mainViewController = navigationController.childViewControllers[0]
+            } else {
+                mainViewController = drawerNavigationControllers[index].viewController
+            }
+            if let resourceDisposableVC = mainViewController as? DrawerResourceDisposable {
+                resourceDisposableVC.disposeResources(isActive)
+            }
+            
+            if !isActive {
                 drawerNavigationControllers[index].viewController = nil
             }
         }
