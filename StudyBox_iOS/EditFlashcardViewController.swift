@@ -203,7 +203,7 @@ class EditFlashcardViewController: StudyBoxViewController {
                 try dataManager.updateFlashcard(flashcard)
                 
                 
-                presentAlertController(withTitle: "Suckes", message: "Zaktualizowano fiszkę", buttonText: "Ok",
+                presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok",
                                        actionCompletion: completion,
                                        dismissCompletion: nil)
             } catch _ {
