@@ -20,7 +20,7 @@ class AnswerViewController: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        if let answerText = context?["data"] as? String {
+        if let answerText = context?["answer"] as? String {
             answerLabel.setText(answerText)
         }
         if let dismissContext = context?["dismissContext"] as? InterfaceController {

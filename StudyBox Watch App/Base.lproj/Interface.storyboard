@@ -28,6 +28,15 @@
                             </items>
                         </group>
                     </items>
+                    <menu key="menu" id="wOo-YK-dQI">
+                        <items>
+                            <menuItem title="Odśwież" icon="repeat" id="8eD-QI-Jn0">
+                                <connections>
+                                    <action selector="refreshButtonPress" destination="AgC-eL-Hgc" id="FDN-8d-P4s"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="detailLabel" destination="fsI-vC-vQ6" id="uQE-Hq-SuH"/>
                         <outlet property="startButton" destination="d4a-ER-yYt" id="bu4-Uv-VtZ"/>

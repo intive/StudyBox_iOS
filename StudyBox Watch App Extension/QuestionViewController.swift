@@ -14,10 +14,12 @@ class QuestionViewController: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        if let questionText = context?["data"] as? String  {
+        if let questionText = context?["question"] as? String  {
             questionLabel.setText(questionText)
         }
     }
+    
+    //TODO: Menu with tip
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user

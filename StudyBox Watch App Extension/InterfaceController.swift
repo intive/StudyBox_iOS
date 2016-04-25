@@ -9,9 +9,10 @@
 import WatchKit
 import Foundation
 import WatchConnectivity
+import RealmSwift
 
-class InterfaceController: WKInterfaceController, WCSessionDelegate {
-
+class InterfaceController: WKInterfaceController, WCSessionDelegate, DataSourceChangedDelegate {
+    
     @IBOutlet var startButton: WKInterfaceButton!
     @IBOutlet var titleLabel: WKInterfaceLabel!
     @IBOutlet var detailLabel: WKInterfaceLabel!
@@ -27,73 +28,75 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     var questionText = String()
     var answerText = String()
+    var tipText = String()
     
-    var storedFlashcards = [(String,String)]()
+    var storedFlashcards = [(String,String,String?)]()
+    
     var userAnswer: Bool?
     var session : WCSession!
     
-    override init() {
-        super.init()
-
-    }
-    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        if context == nil {
-            startButton.setHidden(true)
-            detailLabel.setText(detailTextNotAvailable)
-            titleLabel.setText(titleTextNotAvailable)
-        } else {
-            titleLabel.setHidden(true)
-            detailLabel.setHidden(true)
+        WatchManager.sharedManager.startSession()
+        
+        storedFlashcards = WatchManager.sharedManager.getDataFromRealm()
+        updateButtonAndLabels()
+    }
+    
+    override func willActivate() {
+        super.willActivate()
+        
+        if let userAnswer = userAnswer {
+            titleLabel.setHidden(false)
+            detailLabel.setHidden(false)
+            
+            titleLabel.setText(userAnswer ? titleTextSuccess : titleTextFailure)
+            detailLabel.setText(userAnswer ? detailTextSuccess : detailTextFailure)
         }
+    }
+    
+    func dataSourceDidUpdate() {
+//        print("dataSourceDidUpdate")
+        storedFlashcards = WatchManager.sharedManager.getDataFromRealm()
+        startButton.setHidden(false)
+        titleLabel.setText("")
+        detailLabel.setText("")
     }
     
     func didAnswer(answer: Bool) {
         self.userAnswer = answer
     }
     
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        startButton.setHidden(false)
-        titleLabel.setText("")
-        detailLabel.setText("")
-        //Empty old data array
-        storedFlashcards = [(String,String)]()
-        //Update `storedFlashcards` to data recieved from iPhone
-        if let flashcardsQ = applicationContext["flashcardsQuestions"] as? [String], let flashcardsA = applicationContext["flashcardsAnswers"] as? [String] where flashcardsQ.count == flashcardsA.count {
-            for i in 0..<flashcardsQ.count {
-                storedFlashcards.append((flashcardsQ[i],flashcardsA[i]))
-            }
-        } else {
-            startButton.setHidden(true)
-            titleLabel.setText(titleTextNotAvailable)
-            detailLabel.setText(detailTextError)
-        }
-    }
-    
     @IBAction func startButtonPress() {
         randomFlashcardData()
         presentControllerWithNames(["QuestionViewController", "AnswerViewController"], contexts:
-            [["segue": "pagebased", "data": questionText],
-            ["segue": "pagebased", "data": answerText, "dismissContext": self]])
+            [["segue": "pagebased", "question": questionText, "tip": tipText],
+                ["segue": "pagebased", "answer": answerText, "dismissContext": self]])
+    }
+    
+    @IBAction func refreshButtonPress() {
+        updateButtonAndLabels()
     }
     
     ///Randomizes a question and answer from `storedFlashcards`
     func randomFlashcardData() {
-            let randomElement = storedFlashcards[Int(arc4random_uniform(UInt32(storedFlashcards.count)))]
-            self.questionText = randomElement.0
-            self.answerText = randomElement.1
+        let randomElement = storedFlashcards[Int(arc4random_uniform(UInt32(storedFlashcards.count)))]
+        self.questionText = randomElement.0
+        self.answerText = randomElement.1
+        if let randomTip = randomElement.2 {
+            self.tipText = randomTip
+        }
     }
-
-    override func willActivate() {
-        super.willActivate()
-        
-        if let userAnswer = userAnswer {
-                titleLabel.setHidden(false)
-                detailLabel.setHidden(false)
-
-                titleLabel.setText(userAnswer ? titleTextSuccess : titleTextFailure)
-                detailLabel.setText(userAnswer ? detailTextSuccess : detailTextFailure)
+    
+    func updateButtonAndLabels() {
+        if storedFlashcards.isEmpty {
+            startButton.setHidden(true)
+            detailLabel.setText(detailTextNotAvailable)
+            titleLabel.setText(titleTextNotAvailable)
+        } else {
+            startButton.setHidden(false)
+            titleLabel.setHidden(true)
+            detailLabel.setHidden(true)
         }
     }
 }

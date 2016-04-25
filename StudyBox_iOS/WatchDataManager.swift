@@ -41,25 +41,28 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         
         var flashcardsQuestions = [String]()
         var flashcardsAnswers = [String]()
+        var flashcardsIDs = [String]()
+        var flashcardsTips = [String]()
         
         if let manager = dataManager {
             for deck in decksIDs {
                 if let deckFromManager = manager.deck(withId: deck) {
-                    for flashcard in deckFromManager.flashcards {
+                    for flashcard in deckFromManager.flashcards where !flashcard.hidden {
                         flashcardsQuestions.append(flashcard.question)
                         flashcardsAnswers.append(flashcard.answer)
+                        flashcardsIDs.append(flashcard.serverID)
+                        flashcardsTips.append(flashcard.tip)
                     }
                 }
             }
         }
         
-//        //Dummy Data
-//        flashcardsQuestions = ["1\n" + String(NSDate()), "2\n" + String(NSDate()), "3\n" + String(NSDate()), "TestQuestion4", "TestQuestion5"]
-//        flashcardsAnswers = ["TestAnswer1", "TestAnswer2", "TestAnswer3", "long\nTestAnswer4\nvery\nvery\nvery\nvery\nlong", "TestAnswer5"]
-//
         if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
             do {
-                try self.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions, "flashcardsAnswers":flashcardsAnswers])
+                try self.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions,
+                    "flashcardsAnswers":flashcardsAnswers,
+                    "flashcardsIDs":flashcardsIDs,
+                    "flashcardsTips":flashcardsTips])
             } catch let error {
                 print("Sending to Watch failed: \(error)")
                 throw error

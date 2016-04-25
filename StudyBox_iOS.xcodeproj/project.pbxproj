@@ -30,9 +30,12 @@
 		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
+		4FA92EB85A56DD8728330F7E /* Pods_StudyBox_Watch_App_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */; };
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
+		7200E4311CCE1C8300C96BA4 /* Results+toArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
+		7214E0921CCD0355003E919C /* WatchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7214E0911CCD0355003E919C /* WatchDataModel.swift */; };
 		72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72311BB21CCA0FA800C49723 /* WatchManager.swift */; };
 		7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723772191CBC159800DE0F6D /* QuestionViewController.swift */; };
 		7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */; };
@@ -147,9 +150,11 @@
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
 		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
+		4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7214E0911CCD0355003E919C /* WatchDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataModel.swift; sourceTree = "<group>"; };
 		72311BB21CCA0FA800C49723 /* WatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchManager.swift; sourceTree = "<group>"; };
 		723772191CBC159800DE0F6D /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
@@ -190,20 +195,30 @@
 		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
 		AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
 		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
+		BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.release.xcconfig"; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
 		CEC69B521C946CC100295808 /* TestLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogic.swift; sourceTree = "<group>"; };
 		CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+sbFont.swift"; sourceTree = "<group>"; };
 		CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
 		CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_Watch_App_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5BA2448978A3424AEC6B8EB /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		12A96303BBB776DC9C6D6009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		726EA9BC1CBBFAE5008C90CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA92EB85A56DD8728330F7E /* Pods_StudyBox_Watch_App_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,8 +269,29 @@
 				7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */,
 				874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */,
 				93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */,
+				E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7214E0941CCD036B003E919C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */,
+				723772191CBC159800DE0F6D /* QuestionViewController.swift */,
+				7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */,
+				726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		7214E0951CCD0376003E919C /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				72311BB21CCA0FA800C49723 /* WatchManager.swift */,
+				7214E0911CCD0355003E919C /* WatchDataModel.swift */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 		726EA9B41CBBFAE5008C90CD /* StudyBox Watch App */ = {
@@ -271,12 +307,9 @@
 		726EA9C31CBBFAE5008C90CD /* StudyBox Watch App Extension */ = {
 			isa = PBXGroup;
 			children = (
-				726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */,
+				7214E0941CCD036B003E919C /* View Controllers */,
 				726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */,
-				726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */,
-				723772191CBC159800DE0F6D /* QuestionViewController.swift */,
-				7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */,
-				72311BB21CCA0FA800C49723 /* WatchManager.swift */,
+				7214E0951CCD0376003E919C /* Data Model */,
 				726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */,
 				726EA9CE1CBBFAE5008C90CD /* Info.plist */,
 				726EA9C41CBBFAE5008C90CD /* Supporting Files */,
@@ -431,6 +464,8 @@
 				D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */,
 				15DF27037DBE00D8638065FC /* Pods-StudyBox_iOSTests.debug.xcconfig */,
 				F5BA2448978A3424AEC6B8EB /* Pods-StudyBox_iOSTests.release.xcconfig */,
+				4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */,
+				BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -444,6 +479,7 @@
 			buildPhases = (
 				726EA9B11CBBFAE5008C90CD /* Resources */,
 				726EA9D51CBBFAE5008C90CD /* Embed App Extensions */,
+				12A96303BBB776DC9C6D6009 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -459,9 +495,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 726EA9D21CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App Extension" */;
 			buildPhases = (
+				FB8CD2E1C6E3F20C97DB86C0 /* 📦 Check Pods Manifest.lock */,
 				726EA9BB1CBBFAE5008C90CD /* Sources */,
 				726EA9BC1CBBFAE5008C90CD /* Frameworks */,
 				726EA9BD1CBBFAE5008C90CD /* Resources */,
+				F90BE758B6B3A5F7FCD836E2 /* 📦 Embed Pods Frameworks */,
+				4194F7871595FCE832476EE0 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -631,6 +670,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4194F7871595FCE832476EE0 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -706,6 +760,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F90BE758B6B3A5F7FCD836E2 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB8CD2E1C6E3F20C97DB86C0 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -714,11 +798,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */,
+				7200E4311CCE1C8300C96BA4 /* Results+toArray.swift in Sources */,
 				726EA9C91CBBFAE5008C90CD /* ExtensionDelegate.swift in Sources */,
 				7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */,
 				7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */,
 				72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */,
 				726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */,
+				7214E0921CCD0355003E919C /* WatchDataModel.swift in Sources */,
 				729310021CC01E9E002BF87A /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -831,6 +917,7 @@
 /* Begin XCBuildConfiguration section */
 		726EA9D31CBBFAE5008C90CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				INFOPLIST_FILE = "StudyBox Watch App Extension/Info.plist";
@@ -846,6 +933,7 @@
 		};
 		726EA9D41CBBFAE5008C90CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				INFOPLIST_FILE = "StudyBox Watch App Extension/Info.plist";

@@ -8,6 +8,11 @@
 import WatchKit
 import Foundation
 import WatchConnectivity
+import RealmSwift
+
+protocol DataSourceChangedDelegate {
+    func dataSourceDidUpdate()
+}
 
 class WatchManager: NSObject, WCSessionDelegate {
     
@@ -16,17 +21,59 @@ class WatchManager: NSObject, WCSessionDelegate {
     private override init() {
         super.init()
     }
-    
+
     private let session: WCSession = WCSession.defaultSession()
     
     func startSession() {
         session.delegate = self
         session.activateSession()
     }
+
+    //Return format: [(Question,Answer,Tip?)]
+    func getDataFromRealm() -> [(String,String,String?)] {
+        var storedFlashcards = [(String,String,String?)]()
+        if let realm = try? Realm() {
+            let flashcardsFromRealm = realm.objects(WatchFlashcard).toArray()
+            for i in 0..<flashcardsFromRealm.count {
+                storedFlashcards.append((flashcardsFromRealm[i].question, flashcardsFromRealm[i].answer, flashcardsFromRealm[i].tip))
+            }
+        }
+//        print("gotFromRealm")
+        return storedFlashcards
+    }
+    
+    func overwriteDataInRealm(applicationContext: [String : AnyObject]) {
+        var storedFlashcards = [WatchFlashcard]()
+        
+        if let realm = try? Realm() {
+            do {
+                try realm.write() {
+                    
+                    if let flashcardsQ = applicationContext["flashcardsQuestions"] as? [String],
+                        let flashcardsA = applicationContext["flashcardsAnswers"] as? [String],
+                        let flashcardIDs = applicationContext["flashcardsIDs"] as? [String],
+                        let flashcardsTips = applicationContext["flashcardsTips"] as? [String] {
+                        for i in 0..<flashcardsQ.count {
+                            storedFlashcards.append(WatchFlashcard(serverID: flashcardIDs[i], question: flashcardsQ[i], answer: flashcardsA[i], tip: flashcardsTips[i]))
+                        }
+                    realm.deleteAll()
+                    realm.add(storedFlashcards)
+//                    print("realmUpdated")
+                    }
+                }
+            } catch let e {
+                debugPrint(e)
+            }
+        }
+    }
 }
 
 extension WatchManager {
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        
+//        print("recievedAppContext")
+        if !applicationContext.isEmpty {
+//            print("appContextNotEmpty")
+            overwriteDataInRealm(applicationContext)
+        }
     }
 }
