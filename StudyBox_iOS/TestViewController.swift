@@ -306,10 +306,12 @@ class TestViewController: StudyBoxViewController {
         answerLeading.constant = view.frame.width
         
         //animate dissolving of views
-        UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: {
-            self.answerView.alpha = 0
-            self.questionView.alpha = 1
-            }, completion: { Void in
+        UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut],
+            animations: {
+                self.answerView.alpha = 0
+                self.questionView.alpha = 1
+            },
+            completion: { Void in
                 self.answerView.alpha = 1
         })
         
@@ -319,6 +321,22 @@ class TestViewController: StudyBoxViewController {
         
         //TODOs: set new answer in label after animation
         updateAnswerUiForCurrentCard()
+    }
+    @IBAction func editCurrentFlashcard(sender: UIBarButtonItem) {
+        if let card = testLogicSource?.currentCard,
+            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId) {
+            if let editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
+                editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
+                    self?.updateQuestionUiForCurrentCard()
+                    self?.updateAnswerUiForCurrentCard()
+                    
+                })
+                presentViewController(editFlashcardNavigation, animated: true, completion: nil)
+                
+            }
+          
+        }
+        
     }
 }
 

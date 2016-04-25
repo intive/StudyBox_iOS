@@ -89,6 +89,27 @@ class DataManager {
         }
     }
     
+    func deck(withName name: String, caseSensitive: Bool = false) -> Deck? {
+        let decksData = decks(false)
+        
+        if caseSensitive {
+            for deck in decksData {
+                if deck.name == name {
+                    return deck
+                }
+            }
+        } else {
+            let lowercaseName = name.lowercaseString
+            for deck in decksData {
+                if deck.name.lowercaseString == lowercaseName {
+                    return deck
+                }
+            }
+        }
+        
+        return nil
+    }
+    
     func updateDeck(deck: Deck) throws {
         
         if let realm = realm {
