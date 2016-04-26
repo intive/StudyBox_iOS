@@ -10,12 +10,12 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-private var settingsServerURL: String = ""
-private let defaultServerURL: String = "http://dev.patronage2016.blstream.com:2000"
+private var settingsServerURL: String?
+private let defaultServerURL: String = "http://dev.patronage2016.blstream.com:3000"
 
 var serverURL: String {
 get {
-    if settingsServerURL != "" {
+    if let settingsServerURL = settingsServerURL {
         return settingsServerURL
     } else {
         return defaultServerURL
@@ -26,36 +26,38 @@ set {
 }
 }
 
+enum ServerResult <T> {
+    case Success(T)
+    case Failure(NSError)
+}
+
 class ServerCommunication {
     
     //var userName:String
     //var userPassword:String
     
-    let decksURL : String
+    let decksURL: String
     
     init(){
         decksURL = serverURL + "/decks"
     }
     
-    func getDecksFromServer(completion: (result: [[String: String]]?, error: NSError?) -> Void) {
+    func getDecksFromServer(completion: ServerResult<[Deck]> -> Void) {
         Alamofire.request(.GET, decksURL)
             .responseJSON { response in
                 switch response.result {
-                case .Success:
+                case .Success(let value):
                     
-                    if let result = response.result.value {
-                        
-                        var list = [[String : String]]()
-                        
-                        let json = JSON(result)
-                        for (_, subJson) in json {
-                            
-                            list.append(["id" : subJson["id"].stringValue , "name" : subJson["name"].stringValue, "isPublic" : subJson["isPublic"].stringValue])
-                        }
-                        completion(result: list, error: nil)
+                    let json = JSON(value)
+                    var DecksArray = [Deck]()
+                    
+                    for (_, subJson) in json {
+                        DecksArray.append(Deck(serverID: subJson["id"].stringValue, name: subJson["name"].stringValue))
                     }
+                    completion(.Success(DecksArray))
+                    
                 case .Failure(let error):
-                    completion(result: nil, error: error)
+                    completion(.Failure(error))
                 }
         }
     }
