@@ -121,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xMT-IG-TEx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6fk-bh-Wei">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -165,6 +165,7 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-ZY-Whm">
                                 <rect key="frame" x="0.0" y="64" width="600" height="50"/>
+                                <color key="backgroundColor" red="0.59395420852280956" green="0.39583708713084342" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0bK-g0-NLQ"/>
                                 </constraints>
@@ -179,15 +180,24 @@
                             <constraint firstItem="eGM-ZY-Whm" firstAttribute="leading" secondItem="8Xh-8g-2oR" secondAttribute="leadingMargin" constant="-20" id="J5C-i6-3zf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xMT-IG-TEx" secondAttribute="trailing" constant="-20" id="Rkc-RA-S2Y"/>
                             <constraint firstItem="xMT-IG-TEx" firstAttribute="leading" secondItem="8Xh-8g-2oR" secondAttribute="leadingMargin" constant="-20" id="VVs-jY-94u"/>
-                            <constraint firstItem="xMT-IG-TEx" firstAttribute="top" secondItem="ICs-dx-wqn" secondAttribute="bottom" constant="-64" id="YEc-6X-99U"/>
+                            <constraint firstItem="xMT-IG-TEx" firstAttribute="height" relation="greaterThanOrEqual" secondItem="8Xh-8g-2oR" secondAttribute="height" constant="-100" id="YGp-s8-uXx"/>
+                            <constraint firstItem="xMT-IG-TEx" firstAttribute="top" secondItem="ICs-dx-wqn" secondAttribute="bottom" id="fM8-7F-ayD"/>
                             <constraint firstItem="LY6-KN-Pjc" firstAttribute="top" secondItem="xMT-IG-TEx" secondAttribute="bottom" id="gZx-hx-f0b"/>
                             <constraint firstItem="eGM-ZY-Whm" firstAttribute="top" secondItem="ICs-dx-wqn" secondAttribute="bottom" id="tqA-je-txt"/>
+                            <constraint firstItem="xMT-IG-TEx" firstAttribute="top" secondItem="eGM-ZY-Whm" secondAttribute="baseline" id="wHz-xd-ZWa"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="wHz-xd-ZWa"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Bco-pG-cRr"/>
                     <connections>
+                        <outlet property="decksBottomConstraint" destination="gZx-hx-f0b" id="PO8-yO-1Mc"/>
                         <outlet property="decksCollectionView" destination="xMT-IG-TEx" id="bYA-cU-mHh"/>
-                        <outlet property="decksTopConstraint" destination="YEc-6X-99U" id="ttx-HY-dnf"/>
+                        <outlet property="decksSearchBarVerticalConstraint" destination="wHz-xd-ZWa" id="wT8-sB-ppd"/>
+                        <outlet property="decksTopConstraint" destination="fM8-7F-ayD" id="e7F-3Z-9P7"/>
                         <outlet property="searchBarWrapper" destination="eGM-ZY-Whm" id="QZG-XP-jA8"/>
                         <outlet property="searchWrapperTopConstraint" destination="tqA-je-txt" id="aLv-Jk-0In"/>
                         <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="IWt-ao-u5P"/>
