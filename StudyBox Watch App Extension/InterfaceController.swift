@@ -7,11 +7,10 @@
 //
 
 import WatchKit
-import Foundation
-import WatchConnectivity
-import RealmSwift
 
-class InterfaceController: WKInterfaceController, WCSessionDelegate, DataSourceChangedDelegate {
+import WatchConnectivity
+
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     @IBOutlet var startButton: WKInterfaceButton!
     @IBOutlet var titleLabel: WKInterfaceLabel!
@@ -30,16 +29,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, DataSourceC
     var answerText = String()
     var tipText = String()
     
-    var storedFlashcards = [(String,String,String?)]()
+    var storedFlashcards = [(String,String,String)]()
     
     var userAnswer: Bool?
-    var session : WCSession!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         WatchManager.sharedManager.startSession()
         
-        storedFlashcards = WatchManager.sharedManager.getDataFromRealm()
+        updateStoredFlashcards()
         updateButtonAndLabels()
     }
     
@@ -55,15 +53,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, DataSourceC
         }
     }
     
-    func dataSourceDidUpdate() {
-//        print("dataSourceDidUpdate")
-        storedFlashcards = WatchManager.sharedManager.getDataFromRealm()
-        startButton.setHidden(false)
-        titleLabel.setText("")
-        detailLabel.setText("")
-    }
-    
-    func didAnswer(answer: Bool) {
+    func didAnswerCorrect(answer: Bool) {
         self.userAnswer = answer
     }
     
@@ -75,6 +65,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, DataSourceC
     }
     
     @IBAction func refreshButtonPress() {
+        updateStoredFlashcards()
         updateButtonAndLabels()
     }
     
@@ -83,9 +74,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, DataSourceC
         let randomElement = storedFlashcards[Int(arc4random_uniform(UInt32(storedFlashcards.count)))]
         self.questionText = randomElement.0
         self.answerText = randomElement.1
-        if let randomTip = randomElement.2 {
-            self.tipText = randomTip
-        }
+        self.tipText = randomElement.2
+    }
+    
+    func updateStoredFlashcards() {
+        storedFlashcards = WatchManager.sharedManager.getDataFromRealm()
     }
     
     func updateButtonAndLabels() {

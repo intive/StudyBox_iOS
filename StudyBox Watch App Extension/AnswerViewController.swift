@@ -8,14 +8,9 @@
 
 import WatchKit
 
-protocol ModalItemChooserDelegate {
-    func didSelectItem(itemSelected:String)
-}
-
 class AnswerViewController: WKInterfaceController {
     
     @IBOutlet var answerLabel: WKInterfaceLabel!
-
     var delegate: InterfaceController?
     
     override func awakeWithContext(context: AnyObject?) {
@@ -29,12 +24,12 @@ class AnswerViewController: WKInterfaceController {
     }
     
     @IBAction func correctButtonPress() {
-        self.delegate?.didAnswer(true)
+        self.delegate?.didAnswerCorrect(true)
         self.dismissController()
     }
     
     @IBAction func incorrectButtonPress() {
-        self.delegate?.didAnswer(false)
+        self.delegate?.didAnswerCorrect(false)
         self.dismissController()
     }
     

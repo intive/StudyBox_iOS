@@ -6,16 +6,15 @@
 //  Copyright © 2016 BLStream. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 
 class WatchFlashcard: Object {
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic var question: String = ""
     dynamic var answer: String = ""
-    dynamic var tip: String? = nil
+    dynamic var tip: String = ""
     
-    convenience init(serverID: String, question: String, answer: String, tip: String?){
+    convenience init(serverID: String, question: String, answer: String, tip: String){
         self.init()
         self.serverID = serverID
         self.question = question

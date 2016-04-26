@@ -9,10 +9,6 @@
 import WatchConnectivity
 import UIKit
 
-enum SendingToWatchResult: ErrorType {
-    case Success, Failure
-}
-
 //WatchDataManager is implemented because updating the Watch data will occur in Settings and later when user edits a deck or flashcard data.
 class WatchDataManager: NSObject, WCSessionDelegate {
     
@@ -25,10 +21,6 @@ class WatchDataManager: NSObject, WCSessionDelegate {
             return session
         }
         return nil
-    }
-    
-    override init() {
-        super.init()
     }
     
     func startSession() {
@@ -59,7 +51,8 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         
         if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
             do {
-                try self.updateApplicationContext(["flashcardsQuestions":flashcardsQuestions,
+                try self.updateApplicationContext([
+                    "flashcardsQuestions":flashcardsQuestions,
                     "flashcardsAnswers":flashcardsAnswers,
                     "flashcardsIDs":flashcardsIDs,
                     "flashcardsTips":flashcardsTips])
