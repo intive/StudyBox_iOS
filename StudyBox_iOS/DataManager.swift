@@ -266,6 +266,44 @@ class DataManager {
         }
     }
     
+    func updateFlashcardsFromServer(deckId: String, callback: ((result: Result) -> Void)?){
+        server.getFlashcardsFromServer(deckId, completion: { (completion: ServerResult<[Flashcard]>) in
+            switch completion {
+            case .Success(let flashcardsArray):
+                
+                if let realm = self.realm {
+                    for flashcard in flashcardsArray {
+                        do {
+                            if let updatingFlashcard = realm.objects(Flashcard).filter("serverID == '\(flashcard.serverID)'").first {
+                                try realm.write {
+                                    updatingFlashcard.question = flashcard.question
+                                    updatingFlashcard.answer = flashcard.answer
+                                    updatingFlashcard.tip = flashcard.tip
+                                    updatingFlashcard.hidden = flashcard.hidden
+                                    updatingFlashcard.deck = flashcard.deck
+                                }
+                            } else{
+                                try self.addFlashcard(forDeckWithId: flashcard.deckId, question: flashcard.question, answer: flashcard.answer, tip: nil)
+                            }
+                        } catch let e {
+                            debugPrint(e)
+                        }
+                    }
+                }
+                if let callback = callback {
+                    callback(result: Result.Success)
+                }
+                
+            case .Failure(let error):
+                debugPrint(error.description)
+                if let callback = callback {
+                    callback(result: Result.Failed)
+                }
+            }
+        })
+    }
+
+    
     func addFlashcard(forDeckWithId deckId: String, question: String, answer: String, tip: Tip?)throws -> String  {
         let flashcardId = NSUUID().UUIDString
         if let realm = realm {
