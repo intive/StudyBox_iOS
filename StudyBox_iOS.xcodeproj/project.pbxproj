@@ -26,6 +26,7 @@
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
 		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
+		2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */; };
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
 		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
@@ -39,7 +40,7 @@
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
-		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
+		7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFlashcardViewController.swift */; };
@@ -100,6 +101,7 @@
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
+		2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksCollectionViewLayout.swift; sourceTree = "<group>"; };
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
 		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
@@ -112,7 +114,7 @@
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
+		723849391C8882DE009605EE /* StudyBoxController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFlashcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFlashcardViewController.swift; sourceTree = "<group>"; };
@@ -250,7 +252,7 @@
 			children = (
 				7238493B1C88847F009605EE /* DecksViewController.swift */,
 				7238493F1C88851A009605EE /* EditFlashcardViewController.swift */,
-				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
+				723849391C8882DE009605EE /* StudyBoxController.swift */,
 				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
 				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
@@ -259,6 +261,7 @@
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
+				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -581,8 +584,9 @@
 				2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */,
 				2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
+				2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */,
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
-				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
+				7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */,
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
 				72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */,
 				72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */,
