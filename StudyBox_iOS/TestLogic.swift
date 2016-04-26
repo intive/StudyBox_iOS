@@ -18,7 +18,7 @@ class Test {
     private(set) var repeatDeck: [Flashcard]?
     private(set) var currentCard: Flashcard?
     private var passedFlashcards = 0
-    var index = 0
+    var index = 1
     private var numberOfFlashcardsInFullDeck: Int
     let testType: StudyType
     private var cardsInTest: Int = 0
@@ -83,13 +83,11 @@ class Test {
                 if let moveCardToEnd = currentCard {
                     deck.append(moveCardToEnd)
                 }
-            case .Test(uint(cardsInTest)):
+            case .Test:
                 index += 1
                 if let cardForTestRepeat = currentCard {
                     notPassedInTestDeck?.append(cardForTestRepeat)
                 }
-                break
-            default:
                 break
             }
         } else {
