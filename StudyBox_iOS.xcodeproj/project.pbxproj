@@ -60,6 +60,7 @@
 		AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */; };
 		AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */; };
 		AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */; };
+		AEEAB5701CCE3A5400BB60FA /* TestLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */; };
 		CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */; };
 		CEC69B531C946CC100295808 /* TestLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC69B521C946CC100295808 /* TestLogic.swift */; };
 		CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */; };
@@ -137,6 +138,7 @@
 		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
 		AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
 		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
+		AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogicTests.swift; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
 		CEC69B521C946CC100295808 /* TestLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogic.swift; sourceTree = "<group>"; };
 		CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+sbFont.swift"; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */,
 				A1341DD91C81E76900AFD04E /* Info.plist */,
 				2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */,
+				AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */,
 			);
 			path = StudyBox_iOSTests;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */,
+				AEEAB5701CCE3A5400BB60FA /* TestLogicTests.swift in Sources */,
 				2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
