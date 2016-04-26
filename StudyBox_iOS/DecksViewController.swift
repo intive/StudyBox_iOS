@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout {
+class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, DecksCollectionLayoutDelegate {
     
     var searchBarWrapper: UIView!
     var searchBarTopConstraint:NSLayoutConstraint!
@@ -58,9 +58,16 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
     private var topItemOffset: CGFloat {
         return -(self.statusBarHeight + self.navbarHeight)
     }
+    
+    func shouldStrech() -> Bool {
+        return !searchController.active
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let decksLayout = collectionView?.collectionViewLayout as? DecksCollectionViewLayout {
+            decksLayout.delegate = self 
+        }
         searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         searchBarWrapper.autoresizingMask = .FlexibleWidth
         searchBarWrapper.addSubview(searchBar)
@@ -72,7 +79,6 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
         definesPresentationContext = true
         collectionView?.backgroundColor = UIColor.whiteColor()
         collectionView?.alwaysBounceVertical = true
-        adjustCollectionLayout()
     }
    
     
@@ -85,7 +91,8 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
         decksArray = dataManager?.decks(true)
         if initialLayout {
-            initialCollectionViewPosition(animated:false)
+            adjustCollectionLayout(forSize: view.bounds.size)
+            initialOffset(false)
         }
         
     }
@@ -99,44 +106,38 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
         initialLayout = true
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if initialLayout {
-            initialCollectionViewPosition(animated:false)
-            initialLayout = !initialLayout
-
-        }
-       
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchController.searchBar.sizeToFit()
+        if initialLayout {
+            initialOffset(false)
+            initialLayout = !initialLayout
+            
+        }
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        adjustCollectionLayout(forSize: size)
         
     }
     func orientationChanged(notification:NSNotification) {
-        initialCollectionViewPosition(animated:false,withOffset: !searchController.active)
-        
+        initialLayout = true
+    }
+   
+    func initialOffset(animated:Bool ) {
+        collectionView?.setContentOffset(CGPoint(x: 0, y: topItemOffset + searchBarHeight), animated: animated)
     }
     
-    func initialCollectionViewPosition(animated animated:Bool,withOffset:Bool = true) {
-        adjustCollectionLayout()
-        if withOffset {
-            collectionView?.setContentOffset(CGPoint(x: 0, y: topItemOffset + searchBarHeight), animated: animated)
-        }
-        
-    }
-    func adjustCollectionLayout() {
+    func adjustCollectionLayout(forSize size:CGSize) {
         let layout = collectionView?.collectionViewLayout
         let flow = layout as! UICollectionViewFlowLayout
         let spacing = Utils.DeckViewLayout.DecksSpacing
-        equalSizeAndSpacing(cellSquareSide: Utils.DeckViewLayout.CellSquareSize, spacing: spacing, collectionFlowLayout: flow)
+        equalSizeAndSpacing(forScreenSize: size, cellSquareSide: Utils.DeckViewLayout.CellSquareSize, spacing: spacing, collectionFlowLayout: flow)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
-            initialCollectionViewPosition(animated:true)
-
+            initialOffset(true)
         }
     }
     
@@ -145,10 +146,9 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
     }
     
     // this function calculate size of decks, by given spacing and size of cells
-    private func equalSizeAndSpacing(cellSquareSide cellSize: CGFloat, spacing: CGFloat,
+    private func equalSizeAndSpacing(forScreenSize screenSize:CGSize,cellSquareSide cellSize: CGFloat, spacing: CGFloat,
                                                         collectionFlowLayout flow:UICollectionViewFlowLayout){
             
-        let screenSize = self.view.bounds.size
         let crNumber = DecksViewController.numberOfCellsInRow(screenSize.width, cellSize: cellSize)
         
         let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)

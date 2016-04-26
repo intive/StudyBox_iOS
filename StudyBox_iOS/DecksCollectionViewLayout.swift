@@ -8,19 +8,26 @@
 
 import UIKit
 
+protocol DecksCollectionLayoutDelegate: class {
+    func shouldStrech() -> Bool
+}
+
 class DecksCollectionViewLayout: UICollectionViewFlowLayout {
 
+    weak var delegate:DecksCollectionLayoutDelegate?
+    
     override func collectionViewContentSize() -> CGSize {
         let expectedSize = super.collectionViewContentSize()
-        if let collectionView = collectionView {
+        if let collectionView = collectionView, delegate = delegate where delegate.shouldStrech() {
             
-            var targetSize = collectionView.frame.size
+            var targetSize = collectionView.bounds.size
             
             let height = expectedSize.height
             
             if height < targetSize.height {
                 let sharedApp = UIApplication.sharedApplication()
                 if !sharedApp.statusBarHidden {
+                    
                     targetSize.height -= UIApplication.sharedApplication().statusBarFrame.height
                 }
                 return targetSize
