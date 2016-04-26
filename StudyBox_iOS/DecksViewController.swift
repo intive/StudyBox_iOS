@@ -10,7 +10,6 @@ import UIKit
 
 class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet var decksCollectionView: UICollectionView!
     var searchBarWrapper: UIView!
     var searchBarTopConstraint:NSLayoutConstraint!
     var searchController:UISearchController = UISearchController(searchResultsController: nil)
@@ -62,36 +61,37 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
+        searchBarWrapper.autoresizingMask = .FlexibleWidth
+        searchBarWrapper.addSubview(searchBar)
+        view.addSubview(searchBarWrapper)
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         
         definesPresentationContext = true
+        collectionView?.backgroundColor = UIColor.whiteColor()
+        collectionView?.alwaysBounceVertical = true
         adjustCollectionLayout()
-        decksCollectionView.backgroundColor = UIColor.whiteColor()
-        decksCollectionView.alwaysBounceVertical = true
-        
     }
    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         searchBar.sizeToFit()
-        searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
-        searchBarWrapper.addSubview(searchBar)
-        searchBarWrapper.autoresizingMask = .FlexibleWidth
-        view.addSubview(searchBarWrapper)
-
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
         decksArray = dataManager?.decks(true)
+        if initialLayout {
+            initialCollectionViewPosition(animated:false)
+        }
+        
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         searchController.view.removeFromSuperview()
-        
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.removeObserver(self, forKeyPath: "openSide")
         }
@@ -102,35 +102,32 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if initialLayout {
-            initialCollectionViewPosition(true,animated:false)
+            initialCollectionViewPosition(animated:false)
             initialLayout = !initialLayout
 
         }
+       
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchController.searchBar.sizeToFit()
+        
     }
-    
-    
     func orientationChanged(notification:NSNotification) {
-        let withOffset = !searchController.active
-        initialCollectionViewPosition(withOffset,animated:false)
+        initialCollectionViewPosition(animated:false,withOffset: !searchController.active)
         
     }
     
-    func initialCollectionViewPosition(withOffset:Bool, animated:Bool) {
+    func initialCollectionViewPosition(animated animated:Bool,withOffset:Bool = true) {
         adjustCollectionLayout()
         if withOffset {
-            decksCollectionView.setContentOffset(CGPoint(x: 0, y: topItemOffset + searchBarHeight), animated: animated)
+            collectionView?.setContentOffset(CGPoint(x: 0, y: topItemOffset + searchBarHeight), animated: animated)
         }
         
     }
-   
-    
     func adjustCollectionLayout() {
-        let layout = decksCollectionView.collectionViewLayout
+        let layout = collectionView?.collectionViewLayout
         let flow = layout as! UICollectionViewFlowLayout
         let spacing = Utils.DeckViewLayout.DecksSpacing
         equalSizeAndSpacing(cellSquareSide: Utils.DeckViewLayout.CellSquareSize, spacing: spacing, collectionFlowLayout: flow)
@@ -138,9 +135,13 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "openSide",let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
-            initialCollectionViewPosition(true,animated:true)
+            initialCollectionViewPosition(animated:true)
 
         }
+    }
+    
+    class func numberOfCellsInRow(screenWidth:CGFloat,cellSize:CGFloat) -> CGFloat {
+        return floor(screenWidth / cellSize)
     }
     
     // this function calculate size of decks, by given spacing and size of cells
@@ -148,10 +149,10 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
                                                         collectionFlowLayout flow:UICollectionViewFlowLayout){
             
         let screenSize = self.view.bounds.size
-        let crNumber = floor(screenSize.width / cellSize)
+        let crNumber = DecksViewController.numberOfCellsInRow(screenSize.width, cellSize: cellSize)
         
-        let deckWidth = screenSize.width/crNumber - (spacing + spacing/crNumber)
-        flow.sectionInset = UIEdgeInsetsMake(topOffset, spacing, 0, spacing)
+        let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)
+        flow.sectionInset = UIEdgeInsetsMake(topOffset, spacing, spacing, spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
@@ -164,7 +165,6 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
 
         return 1
     }
-
 
     // Calculate number of decks. If no decks, return 0
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -209,6 +209,10 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
         let source = searchDecks ?? decksArray
         
         if let deck = source?[indexPath.row] {
+            let resetSearchUI = {
+                
+                self.searchController.active = false
+            }
             do {
                 if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
 
@@ -219,8 +223,8 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
                         let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
                         
                         func handler(act: UIAlertAction) {
-                            if let amount = UInt32(act.title!)
-                            {
+                            if let amount = UInt32(act.title!) {
+                                resetSearchUI()
                                 self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
                             }
                         }
@@ -234,6 +238,7 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
                         self.presentViewController(alertAmount, animated: true, completion:nil)
                     }
                     let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
+                        resetSearchUI()
                         self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
                     }
                     
@@ -304,13 +309,13 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
         } else {
             searchDecks = nil
         }
-        decksCollectionView.reloadData()
+        collectionView?.reloadData()
         
 
     }
     func willPresentSearchController(searchController: UISearchController) {
-        if decksCollectionView.contentOffset.y > topItemOffset {
-            decksCollectionView.contentOffset.y = topItemOffset
+        if collectionView?.contentOffset.y > topItemOffset {
+            collectionView?.contentOffset.y = topItemOffset
         }
     }
    
