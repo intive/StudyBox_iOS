@@ -33,7 +33,7 @@
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
-		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
+		7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFicheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFicheViewController.swift */; };
@@ -98,7 +98,7 @@
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
+		723849391C8882DE009605EE /* StudyBoxController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFicheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFicheViewController.swift; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 			children = (
 				7238493B1C88847F009605EE /* DecksViewController.swift */,
 				7238493F1C88851A009605EE /* EditFicheViewController.swift */,
-				723849391C8882DE009605EE /* StudyBoxViewController.swift */,
+				723849391C8882DE009605EE /* StudyBoxController.swift */,
 				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
 				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
 				723849411C8885F7009605EE /* ScoreViewController.swift */,
@@ -546,7 +546,7 @@
 				2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
-				7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */,
+				7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */,
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
 				72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */,
 				72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */,

@@ -8,15 +8,11 @@
 
 import UIKit
 
-class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout {
+class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var searchWrapperTopConstraint: NSLayoutConstraint!
     @IBOutlet var decksCollectionView: UICollectionView!
-    @IBOutlet weak var searchBarWrapper: UIView!
-    @IBOutlet weak var decksTopConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var decksSearchBarVerticalConstraint: NSLayoutConstraint!
-    @IBOutlet weak var decksBottomConstraint: NSLayoutConstraint!
+    var searchBarWrapper: UIView!
+    var searchBarTopConstraint:NSLayoutConstraint!
     var searchController:UISearchController = UISearchController(searchResultsController: nil)
 
     var searchBar: UISearchBar {
@@ -35,26 +31,24 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     }()
 
     private var statusBarHeight: CGFloat {
-        if traitCollection.verticalSizeClass == .Compact {
-            return 0
-        }
         return UIApplication.sharedApplication().statusBarFrame.height
     }
     
-    private lazy var searchBarHeight:CGFloat = {
-       return 50
-    }()
+    private var searchBarHeight:CGFloat {
+       return 44
+    }
     
-    private lazy var searchBarMargin:CGFloat = {
+    private var searchBarMargin:CGFloat {
         return 8
-    }()
-    
-    private lazy var searchBarY:CGFloat = {
-       return self.searchBarHeight + self.searchBarMargin
-    }()
+    }
     
     private var navbarHeight: CGFloat  {
         return self.navigationController?.navigationBar.frame.height ?? 0
+    }
+    
+    // search bar height + 8 points margin
+    private var topOffset:CGFloat {
+        return self.searchBarHeight + searchBarMargin
     }
     
     private var initialLayout = true
@@ -66,19 +60,13 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         return -(self.statusBarHeight + self.navbarHeight)
     }
 
-    private var softAnimationDuration = 0.2
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationController?.navigationBar.translucent = false
-       // navigationController?.navigationBar.barTintColor = UIColor.defaultNavBarColor()
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         
         definesPresentationContext = true
-        decksCollectionView.delegate = self
-        decksCollectionView.dataSource = self
         adjustCollectionLayout()
         decksCollectionView.backgroundColor = UIColor.whiteColor()
         decksCollectionView.alwaysBounceVertical = true
@@ -89,16 +77,17 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         searchBar.sizeToFit()
+        searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         searchBarWrapper.addSubview(searchBar)
-        searchBar.autocorrectionType = UITextAutocorrectionType.No
+        searchBarWrapper.autoresizingMask = .FlexibleWidth
+        view.addSubview(searchBarWrapper)
+
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
         decksArray = dataManager?.decks(true)
-        
     }
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         searchController.view.removeFromSuperview()
@@ -133,21 +122,12 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     
     func initialCollectionViewPosition(withOffset:Bool, animated:Bool) {
         adjustCollectionLayout()
-        adjustSearchBarOffsets()
         if withOffset {
-            decksCollectionView.setContentOffset(CGPoint(x: 0, y: searchBarHeight + topItemOffset), animated: animated)
+            decksCollectionView.setContentOffset(CGPoint(x: 0, y: topItemOffset + searchBarHeight), animated: animated)
         }
         
     }
-    
-    func adjustSearchBarOffsets() {
-        if searchController.active {
-            searchBarActiveOffsets()
-        } else {
-            searchBarInActiveOffsets(false)
-            
-        }
-    }
+   
     
     func adjustCollectionLayout() {
         let layout = decksCollectionView.collectionViewLayout
@@ -163,7 +143,6 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         }
     }
     
- 
     // this function calculate size of decks, by given spacing and size of cells
     private func equalSizeAndSpacing(cellSquareSide cellSize: CGFloat, spacing: CGFloat,
                                                         collectionFlowLayout flow:UICollectionViewFlowLayout){
@@ -172,36 +151,33 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
         let crNumber = floor(screenSize.width / cellSize)
         
         let deckWidth = screenSize.width/crNumber - (spacing + spacing/crNumber)
-        flow.sectionInset = UIEdgeInsetsMake(0, spacing, 0, spacing)
+        flow.sectionInset = UIEdgeInsetsMake(topOffset, spacing, 0, spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
         flow.minimumLineSpacing = spacing
         // size for every deck
         flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
-        
-        
     }
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 
         return 1
     }
 
 
     // Calculate number of decks. If no decks, return 0
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var cellsNumber = 0
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let searchDecksCount = searchDecks?.count {
-            cellsNumber = searchDecksCount
+            return searchDecksCount
         } else if let decksCount = decksArray?.count {
-            cellsNumber = decksCount
+            return  decksCount
         }
-        return cellsNumber
+        return 0
     }
     
     // Populate cells with decks data. Change cells style
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let source = searchDecks ?? decksArray
 
@@ -229,7 +205,7 @@ class DecksViewController: StudyBoxViewController, UICollectionViewDelegate, UIC
     }
     
     // When cell tapped, change to test
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let source = searchDecks ?? decksArray
         
         if let deck = source?[indexPath.row] {
@@ -292,19 +268,21 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
     
     func adjustSearchBar(forYOffset offset:CGFloat) {
         if !searchController.active {
-            if offset < topItemOffset + searchBarY {
+            if offset < topItemOffset + topOffset {
                 
-                searchWrapperTopConstraint.constant = topItemOffset - offset
-                
+                if offset > topItemOffset{
+                    searchBarWrapper.frame.origin.y = -offset
+                } else {
+                    searchBarWrapper.frame.origin.y = -topItemOffset
+                }
                 
             } else {
-                searchWrapperTopConstraint.constant = -searchBarHeight
+                searchBarWrapper.frame.origin.y = -searchBarHeight
             }
-            view.updateConstraintsIfNeeded()
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         adjustSearchBar(forYOffset: offset)
         
@@ -330,85 +308,17 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
         
 
     }
-    
-    func searchBarActiveOffsets() {
-        decksBottomConstraint.active = false
-        decksTopConstraint.active = false
-
-        decksSearchBarVerticalConstraint.active = true
-        UIView.animateWithDuration(0.3) { 
-            self.view.layoutIfNeeded()
-
-        }
-        
-//        //if animated {
-//            decksTopConstraint.constant =  navbarHeight - searchBarHeight
-//            
-//        //}
-//        let flow = decksCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-//        flow?.sectionInset.top = 0
-//        
-//        view.layoutIfNeeded()
-//        
-//        decksTopConstraint.constant = navbarHeight
-//        
-//        UIView.animateWithDuration( 0.3 , animations: {
-//            self.view.layoutIfNeeded()
-//            
-//        })
-    }
-
     func willPresentSearchController(searchController: UISearchController) {
         if decksCollectionView.contentOffset.y > topItemOffset {
             decksCollectionView.contentOffset.y = topItemOffset
         }
-  //      searchBarActiveOffsets()
-        NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(searchBarActiveOffsets), userInfo: false, repeats: false)
-    }
-    
-    
-    
-    
-    
-    func searchBarInActiveOffsets(animated:Bool) {
-        decksSearchBarVerticalConstraint.active = false
-        decksTopConstraint.active = true
-        decksBottomConstraint.active = true
-        //decksSearchBarVerticalConstraint.constant = -80
-        UIView.animateWithDuration(0.3) {
-            self.view.layoutIfNeeded()
-
-        }
-//        let flow =  decksCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-//        flow?.sectionInset.top = searchBarY
-//
-//        if animated {
-//            
-//            decksTopConstraint.constant = navbarHeight - searchBarY
-//          
-//        }
-//        view.layoutIfNeeded()
-//        
-//        decksTopConstraint.constant = topItemOffset
-//        UIView.animateWithDuration(animated ? 0.3 : 0 , animations: {
-//            self.view.layoutIfNeeded()
-//        })
     }
    
-    func willDismissSearchController(searchController: UISearchController) {
-        searchBarInActiveOffsets(true)
-
-    }
-    
     func didDismissSearchController(searchController: UISearchController) {
         searchController.searchBar.sizeToFit()
     }
     
-
-   
 }
-
-
 
 // this extension dynamically change the size of the fonts, so text can fit
 extension UILabel {

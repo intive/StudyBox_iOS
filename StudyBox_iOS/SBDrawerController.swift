@@ -12,6 +12,7 @@ import MMDrawerController
 protocol SBDrawerCenterDelegate {
     var isDrawerVisible:Bool {get set}
     func drawerToggleAnimation()
+    func updateStatusBar()
 }
 
 class SBDrawerController:MMDrawerController {
@@ -121,10 +122,8 @@ class SBDrawerController:MMDrawerController {
         )
         
         completionBlock = {[weak self] (success:Bool) -> Void in
-            if let sbController = self?.centerDelegate as? StudyBoxViewController {
-                sbController.isDrawerVisible = false
-                sbController.updateStatusBar()
-            }
+                self?.centerDelegate?.isDrawerVisible = false
+                self?.centerDelegate?.updateStatusBar()
             
             completion?(success)
         }
