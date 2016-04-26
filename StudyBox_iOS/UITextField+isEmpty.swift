@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITextField {
-    func isEmpty()-> Bool  {
+    func isEmpty() -> Bool  {
         if let text = text {
             if text.isEmpty {
                 return true

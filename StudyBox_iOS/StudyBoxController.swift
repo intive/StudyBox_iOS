@@ -81,10 +81,13 @@ class StudyBoxViewController: UIViewController, StudyBoxController, SBDrawerCent
         return .Default
     }
 
+    func disposeResources(isVisible: Bool) {
+        
+    }
   
 }
 
-class StudyBoxCollectionViewController: UICollectionViewController, StudyBoxController, SBDrawerCenterDelegate {
+class StudyBoxCollectionViewController: UICollectionViewController, StudyBoxController, SBDrawerCenterDelegate, DrawerResourceDisposable {
     
     var isDrawerVisible = false
     
@@ -114,5 +117,9 @@ class StudyBoxCollectionViewController: UICollectionViewController, StudyBoxCont
         }
         
         return .Default
+    }
+   
+    func disposeResources(isVisible: Bool) {
+        
     }
 }

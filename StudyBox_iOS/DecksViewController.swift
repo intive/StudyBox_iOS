@@ -86,7 +86,7 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
         super.viewWillAppear(animated)
         searchBar.sizeToFit()
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
-            drawer.addObserver(self, forKeyPath: "openSide", options: [.New,.Old], context: nil)
+            drawer.addObserver(self, forKeyPath: "openSide", options: [.New, .Old], context: nil)
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
         decksArray = dataManager?.decks(true)
@@ -180,28 +180,30 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let source = searchDecks ?? decksArray
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
-        as! DecksViewCell
-
-        cell.layoutIfNeeded()
         
-        if var deckName = source?[indexPath.row].name {
-            if deckName.isEmpty {
-                deckName = Utils.DeckViewLayout.DeckWithoutTitle
+        let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
+        if let cell = view as? DecksViewCell{
+            cell.layoutIfNeeded()
+            
+            if var deckName = source?[indexPath.row].name {
+                if deckName.isEmpty {
+                    deckName = Utils.DeckViewLayout.DeckWithoutTitle
+                }
+                cell.deckNameLabel.text = deckName
             }
-            cell.deckNameLabel.text = deckName
+            // changing label UI
+            if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
+                cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
+            }
+            cell.deckNameLabel.textColor = UIColor.whiteColor()
+            cell.deckNameLabel.numberOfLines = 0
+            // adding line breaks
+            cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
+            cell.contentView.backgroundColor = UIColor.sb_Graphite()
+            return cell
         }
-        // changing label UI
-        cell.deckNameLabel.adjustFontSizeToHeight(UIFont.sbFont(size: sbFontSizeLarge, bold: false), max: sbFontSizeLarge, min: sbFontSizeSmall)
-        cell.deckNameLabel.textColor = UIColor.whiteColor()
-        cell.deckNameLabel.numberOfLines = 0
-        // adding line breaks
-        cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
-        cell.contentView.backgroundColor = UIColor.sb_Graphite()
-
-        return cell
+        return view
     }
     
     // When cell tapped, change to test
@@ -214,7 +216,7 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
                 self.searchController.active = false
             }
             do {
-                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.id) {
+                if let flashcards = try dataManager?.flashcards(forDeckWithId: deck.serverID) {
 
                    
                     let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
@@ -223,9 +225,11 @@ class DecksViewController: StudyBoxCollectionViewController,  UIGestureRecognize
                         let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
                         
                         func handler(act: UIAlertAction) {
-                            if let amount = UInt32(act.title!) {
-                                resetSearchUI()
-                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                            if let title = act.title {
+                                if let amount = UInt32(title) {
+                               		resetSearchUI()
+                                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                                }
                             }
                         }
                         
@@ -322,24 +326,26 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
     func didDismissSearchController(searchController: UISearchController) {
         searchController.searchBar.sizeToFit()
     }
-    
 }
 
 // this extension dynamically change the size of the fonts, so text can fit
 extension UILabel {
-    func adjustFontSizeToHeight(font: UIFont, max:CGFloat, min:CGFloat)
+    func adjustFontSizeToHeight(font: UIFont, max: CGFloat, min: CGFloat)
     {
-        var font = font;
+        var font = font
         // Initial size is max and the condition the min.
         for size in max.stride(through: min, by: -0.1) {
             font = font.fontWithSize(size)
-            let attrString = NSAttributedString(string: self.text!, attributes: [NSFontAttributeName: font])
-            let rectSize = attrString.boundingRectWithSize(CGSizeMake(self.bounds.width, CGFloat.max), options: .UsesLineFragmentOrigin, context: nil)
-
-            if rectSize.size.height <= self.bounds.height
-            {
-                self.font = font
-                break
+            if let text = self.text{
+                let attrString = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
+                let rectSize = attrString.boundingRectWithSize(CGSize(width: self.bounds.width, height: CGFloat.max),
+                                                               options: .UsesLineFragmentOrigin, context: nil)
+                
+                if rectSize.size.height <= self.bounds.height
+                {
+                    self.font = font
+                    break
+                }
             }
         }
         // in case, it is better to have the smallest possible font
