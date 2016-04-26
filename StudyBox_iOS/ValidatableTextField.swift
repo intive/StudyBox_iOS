@@ -22,4 +22,3 @@ class ValidatableTextField: UITextField {
     var validColor: UIColor!
     var invalidColor: UIColor!
 }
-

@@ -14,7 +14,7 @@ protocol DecksCollectionLayoutDelegate: class {
 
 class DecksCollectionViewLayout: UICollectionViewFlowLayout {
 
-    weak var delegate:DecksCollectionLayoutDelegate?
+    weak var delegate: DecksCollectionLayoutDelegate?
     
     override func collectionViewContentSize() -> CGSize {
         let expectedSize = super.collectionViewContentSize()

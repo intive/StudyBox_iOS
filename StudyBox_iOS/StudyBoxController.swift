@@ -10,7 +10,7 @@ import UIKit
 import MMDrawerController
 
 @objc protocol StudyBoxController {
-    var isDrawerVisible:Bool { get set }
+    var isDrawerVisible: Bool { get set }
     func toggleDrawer()
 }
 
@@ -19,10 +19,11 @@ extension StudyBoxController where Self:UIViewController {
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
             if let controller = navigationController?.viewControllers[0] where controller === self {
                 let hamburgerImage = UIImage(named: "Hamburger")
-                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(toggleDrawer))
+                let button = UIBarButtonItem(image: hamburgerImage, landscapeImagePhone: nil, style: UIBarButtonItemStyle.Plain, target: self,
+                                             action: #selector(toggleDrawer))
                 navigationItem.leftBarButtonItem = button
                 drawer.openDrawerGestureModeMask = .Custom
-            }else {
+            } else {
                 drawer.openDrawerGestureModeMask = .None
             }
             
@@ -36,15 +37,14 @@ extension StudyBoxController where Self:UIViewController {
 extension StudyBoxController where Self:SBDrawerCenterDelegate {
     func drawerToggleAnimation() {
         isDrawerVisible = !isDrawerVisible
-        var animationTime:NSTimeInterval!
+        var animationTime: NSTimeInterval!
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             animationTime = drawer.drawerAnimationTime
         }
         UIView.animateWithDuration(animationTime,
             animations: {
                 self.updateStatusBar()
-            }
-        )
+        })
     }
 }
 //View Controller, which will be inherited by other VC's
@@ -60,7 +60,7 @@ class StudyBoxViewController: UIViewController, StudyBoxController, SBDrawerCent
     }
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
-            drawer.toggleDrawerSide(.Left, animated: true,completion: nil)
+            drawer.toggleDrawerSide(.Left, animated: true, completion: nil)
         }
     }
     
@@ -98,7 +98,7 @@ class StudyBoxCollectionViewController: UICollectionViewController, StudyBoxCont
     }
     func toggleDrawer(){
         if let drawer = UIApplication.sharedRootViewController as? MMDrawerController {
-            drawer.toggleDrawerSide(.Left, animated: true,completion: nil)
+            drawer.toggleDrawerSide(.Left, animated: true, completion: nil)
         }
     }
     
