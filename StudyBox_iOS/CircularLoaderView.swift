@@ -59,7 +59,7 @@ class CircularLoaderView: UIView {
         backgroundColor = UIColor.clearColor()
     }
     
-    ///Draws the circle inside `circleFrame`
+    //Draws the circle inside `circleFrame`
     func drawPath() -> UIBezierPath {
         
         //Draw circle in its frame
@@ -82,7 +82,7 @@ class CircularLoaderView: UIView {
         return path
     }
     
-    ///Returns a frame in which the circle will be drawn
+    //Returns a frame in which the circle will be drawn
     func circleFrame() -> CGRect {
         var circleFrame = CGRect(x: 0, y: 0, width: circleRadius, height: circleRadius)
         circleFrame.origin.x = CGRectGetMidX(foregroundCircleLayer.bounds) - CGRectGetMidX(circleFrame)
@@ -90,7 +90,7 @@ class CircularLoaderView: UIView {
         return circleFrame
     }
     
-    ///Animates the `foregroundCircleLayer` to `toValue`
+    //Animates the `foregroundCircleLayer` to `toValue`
     func animateProgress(toValue: CGFloat) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.toValue = toValue

@@ -19,7 +19,15 @@ extension String {
         return !containsString(" ") && containsString("@")
     }
     
-    func isValidPassword() -> Bool {
-        return characters.count > 7 && rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) == nil
+    func isValidPassword(minimumCharacters min: Int) -> Bool {
+        return hasMinimumCharacters(minimum: min) && !hasWhitespaceOrNewLineCharacter()
+    }
+    
+    func hasMinimumCharacters(minimum min: Int) -> Bool {
+        return characters.count >= min
+    }
+    
+    func hasWhitespaceOrNewLineCharacter() -> Bool {
+        return rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) != nil
     }
 }

@@ -18,7 +18,7 @@ class SBReplaceSegue: UIStoryboardSegue {
             var navigation = destinationViewController
 
             if !(destinationViewController is UINavigationController) {
-                navigation = UINavigationController(rootViewController: destinationViewController)
+                navigation = SBNavigationController(rootViewController: destinationViewController)
             }
             navigation.view.alpha = 0.2
             mmDrawer.setCenterViewController(navigation, withCloseAnimation: false, completion: nil)
@@ -31,8 +31,7 @@ class SBReplaceSegue: UIStoryboardSegue {
                 },
                 completion: { finished in
                     source.view.alpha = 1
-                }
-            )
+                })
         }
     }
 }

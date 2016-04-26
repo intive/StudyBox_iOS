@@ -10,7 +10,7 @@ import UIKit
 import MMDrawerController
 class UserViewController: InputViewController {
     
-    var centerOffset:CGFloat = 100
+    var centerOffset: CGFloat = 100
     func successfulLoginTransition(){
 
         if let board = storyboard {
@@ -24,12 +24,14 @@ class UserViewController: InputViewController {
             let mmDrawer = SBDrawerController(centerViewController: center, leftDrawerViewController: drawerNav)
             mmDrawer.openDrawerGestureModeMask = .None
             mmDrawer.closeDrawerGestureModeMask = [.PanningCenterView ]
-            
+            mmDrawer.statusBarViewBackgroundColor = UIColor.defaultNavBarColor()
+            mmDrawer.showsStatusBarBackgroundView = true 
+
             let offset = centerOffset
             
             mmDrawer.setGestureShouldRecognizeTouchBlock({ (drawer, gesture, touch) -> Bool in
                 if let _ = gesture as? UIPanGestureRecognizer {
-                    if (drawer.visibleLeftDrawerWidth == 0) {
+                    if drawer.visibleLeftDrawerWidth.isZero {
                         let touchLocation = touch.locationInView(drawer.centerViewController.view)
                         let center = drawer.centerViewController.view.center
                         if touchLocation.x < center.x + offset && touchLocation.x > center.x - offset {
@@ -42,34 +44,49 @@ class UserViewController: InputViewController {
             
             UIApplication.sharedRootViewController = mmDrawer
         }
-        
     }
     
-    func validateTextFieldsNotEmpty()->Bool {
+    func areTextFieldsEmpty() -> Bool {
         
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
-                guard let text = field.text where text.characters.count > 0 else {
-                    return false
+                if field.isEmpty() {
+                    return true
                 }
             }
         }
-
-        return true
+        return false 
     }
     
-    func areTextFieldsValid()-> Bool {
+    func areTextFieldsValid() -> Bool {
         if let inputViews = dataSource?.inputViews {
             for field in inputViews {
-                if let validableField = field as? ValidatableTextField {
-                    if !validableField.isValid {
+                if let validatableField = field as? ValidatableTextField {
+                    if validatableField.isEmpty() || validatableField.invalidMessage != nil {
                         return false 
                     }
                 }
             }
         }
-        
         return true
+    }
+    
+    func disableButton(button: UIButton) {
+        button.backgroundColor = UIColor.sb_DarkGrey()
+    }
+    
+    func enableButton(button: UIButton) {
+        button.backgroundColor = UIColor.sb_Raspberry()
+    }
+    
+    enum ValidationMessage: String  {
+        case PasswordTooShort = "Hasła są zbyt krótkie"
+        case PasswordsDontMatch = "Hasła nie są jednakowe!"
+        case PasswordContainsSpace = "Nie można użyć w haśle białych znaków!"
+        case PasswordIncorrect = "Niepoprawne hasło"
+        case NoInternet = "Brak połączenia z Internetem"
+        case EmailIncorrect = "Niepoprawny e-mail!"
+        case FieldsAreEmpty = "Wypełnij wszystkie pola!"
     }
     
 }

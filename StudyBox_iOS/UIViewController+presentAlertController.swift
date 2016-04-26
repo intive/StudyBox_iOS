@@ -10,13 +10,14 @@ import UIKit
 
 extension UIViewController {
     
-    func presentAlertController(withTitle title:String, message:String, buttonText:String, actionCompletion:(()->Void)? = nil, dismissCompletion:(()->Void)? = nil ) {
+    func presentAlertController(withTitle title: String, message: String, buttonText: String, actionCompletion: (() -> Void)? = nil,
+                                          dismissCompletion:(() -> Void)? = nil ) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alert.addAction( UIAlertAction(title: buttonText, style: .Default) { (_) in
             actionCompletion?()
             
-            self.dismissViewControllerAnimated(true) {
+            alert.dismissViewControllerAnimated(true) {
                 dismissCompletion?()
             }
         })
