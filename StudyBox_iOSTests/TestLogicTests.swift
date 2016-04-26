@@ -13,13 +13,14 @@ class TestLogicTests: XCTestCase {
     
     // number of flashcards in array. Bigger than one
     let flashcardsNumber = 10
+    let flashcard = Flashcard(serverID: "serverID", deckId: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
     
 // checkIfAllFlashcardsHidden()
     
-    func testCheckIfAllFlashcardsHiddenWithHiddenFlashcards() {
+    func testCheckIfAllFlashcardsHiddenWithAllHiddenFlashcards() {
         // prepare
-        let mockData = MockData(amount: flashcardsNumber, hidden: flashcardsNumber)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Learn)
+        let mockData = flashcardsArray(amount: flashcardsNumber, hidden: flashcardsNumber)
+        let testLogic = Test(deck: mockData, testType: .Learn)
         
         // do
         let result = testLogic.checkIfAllFlashcardsHidden()
@@ -30,8 +31,8 @@ class TestLogicTests: XCTestCase {
     
     func testCheckIfAllFlashcardsHiddenWithNoHiddenFlashcards() {
         // prepare
-        let mockData = MockData(amount: flashcardsNumber)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Learn)
+        let mockData = flashcardsArray(amount: flashcardsNumber)
+        let testLogic = Test(deck: mockData, testType: .Learn)
         
         // do
         let result = testLogic.checkIfAllFlashcardsHidden()
@@ -42,7 +43,7 @@ class TestLogicTests: XCTestCase {
     
 // checkIfPassedDeckIsEmpty()
     
-    func testCheckIfPassedDeckIsEmptyWithEmptyArray() {
+    func testCheckIfPassedDeckIsEmptyWithNoFlashcards() {
         // prepare
         let testLogic = Test(deck: [], testType: .Learn)
         
@@ -53,10 +54,10 @@ class TestLogicTests: XCTestCase {
         XCTAssertTrue(result, "Initialized with empty Flashcard array, passedDeckWasEmpty should be true")
     }
     
-    func testCheckIfPassedDeckIsEmptyWithNotEmptyArray() {
+    func testCheckIfPassedDeckIsEmptyWithMoreThanOneFlashcard() {
         // prepare
-        let mockData = MockData(amount: flashcardsNumber)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Learn)
+        let mockData = flashcardsArray(amount: flashcardsNumber)
+        let testLogic = Test(deck: mockData, testType: .Learn)
         
         // do
         let result = testLogic.checkIfPassedDeckIsEmpty()
@@ -82,8 +83,8 @@ class TestLogicTests: XCTestCase {
     
     func testCorrectAnswerWithOneFlashcard() {
         // prepare
-        let mockData = MockData(amount: 1)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Learn)
+        let mockData = flashcardsArray(amount: 1)
+        let testLogic = Test(deck: mockData, testType: .Learn)
         let passed = testLogic.cardsAnsweredAndPossible().0
         
         // do
@@ -96,8 +97,8 @@ class TestLogicTests: XCTestCase {
     
     func testCorrectAnswerWithMoreThanOneFlashcard() {
         // prepare
-        let mockData = MockData(amount: flashcardsNumber)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Learn)
+        let mockData = flashcardsArray(amount: flashcardsNumber)
+        let testLogic = Test(deck: mockData, testType: .Learn)
         
         // do
         var result: Flashcard?
@@ -127,7 +128,6 @@ class TestLogicTests: XCTestCase {
     
     func testIncorrectAnswerWithOneFlashcardInLearnMode() {
         // prepare
-        let flashcard = Flashcard(serverID: "serverID", deckId: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
         let testLogic = Test(deck: [flashcard], testType: .Learn)
         
         // do
@@ -139,8 +139,8 @@ class TestLogicTests: XCTestCase {
     
     func testIncorrectAnswerWithTwoFlashcardsInLearnMode() {
         // prepare
-        let mockData = MockData(amount: 2)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Learn)
+        let mockData = flashcardsArray(amount: 2)
+        let testLogic = Test(deck: mockData, testType: .Learn)
         
         // do
         let second = testLogic.incorrectAnswer()!
@@ -152,7 +152,6 @@ class TestLogicTests: XCTestCase {
     
     func testIncorrectAnswerWithOneFlashcardInTestMode() {
         // prepare
-        let flashcard = Flashcard(serverID: "serverID", deckId: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
         let testLogic = Test(deck: [flashcard], testType: .Test(1))
         
         // do
@@ -164,8 +163,8 @@ class TestLogicTests: XCTestCase {
     
     func testIncorrectAnswerWithMoreThanOneFlashcardInTestMode() {
         // prepare
-        let mockData = MockData(amount: flashcardsNumber)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Test(uint(flashcardsNumber)))
+        let mockData = flashcardsArray(amount: flashcardsNumber)
+        let testLogic = Test(deck: mockData, testType: .Test(uint(flashcardsNumber)))
         
         // do
         var result: Flashcard?
@@ -194,7 +193,6 @@ class TestLogicTests: XCTestCase {
     
     func testSkipCardWithOneFlashcard() {
         // prepare
-        let flashcard = Flashcard(serverID: "serverID", deckId: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
         let testLogic = Test(deck: [flashcard], testType: .Learn)
         
         // do
@@ -207,8 +205,8 @@ class TestLogicTests: XCTestCase {
     
     func testSkipCardWithMoreThanOneFlashcard() {
         // prepare
-        let mockData = MockData(amount: flashcardsNumber)
-        let testLogic = Test(deck: mockData.flashcardArray, testType: .Learn)
+        let mockData = flashcardsArray(amount: flashcardsNumber)
+        let testLogic = Test(deck: mockData, testType: .Learn)
         
         // do
         let result = testLogic.skipCard()
@@ -217,24 +215,23 @@ class TestLogicTests: XCTestCase {
         XCTAssertNotNil(result, "More than one flashcard in deck, skipCard should return not nil object")
     }
     
-    class MockData {
+    func flashcardsArray(amount amount: Int, hidden: Int = 0) -> [Flashcard] {
         var flashcardArray = [Flashcard]()
-        static let notOneNumber = 10
+        var hiddenNumber = (hidden > amount) ? amount : hidden;
         
-        init(amount: Int, hidden: Int = 0) {
-            var hiddenNumber = (hidden > amount) ? amount : hidden;
+        for _ in 1...amount {
+            let current = Flashcard(serverID: "serverID", deckId: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
             
-            for _ in 1...amount {
-                let current = Flashcard(serverID: "serverID", deckId: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
-                
-                if hiddenNumber > 0 {
-                    current.hidden = true
-                    hiddenNumber = hiddenNumber - 1
-                }
-                
-                flashcardArray.append(current)
+            if hiddenNumber > 0 {
+                current.hidden = true
+                hiddenNumber = hiddenNumber - 1
             }
+            
+            flashcardArray.append(current)
         }
+        
+        return flashcardArray
     }
     
 }
+
