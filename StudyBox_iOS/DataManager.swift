@@ -8,9 +8,14 @@
 
 import Foundation
 import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 enum DataManagerError: ErrorType {
     case NoDeckWithGivenId, NoFlashcardWithGivenId, NoRealm
+}
+enum Result {
+    case Success, Failed
 }
 
 /**
@@ -19,6 +24,7 @@ enum DataManagerError: ErrorType {
 class DataManager {
     
     private var decks = [Deck]()
+    private let server = ServerCommunication()
     // private var flashcards = [Flashcard]()
     private let realm = try? Realm()
     // dzięki deckDBChanged talie będą wczytywane z bazy tylko w przypadku zmiany tabeli Deck
@@ -130,6 +136,39 @@ class DataManager {
         }
     }
     
+    func updateDeckFromServer(callback: ((result: Result) -> Void)?){
+        server.getDecksFromServer({ completion in
+            switch completion {
+            case .Success(let DecksArray):
+                
+                if let realm = self.realm {
+                    for deck in DecksArray{
+                        do {
+                            if let updatingDeck = realm.objects(Deck).filter("serverID == '\(deck.serverID)'").first{
+                                try realm.write {updatingDeck.name = deck.name}
+                                self.deckDBChanged = true
+                            } else{
+                                try realm.write {realm.add(deck)}
+                                self.deckDBChanged = true
+                            }
+                        } catch let e {
+                              debugPrint(e)
+                        }
+                    }
+                }
+                if let callback = callback {
+                    callback(result: Result.Success)
+                }
+                
+            case .Failure(let error):
+                debugPrint(error.description)
+                if let callback = callback {
+                    callback(result: Result.Failed)
+                }
+            }
+        })
+    }
+
     func addDeck(name: String) -> String {
 
         let id = decks.generateNewId()
