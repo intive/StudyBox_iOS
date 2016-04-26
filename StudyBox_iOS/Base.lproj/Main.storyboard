@@ -108,74 +108,6 @@
             </objects>
             <point key="canvasLocation" x="2185" y="355"/>
         </scene>
-        <!--Decks View Controller-->
-        <scene sceneID="3WR-l3-OEa">
-            <objects>
-                <viewController id="Ffq-5i-cZ4" customClass="DecksViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ICs-dx-wqn"/>
-                        <viewControllerLayoutGuide type="bottom" id="LY6-KN-Pjc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8Xh-8g-2oR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xMT-IG-TEx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6fk-bh-Wei">
-                                    <size key="itemSize" width="100" height="100"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DecksViewCellID" id="9hr-eg-eXj" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzs-Dz-y5m">
-                                                    <rect key="frame" x="8" y="8" width="84" height="84"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="trailing" secondItem="9hr-eg-eXj" secondAttribute="trailingMargin" id="Qc5-0E-yiv"/>
-                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="bottom" secondItem="9hr-eg-eXj" secondAttribute="bottomMargin" id="X0K-nq-GOh"/>
-                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="top" secondItem="9hr-eg-eXj" secondAttribute="topMargin" id="gRh-BU-eyJ"/>
-                                            <constraint firstItem="bzs-Dz-y5m" firstAttribute="leading" secondItem="9hr-eg-eXj" secondAttribute="leadingMargin" id="uJf-Vf-Ukl"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="deckNameLabel" destination="bzs-Dz-y5m" id="9VW-ov-DwE"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="xMT-IG-TEx" secondAttribute="trailing" constant="-20" id="Rkc-RA-S2Y"/>
-                            <constraint firstItem="xMT-IG-TEx" firstAttribute="height" secondItem="8Xh-8g-2oR" secondAttribute="height" id="Suv-M2-ekv"/>
-                            <constraint firstItem="xMT-IG-TEx" firstAttribute="leading" secondItem="8Xh-8g-2oR" secondAttribute="leadingMargin" constant="-20" id="VVs-jY-94u"/>
-                            <constraint firstItem="LY6-KN-Pjc" firstAttribute="top" secondItem="xMT-IG-TEx" secondAttribute="bottom" id="gZx-hx-f0b"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Bco-pG-cRr"/>
-                    <connections>
-                        <outlet property="decksCollectionView" destination="xMT-IG-TEx" id="bYA-cU-mHh"/>
-                        <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="IWt-ao-u5P"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UXn-sV-c38" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3753" y="1189"/>
-        </scene>
         <!--Edit Flashcard View Controller-->
         <scene sceneID="7mE-Ma-p0K">
             <objects>
@@ -727,6 +659,56 @@
             </objects>
             <point key="canvasLocation" x="3640" y="1909"/>
         </scene>
+        <!--Decks View Controller-->
+        <scene sceneID="FhT-fP-7TS">
+            <objects>
+                <collectionViewController id="k4V-mQ-vqt" customClass="DecksViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MyX-iT-hlv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewLayout key="collectionViewLayout" id="42S-ar-lmo" customClass="DecksCollectionViewLayout" customModule="StudyBox_iOS" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DecksViewCellID" id="Oet-h2-Oou" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pW-OJ-jk1">
+                                            <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="5pW-OJ-jk1" firstAttribute="top" secondItem="Oet-h2-Oou" secondAttribute="top" constant="8" id="6dA-FM-w43"/>
+                                    <constraint firstAttribute="trailing" secondItem="5pW-OJ-jk1" secondAttribute="trailing" constant="8" id="6yV-3G-uvY"/>
+                                    <constraint firstItem="5pW-OJ-jk1" firstAttribute="leading" secondItem="Oet-h2-Oou" secondAttribute="leading" constant="8" id="Fn8-JX-Nsv"/>
+                                    <constraint firstAttribute="bottom" secondItem="5pW-OJ-jk1" secondAttribute="bottom" constant="8" id="j1L-5J-yWm"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="deckNameLabel" destination="5pW-OJ-jk1" id="hWq-Yg-oVq"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="k4V-mQ-vqt" id="VnF-Dl-0yh"/>
+                            <outlet property="delegate" destination="k4V-mQ-vqt" id="Fl3-GL-Max"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="Pd5-T1-zfh"/>
+                    <connections>
+                        <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="gYF-Os-WnF"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tEO-tZ-Utw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3669" y="1213"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="pTC-dV-b2n">
             <objects>
@@ -738,8 +720,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Ffq-5i-cZ4" kind="relationship" relationship="rootViewController" id="Ph2-0k-Fed"/>
-                        <segue destination="Ffq-5i-cZ4" kind="show" identifier="DecksViewSegue" id="kaO-g4-SgC"/>
+                        <segue destination="k4V-mQ-vqt" kind="relationship" relationship="rootViewController" id="Rge-uG-jpe"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CMC-Ji-ZLG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -814,6 +795,9 @@
                                     <constraint firstAttribute="bottom" secondItem="8Cv-mK-csu" secondAttribute="bottom" id="mMG-45-hBc"/>
                                     <constraint firstItem="8Cv-mK-csu" firstAttribute="top" secondItem="qd1-B0-NOL" secondAttribute="top" id="qVh-wg-lXk"/>
                                 </constraints>
+                                <variation key="heightClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="62" width="560" height="298"/>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbe-Fw-hsa" userLabel="AnswerView">
                                 <rect key="frame" x="20" y="106" width="560" height="454"/>
@@ -872,6 +856,9 @@
                                     <constraint firstItem="7Dz-uF-MfH" firstAttribute="leading" secondItem="mbe-Fw-hsa" secondAttribute="leading" id="YBE-6M-XXe"/>
                                     <constraint firstItem="7Dz-uF-MfH" firstAttribute="top" secondItem="mbe-Fw-hsa" secondAttribute="top" id="scr-3e-CPu"/>
                                 </constraints>
+                                <variation key="heightClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="62" width="560" height="298"/>
+                                </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ScoreLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qH-5l-kfE">
                                 <rect key="frame" x="234" y="569" width="132" height="21"/>
@@ -964,7 +951,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bb9-zC-jZN"/>
-        <segue reference="kaO-g4-SgC"/>
+        <segue reference="gYF-Os-WnF"/>
     </inferredMetricsTieBreakers>
 </document>

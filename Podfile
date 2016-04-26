@@ -4,7 +4,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 def shared_pods
-    pod 'MMDrawerController', '~> 0.6.0'
+    pod 'MMDrawerController', :git => 'https://github.com/osjup/MMDrawerController.git'
     pod 'RealmSwift', '~> 0.98.5'
     pod 'Alamofire', '~> 3.0'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'

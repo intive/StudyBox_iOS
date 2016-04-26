@@ -189,7 +189,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return barStyle
     }
-    
     func deactiveAllChildViewControllers() {
         for (index, _) in drawerNavigationControllers.enumerate() {
             drawerNavigationControllers[index].isActive = false
