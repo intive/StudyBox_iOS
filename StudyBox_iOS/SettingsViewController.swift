@@ -43,7 +43,11 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
             if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
-                cell.detailTextLabel?.text = "\(decksCount) talii"
+                if decksCount < 5 && decksCount > 0 {
+                    cell.detailTextLabel?.text = "\(decksCount) talie"
+                } else {
+                    cell.detailTextLabel?.text = "\(decksCount) talii"
+                }
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
