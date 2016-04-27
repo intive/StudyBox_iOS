@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 enum DataManagerError: ErrorType {
-    case NoDeckWithGivenId, NoFlashcardWithGivenId, NoRealm
+    case NoDeckWithGivenId, NoFlashcardWithGivenId, NoRealm, ServerConnectionError
 }
 enum Result {
     case Success, Failed
@@ -20,7 +20,7 @@ enum Result {
 
 /**
  Class responisble for handling data model stored in memory
-*/
+ */
 class DataManager {
     
     private var decks = [Deck]()
@@ -33,7 +33,7 @@ class DataManager {
     
     init(){
         
-        // usuwanie tylko wtedy gdy jest internet i najpewniej nie w tym miejscu. Na razie ze względu na 
+        // usuwanie tylko wtedy gdy jest internet i najpewniej nie w tym miejscu. Na razie ze względu na
         // DummyData
         // TODOs: relocate removeDecksFromDatabase() and check for internet connection
         removeDecksFromDatabase()
@@ -45,7 +45,7 @@ class DataManager {
         if deckDBChanged || decks.isEmpty {
             loadDecksFromDatabase()
         }
-
+        
         if sorted {
             return decks.sort {
                 $0.name < $1.name
@@ -152,7 +152,7 @@ class DataManager {
                                 self.deckDBChanged = true
                             }
                         } catch let e {
-                              debugPrint(e)
+                            debugPrint(e)
                         }
                     }
                 }
@@ -168,9 +168,9 @@ class DataManager {
             }
         })
     }
-
+    
     func addDeck(name: String) -> String {
-
+        
         let id = decks.generateNewId()
         let newDeck = Deck(serverID: id, name: name)
         
@@ -186,24 +186,24 @@ class DataManager {
         deckDBChanged = true
         return id
     }
-
+    
     func removeDeck(withId idDeck: String) throws {
         
         if let realm = realm {
-                if let deck = realm.objects(Deck).filter("serverID == '\(idDeck)'").first {
-                    let toRemove = deck.flashcards
-                    do {
-                        try realm.write {
-                            realm.delete(toRemove)
-                            realm.delete(deck)
-                        }
-                    } catch let e {
-                        debugPrint(e)
+            if let deck = realm.objects(Deck).filter("serverID == '\(idDeck)'").first {
+                let toRemove = deck.flashcards
+                do {
+                    try realm.write {
+                        realm.delete(toRemove)
+                        realm.delete(deck)
                     }
-                    deckDBChanged = true
-                } else {
-                    throw DataManagerError.NoDeckWithGivenId
+                } catch let e {
+                    debugPrint(e)
                 }
+                deckDBChanged = true
+            } else {
+                throw DataManagerError.NoDeckWithGivenId
+            }
             
         } else {
             throw DataManagerError.NoRealm
@@ -243,7 +243,7 @@ class DataManager {
     func flashcards(forDeck deck: Deck) throws ->[Flashcard] {
         return try flashcards(forDeckWithId: deck.serverID)
     }
-
+    
     func updateFlashcard(data: Flashcard) throws {
         if let realm = realm {
             if let flashcard = realm.objects(Flashcard).filter("serverID == '\(data.serverID)'").first {
@@ -271,16 +271,20 @@ class DataManager {
         if let realm = realm {
             if let selectedDeck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
                 let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
-            
-                newFlashcard.deck = selectedDeck
-                do {
-                    try realm.write {
-                        realm.add(newFlashcard)
-                    }
-                } catch let e {
-                    debugPrint(e)
-                }
                 
+                newFlashcard.deck = selectedDeck
+                let returnedValue = server.sendFlashcardToServer(newFlashcard, deckId: deckId)
+                if returnedValue {
+                    do {
+                        try realm.write {
+                            realm.add(newFlashcard)
+                        }
+                    } catch let e {
+                        debugPrint(e)
+                    }
+                } else {
+                    throw DataManagerError.ServerConnectionError
+                }
             } else {
                 throw DataManagerError.NoDeckWithGivenId
             }
