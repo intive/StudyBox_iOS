@@ -22,7 +22,7 @@ extension DataManager {
         DataManager.DummyDecks.forEach { name in
             let id = manager.addDeck(name)
             //We create random number of 0 to 30 flashcards, different for each deck
-            let limit = arc4random_uniform(UInt32(30))
+            let limit = arc4random_uniform(UInt32(29)) + 1
             var tip: Tip?
             var cardId: String
             var countToHide: Int = 0
