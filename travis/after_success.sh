@@ -18,6 +18,14 @@ CERTIFICATE="$PWD/travis/certs/dist.cer"
 PRIVATE_KEY="$PWD/travis/certs/dist.p12"
 PROFILE="$PWD/travis/profile/profile.mobileprovision"
 
+# encrypt files with:
+# openssl aes-256-cbc -k ENCRYPTION_SECRET -in FILE -out FILE.enc -a
+#
+# certificate and private key must be valid and matching the provisioning profile
+#
+# add encrypted key to travis:
+# travis encrypt "ENCRYPTION_SECRET=somekey" --add
+
 openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PROFILE.enc" -d -a -out "$PROFILE"
 openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$CERTIFICATE.enc" -d -a -out "$CERTIFICATE"
 openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in "$PRIVATE_KEY.enc" -d -a -out "$PRIVATE_KEY"
@@ -90,7 +98,7 @@ xcrun xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportPath "$IPA_PATH" \
     -exportFormat ipa \
-        | xcpretty
+    -hideShellScriptEnvironment
 
 echo "Uploading IPA"
 

@@ -12,6 +12,7 @@ import MMDrawerController
 protocol SBDrawerCenterDelegate {
     var isDrawerVisible: Bool {get set}
     func drawerToggleAnimation()
+    func updateStatusBar()
 }
 
 class SBDrawerController: MMDrawerController {
