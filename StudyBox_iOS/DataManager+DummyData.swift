@@ -10,52 +10,37 @@ import Foundation
 
 extension DataManager {
     static let DummyDecks = [
-        "Swift", "Obj-C", "Very long name of the deck, so I can remember everything for a very long time : ) ",
-        "Math", "Physics", "English", "Just a decent length name \nhere",
-        "Even longer name of the deck, so I can remember everything for at least double as long. \n" +
-        "No need to study something twice sounds very promising, hope it will really work. I will try hard!",
-        "", "Sh"
+        "Swift", "Obj-C", "Stół z powyłamywanymi nogami",
+        "Math", "Physics", "English", "Sample of\nmultiline\nvery\nvery\nvery\nlong\ndeck\nname",
+        "Even longer name of the deck, so I can remember everything for at least double as long.",
+        "No need to study something twice sounds very promising, hope it will really work. I will try hard!", "",
+        "Sh", "StudyBox是伟大的！"
     ]
 
     static func managerWithDummyData() -> DataManager {
         let manager = DataManager()
-        let size = DataManager.DummyDecks.count
-        let limit = size - 1
         DataManager.DummyDecks.forEach { name in
             let id = manager.addDeck(name)
-            
-            
-            var question = "\(name) question"
-            var answer = "\(name) answer"
-            
+            //We create random number of 0 to 30 flashcards, different for each deck
+            let limit = arc4random_uniform(UInt32(30))
             var tip: Tip?
-            var cardId: String //Helps in hiding
-            var countToHide: Int = 0 //Helps in hiding too
+            var cardId: String
+            var countToHide: Int = 0
             
             for i in 0...limit {
-                let clear = (i == limit || i == limit / 2)
+                let rand = arc4random_uniform(UInt32(100)) //Random number to append in each flashcard
+                let question = "\(name) question \(rand)"
+                let answer = "\(name) answer \(rand)"
                 if i % 2  == 0 {
-                    tip = Tip.Text(text: "\(name) tip")
-                    let choice = Int(arc4random_uniform(UInt32(size)))
-                    
-                    question.appendContentsOf("\n \(DataManager.DummyDecks[choice])")
-                    answer.appendContentsOf("\n \(DataManager.DummyDecks[choice])")
-                    if clear {
-                        answer = ""
-                    }
-
+                    tip = Tip.Text(text: "\(name) tip \(rand)")
                 } else {
-                    if clear {
-                        question = ""
-                    }
                     tip = nil
                 }
-                
                 do {
                     try cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
                     countToHide += 1
                     
-                    //Hides every 3th generated flashcard
+                    //Hides every 3rd generated flashcard
                     if countToHide % 3 == 0 {
                         do {
                             try manager.hideFlashcard(withId: cardId)
