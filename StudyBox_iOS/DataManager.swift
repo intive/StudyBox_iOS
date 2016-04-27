@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 enum DataManagerError: ErrorType {
-    case NoDeckWithGivenId, NoFlashcardWithGivenId, NoRealm
+    case NoDeckWithGivenId, NoFlashcardWithGivenId, NoRealm, ServerConnectionError
 }
 enum Result {
     case Success, Failed
@@ -273,14 +273,18 @@ class DataManager {
                 let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
             
                 newFlashcard.deck = selectedDeck
-                do {
-                    try realm.write {
-                        realm.add(newFlashcard)
+                let returnedValue = server.sendFlashcardToServer(newFlashcard, deckId: deckId)
+                if returnedValue {
+                    do {
+                        try realm.write {
+                            realm.add(newFlashcard)
+                        }
+                    } catch let e {
+                        debugPrint(e)
                     }
-                } catch let e {
-                    debugPrint(e)
+                } else {
+                    throw DataManagerError.ServerConnectionError
                 }
-                
             } else {
                 throw DataManagerError.NoDeckWithGivenId
             }
