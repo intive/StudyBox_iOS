@@ -290,15 +290,11 @@ class DataManager {
                         }
                     }
                 }
-                if let callback = callback {
-                    callback(result: Result.Success)
-                }
+                    callback?(result: Result.Success)
                 
             case .Failure(let error):
                 debugPrint(error.description)
-                if let callback = callback {
-                    callback(result: Result.Failed)
-                }
+                    callback?(result: Result.Failed)
             }
         })
     }

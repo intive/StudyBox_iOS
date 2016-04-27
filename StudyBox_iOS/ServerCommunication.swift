@@ -69,13 +69,13 @@ class ServerCommunication {
                 case .Success(let value):
                     
                     let json = JSON(value)
-                    var FlashcardsArray = [Flashcard]()
+                    var flashcardsArray = [Flashcard]()
                     
                     for (_, subJson) in json {
-                        FlashcardsArray.append(Flashcard(serverID: subJson["id"].stringValue,
+                        flashcardsArray.append(Flashcard(serverID: subJson["id"].stringValue,
                             deckId: subJson["deckId"].stringValue, question: subJson["question"].stringValue, answer: subJson["answer"].stringValue, tip: nil))
                     }
-                    completion(.Success(FlashcardsArray))
+                    completion(.Success(flashcardsArray))
                     
                 case .Failure(let error):
                     completion(.Failure(error))
