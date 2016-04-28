@@ -62,5 +62,26 @@ class ServerCommunication {
         }
     }
     
+    func getFlashcardsFromServer(deckId: String, completion: ServerResult<[Flashcard]> -> Void) {
+        Alamofire.request(.GET, decksURL + "/\(deckId)/flashcards")
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let value):
+                    
+                    let json = JSON(value)
+                    var flashcardsArray = [Flashcard]()
+                    
+                    for (_, subJson) in json {
+                        flashcardsArray.append(Flashcard(serverID: subJson["id"].stringValue,
+                            deckId: subJson["deckId"].stringValue, question: subJson["question"].stringValue, answer: subJson["answer"].stringValue, tip: nil))
+                    }
+                    completion(.Success(flashcardsArray))
+                    
+                case .Failure(let error):
+                    completion(.Failure(error))
+                }
+        }
+    }
+    
     
 }
