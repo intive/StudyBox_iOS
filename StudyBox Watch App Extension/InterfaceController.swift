@@ -7,7 +7,6 @@
 //
 
 import WatchKit
-
 import WatchConnectivity
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
@@ -25,18 +24,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     let detailTextSuccess = "Masz dobrą pamięć!"
     let detailTextFailure = "Następnym razem się uda."
     
-    var questionText = String()
-    var answerText = String()
-    var tipText = String()
-    
-    var storedFlashcards = [(String,String,String)]()
+    var storedFlashcards = [WatchFlashcard]()
     
     var userAnswer: Bool?
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         WatchManager.sharedManager.startSession()
-        
         updateStoredFlashcards()
         updateButtonAndLabels()
     }
@@ -58,23 +52,20 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     @IBAction func startButtonPress() {
-        randomFlashcardData()
+        let random = randomFlashcard()
         presentControllerWithNames(["QuestionViewController", "AnswerViewController"], contexts:
-            [["segue": "pagebased", "question": questionText, "tip": tipText],
-                ["segue": "pagebased", "answer": answerText, "dismissContext": self]])
+            [["segue": "pagebased", "question": random.question, "tip": random.tip],
+                ["segue": "pagebased", "answer": random.answer, "dismissContext": self]])
     }
     
     @IBAction func refreshButtonPress() {
         updateStoredFlashcards()
         updateButtonAndLabels()
+        self.userAnswer = nil
     }
     
-    ///Randomizes a question and answer from `storedFlashcards`
-    func randomFlashcardData() {
-        let randomElement = storedFlashcards[Int(arc4random_uniform(UInt32(storedFlashcards.count)))]
-        self.questionText = randomElement.0
-        self.answerText = randomElement.1
-        self.tipText = randomElement.2
+    func randomFlashcard() -> WatchFlashcard {
+        return storedFlashcards[Int(arc4random_uniform(UInt32(storedFlashcards.count)))]
     }
     
     func updateStoredFlashcards() {

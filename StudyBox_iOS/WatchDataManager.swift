@@ -52,10 +52,10 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         if !flashcardsQuestions.isEmpty && !flashcardsAnswers.isEmpty {
             do {
                 try self.updateApplicationContext([
-                    "flashcardsQuestions":flashcardsQuestions,
-                    "flashcardsAnswers":flashcardsAnswers,
-                    "flashcardsIDs":flashcardsIDs,
-                    "flashcardsTips":flashcardsTips])
+                    Utils.WatchAppContextType.FlashcardsQuestions: flashcardsQuestions,
+                    Utils.WatchAppContextType.FlashcardsAnswers: flashcardsAnswers,
+                    Utils.WatchAppContextType.FlashcardsIDs: flashcardsIDs,
+                    Utils.WatchAppContextType.FlashcardsTips: flashcardsTips])
             } catch let error {
                 print("Sending to Watch failed: \(error)")
                 throw error

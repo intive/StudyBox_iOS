@@ -108,7 +108,7 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="220" y="718"/>
+            <point key="canvasLocation" x="220" y="599"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
@@ -123,7 +123,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="496" y="718"/>
+            <point key="canvasLocation" x="496" y="599"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>

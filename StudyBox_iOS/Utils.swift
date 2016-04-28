@@ -36,4 +36,13 @@ class Utils {
         static let PickerFrequencyTypeKey = "pickerFrequencyType"
         static let DecksToSynchronizeKey = "decksToSynchronize"
     }
+    
+    struct WatchAppContextType {
+        static let FlashcardsQuestions = "flashcardsQuestions"
+        static let FlashcardsAnswers = "flashcardsAnswers"
+        static let FlashcardsIDs = "flashcardsIDs"
+        static let FlashcardsTips = "flashcardsTips"
+    }
+    
+    
 }

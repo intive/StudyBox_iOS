@@ -13,7 +13,6 @@ import RealmSwift
 class WatchManager: NSObject, WCSessionDelegate {
     
     static let sharedManager = WatchManager()
-
     private let session: WCSession = WCSession.defaultSession()
     
     func startSession() {
@@ -22,32 +21,29 @@ class WatchManager: NSObject, WCSessionDelegate {
     }
     
     //Return format: [(Question,Answer,Tip)]
-    func getDataFromRealm() -> [(String,String,String)] {
-        var storedFlashcards = [(String,String,String)]()
+    func getDataFromRealm() -> [WatchFlashcard] {
+        var flashcardsFromRealm = [WatchFlashcard]()
         if let realm = try? Realm() {
-            let flashcardsFromRealm = realm.objects(WatchFlashcard).toArray()
-            for i in 0..<flashcardsFromRealm.count {
-                storedFlashcards.append((flashcardsFromRealm[i].question, flashcardsFromRealm[i].answer, flashcardsFromRealm[i].tip))
-            }
+            flashcardsFromRealm = realm.objects(WatchFlashcard).toArray()
         }
-        return storedFlashcards
+        return flashcardsFromRealm
     }
     
     func overwriteDataInRealm(applicationContext: [String : AnyObject]) {
-        var storedFlashcards = [WatchFlashcard]()
+        var flashcardsToSave = [WatchFlashcard]()
         
         if let realm = try? Realm() {
             do {
                 try realm.write() {
-                    if let flashcardsQ = applicationContext["flashcardsQuestions"] as? [String],
-                        let flashcardsA = applicationContext["flashcardsAnswers"] as? [String],
-                        let flashcardIDs = applicationContext["flashcardsIDs"] as? [String],
-                        let flashcardsTips = applicationContext["flashcardsTips"] as? [String] {
+                    if let flashcardsQ = applicationContext[Utils.WatchAppContextType.FlashcardsQuestions] as? [String],
+                        let flashcardsA = applicationContext[Utils.WatchAppContextType.FlashcardsAnswers] as? [String],
+                        let flashcardIDs = applicationContext[Utils.WatchAppContextType.FlashcardsIDs] as? [String],
+                        let flashcardsTips = applicationContext[Utils.WatchAppContextType.FlashcardsTips] as? [String] {
                         for i in 0..<flashcardsQ.count {
-                            storedFlashcards.append(WatchFlashcard(serverID: flashcardIDs[i], question: flashcardsQ[i], answer: flashcardsA[i], tip: flashcardsTips[i]))
+                            flashcardsToSave.append(WatchFlashcard(serverID: flashcardIDs[i], question: flashcardsQ[i], answer: flashcardsA[i], tip: flashcardsTips[i]))
                         }
                         realm.deleteAll()
-                        realm.add(storedFlashcards)
+                        realm.add(flashcardsToSave)
                     }
                 }
             } catch let e {
