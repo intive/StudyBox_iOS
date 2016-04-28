@@ -98,23 +98,26 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     //Check if user has any decks on device before performing segue on second TableViewCell
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
-        var shouldPerformSegue = true
-        var message = [String]()
+        var outcome: (shouldPerformSegue: Bool, messageCaption: String, messageBody: String) = (true, "", "")
+        
         if let userDecks = dataManager?.decks(false) {
             if userDecks.isEmpty {
-                message = ["Brak talii", "Nie masz na swoim urządzeniu żadnych talii do synchronizacji."]
-                shouldPerformSegue = false
+                outcome.messageCaption = "Brak talii"
+                outcome.messageBody = "Nie masz na swoim urządzeniu żadnych talii do synchronizacji."
+                outcome.shouldPerformSegue = false
                 self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
             }
         }
         if !WCSession.isSupported() {
-            message = ["Niekompatybilne urządzenie", "Twoje urządzenie nie obsługuje komunikacji z Apple Watch"]
+            outcome.messageCaption = "Niekompatybilne urządzenie"
+            outcome.messageBody = "Twoje urządzenie nie obsługuje komunikacji z Apple Watch"
+            outcome.shouldPerformSegue = false
             self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
         }
-        if !message.isEmpty {
-            presentAlertController(withTitle: message[0], message: message[1], buttonText: "OK")
+        if !outcome.messageCaption.isEmpty {
+            presentAlertController(withTitle: outcome.messageCaption, message: outcome.messageBody, buttonText: "OK")
         }
-        return shouldPerformSegue
+        return outcome.shouldPerformSegue
     }
     
     //Update cells when returning from DetailVC
