@@ -196,19 +196,14 @@ class TestViewController: StudyBoxViewController {
     }
     
     @IBAction func showTip(sender: AnyObject) {
-        var message = ""
-        if let currentCard = testLogicSource?.currentCard?.tip {
-            message = currentCard
+        var message = String()
+        
+        if let tip = testLogicSource?.currentCard?.tip where !tip.isEmpty {
+            message = tip
         } else {
             message = "Brak podpowiedzi"
         }
-        let alertController = UIAlertController(title: "Podpowiedź:", message: message, //TODOs: set tip text
-            preferredStyle: .Alert)
-        
-        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertController.addAction(actionOk)
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
+        presentAlertController(withTitle: "Podpowiedź:", message: message, buttonText: "OK")
     }
     
     func updateQuestionUiForCurrentCard() {
