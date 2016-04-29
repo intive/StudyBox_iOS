@@ -96,28 +96,26 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         }
     }
     
-    //Check if user has any decks on device before performing segue on second TableViewCell
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
-        var outcome: (shouldPerformSegue: Bool, messageCaption: String, messageBody: String) = (true, "", "")
+        var shouldPerformSegue = false
+        var message: (title: String, body: String)?
         
-        if let userDecks = dataManager?.decks(false) {
-            if userDecks.isEmpty {
-                outcome.messageCaption = "Brak talii"
-                outcome.messageBody = "Nie masz na swoim urządzeniu żadnych talii do synchronizacji."
-                outcome.shouldPerformSegue = false
-                self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-            }
+        if let userDecks = dataManager?.decks(false) where userDecks.isEmpty {
+                message?.title = "Brak talii"
+                message?.body = "Nie masz na swoim urządzeniu żadnych talii do synchronizacji."
         }
+        
         if !WCSession.isSupported() {
-            outcome.messageCaption = "Niekompatybilne urządzenie"
-            outcome.messageBody = "Twoje urządzenie nie obsługuje komunikacji z Apple Watch"
-            outcome.shouldPerformSegue = false
+            message?.title = "Niekompatybilne urządzenie"
+            message?.body = "Twoje urządzenie nie obsługuje komunikacji z Apple Watch"
+        }
+        
+        if let message = message {
+            shouldPerformSegue = false
+            presentAlertController(withTitle: message.title, message: message.body, buttonText: "OK")
             self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
         }
-        if !outcome.messageCaption.isEmpty {
-            presentAlertController(withTitle: outcome.messageCaption, message: outcome.messageBody, buttonText: "OK")
-        }
-        return outcome.shouldPerformSegue
+        return shouldPerformSegue
     }
     
     //Update cells when returning from DetailVC
