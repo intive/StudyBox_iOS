@@ -35,6 +35,7 @@
 		2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */; };
 		2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */; };
 		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
+		2DF09D691CD3A64C00AD20F8 /* NewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */; };
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
@@ -110,6 +111,7 @@
 		2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+isConnected.swift"; sourceTree = "<group>"; };
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
 		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
+		2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDataManager.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */,
 				AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */,
 				8044F6341CC05555001C9E8A /* ServerCommunication.swift */,
+				2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */,
 				723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */,
 				2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */,
+				2DF09D691CD3A64C00AD20F8 /* NewDataManager.swift in Sources */,
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
