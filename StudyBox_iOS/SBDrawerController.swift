@@ -46,6 +46,13 @@ class SBDrawerController: MMDrawerController {
         super.panGestureCallback(panGesture)
 
         postPanGestureCallback(panGesture, animationTime: animationTime)
+        if panGesture.state == .Recognized {
+            hideKeyboard()
+        }
+    }
+    
+    func hideKeyboard() {
+        UIApplication.sharedApplication().sendAction(#selector(resignFirstResponder), to: nil, from: nil, forEvent: nil)
     }
 
     private func prePanGestureCallback(panGesture: UIPanGestureRecognizer) {
@@ -152,4 +159,5 @@ class SBDrawerController: MMDrawerController {
                 self.statusBarViewBackgroundColor = UIColor.sb_Graphite()
             })
     }
+    
 }

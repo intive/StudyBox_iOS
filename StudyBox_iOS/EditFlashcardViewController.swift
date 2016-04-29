@@ -12,7 +12,7 @@ enum EditFlashcardViewControllerMode {
     case Add, Modify(flashcard: Flashcard, updateCallback: ((flashcard: Flashcard) -> Void)?)
 }
 
-class EditFlashcardViewController: StudyBoxViewController {
+class EditFlashcardViewController: StudyBoxViewController, UIGestureRecognizerDelegate, UITextViewDelegate {
     
     @IBOutlet weak var searchbarWrapperTopConstraint: NSLayoutConstraint!
 
@@ -28,12 +28,16 @@ class EditFlashcardViewController: StudyBoxViewController {
     var decksBar: UISearchBar {
         return searchController.searchBar
     }
+    
+    var currentlyEditedTextView: UITextView?
 
     @IBOutlet weak var choosenDeckLabel: UILabel!
     @IBOutlet weak var searchBarWrapper: UIView!
-    @IBOutlet weak var questionField: UITextField!
-    @IBOutlet weak var tipField: UITextField!
-    @IBOutlet weak var answerField: UITextField!
+    @IBOutlet weak var questionField: UITextView!
+    @IBOutlet weak var tipField: UITextView!
+    @IBOutlet weak var answerField: UITextView!
+    @IBOutlet var editFields: [UITextView]!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var flashcard: Flashcard!
     private var deck: Deck?
@@ -118,10 +122,11 @@ class EditFlashcardViewController: StudyBoxViewController {
     
     func cancelEdition() {
         let alert = UIAlertController(title: "Przerwij", message: "Czy na pewno chcesz przerwać edycję fiszki?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Nie", style: .Default, handler: nil))
+        
         alert.addAction(UIAlertAction(title: "Tak", style: .Default, handler: { (_) in
             self.dismissViewControllerAnimated(true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Nie", style: .Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
     }
     
@@ -137,25 +142,73 @@ class EditFlashcardViewController: StudyBoxViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         assert(mode != nil, "mode not choosen!")
-        
-        clearInput()
+ 
         updateUiForCurrentMode()
+
+        let graphite = UIColor.sb_Graphite().CGColor
+        for field in editFields {
+            field.layer.borderColor = graphite
+            field.layer.borderWidth = 1
+            field.layer.cornerRadius = 10
+            field.delegate = self
+        }
+        scrollView.delegate = self
+    }
+    
+    func keyboardWillHide() {
+        scrollView.contentInset.bottom = 0
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
+            guard frame.size.height > 0, let textView = currentlyEditedTextView else {
+                return
+            }
+            scrollView.contentInset.bottom = frame.size.height
+            
+            let yPosition = scrollView.frame.origin.y + textView.frame.origin.y
+            
+            let bottom = yPosition + textView.frame.height + 8
+            if bottom > frame.origin.y {
+                scrollView.setContentOffset(CGPoint(x: 0, y: bottom - frame.origin.y), animated: true)
+            } else if scrollView.contentOffset.y > textView.frame.origin.y {
+                scrollView.setContentOffset(CGPoint(x: 0, y: textView.frame.origin.y), animated: true)
+            }
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         searchBarWrapper.addSubview(decksBar)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+ 
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         searchController.view.removeFromSuperview()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         dummySearchController?.searchBar.sizeToFit()
     }
+    func textViewDidEndEditing(textView: UITextView) {
+        currentlyEditedTextView = nil
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        currentlyEditedTextView = textView
+        
+        
+    }
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        currentlyEditedTextView?.endEditing(true)
+    }
+    
     @IBAction func saveAction(sender: UIBarButtonItem) {
         
         guard let answer = answerField.text, question = questionField.text where !answer.isEmpty && !question.isEmpty else {
@@ -267,5 +320,4 @@ extension EditFlashcardViewController: UISearchControllerDelegate, UITableViewDa
         searchController.active = false
     }
     
-
 }
