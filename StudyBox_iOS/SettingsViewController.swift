@@ -97,7 +97,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
-        var shouldPerformSegue = false
+        var shouldPerformSegue = true
         var message: (title: String, body: String)?
         
         if let userDecks = dataManager?.decks(false) where userDecks.isEmpty {
