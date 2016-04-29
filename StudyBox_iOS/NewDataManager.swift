@@ -35,12 +35,12 @@ enum DeckRoutes  {
 }
 
 enum UserRoutes  {
-    case Me
+    case Current
     case None
     
     func url(baseURL: NSURL) -> NSURL {
         switch self {
-        case .Me:
+        case .Current:
             return baseURL.URLByAppendingPathComponent("/me")
         case .None:
             return baseURL
@@ -110,12 +110,13 @@ public class RemoteDataManager {
     }
     
     
-    private func request(method: Alamofire.Method, toURL url: NSURL, parameters: [String: AnyObject?]? = nil) -> Request { //swiftlint:disable:this variable_name
+    private func request(method: Alamofire.Method, url: NSURL, parameters: [String: AnyObject?]? = nil) -> Request { //swiftlint:disable:this variable_name
         let params = parameters.flatMap { $0 as? [String: AnyObject] }
         return Alamofire.request(method, url, parameters: params, headers: sharedHeaders())
     }
     
-    /// Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak, w przypadku jego braku dostajemy dane o które prosiliśmy
+    // Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak,
+    // w przypadku jego braku dostajemy dane o które prosiliśmy
     private func wrongRequest(response rawJson: AnyObject) -> ServerResultType<JSON> {
         let json = JSON(rawJson)
         if let message = json.dictionary?["message"]?.string {
@@ -124,9 +125,10 @@ public class RemoteDataManager {
         return .Success(obj: json)
     }
     
-    /// Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil, w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
+    // Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil,
+    // w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
     public func login(username: String, password: String, completion: (ServerResultType<String?>)->()) {
-        request(.GET, toURL: url(fromRouter: Router.User(child: .Me))).responseJSON {
+        request(.GET, url: url(fromRouter: Router.User(child: .Current))).responseJSON {
             
             switch $0.result {
             case .Success(let value):
@@ -152,7 +154,7 @@ public class RemoteDataManager {
     
     
     func deck(deckID: String?, completion: (ServerResultType<JSON>) -> ()) {
-        request(.GET, toURL: url(fromRouter: Router.Deck(child: .Get(id: deckID)))).responseJSON {
+        request(.GET, url: url(fromRouter: Router.Deck(child: .Get(id: deckID)))).responseJSON {
             switch $0.result {
             case .Success(let value):
                 completion(self.wrongRequest(response: value))
@@ -168,7 +170,7 @@ public class RemoteDataManager {
         let parameters: [String: AnyObject?] = ["includeOwn": includeOwn,
                                                 "flashcardsCount": flashcardsCount,
                                                 "name": name]
-        request(.GET, toURL: url(fromRouter: Router.Deck(child: .Get(id: nil))), parameters: parameters).responseJSON {
+        request(.GET, url: url(fromRouter: Router.Deck(child: .Get(id: nil))), parameters: parameters).responseJSON {
             switch $0.result {
             case .Success(let value):
                 let json = JSON(value).arrayValue
@@ -180,9 +182,9 @@ public class RemoteDataManager {
         }
     }
     
-    func addFlashcard(deckId:String, flashcardInJSON json: JSON, completion: (ServerResultType<JSON>) -> ()) {
+    func addFlashcard(deckId: String, flashcardInJSON json: JSON, completion: (ServerResultType<JSON>) -> ()) {
         
-        request(.POST, toURL: url(fromRouter: Router.Flashcards(child: .Post, deckId: deckId))).responseJSON {
+        request(.POST, url: url(fromRouter: Router.Flashcards(child: .Post, deckId: deckId))).responseJSON {
             switch $0.result {
             case .Success(let value):
                 completion(self.wrongRequest(response: value))
@@ -192,11 +194,6 @@ public class RemoteDataManager {
         }
         
     }
-    //
-    //    // te metody można by jeszcze uprościć i uwspólnić tworzenie obiektu JSON i przekazywanie błędu. Czasem jednak możemy potrzebować
-    //}
-    //
-    ////w tej klasie odbywa się komunikacja z bazą danych, opakowuje ona Realm
 }
 
 
@@ -219,8 +216,8 @@ class LocalDataManager {
         return true
     }
     
-    func get<T: Object>(withId id: String) -> T? {
-        return realm?.objectForPrimaryKey(T.self, key: id)
+    func get<T: Object>(withId idKey: String) -> T? {
+        return realm?.objectForPrimaryKey(T.self, key: idKey)
     }
     
     func get<T: Object>(filter: String?) -> [T]? {
@@ -263,25 +260,25 @@ enum DataManagerResponse<T, E> {
     case Error(obj: E)
 }
 
-enum New_DataManagerError: ErrorType {
+enum NewDataManagerError: ErrorType {
     case JSONParseError, ServerError, NoDeckWithGivenId, ErrorWith(message: String)
 }
 
-public class New_DataManager {
+public class NewDataManager {
     
     let remoteDataManager = RemoteDataManager()
     let localDataManager = LocalDataManager()
     
 
 
-    func getDeck(withDeckId deckID: String, mode: ManagerMode, managerCompletion: (DataManagerResponse<Deck, New_DataManagerError>)-> ()) {
+    func getDeck(withDeckId deckID: String, mode: ManagerMode, managerCompletion: (DataManagerResponse<Deck, NewDataManagerError>)-> ()) {
        
-        var localBlock:(()-> (DataManagerResponse<Deck, New_DataManagerError>))?
+        var localBlock:(()-> (DataManagerResponse<Deck, NewDataManagerError>))?
         
         /// Obsluga roznych trybow - tylko lokalne dane, tylko dane z serwera, badz dane lokalne w przypadku braku dostepu do danych z serwera
         if mode.contains(.Local) {
             localBlock = {
-                if let deck:Deck = self.localDataManager.get(withId: deckID) {
+                if let deck: Deck = self.localDataManager.get(withId: deckID) {
                     return .Success(obj: deck)
                 } else {
                     return .Error(obj: .NoDeckWithGivenId)
@@ -314,4 +311,3 @@ public class New_DataManager {
         }
     }
 }
-
