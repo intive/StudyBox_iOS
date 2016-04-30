@@ -281,103 +281,76 @@ struct ManagerMode: OptionSetType {
     
 }
 
-public enum DataManagerResponseType {
-    case Local, Remote
+enum DataManagerResponse<T> {
+    case Success(obj: T)
+    case Error(obj: ErrorType)
 }
 
-public enum DataManagerResponse<T> {
-    case Success(obj: T, responseType: DataManagerResponseType)
-    case Error(obj: NewDataManagerError, responseType: DataManagerResponseType)
+enum NewDataManagerError: ErrorType {
+    case JSONParseError, ServerError, NoDeckWithGivenId, ErrorWith(message: String)
 }
 
-public enum NewDataManagerError: ErrorType {
-    case JSONParseError, ServerError(err: ErrorType), NoDeckWithGivenId, ErrorWithMessage(text: String), DataManagerWasDeinitialized
-}
-private class ModeHandler<T> {
-    var local: (() -> DataManagerResponse<T>)?
-    
-    // wylaczenie ostrzezenia swift lint, aby moc przypisac wartosci poszczegolnym blokom bez ponownego pisania ich typu 
-    // force unwrap zamiast optional, poniewaz w przypadku odwolania do serwera powinny zostac obsluzone oba przypadki
-    var remote: (remoteSuccess: ((obj: JSON) -> DataManagerResponse<T>)!, //swiftlint:disable:this force_unwrapping
-                remoteError: ((obj: ErrorType) -> DataManagerResponse<T>)!)?     //swiftlint:disable:this force_unwrapping
-
-    var remoteRequest: (() -> ())?
-    var activeMode: ManagerMode
-    var callback: (DataManagerResponse<T>) -> ()
-    
-    init(withMode mode: ManagerMode, callback: (DataManagerResponse<T>) -> ()) {
-        self.activeMode = mode
-        self.callback = callback
-    }
-    
-    func start() {
-        if activeMode.contains(.Remote) {
-            remoteRequest?()
-        } else if activeMode == .Local {
-            local?()
-        }
-    }
-    
-}
 public class NewDataManager {
     
     let remoteDataManager = RemoteDataManager()
     let localDataManager = LocalDataManager()
     
-    var mode: ManagerMode = [.Local, .Remote]
     
-    private func handlerCompletion<T>(handler: ModeHandler<T>) -> (response: ServerResultType<JSON>) -> () {
-    
-        return { response in
-            
-            switch response {
-            case .Success(let obj):
-                if let result = handler.remote?.remoteSuccess(obj: obj) {
-                    handler.callback(result)
+    private func complicatedMethod<ServerResponseObject, DataManaterResponseObject>(mode: ManagerMode,
+                                   localFetch:() -> (DataManaterResponseObject?),
+                                   remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
+                                   remoteParsing: (obj: ServerResponseObject) -> (DataManaterResponseObject?),
+                                   completion: (DataManagerResponse<DataManaterResponseObject>) -> ()) {
+        
+        var localBlock:(()-> (DataManagerResponse<DataManaterResponseObject>))?
+        
+        /// Obsluga roznych trybow - tylko lokalne dane, tylko dane z serwera, badz dane lokalne w przypadku braku dostepu do danych z serwera
+        if mode.contains(.Local) {
+            localBlock = {
+                if let obj = localFetch() {
+                    return .Success(obj: obj)
+                } else {
+                    return .Error(obj: NewDataManagerError.NoDeckWithGivenId)
                 }
-            case .Error(let obj):
-                if handler.activeMode.contains(.Local), let local = handler.local {
-                    handler.callback(local())
-                } else if let result = handler.remote?.remoteError(obj: obj) {
-                    handler.callback(result)
-                }
-                
             }
-            handler.remoteRequest = nil
+        }
+        
+        if mode.contains(.Remote) {
+            remoteFetch { response in
+                switch response {
+                case.Success(let obj):
+                    if let obj = remoteParsing(obj: obj) {
+                        completion(.Success(obj: obj))
+                    } else {
+                        completion(.Error(obj: NewDataManagerError.JSONParseError))
+                    }
+                case .Error:
+                    if let localBlock = localBlock {
+                        completion(localBlock())
+                    } else {
+                        completion(.Error(obj: NewDataManagerError.ServerError))
+                    }
+                }
+            }
+        } else if let localBlock = localBlock {
+            completion(localBlock())
         }
     }
-    
-    func getDeck(withDeckId deckID: String, managerCompletion: (DataManagerResponse<Deck>)-> ()) {
-       
-        let modeBlocks = ModeHandler<Deck>(withMode: mode, callback: managerCompletion)
-       
-        modeBlocks.remoteRequest = {
-            self.remoteDataManager.deck(deckID, completion: self.handlerCompletion(modeBlocks))
-        }
-        modeBlocks.local = {
-            if let deck  = self.localDataManager.get(Deck.self, withId: deckID) {
-                return .Success(obj: deck, responseType: .Local)
-            } else {
-                return .Error(obj: .NoDeckWithGivenId, responseType: .Local)
-            }
-        }
+
+    func getDeck(withDeckId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
         
-        modeBlocks.remote = (nil, nil)
+        self.complicatedMethod(mode,
+            localFetch: {
+                self.localDataManager.get(Deck.self, withId: deckID)
+            },
+            remoteFetch: {
+                self.remoteDataManager.deck(deckID, completion: $0)
+            },
+            remoteParsing: {
+                return Deck.withJSON($0)
+            },
+            completion: completion
+        )
         
-        modeBlocks.remote?.remoteSuccess = {  obj in
-            if let deck = Deck.withJSON(obj) {
-                self.localDataManager.update(deck)
-                return .Success(obj: deck, responseType: .Remote)
-            } else {
-                return .Error(obj: .JSONParseError, responseType: .Remote)
-            }
-            
-        }
-        
-        modeBlocks.remote?.remoteError = { obj in
-            return .Error(obj: .ServerError(err: obj), responseType: .Remote)
-        }
-        
-        modeBlocks.start()
     }
 }
