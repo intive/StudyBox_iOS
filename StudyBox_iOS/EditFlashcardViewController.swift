@@ -12,7 +12,7 @@ enum EditFlashcardViewControllerMode {
     case Add, Modify(flashcard: Flashcard, updateCallback: ((flashcard: Flashcard) -> Void)?)
 }
 
-class EditFlashcardViewController: StudyBoxViewController, UIGestureRecognizerDelegate, UITextViewDelegate {
+class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     
     @IBOutlet weak var searchbarWrapperTopConstraint: NSLayoutConstraint!
 
@@ -117,7 +117,6 @@ class EditFlashcardViewController: StudyBoxViewController, UIGestureRecognizerDe
             flashcard = nil
             deck = nil
         }
-        
     }
     
     func cancelEdition() {
@@ -135,7 +134,6 @@ class EditFlashcardViewController: StudyBoxViewController, UIGestureRecognizerDe
         if !isVisible {
             dummySearchController?.searchBar.removeFromSuperview()
             dummySearchController = nil
-            
         }
     }
 
@@ -202,9 +200,8 @@ class EditFlashcardViewController: StudyBoxViewController, UIGestureRecognizerDe
     
     func textViewDidBeginEditing(textView: UITextView) {
         currentlyEditedTextView = textView
-        
-        
     }
+    
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         currentlyEditedTextView?.endEditing(true)
     }
