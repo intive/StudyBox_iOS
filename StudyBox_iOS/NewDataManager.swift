@@ -26,7 +26,7 @@ enum DeckRoutes  {
     func url(baseURL: NSURL) -> NSURL {
         switch self {
         case .Single(let id):
-            return baseURL.URLByAppendingPathComponent("\(id)")
+            return baseURL.URLByAppendingPathComponent(id)
         case .All:
             return baseURL
         }
@@ -120,54 +120,51 @@ public class RemoteDataManager {
     
     // Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak,
     // w przypadku jego braku dostajemy dane o które prosiliśmy
-    private func wrongRequest(responseValue rawJson: AnyObject) -> ServerResultType<JSON> {
-        let json = JSON(rawJson)
-        if let message = json.dictionary?["message"]?.string {
-            return .Error(err: ServerError.ErrorWithMessage(text: message))
+    private func handleResponse<T>(responseResult result: Alamofire.Result<AnyObject, NSError>,
+                                               completion: (ServerResultType<T>)->(),
+                                               successAction: ((JSON) -> (T))) {
+        switch result {
+        case .Success(let val):
+            let json = JSON(val)
+            if let message = json.dictionary?["message"]?.string {
+                completion(.Error(err: ServerError.ErrorWithMessage(text: message)))
+            } else {
+                completion(.Success(obj: successAction(json)))
+            }
+            
+        case .Failure(let err):
+            completion(.Error(err: err))
         }
-        return .Success(obj: json)
+        
+    }
+    
+    private func handleResponse(responseResult result: Alamofire.Result<AnyObject, NSError>,
+                                completion: (ServerResultType<JSON>)->(),
+                                successAction: ((JSON) -> ())? = nil ) {
+        handleResponse(responseResult: result, completion: completion) { json in
+            return json
+        }
     }
     
     // Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil,
     // w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
     public func login(username: String, password: String, completion: (ServerResultType<JSON>)->()) {
         request(.GET, url: url(fromRouter: Router.User(child: .Current))).responseJSON {
-            
-            switch $0.result {
-            case .Success(let value):
-                
-                let wrongRequest = self.wrongRequest(responseValue: value)
-                
-                if case .Success = wrongRequest {
-                    self.username = username
-                    self.password = password
-                    self.defaults.setObject(username, forKey: UserDefaultsKeys.LoggedUserUsername.rawValue)
-                    self.defaults.setObject(password, forKey: UserDefaultsKeys.LoggedUserPassword.rawValue)
-                }
-                completion(wrongRequest)
-                
-            case .Failure(let error):
-                completion(.Error(err: error))
+            self.handleResponse(responseResult: $0.result, completion: completion) { json in
+                self.username = username
+                self.password = password
+                self.defaults.setObject(username, forKey: UserDefaultsKeys.LoggedUserUsername.rawValue)
+                self.defaults.setObject(password, forKey: UserDefaultsKeys.LoggedUserPassword.rawValue)
+                return json
             }
         }
     }
     
     
-    func deck(deckID: String?, completion: (ServerResultType<JSON>) -> ()) {
-        var router: Router!
-        if let deckID = deckID {
-            router = Router.Deck(child: .Single(id: deckID))
-        } else {
-            router = Router.Deck(child: .All)
-        }
+    func deck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
+        let router = Router.Deck(child: .Single(id: deckID))
         request(.GET, url: url(fromRouter: router)).responseJSON {
-            switch $0.result {
-            case .Success(let value):
-                completion(self.wrongRequest(responseValue: value))
-            case .Failure(let error):
-                completion(.Error(err: error))
-            }
-            
+            self.handleResponse(responseResult: $0.result, completion: completion)
         }
     }
     
@@ -177,26 +174,16 @@ public class RemoteDataManager {
                                                 "flashcardsCount": flashcardsCount,
                                                 "name": name]
         request(.GET, url: url(fromRouter: Router.Deck(child: .All)), parameters: parameters).responseJSON {
-            switch $0.result {
-            case .Success(let value):
-                let json = JSON(value).arrayValue
-                completion(.Success(obj: json))
-            case .Failure(let error):
-                completion(.Error(err: error))
+            self.handleResponse(responseResult: $0.result, completion: completion) { json in
+                return json.arrayValue
             }
-            
         }
     }
     
     func addFlashcard(deckId: String, flashcardInJSON json: JSON, completion: (ServerResultType<JSON>) -> ()) {
         
         request(.POST, url: url(fromRouter: Router.Flashcards(child: .Post, deckId: deckId))).responseJSON {
-            switch $0.result {
-            case .Success(let value):
-                completion(self.wrongRequest(responseValue: value))
-            case .Failure(let error):
-                completion(.Error(err: error))
-            }
+            self.handleResponse(responseResult: $0.result, completion: completion)
         }
         
     }
@@ -287,7 +274,7 @@ enum DataManagerResponse<T> {
 }
 
 enum NewDataManagerError: ErrorType {
-    case JSONParseError, ServerError, NoDeckWithGivenId, ErrorWith(message: String)
+    case JSONParseError, ServerError, NoLocalData, ErrorWith(message: String)
 }
 
 public class NewDataManager {
@@ -296,13 +283,13 @@ public class NewDataManager {
     let localDataManager = LocalDataManager()
     
     
-    private func complicatedMethod<ServerResponseObject, DataManaterResponseObject>(mode: ManagerMode,
-                                   localFetch:() -> (DataManaterResponseObject?),
+    private func handleRequest<ServerResponseObject, DataManagerResponseObject>(mode: ManagerMode,
+                                   localFetch:() -> (DataManagerResponseObject?),
                                    remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
-                                   remoteParsing: (obj: ServerResponseObject) -> (DataManaterResponseObject?),
-                                   completion: (DataManagerResponse<DataManaterResponseObject>) -> ()) {
+                                   remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
+                                   completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
         
-        var localBlock:(()-> (DataManagerResponse<DataManaterResponseObject>))?
+        var localBlock:(()-> (DataManagerResponse<DataManagerResponseObject>))?
         
         /// Obsluga roznych trybow - tylko lokalne dane, tylko dane z serwera, badz dane lokalne w przypadku braku dostepu do danych z serwera
         if mode.contains(.Local) {
@@ -310,7 +297,7 @@ public class NewDataManager {
                 if let obj = localFetch() {
                     return .Success(obj: obj)
                 } else {
-                    return .Error(obj: NewDataManagerError.NoDeckWithGivenId)
+                    return .Error(obj: NewDataManagerError.NoLocalData)
                 }
             }
         }
@@ -337,9 +324,9 @@ public class NewDataManager {
         }
     }
 
-    func getDeck(withDeckId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
+    func deck(withId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
         
-        self.complicatedMethod(mode,
+        self.handleRequest(mode,
             localFetch: {
                 self.localDataManager.get(Deck.self, withId: deckID)
             },
