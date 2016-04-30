@@ -22,3 +22,7 @@ target 'StudyBox_iOSTests' do
     shared_pods
 end
 
+target 'StudyBox Watch App Extension' do
+    platform :watchos, '2.0'
+    pod 'RealmSwift', '~> 0.98.5'
+end

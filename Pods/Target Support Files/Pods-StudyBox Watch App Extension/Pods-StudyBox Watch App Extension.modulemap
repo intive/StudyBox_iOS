@@ -1,0 +1,6 @@
+framework module Pods_StudyBox_Watch_App_Extension {
+  umbrella header "Pods-StudyBox Watch App Extension-umbrella.h"
+
+  export *
+  module * { export * }
+}
