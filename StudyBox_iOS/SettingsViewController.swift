@@ -101,13 +101,11 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         var message: (title: String, body: String)?
         
         if let userDecks = dataManager?.decks(false) where userDecks.isEmpty {
-                message?.title = "Brak talii"
-                message?.body = "Nie masz na swoim urządzeniu żadnych talii do synchronizacji."
+            message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
         }
         
         if !WCSession.isSupported() {
-            message?.title = "Niekompatybilne urządzenie"
-            message?.body = "Twoje urządzenie nie obsługuje komunikacji z Apple Watch"
+            message = (title: "Niekompatybilne urządzenie", body: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch")
         }
         
         if let message = message {
