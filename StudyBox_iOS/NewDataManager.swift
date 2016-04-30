@@ -255,9 +255,9 @@ struct ManagerMode: OptionSetType {
     
 }
 
-enum DataManagerResponse<T, E> {
+enum DataManagerResponse<T> {
     case Success(obj: T)
-    case Error(obj: E)
+    case Error(obj: ErrorType)
 }
 
 enum NewDataManagerError: ErrorType {
@@ -269,45 +269,59 @@ public class NewDataManager {
     let remoteDataManager = RemoteDataManager()
     let localDataManager = LocalDataManager()
     
-
-
-    func getDeck(withDeckId deckID: String, mode: ManagerMode, managerCompletion: (DataManagerResponse<Deck, NewDataManagerError>)-> ()) {
-       
-        var localBlock:(()-> (DataManagerResponse<Deck, NewDataManagerError>))?
+    
+    private func complicatedMethod<ServerResponseObject, DataManaterResponseObject>(mode: ManagerMode,
+                                   localFetch:() -> (DataManaterResponseObject?),
+                                   remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
+                                   remoteParsing: (obj: ServerResponseObject) -> (DataManaterResponseObject?),
+                                   completion: (DataManagerResponse<DataManaterResponseObject>) -> ()) {
+        
+        var localBlock:(()-> (DataManagerResponse<DataManaterResponseObject>))?
         
         /// Obsluga roznych trybow - tylko lokalne dane, tylko dane z serwera, badz dane lokalne w przypadku braku dostepu do danych z serwera
         if mode.contains(.Local) {
             localBlock = {
-                if let deck: Deck = self.localDataManager.get(withId: deckID) {
-                    return .Success(obj: deck)
+                if let obj = localFetch() {
+                    return .Success(obj: obj)
                 } else {
-                    return .Error(obj: .NoDeckWithGivenId)
+                    return .Error(obj: NewDataManagerError.NoDeckWithGivenId)
                 }
             }
         }
         
         if mode.contains(.Remote) {
-            remoteDataManager.deck(deckID, completion: { (response) in
+            remoteFetch { response in
                 switch response {
                 case.Success(let obj):
-                    if let deck = Deck.withJSON(obj) {
-                        managerCompletion(.Success(obj: deck))
+                    if let obj = remoteParsing(obj: obj) {
+                        completion(.Success(obj: obj))
                     } else {
-                        managerCompletion(.Error(obj: .JSONParseError))
+                        completion(.Error(obj: NewDataManagerError.JSONParseError))
                     }
                 case .Error:
                     if let localBlock = localBlock {
-                        managerCompletion(localBlock())
+                        completion(localBlock())
                     } else {
-                        managerCompletion(.Error(obj: .ServerError))
+                        completion(.Error(obj: NewDataManagerError.ServerError))
                     }
                 case .WrongRequest(let msg):
-                    managerCompletion(.Error(obj: .ErrorWith(message: msg)))
+                    completion(.Error(obj: NewDataManagerError.ErrorWith(message: msg)))
                 }
-                
-            })
+            }
         } else if let localBlock = localBlock {
-            managerCompletion(localBlock())
+            completion(localBlock())
         }
+    }
+
+    func getDeck(withDeckId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
+        
+        self.complicatedMethod(mode, localFetch: {
+            self.localDataManager.get(withId: deckID)
+            }, remoteFetch: {
+                self.remoteDataManager.deck(deckID, completion: $0)
+            }, remoteParsing: {
+                return Deck.withJSON($0)
+            }, completion: completion)
+        
     }
 }
