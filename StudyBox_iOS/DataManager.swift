@@ -31,14 +31,6 @@ class DataManager {
     // !!! Zmiana tabeli Flashcard nie jest brana pod uwagę
     private var deckDBChanged: Bool = true
     
-    init(){
-        
-        // usuwanie tylko wtedy gdy jest internet i najpewniej nie w tym miejscu. Na razie ze względu na 
-        // DummyData
-        // TODOs: relocate removeDecksFromDatabase() and check for internet connection
-        removeDecksFromDatabase()
-    }
-    
     func decks(sorted: Bool) -> [Deck] {
         
         // wczytuje talie jeśli nastąpiła zmiana w tabeli talii w bazie lub puste
