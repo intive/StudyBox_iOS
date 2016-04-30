@@ -161,7 +161,7 @@ class EditFlashcardViewController: StudyBoxViewController, UIGestureRecognizerDe
     
     func keyboardWillShow(notification: NSNotification) {
         if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
-            guard frame.size.height > 0, let textView = currentlyEditedTextView else {
+            guard frame.size.height > 0 && mm_drawerController.openSide == .None, let textView = currentlyEditedTextView else {
                 return
             }
             scrollView.contentInset.bottom = frame.size.height
