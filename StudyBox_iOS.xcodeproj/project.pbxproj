@@ -63,6 +63,10 @@
 		AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */; };
 		AEEAB5701CCE3A5400BB60FA /* TestLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */; };
 		CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */; };
+		CEC47A8D1CD2AB6200B0C9C0 /* expressions.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC47A8B1CD2AB6200B0C9C0 /* expressions.json */; };
+		CEC47A901CD2AD5800B0C9C0 /* base.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC47A8E1CD2AD5800B0C9C0 /* base.json */; };
+		CEC47A961CD2AEC000B0C9C0 /* pl.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC47A941CD2AEC000B0C9C0 /* pl.json */; };
+		CEC47A991CD2B69800B0C9C0 /* en.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC47A971CD2B69800B0C9C0 /* en.json */; };
 		CEC69B531C946CC100295808 /* TestLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC69B521C946CC100295808 /* TestLogic.swift */; };
 		CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */; };
 		CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */; };
@@ -142,6 +146,12 @@
 		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
 		AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogicTests.swift; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
+		CEC47A8C1CD2AB6200B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/expressions.json; sourceTree = "<group>"; };
+		CEC47A8F1CD2AD5800B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/base.json; sourceTree = "<group>"; };
+		CEC47A951CD2AEC000B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/pl.json; sourceTree = "<group>"; };
+		CEC47A981CD2B69800B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/en.json; sourceTree = "<group>"; };
+		CEC47AA01CD2B9C500B0C9C0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		CEC47AA11CD2B9C500B0C9C0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Main.strings; sourceTree = "<group>"; };
 		CEC69B521C946CC100295808 /* TestLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogic.swift; sourceTree = "<group>"; };
 		CEE9F6951C8A231D00961ABA /* UIFont+sbFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+sbFont.swift"; sourceTree = "<group>"; };
 		CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
@@ -220,6 +230,10 @@
 			isa = PBXGroup;
 			children = (
 				72CA9E881CB10B37005631DC /* SettingsViewController.swift */,
+				CEC47A8E1CD2AD5800B0C9C0 /* base.json */,
+				CEC47A971CD2B69800B0C9C0 /* en.json */,
+				CEC47A941CD2AEC000B0C9C0 /* pl.json */,
+				CEC47A8B1CD2AB6200B0C9C0 /* expressions.json */,
 				72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */,
 				72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */,
 				72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */,
@@ -445,9 +459,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC47A991CD2B69800B0C9C0 /* en.json in Resources */,
 				A1341DCD1C81E76900AFD04E /* LaunchScreen.storyboard in Resources */,
+				CEC47A8D1CD2AB6200B0C9C0 /* expressions.json in Resources */,
 				A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */,
+				CEC47A961CD2AEC000B0C9C0 /* pl.json in Resources */,
 				CEE9F69A1C8AE1F800961ABA /* Lato-Regular.ttf in Resources */,
+				CEC47A901CD2AD5800B0C9C0 /* base.json in Resources */,
 				CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */,
 				2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */,
 				A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */,
@@ -651,6 +669,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A1341DC41C81E76900AFD04E /* Base */,
+				CEC47AA11CD2B9C500B0C9C0 /* pl */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -659,8 +678,41 @@
 			isa = PBXVariantGroup;
 			children = (
 				A1341DCC1C81E76900AFD04E /* Base */,
+				CEC47AA01CD2B9C500B0C9C0 /* pl */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CEC47A8B1CD2AB6200B0C9C0 /* expressions.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEC47A8C1CD2AB6200B0C9C0 /* Base */,
+			);
+			name = expressions.json;
+			sourceTree = "<group>";
+		};
+		CEC47A8E1CD2AD5800B0C9C0 /* base.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEC47A8F1CD2AD5800B0C9C0 /* Base */,
+			);
+			name = base.json;
+			sourceTree = "<group>";
+		};
+		CEC47A941CD2AEC000B0C9C0 /* pl.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEC47A951CD2AEC000B0C9C0 /* Base */,
+			);
+			name = pl.json;
+			sourceTree = "<group>";
+		};
+		CEC47A971CD2B69800B0C9C0 /* en.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEC47A981CD2B69800B0C9C0 /* Base */,
+			);
+			name = en.json;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

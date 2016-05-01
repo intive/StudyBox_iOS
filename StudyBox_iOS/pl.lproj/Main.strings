@@ -1,0 +1,93 @@
+
+/* Class = "UILabel"; text = "Score"; ObjectID = "1rX-H8-gbr"; */
+"1rX-H8-gbr.text" = "Score";
+
+/* Class = "UIButton"; normalTitle = "Anuluj"; ObjectID = "2zs-qr-d1p"; */
+"2zs-qr-d1p.normalTitle" = "Anuluj";
+
+/* Class = "UITextField"; placeholder = "E-MAIL"; ObjectID = "5dY-gB-BHf"; */
+"5dY-gB-BHf.placeholder" = "E-MAIL";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5pW-OJ-jk1"; */
+"5pW-OJ-jk1.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "E-MAIL"; ObjectID = "7fq-pj-29a"; */
+"7fq-pj-29a.placeholder" = "E-MAIL";
+
+/* Class = "UILabel"; text = "Wybrana talia"; ObjectID = "7h0-u0-NRa"; */
+"7h0-u0-NRa.text" = "Wybrana talia";
+
+/* Class = "UILabel"; text = "Pytanie"; ObjectID = "8Tv-ua-ypq"; */
+"8Tv-ua-ypq.text" = "Pytanie";
+
+/* Class = "UILabel"; text = "ScoreLabel"; ObjectID = "9qH-5l-kfE"; */
+"9qH-5l-kfE.text" = "ScoreLabel";
+
+/* Class = "UIButton"; normalTitle = "Podpowiedź"; ObjectID = "AYi-mT-KA8"; */
+"AYi-mT-KA8.normalTitle" = "Podpowiedź";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CN8-h0-Hn7"; */
+"CN8-h0-Hn7.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CiD-Z9-8yo"; */
+"CiD-Z9-8yo.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "HQy-6y-vjM"; */
+"HQy-6y-vjM.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "ZAREJESTRUJ"; ObjectID = "HvJ-RZ-puj"; */
+"HvJ-RZ-puj.normalTitle" = "ZAREJESTRUJ";
+
+/* Class = "UIButton"; normalTitle = "ZALOGUJ"; ObjectID = "Ib1-31-XT5"; */
+"Ib1-31-XT5.normalTitle" = "ZALOGUJ";
+
+/* Class = "UILabel"; text = "Twój wynik:"; ObjectID = "Mau-dA-yg9"; */
+"Mau-dA-yg9.text" = "Twój wynik:";
+
+/* Class = "UITextField"; placeholder = "HASŁO"; ObjectID = "MsS-od-E0r"; */
+"MsS-od-E0r.placeholder" = "HASŁO";
+
+/* Class = "UIButton"; normalTitle = "Test z błędnych fiszek"; ObjectID = "Nzp-hV-QQH"; */
+"Nzp-hV-QQH.normalTitle" = "Test z błędnych fiszek";
+
+/* Class = "UIButton"; normalTitle = "Utwórz nowego użytkownika"; ObjectID = "OF9-kg-Wha"; */
+"OF9-kg-Wha.normalTitle" = "Utwórz nowego użytkownika";
+
+/* Class = "UILabel"; text = "Odpowiedź"; ObjectID = "RZB-4x-LNY"; */
+"RZB-4x-LNY.text" = "Odpowiedź";
+
+/* Class = "UITextField"; placeholder = "Pytanie"; ObjectID = "f9O-8o-KoL"; */
+"f9O-8o-KoL.placeholder" = "Pytanie";
+
+/* Class = "UITextField"; placeholder = "Podpowiedź"; ObjectID = "iWh-AY-ia9"; */
+"iWh-AY-ia9.placeholder" = "Podpowiedź";
+
+/* Class = "UIButton"; normalTitle = "Wejdź jako niezarejestrowany użytkownik"; ObjectID = "j8E-Lg-vrU"; */
+"j8E-Lg-vrU.normalTitle" = "Wejdź jako niezarejestrowany użytkownik";
+
+/* Class = "UITextField"; placeholder = "HASŁO"; ObjectID = "kLM-jb-EWp"; */
+"kLM-jb-EWp.placeholder" = "HASŁO";
+
+/* Class = "UITextField"; placeholder = "Odpowiedź"; ObjectID = "kqM-Cv-6Mv"; */
+"kqM-Cv-6Mv.placeholder" = "Odpowiedź";
+
+/* Class = "UIBarButtonItem"; title = "Zapisz"; ObjectID = "lF3-ka-wXW"; */
+"lF3-ka-wXW.title" = "Zapisz";
+
+/* Class = "UILabel"; text = "Gratulacje!"; ObjectID = "lxN-Bt-U7Z"; */
+"lxN-Bt-U7Z.text" = "Gratulacje!";
+
+/* Class = "UILabel"; text = "Menu name"; ObjectID = "m86-hQ-g9n"; */
+"m86-hQ-g9n.text" = "Menu name";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "n1c-TM-8eG"; */
+"n1c-TM-8eG.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Deck name"; ObjectID = "nyQ-60-stZ"; */
+"nyQ-60-stZ.title" = "Deck name";
+
+/* Class = "UIButton"; normalTitle = "Powrót do listy talii"; ObjectID = "tgM-lc-h5I"; */
+"tgM-lc-h5I.normalTitle" = "Powrót do listy talii";
+
+/* Class = "UITextField"; placeholder = "POWTÓRZ HASŁO"; ObjectID = "vTh-fE-OH6"; */
+"vTh-fE-OH6.placeholder" = "POWTÓRZ HASŁO";

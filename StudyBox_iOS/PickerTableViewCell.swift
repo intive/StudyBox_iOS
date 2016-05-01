@@ -15,7 +15,7 @@ class PickerTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDa
     let defaults = NSUserDefaults.standardUserDefaults()
     
     let pickerFrequencyNumbers = [1, 2, 3, 4, 5, 10, 15, 20, 30, 45, 60]
-    let pickerFrequencyTypes = ["minut", "godzin", "dni"]
+    let pickerFrequencyTypes = ["minuty", "godziny", "dni"]
     
     override func awakeFromNib() {
         super.awakeFromNib()
