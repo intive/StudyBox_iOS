@@ -148,7 +148,7 @@ class DataManagerTests: XCTestCase {
     
     func testRemoveFlashcard(){
         let manager = DataManager.managerWithDummyData()
-        let deck = manager.decks(false)[0]
+        let deck = manager.decks(true)[0]
         
         let flashcard = (try! manager.flashcards(forDeck: deck))[0]
         
@@ -161,14 +161,14 @@ class DataManagerTests: XCTestCase {
     }
     
     
-    /*
+    
     func testPerformanceFilter(){
         let manager = DataManager()
         for i in 1...1000 {
-            manager.addDeck("\(i)")
+            manager.addDeck("zzz \(i)")
         }
         let docks = manager.decks(false)
-        let firstDock = docks[0]
+        let firstDock = docks[500]
         self.measureBlock {
             let _ =  docks.filter( { $0.serverID == firstDock.serverID })
             
@@ -183,15 +183,15 @@ class DataManagerTests: XCTestCase {
     func testPerformanceUniqueId(){
         let manager = DataManager()
         for i in 1...1000 {
-            manager.addDeck("\(i)")
+            manager.addDeck("zzz \(i)")
         }
         let docks = manager.decks(false)
-        let firstDock = docks[0]
+        let firstDock = docks[500]
         
         self.measureBlock {
             manager.deck(withId: firstDock.serverID)
         }
     }
-    */
+    
     
 }
