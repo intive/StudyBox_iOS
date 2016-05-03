@@ -94,13 +94,6 @@ public class RemoteDataManager {
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
-    private func sharedHeaders() -> [String: String]? {
-        if let username = Router.username,
-            let password = Router.password {
-            return ["Authentication": "\(username):\(password)-encodedwithbase64"]
-        }
-        return nil
-    }
     
     // Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak,
     // w przypadku jego braku dostajemy dane o które prosiliśmy
@@ -133,6 +126,8 @@ public class RemoteDataManager {
     // Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil,
     // w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
     public func login(username: String, password: String, completion: (ServerResultType<JSON>)->()) {
+        Router.username = username
+        Router.password = password 
         request(Router.GetCurrentUser).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion) { json in
                 self.defaults.setObject(username, forKey: Utils.NSUserDefaultsKeys.LoggedUserUsername)
