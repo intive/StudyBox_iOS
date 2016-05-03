@@ -24,3 +24,16 @@ extension Dictionary {
         }
     }
 }
+
+extension Dictionary {
+    //Converts [String:AnyObject?] to [String:AnyObject]
+    static func flat(dict: Dictionary<Key, Value?>) -> Dictionary<Key, Value> {
+        let y  = dict.flatMap { (val) -> (Key, Value)? in
+            if let value = val.1  {
+                return (val.0, value)
+            }
+            return nil
+        }
+        return Dictionary(y)
+    }
+}

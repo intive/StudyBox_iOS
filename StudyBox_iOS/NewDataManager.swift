@@ -1,6 +1,6 @@
 //
 //  StudyBox_iOS
-//
+//  Created by Kacper Czapp and Damian Malarczyk
 //  Copyright © 2016 BLStream. All rights reserved.
 //
 
@@ -14,8 +14,8 @@ enum Router: URLRequestConvertible {
     static let serverURL = defaults.objectForKey("customServerURLFromSettings") as? NSURL ??
         NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
     
-    static var username: String? = defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
-    static var password: String? = defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+    static var username: String? = defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserUsername) ?? "studyBoxiOS@patronage.com"
+    static var password: String? = defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword) ?? "StudyBoxPassword"
     
     case GetAllDecks(params: [String: AnyObject]?)
     case GetSingleDeck(id: String)
@@ -31,20 +31,12 @@ enum Router: URLRequestConvertible {
     
     var method: Alamofire.Method {
         switch self {
-        case .GetAllDecks:
-            return .GET
-        case .GetSingleDeck:
-            return .GET
-        case .GetAllFlashcards:
+        case .GetAllDecks, GetSingleDeck, GetAllFlashcards, GetSingleFlashcard, GetCurrentUser:
             return .GET
         case .AddSingleFlashcard:
             return .POST
-        case .GetSingleFlashcard:
-            return .GET
         case .RemoveSingleFlashcard:
             return .DELETE
-        case .GetCurrentUser:
-            return .GET
         }
     }
     
@@ -102,12 +94,9 @@ public class RemoteDataManager {
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
-    private lazy var username: String? = self.defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserUsername) ?? "studyBoxiOS@patronage.com"
-    private lazy var password: String? = self.defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword) ?? "StudyBoxPassword"
-    
     private func sharedHeaders() -> [String: String]? {
-        if let username = username,
-            let password = password {
+        if let username = Router.username,
+            let password = Router.password {
             return ["Authentication": "\(username):\(password)-encodedwithbase64"]
         }
         return nil
@@ -146,10 +135,8 @@ public class RemoteDataManager {
     public func login(username: String, password: String, completion: (ServerResultType<JSON>)->()) {
         request(Router.GetCurrentUser).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion) { json in
-                self.username = username
-                self.password = password
                 self.defaults.setObject(username, forKey: Utils.NSUserDefaultsKeys.LoggedUserUsername)
-                self.defaults.setObject(password, forKey: Utils.NSUserDefaultsKeys.LoggedUserUsername)
+                self.defaults.setObject(password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
                 return json
             }
         }
@@ -167,16 +154,10 @@ public class RemoteDataManager {
             ["includeOwn": includeOwn,
              "flashcardsCount": flashcardsCount,
              "name": name]
+
+        let flatMap = Dictionary.flat(parameters)
         
-        //converts [String:AnyObject?] to [String:AnyObject]?
-        let flatMap  = parameters.flatMap { (val) -> (String, AnyObject)? in
-            if let value = val.1  {
-                return (val.0, value)
-            }
-            return nil
-        }
-        
-        request(Router.GetAllDecks(params: Dictionary(flatMap)).URLRequest).responseJSON {
+        request(Router.GetAllDecks(params: flatMap).URLRequest).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion) { json in
                 return json.arrayValue
             }

@@ -46,7 +46,7 @@
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFlashcardViewController.swift */; };
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
-		725E3C121CD89A810081470D /* Dictionary+merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C111CD89A810081470D /* Dictionary+merge.swift */; };
+		725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */; };
 		725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */; };
 		725E3C161CD89B160081470D /* Deck+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C151CD89B160081470D /* Deck+JSON.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
@@ -124,7 +124,7 @@
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFlashcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFlashcardViewController.swift; sourceTree = "<group>"; };
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
-		725E3C111CD89A810081470D /* Dictionary+merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge.swift"; sourceTree = "<group>"; };
+		725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge+flat.swift"; sourceTree = "<group>"; };
 		725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+URLByAppendingElements.swift"; sourceTree = "<group>"; };
 		725E3C151CD89B160081470D /* Deck+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+JSON.swift"; sourceTree = "<group>"; };
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
 				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
 				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
-				725E3C111CD89A810081470D /* Dictionary+merge.swift */,
+				725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */,
 				725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */,
 				725E3C151CD89B160081470D /* Deck+JSON.swift */,
 			);
@@ -629,7 +629,7 @@
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
-				725E3C121CD89A810081470D /* Dictionary+merge.swift in Sources */,
+				725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
 				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
 				2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */,
