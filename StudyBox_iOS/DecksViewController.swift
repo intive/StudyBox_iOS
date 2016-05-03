@@ -214,7 +214,6 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         
         if let deck = source?[indexPath.row] {
             let resetSearchUI = {
-                
                 self.searchController.active = false
             }
             do {
@@ -230,13 +229,28 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                             if let amount = UInt32(title) {
                                 resetSearchUI()
                                 self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
+                            } else {
+                                if let start = title.rangeOfString("(")?.endIndex, stop = title.rangeOfString(")")?.startIndex,
+                                    tit = UInt32(title.substringWithRange(start ..< stop)) {
+                                    resetSearchUI()
+                                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(tit)))
+                                }
                             }
                         }
                     }
                     
-                    let amounts = [ "1", "5", "10", "15", "20"]
+                    let amounts = [ 1, 5, 10, 15, 20 ]
+                    
                     for amount in amounts {
-                        alertAmount.addAction(UIAlertAction(title: amount, style: .Default, handler: handler))
+                        if amount < flashcards.count {
+                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default, handler: handler))
+                        } else {
+                            alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(flashcards.count) + ")", style: .Default, handler: handler))
+                            break
+                        }
+                    }
+                    if amounts.last < flashcards.count{
+                        alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(flashcards.count) + ")", style: .Default, handler: handler))
                     }
                     alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                     
