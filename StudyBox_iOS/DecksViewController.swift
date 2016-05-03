@@ -241,17 +241,21 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                     
                     let amounts = [ 1, 5, 10, 15, 20 ]
                     
+                    var amountFlashcardsNotHiden: Int = 0
+                    for flashcard in flashcards {
+                        if flashcard.hidden == false {
+                            amountFlashcardsNotHiden += 1
+                        }
+                    }
+                    
                     for amount in amounts {
-                        if amount < flashcards.count {
+                        if amount < amountFlashcardsNotHiden {
                             alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default, handler: handler))
                         } else {
-                            alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(flashcards.count) + ")", style: .Default, handler: handler))
                             break
                         }
                     }
-                    if amounts.last < flashcards.count{
-                        alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(flashcards.count) + ")", style: .Default, handler: handler))
-                    }
+                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default, handler: handler))
                     alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                     
                     self.presentViewController(alertAmount, animated: true, completion:nil)
