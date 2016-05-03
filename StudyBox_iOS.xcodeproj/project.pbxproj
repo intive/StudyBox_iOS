@@ -46,6 +46,9 @@
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFlashcardViewController.swift */; };
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
+		725E3C121CD89A810081470D /* Dictionary+merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C111CD89A810081470D /* Dictionary+merge.swift */; };
+		725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */; };
+		725E3C161CD89B160081470D /* Deck+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C151CD89B160081470D /* Deck+JSON.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */; };
@@ -121,6 +124,9 @@
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFlashcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFlashcardViewController.swift; sourceTree = "<group>"; };
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		725E3C111CD89A810081470D /* Dictionary+merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge.swift"; sourceTree = "<group>"; };
+		725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+URLByAppendingElements.swift"; sourceTree = "<group>"; };
+		725E3C151CD89B160081470D /* Deck+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+JSON.swift"; sourceTree = "<group>"; };
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -283,6 +289,9 @@
 				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
 				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
 				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
+				725E3C111CD89A810081470D /* Dictionary+merge.swift */,
+				725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */,
+				725E3C151CD89B160081470D /* Deck+JSON.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -593,6 +602,7 @@
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
 				72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */,
 				72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */,
+				725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */,
 				2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */,
 				CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */,
 				2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */,
@@ -615,9 +625,11 @@
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
+				725E3C161CD89B160081470D /* Deck+JSON.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
+				725E3C121CD89A810081470D /* Dictionary+merge.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
 				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
 				2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */,

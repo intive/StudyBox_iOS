@@ -9,69 +9,84 @@ import RealmSwift
 import Alamofire
 import SwiftyJSON
 
-enum FlashcardRoutes {
-    case Post
+enum Router: URLRequestConvertible {
+    static let defaults = NSUserDefaults.standardUserDefaults()
+    static let serverURL = defaults.objectForKey("customServerURLFromSettings") as? NSURL ??
+        NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
     
-    func url(baseURL: NSURL) -> NSURL {
+    static var username: String? = defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+    static var password: String? = defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+    
+    case GetAllDecks(params: [String: AnyObject]?)
+    case GetSingleDeck(id: String)
+    //dodać RemoveDeck, UpdateDeck
+    
+    case GetAllFlashcards(inDeckID: String, params: [String:AnyObject]?)
+    case AddSingleFlashcard(question: String, answer: String, isHidden: Bool)
+    case GetSingleFlashcard(inDeckID: String, flashcardID: String)
+    case RemoveSingleFlashcard(inDeckID: String, flashcardID: String)
+    
+    case GetCurrentUser
+    //dodać AddUser
+    
+    var method: Alamofire.Method {
         switch self {
-        case .Post:
-            return baseURL.URLByAppendingPathComponent("flashcards")
+        case .GetAllDecks:
+            return .GET
+        case .GetSingleDeck:
+            return .GET
+        case .GetAllFlashcards:
+            return .GET
+        case .AddSingleFlashcard:
+            return .POST
+        case .GetSingleFlashcard:
+            return .GET
+        case .RemoveSingleFlashcard:
+            return .DELETE
+        case .GetCurrentUser:
+            return .GET
         }
     }
-}
-
-enum DeckRoutes  {
-    case Single(id:String)
-    case All
-    func url(baseURL: NSURL) -> NSURL {
+    
+    var path: NSURL {
         switch self {
-        case .Single(let id):
-            return baseURL.URLByAppendingPathComponent(id)
-        case .All:
-            return baseURL
+        case GetAllDecks:
+            return Router.serverURL.URLByAppendingPathComponent("decks")
+            
+        case GetSingleDeck(let id):
+            return Router.serverURL.URLByAppendingElements(["decks", id])
+            
+        case GetCurrentUser:
+            return Router.serverURL.URLByAppendingElements(["users", "me"])
+            
+            /*...*/
+        default:
+            return Router.serverURL
         }
     }
-}
-
-enum UserRoutes  {
-    case Current
-    case None
     
-    func url(baseURL: NSURL) -> NSURL {
-        switch self {
-        case .Current:
-            return baseURL.URLByAppendingPathComponent("me")
-        case .None:
-            return baseURL
-        }
-    }
-}
-
-// prywatna klasa trzymająca adresy endpointów
-enum Router {
-    
-    case User(child: UserRoutes)
-    case Deck(child: DeckRoutes)
-    case Flashcards(child: FlashcardRoutes, deckId: String)
-    
-    func URL(baseURL: NSURL) -> NSURL {
-        switch self {
-        case User(let child):
-            
-            let url = baseURL.URLByAppendingPathComponent("users")
-            return child.url(url)
-        case Deck(let child):
-            let url = baseURL.URLByAppendingPathComponent("decks")
-            return child.url(url)
-            
-        case Flashcards(let child, let deckId):
-            var url = baseURL.URLByAppendingPathComponent("decks")
-            url = url.URLByAppendingPathComponent(deckId)
-            return child.url(url)
-            
+    var URLRequest: NSMutableURLRequest {
+        let request = NSMutableURLRequest(URL: self.path)
+        request.HTTPMethod = self.method.rawValue
+        request.URL = self.path
+        
+        if let username = Router.username,
+            let password = Router.password {
+            request.allHTTPHeaderFields = ["Authentication": "\(username):\(password)-encodedwithbase64"]
         }
         
+        switch self {
+        //Add only methods that use parameters (check in Apiary)
+        case .GetAllDecks(let params):
+            return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
+        case .GetAllFlashcards(_, let params):
+            return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
+            
+        default: //for methods that don't use parameters
+            return request
+        }
     }
+    
 }
 
 public enum ServerError: ErrorType {
@@ -83,23 +98,13 @@ public enum ServerResultType<T> {
     case Error(err: ErrorType)
 }
 
-//
-////tylko w tej klasie odbywa się komunikacja z serwerem i trzyma stan sesji, opakowuje ona Alamofire
-
-enum UserDefaultsKeys: String {
-    case LoggedUserUsername = "username"
-    case LoggedUserPassword = "password"
-}
-
 public class RemoteDataManager {
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
-    private lazy var username: String? = self.defaults.stringForKey(UserDefaultsKeys.LoggedUserUsername.rawValue)
-    private lazy var password: String? = self.defaults.stringForKey(UserDefaultsKeys.LoggedUserPassword.rawValue)
+    private lazy var username: String? = self.defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserUsername) ?? "studyBoxiOS@patronage.com"
+    private lazy var password: String? = self.defaults.stringForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword) ?? "StudyBoxPassword"
     
-    private let serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
-    //
     private func sharedHeaders() -> [String: String]? {
         if let username = username,
             let password = password {
@@ -108,21 +113,11 @@ public class RemoteDataManager {
         return nil
     }
     
-    private func url(fromRouter router: Router) -> NSURL {
-        return router.URL(serverURL)
-    }
-    
-    
-    private func request(method: Alamofire.Method, url: NSURL, parameters: [String: AnyObject?]? = nil) -> Request { //swiftlint:disable:this variable_name
-        let params = parameters.flatMap { $0 as? [String: AnyObject] }
-        return Alamofire.request(method, url, parameters: params, headers: sharedHeaders())
-    }
-    
     // Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak,
     // w przypadku jego braku dostajemy dane o które prosiliśmy
     private func handleResponse<T>(responseResult result: Alamofire.Result<AnyObject, NSError>,
-                                               completion: (ServerResultType<T>)->(),
-                                               successAction: ((JSON) -> (T))) {
+                                completion: (ServerResultType<T>)->(),
+                                successAction: ((JSON) -> (T))) {
         switch result {
         case .Success(let val):
             let json = JSON(val)
@@ -139,8 +134,8 @@ public class RemoteDataManager {
     }
     
     private func handleResponse(responseResult result: Alamofire.Result<AnyObject, NSError>,
-                                completion: (ServerResultType<JSON>)->(),
-                                successAction: ((JSON) -> ())? = nil ) {
+                                               completion: (ServerResultType<JSON>)->(),
+                                               successAction: ((JSON) -> ())? = nil ) {
         handleResponse(responseResult: result, completion: completion) { json in
             return json
         }
@@ -149,46 +144,59 @@ public class RemoteDataManager {
     // Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil,
     // w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
     public func login(username: String, password: String, completion: (ServerResultType<JSON>)->()) {
-        request(.GET, url: url(fromRouter: Router.User(child: .Current))).responseJSON {
+        request(Router.GetCurrentUser).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion) { json in
                 self.username = username
                 self.password = password
-                self.defaults.setObject(username, forKey: UserDefaultsKeys.LoggedUserUsername.rawValue)
-                self.defaults.setObject(password, forKey: UserDefaultsKeys.LoggedUserPassword.rawValue)
+                self.defaults.setObject(username, forKey: Utils.NSUserDefaultsKeys.LoggedUserUsername)
+                self.defaults.setObject(password, forKey: Utils.NSUserDefaultsKeys.LoggedUserUsername)
                 return json
             }
         }
     }
     
-    
     func deck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
-        let router = Router.Deck(child: .Single(id: deckID))
-        request(.GET, url: url(fromRouter: router)).responseJSON {
+        request(Router.GetSingleDeck(id: deckID)).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion)
         }
     }
     
     
     func findDecks(includeOwn includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (ServerResultType<[JSON]>)->()) {
-        let parameters: [String: AnyObject?] = ["includeOwn": includeOwn,
-                                                "flashcardsCount": flashcardsCount,
-                                                "name": name]
-        request(.GET, url: url(fromRouter: Router.Deck(child: .All)), parameters: parameters).responseJSON {
+        let parameters: [String: AnyObject?] =
+            ["includeOwn": includeOwn,
+             "flashcardsCount": flashcardsCount,
+             "name": name]
+        
+        //converts [String:AnyObject?] to [String:AnyObject]?
+        let flatMap  = parameters.flatMap { (val) -> (String, AnyObject)? in
+            if let value = val.1  {
+                return (val.0, value)
+            }
+            return nil
+        }
+        
+        request(Router.GetAllDecks(params: Dictionary(flatMap)).URLRequest).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion) { json in
                 return json.arrayValue
             }
         }
     }
     
-    func addFlashcard(deckId: String, flashcardInJSON json: JSON, completion: (ServerResultType<JSON>) -> ()) {
+    func addFlashcard(deckId: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
         
-        request(.POST, url: url(fromRouter: Router.Flashcards(child: .Post, deckId: deckId))).responseJSON {
+        request(Router.AddSingleFlashcard(question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden)).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion)
         }
+    }
+    
+    func addDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
         
+        request(Router.GetSingleDeck(id: deck.serverID)).responseJSON {
+            self.handleResponse(responseResult: $0.result, completion: completion)
+        }
     }
 }
-
 
 class LocalDataManager {
     private let realm = try? Realm()
@@ -235,31 +243,6 @@ class LocalDataManager {
     
 }
 
-extension Deck {
-    class func withJSON(json: JSON) -> Deck? {
-        if let jsonDict = json.dictionary {
-            if let id = jsonDict["id"]?.string, name = jsonDict["name"]?.string {
-                return Deck(serverID: id, name: name)
-            }
-        }
-        return nil
-    }
-    
-    class func arrayWithJSON(json: JSON) -> [Deck] {
-        var decks = [Deck]()
-        if let jsonArray = json.array {
-            jsonArray.forEach {
-                if let deck = Deck.withJSON($0) {
-                    decks.append(deck)
-                }
-            }
-        }
-        return decks
-    }
-}
-
-
-
 struct ManagerMode: OptionSetType {
     var rawValue: Int
     
@@ -284,10 +267,10 @@ public class NewDataManager {
     
     
     private func handleRequest<ServerResponseObject, DataManagerResponseObject>(mode: ManagerMode,
-                                   localFetch:() -> (DataManagerResponseObject?),
-                                   remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
-                                   remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
-                                   completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
+                               localFetch:() -> (DataManagerResponseObject?),
+                               remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
+                               remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
+                               completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
         
         var localBlock:(()-> (DataManagerResponse<DataManagerResponseObject>))?
         
@@ -323,20 +306,20 @@ public class NewDataManager {
             completion(localBlock())
         }
     }
-
+    
     func deck(withId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
         
         self.handleRequest(mode,
-            localFetch: {
-                self.localDataManager.get(Deck.self, withId: deckID)
+                           localFetch: {
+                            self.localDataManager.get(Deck.self, withId: deckID)
             },
-            remoteFetch: {
-                self.remoteDataManager.deck(deckID, completion: $0)
+                           remoteFetch: {
+                            self.remoteDataManager.deck(deckID, completion: $0)
             },
-            remoteParsing: {
-                return Deck.withJSON($0)
+                           remoteParsing: {
+                            return Deck.withJSON($0)
             },
-            completion: completion
+                           completion: completion
         )
         
     }
