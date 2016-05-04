@@ -51,6 +51,9 @@
 		725E3C161CD89B160081470D /* Deck+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C151CD89B160081470D /* Deck+JSON.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
+		72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D50BB01CDA69AC00CB0271 /* Router.swift */; };
+		72D50BB31CDA69E600CB0271 /* RemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D50BB21CDA69E600CB0271 /* RemoteDataManager.swift */; };
+		72D50BB51CDA6A4800CB0271 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D50BB41CDA6A4800CB0271 /* LocalDataManager.swift */; };
 		72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */; };
 		72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
@@ -129,6 +132,9 @@
 		725E3C151CD89B160081470D /* Deck+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+JSON.swift"; sourceTree = "<group>"; };
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
+		72D50BB01CDA69AC00CB0271 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		72D50BB21CDA69E600CB0271 /* RemoteDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDataManager.swift; sourceTree = "<group>"; };
+		72D50BB41CDA6A4800CB0271 /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -179,30 +185,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D0FC8611CCBEBEA003177D1 /* Data */ = {
+		2D0FC8611CCBEBEA003177D1 /* Data Manager */ = {
 			isa = PBXGroup;
 			children = (
-				2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */,
-				2D2843661C88CEEC006E5E21 /* DataModel.swift */,
+				72D50BB01CDA69AC00CB0271 /* Router.swift */,
+				72D50BB41CDA6A4800CB0271 /* LocalDataManager.swift */,
+				72D50BB21CDA69E600CB0271 /* RemoteDataManager.swift */,
+				2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */,
 				2D2843681C88D03D006E5E21 /* DataManager.swift */,
 				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
-				2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */,
-				AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */,
-				AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */,
 				8044F6341CC05555001C9E8A /* ServerCommunication.swift */,
-				2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */,
 			);
-			name = Data;
+			name = "Data Manager";
 			sourceTree = "<group>";
 		};
 		2D2843651C88CEDE006E5E21 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2D0FC8611CCBEBEA003177D1 /* Data Manager */,
+				2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */,
+				2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */,
+				2D2843661C88CEEC006E5E21 /* DataModel.swift */,
+				AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */,
+				2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */,
+				2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */,
+				AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */,
 				2D6100161CC0527500F9CB2A /* SBRepresentable.swift */,
 				2D6100141CC0522300F9CB2A /* Searchable.swift */,
-				2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */,
-				2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */,
-				2D0FC8611CCBEBEA003177D1 /* Data */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -595,6 +604,7 @@
 				2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */,
 				2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */,
 				2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */,
+				72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
 				2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */,
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
@@ -634,9 +644,11 @@
 				2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */,
 				2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */,
 				AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */,
+				72D50BB51CDA6A4800CB0271 /* LocalDataManager.swift in Sources */,
 				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
 				2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
+				72D50BB31CDA69E600CB0271 /* RemoteDataManager.swift in Sources */,
 				723849421C8885F7009605EE /* ScoreViewController.swift in Sources */,
 				72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */,
 			);
