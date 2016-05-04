@@ -127,11 +127,11 @@
                                     <constraint firstAttribute="height" constant="50" id="sdI-1y-Jji"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhQ-Ae-lE1">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhQ-Ae-lE1">
                                 <rect key="frame" x="20" y="122" width="560" height="470"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kfn-pw-SW3">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="414"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="416"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wybrana talia" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-u0-NRa">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -139,30 +139,33 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Pytanie" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f9O-8o-KoL">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" text="Pytanie" translatesAutoresizingMaskIntoConstraints="NO" id="VUh-bE-pKc">
                                                 <rect key="frame" x="0.0" y="36" width="560" height="150"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="Ore-ED-xt6"/>
+                                                    <constraint firstAttribute="height" constant="150" id="DDr-Ej-RHM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Podpowiedź" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWh-AY-ia9">
-                                                <rect key="frame" x="0.0" y="201" width="560" height="48"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Podpowiedź" translatesAutoresizingMaskIntoConstraints="NO" id="YKh-3v-Eq2">
+                                                <rect key="frame" x="0.0" y="201" width="560" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="aMz-zy-gjo"/>
+                                                    <constraint firstAttribute="height" constant="50" id="GO8-J9-kN0"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Odpowiedź" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqM-Cv-6Mv">
-                                                <rect key="frame" x="0.0" y="264" width="560" height="150"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Odpowiedź" translatesAutoresizingMaskIntoConstraints="NO" id="l4A-pd-pc4">
+                                                <rect key="frame" x="0.0" y="266" width="560" height="150"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="TZt-tC-aMg"/>
+                                                    <constraint firstAttribute="height" constant="150" id="EWl-5W-SpZ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -194,12 +197,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="answerField" destination="kqM-Cv-6Mv" id="J8z-tb-yhn"/>
+                        <outlet property="answerField" destination="l4A-pd-pc4" id="ROG-UC-joO"/>
                         <outlet property="choosenDeckLabel" destination="7h0-u0-NRa" id="Sf8-T0-3On"/>
-                        <outlet property="questionField" destination="f9O-8o-KoL" id="ODT-Qc-RPZ"/>
+                        <outlet property="questionField" destination="VUh-bE-pKc" id="5FO-lc-LHM"/>
+                        <outlet property="scrollView" destination="vhQ-Ae-lE1" id="7ao-wS-0gg"/>
                         <outlet property="searchBarWrapper" destination="EUD-8B-Kzz" id="kZR-X1-Xam"/>
                         <outlet property="searchbarWrapperTopConstraint" destination="3xf-BU-f1g" id="JaG-qx-2NV"/>
-                        <outlet property="tipField" destination="iWh-AY-ia9" id="oDm-8Q-teW"/>
+                        <outlet property="tipField" destination="YKh-3v-Eq2" id="cFg-6n-M29"/>
+                        <outletCollection property="editFields" destination="VUh-bE-pKc" collectionClass="NSMutableArray" id="mGA-H6-u2d"/>
+                        <outletCollection property="editFields" destination="YKh-3v-Eq2" collectionClass="NSMutableArray" id="Jh3-bt-5gg"/>
+                        <outletCollection property="editFields" destination="l4A-pd-pc4" collectionClass="NSMutableArray" id="ldf-GT-jCI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRj-W9-DEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
