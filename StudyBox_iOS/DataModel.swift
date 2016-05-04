@@ -26,7 +26,7 @@ enum Tip: CustomStringConvertible, Equatable  {
     }
 }
 
-class Flashcard: Object, Equatable, UniquelyIdentifiable {
+class Flashcard: Object, UniquelyIdentifiable {
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck?
@@ -56,7 +56,7 @@ class Flashcard: Object, Equatable, UniquelyIdentifiable {
     }
 }
 
-class Deck: Object, Equatable, UniquelyIdentifiable, Searchable {
+class Deck: Object, UniquelyIdentifiable, Searchable {
     
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic var name: String = ""

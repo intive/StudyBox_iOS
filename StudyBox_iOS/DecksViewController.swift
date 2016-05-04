@@ -224,21 +224,6 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                 let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
                     let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
                     
-                    func handler(act: UIAlertAction) {
-                        if let title = act.title {
-                            if let amount = UInt32(title) {
-                                resetSearchUI()
-                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(amount)))
-                            } else {
-                                if let start = title.rangeOfString("(")?.endIndex, stop = title.rangeOfString(")")?.startIndex,
-                                    tit = UInt32(title.substringWithRange(start ..< stop)) {
-                                    resetSearchUI()
-                                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(tit)))
-                                }
-                            }
-                        }
-                    }
-                    
                     let amounts = [ 1, 5, 10, 15, 20 ]
                     
                     var amountFlashcardsNotHiden: Int = 0
@@ -250,12 +235,18 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                     
                     for amount in amounts {
                         if amount < amountFlashcardsNotHiden {
-                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default, handler: handler))
+                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
+                                resetSearchUI()
+                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amount))))
+                            })
                         } else {
                             break
                         }
                     }
-                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default, handler: handler))
+                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
+                        resetSearchUI()
+                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden))))
+                        })
                     alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                     
                     self.presentViewController(alertAmount, animated: true, completion:nil)
