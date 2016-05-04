@@ -1,0 +1,24 @@
+{
+    "dni": {
+        "one": "dzień",
+        "other": "dni"
+    },
+    
+    "minuty": {
+        "one": "minutę",
+        "few": "minuty",
+        "many": "minut"
+    },
+    
+    "godziny": {
+        "one": "godzinę",
+        "few": "godziny",
+        "many": "godzin"
+    },
+    
+    "amount-decks": {
+        "one": "talię",
+        "few": "talie",
+        "many": "talii"
+    }
+}

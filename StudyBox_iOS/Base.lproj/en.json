@@ -1,0 +1,21 @@
+{
+    "dni": {
+        "one": "day",
+        "other": "days"
+    },
+    
+    "minuty": {
+        "one": "minute",
+        "other": "minutes"
+    },
+    
+    "godziny": {
+        "one": "hours",
+        "other": "hours"
+    },
+    
+    "amount-decks": {
+        "one": "deck",
+        "other": "decks"
+    }
+}
