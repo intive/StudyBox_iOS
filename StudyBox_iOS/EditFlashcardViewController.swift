@@ -33,9 +33,9 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
 
     @IBOutlet weak var choosenDeckLabel: UILabel!
     @IBOutlet weak var searchBarWrapper: UIView!
-    @IBOutlet weak var questionField: UITextView!
-    @IBOutlet weak var tipField: UITextView!
-    @IBOutlet weak var answerField: UITextView!
+    @IBOutlet weak var questionField: UIPlaceholderTextView!
+    @IBOutlet weak var tipField: UIPlaceholderTextView!
+    @IBOutlet weak var answerField: UIPlaceholderTextView!
     @IBOutlet var editFields: [UITextView]!
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -140,7 +140,9 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         assert(mode != nil, "mode not choosen!")
- 
+        answerField.placeholder = "Odpowiedź"
+        questionField.placeholder = "Pytanie"
+        tipField.placeholder = "Podpowiedź"
         updateUiForCurrentMode()
 
         let graphite = UIColor.sb_Graphite().CGColor
