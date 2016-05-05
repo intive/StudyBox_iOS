@@ -89,13 +89,13 @@ public class NewDataManager {
         
     }
     
-    func login(username: String, password: String, completion: (DataManagerResponse<User?>) -> ()) {
+    func login(email: String, password: String, completion: (DataManagerResponse<User?>) -> ()) {
         self.handleRequest(.Remote,
             localFetch: {
                 return nil
             },
             remoteFetch: {
-                self.remoteDataManager.login(username, password: password, completion: $0)
+                self.remoteDataManager.login(email, password: password, completion: $0)
             },
             remoteParsing: {
                 return $0

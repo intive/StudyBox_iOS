@@ -41,6 +41,33 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         dataSource = self
     }
     
+    func loginToServer(withEmail email: String, password: String) {
+        let newDataManager = UIApplication.appDelegate().newDataManager
+        
+        newDataManager.login(email, password: password, completion: { response in
+            var msg = "Błąd logowania"
+            
+            switch response {
+            case .Success(let usr):
+                
+                guard let user = usr else {
+                    break
+                }
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setObject(user.email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
+                defaults.setObject(user.password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                self.successfulLoginTransition()
+                return
+                
+            case .Error(let err):
+                if case .ErrorWithMessage(let txt)? = (err as? ServerError){
+                    msg = txt
+                }
+            }
+            self.presentAlertController(withTitle: "", message: msg, buttonText: "Ok")
+        })
+    }
+    
     func loginWithInputData(){
         
         var alertMessage: String?
@@ -61,12 +88,15 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         if areTextFieldsEmpty() {
             alertMessage = "Wypełnij wszystkie pola!"
         }
-        
         if let message = alertMessage {
             presentAlertController(withTitle: "", message: message, buttonText: "Ok")
-        } else {
-            successfulLoginTransition()
+            return
         }
+        guard let email = emailTextField.text, password = passwordTextField.text else {
+            return
+        }
+        loginToServer(withEmail: email, password: password)
+        
     }
 
     @IBAction func login(sender: UIButton) {

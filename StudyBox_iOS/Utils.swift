@@ -35,7 +35,7 @@ class Utils {
         static let PickerFrequencyNumberKey = "pickerFrequencyNumber"
         static let PickerFrequencyTypeKey = "pickerFrequencyType"
         static let DecksToSynchronizeKey = "decksToSynchronize"
-        static let LoggedUserUsername = "username"
+        static let LoggedUserEmail = "email"
         static let LoggedUserPassword = "password"
     }
 }

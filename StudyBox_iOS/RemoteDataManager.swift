@@ -24,7 +24,18 @@ enum RemoteDataManagerError: ErrorType {
 
 class RemoteDataManager {
     
-    private(set) var user: User?
+    private(set) var user: User? {
+        didSet {
+            if let user = user {
+                if let basicEncoded = "\(user.email):\(user.password)".base64Encoded() {
+                    basicAuth = "Basic \(basicEncoded)"
+                }
+            } else {
+                basicAuth = nil
+            }
+        }
+    }
+    private var basicAuth: String?
     
     func updateCredentials(email: String, password: String) throws  {
         guard user == nil else {
@@ -34,11 +45,11 @@ class RemoteDataManager {
     }
     
     private func request(request: URLRequestConvertible) -> Request {
-        let afRequest = Alamofire.request(request)
-        if let user = user {
-            return afRequest.authenticate(user: user.email, password: user.password)
+        let mutableRequest = request.URLRequest
+        if let basic = basicAuth {
+            mutableRequest.addValue(basic, forHTTPHeaderField: "Authorization")
         }
-        return afRequest
+        return Alamofire.request(mutableRequest)
     }
     
     // Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak,
@@ -72,8 +83,15 @@ class RemoteDataManager {
     
     // Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil,
     // w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
-    func login(username: String, password: String, completion: (ServerResultType<User?>)->()) {
-        request(Router.GetCurrentUser).authenticate(user: username, password: password).responseJSON {
+    func login(email: String, password: String, completion: (ServerResultType<User?>)->()) {
+        guard let basicAuth = "\(email):\(password)".base64Encoded() else {
+            completion(.Error(err: (ServerError.ErrorWithMessage(text: "Niepoprawne dane"))))
+            return
+        }
+        let loginRequest = Router.GetCurrentUser.URLRequest
+        loginRequest.addValue("Basic \(basicAuth)", forHTTPHeaderField: "Authorization")
+        
+        request(loginRequest).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion) { json in
                 if let email = json.dictionary?["email"]?.string {
                     self.user = User(email: email, password: password)
