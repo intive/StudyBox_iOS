@@ -26,6 +26,7 @@
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
 		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
+		2D7E038F1CDBC37E003B5294 /* UIPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */; };
 		2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */; };
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
@@ -105,6 +106,7 @@
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
+		2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPlaceholderTextView.swift; sourceTree = "<group>"; };
 		2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksCollectionViewLayout.swift; sourceTree = "<group>"; };
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */,
 				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
 				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
+				2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
+				2D7E038F1CDBC37E003B5294 /* UIPlaceholderTextView.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
