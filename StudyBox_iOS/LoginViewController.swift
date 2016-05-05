@@ -45,14 +45,11 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         let newDataManager = UIApplication.appDelegate().newDataManager
         
         newDataManager.login(email, password: password, completion: { response in
-            var msg = "Błąd logowania"
+            var errorMessage = "Błąd logowania"
             
             switch response {
-            case .Success(let usr):
-                
-                guard let user = usr else {
-                    break
-                }
+            case .Success(let user):
+               
                 let defaults = NSUserDefaults.standardUserDefaults()
                 defaults.setObject(user.email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
                 defaults.setObject(user.password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
@@ -61,10 +58,10 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
                 
             case .Error(let err):
                 if case .ErrorWithMessage(let txt)? = (err as? ServerError){
-                    msg = txt
+                    errorMessage = txt
                 }
             }
-            self.presentAlertController(withTitle: "", message: msg, buttonText: "Ok")
+            self.presentAlertController(withTitle: "", message: errorMessage, buttonText: "Ok")
         })
     }
     
@@ -92,10 +89,10 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             presentAlertController(withTitle: "", message: message, buttonText: "Ok")
             return
         }
-        guard let email = emailTextField.text, password = passwordTextField.text else {
-            return
+        
+        if let email = emailTextField.text, password = passwordTextField.text  {
+            loginToServer(withEmail: email, password: password)
         }
-        loginToServer(withEmail: email, password: password)
         
     }
 

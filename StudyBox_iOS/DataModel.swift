@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 import RealmSwift
 
 protocol UniquelyIdentifiable {
@@ -56,13 +57,23 @@ class Flashcard: Object, UniquelyIdentifiable {
     }
 }
 
-class Deck: Object, UniquelyIdentifiable, Searchable {
+class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic var name: String = ""
 
     var flashcards: [Flashcard] {
         return linkingObjects(Flashcard.self, forProperty: "deck")
+    }
+    
+    required convenience init?(withJSON json: JSON) {
+        if let jsonDict = json.dictionary {
+            if let id = jsonDict["id"]?.string, name = jsonDict["name"]?.string {
+                self.init(serverID: id, name: name)
+                return 
+            }
+        }
+        return nil
     }
     
     convenience init(serverID: String, name: String){

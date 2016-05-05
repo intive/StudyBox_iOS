@@ -18,31 +18,19 @@ enum ServerResultType<T> {
     case Error(err: ErrorType)
 }
 
-enum RemoteDataManagerError: ErrorType {
-    case UserNotLoggedOut
-}
-
 class RemoteDataManager {
     
-    private(set) var user: User? {
-        didSet {
-            if let user = user {
-                if let basicEncoded = "\(user.email):\(user.password)".base64Encoded() {
-                    basicAuth = "Basic \(basicEncoded)"
-                }
-            } else {
-                basicAuth = nil
+    var user: User?
+   
+    private var basicAuth: String? {
+        if let user = user {
+            if let basicEncoded = "\(user.email):\(user.password)".base64Encoded() {
+                return "Basic \(basicEncoded)"
             }
         }
+        return nil
     }
-    private var basicAuth: String?
-    
-    func updateCredentials(email: String, password: String) throws  {
-        guard user == nil else {
-            throw RemoteDataManagerError.UserNotLoggedOut
-        }
-        self.user = User(email: email, password: password)
-    }
+   
     
     private func request(request: URLRequestConvertible) -> Request {
         let mutableRequest = request.URLRequest
@@ -83,7 +71,7 @@ class RemoteDataManager {
     
     // Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil,
     // w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
-    func login(email: String, password: String, completion: (ServerResultType<User?>)->()) {
+    func login(email: String, password: String, completion: (ServerResultType<JSON>)->()) {
         guard let basicAuth = "\(email):\(password)".base64Encoded() else {
             completion(.Error(err: (ServerError.ErrorWithMessage(text: "Niepoprawne dane"))))
             return
@@ -92,12 +80,7 @@ class RemoteDataManager {
         loginRequest.addValue("Basic \(basicAuth)", forHTTPHeaderField: "Authorization")
         
         request(loginRequest).responseJSON {
-            self.handleResponse(responseResult: $0.result, completion: completion) { json in
-                if let email = json.dictionary?["email"]?.string {
-                    self.user = User(email: email, password: password)
-                }
-                return self.user
-            }
+            self.handleResponse(responseResult: $0.result, completion: completion)
         }
     }
     

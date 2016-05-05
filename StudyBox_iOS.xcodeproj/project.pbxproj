@@ -34,6 +34,7 @@
 		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
+		2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */; };
 		2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */; };
 		2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */; };
 		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
@@ -118,6 +119,7 @@
 		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONInitializable.swift; sourceTree = "<group>"; };
 		2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+isConnected.swift"; sourceTree = "<group>"; };
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
 		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */,
 				2D6100161CC0527500F9CB2A /* SBRepresentable.swift */,
 				2D6100141CC0522300F9CB2A /* Searchable.swift */,
+				2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				725E3C161CD89B160081470D /* Deck+JSON.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
+				2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */,
