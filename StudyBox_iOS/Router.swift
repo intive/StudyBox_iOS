@@ -9,9 +9,7 @@
 import Alamofire
 
 enum Router: URLRequestConvertible {
-    static let defaults = NSUserDefaults.standardUserDefaults()
-    static let serverURL = defaults.objectForKey("customServerURLFromSettings") as? NSURL ??
-        NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
+    static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
     
     case GetAllDecks(params: [String: AnyObject]?)
     case GetSingleDeck(id: String)
@@ -57,11 +55,6 @@ enum Router: URLRequestConvertible {
         let request = NSMutableURLRequest(URL: self.path)
         request.HTTPMethod = self.method.rawValue
         request.URL = self.path
-        
-//        if let username = Router.username,
-//            let password = Router.password {
-//            request.allHTTPHeaderFields = ["Authentication": "\(username):\(password)-encodedwithbase64"]
-//        }
         
         switch self {
         //Add only methods that use parameters (check in Apiary)

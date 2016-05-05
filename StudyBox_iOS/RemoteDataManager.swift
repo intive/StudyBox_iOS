@@ -9,19 +9,37 @@
 import Alamofire
 import SwiftyJSON
 
-public enum ServerError: ErrorType {
+enum ServerError: ErrorType {
     case ErrorWithMessage(text: String)
 }
 
-public enum ServerResultType<T> {
+enum ServerResultType<T> {
     case Success(obj: T)
     case Error(err: ErrorType)
 }
 
-public class RemoteDataManager {
+enum RemoteDataManagerError: ErrorType {
+    case UserNotLoggedOut
+}
+
+class RemoteDataManager {
     
-    private let defaults = NSUserDefaults.standardUserDefaults()
+    private(set) var user: User?
     
+    func updateCredentials(email: String, password: String) throws  {
+        guard user == nil else {
+            throw RemoteDataManagerError.UserNotLoggedOut
+        }
+        self.user = User(email: email, password: password)
+    }
+    
+    private func request(request: URLRequestConvertible) -> Request {
+        let afRequest = Alamofire.request(request)
+        if let user = user {
+            return afRequest.authenticate(user: user.email, password: user.password)
+        }
+        return afRequest
+    }
     
     // Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak,
     // w przypadku jego braku dostajemy dane o które prosiliśmy
@@ -45,22 +63,28 @@ public class RemoteDataManager {
     
     private func handleResponse(responseResult result: Alamofire.Result<AnyObject, NSError>,
                                                completion: (ServerResultType<JSON>)->(),
-                                               successAction: ((JSON) -> ())? = nil ) {
+                                               successAction: ((JSON) -> (JSON))? = nil ) {
         handleResponse(responseResult: result, completion: completion) { json in
-            return json
+            return successAction?(json) ?? json
         }
     }
+
     
     // Jeśli udało się zalogować metoda zwróci ServerResultType.Success z obiektem nil,
     // w przeciwnym wypadku obiekt to String z odpowiedzią serwera (powód błędu logowania)
-    public func login(username: String, password: String, completion: (ServerResultType<JSON>)->()) {
-        request(Router.GetCurrentUser).responseJSON {
+    func login(username: String, password: String, completion: (ServerResultType<User?>)->()) {
+        request(Router.GetCurrentUser).authenticate(user: username, password: password).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion) { json in
-                self.defaults.setObject(username, forKey: Utils.NSUserDefaultsKeys.LoggedUserUsername)
-                self.defaults.setObject(password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
-                return json
+                if let email = json.dictionary?["email"]?.string {
+                    self.user = User(email: email, password: password)
+                }
+                return self.user
             }
         }
+    }
+    
+    func logout() {
+        user = nil
     }
     
     func deck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {

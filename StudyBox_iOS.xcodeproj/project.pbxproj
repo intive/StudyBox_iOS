@@ -26,6 +26,7 @@
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
 		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
+		2D7E038B1CDB617F003B5294 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E038A1CDB617F003B5294 /* User.swift */; };
 		2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */; };
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
@@ -108,6 +109,7 @@
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
+		2D7E038A1CDB617F003B5294 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksCollectionViewLayout.swift; sourceTree = "<group>"; };
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				2D2843681C88D03D006E5E21 /* DataManager.swift */,
 				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
 				8044F6341CC05555001C9E8A /* ServerCommunication.swift */,
+				2D7E038A1CDB617F003B5294 /* User.swift */,
 			);
 			name = "Data Manager";
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */,
 				CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */,
 				2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */,
+				2D7E038B1CDB617F003B5294 /* User.swift in Sources */,
 				2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */,
 				CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */,
 				2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */,

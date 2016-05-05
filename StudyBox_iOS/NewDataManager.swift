@@ -75,17 +75,36 @@ public class NewDataManager {
     func deck(withId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
         
         self.handleRequest(mode,
-                           localFetch: {
-                            self.localDataManager.get(Deck.self, withId: deckID)
+            localFetch: {
+                self.localDataManager.get(Deck.self, withId: deckID)
             },
-                           remoteFetch: {
-                            self.remoteDataManager.deck(deckID, completion: $0)
+            remoteFetch: {
+                self.remoteDataManager.deck(deckID, completion: $0)
             },
-                           remoteParsing: {
-                            return Deck.withJSON($0)
+            remoteParsing: {
+                return Deck.withJSON($0)
             },
-                           completion: completion
+            completion: completion
         )
         
+    }
+    
+    func login(username: String, password: String, completion: (DataManagerResponse<User?>) -> ()) {
+        self.handleRequest(.Remote,
+            localFetch: {
+                return nil
+            },
+            remoteFetch: {
+                self.remoteDataManager.login(username, password: password, completion: $0)
+            },
+            remoteParsing: {
+                return $0
+            },
+           completion: completion
+        )
+    }
+    
+    func logout() {
+        remoteDataManager.logout()
     }
 }
