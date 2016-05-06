@@ -52,7 +52,6 @@
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
 		725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */; };
 		725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */; };
-		725E3C161CD89B160081470D /* Deck+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C151CD89B160081470D /* Deck+JSON.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D50BB01CDA69AC00CB0271 /* Router.swift */; };
@@ -141,7 +140,6 @@
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge+flat.swift"; sourceTree = "<group>"; };
 		725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+URLByAppendingElements.swift"; sourceTree = "<group>"; };
-		725E3C151CD89B160081470D /* Deck+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+JSON.swift"; sourceTree = "<group>"; };
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72D50BB01CDA69AC00CB0271 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
 				725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */,
 				725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */,
-				725E3C151CD89B160081470D /* Deck+JSON.swift */,
 				2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */,
 			);
 			name = Extensions;

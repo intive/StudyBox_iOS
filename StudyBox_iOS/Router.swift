@@ -68,6 +68,8 @@ enum Router: URLRequestConvertible {
             
         case .GetAllFlashcards(_, let params):
             return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
+        case .AddSingleDeck(let name, let isPublic):
+            return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
             
         default: //For methods that don't use parameters
             return request
