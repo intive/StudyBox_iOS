@@ -102,18 +102,24 @@ class TestViewControllerTests: XCTestCase {
         let currentScoreLabel = sut.scoreLabel.text
         sut.updateQuestionUiForCurrentCard()
         XCTAssertNotEqual(currentScoreLabel, sut.scoreLabel.text)
+        XCTAssertTrue(sut.scoreLabel.text?.rangeOfString("[0-9]+ / [0-9]+", options: .RegularExpressionSearch) != nil)
     }
     
     func testUpdateAnswerUiForCurrentCard_shouldUpdateAnswerLabelAndCurrentQuestionNumber() {
         sut.pushDummyData(.Learn)
-        let currentAnswerLabel = sut.answerLabel
-        let currentQuestionNumer = sut.currentQuestionNumber
-        print("\n\n\n1: \(sut.currentQuestionNumber) + \(sut.answerLabel)\n\n\n")
         sut.updateAnswerUiForCurrentCard()
-        sut.updateAnswerUiForCurrentCard()
-        print("\n\n\n2: \(sut.currentQuestionNumber) + \(sut.answerLabel) \n\n\n")
-        XCTAssertNotEqual(currentAnswerLabel, sut.answerView)
-        XCTAssertNotEqual(currentQuestionNumer, sut.currentQuestionNumber)
+        XCTAssertEqual(sut.answerLabel.text, sut.testLogicSource?.currentCard?.answer)
+        XCTAssertTrue(sut.currentQuestionNumber.text?.rangeOfString("#[0-9]+", options: .RegularExpressionSearch) != nil)
+    }
+    
+    
+    
+    
+    
+    //todo...
+    func testUpdateForAnswer_shoudCallAnsweredQuestionTransitionMethod() {
+        sut.pushDummyData(.Learn)
+        sut.updateForAnswer(true)
     }
     
     func testIfDeskIsEmptyShoudCall_displayAlertIfPassedDeskIsEmpty() {
@@ -157,7 +163,7 @@ extension TestViewController {
         var flashcardArray = [flashcard]
         for _ in 1...10 {
             flashcardArray.append(flashcard)
-            }
+        }
         testLogicSource = Test(deck: [flashcard], testType: testType)
     }
 }
