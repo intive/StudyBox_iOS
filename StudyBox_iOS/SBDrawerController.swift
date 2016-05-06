@@ -46,6 +46,13 @@ class SBDrawerController: MMDrawerController {
         super.panGestureCallback(panGesture)
 
         postPanGestureCallback(panGesture, animationTime: animationTime)
+        if panGesture.state == .Recognized {
+            hideKeyboard()
+        }
+    }
+    
+    func hideKeyboard() {
+        UIApplication.sharedApplication().sendAction(#selector(resignFirstResponder), to: nil, from: nil, forEvent: nil)
     }
 
     private func prePanGestureCallback(panGesture: UIPanGestureRecognizer) {
@@ -136,8 +143,11 @@ class SBDrawerController: MMDrawerController {
         
     }
     
-    override func openDrawerSide(drawerSide: MMDrawerSide, animated: Bool, velocity: CGFloat, animationOptions options: UIViewAnimationOptions,
+    override func openDrawerSide(drawerSide: MMDrawerSide, animated: Bool,
+                                 velocity: CGFloat,
+                                 animationOptions options: UIViewAnimationOptions,
                                  completion: ((Bool) -> Void)!) { // swiftlint:disable:this force_unwrapping
+        hideKeyboard()
         self.centerDelegate?.drawerToggleAnimation()
 
         super.openDrawerSide(drawerSide, animated: animated, velocity: velocity, animationOptions: options, completion: completion)
@@ -152,4 +162,6 @@ class SBDrawerController: MMDrawerController {
                 self.statusBarViewBackgroundColor = UIColor.sb_Graphite()
             })
     }
+    
+    
 }
