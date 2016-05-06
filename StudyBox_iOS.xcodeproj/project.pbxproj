@@ -37,6 +37,7 @@
 		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
 		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
+		636392851CDA0882008E33D0 /* TestViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636392841CDA0882008E33D0 /* TestViewControllerTests.swift */; };
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
@@ -111,6 +112,7 @@
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
 		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
 		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
+		636392841CDA0882008E33D0 /* TestViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewControllerTests.swift; sourceTree = "<group>"; };
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -333,6 +335,7 @@
 				A1341DD91C81E76900AFD04E /* Info.plist */,
 				2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */,
 				AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */,
+				636392841CDA0882008E33D0 /* TestViewControllerTests.swift */,
 			);
 			path = StudyBox_iOSTests;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 			files = (
 				A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */,
 				AEEAB5701CCE3A5400BB60FA /* TestLogicTests.swift in Sources */,
+				636392851CDA0882008E33D0 /* TestViewControllerTests.swift in Sources */,
 				2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
