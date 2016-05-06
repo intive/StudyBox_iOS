@@ -9,7 +9,7 @@
 import Foundation
 
 extension NSURL {
-    func URLByAppendingElements(elements: [String]) -> NSURL {
+    func URLByAppendingPathComponents(elements: String...) -> NSURL {
         var url = self
         for element in elements {
             url = url.URLByAppendingPathComponent(element)

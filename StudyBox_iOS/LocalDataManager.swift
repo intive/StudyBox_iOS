@@ -45,9 +45,21 @@ class LocalDataManager {
         }
     }
     
-    func delete (object: Object) -> Bool {
+    func update(objects: [Object]) -> Bool {
+        return write { realm in
+            realm.add(objects, update: true)
+        }
+    }
+    
+    func delete(object: Object) -> Bool {
         return write { realm in
             realm.delete(object)
+        }
+    }
+    
+    func delete(objects: [Object]) -> Bool {
+        return write { realm in
+            realm.delete(objects)
         }
     }
     

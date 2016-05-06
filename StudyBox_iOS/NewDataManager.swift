@@ -11,10 +11,10 @@ import SwiftyJSON
 
 struct ManagerMode: OptionSetType {
     var rawValue: Int
-    
+
     static let Local = ManagerMode(rawValue: 1 << 0)
     static let Remote = ManagerMode(rawValue: 1 << 1)
-    
+
 }
 
 enum DataManagerResponse<T> {
@@ -23,163 +23,134 @@ enum DataManagerResponse<T> {
 }
 
 enum NewDataManagerError: ErrorType {
-    case JSONParseError, ServerError, NoLocalData, ErrorSavingData, ErrorWith(message: String)
+    case JSONParseError, NoLocalData, ErrorSavingData, ErrorWith(message: String)
 }
 
 public class NewDataManager {
-    
+
     let remoteDataManager = RemoteDataManager()
     let localDataManager = LocalDataManager()
-    
-    private func handleLocalUpdate<DataManagerResponseObject>(parsedObj: DataManagerResponseObject,
-                                   completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
-        if let realmObj = parsedObj as? Object {
-            if self.localDataManager.update(realmObj) {
-                completion(.Success(obj: parsedObj))
-            } else {
-                completion(.Error(obj: NewDataManagerError.ErrorSavingData))
-            }
-        } else if let realmObjects = (parsedObj as? NSArray) as? [Object] {
-            var results = [Object]()
-            realmObjects.forEach {
-                if self.localDataManager.update($0) {
-                    results.append($0)
-                }
-            }
-            if let returnResults = (results as NSArray) as? DataManagerResponseObject {
-                completion(.Success(obj: returnResults))
-            }
-        } else {
-            completion(.Success(obj: parsedObj))
-        }
-    }
-    
-    private func handleRequest<ServerResponseObject, DataManagerResponseObject>(mode: ManagerMode,
-                               localFetch: (() -> (DataManagerResponseObject?))? = nil,
-                               remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
-                               remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
-                               completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
-        
-        // argumenty mogłyby być tutaj force unwrap, ale chyba lepiej użyć precondition i ewentualnie dać znać o czym zapomnieliśmy
 
-        
-        var localBlock:(()-> (DataManagerResponse<DataManagerResponseObject>))?
-        
-        /// Obsluga roznych trybow - tylko lokalne dane, tylko dane z serwera, badz dane lokalne w przypadku braku dostepu do danych z serwera
-        if mode.contains(.Local) {
-            
-            if let localFetch = localFetch {
-                localBlock = {
-                    if let obj = localFetch() {
-                        return .Success(obj: obj)
-                    } else {
-                        return .Error(obj: NewDataManagerError.NoLocalData)
-                    }
-                }
-            } else {
-                fatalError("Local mode requires `localFetch` argument")
+    // Metoda ta obsługuje zapisywanie obiektów do bazy danych
+    private func updateInLocalDatabase<DataManagerResponseObject>(parsedObject: DataManagerResponseObject) -> DataManagerResponse<DataManagerResponseObject> {
+        if let realmObject = parsedObject as? Object {
+            if !self.localDataManager.update(realmObject) {
+                return .Error(obj: NewDataManagerError.ErrorSavingData)
+            }
+        } else if let realmObjects = parsedObject as? [Object] {
+            if !self.localDataManager.update(realmObjects) {
+                return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
         }
-        
-        if mode.contains(.Remote) {
-            
-            remoteFetch { response in
-                switch response {
-                case.Success(let obj):
-                    if let parsedObj = remoteParsing(obj: obj) {
-                        self.handleLocalUpdate(parsedObj, completion: completion)
-                    } else {
-                        completion(.Error(obj: NewDataManagerError.JSONParseError))
-                    }
-                case .Error:
-                    if let localBlock = localBlock {
-                        completion(localBlock())
-                    } else {
-                        completion(.Error(obj: NewDataManagerError.ServerError))
-                    }
-                }
-            }
-        } else if let localBlock = localBlock {
-            completion(localBlock())
-        }
+        return .Success(obj: parsedObject)
     }
-    
-    private func handleRequest<T: JSONInitializable>(mode: ManagerMode,
-                               localFetch: (() -> T?)? = nil,
-                               remoteFetch: ((ServerResultType<JSON>) -> ()) -> (),
-                               remoteParsing: (obj: JSON) -> T? = { json in
-                                    return T(withJSON: json)
-                                },
-                               completion: (DataManagerResponse<T>) -> ()) {
-        handleRequest(mode, localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
-        
-    }
-    
-    private func handleRequest<T: JSONInitializable>(mode: ManagerMode,
-                               localFetch: (() -> [T])? = nil,
-                               remoteFetch: ((ServerResultType<[JSON]>) -> ()) -> (),
-                               remoteParsing: (obj: [JSON]) -> [T] = {
-                                    return T.arrayWithJSONArray($0)
-                               },
-                               completion: (DataManagerResponse<[T]>) -> ()) {
-        handleRequest(mode, localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
-    }
-    
-    //MARK: Deck/Flashcard/etc. methods
 
-    func deck(withId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
-        
-        handleRequest(mode,
+    // Metoda ta obsługuje generycznie błędy, które mogą wystąpić podczas łączenia się z serwerem
+    // jeśli został przekazany parametr localFetch, w przypadku gdy nie uda się połączenie z serwerem dane są pobierane z lokalnej bazy danych
+    //
+    // localFetch - blok powinien zwrócić dane z lokalnej bazy danych
+    // remoteFetch - blok powinien zawołać przekazany blok z danymi z serwera
+    // remoteParsing - blok przyjmuje dane typu, który przychodzi z serwera i powinien zwrócić dane typu lokalnego, np. JSON do Deck
+    // completion - ten blok jest wołany z obiektem typu lokalnego, np. Deck
+    private func handleRequest<ServerResponseObject, DataManagerResponseObject>(
+        localFetch localFetch: (() -> (DataManagerResponseObject?))? = nil,
+                   remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
+                   remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
+                   completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
+
+        remoteFetch { response in
+            switch response {
+            case.Success(let object):
+                if let parsedObject = remoteParsing(obj: object) {
+                    self.updateInLocalDatabase(parsedObject, completion: completion)
+                } else {
+                    completion(.Error(obj: NewDataManagerError.JSONParseError))
+                }
+            case .Error(let error):
+                if let localFetch = localFetch {
+                    if let object = localFetch() {
+                        completion(.Success(obj: object))
+                    } else {
+                        completion(.Error(obj: NewDataManagerError.NoLocalData))
+                    }
+                } else {
+                    completion(.Error(obj: error))
+                }
+            }
+        }
+    }
+
+    //convenience method with automated parsing data where remote object is JSON and local object conforms to JSONInitializable
+    private func handleRequest<DataManagerResponseObject: JSONInitializable>(
+        localFetch localFetch: (() -> DataManagerResponseObject?)? = nil,
+                   remoteFetch: ((ServerResultType<JSON>) -> ()) -> (),
+                   remoteParsing: (obj: JSON) -> DataManagerResponseObject? = { DataManagerResponseObject(withJSON: $0) },
+                   completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
+        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
+
+    }
+
+    //convenience method with automated parsing data where remote object is [JSON] and local object conforms to [JSONInitializable]
+    private func handleRequest<DataManagerResponseObject: JSONInitializable>(
+        localFetch localFetch: (() -> [DataManagerResponseObject])? = nil,
+                   remoteFetch: ((ServerResultType<[JSON]>) -> ()) -> (),
+                   remoteParsing: (obj: [JSON]) -> [DataManagerResponseObject] = { DataManagerResponseObject.arrayWithJSONArray($0) },
+                   completion: (DataManagerResponse<[DataManagerResponseObject]>) -> ()) {
+        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
+    }
+
+    //MARK: users
+    func login(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.login(email, password: password, completion: $0)
+            },
+            remoteParsing: {
+                if let jsonDict = $0.dictionary where jsonDict["email"]?.string == email {
+                    self.remoteDataManager.user = User(email: email, password: password)
+                    return self.remoteDataManager.user
+                }
+                return nil
+            }, completion: completion)
+    }
+
+    func register(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
+        fatalError("Not implemented")
+    }
+
+    func logout() {
+        remoteDataManager.logout()
+    }
+
+    //MARK: Decks
+    func deck(withId deckID: String, completion: (DataManagerResponse<Deck>)-> ()) {
+        handleRequest(
             localFetch: {
                 self.localDataManager.get(Deck.self, withId: deckID)
             },
             remoteFetch: {
                 self.remoteDataManager.deck(deckID, completion: $0)
-            },
-            completion: completion
-        )
-        
+            }, completion: completion)
     }
-    
+
     func addDeck(deck: Deck, completion: (DataManagerResponse<Deck>)-> ()) {
-        handleRequest(.Remote,
+        handleRequest(
             remoteFetch: {
                 self.remoteDataManager.addDeck(deck, completion: $0)
-            },
-            completion: completion
-        )
+            }, completion: completion)
     }
-    
-    func decks(mode: ManagerMode = .Remote, completion: (DataManagerResponse<[Deck]> -> ()), includeOwn: Bool?, flashcardsCount: Bool?, name: String?) {
-        
-        handleRequest(mode,
+
+    func decks(completion: (DataManagerResponse<[Deck]> -> ()), includeOwn: Bool?, flashcardsCount: Bool?, name: String?) {
+        handleRequest(
             localFetch: {
                 self.localDataManager.getAll(Deck)
             }, remoteFetch: {
                 self.remoteDataManager.findDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name, completion: $0)
-            },
-            completion: completion
-        )
+            }, completion: completion)
     }
-    
-    func login(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
-        self.handleRequest(.Remote,
-            remoteFetch: {
-                self.remoteDataManager.login(email, password: password, completion: $0)
-            },
-            remoteParsing: {
-                if let jsonDict = $0.dictionary, email = jsonDict["email"]?.string {
-                    let loggedUsr = User(email: email, password: password)
-                    self.remoteDataManager.user = loggedUsr
-                    return loggedUsr
-                }
-                return nil
-            },
-            completion: completion
-        )
-    }
-    
-    func logout() {
-        remoteDataManager.logout()
+
+    //MARK: Flashcards
+    func flashcard(withId flashcardID: String, deckID: String, completion: (DataManagerResponse<Deck>)-> ()) {
+        fatalError("Not implemented")
     }
 }

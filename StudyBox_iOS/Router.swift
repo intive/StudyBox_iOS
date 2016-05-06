@@ -8,22 +8,25 @@
 
 import Alamofire
 
+private let usersPath = "users"
+private let decksPath = "decks"
+private let flashcardsPath = "flashcards"
+
 enum Router: URLRequestConvertible {
-    static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
-    
-    case GetAllDecks(params: [String: AnyObject]?)
-    case GetSingleDeck(id: String)
-    case AddSingleDeck(name: String, isPublic: Bool)
-    //dodać RemoveDeck, UpdateDeck
-    
-    case GetAllFlashcards(inDeckID: String, params: [String:AnyObject]?)
-    case AddSingleFlashcard(question: String, answer: String, isHidden: Bool)
-    case GetSingleFlashcard(inDeckID: String, flashcardID: String)
-    case RemoveSingleFlashcard(inDeckID: String, flashcardID: String)
-    
+    private static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
+
     case GetCurrentUser
-    //dodać AddUser
-    
+
+    case GetAllDecks(includeOwn: Bool?, flashcardsCount: Bool?, name: String?)
+    case GetSingleDeck(ID: String)
+    case AddSingleDeck(name: String, isPublic: Bool)
+
+    case GetAllFlashcards(deckID: String)
+    case AddSingleFlashcard(deckID: String, question: String, answer: String, isHidden: Bool)
+    case GetSingleFlashcard(ID: String, deckID: String)
+    case RemoveSingleFlashcard(ID: String, deckID: String)
+
+
     var method: Alamofire.Method {
         switch self {
         case .GetAllDecks, GetSingleDeck, GetAllFlashcards, GetSingleFlashcard, GetCurrentUser:
@@ -34,43 +37,55 @@ enum Router: URLRequestConvertible {
             return .DELETE
         }
     }
-    
+
     var path: NSURL {
         switch self {
-        case GetAllDecks, AddSingleDeck:
-            return Router.serverURL.URLByAppendingPathComponent("decks") //use when only one element
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks"
-            
-        case GetSingleDeck(let id):
-            return Router.serverURL.URLByAppendingElements(["decks", id]) //use when multiple elements
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/12345678-9012-3456-7890-123456789012"
-            
         case GetCurrentUser:
-            return Router.serverURL.URLByAppendingElements(["users", "me"])
+            return Router.serverURL.URLByAppendingPathComponents(usersPath, "me")
 
-            
-            /*...*/
-        default:
-            return Router.serverURL
+        case GetAllDecks, AddSingleDeck:
+            return Router.serverURL.URLByAppendingPathComponents(decksPath)
+            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks"
+
+        case GetSingleDeck(let ID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, ID)
+            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040"
+
+        case GetAllFlashcards(let deckID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, "flashcards")
+            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards"
+
+        case AddSingleFlashcard(let deckID, _, _, _):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, "flashcards")
+
+        case GetSingleFlashcard(let ID, let deckID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, "flashcards", ID)
+
+        case RemoveSingleFlashcard(let ID, let deckID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, "flashcards", ID)
         }
     }
-    
+
     var URLRequest: NSMutableURLRequest {
         let request = NSMutableURLRequest(URL: self.path)
         request.HTTPMethod = self.method.rawValue
         request.URL = self.path
-        
+
         switch self {
-        //Add only methods that use parameters (check in Apiary)
-            
-        case .GetAllDecks(let params):
-            return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
-            
-        case .GetAllFlashcards(_, let params):
-            return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
+            //Add only methods that use parameters (check in Apiary)
+
+        case .GetAllDecks(let includeOwn, let flashcardsCount, let name):
+            let parameters: [String: AnyObject] = Dictionary.flat(
+                [
+                    "includeOwn": includeOwn,
+                    "flashcardsCount": flashcardsCount,
+                    "name": name,
+                ])
+            return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
+
         case .AddSingleDeck(let name, let isPublic):
             return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
-            
+
         default: //For methods that don't use parameters
             return request
         }
