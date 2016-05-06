@@ -26,7 +26,7 @@ extension Dictionary {
 }
 
 extension Dictionary {
-    //Converts [String:AnyObject?] to [String:AnyObject]
+    //Removes from [Key:Value?] elements that have nil value
     static func flat(dict: Dictionary<Key, Value?>) -> Dictionary<Key, Value> {
         let y  = dict.flatMap { (val) -> (Key, Value)? in
             if let value = val.1  {

@@ -36,6 +36,7 @@ public class NewDataManager {
                                remoteFetch: (((ServerResultType<ServerResponseObject>) -> ())->())? = nil,
                                remoteParsing: ((obj: ServerResponseObject) -> (DataManagerResponseObject?))? = nil ,
                                completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
+        
         // argumenty mogłyby być tutaj force unwrap, ale chyba lepiej użyć precondition i ewentualnie dać znać o czym zapomnieliśmy
         precondition(mode.contains(.Local) ? localFetch != nil : true, "Local mode requires `localFetch` argument")
         precondition(mode.contains(.Remote) ? remoteFetch != nil && remoteParsing != nil : true,
@@ -89,6 +90,7 @@ public class NewDataManager {
         
     }
     
+//MARK: Deck/Flashcard/etc. methods
     
     func deck(withId deckID: String, mode: ManagerMode = [.Local, .Remote], completion: (DataManagerResponse<Deck>)-> ()) {
         

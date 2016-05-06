@@ -13,6 +13,7 @@ enum Router: URLRequestConvertible {
     
     case GetAllDecks(params: [String: AnyObject]?)
     case GetSingleDeck(id: String)
+    case AddSingleDeck(name: String, isPublic: Bool)
     //dodać RemoveDeck, UpdateDeck
     
     case GetAllFlashcards(inDeckID: String, params: [String:AnyObject]?)
@@ -27,7 +28,7 @@ enum Router: URLRequestConvertible {
         switch self {
         case .GetAllDecks, GetSingleDeck, GetAllFlashcards, GetSingleFlashcard, GetCurrentUser:
             return .GET
-        case .AddSingleFlashcard:
+        case .AddSingleFlashcard, AddSingleDeck:
             return .POST
         case .RemoveSingleFlashcard:
             return .DELETE
@@ -36,14 +37,17 @@ enum Router: URLRequestConvertible {
     
     var path: NSURL {
         switch self {
-        case GetAllDecks:
-            return Router.serverURL.URLByAppendingPathComponent("decks")
+        case GetAllDecks, AddSingleDeck:
+            return Router.serverURL.URLByAppendingPathComponent("decks") //use when only one element
+            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks"
             
         case GetSingleDeck(let id):
-            return Router.serverURL.URLByAppendingElements(["decks", id])
+            return Router.serverURL.URLByAppendingElements(["decks", id]) //use when multiple elements
+            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/12345678-9012-3456-7890-123456789012"
             
         case GetCurrentUser:
             return Router.serverURL.URLByAppendingElements(["users", "me"])
+
             
             /*...*/
         default:
@@ -58,12 +62,14 @@ enum Router: URLRequestConvertible {
         
         switch self {
         //Add only methods that use parameters (check in Apiary)
+            
         case .GetAllDecks(let params):
             return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
+            
         case .GetAllFlashcards(_, let params):
             return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
             
-        default: //for methods that don't use parameters
+        default: //For methods that don't use parameters
             return request
         }
     }

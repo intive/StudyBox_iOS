@@ -6,11 +6,7 @@
 //  Copyright © 2016 BLStream. All rights reserved.
 //
 
-import Foundation
-import SwiftyJSON
-
 struct User {
     var email: String
     var password: String
-    
 }
