@@ -118,7 +118,7 @@ class RemoteDataManager {
     
     func addDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
         
-        request(Router.GetSingleDeck(id: deck.serverID)).responseJSON {
+        request(Router.AddSingleDeck(name: deck.name, isPublic: deck.isPublic)).responseJSON {
             self.handleResponse(responseResult: $0.result, completion: completion)
         }
     }

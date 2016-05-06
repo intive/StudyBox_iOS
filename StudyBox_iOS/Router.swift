@@ -13,6 +13,7 @@ enum Router: URLRequestConvertible {
     
     case GetAllDecks(params: [String: AnyObject]?)
     case GetSingleDeck(id: String)
+    case AddSingleDeck(name: String, isPublic: Bool)
     //dodać RemoveDeck, UpdateDeck
     
     case GetAllFlashcards(inDeckID: String, params: [String:AnyObject]?)
@@ -27,7 +28,7 @@ enum Router: URLRequestConvertible {
         switch self {
         case .GetAllDecks, GetSingleDeck, GetAllFlashcards, GetSingleFlashcard, GetCurrentUser:
             return .GET
-        case .AddSingleFlashcard:
+        case .AddSingleFlashcard, .AddSingleDeck:
             return .POST
         case .RemoveSingleFlashcard:
             return .DELETE
@@ -36,7 +37,7 @@ enum Router: URLRequestConvertible {
     
     var path: NSURL {
         switch self {
-        case GetAllDecks:
+        case GetAllDecks, AddSingleDeck:
             return Router.serverURL.URLByAppendingPathComponent("decks")
             
         case GetSingleDeck(let id):
@@ -62,6 +63,8 @@ enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
         case .GetAllFlashcards(_, let params):
             return Alamofire.ParameterEncoding.URL.encode(request, parameters: params).0
+        case .AddSingleDeck(let name, let isPublic):
+            return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
             
         default: //for methods that don't use parameters
             return request
