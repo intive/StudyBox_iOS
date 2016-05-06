@@ -37,7 +37,7 @@ public class NewDataManager {
             if !self.localDataManager.update(realmObject) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
-        } else if let realmObjects = parsedObject as? [Object] {
+        } else if let realmObjects = parsedObject as? NSArray as? [Object] {
             if !self.localDataManager.update(realmObjects) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
@@ -62,7 +62,7 @@ public class NewDataManager {
             switch response {
             case.Success(let object):
                 if let parsedObject = remoteParsing(obj: object) {
-                    self.updateInLocalDatabase(parsedObject, completion: completion)
+                    completion(self.updateInLocalDatabase(parsedObject))
                 } else {
                     completion(.Error(obj: NewDataManagerError.JSONParseError))
                 }
@@ -81,7 +81,7 @@ public class NewDataManager {
     }
 
     //convenience method with automated parsing data where remote object is JSON and local object conforms to JSONInitializable
-    private func handleRequest<DataManagerResponseObject: JSONInitializable>(
+    private func handleJSONRequest<DataManagerResponseObject: JSONInitializable>(
         localFetch localFetch: (() -> DataManagerResponseObject?)? = nil,
                    remoteFetch: ((ServerResultType<JSON>) -> ()) -> (),
                    remoteParsing: (obj: JSON) -> DataManagerResponseObject? = { DataManagerResponseObject(withJSON: $0) },
@@ -91,7 +91,7 @@ public class NewDataManager {
     }
 
     //convenience method with automated parsing data where remote object is [JSON] and local object conforms to [JSONInitializable]
-    private func handleRequest<DataManagerResponseObject: JSONInitializable>(
+    private func handleJSONRequest<DataManagerResponseObject: JSONInitializable>(
         localFetch localFetch: (() -> [DataManagerResponseObject])? = nil,
                    remoteFetch: ((ServerResultType<[JSON]>) -> ()) -> (),
                    remoteParsing: (obj: [JSON]) -> [DataManagerResponseObject] = { DataManagerResponseObject.arrayWithJSONArray($0) },
@@ -124,7 +124,7 @@ public class NewDataManager {
 
     //MARK: Decks
     func deck(withId deckID: String, completion: (DataManagerResponse<Deck>)-> ()) {
-        handleRequest(
+        handleJSONRequest(
             localFetch: {
                 self.localDataManager.get(Deck.self, withId: deckID)
             },
@@ -134,14 +134,14 @@ public class NewDataManager {
     }
 
     func addDeck(deck: Deck, completion: (DataManagerResponse<Deck>)-> ()) {
-        handleRequest(
+        handleJSONRequest(
             remoteFetch: {
                 self.remoteDataManager.addDeck(deck, completion: $0)
             }, completion: completion)
     }
 
-    func decks(completion: (DataManagerResponse<[Deck]> -> ()), includeOwn: Bool?, flashcardsCount: Bool?, name: String?) {
-        handleRequest(
+    func decks(includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (DataManagerResponse<[Deck]> -> ())) {
+        handleJSONRequest(
             localFetch: {
                 self.localDataManager.getAll(Deck)
             }, remoteFetch: {

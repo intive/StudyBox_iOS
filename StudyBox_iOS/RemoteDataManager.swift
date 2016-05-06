@@ -33,7 +33,7 @@ class RemoteDataManager {
 
     // Metoda sprawdza czy odpowiedź serwera zawiera pole 'message' - jeśli tak oznacza to, że coś poszło nie tak,
     // w przypadku jego braku dostajemy dane o które prosiliśmy
-    private func performRequest<ObjectType>(
+    private func performGenericRequest<ObjectType>(
         request: URLRequestConvertible,
         completion: (ServerResultType<ObjectType>)->(),
         successAction: (JSON) -> (ObjectType)) {
@@ -62,14 +62,14 @@ class RemoteDataManager {
     private func performRequest(
         request: URLRequestConvertible,
         completion: (ServerResultType<JSON>)->()) {
-        performRequest(request, completion: completion) { $0 }
+        performGenericRequest(request, completion: completion) { $0 }
     }
 
     //convenience method when ServerResultType is [JSON]
     private func performRequest(
         request: URLRequestConvertible,
         completion: (ServerResultType<[JSON]>)->()) {
-        performRequest(request, completion: completion) { $0.arrayValue }
+        performGenericRequest(request, completion: completion) { $0.arrayValue }
     }
 
     //MARK: Users
