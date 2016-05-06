@@ -45,7 +45,7 @@ class LocalDataManager {
         }
     }
     
-    func update(objects: [Object]) -> Bool {
+    func update<S: SequenceType where S.Generator.Element: Object>(objects: S) -> Bool {
         return write { realm in
             realm.add(objects, update: true)
         }
