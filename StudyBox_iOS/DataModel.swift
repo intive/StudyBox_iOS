@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 import RealmSwift
 
 protocol UniquelyIdentifiable {
@@ -45,6 +46,10 @@ class Flashcard: Object, UniquelyIdentifiable {
     }
     dynamic var hidden: Bool = false
     
+    override class func primaryKey() -> String? {
+        return "serverID"
+    }
+    
     convenience init(serverID: String, deckId: String, question: String, answer: String, tip: Tip?){
         self.init()
         self.serverID = serverID
@@ -56,19 +61,36 @@ class Flashcard: Object, UniquelyIdentifiable {
     }
 }
 
-class Deck: Object, UniquelyIdentifiable, Searchable {
+
+class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic var name: String = ""
+    dynamic var isPublic: Bool = true
 
     var flashcards: [Flashcard] {
         return linkingObjects(Flashcard.self, forProperty: "deck")
     }
     
-    convenience init(serverID: String, name: String){
+    required convenience init?(withJSON json: JSON) {
+        if let jsonDict = json.dictionary {
+            if let id = jsonDict["id"]?.string, name = jsonDict["name"]?.string, isPublic  = jsonDict["isPublic"]?.bool {
+                self.init(serverID: id, name: name,isPublic: isPublic)
+                return 
+            }
+        }
+        return nil
+    }
+    
+    override class func primaryKey() -> String? {
+        return "serverID"
+    }
+    
+    convenience init(serverID: String, name: String, isPublic: Bool = true){
         self.init()
         self.serverID = serverID
         self.name = name
+        self.isPublic = isPublic
     }
     
     func matches(expression: String?) -> Bool {
