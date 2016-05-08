@@ -89,24 +89,62 @@ class RemoteDataManager {
         user = nil
     }
 
+    
     //MARK: Decks
+    func findDecks(includeOwn includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (ServerResultType<[JSON]>)->()) {
+        performRequest(Router.GetAllDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name).URLRequest, completion: completion)
+    }
+    
+    func findDecksUser(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>)->()) {
+        performRequest(Router.GetAllUsersDecks(
+            flashcardsCount: flashcardsCount).URLRequest, completion: completion)
+    }
     
     func deck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.GetSingleDeck(ID: deckID), completion: completion)
     }
     
-    func findDecks(includeOwn includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (ServerResultType<[JSON]>)->()) {
-        performRequest(Router.GetAllDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name).URLRequest, completion: completion)
+    func findRandomDeck(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>)->()) {
+        performRequest(Router.GetRandomDeck(flashcardsCount: flashcardsCount).URLRequest, completion: completion)
     }
 
     func addDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.AddSingleDeck(name: deck.name, isPublic: deck.isPublic), completion: completion)
     }
+    
+    func removeDeck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.RemoveSingleDeck(ID: deckID), completion: completion)
+    }
+    
+    func updateDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.UpdateDeck(ID: deck.serverID, name: deck.name, isPublic: deck.isPublic), completion: completion)
+    }
+    
+    func changeAccesToDeck(deckID: String, isPublic: Bool, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.ChangeAccessToDeck(ID: deckID, isPublic: isPublic), completion: completion)
+    }
+    
 
     //MARK: Flashcards
+    func findFlashcards(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.GetAllFlashcards(deckID: deckID), completion: completion)
+    }
+    
+    func flashcard(deckID: String, flashcardID: String, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.GetSingleFlashcard(ID: flashcardID, deckID: deckID), completion: completion)
+    }
+    
     func addFlashcard(deckID: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.AddSingleFlashcard(deckID: deckID, question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
                        completion: completion)
     }
     
+    func removeFlashcard(deckID: String, flashcardID: String, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.RemoveSingleFlashcard(ID: flashcardID, deckID: deckID), completion: completion)
+    }
+    
+    func updateFlashcard(deckID: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.UpdateFlashcard(ID: flashcard.serverID, deckID: deckID, question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
+                       completion: completion)
+    }
 }

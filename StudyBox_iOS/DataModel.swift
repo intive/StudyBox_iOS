@@ -75,7 +75,7 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     required convenience init?(withJSON json: JSON) {
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, name = jsonDict["name"]?.string, isPublic  = jsonDict["isPublic"]?.bool {
-                self.init(serverID: id, name: name,isPublic: isPublic)
+                self.init(serverID: id, name: name, isPublic: isPublic)
                 return 
             }
         }
