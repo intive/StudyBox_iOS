@@ -144,7 +144,8 @@ class RemoteDataManager {
     }
     
     func updateFlashcard(deckID: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.UpdateFlashcard(ID: flashcard.serverID, deckID: deckID, question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
+        performRequest(Router.UpdateFlashcard(ID: flashcard.serverID, deckID: deckID,
+            question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
                        completion: completion)
     }
 }

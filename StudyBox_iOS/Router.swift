@@ -90,7 +90,8 @@ enum Router: URLRequestConvertible {
         
         case GetSingleFlashcard(let ID, let deckID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
+            //example: this returns 
+            //"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
             
         case AddSingleFlashcard(let deckID, _, _, _):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath)
@@ -98,11 +99,13 @@ enum Router: URLRequestConvertible {
 
         case RemoveSingleFlashcard(let ID, let deckID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
+            //example: this returns 
+            //"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
         
         case .UpdateFlashcard(let ID, let deckID, _, _, _):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
+            //example: this returns 
+            //"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
         }
     }
 
