@@ -35,6 +35,8 @@ class Utils {
         static let PickerFrequencyNumberKey = "pickerFrequencyNumber"
         static let PickerFrequencyTypeKey = "pickerFrequencyType"
         static let DecksToSynchronizeKey = "decksToSynchronize"
+        static let LoggedUserEmail = "email"
+        static let LoggedUserPassword = "password"
     }
     
     struct WatchAppContextType {

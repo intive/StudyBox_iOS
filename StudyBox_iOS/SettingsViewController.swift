@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Swifternalization
 import WatchConnectivity
 
 class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
@@ -25,13 +26,13 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         case (0, 0):
             //Frequency cell configuration
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
-            cell.textLabel?.text = "Powiadomienia co..."
+            cell.textLabel?.text = "Powiadomienia co"
             //Set detail label to data from NSUD
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
                 if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
                     let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
                 {
-                    cell.detailTextLabel?.text = "\(number) \(type)"
+                    cell.detailTextLabel?.text = "\(number) \(I18n.localizedString(type, stringValue: number))"
                 } else {
                     cell.detailTextLabel?.text = "Nie wybrano"
                 }
@@ -44,7 +45,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
             if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
-                cell.detailTextLabel?.text = "\(decksCount) talii"
+                cell.detailTextLabel?.text = "\(decksCount) \(I18n.localizedString("amount-decks", intValue: decksCount))"
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
