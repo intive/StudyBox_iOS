@@ -226,7 +226,7 @@ class TestViewController: StudyBoxViewController {
     
     //Alert if passed deck was empty.
     func displayAlertIfPassedDeskIsEmpty() {
-        if (testLogicSource?.checkIfPassedDeckIsEmpty()) == true {
+        if testLogicSource?.checkIfPassedDeckIsEmpty() == true {
             let msg = "Talia jest pusta."
             let alert = UIAlertController(title: "Uwaga!", message: msg, preferredStyle: .Alert)
             let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -237,7 +237,7 @@ class TestViewController: StudyBoxViewController {
     
     //Alert if passed deck have all flashcards hidden
     func displayAlertIfPassedDeskHasAllFlashcardsHidden() {
-        if (testLogicSource?.checkIfAllFlashcardsHidden()) == true {
+        if testLogicSource?.checkIfAllFlashcardsHidden() == true {
             let msg = "Wszystkie fiszki w tali są ukryte"
             let alert = UIAlertController(title: "Uwaga!", message: msg, preferredStyle: .Alert)
             let action = UIAlertAction(title: "OK", style: .Default, handler: nil)

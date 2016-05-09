@@ -27,16 +27,15 @@ class TestViewControllerTests: XCTestCase {
     }
     
     //based on NSLayoutConstraint in answerView -> False on start!
-    func testAnswerViewShoudBeHiddenWhenStart() {
+    func testAnswerViewShouldBeHiddenWhenStart() {
         XCTAssertFalse(sut.answerTrailing.active)
     }
     
-    //??
-    func testQuestionViewShoudBeVisibleWhenStart() {
+    func testQuestionViewShouldBeVisibleWhenStart() {
         XCTAssertEqual(sut.questionView.alpha, 1)
     }
     
-    func testShouldPerformSegueWithIdentifier_shoudDisplayAlertIfScoreSequeAndLern() {
+    func testShouldPerformSegueWithIdentifier_shouldDisplayAlertIfScoreSequeAndLern() {
         sut.pushDummyData(.Learn)
         
         sut.shouldPerformSegueWithIdentifier("SthElse", sender: self)
@@ -46,7 +45,7 @@ class TestViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
     
-    func testShouldPerformSegueWithIdentifier_shoudNotDisplayAlertIfScoreSequeAndLern() {
+    func testShouldPerformSegueWithIdentifier_shouldNotDisplayAlertIfScoreSequeAndLearn() {
         sut.pushDummyData(.Test(1))
         
         sut.shouldPerformSegueWithIdentifier("SthElse", sender: self)
@@ -57,7 +56,6 @@ class TestViewControllerTests: XCTestCase {
     }
     
 
-    
     func testQuestionViewHiddenAnswerViewVisibleSwipeLeft() {
         sut.swipedLeft()
         XCTAssertTrue(sut.answerTrailing.active)
@@ -67,7 +65,7 @@ class TestViewControllerTests: XCTestCase {
         XCTAssertTrue(questionViewRightSidePosition < 0)
     }
     
-    func testSwipedUpShoudChangeQuestionAnswer() {
+    func testSwipedUpShouldChangeQuestionAnswer() {
         /*
             testing in
             updateQuestionUiForCurrentCard
@@ -75,14 +73,14 @@ class TestViewControllerTests: XCTestCase {
         */
     }
     
-    func testShowTipShoudNotDisplayTipIfDeckEmpty() {
+    func testShowTipShouldNotDisplayTipIfDeckEmpty() {
         sut.showTip(self)
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
         let message = sut.presentedViewController as! UIAlertController
         XCTAssertEqual(message.message, "Brak podpowiedzi")
     }
 
-    func testShowTipShoudDisplayTipIfDeckNotEmpty() {
+    func testShowTipShouldDisplayTipIfDeckNotEmpty() {
         sut.pushDummyData(.Learn)
         sut.showTip(self)
         let message = sut.presentedViewController as! UIAlertController
@@ -112,17 +110,22 @@ class TestViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.currentQuestionNumber.text?.rangeOfString("#[0-9]+", options: .RegularExpressionSearch) != nil)
     }
     
-    
-    
-    
-    
-    //todo...
-    func testUpdateForAnswer_shoudCallAnsweredQuestionTransitionMethod() {
+    func testUpdateForAnswer_shouldCallAnsweredQuestionTransitionMethod() {
+        let sut = mockTestViewController()
+        sut.testLogicSource = Test(deck: [], testType: .Learn)
         sut.pushDummyData(.Learn)
-        sut.updateForAnswer(true)
+        sut.updateForAnswer(false)
+        XCTAssertTrue(sut.wasOpened)
     }
-    
-    func testIfDeskIsEmptyShoudCall_displayAlertIfPassedDeskIsEmpty() {
+    /*
+    func testUpdateForAnswer_shouldPerformSegueWhenDeckIsEmpty() {
+        sut.testLogicSource = Test(deck: [], testType: .Test(1))
+        sut.updateForAnswer(true)
+        print("view??: \(sut.nibName)")
+        XCTAssertTrue(true)
+    }
+    */
+    func testIfDeskIsEmptyShouldCall_displayAlertIfPassedDeskIsEmpty() {
         let sut = mockTestViewController()
         //desk is empty!
         sut.testLogicSource = Test(deck: [], testType: .Learn)
@@ -130,7 +133,7 @@ class TestViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.wasOpened)
     }
     
-    func testIfDeskIsEmptyShoudNotCall_displayAlertIfPassedDeskIsEmpty() {
+    func testIfDeskIsEmptyShouldNotCall_displayAlertIfPassedDeskIsEmpty() {
         let sut = mockTestViewController()
         sut.pushDummyData(.Learn)
         sut.displayAlertIfPassedDeskIsEmpty()
@@ -138,16 +141,41 @@ class TestViewControllerTests: XCTestCase {
         XCTAssertFalse(sut.wasOpened)
     }
     
-    func testIfDeckIsEmptyShoudCallAlert() {
+    func testIfDeckIsEmptyShouldCallAlert() {
         sut.testLogicSource = Test(deck: [], testType: .Learn)
         sut.displayAlertIfPassedDeskIsEmpty()
         XCTAssertNotNil(sut.view)
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
+
+    func testIfDeckIsEmptyShouldNotCallIfNotHidden_displayAlertIfPassedDeskHasAllFlashcardsHidden() {
+        let sut = mockTestViewController()
+        sut.pushDummyData(.Learn, allHidden: false)
+        
+        sut.displayAlertIfPassedDeskHasAllFlashcardsHidden()
+        XCTAssertFalse(sut.wasOpened)
+    }
     
+    func testIfDeckIsEmptyShouldCall_displayAlertIfPassedDeskHasAllFlashcardsHidden() {
+        let sut = mockTestViewController()
+        sut.pushDummyData(.Learn, allHidden: true)
+
+        sut.displayAlertIfPassedDeskHasAllFlashcardsHidden()
+        XCTAssertTrue(sut.wasOpened)
+    }
+    
+    func testIfCallAlertIfDeckIsEmpty() {
+        sut.pushDummyData(.Learn, allHidden: true)
+        sut.displayAlertIfPassedDeskHasAllFlashcardsHidden()
+        XCTAssertTrue(sut.presentedViewController is UIAlertController)
+    }
+
 }
+
+
 extension TestViewControllerTests {
     class mockTestViewController: TestViewController {
+        var passedFlashcards = 0
         var wasOpened = false
  
         override func displayAlertIfPassedDeskIsEmpty() {
@@ -155,15 +183,26 @@ extension TestViewControllerTests {
                 wasOpened = true
             }
         }
+        override func answeredQuestionTransition() {
+            wasOpened = true
+        }
+        override func displayAlertIfPassedDeskHasAllFlashcardsHidden() {
+            if testLogicSource?.checkIfAllFlashcardsHidden() == true {
+                wasOpened = true
+            }
+        }
     }
 }
 extension TestViewController {
-    func pushDummyData(testType: StudyType) {
+    func pushDummyData(testType: StudyType, allHidden: Bool = false) {
         let flashcard = Flashcard(serverID: "a", deckId: "a", question: "a", answer: "a", tip: Tip.Text(text: "a"))
         var flashcardArray = [flashcard]
         for _ in 1...10 {
+            if allHidden {
+                flashcard.hidden = true
+            }
             flashcardArray.append(flashcard)
         }
-        testLogicSource = Test(deck: [flashcard], testType: testType)
+        testLogicSource = Test(deck: flashcardArray, testType: testType)
     }
 }
