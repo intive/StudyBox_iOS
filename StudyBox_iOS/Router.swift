@@ -55,57 +55,42 @@ enum Router: URLRequestConvertible {
         //MARK: Decks
         case GetAllDecks, AddSingleDeck:
             return Router.serverURL.URLByAppendingPathComponents(decksPath)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks"
             
         case GetAllUsersDecks(_):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, "me")
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/me"
-
+            
         case GetSingleDeck(let ID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, ID)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040"
             
         case GetRandomDeck(_):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, "random")
-        //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/random"
             
         case RemoveSingleDeck(let ID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, ID)
-            //example: this returns	"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040"
             
         case .UpdateDeck(let ID, _, _) :
             return Router.serverURL.URLByAppendingPathComponents(decksPath, ID)
-            //example: this returns	"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040"
             
             
         case .ChangeAccessToDeck(let ID, let isPublic):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, ID, "public", isPublic.description)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/public/true"
             
             
         //MARK: Flashcards
         case GetAllFlashcards(let deckID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards"
         
         case GetSingleFlashcard(let ID, let deckID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-            //example: this returns 
-            //"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
             
         case AddSingleFlashcard(let deckID, _, _, _):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards"
 
         case RemoveSingleFlashcard(let ID, let deckID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-            //example: this returns 
-            //"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
         
         case .UpdateFlashcard(let ID, let deckID, _, _, _):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-            //example: this returns 
-            //"http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards/27B2CA30-644D-41DB-98BF-55F201049F67"
         }
     }
 

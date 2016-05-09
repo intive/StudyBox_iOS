@@ -27,7 +27,7 @@ enum Tip: CustomStringConvertible, Equatable  {
     }
 }
 
-class Flashcard: Object, UniquelyIdentifiable {
+class Flashcard: Object, UniquelyIdentifiable, JSONInitializable {
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck?
@@ -46,18 +46,29 @@ class Flashcard: Object, UniquelyIdentifiable {
     }
     dynamic var hidden: Bool = false
     
+    required convenience init?(withJSON json: JSON) {
+        if let jsonDict = json.dictionary {
+            if let id = jsonDict["id"]?.string, deckId = jsonDict["deckId"]?.string, question = jsonDict["question"]?.string,
+                answer = jsonDict["answer"]?.string, isHidden = jsonDict["isHidden"]?.bool {
+                self.init(serverID: id, deckId: deckId, question: question, answer: answer, isHidden: isHidden, tip: nil)
+                return
+            }
+        }
+        return nil
+    }
+    
     override class func primaryKey() -> String? {
         return "serverID"
     }
     
-    convenience init(serverID: String, deckId: String, question: String, answer: String, tip: Tip?){
+    convenience init(serverID: String, deckId: String, question: String, answer: String, isHidden: Bool = false, tip: Tip?){
         self.init()
         self.serverID = serverID
         self.deckId = deckId
         self.question = question
         self.answer = answer
         self.tipEnum = tip
-        self.hidden = false
+        self.hidden = isHidden
     }
 }
 
