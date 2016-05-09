@@ -72,8 +72,8 @@ class RemoteDataManager {
         performGenericRequest(request, completion: completion) { $0.arrayValue }
     }
 
+    
     //MARK: Users
-
     func login(email: String, password: String, completion: (ServerResultType<JSON>)->()) {
         guard let basicAuth = "\(email):\(password)".base64Encoded() else {
             completion(.Error(err: (ServerError.ErrorWithMessage(text: "Niepoprawne dane"))))
@@ -92,41 +92,45 @@ class RemoteDataManager {
     
     //MARK: Decks
     func findDecks(includeOwn includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (ServerResultType<[JSON]>)->()) {
-        performRequest(Router.GetAllDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name).URLRequest, completion: completion)
+        performRequest(Router.GetAllDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name), completion: completion)
     }
     
     func findDecksUser(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>)->()) {
         performRequest(Router.GetAllUsersDecks(
-            flashcardsCount: flashcardsCount).URLRequest, completion: completion)
+            flashcardsCount: flashcardsCount), completion: completion)
     }
     
     func deck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.GetSingleDeck(ID: deckID), completion: completion)
     }
     
-    func findRandomDeck(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>)->()) {
-        performRequest(Router.GetRandomDeck(flashcardsCount: flashcardsCount).URLRequest, completion: completion)
+    func findRandomDeck(flashcardsCount: Bool? = nil, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.GetRandomDeck(flashcardsCount: flashcardsCount), completion: completion)
     }
 
     func addDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.AddSingleDeck(name: deck.name, isPublic: deck.isPublic), completion: completion)
     }
     
-    func removeDeck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.RemoveSingleDeck(ID: deckID), completion: completion)
+    func removeDeck(deckID: String, completion: (ServerResultType<Void>) -> ()) {
+        performGenericRequest(Router.RemoveSingleDeck(ID: deckID), completion: completion){ _ in
+            return
+        }
     }
     
     func updateDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.UpdateDeck(ID: deck.serverID, name: deck.name, isPublic: deck.isPublic), completion: completion)
     }
     
-    func changeAccesToDeck(deckID: String, isPublic: Bool, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.ChangeAccessToDeck(ID: deckID, isPublic: isPublic), completion: completion)
+    func changeAccessToDeck(deckID: String, isPublic: Bool, completion: (ServerResultType<Void>) -> ()) {
+        performGenericRequest(Router.ChangeAccessToDeck(ID: deckID, isPublic: isPublic), completion: completion){ _ in
+            return
+        }
     }
     
 
     //MARK: Flashcards
-    func findFlashcards(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
+    func findFlashcards(deckID: String, completion: (ServerResultType<[JSON]>) -> ()) {
         performRequest(Router.GetAllFlashcards(deckID: deckID), completion: completion)
     }
     
@@ -139,8 +143,10 @@ class RemoteDataManager {
                        completion: completion)
     }
     
-    func removeFlashcard(deckID: String, flashcardID: String, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.RemoveSingleFlashcard(ID: flashcardID, deckID: deckID), completion: completion)
+    func removeFlashcard(deckID: String, flashcardID: String, completion: (ServerResultType<Void>) -> ()) {
+        performGenericRequest(Router.RemoveSingleFlashcard(ID: flashcardID, deckID: deckID), completion: completion){ _ in
+            return
+        }
     }
     
     func updateFlashcard(deckID: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
