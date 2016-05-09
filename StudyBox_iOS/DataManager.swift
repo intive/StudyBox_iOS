@@ -164,7 +164,7 @@ class DataManager {
     func addDeck(name: String) -> String {
 
         let id = decks.generateNewId()
-        let newDeck = Deck(serverID: id, name: name)
+        let newDeck = Deck(name: name, serverID: id)
         
         if let realm = realm {
             do {
@@ -296,7 +296,7 @@ class DataManager {
         let flashcardId = NSUUID().UUIDString
         if let realm = realm {
             if let selectedDeck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
-                let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
+                let newFlashcard = Flashcard(deckID: deckId, question: question, answer: answer, tip: tip, serverID: flashcardId)
             
                 newFlashcard.deck = selectedDeck
                 do {

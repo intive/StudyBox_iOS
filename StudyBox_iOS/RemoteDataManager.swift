@@ -98,15 +98,33 @@ class RemoteDataManager {
     func findDecks(includeOwn includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (ServerResultType<[JSON]>)->()) {
         performRequest(Router.GetAllDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name).URLRequest, completion: completion)
     }
+    
+    func userDecks(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>) -> ()) {
+        performRequest(Router.GetAllUserDecks(flashcardsCount: flashcardsCount), completion: completion)
+    }
 
     func addDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.AddSingleDeck(name: deck.name, isPublic: deck.isPublic), completion: completion)
     }
 
     //MARK: Flashcards
-    func addFlashcard(deckID: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.AddSingleFlashcard(deckID: deckID, question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
+   
+    func flashcard(id flashcardId: String, deckId: String, tipsCount: Bool = false, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.GetSingleFlashcard(ID: flashcardId, deckID: deckId), completion: completion)
+    }
+    
+    func flashcards(deckId: String, tipsCount: Bool = false, completion: (ServerResultType<[JSON]>) -> ()) {
+        performRequest(Router.GetAllFlashcards(deckID: deckId), completion: completion)
+    }
+    
+    func addFlashcard(flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.AddSingleFlashcard(deckID: flashcard.deckId, question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
                        completion: completion)
+    }
+    
+    func updateFlashcard(flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.UpdateFlashcard(ID: flashcard.serverID, deckID: flashcard.deckId,
+            question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden), completion: completion)
     }
     
 }

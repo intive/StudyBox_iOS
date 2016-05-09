@@ -16,7 +16,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     @IBOutlet weak var settingsTableView: UITableView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    lazy private var dataManager: NewDataManager = { return UIApplication.appDelegate().dataManager }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
@@ -100,13 +100,14 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     //Check if user has any decks on device before performing segue on second TableViewCell
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
         var doesUserHaveDecks = true
-        if let userDecks = dataManager?.decks(false) {
-            if userDecks.isEmpty {
-                presentAlertController(withTitle: "Brak talii", message: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.", buttonText: "OK")
-                doesUserHaveDecks = false
-                self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-            }
+        
+        let userDecks = dataManager.localDataManager.getAll(Deck)
+        if userDecks.isEmpty {
+            presentAlertController(withTitle: "Brak talii", message: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.", buttonText: "OK")
+            doesUserHaveDecks = false
+            self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
         }
+        
         return doesUserHaveDecks
     }
     

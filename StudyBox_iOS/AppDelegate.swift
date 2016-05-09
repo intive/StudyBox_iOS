@@ -18,7 +18,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
+        dataManager.localDataManager.write { realm in
+            realm.deleteAll()
+        }
+//        let deck = Deck(serverID: "someDeck", name: "xd")
+        let flashcard = Flashcard(deckID: "someDeck", question: "question", answer: "answer", tip: nil, serverID: "damianId")
+        let result = dataManager.localDataManager.write {
+            $0.add(flashcard)
+        }
+        print(result)
         
+//        dataManager.localDataManager.update(deck)
+//        dataManager.localDataManager.update(flashcard)
+        
+//        dataManager.localDataManager.write { realm in
+//            flashcard.deck = deck
+//        }
+        
+        let decks = dataManager.localDataManager.getAll(Deck)
+        let theFc = dataManager.localDataManager.getAll(Flashcard)
+        let fc = dataManager.localDataManager.realm?.objects(Flashcard).toArray()
+        print("x")
         return true
     }
     
@@ -100,8 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - DataManager stack 
     
-    private(set) var dataManager: DataManager = DataManager.managerWithDummyData()
-    private(set) var newDataManager = NewDataManager()
+//    private(set) var dataManager: DataManager = DataManager.managerWithDummyData()
+    private(set) var dataManager = NewDataManager()
     
 
     // MARK: - Core Data stack

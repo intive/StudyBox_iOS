@@ -20,7 +20,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     let checkmarkCellID = "checkmarkCell"
     let switchCellID = "switchCell"
     var mode: SettingsDetailVCMode!
-    lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    lazy private var dataManager: NewDataManager = { return UIApplication.appDelegate().dataManager }()
     
     ///Array that holds all user's local decks
     var userDecksArray: [Deck]?
@@ -34,7 +34,8 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         switch mode {
         case .DecksForWatch?:
             self.title = "Wybór talii"
-            userDecksArray = dataManager?.decks(true)
+            
+            userDecksArray = dataManager.localDataManager.getAll(Deck)
         case .Frequency?:
             self.title = "Powiadomienia"
         default:

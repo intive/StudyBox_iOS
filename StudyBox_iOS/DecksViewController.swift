@@ -25,7 +25,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return searchDecks ?? decksArray
     }
     
-    lazy var dataManager: DataManager = {
+    lazy var dataManager: NewDataManager = {
         return UIApplication.appDelegate().dataManager
     }()
 
@@ -90,7 +90,15 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         }
         NSNotificationCenter.defaultCenter()
             .addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        decksArray = dataManager.decks(true)
+        dataManager.userDecks {
+            switch $0 {
+            case .Success(let obj):
+                self.decksArray = obj
+            case .Error(_):
+                self.presentAlertController(withTitle: "Błąd", message: "Błąd pobierania danych", buttonText: "Ok")
+            }
+            self.collectionView?.reloadData()
+        }
         if initialLayout {
             adjustCollectionLayout(forSize: view.bounds.size)
             initialOffset(false)
@@ -216,54 +224,63 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             let resetSearchUI = {
                 self.searchController.active = false
             }
-            do {
-                let flashcards = try dataManager.flashcards(forDeckWithId: deck.serverID)
-                   
-                let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
-                
-                let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                    let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
-                    
-                    let amounts = [ 1, 5, 10, 15, 20 ]
-                    
-                    var amountFlashcardsNotHiden: Int = 0
-                    for flashcard in flashcards {
-                        if flashcard.hidden == false {
-                            amountFlashcardsNotHiden += 1
-                        }
+            
+            dataManager.flashcards(deck.serverID) {
+                switch $0 {
+                case .Success(let flashcards):
+                    guard !flashcards.isEmpty else {
+                        self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek", buttonText: "Ok")
+                        return
                     }
+                    let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
                     
-                    for amount in amounts {
-                        if amount < amountFlashcardsNotHiden {
-                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
-                                resetSearchUI()
-                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amount))))
+                    let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
+                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
+                        
+                        let amounts = [ 1, 5, 10, 15, 20 ]
+                        
+                        var amountFlashcardsNotHiden: Int = 0
+                        for flashcard in flashcards {
+                            if flashcard.hidden == false {
+                                amountFlashcardsNotHiden += 1
+                            }
+                        }
+                        
+                        for amount in amounts {
+                            if amount < amountFlashcardsNotHiden {
+                                alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
+                                    resetSearchUI()
+                                    self.performSegueWithIdentifier("StartTest",
+                                        sender: Test(deck: flashcards, deckName: deck.name, testType: .Test(UInt32(amount))))
+                                    })
+                            } else {
+                                break
+                            }
+                        }
+                        alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
+                            resetSearchUI()
+                            self.performSegueWithIdentifier("StartTest",
+                                sender: Test(deck: flashcards, deckName: deck.name, testType: .Test(UInt32(amountFlashcardsNotHiden))))
                             })
-                        } else {
-                            break
-                        }
+                        alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
+                        
+                        self.presentViewController(alertAmount, animated: true, completion:nil)
                     }
-                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
+                    let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                         resetSearchUI()
-                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden))))
-                        })
-                    alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
+                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, deckName: deck.name, testType: .Learn))
+                    }
                     
-                    self.presentViewController(alertAmount, animated: true, completion:nil)
-                }
-                let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    resetSearchUI()
-                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
+                    alert.addAction(testButton)
+                    alert.addAction(studyButton)
+                    alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
+                    
+                    self.presentViewController(alert, animated: true, completion:nil)
+                    
+                case .Error(_):
+                    self.presentAlertController(withTitle: "Błąd", message: "Nie udało się pobrać danych", buttonText: "Ok")
                 }
                 
-                alert.addAction(testButton)
-                alert.addAction(studyButton)
-                alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-
-                presentViewController(alert, animated: true, completion:nil)
-                
-            } catch let e {
-                debugPrint(e)
             }
         }
     }

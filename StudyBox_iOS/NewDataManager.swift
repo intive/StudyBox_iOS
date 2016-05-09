@@ -37,11 +37,20 @@ public class NewDataManager {
             if !self.localDataManager.update(realmObject) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
+            if let parentStoreable = parsedObject as? ParentStoreable {
+                parentStoreable.storeLocalParent(localDataManager)
+            }
         } else if let realmObjects = parsedObject as? NSArray as? [Object] {
             if !self.localDataManager.update(realmObjects) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
+            realmObjects.forEach {
+                if let parentStoreable = $0 as? ParentStoreable {
+                    parentStoreable.storeLocalParent(localDataManager)
+                }
+            }
         }
+        
         return .Success(obj: parsedObject)
     }
 
@@ -148,9 +157,61 @@ public class NewDataManager {
                 self.remoteDataManager.findDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name, completion: $0)
             }, completion: completion)
     }
+    
+    func userDecks(flashcardsCount: Bool? = nil, completion: (DataManagerResponse<[Deck]>) -> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.getAll(Deck)
+            }, remoteFetch: {
+                self.remoteDataManager.userDecks(completion: $0)
+            }, completion: completion)
+    }
 
     //MARK: Flashcards
-    func flashcard(withId flashcardID: String, deckID: String, completion: (DataManagerResponse<Deck>)-> ()) {
-        fatalError("Not implemented")
+    func flashcards(deckID: String, tipsCount: Bool = false, completion: (DataManagerResponse<[Flashcard]>) -> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.flashcards(deckID)
+            }, remoteFetch: {
+                self.remoteDataManager.flashcards(deckID, tipsCount: tipsCount, completion: $0)
+            }, completion: completion)
+    }
+    
+    
+    func flashcard(withId flashcardID: String, deckID: String, completion: (DataManagerResponse<Flashcard>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.get(Flashcard.self, withId: flashcardID)
+            }, remoteFetch: {
+                self.remoteDataManager.flashcard(id: flashcardID, deckId: deckID, completion: $0)
+            }, completion: completion)
+    }
+    
+    func addFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.addFlashcard(flashcard, completion: $0)
+            }, completion: completion)
+    }
+    
+    func updateFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
+        handleJSONRequest(
+            remoteFetch:{
+                self.remoteDataManager.updateFlashcard(flashcard, completion: $0)
+            }, remoteParsing: {
+                guard let flashcard = Flashcard(withJSON: $0) else {
+                    return nil 
+                }
+                return self.deckInFlashcard([flashcard])[0]
+                
+            },
+            completion: completion)
+    }
+    
+    private func deckInFlashcard(flashcards: [Flashcard]) -> [Flashcard] {
+        return flashcards.map {
+            $0.deck = localDataManager.get(Deck.self, withId: $0.deckId)
+            return $0
+        }
     }
 }

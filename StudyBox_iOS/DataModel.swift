@@ -27,7 +27,7 @@ enum Tip: CustomStringConvertible, Equatable  {
     }
 }
 
-class Flashcard: Object, UniquelyIdentifiable {
+class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, ParentStoreable {
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck?
@@ -46,19 +46,39 @@ class Flashcard: Object, UniquelyIdentifiable {
     }
     dynamic var hidden: Bool = false
     
+    required convenience init?(withJSON json: JSON) {
+        if let jsonDict = json.dictionary {
+            if let id = jsonDict["id"]?.string, question = jsonDict["question"]?.string,
+                answer = jsonDict["answer"]?.string, deckId = jsonDict["deckId"]?.string, isHidden = jsonDict["isHidden"]?.bool {
+                self.init(deckID: deckId, question: question, answer: answer, tip: nil, serverID: id)
+                self.hidden = isHidden
+                return
+            }
+        }
+        return nil
+    }
+    
     override class func primaryKey() -> String? {
         return "serverID"
     }
     
-    convenience init(serverID: String, deckId: String, question: String, answer: String, tip: Tip?){
+    convenience init(deckID: String, question: String, answer: String, tip: Tip?, serverID: String? = nil){
         self.init()
-        self.serverID = serverID
-        self.deckId = deckId
+        if let serverID = serverID {
+            self.serverID = serverID
+        }
         self.question = question
         self.answer = answer
         self.tipEnum = tip
         self.hidden = false
+        
     }
+    
+    func storeLocalParent(localDataManager: LocalDataManager) {
+        self.deck = localDataManager.get(Deck.self, withId: deckId)
+    }
+    
+    
 }
 
 
@@ -75,7 +95,7 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     required convenience init?(withJSON json: JSON) {
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, name = jsonDict["name"]?.string, isPublic  = jsonDict["isPublic"]?.bool {
-                self.init(serverID: id, name: name,isPublic: isPublic)
+                self.init(name: name, isPublic: isPublic, serverID: id)
                 return 
             }
         }
@@ -86,10 +106,13 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
         return "serverID"
     }
     
-    convenience init(serverID: String, name: String, isPublic: Bool = true){
+    convenience init( name: String, isPublic: Bool = true, serverID: String? = nil){
         self.init()
-        self.serverID = serverID
         self.name = name
+        if let serverID = serverID {
+            self.serverID = serverID
+            
+        }
         self.isPublic = isPublic
     }
     

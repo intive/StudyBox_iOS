@@ -9,7 +9,7 @@
 import RealmSwift
 
 class LocalDataManager {
-    private let realm = try? Realm()
+    let realm = try? Realm()
     
     func write(@noescape block: (realm: Realm) -> ()) -> Bool {
         guard let realm = realm else {
@@ -35,8 +35,8 @@ class LocalDataManager {
         return realm?.objects(T.self).toArray() ?? []
     }
     
-    func filter<T: Object>(type: T.Type, predicate: String, args: AnyObject...) -> [T] {
-        return realm?.objects(T.self).filter(predicate, args).toArray() ?? []
+    func filter<T: Object>(type: T.Type, predicate: String) -> [T] {
+        return realm?.objects(T.self).filter(predicate).toArray() ?? []
     }
     
     func update(object: Object) -> Bool {
@@ -61,6 +61,10 @@ class LocalDataManager {
         return write { realm in
             realm.delete(objects)
         }
+    }
+    
+    func flashcards(deckID: String) -> [Flashcard] {
+        return filter(Flashcard.self, predicate: "serverID == '\(deckID)'")
     }
     
 }
