@@ -25,7 +25,6 @@ class ScoreViewController: StudyBoxViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print("viewDidLoad")
         congratulationsBigLabel.font = UIFont.sbFont(size: sbFontSizeSuperLarge, bold: true)
         congratulationsSmallLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         
