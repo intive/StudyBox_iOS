@@ -193,6 +193,9 @@ public class NewDataManager {
     //MARK: Flashcards
     func flashcard(withId flashcardID: String, deckID: String, completion: (DataManagerResponse<Flashcard>)-> ()) {
         handleJSONRequest(
+            localFetch: {
+                self.localDataManager.get(Flashcard.self, withId: flashcardID)
+            },
             remoteFetch: {
                 self.remoteDataManager.flashcard(deckID, flashcardID: flashcardID, completion: $0)
             }, completion: completion)
@@ -200,6 +203,11 @@ public class NewDataManager {
     
     func Flashcards(deckID: String, completion: (DataManagerResponse<[Flashcard]>) -> ()) {
         handleJSONRequest(
+            localFetch: {
+                var tmpDeck: Deck
+                tmpDeck = self.localDataManager.get(Deck.self, withId: deckID)!
+                return tmpDeck.flashcards
+            },
             remoteFetch: {
                 self.remoteDataManager.findFlashcards(deckID, completion: $0)
             }, completion: completion)
@@ -207,6 +215,10 @@ public class NewDataManager {
     
     func addFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
         handleJSONRequest(
+            localFetch: {
+                self.localDataManager.update(flashcard)
+                return flashcard
+            },
             remoteFetch: {
                 self.remoteDataManager.addFlashcard(deckID, flashcard: flashcard, completion: $0)
             }, completion: completion)
@@ -225,6 +237,10 @@ public class NewDataManager {
     
     func updateFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
         handleJSONRequest(
+            localFetch: {
+                self.localDataManager.update(flashcard)
+                return flashcard
+            },
             remoteFetch: {
                 self.remoteDataManager.updateFlashcard(deckID, flashcard: flashcard, completion: $0)
             }, completion: completion)
