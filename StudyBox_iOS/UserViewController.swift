@@ -49,14 +49,14 @@ class UserViewController: InputViewController {
     func userAction(action: UserAction, email: String, password: String) {
         let newDataManager = UIApplication.appDelegate().dataManager
         
-        newDataManager.userAction(action, email: email, password: password, completion: { response in
+        newDataManager.userAction(action, email: email, password: password, completion: {
             var errorMessage = "Błąd logowania"
             
             if case .Register = action {
                 errorMessage = "Błąd rejestracji"
             }
             
-            switch response {
+            switch $0 {
             case .Success(let user):
                 
                 let defaults = NSUserDefaults.standardUserDefaults()

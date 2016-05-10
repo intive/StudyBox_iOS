@@ -243,8 +243,8 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         if case .Add = mode {
             
             // todo add tips
-            dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, tip: tip)) { response in
-                switch response {
+            dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, tip: tip)) {
+                switch $0 {
                 case .Success(_):
                     self.presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
                     self.clearInput()
@@ -267,8 +267,8 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         
-        dataManager.updateFlashcard(updateFlashcardCpy) { response in
-            switch response {
+        dataManager.updateFlashcard(updateFlashcardCpy) {
+            switch $0 {
             case .Success(let updatedFlashcard):
                 callback?(flashcard:updatedFlashcard)
                 self.presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok",
