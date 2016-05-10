@@ -74,8 +74,9 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         if let message = alertMessage {
             presentAlertController(withTitle: "", message: message, buttonText: "Ok")
         } else {
-            dismissViewControllerAnimated(true) {[unowned self] in
-                self.successfulLoginTransition()
+            
+            if let email = emailTextField.text, password = passwordTextField.text {
+                userAction(.Register, email: email, password: password)
             }
         }
     }

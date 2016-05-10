@@ -74,7 +74,7 @@ class RemoteDataManager {
 
     //MARK: Users
 
-    func login(email: String, password: String, completion: (ServerResultType<JSON>)->()) {
+    func login(email: String, password: String, completion: (ServerResultType<JSON>) -> ()) {
         guard let basicAuth = "\(email):\(password)".base64Encoded() else {
             completion(.Error(err: (ServerError.ErrorWithMessage(text: "Niepoprawne dane"))))
             return
@@ -83,6 +83,10 @@ class RemoteDataManager {
         loginRequest.addValue("Basic \(basicAuth)", forHTTPHeaderField: "Authorization")
 
         performRequest(loginRequest, completion: completion)
+    }
+    
+    func register(email: String, password: String, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.RegisterUser(email: email, password: password), completion: completion)
     }
     
     func logout() {

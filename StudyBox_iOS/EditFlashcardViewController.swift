@@ -242,48 +242,47 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         
         if case .Add = mode {
             
-            if let flashcardDeck = deck {
-                // todo add tips
-                dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, tip: tip)) { response in
-                    switch response {
-                    case .Success(_):
-                        self.presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
-                        self.clearInput()
-                    case .Error(_):
-                        self.presentAlertController(withTitle: "Błąd", message: "Nie udało się dodać fiszki", buttonText: "Ok")
-                        
-                    }
-                }
-
-            }
-        } else if case .Modify(_, let callback) = mode {
-            
-//            flashcard.question = question
-//            flashcard.answer = answer
-//            flashcard.tipEnum = tip
-            let updateFlashcardCpy = Flashcard(deckID: flashcard.deckId, question: question, answer: answer, tip: tip, serverID: flashcard.serverID)
-            let completion = {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            
-            dataManager.updateFlashcard(updateFlashcardCpy) { response in
+            // todo add tips
+            dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, tip: tip)) { response in
                 switch response {
-                case .Success(let updatedFlashcard):
-                    callback?(flashcard:updatedFlashcard)
-                    self.presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok",
-                                           actionCompletion: completion,
-                                           dismissCompletion: nil)
-                case .Error(let err):
-                    var errMessage = "Nie udało się zapisać zmian"
-                    if case ServerError.ErrorWithMessage(let serverErrMessage) = err {
-                        errMessage = serverErrMessage
-                    }
+                case .Success(_):
+                    self.presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
+                    self.clearInput()
+                case .Error(_):
+                    self.presentAlertController(withTitle: "Błąd", message: "Nie udało się dodać fiszki", buttonText: "Ok")
+                    
+                }
+            }
 
-                    self.presentAlertController(withTitle: "Błąd", message: errMessage, buttonText: "Ok",
-                                           actionCompletion: completion,
-                                           dismissCompletion: nil)
+        } else if case .Modify(_, let callback) = mode {
+            modifyAction(question, answer: answer, tip: tip, callback: callback)
+            
+        }
+        
+    }
+    
+    private func modifyAction(question: String, answer: String, tip: Tip?, callback: ((flashcard: Flashcard) -> Void)?) {
+        let updateFlashcardCpy = Flashcard(deckID: flashcard.deckId, question: question, answer: answer, tip: tip, serverID: flashcard.serverID)
+        let completion = {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        dataManager.updateFlashcard(updateFlashcardCpy) { response in
+            switch response {
+            case .Success(let updatedFlashcard):
+                callback?(flashcard:updatedFlashcard)
+                self.presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok",
+                                            actionCompletion: completion,
+                                            dismissCompletion: nil)
+            case .Error(let err):
+                var errMessage = "Nie udało się zapisać zmian"
+                if case ServerError.ErrorWithMessage(let serverErrMessage) = err {
+                    errMessage = serverErrMessage
                 }
                 
+                self.presentAlertController(withTitle: "Błąd", message: errMessage, buttonText: "Ok",
+                                            actionCompletion: completion,
+                                            dismissCompletion: nil)
             }
             
         }

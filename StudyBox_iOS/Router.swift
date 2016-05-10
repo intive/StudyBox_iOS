@@ -16,6 +16,7 @@ enum Router: URLRequestConvertible {
     private static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
 
     case GetCurrentUser
+    case RegisterUser(email: String, password: String)
 
     case GetAllDecks(includeOwn: Bool?, flashcardsCount: Bool?, name: String?)
     case GetAllUserDecks(flashcardsCount: Bool?)
@@ -33,7 +34,7 @@ enum Router: URLRequestConvertible {
         switch self {
         case .GetAllDecks, GetSingleDeck, GetAllFlashcards, GetSingleFlashcard, GetCurrentUser, GetAllUserDecks:
             return .GET
-        case .AddSingleFlashcard, AddSingleDeck:
+        case .AddSingleFlashcard, AddSingleDeck, .RegisterUser:
             return .POST
         case .RemoveSingleFlashcard:
             return .DELETE
@@ -46,6 +47,9 @@ enum Router: URLRequestConvertible {
         switch self {
         case GetCurrentUser:
             return Router.serverURL.URLByAppendingPathComponents(usersPath, "me")
+            
+        case .RegisterUser(_, _):
+            return Router.serverURL.URLByAppendingPathComponent(usersPath)
 
         case GetAllDecks, AddSingleDeck:
             return Router.serverURL.URLByAppendingPathComponents(decksPath)
@@ -83,6 +87,9 @@ enum Router: URLRequestConvertible {
 
         switch self {
             //Add only methods that use parameters (check in Apiary)
+            
+        case .RegisterUser(let email, let password):
+            return Alamofire.ParameterEncoding.JSON.encode(request, parameters: ["email": email, "password": password]).0
 
         case .GetAllDecks(let includeOwn, let flashcardsCount, let name):
             let parameters: [String: AnyObject] = Dictionary.flat(

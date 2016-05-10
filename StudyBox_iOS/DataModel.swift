@@ -27,7 +27,7 @@ enum Tip: CustomStringConvertible, Equatable  {
     }
 }
 
-class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, ParentStoreable {
+class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentStoreable {
     dynamic private(set) var serverID: String = NSUUID().UUIDString
     dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck?
@@ -67,6 +67,7 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, ParentStoreabl
         if let serverID = serverID {
             self.serverID = serverID
         }
+        self.deckId = deckID
         self.question = question
         self.answer = answer
         self.tipEnum = tip

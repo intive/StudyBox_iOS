@@ -9,6 +9,6 @@
 import Foundation
 
 
-protocol ParentStoreable {
+protocol LocalParentStoreable {
     func storeLocalParent(localDataManager: LocalDataManager)
 }

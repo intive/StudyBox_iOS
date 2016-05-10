@@ -13,6 +13,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchBarWrapper: UIView!
     var searchBarTopConstraint: NSLayoutConstraint!
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
+    let refreshControl = UIRefreshControl()
+
 
     var searchBar: UISearchBar {
         return searchController.searchBar
@@ -79,17 +81,13 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         definesPresentationContext = true
         collectionView?.backgroundColor = UIColor.sb_White()
         collectionView?.alwaysBounceVertical = true
+        refreshControl.tintColor = UIColor.sb_Graphite()
+        refreshControl.addTarget(self, action: #selector(reloadData), forControlEvents: .ValueChanged)
+        reloadData()
     }
    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        searchBar.sizeToFit()
-        if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
-            drawer.addObserver(self, forKeyPath: "openSide", options: [.New, .Old], context: nil)
-        }
-        NSNotificationCenter.defaultCenter()
-            .addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
+    func reloadData() {
+        
         dataManager.userDecks {
             switch $0 {
             case .Success(let obj):
@@ -97,8 +95,22 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             case .Error(_):
                 self.presentAlertController(withTitle: "Błąd", message: "Błąd pobierania danych", buttonText: "Ok")
             }
+            self.refreshControl.endRefreshing()
             self.collectionView?.reloadData()
         }
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        searchBar.sizeToFit()
+        self.collectionView?.addSubview(refreshControl)
+        if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
+            drawer.addObserver(self, forKeyPath: "openSide", options: [.New, .Old], context: nil)
+        }
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        
         if initialLayout {
             adjustCollectionLayout(forSize: view.bounds.size)
             initialOffset(false)
@@ -130,7 +142,11 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         
     }
     func orientationChanged(notification: NSNotification) {
-        initialLayout = true
+        
+        if traitCollection.horizontalSizeClass != .Compact {
+            initialLayout = true
+            
+        }
     }
    
     func initialOffset(animated: Bool) {
@@ -306,12 +322,8 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
     func adjustSearchBar(forYOffset offset: CGFloat) {
         if !searchController.active {
             if offset < topItemOffset + topOffset {
-                
-                if offset > topItemOffset{
-                    searchBarWrapper.frame.origin.y = -offset
-                } else {
-                    searchBarWrapper.frame.origin.y = -topItemOffset
-                }
+            
+                searchBarWrapper.frame.origin.y = -offset
                 
             } else {
                 searchBarWrapper.frame.origin.y = -searchBarHeight

@@ -8,8 +8,9 @@
 
 import RealmSwift
 
+
 class LocalDataManager {
-    let realm = try? Realm()
+    private let realm = try? Realm()
     
     func write(@noescape block: (realm: Realm) -> ()) -> Bool {
         guard let realm = realm else {
