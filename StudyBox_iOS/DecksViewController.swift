@@ -267,7 +267,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                                 alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
                                     resetSearchUI()
                                     self.performSegueWithIdentifier("StartTest",
-                                        sender: Test(deck: flashcards, deckName: deck.name, testType: .Test(UInt32(amount))))
+                                        sender: Test(deck: flashcards, testType: .Test(UInt32(amount)), deckName: deck.name))
                                     })
                             } else {
                                 break
@@ -276,7 +276,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                         alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
                             resetSearchUI()
                             self.performSegueWithIdentifier("StartTest",
-                                sender: Test(deck: flashcards, deckName: deck.name, testType: .Test(UInt32(amountFlashcardsNotHiden))))
+                                sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden)), deckName: deck.name))
                             })
                         alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                         
@@ -284,7 +284,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                     }
                     let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                         resetSearchUI()
-                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, deckName: deck.name, testType: .Learn))
+                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn, deckName: deck.name))
                     }
                     
                     alert.addAction(testButton)

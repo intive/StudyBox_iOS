@@ -96,7 +96,7 @@ class DataManagerTests: XCTestCase {
         
         XCTAssertNotNil(flashcardById,"Receiving added flashcard by id, must not be nil")
         
-        let newCard = Flashcard(serverID: "xxxxxz", deckId: "xxxx", question: "question", answer: "answer", tip: nil)
+        let newCard = Flashcard(serverID: "xxxxxz", deckID: "xxxx", question: "question", answer: "answer", tip: nil)
         
         let newCardById = manager.flashcard(withId: newCard.serverID)
         

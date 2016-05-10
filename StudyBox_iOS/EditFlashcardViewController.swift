@@ -262,7 +262,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     }
     
     private func modifyAction(question: String, answer: String, tip: Tip?, callback: ((flashcard: Flashcard) -> Void)?) {
-        let updateFlashcardCpy = Flashcard(deckID: flashcard.deckId, question: question, answer: answer, tip: tip, serverID: flashcard.serverID)
+        let updateFlashcardCpy = Flashcard(serverID: flashcard.serverID, deckID: flashcard.deckId, question: question, answer: answer, tip: tip)
         let completion = {
             self.dismissViewControllerAnimated(true, completion: nil)
         }

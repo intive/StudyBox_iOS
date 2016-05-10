@@ -28,7 +28,7 @@ enum Tip: CustomStringConvertible, Equatable  {
 }
 
 class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentStoreable {
-    dynamic private(set) var serverID: String = NSUUID().UUIDString
+    dynamic private(set) var serverID: String = ""
     dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck?
     dynamic var question: String = ""
@@ -50,7 +50,7 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentSto
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, question = jsonDict["question"]?.string,
                 answer = jsonDict["answer"]?.string, deckId = jsonDict["deckId"]?.string, isHidden = jsonDict["isHidden"]?.bool {
-                self.init(deckID: deckId, question: question, answer: answer, tip: nil, serverID: id)
+                self.init(serverID: id, deckID: deckId, question: question, answer: answer, tip: nil)
                 self.hidden = isHidden
                 return
             }
@@ -62,17 +62,18 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentSto
         return "serverID"
     }
     
-    convenience init(deckID: String, question: String, answer: String, tip: Tip?, serverID: String? = nil){
+    convenience init(serverID: String, deckID: String, question: String, answer: String, tip: Tip?){
         self.init()
-        if let serverID = serverID {
-            self.serverID = serverID
-        }
+        self.serverID = serverID
         self.deckId = deckID
         self.question = question
         self.answer = answer
         self.tipEnum = tip
         self.hidden = false
         
+    }
+    convenience init(deckID: String, question: String, answer: String, tip: Tip?) {
+        self.init(serverID: "", deckID: deckID, question: question, answer: answer, tip: tip)
     }
     
     func storeLocalParent(localDataManager: LocalDataManager) {
@@ -85,7 +86,7 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentSto
 
 class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     
-    dynamic private(set) var serverID: String = NSUUID().UUIDString
+    dynamic private(set) var serverID: String = ""
     dynamic var name: String = ""
     dynamic var isPublic: Bool = true
 
@@ -96,7 +97,7 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     required convenience init?(withJSON json: JSON) {
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, name = jsonDict["name"]?.string, isPublic  = jsonDict["isPublic"]?.bool {
-                self.init(name: name, isPublic: isPublic, serverID: id)
+                self.init(serverID: id, name: name, isPublic: isPublic)
                 return 
             }
         }
@@ -107,14 +108,15 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
         return "serverID"
     }
     
-    convenience init( name: String, isPublic: Bool = true, serverID: String? = nil){
+    convenience init(serverID: String, name: String, isPublic: Bool = true ){
         self.init()
         self.name = name
-        if let serverID = serverID {
-            self.serverID = serverID
-            
-        }
+        self.serverID = serverID
         self.isPublic = isPublic
+    }
+    
+    convenience init(name: String, isPublic: Bool = true ){
+        self.init(serverID: "", name: name, isPublic: isPublic)
     }
     
     func matches(expression: String?) -> Bool {

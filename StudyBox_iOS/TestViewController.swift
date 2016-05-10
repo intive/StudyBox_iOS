@@ -120,7 +120,7 @@ class TestViewController: StudyBoxViewController {
                         UIAlertAction(title: "Tak", style: .Default,
                             handler: { _ in
                                 if let repeatDeck = testLogic.repeatDeck {
-                                    self.testLogicSource = Test(deck: repeatDeck, deckName: testLogic.deckName, testType: .Learn)
+                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn, deckName: testLogic.deckName)
                                     self.answeredQuestionTransition()
                                 }
                             })

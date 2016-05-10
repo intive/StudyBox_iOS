@@ -27,7 +27,7 @@ class Test {
     private var allFlashcardsHidden: Bool = false
     private var passedDeckWasEmpty: Bool = false
     
-    init(deck: [Flashcard], deckName: String, testType: StudyType) {
+    init(deck: [Flashcard], testType: StudyType, deckName: String = "") {
         
         self.deckName = deckName 
         if deck.isEmpty {

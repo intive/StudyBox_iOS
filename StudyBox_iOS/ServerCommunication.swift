@@ -52,7 +52,7 @@ class ServerCommunication {
                     var DecksArray = [Deck]()
                     
                     for (_, subJson) in json {
-                        DecksArray.append(Deck(name: subJson["name"].stringValue, serverID: subJson["id"].stringValue))
+                        DecksArray.append(Deck(serverID: subJson["id"].stringValue, name: subJson["name"].stringValue))
                     }
                     completion(.Success(DecksArray))
                     
@@ -72,8 +72,8 @@ class ServerCommunication {
                     var flashcardsArray = [Flashcard]()
                     
                     for (_, subJson) in json {
-                        flashcardsArray.append(Flashcard( deckID: subJson["deckId"].stringValue, question: subJson["question"].stringValue,
-                            answer: subJson["answer"].stringValue, tip: nil, serverID: subJson["id"].stringValue))
+                        flashcardsArray.append(Flashcard(serverID: subJson["id"].stringValue, deckID: subJson["deckId"].stringValue,
+                            question: subJson["question"].stringValue, answer: subJson["answer"].stringValue, tip: nil))
                     }
                     completion(.Success(flashcardsArray))
                     
