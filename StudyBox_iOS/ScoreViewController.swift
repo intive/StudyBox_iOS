@@ -20,9 +20,12 @@ class ScoreViewController: StudyBoxViewController {
     var testLogicSource: Test?
     var testScoreFraction: Double = 0.0
     
+    var frameWidth: CGFloat = 0
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
+        print("viewDidLoad")
         congratulationsBigLabel.font = UIFont.sbFont(size: sbFontSizeSuperLarge, bold: true)
         congratulationsSmallLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         
@@ -30,8 +33,6 @@ class ScoreViewController: StudyBoxViewController {
         deckListButton.setTitleColor(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), forState: UIControlState.Normal)
         deckListButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         deckListButton.layer.cornerRadius = 10
-        
-        
         
         completeData()
         if testScoreFraction < 1 {
@@ -42,20 +43,19 @@ class ScoreViewController: StudyBoxViewController {
         } else {
             runTestButton.hidden = true 
         }
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
         setupProgressView()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         animateProgressView()
     }
     
     func setupProgressView() {
-        let frameWidth = circularProgressView.frame.width
-        let frameHeight = circularProgressView.frame.height
-        
-        //We set the radius based on width or height, whichever is smaller
-        circularProgressView.circleRadius = (frameWidth < frameHeight) ? frameWidth/2 : frameHeight/2
+        frameWidth = circularProgressView.bounds.width
+        circularProgressView.circleRadius = frameWidth*2/3
         circularProgressView.progress = 0
     }
     
