@@ -28,24 +28,24 @@ class TestViewControllerTests: XCTestCase {
     
     //based on NSLayoutConstraint in answerView -> False on start!
     func testAnswerViewShouldBeHiddenWhenStart() {
-        XCTAssertFalse(sut.answerTrailing.active)
+        XCTAssertFalse(sut.answerTrailing.active, "AnswerTrailing should not be active on start -> should be hidden")
     }
     
     func testQuestionViewShouldBeVisibleWhenStart() {
-        XCTAssertEqual(sut.questionView.alpha, 1)
+        XCTAssertEqual(sut.questionView.alpha, 1, "QuestionView should be visible on start")
     }
     
-    func testShouldPerformSegueWithIdentifier_shouldDisplayAlertIfScoreSequeAndLern() {
+    func testShouldDisplayAlertIfScoreSequeAndLearn() {
         sut.pushDummyData(.Learn)
         
         sut.shouldPerformSegueWithIdentifier("SthElse", sender: self)
-        XCTAssertFalse(sut.presentedViewController is UIAlertController)
+        XCTAssertFalse(sut.presentedViewController is UIAlertController, "Should not display alert if segue is not ScoreSegue")
         
         sut.shouldPerformSegueWithIdentifier("ScoreSegue", sender: self)
-        XCTAssertTrue(sut.presentedViewController is UIAlertController)
+        XCTAssertTrue(sut.presentedViewController is UIAlertController, "Should display alert if segue is ScoreSegue")
     }
     
-    func testShouldPerformSegueWithIdentifier_shouldNotDisplayAlertIfScoreSequeAndLearn() {
+    func testShouldNotDisplayAlertIfScoreSequeAndLearn() {
         sut.pushDummyData(.Test(1))
         
         sut.shouldPerformSegueWithIdentifier("SthElse", sender: self)
@@ -62,7 +62,7 @@ class TestViewControllerTests: XCTestCase {
         
         //questionView outside the screen
         let questionViewRightSidePosition = sut.questionView.center.x + (sut.questionView.frame.size.width/2)
-        XCTAssertTrue(questionViewRightSidePosition < 0)
+        XCTAssertTrue(questionViewRightSidePosition < 0, "QuestionView should be outside the screen")
     }
     
     func testSwipedUpShouldChangeQuestionAnswer() {
@@ -77,22 +77,22 @@ class TestViewControllerTests: XCTestCase {
         sut.showTip(self)
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
         let message = sut.presentedViewController as! UIAlertController
-        XCTAssertEqual(message.message, "Brak podpowiedzi")
+        XCTAssertEqual(message.message, "Brak podpowiedzi", "Should display suitable message")
     }
 
     func testShowTipShouldDisplayTipIfDeckNotEmpty() {
         sut.pushDummyData(.Learn)
         sut.showTip(self)
         let message = sut.presentedViewController as! UIAlertController
-        XCTAssertEqual(message.message, sut.testLogicSource?.currentCard?.tip)
+        XCTAssertEqual(message.message, sut.testLogicSource?.currentCard?.tip, "Should display correct tip")
     }
     
-    func testUpdateQuestionUiForCurrentCard_shouldUpdateQuestionLabel() {
+    func testShouldUpdateQuestionLabel() {
         sut.pushDummyData(.Learn)
-        XCTAssertNotEqual(sut.questionLabel.text, sut.testLogicSource?.currentCard?.question)
+        XCTAssertNotEqual(sut.questionLabel.text, sut.testLogicSource?.currentCard?.question, "Shouldn't display question on start, before update screen")
         
         sut.updateQuestionUiForCurrentCard()
-        XCTAssertEqual(sut.questionLabel.text, sut.testLogicSource?.currentCard?.question)
+        XCTAssertEqual(sut.questionLabel.text, sut.testLogicSource?.currentCard?.question, "Should display correct question")
     }
 
     func testUpdateQuestionUiForCurrentCard_shouldUpdateScoreLabel() {
@@ -169,11 +169,67 @@ class TestViewControllerTests: XCTestCase {
         sut.displayAlertIfPassedDeskHasAllFlashcardsHidden()
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
+    
+    
+    
+
+    func testCorrectButtonTouchShouldScaleWhenPressed() {
+        testButtonSizeShouldBeEqualAfterTransform(sut.correctButton, controlEventOne: .TouchDown, controlEventTwo: nil, resize: 0.85)
+    }
+    
+    func testCorrectButtonTouchDragExitShouldGetNormalSize() {
+        testButtonSizeShouldBeEqualAfterTransform(sut.correctButton, controlEventOne: .TouchDown, controlEventTwo: .TouchDragExit, resize: nil)
+    }
+
+    func testCorrectButtonTouchCancelShouldGetNormalSize() {
+        testButtonSizeShouldBeEqualAfterTransform(sut.correctButton, controlEventOne: .TouchDown, controlEventTwo: .TouchUpInside, resize: nil)
+    }
+
+    func testIncorrectButtonTouchDownShouldScaleWhenPressed() {
+        testButtonSizeShouldBeEqualAfterTransform(sut.incorrectButton, controlEventOne: .TouchDown, controlEventTwo: nil, resize: 0.85)
+    }
+    
+    func testIncorrectButtonTouchDragExitShouldGetNormalSize() {
+        testButtonSizeShouldBeEqualAfterTransform(sut.incorrectButton, controlEventOne: .TouchDown, controlEventTwo: .TouchDragExit, resize: nil)
+    }
+    
+    func testIncorrectTouchCancelShoudGetNormalSize() {
+        testButtonSizeShouldBeEqualAfterTransform(sut.incorrectButton, controlEventOne: .TouchDown, controlEventTwo: .TouchUpInside, resize: nil)
+    }
+    
+    //swipedLeft() tested before
+    //questionView is outside the screen; answerView -> answerTrailing is active
+    func testAnsweredQuestionTransition() {
+        sut.swipedLeft()
+        sut.answeredQuestionTransition()
+        XCTAssertTrue(sut.answerTrailing.active == false)
+        XCTAssertTrue(sut.questionView.alpha == 1)
+        XCTAssertEqual(sut.questionView.center.x, sut.testView.center.x)
+    }
+    
+    
+    //hint: SBNavigationController.swift -> childViewControllerForStatusBarStyle()
+    func testEditCurrentFlashcard() {
+        var resultClass: String?
+        sut.pushDummyData(.Learn)
+        
+        if let button = sut.navigationItem.rightBarButtonItem {
+            sut.editCurrentFlashcard(button)
+            if let tmpView = sut.presentedViewController {
+                let nextView = tmpView.childViewControllerForStatusBarStyle()
+                resultClass = NSStringFromClass((nextView?.classForCoder)!)
+            }
+        }
+        
+        XCTAssertEqual(resultClass, "StudyBox_iOS.EditFlashcardViewController")
+    }
+    
 
 }
 
 
 extension TestViewControllerTests {
+    //mock
     class mockTestViewController: TestViewController {
         var passedFlashcards = 0
         var wasOpened = false
@@ -192,7 +248,28 @@ extension TestViewControllerTests {
             }
         }
     }
+    
+    //method test change button sizes
+    func testButtonSizeShouldBeEqualAfterTransform(button: UIButton, controlEventOne: UIControlEvents, controlEventTwo: UIControlEvents?, resize: CGFloat?) {
+        var buttonWidth = button.frame.size.width
+        var buttonHeight = button.frame.size.height
+        
+        if let resizeButton = resize {
+            buttonWidth = buttonWidth * resizeButton
+            buttonHeight = buttonHeight * resizeButton
+        }
+        
+        let _ = button.sendActionsForControlEvents(controlEventOne)
+        if let secondEvent = controlEventTwo {
+            let _ = button.sendActionsForControlEvents(secondEvent)
+        }
+        
+        XCTAssertEqual(buttonWidth, button.frame.size.width, line: #line)
+        XCTAssertEqual(buttonHeight, button.frame.size.height, line: #line)
+    }
 }
+
+
 extension TestViewController {
     func pushDummyData(testType: StudyType, allHidden: Bool = false) {
         let flashcard = Flashcard(serverID: "a", deckId: "a", question: "a", answer: "a", tip: Tip.Text(text: "a"))

@@ -268,6 +268,7 @@ class TestViewController: StudyBoxViewController {
             }, completion:nil)
     }
     
+    //TouchUpInside event [not TouchCancel]
     @IBAction func correctTouchCancel(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
             self.correctButton.transform = CGAffineTransformIdentity
@@ -291,6 +292,7 @@ class TestViewController: StudyBoxViewController {
             }, completion:nil)
     }
     
+    //TouchUpInside event [not TouchCancel]
     @IBAction func incorrectTouchCancel(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
             self.incorrectButton.transform = CGAffineTransformIdentity
