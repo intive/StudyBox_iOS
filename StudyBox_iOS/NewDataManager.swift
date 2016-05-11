@@ -135,10 +135,6 @@ public class NewDataManager {
 
     func addDeck(deck: Deck, completion: (DataManagerResponse<Deck>)-> ()) {
         handleJSONRequest(
-            localFetch: {
-                self.localDataManager.update(deck)
-                return deck
-            },
             remoteFetch: {
                 self.remoteDataManager.addDeck(deck, completion: $0)
             }, completion: completion)
@@ -186,10 +182,6 @@ public class NewDataManager {
     
     func updateDeck(deck: Deck, completion: (DataManagerResponse<Deck>)-> ()) {
         handleJSONRequest(
-            localFetch: {
-                self.localDataManager.update(deck)
-                return deck
-            },
             remoteFetch: {
                 self.remoteDataManager.updateDeck(deck, completion: $0)
             }, completion: completion)
@@ -203,6 +195,7 @@ public class NewDataManager {
             remoteParsing: {
                 if let deck = self.localDataManager.get(Deck.self, withId: deckID){
                     deck.isPublic = isPublic
+                    self.localDataManager.update(deck)
                 }
                 return nil
             }, completion: completion)
@@ -235,14 +228,9 @@ public class NewDataManager {
     
     func addFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
         handleJSONRequest(
-            localFetch: {
-                self.localDataManager.update(flashcard)
-                return flashcard
-            },
             remoteFetch: {
                 self.remoteDataManager.addFlashcard(deckID, flashcard: flashcard, completion: $0)
             }, completion: completion)
-
     }
     
     func removeFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Void>) -> ()) {
@@ -257,10 +245,6 @@ public class NewDataManager {
     
     func updateFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
         handleJSONRequest(
-            localFetch: {
-                self.localDataManager.update(flashcard)
-                return flashcard
-            },
             remoteFetch: {
                 self.remoteDataManager.updateFlashcard(deckID, flashcard: flashcard, completion: $0)
             }, completion: completion)
