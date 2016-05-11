@@ -57,30 +57,29 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
             var errorMessage = "Błąd Rejestracji"
             let successfullMessageTitle = "Zarejestrowano pomyślnie"
             let successfullMessage = "Możesz się teraz zalogować"
+            let Ok = "Ok"
             
             switch response {
             case .Success(let user):
                 
-                for (key, value) in user {
-                    debugPrint("\(key): \(value)")
-                }
+                debugPrint("email: \(user.email)")
+                debugPrint("password: \(user.password)")
                 
                 let alert: UIAlertController = UIAlertController(title: successfullMessageTitle, message: successfullMessage, preferredStyle: .Alert)
                 
-                let okButton = UIAlertAction(title: "Ok", style: .Default) { action -> () in
+                let okButton = UIAlertAction(title: Ok, style: .Default) { action -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
                 alert.addAction(okButton)
                 
                 self.presentViewController(alert, animated: true, completion: nil)
-                return
                 
             case .Error(let err):
                 if case .ErrorWithMessage(let txt)? = (err as? ServerError){
                     errorMessage = txt
                 }
+                 self.presentAlertController(withTitle: "", message: errorMessage, buttonText: Ok)
             }
-            self.presentAlertController(withTitle: "", message: errorMessage, buttonText: "Ok")
         })
     }
     
