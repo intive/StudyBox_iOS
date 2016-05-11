@@ -88,6 +88,11 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             )
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
+                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                    UIApplication.appDelegate().newDataManager.logout()
+                    
                     if let storyboard = self?.storyboard {
                         UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
                     }

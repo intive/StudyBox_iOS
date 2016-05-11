@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aM1-56-TXz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aM1-56-TXz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -127,11 +127,11 @@
                                     <constraint firstAttribute="height" constant="50" id="sdI-1y-Jji"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhQ-Ae-lE1">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhQ-Ae-lE1">
                                 <rect key="frame" x="20" y="122" width="560" height="470"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kfn-pw-SW3">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="414"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="416"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wybrana talia" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-u0-NRa">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -139,30 +139,33 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Pytanie" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f9O-8o-KoL">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUh-bE-pKc" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="36" width="560" height="150"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="Ore-ED-xt6"/>
+                                                    <constraint firstAttribute="height" constant="150" id="DDr-Ej-RHM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Podpowiedź" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWh-AY-ia9">
-                                                <rect key="frame" x="0.0" y="201" width="560" height="48"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKh-3v-Eq2" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="201" width="560" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="aMz-zy-gjo"/>
+                                                    <constraint firstAttribute="height" constant="50" id="GO8-J9-kN0"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Odpowiedź" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqM-Cv-6Mv">
-                                                <rect key="frame" x="0.0" y="264" width="560" height="150"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4A-pd-pc4" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="266" width="560" height="150"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="TZt-tC-aMg"/>
+                                                    <constraint firstAttribute="height" constant="150" id="EWl-5W-SpZ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -194,12 +197,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="answerField" destination="kqM-Cv-6Mv" id="J8z-tb-yhn"/>
+                        <outlet property="answerField" destination="l4A-pd-pc4" id="ROG-UC-joO"/>
                         <outlet property="choosenDeckLabel" destination="7h0-u0-NRa" id="Sf8-T0-3On"/>
-                        <outlet property="questionField" destination="f9O-8o-KoL" id="ODT-Qc-RPZ"/>
+                        <outlet property="questionField" destination="VUh-bE-pKc" id="5FO-lc-LHM"/>
+                        <outlet property="scrollView" destination="vhQ-Ae-lE1" id="7ao-wS-0gg"/>
                         <outlet property="searchBarWrapper" destination="EUD-8B-Kzz" id="kZR-X1-Xam"/>
                         <outlet property="searchbarWrapperTopConstraint" destination="3xf-BU-f1g" id="JaG-qx-2NV"/>
-                        <outlet property="tipField" destination="iWh-AY-ia9" id="oDm-8Q-teW"/>
+                        <outlet property="tipField" destination="YKh-3v-Eq2" id="cFg-6n-M29"/>
+                        <outletCollection property="editFields" destination="VUh-bE-pKc" collectionClass="NSMutableArray" id="mGA-H6-u2d"/>
+                        <outletCollection property="editFields" destination="YKh-3v-Eq2" collectionClass="NSMutableArray" id="Jh3-bt-5gg"/>
+                        <outletCollection property="editFields" destination="l4A-pd-pc4" collectionClass="NSMutableArray" id="ldf-GT-jCI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRj-W9-DEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -219,25 +226,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wG7-8q-qyR">
-                                <rect key="frame" x="120" y="49" width="360" height="502"/>
+                                <rect key="frame" x="210" y="139" width="180" height="322"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratulacje!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxN-Bt-U7Z">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twój wynik:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mau-dA-yg9">
-                                        <rect key="frame" x="0.0" y="31" width="360" height="21"/>
+                                        <rect key="frame" x="0.0" y="31" width="180" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDb-D2-iFj" customClass="CircularLoaderView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="62" width="360" height="360"/>
+                                        <rect key="frame" x="0.0" y="62" width="180" height="180"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rX-H8-gbr">
-                                                <rect key="frame" x="0.0" y="0.0" width="360" height="360"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -259,8 +266,8 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgM-lc-h5I">
-                                        <rect key="frame" x="105" y="432" width="150" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgM-lc-h5I">
+                                        <rect key="frame" x="15" y="252" width="150" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="to5-id-Xw2"/>
                                         </constraints>
@@ -269,8 +276,8 @@
                                             <action selector="deckListButtonAction:" destination="iPr-WN-tEa" eventType="touchUpInside" id="QT8-Qy-att"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nzp-hV-QQH">
-                                        <rect key="frame" x="90" y="472" width="180" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nzp-hV-QQH">
+                                        <rect key="frame" x="0.0" y="292" width="180" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="Nti-KF-vXc"/>
                                         </constraints>
@@ -284,15 +291,9 @@
                                     <constraint firstAttribute="trailing" secondItem="Mau-dA-yg9" secondAttribute="trailing" id="KFf-VY-QWD"/>
                                     <constraint firstItem="Mau-dA-yg9" firstAttribute="leading" secondItem="wG7-8q-qyR" secondAttribute="leading" id="KY1-9L-xHl"/>
                                     <constraint firstAttribute="trailing" secondItem="lxN-Bt-U7Z" secondAttribute="trailing" id="MiR-Zw-WKB"/>
-                                    <constraint firstItem="TDb-D2-iFj" firstAttribute="width" secondItem="wG7-8q-qyR" secondAttribute="height" multiplier="1:1" id="Mru-e2-4D8"/>
                                     <constraint firstItem="lxN-Bt-U7Z" firstAttribute="leading" secondItem="wG7-8q-qyR" secondAttribute="leading" id="O8Q-0j-3ue"/>
                                     <constraint firstItem="TDb-D2-iFj" firstAttribute="width" secondItem="wG7-8q-qyR" secondAttribute="width" id="Tfw-Ai-wvk"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Mru-e2-4D8"/>
-                                    </mask>
-                                </variation>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -300,7 +301,24 @@
                             <constraint firstItem="wG7-8q-qyR" firstAttribute="centerY" secondItem="P8M-BQ-d77" secondAttribute="centerY" id="Iii-JE-RMR"/>
                             <constraint firstItem="wG7-8q-qyR" firstAttribute="width" secondItem="P8M-BQ-d77" secondAttribute="width" multiplier="0.6" id="Qis-MK-KIH"/>
                             <constraint firstItem="wG7-8q-qyR" firstAttribute="centerX" secondItem="P8M-BQ-d77" secondAttribute="centerX" id="f96-hS-IS4"/>
+                            <constraint firstItem="wG7-8q-qyR" firstAttribute="width" secondItem="P8M-BQ-d77" secondAttribute="width" multiplier="0.4" priority="999" id="ime-nC-Rpa"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Qis-MK-KIH"/>
+                                <exclude reference="ime-nC-Rpa"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="Qis-MK-KIH"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="ime-nC-Rpa"/>
+                            </mask>
+                        </variation>
                     </view>
                     <keyCommands/>
                     <connections>
@@ -951,6 +969,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gYF-Os-WnF"/>
+        <segue reference="bb9-zC-jZN"/>
     </inferredMetricsTieBreakers>
 </document>

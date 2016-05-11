@@ -18,11 +18,12 @@ class DataManagerTests: XCTestCase {
     }
     func testAddDeck(){
         let manager = DataManager()
+        let decksCountBefore = manager.decks(false).count
         manager.addDeck("some name")
         
-        let decks = manager.decks(false)
+        let decksCountAfter = manager.decks(false).count
         
-        XCTAssertEqual(decks.count, 1)
+        XCTAssertEqual(decksCountAfter, decksCountBefore+1)
         
     }
     
@@ -66,7 +67,7 @@ class DataManagerTests: XCTestCase {
     
     func testFlashcards(){
         let dummyManager = DataManager.managerWithDummyData()
-        let decks = dummyManager.decks(false)
+        let decks = dummyManager.decks(true)
         
         let deck = decks[0]
         let flashcards = try! dummyManager.flashcards(forDeck: deck)
@@ -117,9 +118,10 @@ class DataManagerTests: XCTestCase {
     
     func testUpdateFlashcard(){
         let manager = DataManager.managerWithDummyData()
-        let deck = manager.decks(false)[0]
-        let flashcard = (try! manager.flashcards(forDeck: deck))[0]
+        let deck = manager.decks(true)[0]
         
+        let flashcard = try! manager.flashcards(forDeckWithId: deck.serverID)[0]
+     
         flashcard.question = "update flash question"
         
         let _ = try? manager.updateFlashcard(flashcard)
@@ -146,7 +148,7 @@ class DataManagerTests: XCTestCase {
     
     func testRemoveFlashcard(){
         let manager = DataManager.managerWithDummyData()
-        let deck = manager.decks(false)[0]
+        let deck = manager.decks(true)[0]
         
         let flashcard = (try! manager.flashcards(forDeck: deck))[0]
         
@@ -163,10 +165,10 @@ class DataManagerTests: XCTestCase {
     func testPerformanceFilter(){
         let manager = DataManager()
         for i in 1...1000 {
-            manager.addDeck("\(i)")
+            manager.addDeck("zzz \(i)")
         }
         let docks = manager.decks(false)
-        let firstDock = docks[0]
+        let firstDock = docks[500]
         self.measureBlock {
             let _ =  docks.filter( { $0.serverID == firstDock.serverID })
             
@@ -181,10 +183,10 @@ class DataManagerTests: XCTestCase {
     func testPerformanceUniqueId(){
         let manager = DataManager()
         for i in 1...1000 {
-            manager.addDeck("\(i)")
+            manager.addDeck("zzz \(i)")
         }
         let docks = manager.decks(false)
-        let firstDock = docks[0]
+        let firstDock = docks[500]
         
         self.measureBlock {
             manager.deck(withId: firstDock.serverID)
