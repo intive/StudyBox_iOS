@@ -16,6 +16,7 @@ enum Router: URLRequestConvertible {
     private static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
 
     case GetCurrentUser
+    case AddUser(email: String, password: String)
 
     case GetAllDecks(includeOwn: Bool?, flashcardsCount: Bool?, name: String?)
     case GetAllUsersDecks(flashcardsCount: Bool?)
@@ -37,7 +38,7 @@ enum Router: URLRequestConvertible {
         case .GetAllDecks, .GetSingleDeck, .GetAllFlashcards, .GetSingleFlashcard, .GetCurrentUser, .GetAllUsersDecks,
              .GetRandomDeck:
             return .GET
-        case .AddSingleFlashcard, .AddSingleDeck, .ChangeAccessToDeck:
+        case .AddSingleFlashcard, .AddSingleDeck, AddUser, .ChangeAccessToDeck:
             return .POST
         case .RemoveSingleFlashcard, .RemoveSingleDeck:
             return .DELETE
@@ -50,6 +51,9 @@ enum Router: URLRequestConvertible {
         switch self {
         case GetCurrentUser:
             return Router.serverURL.URLByAppendingPathComponents(usersPath, "me")
+            
+        case AddUser:
+            return Router.serverURL.URLByAppendingPathComponents(usersPath)
 
             
         //MARK: Decks
@@ -129,6 +133,10 @@ enum Router: URLRequestConvertible {
             
         case .AddSingleDeck(let name, let isPublic):
             return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
+            
+        case .AddUser(let email, let password):
+            return ParameterEncoding.JSON.encode(request, parameters: ["email": email, "password": password]).0
+
             
         case .UpdateDeck(_, let name, let isPublic):
             return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0

@@ -88,6 +88,10 @@ class RemoteDataManager {
     func logout() {
         user = nil
     }
+    
+    func register(email: String, password: String, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.AddUser(email: email, password: password), completion: completion)
+    }
 
     
     //MARK: Decks
