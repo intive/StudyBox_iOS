@@ -57,7 +57,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
             var errorMessage = "Błąd Rejestracji"
             let successfullMessageTitle = "Zarejestrowano pomyślnie"
             let successfullMessage = "Możesz się teraz zalogować"
-            let Ok = "Ok"
+            let ok = "Ok"
             
             switch response {
             case .Success(let user):
@@ -65,9 +65,10 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
                 debugPrint("email: \(user.email)")
                 debugPrint("password: \(user.password)")
                 
+                
                 let alert: UIAlertController = UIAlertController(title: successfullMessageTitle, message: successfullMessage, preferredStyle: .Alert)
                 
-                let okButton = UIAlertAction(title: Ok, style: .Default) { action -> () in
+                let okButton = UIAlertAction(title: ok, style: .Default) { action -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
                 alert.addAction(okButton)
@@ -78,7 +79,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
                 if case .ErrorWithMessage(let txt)? = (err as? ServerError){
                     errorMessage = txt
                 }
-                 self.presentAlertController(withTitle: "", message: errorMessage, buttonText: Ok)
+                 self.presentAlertController(withTitle: "", message: errorMessage, buttonText: ok)
             }
         })
     }
