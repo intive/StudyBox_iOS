@@ -114,8 +114,19 @@ public class NewDataManager {
             }, completion: completion)
     }
 
-    func register(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
-        fatalError("Not implemented")
+    func register(email: String, password: String, completion: (DataManagerResponse<[String:String]>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.register(email, password: password, completion: $0)
+            },
+            remoteParsing: {
+                let values = [
+                    "id": $0["id"].stringValue,
+                    "email": $0["email"].stringValue
+                ]
+                return values
+            },
+            completion: completion)
     }
 
     func logout() {
