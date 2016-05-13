@@ -41,6 +41,30 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         dataSource = self
     }
     
+    func loginToServer(withEmail email: String, password: String) {
+        let newDataManager = UIApplication.appDelegate().dataManager
+        
+        newDataManager.login(email, password: password, completion: { response in
+            var errorMessage = "Błąd logowania"
+            
+            switch response {
+            case .Success(let user):
+               
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setObject(user.email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
+                defaults.setObject(user.password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                self.successfulLoginTransition()
+                return
+                
+            case .Error(let err):
+                if case .ErrorWithMessage(let txt)? = (err as? ServerError){
+                    errorMessage = txt
+                }
+            }
+            self.presentAlertController(withTitle: "", message: errorMessage, buttonText: "Ok")
+        })
+    }
+    
     func loginWithInputData(){
         
         var alertMessage: String?
@@ -67,7 +91,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         }
         
         if let email = emailTextField.text, password = passwordTextField.text  {
-            userAction(.Login, email: email, password: password)
+            loginToServer(withEmail: email, password: password)
         }
         
     }

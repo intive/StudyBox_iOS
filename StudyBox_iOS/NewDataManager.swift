@@ -26,10 +26,6 @@ enum NewDataManagerError: ErrorType {
     case JSONParseError, NoLocalData, ErrorSavingData, ErrorWith(message: String)
 }
 
-enum UserAction {
-    case Login, Register
-}
-
 public class NewDataManager {
 
     let remoteDataManager = RemoteDataManager()
@@ -116,37 +112,22 @@ public class NewDataManager {
     }
 
     //MARK: users
-    
-//    func login(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
-//        handleRequest(
-//            remoteFetch: {
-//                self.remoteDataManager.login(email, password: password, completion: $0)
-//            },
-//            remoteParsing: {
-//                self.remoteDataManager.user = User(withJSON: $0, password: password)
-//                return self.remoteDataManager.user
-//            }, completion: completion)
-//    }
-
-    func userAction(action: UserAction, email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
-        var remoteFetch: ((ServerResultType<JSON>) -> ()) -> () = {
-            self.remoteDataManager.login(email, password: password, completion: $0)
-        }
-        
-        if case .Register = action {
-            remoteFetch = {
-                self.remoteDataManager.register(email, password: password, completion: $0)
- 
-            }
-        }
-        
+    func login(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
         handleRequest(
-            remoteFetch: remoteFetch,
+            remoteFetch: {
+                self.remoteDataManager.login(email, password: password, completion: $0)
+            },
             remoteParsing: {
-                self.remoteDataManager.user = User(withJSON: $0, password: password)
-                return self.remoteDataManager.user
-            }, completion: completion
-        )
+                if let jsonDict = $0.dictionary where jsonDict["email"]?.string == email {
+                    self.remoteDataManager.user = User(email: email, password: password)
+                    return self.remoteDataManager.user
+                }
+                return nil
+            }, completion: completion)
+    }
+
+    func register(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
+        fatalError("Not implemented")
     }
 
     func logout() {

@@ -46,44 +46,6 @@ class UserViewController: InputViewController {
         }
     }
     
-    func userAction(action: UserAction, email: String, password: String) {
-        let newDataManager = UIApplication.appDelegate().dataManager
-        
-        newDataManager.userAction(action, email: email, password: password, completion: {
-            var errorMessage = "Błąd logowania"
-            
-            if case .Register = action {
-                errorMessage = "Błąd rejestracji"
-            }
-            
-            switch $0 {
-            case .Success(let user):
-                
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(user.email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
-                defaults.setObject(user.password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
-                
-                switch action {
-                case .Login:
-                    self.successfulLoginTransition()
-
-                case .Register:
-                    self.dismissViewControllerAnimated(true) {[unowned self] in
-                        self.successfulLoginTransition()
-                    }
-                }
-                
-                return
-                
-            case .Error(let err):
-                if case .ErrorWithMessage(let txt)? = (err as? ServerError){
-                    errorMessage = txt
-                }
-            }
-            self.presentAlertController(withTitle: "", message: errorMessage, buttonText: "Ok")
-        })
-    }
-    
     func areTextFieldsEmpty() -> Bool {
         
         if let inputViews = dataSource?.inputViews {
