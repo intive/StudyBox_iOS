@@ -5,7 +5,7 @@
 //  Created by Mariusz Koziel on 13.04.2016.
 //  Copyright © 2016 BLStream. All rights reserved.
 //
-
+/*
 import Foundation
 import Alamofire
 import SwiftyJSON
@@ -85,3 +85,4 @@ class ServerCommunication {
     
     
 }
+*/

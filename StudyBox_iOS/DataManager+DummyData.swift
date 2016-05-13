@@ -20,7 +20,7 @@ extension DataManager {
     static func managerWithDummyData() -> DataManager {
         let manager = DataManager()
         
-        if manager.decks(false).isEmpty {
+        /*if manager.decks(false).isEmpty {
             DataManager.DummyDecks.forEach { name in
                 let id = manager.addDeck(name)
                 //We create random number of 0 to 30 flashcards, different for each deck
@@ -34,7 +34,7 @@ extension DataManager {
                     let question = "\(name) question \(rand)"
                     let answer = "\(name) answer \(rand)"
                     if i % 2  == 0 {
-                        tip = Tip.Text(text: "\(name) tip \(rand)")
+                        //tip = Tip.Text(text: "\(name) tip \(rand)")
                     } else {
                         tip = nil
                     }
@@ -55,7 +55,7 @@ extension DataManager {
                     }
                 }
             }
-        }
+        }*/
         return manager 
     }
 }

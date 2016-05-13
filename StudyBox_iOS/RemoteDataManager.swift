@@ -158,4 +158,36 @@ class RemoteDataManager {
             question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
                        completion: completion)
     }
+    
+    //MARK: Tips
+    func addTip(tip: Tip, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.AddTip(deckID: tip.deckID, flashcardID: tip.flashcardID, essence: tip.essence, difficult: tip.difficult), completion: completion)
+    }
+    
+    func tip(tip: Tip, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.GetTip(deckID: tip.deckID, flashcardID: tip.flashcardID, tipID: tip.serverID), completion: completion)
+    }
+    
+    func tip(deckID: String, flashcardID: String, tipID: String, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.GetTip(deckID: deckID, flashcardID: flashcardID, tipID: tipID), completion: completion)
+    }
+    
+    func allTips(deckID deckID: String, flashcardID: String, completion: (ServerResultType<[JSON]>) -> ()) {
+        performRequest(Router.GetAllTips(deckID: deckID, flashcardID: flashcardID), completion: completion)
+    }
+    
+    func updateTip(tip: Tip, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.UpdateTip(deckID: tip.deckID,
+            flashcardID: tip.flashcardID,
+            tipID: tip.serverID,
+            essence: tip.essence,
+            difficult: tip.difficult), completion: completion)
+    }
+    
+    func removeTip(tip: Tip, completion: (ServerResultType<Void>) -> ()) {
+        performGenericRequest(Router.RemoveTip(deckID: tip.deckID, flashcardID: tip.flashcardID, tipID: tip.serverID), completion: completion){ _ in
+            return
+        }
+    }
+    
 }
