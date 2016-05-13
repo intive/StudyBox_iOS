@@ -16,29 +16,33 @@ enum Router: URLRequestConvertible {
     private static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
 
     case GetCurrentUser
-    case RegisterUser(email: String, password: String)
+    case AddUser(email: String, password: String)
 
     case GetAllDecks(includeOwn: Bool?, flashcardsCount: Bool?, name: String?)
-    case GetAllUserDecks(flashcardsCount: Bool?)
+    case GetAllUsersDecks(flashcardsCount: Bool?)
     case GetSingleDeck(ID: String)
+    case GetRandomDeck(flashcardsCount: Bool?)
     case AddSingleDeck(name: String, isPublic: Bool)
+    case RemoveSingleDeck(ID: String)
+    case UpdateDeck(ID: String, name: String, isPublic: Bool)
+    case ChangeAccessToDeck(ID: String, isPublic: Bool)
 
     case GetAllFlashcards(deckID: String)
-    case AddSingleFlashcard(deckID: String, question: String, answer: String, isHidden: Bool)
     case GetSingleFlashcard(ID: String, deckID: String)
-    case UpdateFlashcard(ID: String, deckID: String, question: String, answer: String, isHidden: Bool)
+    case AddSingleFlashcard(deckID: String, question: String, answer: String, isHidden: Bool)
     case RemoveSingleFlashcard(ID: String, deckID: String)
-    
+    case UpdateFlashcard(ID: String, deckID: String, question: String, answer: String, isHidden: Bool)
 
     var method: Alamofire.Method {
         switch self {
-        case .GetAllDecks, GetSingleDeck, GetAllFlashcards, GetSingleFlashcard, GetCurrentUser, GetAllUserDecks:
+        case .GetAllDecks, .GetSingleDeck, .GetAllFlashcards, .GetSingleFlashcard, .GetCurrentUser, .GetAllUsersDecks,
+             .GetRandomDeck:
             return .GET
-        case .AddSingleFlashcard, AddSingleDeck, .RegisterUser:
+        case .AddSingleFlashcard, .AddSingleDeck, AddUser, .ChangeAccessToDeck:
             return .POST
-        case .RemoveSingleFlashcard:
+        case .RemoveSingleFlashcard, .RemoveSingleDeck:
             return .DELETE
-        case .UpdateFlashcard:
+        case .UpdateDeck, .UpdateFlashcard:
             return .PUT
         }
     }
@@ -48,33 +52,47 @@ enum Router: URLRequestConvertible {
         case GetCurrentUser:
             return Router.serverURL.URLByAppendingPathComponents(usersPath, "me")
             
-        case .RegisterUser(_, _):
-            return Router.serverURL.URLByAppendingPathComponent(usersPath)
+        case AddUser:
+            return Router.serverURL.URLByAppendingPathComponents(usersPath)
 
+            
+        //MARK: Decks
         case GetAllDecks, AddSingleDeck:
             return Router.serverURL.URLByAppendingPathComponents(decksPath)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks"o
-        
-        case GetAllUserDecks(_):
+            
+        case GetAllUsersDecks(_):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, "me")
-
+            
         case GetSingleDeck(let ID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, ID)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040"
-
+            
+        case GetRandomDeck(_):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, "random")
+            
+        case RemoveSingleDeck(let ID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, ID)
+            
+        case .UpdateDeck(let ID, _, _) :
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, ID)
+            
+            
+        case .ChangeAccessToDeck(let ID, let isPublic):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, ID, "public", isPublic.description)
+            
+            
+        //MARK: Flashcards
         case GetAllFlashcards(let deckID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath)
-            //example: this returns "http://dev.patronage2016.blstream.com:3000/decks/4a31046e-e9cc-4446-bf06-2e07578b2040/flashcards"
-
+        
+        case GetSingleFlashcard(let ID, let deckID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
+            
         case AddSingleFlashcard(let deckID, _, _, _):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath)
 
-        case GetSingleFlashcard(let ID, let deckID):
-            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-
         case RemoveSingleFlashcard(let ID, let deckID):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
-            
+        
         case .UpdateFlashcard(let ID, let deckID, _, _, _):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
         }
@@ -88,9 +106,7 @@ enum Router: URLRequestConvertible {
         switch self {
             //Add only methods that use parameters (check in Apiary)
             
-        case .RegisterUser(let email, let password):
-            return Alamofire.ParameterEncoding.JSON.encode(request, parameters: ["email": email, "password": password]).0
-
+        //MARK: Decks
         case .GetAllDecks(let includeOwn, let flashcardsCount, let name):
             let parameters: [String: AnyObject] = Dictionary.flat(
                 [
@@ -99,24 +115,40 @@ enum Router: URLRequestConvertible {
                     "name": name,
                 ])
             return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
-        
-        case .GetAllUserDecks(let flashcardsCount):
+            
+        case GetAllUsersDecks(let flashcardsCount):
             let parameters: [String: AnyObject] = Dictionary.flat(
                 [
-                    "flashcardsCount" : flashcardsCount
+                    "flashcardsCount": flashcardsCount,
                 ])
-            
             return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
-
+       
+        case GetRandomDeck(let flashcardsCount):
+            let parameters: [String: AnyObject] = Dictionary.flat(
+                [
+                    "flashcardsCount": flashcardsCount,
+                ])
+            return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
+            
         case .AddSingleDeck(let name, let isPublic):
             return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
             
-        case .AddSingleFlashcard(_, let question, let answer, let isHidden):
-            return ParameterEncoding.JSON.encode(request, parameters: ["question" : question, "answer" : answer, "isHidden" : isHidden]).0
-            
-        case .UpdateFlashcard(_, _, let question, let answer, let isHidden):
-            return ParameterEncoding.JSON.encode(request, parameters: ["question" : question, "answer" : answer, "isHidden" : isHidden]).0
+        case .AddUser(let email, let password):
+            return ParameterEncoding.JSON.encode(request, parameters: ["email": email, "password": password]).0
 
+            
+        case .UpdateDeck(_, let name, let isPublic):
+            return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
+            
+            
+        //MARK: Flashcards
+        case .AddSingleFlashcard(_, let question, let answer, let isHidden):
+            return ParameterEncoding.JSON.encode(request, parameters: ["question": question, "answer": answer, "isHidden": isHidden]).0
+        
+        case .UpdateFlashcard(_, _, let question, let answer, let isHidden):
+            return ParameterEncoding.JSON.encode(request, parameters: ["question": question, "answer": answer, "isHidden": isHidden]).0
+            
+            
         default: //For methods that don't use parameters
             return request
         }

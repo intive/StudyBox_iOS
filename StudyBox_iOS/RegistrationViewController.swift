@@ -50,6 +50,39 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         registerButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     }
     
+    func registerNewUser(email: String, password: String) {
+        let dataManager = UIApplication.appDelegate().dataManager
+        
+        dataManager.register(email, password: password, completion: { response in
+            var errorMessage = "Błąd Rejestracji"
+            let successfullMessageTitle = "Zarejestrowano pomyślnie"
+            let successfullMessage = "Możesz się teraz zalogować"
+            let ok = "Ok"
+            
+            switch response {
+            case .Success(let user):
+                
+                debugPrint("email: \(user.email)")
+                debugPrint("password: \(user.password)")
+                
+                
+                let alert: UIAlertController = UIAlertController(title: successfullMessageTitle, message: successfullMessage, preferredStyle: .Alert)
+                
+                let okButton = UIAlertAction(title: ok, style: .Default) { action -> () in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                alert.addAction(okButton)
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+            case .Error(let err):
+                if case .ErrorWithMessage(let txt)? = (err as? ServerError){
+                    errorMessage = txt
+                }
+                 self.presentAlertController(withTitle: "", message: errorMessage, buttonText: ok)
+            }
+        })
+    }
     
     func registerWithInputData() {
         var alertMessage: String?
@@ -74,8 +107,8 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         if let message = alertMessage {
             presentAlertController(withTitle: "", message: message, buttonText: "Ok")
         } else {
-            dismissViewControllerAnimated(true) {[unowned self] in
-                self.successfulLoginTransition()
+            if let email = self.emailTextField.text, password = self.passwordTextField.text  {
+                self.registerNewUser(email, password: password)
             }
         }
     }
