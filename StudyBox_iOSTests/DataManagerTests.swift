@@ -10,6 +10,11 @@ import XCTest
 @testable import StudyBox_iOS
 class DataManagerTests: XCTestCase {
     
+    override func setUp() {
+        super.setUp()
+        DataManager().removeDecksFromDatabase()
+    }
+    
     func testDummyManager(){
         let manager = DataManager.managerWithDummyData()
         let decks = manager.decks(false)[0]
