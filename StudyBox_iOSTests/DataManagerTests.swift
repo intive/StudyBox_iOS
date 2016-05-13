@@ -55,7 +55,7 @@ class DataManagerTests: XCTestCase {
         let manager = DataManager()
         let deckId = manager.addDeck("some name")
         
-        try! manager.addFlashcard(forDeckWithId: deckId, question: "question", answer: "answer", tip: nil)
+        try! manager.addFlashcard(forDeckWithId: deckId, question: "question", answer: "answer", isHidden: false)
         
         let flashcards = try? manager.flashcards(forDeckWithId: deckId)
         
@@ -86,7 +86,7 @@ class DataManagerTests: XCTestCase {
         let manager = DataManager()
         let deckId = manager.addDeck("some name")
         
-        try! manager.addFlashcard(forDeckWithId: deckId, question: "question", answer: "answer", tip: nil)
+        try! manager.addFlashcard(forDeckWithId: deckId, question: "question", answer: "answer", isHidden: false)
         
         let flashcards = try! manager.flashcards(forDeckWithId: deckId)
         
@@ -96,7 +96,7 @@ class DataManagerTests: XCTestCase {
         
         XCTAssertNotNil(flashcardById,"Receiving added flashcard by id, must not be nil")
         
-        let newCard = Flashcard(serverID: "xxxxxz", deckId: "xxxx", question: "question", answer: "answer", tip: nil)
+        let newCard = Flashcard(serverID: "xxxxxz", deckId: "xxxx", question: "question", answer: "answer", isHidden: false)
         
         let newCardById = manager.flashcard(withId: newCard.serverID)
         
