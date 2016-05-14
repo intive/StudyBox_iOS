@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
+    </dependencies>
+    <scenes>
+        <!--StudyBox-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="StudyBox" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="StudyBox_Watch_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="VOL-cn-YJm">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="titleLabel" textAlignment="center" numberOfLines="0" id="hbK-x0-Wci">
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                </label>
+                                <label alignment="center" verticalAlignment="center" text="detailLabel" textAlignment="center" numberOfLines="0" id="fsI-vC-vQ6">
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <button width="1" height="63.5" alignment="center" verticalAlignment="center" title="Wylosuj fiszkę" id="d4a-ER-yYt">
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                    <connections>
+                                        <action selector="startButtonPress" destination="AgC-eL-Hgc" id="c27-jd-3r5"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <menu key="menu" id="wOo-YK-dQI">
+                        <items>
+                            <menuItem title="Odśwież" icon="repeat" id="8eD-QI-Jn0">
+                                <connections>
+                                    <action selector="refreshButtonPress" destination="AgC-eL-Hgc" id="FDN-8d-P4s"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="detailLabel" destination="fsI-vC-vQ6" id="uQE-Hq-SuH"/>
+                        <outlet property="startButton" destination="d4a-ER-yYt" id="bu4-Uv-VtZ"/>
+                        <outlet property="titleLabel" destination="hbK-x0-Wci" id="gKu-5C-OXP"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="291"/>
+        </scene>
+        <!--QuestionViewController-->
+        <scene sceneID="cZX-BV-P1z">
+            <objects>
+                <controller identifier="QuestionViewController" id="pbX-d6-PWg" customClass="QuestionViewController" customModule="StudyBox_Watch_App_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" spacing="20" id="Vfq-JY-t3O">
+                            <items>
+                                <label width="1" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="Z2z-eJ-Xce"/>
+                            </items>
+                        </group>
+                    </items>
+                    <menu key="menu" id="vdo-9X-kSR"/>
+                    <connections>
+                        <outlet property="questionLabel" destination="Z2z-eJ-Xce" id="rZN-6n-vrh"/>
+                        <segue destination="fIA-P1-TDZ" kind="relationship" relationship="nextPage" id="BaM-Bc-uia"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="468" y="291"/>
+        </scene>
+        <!--AnswerViewController-->
+        <scene sceneID="KbI-ap-NfR">
+            <objects>
+                <controller identifier="AnswerViewController" id="fIA-P1-TDZ" customClass="AnswerViewController" customModule="StudyBox_Watch_App_Extension">
+                    <items>
+                        <label width="1" alignment="center" text="Answer" textAlignment="center" numberOfLines="0" id="4D9-iy-k3F"/>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="6f8-gr-Pr8">
+                            <items>
+                                <button width="0.5" height="50" alignment="left" title="Dobrze" id="Ae6-x2-75C">
+                                    <connections>
+                                        <action selector="correctButtonPress" destination="fIA-P1-TDZ" id="s7x-kK-yDQ"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" height="50" alignment="left" title="Źle" id="qHW-cU-giA">
+                                    <connections>
+                                        <action selector="incorrectButtonPress" destination="fIA-P1-TDZ" id="U0R-8W-skX"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="answerLabel" destination="4D9-iy-k3F" id="HFB-UT-WsZ"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="719" y="291"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Najwyższy czas poćwiczyć fiszki!" textAlignment="left" numberOfLines="2" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="599"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="StudyBox_Watch_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" id="4fd-h9-Qki">
+                            <items>
+                                <label alignment="left" text="Label" id="efN-Nd-Q4O"/>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="496" y="599"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+</document>
