@@ -38,4 +38,13 @@ class Utils {
         static let LoggedUserEmail = "email"
         static let LoggedUserPassword = "password"
     }
+    
+    struct WatchAppContextType {
+        static let FlashcardsQuestions = "flashcardsQuestions"
+        static let FlashcardsAnswers = "flashcardsAnswers"
+        static let FlashcardsIDs = "flashcardsIDs"
+        static let FlashcardsTips = "flashcardsTips"
+    }
+    
+    
 }
