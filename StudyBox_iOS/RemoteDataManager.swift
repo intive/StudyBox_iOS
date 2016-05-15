@@ -8,9 +8,10 @@
 
 import Alamofire
 import SwiftyJSON
+import Reachability
 
 enum ServerError: ErrorType {
-    case ErrorWithMessage(text: String)
+    case ErrorWithMessage(text: String), NoInternetAccess
 }
 
 enum ServerResultType<T> {
@@ -37,7 +38,11 @@ class RemoteDataManager {
         request: URLRequestConvertible,
         completion: (ServerResultType<ObjectType>)->(),
         successAction: (JSON) -> (ObjectType)) {
-
+        
+        guard Reachability.isConnected() else {
+            completion(.Error(err: ServerError.NoInternetAccess))
+            return
+        }
         let mutableRequest = request.URLRequest
         if let basic = basicAuth {
             mutableRequest.addValue(basic, forHTTPHeaderField: "Authorization")

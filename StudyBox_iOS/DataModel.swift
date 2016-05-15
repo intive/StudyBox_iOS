@@ -84,7 +84,11 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentSto
 
 class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     
-    dynamic private(set) var serverID: String = ""
+    dynamic private(set) var serverID: String = "" {
+        didSet {
+            
+        }
+    }
     dynamic var name: String = ""
     dynamic var isPublic: Bool = true
 
