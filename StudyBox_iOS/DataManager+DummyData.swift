@@ -25,21 +25,15 @@ extension DataManager {
                 let id = manager.addDeck(name)
                 //We create random number of 0 to 30 flashcards, different for each deck
                 let limit = arc4random_uniform(UInt32(29)) + 1
-                var tip: Tip?
                 var cardId: String
                 var countToHide: Int = 0
                 
-                for i in 0...limit {
+                for _ in 0...limit {
                     let rand = arc4random_uniform(UInt32(100)) //Random number to append in each flashcard
                     let question = "\(name) question \(rand)"
                     let answer = "\(name) answer \(rand)"
-                    if i % 2  == 0 {
-                        tip = Tip.Text(text: "\(name) tip \(rand)")
-                    } else {
-                        tip = nil
-                    }
                     do {
-                        try cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, tip: tip)
+                        try cardId = manager.addFlashcard(forDeckWithId: id, question: question, answer: answer, isHidden: false)
                         countToHide += 1
                         
                         //Hides every 3rd generated flashcard

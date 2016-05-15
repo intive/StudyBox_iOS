@@ -43,7 +43,8 @@ class WatchDataManager: NSObject, WCSessionDelegate {
                         flashcardsQuestions.append(flashcard.question)
                         flashcardsAnswers.append(flashcard.answer)
                         flashcardsIDs.append(flashcard.serverID)
-                        flashcardsTips.append(flashcard.tip)
+//                        flashcardsTips.append(flashcard.tip)
+//TODO: fix handling tips
                     }
                 }
             }

@@ -98,7 +98,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             deck = card.deck
             choosenDeckLabel.text = card.deck?.uiName
             questionField.text = card.question
-            tipField.text = card.tip
+            //tipField.text = card.tip //TODO: replace with button to show editable list of tips
             answerField.text = card.answer
             navigationItem.title = "Edytuj"
             if presentingViewController != nil {
@@ -220,16 +220,17 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             return
         }
         
-        var tip: Tip?
-        if let tipText = tipField.text {
-            tip = Tip.Text(text: tipText)
-        }
+//        var tip: Tip?
+//        if let tipText = tipField.text {
+//            tip = Tip.Text(text: tipText)
+//        }
+//      TODO: replace with button to show list of tips
         
         if case .Add? = mode {
             
             if let flashcardDeck = deck {
                 do {
-                    try dataManager.addFlashcard(forDeckWithId: flashcardDeck.serverID, question: question, answer: answer, tip: tip)
+                    try dataManager.addFlashcard(forDeckWithId: flashcardDeck.serverID, question: question, answer: answer, isHidden: false)
                     presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
                     clearInput()
                 } catch _ as DataManagerError {
@@ -243,7 +244,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             
             flashcard.question = question
             flashcard.answer = answer
-            flashcard.tipEnum = tip
             if flashcardDeck.serverID != flashcard.deckId {
                 flashcard.deck? = flashcardDeck
             }

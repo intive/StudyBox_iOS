@@ -258,4 +258,50 @@ public class NewDataManager {
                 self.remoteDataManager.updateFlashcard(deckID, flashcard: flashcard, completion: $0)
             }, completion: completion)
     }
+    
+    //Tips
+    func addTip(tip: Tip, completion: (DataManagerResponse<Tip>)-> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.addTip(tip, completion: $0)
+            }, completion: completion)
+    }
+    
+    func removeTip(tip: Tip, completion: (DataManagerResponse<Void>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.removeTip(tip, completion: $0)
+            },
+            remoteParsing: {
+                _ = self.localDataManager.delete(tip)
+            }, completion: completion)
+    }
+    
+    func tip(withID tipID: String, deckID: String, flashcardID: String, completion: (DataManagerResponse<Tip>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.get(Tip.self, withId: tipID)
+            },
+            remoteFetch: {
+                self.remoteDataManager.tip(deckID, flashcardID: flashcardID, tipID: tipID, completion: $0)
+            }, completion: completion)
+    }
+    
+    func updateTip(tip: Tip, completion: (DataManagerResponse<Tip>) -> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.updateTip(tip, completion: $0)
+            }, completion: completion)
+    }
+    
+    func allTipsForFlashcard(deck: Deck, flashcard: Flashcard, completion: (DataManagerResponse<[Tip]>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.filter(Tip.self, predicate: "flashcardID == %@ AND deckID == %@", args: flashcard.serverID, deck.serverID)
+            },
+            remoteFetch: {
+                self.remoteDataManager.allTips(deckID: deck.serverID, flashcardID: flashcard.serverID, completion: $0)
+            }, completion: completion)
+    }
+    
 }

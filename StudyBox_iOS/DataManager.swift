@@ -18,13 +18,12 @@ enum Result {
     case Success, Failed
 }
 
-/**
- Class responisble for handling data model stored in memory
-*/
+// Class responisble for handling data model stored in memory
+
+
 class DataManager {
     
     private var decks = [Deck]()
-    private let server = ServerCommunication()
     // private var flashcards = [Flashcard]()
     private let realm = try? Realm()
     // dzięki deckDBChanged talie będą wczytywane z bazy tylko w przypadku zmiany tabeli Deck
@@ -127,7 +126,7 @@ class DataManager {
             throw DataManagerError.NoRealm
         }
     }
-    
+    /*
     func updateDeckFromServer(callback: ((result: Result) -> Void)?){
         server.getDecksFromServer({ completion in
             switch completion {
@@ -160,7 +159,7 @@ class DataManager {
             }
         })
     }
-
+*/
     func addDeck(name: String) -> String {
 
         let id = decks.generateNewId()
@@ -243,7 +242,6 @@ class DataManager {
                     try realm.write {
                         flashcard.question = data.question
                         flashcard.answer = data.answer
-                        flashcard.tip = data.tip
                         flashcard.hidden = data.hidden
                         flashcard.deck = data.deck
                     }
@@ -257,7 +255,7 @@ class DataManager {
             throw DataManagerError.NoRealm
         }
     }
-    
+    /*
     func updateFlashcardsFromServer(deckId: String, callback: ((result: Result) -> Void)?){
         server.getFlashcardsFromServer(deckId, completion: { (completion: ServerResult<[Flashcard]>) in
             switch completion {
@@ -289,14 +287,14 @@ class DataManager {
                     callback?(result: Result.Failed)
             }
         })
-    }
+    }*/
 
     
-    func addFlashcard(forDeckWithId deckId: String, question: String, answer: String, tip: Tip?)throws -> String  {
+    func addFlashcard(forDeckWithId deckId: String, question: String, answer: String, isHidden: Bool)throws -> String  {
         let flashcardId = NSUUID().UUIDString
         if let realm = realm {
             if let selectedDeck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
-                let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
+                let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, isHidden: isHidden)
             
                 newFlashcard.deck = selectedDeck
                 do {
@@ -316,8 +314,8 @@ class DataManager {
         return flashcardId
     }
     
-    func addFlashcard(forDeck deck: Deck, question: String, answer: String, tip: Tip?)throws -> String  {
-        return try addFlashcard(forDeckWithId: deck.serverID, question: question, answer: answer, tip: tip)
+    func addFlashcard(forDeck deck: Deck, question: String, answer: String, isHidden: Bool)throws -> String  {
+        return try addFlashcard(forDeckWithId: deck.serverID, question: question, answer: answer, isHidden: isHidden)
     }
     
     func removeFlashcard(withId idFlashcard: String) throws {
@@ -378,4 +376,5 @@ class DataManager {
             throw DataManagerError.NoRealm
         }
     }
+
 }
