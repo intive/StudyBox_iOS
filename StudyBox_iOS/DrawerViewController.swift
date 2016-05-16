@@ -81,23 +81,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Odkryj losową talię", viewController: nil,
                 lazyLoadViewControllerBlock: {[weak self] in
-                    var vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.TestViewControllerID) as? UINavigationController
-                    
-                    if let testVC = vc?.childViewControllers[0] as? TestViewController {
-                        UIApplication.appDelegate().newDataManager.randomDeck({ response in
-                            switch response {
-                            case .Success(let recievedDeck):
-                                testVC.testLogicSource = Test(deck: recievedDeck.flashcards, testType: .Test(uint(recievedDeck.flashcards.count)))
-                                
-                            case .Error(let err):
-                                print(err)
-                                self?.presentAlertController(withTitle: "Błąd",
-                                    message: "Błąd przy pobieraniu talii z serwera. Sprawdź połączenie z Internetem.", buttonText: "OK")
-                                vc = nil
-                            }
-                        })
-                    }
-                    return vc
+                   return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.RandomDeckViewControllerID) //as? UINavigationController
                 })
             )
                     

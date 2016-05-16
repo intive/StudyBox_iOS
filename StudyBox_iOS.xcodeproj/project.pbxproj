@@ -51,12 +51,14 @@
 		72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72311BB21CCA0FA800C49723 /* WatchManager.swift */; };
 		7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723772191CBC159800DE0F6D /* QuestionViewController.swift */; };
 		7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */; };
-		7238493A1C8882DE009605EE /* StudyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxViewController.swift */; };
+		7237FCCE1CE8F5550015BA78 /* RandomDeckLoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */; };
 		7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
 		723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493F1C88851A009605EE /* EditFlashcardViewController.swift */; };
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
+		725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */; };
+		725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */; };
 		7269FCF81CC159CC0075CBAC /* WatchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */; };
 		726EA9B71CBBFAE5008C90CD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B51CBBFAE5008C90CD /* Interface.storyboard */; };
 		726EA9B91CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B81CBBFAE5008C90CD /* Assets.xcassets */; };
@@ -67,8 +69,6 @@
 		726EA9CD1CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */; };
 		726EA9D11CBBFAE5008C90CD /* StudyBox Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */; };
 		729310021CC01E9E002BF87A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
-		725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */; };
-		725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D50BB01CDA69AC00CB0271 /* Router.swift */; };
@@ -171,9 +171,9 @@
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
-		2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPlaceholderTextView.swift; sourceTree = "<group>"; };
 		2D7E038A1CDB617F003B5294 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+base64Encoded.swift"; sourceTree = "<group>"; };
+		2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPlaceholderTextView.swift; sourceTree = "<group>"; };
 		2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksCollectionViewLayout.swift; sourceTree = "<group>"; };
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
@@ -194,12 +194,14 @@
 		72311BB21CCA0FA800C49723 /* WatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchManager.swift; sourceTree = "<group>"; };
 		723772191CBC159800DE0F6D /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
-		723849391C8882DE009605EE /* StudyBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxViewController.swift; sourceTree = "<group>"; };
+		7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomDeckLoadingController.swift; sourceTree = "<group>"; };
 		723849391C8882DE009605EE /* StudyBoxController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7238493F1C88851A009605EE /* EditFlashcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFlashcardViewController.swift; sourceTree = "<group>"; };
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge+flat.swift"; sourceTree = "<group>"; };
+		725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+URLByAppendingElements.swift"; sourceTree = "<group>"; };
 		7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataManager.swift; sourceTree = "<group>"; };
 		726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StudyBox Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		726EA9B61CBBFAE5008C90CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -212,8 +214,6 @@
 		726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		726EA9CE1CBBFAE5008C90CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge+flat.swift"; sourceTree = "<group>"; };
-		725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+URLByAppendingElements.swift"; sourceTree = "<group>"; };
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72D50BB01CDA69AC00CB0271 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -238,8 +238,8 @@
 		AE2AFB741C8DC274003EF985 /* DecksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewCell.swift; sourceTree = "<group>"; };
 		AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
 		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
-		BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.release.xcconfig"; sourceTree = "<group>"; };
 		AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogicTests.swift; sourceTree = "<group>"; };
+		BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.release.xcconfig"; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
 		CEC47A8C1CD2AB6200B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/expressions.json; sourceTree = "<group>"; };
 		CEC47A8F1CD2AD5800B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/base.json; sourceTree = "<group>"; };
@@ -445,6 +445,7 @@
 				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
+				7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
 				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
 			);
@@ -913,6 +914,7 @@
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
 				7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */,
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
+				7237FCCE1CE8F5550015BA78 /* RandomDeckLoadingController.swift in Sources */,
 				72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */,
 				72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */,
 				725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */,
