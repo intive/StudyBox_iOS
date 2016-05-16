@@ -35,9 +35,9 @@ enum Router: URLRequestConvertible {
     case UpdateFlashcard(ID: String, deckID: String, question: String, answer: String, isHidden: Bool)
     
     case GetAllTips(deckID: String, flashcardID: String)
-    case AddTip(deckID: String, flashcardID: String, essence: String, difficult: Int)
+    case AddTip(deckID: String, flashcardID: String, content: String, difficulty: Int)
     case GetTip(deckID: String, flashcardID: String, tipID: String)
-    case UpdateTip(deckID: String, flashcardID: String, tipID: String, essence: String, difficult: Int)
+    case UpdateTip(deckID: String, flashcardID: String, tipID: String, content: String, difficulty: Int)
     case RemoveTip(deckID: String, flashcardID: String, tipID: String)
 
     var method: Alamofire.Method {

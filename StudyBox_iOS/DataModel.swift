@@ -19,26 +19,26 @@ class Tip: Object, UniquelyIdentifiable, JSONInitializable {
     dynamic private(set) var serverID: String = ""
     dynamic var flashcardID: String = ""
     dynamic var deckID: String = ""
-    dynamic var essence: String = ""
-    dynamic var difficult: Int = 0
+    dynamic var content: String = ""
+    dynamic var difficulty: Int = 0
     
     required convenience init?(withJSON json: JSON) {
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, essence = jsonDict["essence"]?.string, difficult = jsonDict["difficult"]?.int {
-                self.init(deckID: "", flashcardID: "", serverID: id, essence: essence, difficult: difficult)
+                self.init(deckID: "", flashcardID: "", serverID: id, content: essence, difficulty: difficult)
                 return
             }
         }
         return nil
     }
     
-    convenience init(deckID: String, flashcardID: String, serverID: String, essence: String, difficult: Int){
+    convenience init(deckID: String, flashcardID: String, serverID: String, content: String, difficulty: Int){
         self.init()
         self.serverID = serverID
         self.deckID = deckID
         self.flashcardID = flashcardID
-        self.essence = essence
-        self.difficult = difficult
+        self.content = content
+        self.difficulty = difficulty
     }
     
     override class func primaryKey() -> String? {

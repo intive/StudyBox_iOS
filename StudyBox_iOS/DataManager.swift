@@ -126,40 +126,7 @@ class DataManager {
             throw DataManagerError.NoRealm
         }
     }
-    /*
-    func updateDeckFromServer(callback: ((result: Result) -> Void)?){
-        server.getDecksFromServer({ completion in
-            switch completion {
-            case .Success(let DecksArray):
-                
-                if let realm = self.realm {
-                    for deck in DecksArray{
-                        do {
-                            if let updatingDeck = realm.objects(Deck).filter("serverID == '\(deck.serverID)'").first{
-                                try realm.write {updatingDeck.name = deck.name}
-                                self.deckDBChanged = true
-                            } else{
-                                try realm.write {realm.add(deck)}
-                                self.deckDBChanged = true
-                            }
-                        } catch let e {
-                              debugPrint(e)
-                        }
-                    }
-                }
-                if let callback = callback {
-                    callback(result: Result.Success)
-                }
-                
-            case .Failure(let error):
-                debugPrint(error.description)
-                if let callback = callback {
-                    callback(result: Result.Failed)
-                }
-            }
-        })
-    }
-*/
+
     func addDeck(name: String) -> String {
 
         let id = decks.generateNewId()
@@ -255,40 +222,6 @@ class DataManager {
             throw DataManagerError.NoRealm
         }
     }
-    /*
-    func updateFlashcardsFromServer(deckId: String, callback: ((result: Result) -> Void)?){
-        server.getFlashcardsFromServer(deckId, completion: { (completion: ServerResult<[Flashcard]>) in
-            switch completion {
-            case .Success(let flashcardsArray):
-                
-                if let realm = self.realm {
-                    for flashcard in flashcardsArray {
-                        do {
-                            if let updatingFlashcard = realm.objects(Flashcard).filter("serverID == '\(flashcard.serverID)'").first {
-                                try realm.write {
-                                    updatingFlashcard.question = flashcard.question
-                                    updatingFlashcard.answer = flashcard.answer
-                                    updatingFlashcard.tip = flashcard.tip
-                                    updatingFlashcard.hidden = flashcard.hidden
-                                    updatingFlashcard.deck = flashcard.deck
-                                }
-                            } else{
-                                try self.addFlashcard(forDeckWithId: flashcard.deckId, question: flashcard.question, answer: flashcard.answer, tip: nil)
-                            }
-                        } catch let e {
-                            debugPrint(e)
-                        }
-                    }
-                }
-                    callback?(result: Result.Success)
-                
-            case .Failure(let error):
-                debugPrint(error.description)
-                    callback?(result: Result.Failed)
-            }
-        })
-    }*/
-
     
     func addFlashcard(forDeckWithId deckId: String, question: String, answer: String, isHidden: Bool)throws -> String  {
         let flashcardId = NSUUID().UUIDString

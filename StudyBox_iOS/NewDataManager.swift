@@ -283,7 +283,7 @@ public class NewDataManager {
                 self.localDataManager.get(Tip.self, withId: tipID)
             },
             remoteFetch: {
-                self.remoteDataManager.tip(deckID, flashcardID: flashcardID, tipID: tipID, completion: $0)
+                self.remoteDataManager.tip(deckID: deckID, flashcardID: flashcardID, tipID: tipID, completion: $0)
             }, completion: completion)
     }
     

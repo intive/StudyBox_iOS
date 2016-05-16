@@ -198,11 +198,10 @@ class TestViewController: StudyBoxViewController {
     @IBAction func showTip(sender: AnyObject) {
         var message = String()
         
-//        if let tip = testLogicSource?.currentCard?.tip where !tip.isEmpty {
-//            message = tip
-//        } else {
-//            message = "Brak podpowiedzi"
-//        }
+        if let _ = testLogicSource?.currentCard {
+            //TODO: get tips for card
+        }
+            message = "Brak podpowiedzi"
     
         presentAlertController(withTitle: "Podpowiedź:", message: message, buttonText: "OK")
     }
