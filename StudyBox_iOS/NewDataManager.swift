@@ -205,10 +205,9 @@ public class NewDataManager {
                     dependencyCompletion()
                 }
             }
-            
         }
-        
     }
+    
     func decks(includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil,
                withDependecies: Bool = true, completion: (DataManagerResponse<[Deck]> -> ())) {
         handleJSONRequest(
