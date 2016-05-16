@@ -8,6 +8,7 @@
 
 import UIKit
 import Swifternalization
+import WatchConnectivity
 
 class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -48,7 +49,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
-            //TODOs: enable or disable cell based on whether Watch is available
             
         default: break
         }
@@ -97,18 +97,24 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         }
     }
     
-    //Check if user has any decks on device before performing segue on second TableViewCell
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
-        var doesUserHaveDecks = true
+        var shouldPerformSegue = true
+        var message: (title: String, body: String)?
         
-        let userDecks = dataManager.localDataManager.getAll(Deck)
-        if userDecks.isEmpty {
-            presentAlertController(withTitle: "Brak talii", message: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.", buttonText: "OK")
-            doesUserHaveDecks = false
-            self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+        if let userDecks = dataManager?.decks(false) where userDecks.isEmpty {
+            message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
         }
         
-        return doesUserHaveDecks
+        if !WCSession.isSupported() {
+            message = (title: "Niekompatybilne urządzenie", body: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch")
+        }
+        
+        if let message = message {
+            shouldPerformSegue = false
+            presentAlertController(withTitle: message.title, message: message.body, buttonText: "OK")
+            self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+        }
+        return shouldPerformSegue
     }
     
     //Update cells when returning from DetailVC
