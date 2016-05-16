@@ -37,20 +37,10 @@ public class NewDataManager {
             if !self.localDataManager.update(realmObject) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
-            if let parentStoreable = parsedObject as? LocalParentStoreable {
-                localDataManager.write { _ in
-                    parentStoreable.storeLocalParent(localDataManager)
-                }
-            }
             
         } else if let realmObjects = parsedObject as? NSArray as? [Object] {
             if !self.localDataManager.update(realmObjects) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
-            }
-            localDataManager.write { _ in
-                realmObjects.forEach {
-                    ($0 as? LocalParentStoreable)?.storeLocalParent(localDataManager)
-                }
             }
         }
         
@@ -63,13 +53,17 @@ public class NewDataManager {
     // localFetch - blok powinien zwrócić dane z lokalnej bazy danych
     // remoteFetch - blok powinien zawołać przekazany blok z danymi z serwera
     // remoteParsing - blok przyjmuje dane typu, który przychodzi z serwera i powinien zwrócić dane typu lokalnego, np. JSON do Deck
+    // remoteDependeciesCount - blok przyjmuje dane typu lokalnego i zwraca asynchronicznych zależności, które powinny zostać wywołane przed completion
+    /* remoteDependecies - blok zawoła przekazany blok z danymi typu lokalnego i blokiem `dependencyCompletion`,
+        który musi zostać wywołany tyle razy ile wartość zwrócona przez `remoteDependeciesCount`
+    */
     // completion - ten blok jest wołany z obiektem typu lokalnego, np. Deck
     private func handleRequest<ServerResponseObject, DataManagerResponseObject>(
         localFetch localFetch: (() -> (DataManagerResponseObject?))? = nil,
                    remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
                    remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
                    remoteDependeciesCount: ((obj: DataManagerResponseObject) -> Int)? = nil,
-                   remoteDependecies: ((obj: DataManagerResponseObject, (() -> ())) -> ())? = nil,
+                   remoteDependecies: ((obj: DataManagerResponseObject, dependencyCompletion: (() -> ())) -> ())? = nil,
                    completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
 
         remoteFetch { response in

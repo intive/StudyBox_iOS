@@ -27,10 +27,12 @@ enum Tip: CustomStringConvertible, Equatable  {
     }
 }
 
-class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentStoreable {
+class Flashcard: Object, UniquelyIdentifiable, JSONInitializable  {
     dynamic private(set) var serverID: String = ""
     dynamic private(set) var deckId: String = ""
-    dynamic var deck: Deck?
+    dynamic var deck: Deck? {
+        return realm?.objectForPrimaryKey(Deck.self, key: serverID)
+    }
     dynamic var question: String = ""
     dynamic var answer: String = ""
     dynamic var tip = Tip.Text(text: "").description
@@ -74,11 +76,6 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable, LocalParentSto
         self.init(serverID: "", deckID: deckID, question: question, answer: answer, tip: tip, isHidden: isHidden)
     }
     
-    func storeLocalParent(localDataManager: LocalDataManager) {
-        self.deck = localDataManager.get(Deck.self, withId: deckId)
-    }
-    
-    
 }
 
 
@@ -89,7 +86,7 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     dynamic var isPublic: Bool = true
 
     var flashcards: [Flashcard] {
-        return linkingObjects(Flashcard.self, forProperty: "deck")
+        return realm?.objects(Flashcard).filter("deckId == '\(serverID)'").map { $0 } ?? []
     }
     
     required convenience init?(withJSON json: JSON) {
