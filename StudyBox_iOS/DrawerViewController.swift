@@ -81,7 +81,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Odkryj losową talię", viewController: nil,
                 lazyLoadViewControllerBlock: {[weak self] in
-                   return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.RandomDeckViewControllerID) //as? UINavigationController
+                   return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.RandomDeckViewControllerID)
                 })
             )
                     
