@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0730"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "726EA9B21CBBFAE5008C90CD"
+               BuildableName = "StudyBox Watch App.app"
+               BlueprintName = "StudyBox Watch App"
+               ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A1341DBB1C81E76900AFD04E"
+               BuildableName = "StudyBox_iOS.app"
+               BlueprintName = "StudyBox_iOS"
+               ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "726EA9BE1CBBFAE5008C90CD"
+               BuildableName = "StudyBox Watch App Extension.appex"
+               BlueprintName = "StudyBox Watch App Extension"
+               ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "726EA9B21CBBFAE5008C90CD"
+            BuildableName = "StudyBox Watch App.app"
+            BlueprintName = "StudyBox Watch App"
+            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/StudyBox">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "726EA9B21CBBFAE5008C90CD"
+            BuildableName = "StudyBox Watch App.app"
+            BlueprintName = "StudyBox Watch App"
+            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "726EA9B21CBBFAE5008C90CD"
+            BuildableName = "StudyBox Watch App.app"
+            BlueprintName = "StudyBox Watch App"
+            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/StudyBox">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "726EA9B21CBBFAE5008C90CD"
+            BuildableName = "StudyBox Watch App.app"
+            BlueprintName = "StudyBox Watch App"
+            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "726EA9B21CBBFAE5008C90CD"
+            BuildableName = "StudyBox Watch App.app"
+            BlueprintName = "StudyBox Watch App"
+            ReferencedContainer = "container:StudyBox_iOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
