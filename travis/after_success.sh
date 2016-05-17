@@ -34,6 +34,7 @@ echo "Create constants"
 
 PLIST_BUDDY="/usr/libexec/PlistBuddy"
 INFO_PLIST="$PWD/StudyBox_iOS/Info.plist"
+INFO_PLIST_WATCH="$PWD/StudyBox Watch App/Info.plist"
 
 WORKSPACE="StudyBox_iOS.xcworkspace"
 SCHEME="StudyBox_iOS"
@@ -59,6 +60,7 @@ FABRIC_GROUP_ALIASES="patronage-2016-qa"
 echo "Update build number"
 
 "$PLIST_BUDDY" -c "Set :CFBundleVersion travis-$TRAVIS_BUILD_NUMBER" "$INFO_PLIST"
+"$PLIST_BUDDY" -c "Set :CFBundleVersion travis-$TRAVIS_BUILD_NUMBER" "$INFO_PLIST_WATCH"
 
 echo "Setting up certificates and keys"
 
