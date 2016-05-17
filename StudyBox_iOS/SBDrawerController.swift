@@ -32,7 +32,7 @@ class SBDrawerController: MMDrawerController {
         newFrame = self.centerViewController.view.frame
         newFrame.origin.x = self.maximumLeftDrawerWidth
         
-        let distance = abs(CGRectGetMinX(oldFrame)-newFrame.origin.x)
+        let distance = abs(oldFrame.minX - newFrame.origin.x)
         return max(Double(distance/abs(animationVelocity)), 0.1)
     }
     

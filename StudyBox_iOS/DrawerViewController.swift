@@ -233,7 +233,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
 extension DrawerViewController {
     class func sharedSbDrawerViewControllerChooseMenuOption(atIndex index: Int) {
         if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController,
-            let drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {
+             drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {
             drawer.selectMenuOptionAtIndex(index)
         }
     }
