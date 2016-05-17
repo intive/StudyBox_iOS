@@ -57,9 +57,9 @@ class RandomDeckLoadingController: StudyBoxViewController {
                     case .Success(let flashcards):
                         if flashcards.isEmpty {
                             self.updateUI(message: "Otrzymano pustą talię.")
+                        } else {
+                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(uint(flashcards.count))))
                         }
-                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(uint(flashcards.count))))
-                        
                     case .Error(let err):
                         print(err)
                         self.updateUI(message: "Błąd pobierania fiszek.")
@@ -79,7 +79,7 @@ class RandomDeckLoadingController: StudyBoxViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, let testLogic = sender as? Test {
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, testLogic = sender as? Test {
             testViewController.testLogicSource = testLogic
         }
     }
