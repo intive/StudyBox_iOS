@@ -51,10 +51,12 @@ class Tip: Object, UniquelyIdentifiable, JSONInitializable {
     }
 }
 
-class Flashcard: Object, UniquelyIdentifiable, JSONInitializable {
-    dynamic private(set) var serverID: String = NSUUID().UUIDString
+class Flashcard: Object, UniquelyIdentifiable, JSONInitializable  {
+    dynamic private(set) var serverID: String = ""
     dynamic private(set) var deckId: String = ""
-    dynamic var deck: Deck?
+    dynamic var deck: Deck? {
+        return realm?.objectForPrimaryKey(Deck.self, key: serverID)
+    }
     dynamic var question: String = ""
     dynamic var answer: String = ""
     dynamic var hidden: Bool = false
@@ -63,7 +65,7 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable {
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, deckId = jsonDict["deckId"]?.string, question = jsonDict["question"]?.string,
                 answer = jsonDict["answer"]?.string, isHidden = jsonDict["isHidden"]?.bool {
-                self.init(serverID: id, deckId: deckId, question: question, answer: answer, isHidden: isHidden)
+                self.init(serverID: id, deckID: deckId, question: question, answer: answer, isHidden: isHidden)
                 return
             }
         }
@@ -74,25 +76,29 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable {
         return "serverID"
     }
     
-    convenience init(serverID: String, deckId: String, question: String, answer: String, isHidden: Bool = false){
+    convenience init(serverID: String, deckID: String, question: String, answer: String, isHidden: Bool = false){
         self.init()
         self.serverID = serverID
-        self.deckId = deckId
+        self.deckId = deckID
         self.question = question
         self.answer = answer
         self.hidden = isHidden
     }
+    convenience init(deckID: String, question: String, answer: String, isHidden: Bool = false) {
+        self.init(serverID: "", deckID: deckID, question: question, answer: answer, isHidden: isHidden)
+    }
+    
 }
 
 
 class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     
-    dynamic private(set) var serverID: String = NSUUID().UUIDString
+    dynamic private(set) var serverID: String = ""
     dynamic var name: String = ""
     dynamic var isPublic: Bool = true
 
     var flashcards: [Flashcard] {
-        return linkingObjects(Flashcard.self, forProperty: "deck")
+        return realm?.objects(Flashcard).filter("deckId == '\(serverID)'").map { $0 } ?? []
     }
     
     required convenience init?(withJSON json: JSON) {
@@ -111,9 +117,13 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     
     convenience init(serverID: String, name: String, isPublic: Bool = true){
         self.init()
-        self.serverID = serverID
         self.name = name
+        self.serverID = serverID
         self.isPublic = isPublic
+    }
+    
+    convenience init(name: String, isPublic: Bool = true ){
+        self.init(serverID: "", name: name, isPublic: isPublic)
     }
     
     func matches(expression: String?) -> Bool {

@@ -17,7 +17,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     @IBOutlet weak var settingsTableView: UITableView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    lazy private var dataManager: NewDataManager = { return UIApplication.appDelegate().dataManager }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
@@ -30,7 +30,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             //Set detail label to data from NSUD
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
                 if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
-                    let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
+                    type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
                 {
                     cell.detailTextLabel?.text = "\(number) \(I18n.localizedString(type, stringValue: number))"
                 } else {
@@ -101,7 +101,8 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         var shouldPerformSegue = true
         var message: (title: String, body: String)?
         
-        if let userDecks = dataManager?.decks(false) where userDecks.isEmpty {
+        let userDecks = dataManager.localDataManager.getAll(Deck)
+        if  userDecks.isEmpty {
             message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
         }
         

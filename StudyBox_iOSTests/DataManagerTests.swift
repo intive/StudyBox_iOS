@@ -10,6 +10,11 @@ import XCTest
 @testable import StudyBox_iOS
 class DataManagerTests: XCTestCase {
     
+    override func setUp() {
+        super.setUp()
+        DataManager().removeDecksFromDatabase()
+    }
+    
     func testDummyManager(){
         let manager = DataManager.managerWithDummyData()
         let decks = manager.decks(false)[0]
@@ -96,7 +101,7 @@ class DataManagerTests: XCTestCase {
         
         XCTAssertNotNil(flashcardById,"Receiving added flashcard by id, must not be nil")
         
-        let newCard = Flashcard(serverID: "xxxxxz", deckId: "xxxx", question: "question", answer: "answer", isHidden: false)
+        let newCard = Flashcard(serverID: "xxxxxz", deckID: "xxxx", question: "question", answer: "answer", isHidden: false)
         
         let newCardById = manager.flashcard(withId: newCard.serverID)
         

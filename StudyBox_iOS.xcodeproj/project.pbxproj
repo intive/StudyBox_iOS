@@ -25,6 +25,7 @@
 		2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100141CC0522300F9CB2A /* Searchable.swift */; };
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
+		2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */; };
 		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
 		2D7E038B1CDB617F003B5294 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E038A1CDB617F003B5294 /* User.swift */; };
 		2D7E038D1CDBADB6003B5294 /* String+base64Encoded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */; };
@@ -51,6 +52,7 @@
 		72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72311BB21CCA0FA800C49723 /* WatchManager.swift */; };
 		7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723772191CBC159800DE0F6D /* QuestionViewController.swift */; };
 		7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */; };
+		7237FCCE1CE8F5550015BA78 /* RandomDeckLoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */; };
 		7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
@@ -168,6 +170,7 @@
 		2D6100141CC0522300F9CB2A /* Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Searchable.swift; sourceTree = "<group>"; };
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
+		2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalParentStoreable.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
 		2D7E038A1CDB617F003B5294 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+base64Encoded.swift"; sourceTree = "<group>"; };
@@ -192,6 +195,7 @@
 		72311BB21CCA0FA800C49723 /* WatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchManager.swift; sourceTree = "<group>"; };
 		723772191CBC159800DE0F6D /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
+		7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomDeckLoadingController.swift; sourceTree = "<group>"; };
 		723849391C8882DE009605EE /* StudyBoxController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 				2D6100161CC0527500F9CB2A /* SBRepresentable.swift */,
 				2D6100141CC0522300F9CB2A /* Searchable.swift */,
 				2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */,
+				2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
+				7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
 				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
 			);
@@ -895,6 +901,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
+				8044F6351CC05555001C9E8A /* ServerCommunication.swift in Sources */,
+				2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
 				AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */,
@@ -907,6 +915,7 @@
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
 				7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */,
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
+				7237FCCE1CE8F5550015BA78 /* RandomDeckLoadingController.swift in Sources */,
 				72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */,
 				72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */,
 				725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */,

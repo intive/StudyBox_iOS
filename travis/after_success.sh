@@ -38,7 +38,6 @@ INFO_PLIST="$PWD/StudyBox_iOS/Info.plist"
 WORKSPACE="StudyBox_iOS.xcworkspace"
 SCHEME="StudyBox_iOS"
 APP_NAME="StudyBox_iOS"
-SDK="iphoneos"
 CONFIGURATION="Release"
 
 UUID=`$PLIST_BUDDY -c Print:UUID /dev/stdin <<< \`security cms -D -i $PROFILE\``
@@ -81,11 +80,11 @@ cp "$PROFILE" "$PROFILE_TARGET"
 
 echo "Building and archiving"
 
-xctool \
+xcodebuild \
     -workspace "$WORKSPACE" \
     -scheme "$SCHEME" \
-    -sdk "$SDK" \
     -configuration "$CONFIGURATION" \
+	-hideShellScriptEnvironment \
     ONLY_ACTIVE_ARCH="NO" \
     CODE_SIGN_IDENTITY="$DEVELOPER_NAME" \
     PROVISIONING_PROFILE="$UUID" \

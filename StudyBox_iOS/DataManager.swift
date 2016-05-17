@@ -210,7 +210,6 @@ class DataManager {
                         flashcard.question = data.question
                         flashcard.answer = data.answer
                         flashcard.hidden = data.hidden
-                        flashcard.deck = data.deck
                     }
                 } catch let e {
                     debugPrint(e)
@@ -226,10 +225,9 @@ class DataManager {
     func addFlashcard(forDeckWithId deckId: String, question: String, answer: String, isHidden: Bool)throws -> String  {
         let flashcardId = NSUUID().UUIDString
         if let realm = realm {
-            if let selectedDeck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
-                let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, isHidden: isHidden)
+            if let _ = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
+                let newFlashcard = Flashcard(serverID: flashcardId, deckID: deckId, question: question, answer: answer, isHidden: false)
             
-                newFlashcard.deck = selectedDeck
                 do {
                     try realm.write {
                         realm.add(newFlashcard)

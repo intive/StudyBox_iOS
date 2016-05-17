@@ -20,7 +20,7 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet var answerTrailing: NSLayoutConstraint!
     var testLogicSource: Test?
     
-    private var dataManager: DataManager? = {
+    private var dataManager: NewDataManager? = {
         return UIApplication.appDelegate().dataManager
     }()
     
@@ -53,8 +53,8 @@ class TestViewController: StudyBoxViewController {
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
         //Set the navigation bar title to current deck name
-        if let test = testLogicSource, deckID = test.currentCard?.deckId, manager = dataManager {
-            self.title = manager.deck(withId: deckID)?.name
+        if let test = testLogicSource {
+            self.title = test.deckName
         }
 
         tipButton.backgroundColor = UIColor.sb_Grey()
@@ -120,7 +120,7 @@ class TestViewController: StudyBoxViewController {
                         UIAlertAction(title: "Tak", style: .Default,
                             handler: { _ in
                                 if let repeatDeck = testLogic.repeatDeck {
-                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn)
+                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn, deckName: testLogic.deckName)
                                     self.answeredQuestionTransition()
                                 }
                             })

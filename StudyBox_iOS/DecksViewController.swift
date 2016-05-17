@@ -13,6 +13,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchBarWrapper: UIView!
     var searchBarTopConstraint: NSLayoutConstraint!
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
+    let refreshControl = UIRefreshControl()
+
 
     var searchBar: UISearchBar {
         return searchController.searchBar
@@ -25,7 +27,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return searchDecks ?? decksArray
     }
     
-    lazy var dataManager: DataManager = {
+    lazy var dataManager: NewDataManager = {
         return UIApplication.appDelegate().dataManager
     }()
 
@@ -79,18 +81,36 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         definesPresentationContext = true
         collectionView?.backgroundColor = UIColor.sb_White()
         collectionView?.alwaysBounceVertical = true
+        refreshControl.tintColor = UIColor.sb_Graphite()
+        refreshControl.addTarget(self, action: #selector(reloadData), forControlEvents: .ValueChanged)
+        reloadData()
     }
    
+    func reloadData() {
+        
+        dataManager.userDecks {
+            switch $0 {
+            case .Success(let obj):
+                self.decksArray = obj
+            case .Error(_):
+                self.presentAlertController(withTitle: "Błąd", message: "Błąd pobierania danych", buttonText: "Ok")
+            }
+            self.refreshControl.endRefreshing()
+            self.collectionView?.reloadData()
+        }
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         searchBar.sizeToFit()
+        self.collectionView?.addSubview(refreshControl)
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.addObserver(self, forKeyPath: "openSide", options: [.New, .Old], context: nil)
         }
         NSNotificationCenter.defaultCenter()
             .addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        decksArray = dataManager.decks(true)
+        
         if initialLayout {
             adjustCollectionLayout(forSize: view.bounds.size)
             initialOffset(false)
@@ -122,7 +142,11 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         
     }
     func orientationChanged(notification: NSNotification) {
-        initialLayout = true
+        
+        if traitCollection.horizontalSizeClass != .Compact {
+            initialLayout = true
+            
+        }
     }
    
     func initialOffset(animated: Bool) {
@@ -138,7 +162,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == "openSide", let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+        if keyPath == "openSide", let newSide = change?["new"] as? Int, oldSide = change?["old"] as? Int where newSide != oldSide {
             initialOffset(true)
         }
     }
@@ -154,7 +178,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         let crNumber = DecksViewController.numberOfCellsInRow(screenSize.width, cellSize: cellSize)
         
         let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)
-        flow.sectionInset = UIEdgeInsetsMake(topOffset, spacing, spacing, spacing)
+        
+        flow.sectionInset = UIEdgeInsets(top: topOffset, left: spacing, bottom: spacing, right: spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
@@ -216,60 +241,69 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             let resetSearchUI = {
                 self.searchController.active = false
             }
-            do {
-                let flashcards = try dataManager.flashcards(forDeckWithId: deck.serverID)
-                   
-                let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
-                
-                let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                    let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
-                    
-                    let amounts = [ 1, 5, 10, 15, 20 ]
-                    
-                    var amountFlashcardsNotHiden: Int = 0
-                    for flashcard in flashcards {
-                        if flashcard.hidden == false {
-                            amountFlashcardsNotHiden += 1
-                        }
+            
+            dataManager.flashcards(deck.serverID) {
+                switch $0 {
+                case .Success(let flashcards):
+                    guard !flashcards.isEmpty else {
+                        self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek", buttonText: "Ok")
+                        return
                     }
+                    let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
                     
-                    for amount in amounts {
-                        if amount < amountFlashcardsNotHiden {
-                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
-                                resetSearchUI()
-                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amount))))
+                    let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
+                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
+                        
+                        let amounts = [ 1, 5, 10, 15, 20 ]
+                        
+                        var amountFlashcardsNotHiden: Int = 0
+                        for flashcard in flashcards {
+                            if flashcard.hidden == false {
+                                amountFlashcardsNotHiden += 1
+                            }
+                        }
+                        
+                        for amount in amounts {
+                            if amount < amountFlashcardsNotHiden {
+                                alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
+                                    resetSearchUI()
+                                    self.performSegueWithIdentifier("StartTest",
+                                        sender: Test(deck: flashcards, testType: .Test(UInt32(amount)), deckName: deck.name))
+                                    })
+                            } else {
+                                break
+                            }
+                        }
+                        alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
+                            resetSearchUI()
+                            self.performSegueWithIdentifier("StartTest",
+                                sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden)), deckName: deck.name))
                             })
-                        } else {
-                            break
-                        }
+                        alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
+                        
+                        self.presentViewController(alertAmount, animated: true, completion:nil)
                     }
-                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
+                    let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                         resetSearchUI()
-                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden))))
-                        })
-                    alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
+                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn, deckName: deck.name))
+                    }
                     
-                    self.presentViewController(alertAmount, animated: true, completion:nil)
-                }
-                let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    resetSearchUI()
-                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
+                    alert.addAction(testButton)
+                    alert.addAction(studyButton)
+                    alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
+                    
+                    self.presentViewController(alert, animated: true, completion:nil)
+                    
+                case .Error(_):
+                    self.presentAlertController(withTitle: "Błąd", message: "Nie udało się pobrać danych", buttonText: "Ok")
                 }
                 
-                alert.addAction(testButton)
-                alert.addAction(studyButton)
-                alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-
-                presentViewController(alert, animated: true, completion:nil)
-                
-            } catch let e {
-                debugPrint(e)
             }
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, let testLogic = sender as? Test {
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, testLogic = sender as? Test {
             testViewController.testLogicSource = testLogic
         }
     }
@@ -289,12 +323,8 @@ extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelega
     func adjustSearchBar(forYOffset offset: CGFloat) {
         if !searchController.active {
             if offset < topItemOffset + topOffset {
-                
-                if offset > topItemOffset{
-                    searchBarWrapper.frame.origin.y = -offset
-                } else {
-                    searchBarWrapper.frame.origin.y = -topItemOffset
-                }
+            
+                searchBarWrapper.frame.origin.y = -offset
                 
             } else {
                 searchBarWrapper.frame.origin.y = -searchBarHeight

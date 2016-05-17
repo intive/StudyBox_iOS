@@ -76,9 +76,15 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                             return vc
                         }
                         return nil 
+                    })
+            )
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Odkryj losową talię", viewController: nil,
+                lazyLoadViewControllerBlock: {[weak self] in
+                   return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.RandomDeckViewControllerID)
                 })
             )
-            drawerNavigationControllers.append(DrawerNavigationChild(name: "Odkryj nową fiszkę"))
+                    
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Ustawienia", viewController: nil,
@@ -91,7 +97,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                     let defaults = NSUserDefaults.standardUserDefaults()
                     defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
                     defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
-                    UIApplication.appDelegate().newDataManager.logout()
+                    UIApplication.appDelegate().dataManager.logout()
                     
                     if let storyboard = self?.storyboard {
                         UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
@@ -227,7 +233,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
 extension DrawerViewController {
     class func sharedSbDrawerViewControllerChooseMenuOption(atIndex index: Int) {
         if let sbDrawer = UIApplication.sharedRootViewController as? SBDrawerController,
-            let drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {
+             drawer = sbDrawer.leftDrawerViewController as? DrawerViewController {
             drawer.selectMenuOptionAtIndex(index)
         }
     }
