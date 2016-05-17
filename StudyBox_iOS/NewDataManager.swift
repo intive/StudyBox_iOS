@@ -239,10 +239,6 @@ public class NewDataManager {
     
     func randomDeck(completion: (DataManagerResponse<Deck>)-> ()) {
         handleJSONRequest(
-            localFetch: {
-                let allDeck = self.localDataManager.getAll(Deck)
-                return allDeck[Int(arc4random_uniform(UInt32(allDeck.count) - 1))]
-            },
             remoteFetch: {
                 self.remoteDataManager.findRandomDeck(completion: $0)
             }, completion: completion)

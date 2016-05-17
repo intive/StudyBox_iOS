@@ -570,7 +570,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oa-qo-Bp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2873" y="1909"/>
+            <point key="canvasLocation" x="2927" y="2581"/>
+        </scene>
+        <!--Random Deck Loading Controller-->
+        <scene sceneID="KIJ-m0-3eO">
+            <objects>
+                <viewController id="edl-Ew-ryI" customClass="RandomDeckLoadingController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L61-he-tGa"/>
+                        <viewControllerLayoutGuide type="bottom" id="2N7-oq-3Ee"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SUJ-RI-g90">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jt5-ct-dHD">
+                                <rect key="frame" x="195" y="289" width="210" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="Wxs-85-Wgy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2To-hz-cFR">
+                                <rect key="frame" x="195" y="318" width="210" height="30"/>
+                                <state key="normal" title="Spróbuj ponownie"/>
+                                <connections>
+                                    <action selector="retryAction:" destination="edl-Ew-ryI" eventType="touchUpInside" id="uxE-hl-bCt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jt5-ct-dHD" firstAttribute="centerY" secondItem="SUJ-RI-g90" secondAttribute="centerY" id="0hX-cY-rIy"/>
+                            <constraint firstItem="2To-hz-cFR" firstAttribute="leading" secondItem="jt5-ct-dHD" secondAttribute="leading" id="88o-dv-G23"/>
+                            <constraint firstItem="2To-hz-cFR" firstAttribute="trailing" secondItem="jt5-ct-dHD" secondAttribute="trailing" id="9VS-bf-xiL"/>
+                            <constraint firstItem="2To-hz-cFR" firstAttribute="top" secondItem="jt5-ct-dHD" secondAttribute="bottom" constant="8" symbolic="YES" id="XSG-7Z-2Os"/>
+                            <constraint firstItem="jt5-ct-dHD" firstAttribute="centerX" secondItem="SUJ-RI-g90" secondAttribute="centerX" id="YYr-x1-1h6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="J1B-U8-sda"/>
+                    <connections>
+                        <outlet property="loadingLabelOutlet" destination="jt5-ct-dHD" id="98N-XS-up3"/>
+                        <outlet property="retryButton" destination="2To-hz-cFR" id="a11-Bj-wEb"/>
+                        <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="Nci-HR-1So"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rFY-oK-PgD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3673" y="1884"/>
         </scene>
         <!--Settings Detail View Controller-->
         <scene sceneID="DLv-Kz-Vv1">
@@ -675,7 +724,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBW-4P-qlY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3640" y="1909"/>
+            <point key="canvasLocation" x="3659" y="2581"/>
         </scene>
         <!--Decks View Controller-->
         <scene sceneID="FhT-fP-7TS">
@@ -725,7 +774,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEO-tZ-Utw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3669" y="1213"/>
+            <point key="canvasLocation" x="3673" y="1189"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pTC-dV-b2n">
@@ -960,7 +1009,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jsN-ni-jwy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2185" y="1909"/>
+            <point key="canvasLocation" x="2209" y="2581"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WBu-ui-kqC">
+            <objects>
+                <navigationController storyboardIdentifier="RandomDeckViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="Ueq-Or-q2M" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Aa5-Tj-Obg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="edl-Ew-ryI" kind="relationship" relationship="rootViewController" id="mTd-Ha-dTZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s5e-bQ-rje" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2941" y="1884"/>
         </scene>
     </scenes>
     <resources>
@@ -969,6 +1036,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bb9-zC-jZN"/>
+        <segue reference="Nci-HR-1So"/>
     </inferredMetricsTieBreakers>
 </document>
