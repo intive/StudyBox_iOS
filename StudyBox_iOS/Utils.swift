@@ -18,6 +18,7 @@ class Utils {
         static let DecksViewCellID = "DecksViewCellID"
         static let EditFlashcardViewControllerId = "EditFlashcardViewControllerId"
         static let SettingsViewControllerID = "SettingsViewControllerID"
+        static let RandomDeckViewControllerID = "RandomDeckViewControllerID"
 
     }
     struct DeckViewLayout{
