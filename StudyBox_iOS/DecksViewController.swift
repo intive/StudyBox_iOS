@@ -162,7 +162,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == "openSide", let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+        if keyPath == "openSide", let newSide = change?["new"] as? Int, oldSide = change?["old"] as? Int where newSide != oldSide {
             initialOffset(true)
         }
     }
@@ -178,7 +178,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         let crNumber = DecksViewController.numberOfCellsInRow(screenSize.width, cellSize: cellSize)
         
         let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)
-        flow.sectionInset = UIEdgeInsetsMake(topOffset, spacing, spacing, spacing)
+        
+        flow.sectionInset = UIEdgeInsets(top: topOffset, left: spacing, bottom: spacing, right: spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
@@ -302,7 +303,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, let testLogic = sender as? Test {
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, testLogic = sender as? Test {
             testViewController.testLogicSource = testLogic
         }
     }

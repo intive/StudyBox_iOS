@@ -30,7 +30,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             //Set detail label to data from NSUD
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
                 if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
-                    let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
+                    type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
                 {
                     cell.detailTextLabel?.text = "\(number) \(I18n.localizedString(type, stringValue: number))"
                 } else {
