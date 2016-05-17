@@ -10,7 +10,7 @@ import UIKit
 
 extension UIColor {
     class func fade(fromColor color: UIColor, toColor: UIColor, currentStep: CGFloat, steps: CGFloat, alpha: CGFloat = 1)
-        ->  UIColor {
+        -> UIColor {
         let cgColor = color.CGColor
         let toCgColor = toColor.CGColor
         let cgColorComponents = CGColorGetComponents(cgColor)
