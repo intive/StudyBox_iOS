@@ -88,7 +88,8 @@ xcodebuild \
     ONLY_ACTIVE_ARCH="NO" \
     CODE_SIGN_IDENTITY="$DEVELOPER_NAME" \
     PROVISIONING_PROFILE="$UUID" \
-    archive -archivePath "$ARCHIVE_PATH"
+    archive -archivePath "$ARCHIVE_PATH" \
+	> /dev/null
 
 echo "Creating IPA"
 
@@ -97,7 +98,8 @@ xcrun xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportPath "$IPA_PATH" \
     -exportFormat ipa \
-    -hideShellScriptEnvironment
+    -hideShellScriptEnvironment \
+	> /dev/null
 
 echo "Uploading IPA"
 

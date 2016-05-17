@@ -10,4 +10,5 @@ xcodebuild \
     -scheme "$SCHEME" \
 	-destination "$PLATFORM" \
     -hideShellScriptEnvironment \
-	test
+	test \
+	> /dev/null
