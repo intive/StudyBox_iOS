@@ -14,6 +14,7 @@ enum StudyType {
 
 class Test {
     private var deck: [Flashcard]
+    private(set) var deckName: String
     private(set) var notPassedInTestDeck: [Flashcard]?
     private(set) var repeatDeck: [Flashcard]?
     private(set) var currentCard: Flashcard?
@@ -26,8 +27,9 @@ class Test {
     private var allFlashcardsHidden: Bool = false
     private var passedDeckWasEmpty: Bool = false
     
-    init(deck: [Flashcard], testType: StudyType) {
+    init(deck: [Flashcard], testType: StudyType, deckName: String = "") {
         
+        self.deckName = deckName 
         if deck.isEmpty {
             passedDeckWasEmpty = true
         } else {

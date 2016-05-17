@@ -15,7 +15,7 @@ class RandomDeckLoadingController: StudyBoxViewController {
     @IBOutlet weak var retryButton: UIButton!
     var flashcards = [Flashcard]()
 
-    var dataManager = UIApplication.appDelegate().newDataManager
+    var dataManager = UIApplication.appDelegate().dataManager
     
     override func viewDidLoad() {
         super.viewDidLoad()

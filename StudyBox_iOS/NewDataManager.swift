@@ -37,11 +37,13 @@ public class NewDataManager {
             if !self.localDataManager.update(realmObject) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
+            
         } else if let realmObjects = parsedObject as? NSArray as? [Object] {
             if !self.localDataManager.update(realmObjects) {
                 return .Error(obj: NewDataManagerError.ErrorSavingData)
             }
         }
+        
         return .Success(obj: parsedObject)
     }
 
@@ -63,6 +65,7 @@ public class NewDataManager {
             case.Success(let object):
                 if let parsedObject = remoteParsing(obj: object) {
                     completion(self.updateInLocalDatabase(parsedObject))
+                    
                 } else {
                     completion(.Error(obj: NewDataManagerError.JSONParseError))
                 }
@@ -132,6 +135,8 @@ public class NewDataManager {
     }
 
     //MARK: Decks
+    
+    
     func deck(withId deckID: String, completion: (DataManagerResponse<Deck>)-> ()) {
         handleJSONRequest(
             localFetch: {
@@ -148,15 +153,29 @@ public class NewDataManager {
                 self.remoteDataManager.addDeck(deck, completion: $0)
             }, completion: completion)
     }
-
-    func decks(includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (DataManagerResponse<[Deck]> -> ())) {
+    
+    func decks(includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil,
+               completion: (DataManagerResponse<[Deck]> -> ())) {
         handleJSONRequest(
             localFetch: {
                 self.localDataManager.getAll(Deck)
-            }, remoteFetch: {
-                self.remoteDataManager.findDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name, completion: $0)
+            },
+            remoteFetch: {
+                self.remoteDataManager.findDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount,
+                    name: name, completion: $0)
             }, completion: completion)
     }
+    
+    func userDecks(flashcardsCount: Bool? = nil, withDependecies: Bool = true, completion: (DataManagerResponse<[Deck]>) -> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.getAll(Deck)
+            },
+            remoteFetch: {
+                self.remoteDataManager.userDecks(completion: $0)
+            }, completion: completion)
+    }
+
     
     func removeDeck(withId deck: Deck, completion: (DataManagerResponse<Void>)-> ()) {
         handleRequest(
@@ -165,16 +184,6 @@ public class NewDataManager {
             },
             remoteParsing: {
                 _ = self.localDataManager.delete(deck)
-            }, completion: completion)
-    }
-    
-    func decksUser(completion: (DataManagerResponse<[Deck]>)-> ()) {
-        handleJSONRequest(
-            localFetch: {
-                self.localDataManager.getAll(Deck)
-            },
-            remoteFetch: {
-                self.remoteDataManager.findDecksUser(completion: $0)
             }, completion: completion)
     }
     
@@ -231,27 +240,27 @@ public class NewDataManager {
             }, completion: completion)
     }
     
-    func addFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
+    func addFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
         handleJSONRequest(
             remoteFetch: {
-                self.remoteDataManager.addFlashcard(deckID, flashcard: flashcard, completion: $0)
+                self.remoteDataManager.addFlashcard(flashcard, completion: $0)
             }, completion: completion)
     }
     
-    func removeFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Void>) -> ()) {
+    func removeFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Void>) -> ()) {
         handleRequest(
             remoteFetch: {
-                self.remoteDataManager.removeFlashcard(deckID, flashcardID: flashcard.serverID, completion: $0)
+                self.remoteDataManager.removeFlashcard(flashcard.deckId, flashcardID: flashcard.serverID, completion: $0)
             },
             remoteParsing: {
                 _ = self.localDataManager.delete(flashcard)
             }, completion: completion)
     }
     
-    func updateFlashcard(deckID: String, flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
+    func updateFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
         handleJSONRequest(
             remoteFetch: {
-                self.remoteDataManager.updateFlashcard(deckID, flashcard: flashcard, completion: $0)
+                self.remoteDataManager.updateFlashcard(flashcard, completion: $0)
             }, completion: completion)
     }
 }

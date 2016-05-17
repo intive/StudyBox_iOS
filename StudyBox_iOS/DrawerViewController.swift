@@ -97,7 +97,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                     let defaults = NSUserDefaults.standardUserDefaults()
                     defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
                     defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
-                    UIApplication.appDelegate().newDataManager.logout()
+                    UIApplication.appDelegate().dataManager.logout()
                     
                     if let storyboard = self?.storyboard {
                         UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)

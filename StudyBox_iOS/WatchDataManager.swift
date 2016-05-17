@@ -13,7 +13,7 @@ import UIKit
 class WatchDataManager: NSObject, WCSessionDelegate {
     
     static let watchManager = WatchDataManager()
-    private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    private var dataManager: NewDataManager? = { return UIApplication.appDelegate().dataManager }()
     private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
     
     private var validSession: WCSession? {
@@ -38,7 +38,7 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         
         if let manager = dataManager {
             for deck in decksIDs {
-                if let deckFromManager = manager.deck(withId: deck) {
+                if let deckFromManager = manager.localDataManager.get(Deck.self, withId: deck) {
                     for flashcard in deckFromManager.flashcards where !flashcard.hidden {
                         flashcardsQuestions.append(flashcard.question)
                         flashcardsAnswers.append(flashcard.answer)
