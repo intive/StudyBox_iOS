@@ -104,11 +104,6 @@ class RemoteDataManager {
         performRequest(Router.GetAllDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name), completion: completion)
     }
     
-    func findDecksUser(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>)->()) {
-        performRequest(Router.GetAllUsersDecks(
-            flashcardsCount: flashcardsCount), completion: completion)
-    }
-    
     func deck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
         performRequest(Router.GetSingleDeck(ID: deckID), completion: completion)
     }

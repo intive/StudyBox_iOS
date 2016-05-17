@@ -214,7 +214,12 @@ public class NewDataManager {
                 return withDependecies ? $0.count : 0
             }, remoteDependecies: {  objs, dependencyCompletion in
                 for obj in objs {
-                    self.flashcards(obj.serverID) { _ in
+                    let flashcards = self.localDataManager.filter(Flashcard.self, predicate: "deckId == '\(obj.serverID)'")
+                    if flashcards.isEmpty {
+                        self.flashcards(obj.serverID) { _ in
+                            dependencyCompletion()
+                        }
+                    } else {
                         dependencyCompletion()
                     }
                 }
@@ -229,16 +234,6 @@ public class NewDataManager {
             },
             remoteParsing: {
                 _ = self.localDataManager.delete(deck)
-            }, completion: completion)
-    }
-    
-    func decksUser(completion: (DataManagerResponse<[Deck]>)-> ()) {
-        handleJSONRequest(
-            localFetch: {
-                self.localDataManager.getAll(Deck)
-            },
-            remoteFetch: {
-                self.remoteDataManager.findDecksUser(completion: $0)
             }, completion: completion)
     }
     
