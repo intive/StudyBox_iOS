@@ -11,4 +11,4 @@ xcodebuild \
 	-destination "$PLATFORM" \
     -hideShellScriptEnvironment \
 	test \
-	> /dev/null
+	| xcpretty
