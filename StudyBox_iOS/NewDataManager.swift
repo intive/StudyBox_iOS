@@ -53,39 +53,18 @@ public class NewDataManager {
     // localFetch - blok powinien zwrócić dane z lokalnej bazy danych
     // remoteFetch - blok powinien zawołać przekazany blok z danymi z serwera
     // remoteParsing - blok przyjmuje dane typu, który przychodzi z serwera i powinien zwrócić dane typu lokalnego, np. JSON do Deck
-    // remoteDependeciesCount - blok przyjmuje dane typu lokalnego i zwraca asynchronicznych zależności, które powinny zostać wywołane przed completion
-    /* remoteDependecies - blok zawoła przekazany blok z danymi typu lokalnego i blokiem `dependencyCompletion`,
-        który musi zostać wywołany tyle razy ile wartość zwrócona przez `remoteDependeciesCount`
-    */
     // completion - ten blok jest wołany z obiektem typu lokalnego, np. Deck
     private func handleRequest<ServerResponseObject, DataManagerResponseObject>(
         localFetch localFetch: (() -> (DataManagerResponseObject?))? = nil,
                    remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
                    remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
-                   remoteDependeciesCount: ((obj: DataManagerResponseObject) -> Int)? = nil,
-                   remoteDependecies: ((obj: DataManagerResponseObject, dependencyCompletion: (() -> ())) -> ())? = nil,
                    completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
 
         remoteFetch { response in
             switch response {
             case.Success(let object):
                 if let parsedObject = remoteParsing(obj: object) {
-                    let updateResult = self.updateInLocalDatabase(parsedObject)
-                    if let remoteDependecies = remoteDependecies, var dependeciesCount = remoteDependeciesCount?(obj: parsedObject) where dependeciesCount > 0 {
-                        let lock = NSLock()
-                        remoteDependecies(obj: parsedObject) {
-                            lock.lock()
-                            dependeciesCount -= 1
-                            if dependeciesCount < 1 {
-                                completion(updateResult)
-                            }
-                            lock.unlock()
-                        }
-                        return
-                    
-                    } else {
-                        completion(updateResult)
-                    }
+                    completion(self.updateInLocalDatabase(parsedObject))
                     
                 } else {
                     completion(.Error(obj: NewDataManagerError.JSONParseError))
@@ -109,13 +88,8 @@ public class NewDataManager {
         localFetch localFetch: (() -> DataManagerResponseObject?)? = nil,
                    remoteFetch: ((ServerResultType<JSON>) -> ()) -> (),
                    remoteParsing: (obj: JSON) -> DataManagerResponseObject? = { DataManagerResponseObject(withJSON: $0) },
-                   remoteDependeciesCount: ((obj: DataManagerResponseObject) -> Int)? = { _ in
-                        return 1
-                    },
-                   remoteDependecies: ((obj: DataManagerResponseObject, (() -> ())) -> ())? = nil,
                    completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
-        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing,
-                      remoteDependeciesCount: remoteDependeciesCount, remoteDependecies: remoteDependecies, completion: completion)
+        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
 
     }
 
@@ -124,13 +98,8 @@ public class NewDataManager {
         localFetch localFetch: (() -> [DataManagerResponseObject])? = nil,
                    remoteFetch: ((ServerResultType<[JSON]>) -> ()) -> (),
                    remoteParsing: (obj: [JSON]) -> [DataManagerResponseObject] = { DataManagerResponseObject.arrayWithJSONArray($0) },
-                   remoteDependeciesCount: ((obj: [DataManagerResponseObject]) -> Int)? = {
-                        return $0.count
-                    },
-                   remoteDependecies: ((obj: [DataManagerResponseObject], (() -> ())) -> ())? = nil,
                    completion: (DataManagerResponse<[DataManagerResponseObject]>) -> ()) {
-        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing,
-                      remoteDependeciesCount: remoteDependeciesCount, remoteDependecies: remoteDependecies, completion: completion)
+        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
     }
 
     //MARK: users
@@ -175,11 +144,6 @@ public class NewDataManager {
             },
             remoteFetch: {
                 self.remoteDataManager.deck(deckID, completion: $0)
-            },
-            remoteDependecies: { obj, depenedencyCompletion in
-                self.flashcards(obj.serverID) { _ in
-                    depenedencyCompletion()
-                }
             }, completion: completion)
     }
 
@@ -209,20 +173,6 @@ public class NewDataManager {
             },
             remoteFetch: {
                 self.remoteDataManager.userDecks(completion: $0)
-            },
-            remoteDependeciesCount: {
-                return withDependecies ? $0.count : 0
-            }, remoteDependecies: {  objs, dependencyCompletion in
-                for obj in objs {
-                    let flashcards = self.localDataManager.filter(Flashcard.self, predicate: "deckId == '\(obj.serverID)'")
-                    if flashcards.isEmpty {
-                        self.flashcards(obj.serverID) { _ in
-                            dependencyCompletion()
-                        }
-                    } else {
-                        dependencyCompletion()
-                    }
-                }
             }, completion: completion)
     }
 
