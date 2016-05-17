@@ -189,21 +189,9 @@ public class NewDataManager {
                 self.remoteDataManager.addDeck(deck, completion: $0)
             }, completion: completion)
     }
-
-
-    
-    private var decksDependecies: (obj: [Deck], (() -> ())) -> () {
-        return {  objs, dependencyCompletion in
-            for obj in objs {
-                self.flashcards(obj.serverID) { _ in
-                    dependencyCompletion()
-                }
-            }
-        }
-    }
     
     func decks(includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil,
-               withDependecies: Bool = true, completion: (DataManagerResponse<[Deck]> -> ())) {
+               completion: (DataManagerResponse<[Deck]> -> ())) {
         handleJSONRequest(
             localFetch: {
                 self.localDataManager.getAll(Deck)
@@ -211,10 +199,7 @@ public class NewDataManager {
             remoteFetch: {
                 self.remoteDataManager.findDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount,
                     name: name, completion: $0)
-            },
-            remoteDependeciesCount: {
-                return withDependecies ? $0.count : 0
-            }, remoteDependecies: decksDependecies, completion: completion)
+            }, completion: completion)
     }
     
     func userDecks(flashcardsCount: Bool? = nil, withDependecies: Bool = true, completion: (DataManagerResponse<[Deck]>) -> ()) {
@@ -227,7 +212,13 @@ public class NewDataManager {
             },
             remoteDependeciesCount: {
                 return withDependecies ? $0.count : 0
-            }, remoteDependecies: decksDependecies, completion: completion)
+            }, remoteDependecies: {  objs, dependencyCompletion in
+                for obj in objs {
+                    self.flashcards(obj.serverID) { _ in
+                        dependencyCompletion()
+                    }
+                }
+            }, completion: completion)
     }
 
     
