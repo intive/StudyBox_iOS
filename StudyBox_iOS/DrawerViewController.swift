@@ -45,6 +45,16 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
     static let DrawerCellId = "DrawerCellId"
+    private var loggedIn: Bool {
+        get {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail) != nil {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
     
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 1
@@ -61,48 +71,68 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     func setupDrawer() {
         if drawerNavigationControllers.isEmpty {
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto"))
-            drawerNavigationControllers.append(
-                DrawerNavigationChild(name: "Moje talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
-                    return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
-                })
-            )
-            drawerNavigationControllers.append(
-                DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,
-                    lazyLoadViewControllerBlock: {[weak self] in
-                        let vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerId) as? UINavigationController
-                        
-                        if let editVC = vc?.childViewControllers[0] as? EditFlashcardViewController {
-                            editVC.mode = .Add
-                            return vc
-                        }
-                        return nil 
+            
+            if loggedIn {
+                drawerNavigationControllers.append(
+                    DrawerNavigationChild(name: "Moje talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
+                        return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
                     })
-            )
+                )
+            }
+            
+            if loggedIn {
+                drawerNavigationControllers.append(
+                    DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,
+                        lazyLoadViewControllerBlock: {[weak self] in
+                            let vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerId) as? UINavigationController
+                            
+                            if let editVC = vc?.childViewControllers[0] as? EditFlashcardViewController {
+                                editVC.mode = .Add
+                                return vc
+                            }
+                            return nil 
+                        })
+                )
+            } else {
+                //todo: alert
+            }
+            
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Odkryj losową talię", viewController: nil,
                 lazyLoadViewControllerBlock: {[weak self] in
                    return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.RandomDeckViewControllerID)
                 })
             )
-                    
+            
+            //always visible
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
-            drawerNavigationControllers.append(
-                DrawerNavigationChild(name: "Ustawienia", viewController: nil,
-                    lazyLoadViewControllerBlock: {[weak self] in
-                        return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
+            
+            if loggedIn {
+                drawerNavigationControllers.append(
+                    DrawerNavigationChild(name: "Ustawienia", viewController: nil,
+                        lazyLoadViewControllerBlock: {[weak self] in
+                            return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.SettingsViewControllerID)
+                        })
+                )
+            }
+            
+            if loggedIn {
+                drawerNavigationControllers.append(
+                    DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
+                        let defaults = NSUserDefaults.standardUserDefaults()
+                        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
+                        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                        UIApplication.appDelegate().newDataManager.logout()
+                        
+                        if let storyboard = self?.storyboard {
+                            UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
+                        }
                     })
-            )
-            drawerNavigationControllers.append(
-                DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
-                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
-                    UIApplication.appDelegate().newDataManager.logout()
-                    
-                    if let storyboard = self?.storyboard {
-                        UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
-                    }
-                })
+            } else {
+                //todo: //wyloguj -> wyjdź
+            }
+            
+            
         }
     }
     

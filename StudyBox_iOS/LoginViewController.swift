@@ -34,11 +34,23 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         disableButton(logInButton)
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        
+        autoLoginIfLoggedBefore()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         dataSource = self
+    }
+    
+    func autoLoginIfLoggedBefore() {
+        let zalogo = NSUserDefaults.standardUserDefaults()
+        let email = zalogo.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
+        let password = zalogo.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+        
+        if let _ = email, _ = password {
+            loginWithInputData(email as? String, password: password as? String)
+        }
     }
     
     func loginToServer(withEmail email: String, password: String) {
@@ -65,7 +77,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         })
     }
     
-    func loginWithInputData(){
+    func loginWithInputData(login: String? = nil, password: String? = nil) {
         
         var alertMessage: String?
         
@@ -89,8 +101,9 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             presentAlertController(withTitle: "", message: message, buttonText: "Ok")
             return
         }
-        
-        if let email = emailTextField.text, password = passwordTextField.text  {
+        if let login = login, password = password {
+            loginToServer(withEmail: login, password: password)
+        } else if let email = emailTextField.text, password = passwordTextField.text  {
             loginToServer(withEmail: email, password: password)
         }
         
