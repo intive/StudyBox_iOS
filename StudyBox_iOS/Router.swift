@@ -97,45 +97,50 @@ enum Router: URLRequestConvertible {
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
         }
     }
-
+    
+    private func verboseParameters(inout dict: [String: AnyObject]) {
+        for (key, value) in dict {
+            if let boolVal = value as? Bool {
+                dict[key] = boolVal ? "true" : "false"
+            }
+        }
+    }
+    
     var URLRequest: NSMutableURLRequest {
         let request = NSMutableURLRequest(URL: self.path)
         request.HTTPMethod = self.method.rawValue
         request.URL = self.path
-
+        var parameters: [String: AnyObject] = [:]
         switch self {
             //Add only methods that use parameters (check in Apiary)
             
         //MARK: Decks
         case .GetAllDecks(let includeOwn, let flashcardsCount, let name):
-            let parameters: [String: AnyObject] = Dictionary.flat(
+            parameters = Dictionary.flat(
                 [
                     "includeOwn": includeOwn,
                     "flashcardsCount": flashcardsCount,
                     "name": name,
                 ])
-            return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
             
         case GetAllUsersDecks(let flashcardsCount):
-            let parameters: [String: AnyObject] = Dictionary.flat(
+            parameters = Dictionary.flat(
                 [
                     "flashcardsCount": flashcardsCount,
                 ])
-            return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
-       
+            
         case GetRandomDeck(let flashcardsCount):
-            let parameters: [String: AnyObject] = Dictionary.flat(
+            parameters = Dictionary.flat(
                 [
                     "flashcardsCount": flashcardsCount,
                 ])
-            return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
             
         case .AddSingleDeck(let name, let isPublic):
             return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
             
         case .AddUser(let email, let password):
             return ParameterEncoding.JSON.encode(request, parameters: ["email": email, "password": password]).0
-
+            
             
         case .UpdateDeck(_, let name, let isPublic):
             return ParameterEncoding.JSON.encode(request, parameters: ["name": name, "isPublic": isPublic]).0
@@ -152,6 +157,9 @@ enum Router: URLRequestConvertible {
         default: //For methods that don't use parameters
             return request
         }
+        verboseParameters(&parameters)
+        return Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
+        
     }
     
 }

@@ -18,6 +18,8 @@
 		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
 		2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */; };
 		2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */; };
+		2D47DCC41CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */; };
+		2D47DCC61CEC651D00110F85 /* DecksViewController+searching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */; };
 		2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */; };
 		2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */; };
 		2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */; };
@@ -160,6 +162,8 @@
 		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
 		2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+appDelegate.swift"; sourceTree = "<group>"; };
 		2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
+		2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+adjustFontSizeToHeight.swift"; sourceTree = "<group>"; };
+		2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecksViewController+searching.swift"; sourceTree = "<group>"; };
 		2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBDrawerController.swift; sourceTree = "<group>"; };
 		2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBNavigationController.swift; sourceTree = "<group>"; };
 		2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+SBRepresentable.swift"; sourceTree = "<group>"; };
@@ -317,6 +321,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		2D47DCC71CEC659900110F85 /* Decks */ = {
+			isa = PBXGroup;
+			children = (
+				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */,
+			);
+			name = Decks;
+			sourceTree = "<group>";
+		};
 		2DA0E6981C949AE200DAB6B5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,7 +440,7 @@
 		9E6F89231CC505690027045A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				2D47DCC71CEC659900110F85 /* Decks */,
 				7238493F1C88851A009605EE /* EditFlashcardViewController.swift */,
 				723849391C8882DE009605EE /* StudyBoxController.swift */,
 				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
@@ -461,6 +474,7 @@
 				725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */,
 				725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */,
 				2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */,
+				2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -892,6 +906,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
+				2D47DCC61CEC651D00110F85 /* DecksViewController+searching.swift in Sources */,
 				2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
@@ -927,6 +942,7 @@
 				2DF09D691CD3A64C00AD20F8 /* DataManager.swift in Sources */,
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
+				2D47DCC41CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift in Sources */,
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
 				72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
