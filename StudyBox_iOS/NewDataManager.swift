@@ -169,10 +169,25 @@ public class NewDataManager {
     func userDecks(flashcardsCount: Bool? = nil, withDependecies: Bool = true, completion: (DataManagerResponse<[Deck]>) -> ()) {
         handleJSONRequest(
             localFetch: {
-                self.localDataManager.getAll(Deck)
+                if let email = self.remoteDataManager.user?.email {
+                    return self.localDataManager.filter(Deck.self, predicate: "owner == '\(email)'")
+                }
+                return []
             },
             remoteFetch: {
                 self.remoteDataManager.userDecks(completion: $0)
+            },
+            remoteParsing: { jsonDecks in
+                return jsonDecks.flatMap {
+                    if let dck = Deck(withJSON: $0) {
+                        if dck.owner == "" {
+                            dck.owner = self.remoteDataManager.user?.email ?? ""
+                        }
+                        return dck
+                    }
+                    return nil
+                    
+                }
             }, completion: completion)
     }
 
