@@ -131,7 +131,7 @@
                                 <rect key="frame" x="20" y="122" width="560" height="470"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kfn-pw-SW3">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="416"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="351"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wybrana talia" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-u0-NRa">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -148,17 +148,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                             </textView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKh-3v-Eq2" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="201" width="560" height="50"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="GO8-J9-kN0"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4A-pd-pc4" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="266" width="560" height="150"/>
+                                                <rect key="frame" x="0.0" y="201" width="560" height="150"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="EWl-5W-SpZ"/>
@@ -203,9 +194,7 @@
                         <outlet property="scrollView" destination="vhQ-Ae-lE1" id="7ao-wS-0gg"/>
                         <outlet property="searchBarWrapper" destination="EUD-8B-Kzz" id="kZR-X1-Xam"/>
                         <outlet property="searchbarWrapperTopConstraint" destination="3xf-BU-f1g" id="JaG-qx-2NV"/>
-                        <outlet property="tipField" destination="YKh-3v-Eq2" id="cFg-6n-M29"/>
                         <outletCollection property="editFields" destination="VUh-bE-pKc" collectionClass="NSMutableArray" id="mGA-H6-u2d"/>
-                        <outletCollection property="editFields" destination="YKh-3v-Eq2" collectionClass="NSMutableArray" id="Jh3-bt-5gg"/>
                         <outletCollection property="editFields" destination="l4A-pd-pc4" collectionClass="NSMutableArray" id="ldf-GT-jCI"/>
                     </connections>
                 </viewController>
@@ -831,17 +820,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Odpowiedź" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZB-4x-LNY" userLabel="AnswerLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="308"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="353"/>
                                                 <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0Q-OR-x3g">
-                                                <rect key="frame" x="0.0" y="318" width="560" height="136"/>
+                                                <rect key="frame" x="0.0" y="363" width="560" height="91"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKv-dV-bFU" userLabel="YesBtn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="136"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="91"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="tintColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" image="correct"/>
@@ -853,7 +842,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrx-Hp-csN" userLabel="NoBtn">
-                                                        <rect key="frame" x="285" y="0.0" width="275" height="136"/>
+                                                        <rect key="frame" x="285" y="0.0" width="275" height="91"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="tintColor" red="1" green="0.23120318092490566" blue="0.24729550240503795" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" image="incorrect"/>
@@ -868,7 +857,7 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="U0Q-OR-x3g" firstAttribute="height" secondItem="7Dz-uF-MfH" secondAttribute="height" multiplier="0.3" id="aT1-eq-bWZ"/>
+                                            <constraint firstItem="U0Q-OR-x3g" firstAttribute="height" secondItem="7Dz-uF-MfH" secondAttribute="height" multiplier="0.2" id="aT1-eq-bWZ"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -892,24 +881,24 @@
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-aN-Wdn">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="308"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="353"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrR-w4-98C">
-                                                        <rect key="frame" x="0.0" y="0.0" width="56" height="308"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="56" height="353"/>
                                                         <state key="normal" image="arrow_left"/>
                                                         <connections>
                                                             <action selector="previousTipAction:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="p0u-cC-mAZ"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Pytanie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-ua-ypq" userLabel="QuestionLabel">
-                                                        <rect key="frame" x="61" y="0.0" width="438" height="308"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Pytanie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-ua-ypq" userLabel="QuestionLabel">
+                                                        <rect key="frame" x="61" y="0.0" width="438" height="353"/>
                                                         <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6H-nk-iQC">
-                                                        <rect key="frame" x="504" y="0.0" width="56" height="308"/>
+                                                        <rect key="frame" x="504" y="0.0" width="56" height="353"/>
                                                         <state key="normal" image="arrow_right"/>
                                                         <connections>
                                                             <action selector="nextTipAction:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="Y88-EN-hnJ"/>
@@ -925,7 +914,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYi-mT-KA8">
-                                                <rect key="frame" x="0.0" y="318" width="560" height="136"/>
+                                                <rect key="frame" x="0.0" y="363" width="560" height="91"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Podpowiedź">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -936,7 +925,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="AYi-mT-KA8" firstAttribute="height" secondItem="8Cv-mK-csu" secondAttribute="height" multiplier="0.3" id="2Cg-ct-Lfc"/>
+                                            <constraint firstItem="AYi-mT-KA8" firstAttribute="height" secondItem="8Cv-mK-csu" secondAttribute="height" multiplier="0.2" id="2Cg-ct-Lfc"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -949,6 +938,11 @@
                                     <constraint firstAttribute="bottom" secondItem="8Cv-mK-csu" secondAttribute="bottom" id="mMG-45-hBc"/>
                                     <constraint firstItem="8Cv-mK-csu" firstAttribute="top" secondItem="qd1-B0-NOL" secondAttribute="top" id="qVh-wg-lXk"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="S7T-Si-he5"/>
+                                    </mask>
+                                </variation>
                                 <variation key="heightClass=compact" misplaced="YES">
                                     <rect key="frame" x="20" y="62" width="560" height="298"/>
                                 </variation>
