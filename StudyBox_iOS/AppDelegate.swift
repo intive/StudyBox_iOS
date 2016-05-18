@@ -99,8 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - DataManager stack 
     
-//    private(set) var dataManager: DataManager = DataManager.managerWithDummyData()
-    private(set) var dataManager = NewDataManager()
+    private(set) var dataManager = DataManager()
     
 
     // MARK: - Core Data stack

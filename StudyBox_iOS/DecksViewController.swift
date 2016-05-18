@@ -27,7 +27,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return searchDecks ?? decksArray
     }
     
-    lazy var dataManager: NewDataManager = {
+    lazy var dataManager: DataManager = {
         return UIApplication.appDelegate().dataManager
     }()
 

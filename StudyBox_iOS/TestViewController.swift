@@ -20,7 +20,7 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet var answerTrailing: NSLayoutConstraint!
     var testLogicSource: Test?
     
-    private var dataManager: NewDataManager? = {
+    private var dataManager: DataManager? = {
         return UIApplication.appDelegate().dataManager
     }()
     

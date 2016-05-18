@@ -50,7 +50,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         }
     }
     
-    lazy private var dataManager: NewDataManager = {
+    lazy private var dataManager: DataManager = {
         return UIApplication.appDelegate().dataManager
     }()
     
