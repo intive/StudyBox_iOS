@@ -92,7 +92,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             switch $0 {
             case .Success(let obj):
                 self.decksArray = obj
-            case .Error(_):
+            case .Error(let err):
+                print(err)
                 self.presentAlertController(withTitle: "Błąd", message: "Błąd pobierania danych", buttonText: "Ok")
             }
             self.refreshControl.endRefreshing()

@@ -898,7 +898,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="56" height="308"/>
                                                         <state key="normal" image="arrow_left"/>
                                                         <connections>
-                                                            <action selector="tipButtonTap:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="zoN-F1-n3j"/>
+                                                            <action selector="previousTipAction:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="p0u-cC-mAZ"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Pytanie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-ua-ypq" userLabel="QuestionLabel">
@@ -912,7 +912,7 @@
                                                         <rect key="frame" x="504" y="0.0" width="56" height="308"/>
                                                         <state key="normal" image="arrow_right"/>
                                                         <connections>
-                                                            <action selector="tipButtonTap:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="NaQ-qa-GQ4"/>
+                                                            <action selector="nextTipAction:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="Y88-EN-hnJ"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

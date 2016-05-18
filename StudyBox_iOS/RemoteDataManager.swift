@@ -191,7 +191,6 @@ class RemoteDataManager {
         }
     }
     
-    
     func addTip(tip: Tip, completion: (ServerResultType<JSON>)->()) {
         addTip(deckID: tip.deckID, flashcardID: tip.flashcardID, tipID: tip.serverID, content: tip.content, difficulty: tip.difficulty, completion: completion)
     }
