@@ -35,7 +35,9 @@ class TestViewController: StudyBoxViewController {
     var currentTipNumber = 0
     var tipOrQuestionMode = TestModeTipOrQuestion.Question
     
-    private var dataManager = UIApplication.appDelegate().dataManager
+    private var dataManager: DataManager? = {
+        return UIApplication.appDelegate().dataManager
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()

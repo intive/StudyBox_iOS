@@ -96,6 +96,8 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     dynamic private(set) var serverID: String = ""
     dynamic var name: String = ""
     dynamic var isPublic: Bool = true
+    dynamic var owner: String = ""
+    dynamic var createDate: NSDate?
 
     var flashcards: [Flashcard] {
         return realm?.objects(Flashcard).filter("deckId == '\(serverID)'").map { $0 } ?? []
@@ -105,7 +107,15 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, name = jsonDict["name"]?.string, isPublic  = jsonDict["isPublic"]?.bool {
                 self.init(serverID: id, name: name, isPublic: isPublic)
-                return 
+                if let owner = jsonDict["creatorEmail"]?.string {
+                    self.owner = owner
+                }
+                if let date = jsonDict["creationDate"]?.string {
+                    let formatter = NSDateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SS"
+                    self.createDate = formatter.dateFromString(date)
+                }
+                return
             }
         }
         return nil
