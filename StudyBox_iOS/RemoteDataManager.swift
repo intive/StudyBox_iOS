@@ -8,9 +8,10 @@
 
 import Alamofire
 import SwiftyJSON
+import Reachability
 
 enum ServerError: ErrorType {
-    case ErrorWithMessage(text: String)
+    case ErrorWithMessage(text: String), NoInternetAccess
 }
 
 enum ServerResultType<T> {
@@ -37,7 +38,11 @@ class RemoteDataManager {
         request: URLRequestConvertible,
         completion: (ServerResultType<ObjectType>)->(),
         successAction: (JSON) -> (ObjectType)) {
-
+        
+        guard Reachability.isConnected() else {
+            completion(.Error(err: ServerError.NoInternetAccess))
+            return
+        }
         let mutableRequest = request.URLRequest
         if let basic = basicAuth {
             mutableRequest.addValue(basic, forHTTPHeaderField: "Authorization")
@@ -85,23 +90,18 @@ class RemoteDataManager {
         performRequest(loginRequest, completion: completion)
     }
     
+    func register(email: String, password: String, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.AddUser(email: email, password: password), completion: completion)
+    }
+    
     func logout() {
         user = nil
     }
     
-    func register(email: String, password: String, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.AddUser(email: email, password: password), completion: completion)
-    }
-
     
     //MARK: Decks
     func findDecks(includeOwn includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (ServerResultType<[JSON]>)->()) {
         performRequest(Router.GetAllDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount, name: name), completion: completion)
-    }
-    
-    func findDecksUser(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>)->()) {
-        performRequest(Router.GetAllUsersDecks(
-            flashcardsCount: flashcardsCount), completion: completion)
     }
     
     func deck(deckID: String, completion: (ServerResultType<JSON>) -> ()) {
@@ -110,6 +110,10 @@ class RemoteDataManager {
     
     func findRandomDeck(flashcardsCount: Bool? = nil, completion: (ServerResultType<JSON>)->()) {
         performRequest(Router.GetRandomDeck(flashcardsCount: flashcardsCount), completion: completion)
+    }
+    
+    func userDecks(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>) -> ()) {
+        performRequest(Router.GetAllUsersDecks(flashcardsCount: flashcardsCount), completion: completion)
     }
 
     func addDeck(deck: Deck, completion: (ServerResultType<JSON>) -> ()) {
@@ -142,8 +146,8 @@ class RemoteDataManager {
         performRequest(Router.GetSingleFlashcard(ID: flashcardID, deckID: deckID), completion: completion)
     }
     
-    func addFlashcard(deckID: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.AddSingleFlashcard(deckID: deckID, question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
+    func addFlashcard(flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.AddSingleFlashcard(deckID: flashcard.deckId, question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
                        completion: completion)
     }
     
@@ -153,8 +157,8 @@ class RemoteDataManager {
         }
     }
     
-    func updateFlashcard(deckID: String, flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
-        performRequest(Router.UpdateFlashcard(ID: flashcard.serverID, deckID: deckID,
+    func updateFlashcard(flashcard: Flashcard, completion: (ServerResultType<JSON>) -> ()) {
+        performRequest(Router.UpdateFlashcard(ID: flashcard.serverID, deckID: flashcard.deckId,
             question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
                        completion: completion)
     }

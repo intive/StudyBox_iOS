@@ -54,7 +54,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
     }
     
     func loginToServer(withEmail email: String, password: String) {
-        let newDataManager = UIApplication.appDelegate().newDataManager
+        let newDataManager = UIApplication.appDelegate().dataManager
         
         newDataManager.login(email, password: password, completion: { response in
             var errorMessage = "Błąd logowania"

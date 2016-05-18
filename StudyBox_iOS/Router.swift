@@ -105,7 +105,6 @@ enum Router: URLRequestConvertible {
 
         switch self {
             //Add only methods that use parameters (check in Apiary)
-
             
         //MARK: Decks
         case .GetAllDecks(let includeOwn, let flashcardsCount, let name):

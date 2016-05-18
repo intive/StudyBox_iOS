@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
-        
         return true
     }
     
@@ -100,8 +99,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - DataManager stack 
     
-    private(set) var dataManager: DataManager = DataManager.managerWithDummyData()
-    private(set) var newDataManager = NewDataManager()
+//    private(set) var dataManager: DataManager = DataManager.managerWithDummyData()
+    private(set) var dataManager = NewDataManager()
     
 
     // MARK: - Core Data stack

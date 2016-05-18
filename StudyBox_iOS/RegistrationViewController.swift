@@ -51,9 +51,9 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     }
     
     func registerNewUser(email: String, password: String) {
-        let newDataManager = UIApplication.appDelegate().newDataManager
+        let dataManager = UIApplication.appDelegate().dataManager
         
-        newDataManager.register(email, password: password, completion: { response in
+        dataManager.register(email, password: password, completion: { response in
             var errorMessage = "Błąd Rejestracji"
             let successfullMessageTitle = "Zarejestrowano pomyślnie"
             let successfullMessage = "Możesz się teraz zalogować"

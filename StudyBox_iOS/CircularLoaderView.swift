@@ -65,7 +65,7 @@ class CircularLoaderView: UIView {
         
         //Draw circle in its frame
         let layer = foregroundCircleLayer.bounds
-        let centerPoint = CGPoint(x: CGRectGetMidX(layer), y: CGRectGetMidY(layer))
+        let centerPoint = CGPoint(x: layer.midX, y: layer.midY)
         let radius = (foregroundCircleLayer.bounds.width / 2) - lineWidth
         
         return UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(M_PI*3/2), clockwise: true)
