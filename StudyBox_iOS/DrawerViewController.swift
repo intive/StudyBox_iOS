@@ -72,13 +72,11 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         if drawerNavigationControllers.isEmpty {
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto"))
             
-            if loggedIn {
-                drawerNavigationControllers.append(
-                    DrawerNavigationChild(name: "Moje talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
-                        return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
-                    })
-                )
-            }
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Moje talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
+                    return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
+                })
+            )
             
             if loggedIn {
                 drawerNavigationControllers.append(
@@ -94,7 +92,14 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                         })
                 )
             } else {
-                //todo: alert
+                drawerNavigationControllers.append(
+                    DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil, lazyLoadViewControllerBlock: nil,
+                        viewControllerBlock: {
+                            let alert = UIAlertController(title: "Uwaga", message: "Musisz być zalogowany", preferredStyle: .Alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                    })
+                )
             }
             
             drawerNavigationControllers.append(
@@ -116,21 +121,19 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                 )
             }
             
-            if loggedIn {
-                drawerNavigationControllers.append(
-                    DrawerNavigationChild(name: "Wyloguj", viewController: nil) { [weak self] in
-                        let defaults = NSUserDefaults.standardUserDefaults()
-                        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
-                        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
-                        UIApplication.appDelegate().newDataManager.logout()
-                        
-                        if let storyboard = self?.storyboard {
-                            UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
-                        }
-                    })
-            } else {
-                //todo: //wyloguj -> wyjdź
-            }
+            
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: loggedIn ? "Wyloguj" : "Zaloguj", viewController: nil) { [weak self] in
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
+                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                    UIApplication.appDelegate().newDataManager.logout()
+                    
+                    if let storyboard = self?.storyboard {
+                        UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
+                    }
+                })
+
             
             
         }
