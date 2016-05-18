@@ -1,5 +1,10 @@
 import UIKit
 
+enum TestModeTipOrQuestion {
+    case Tip
+    case Question
+}
+
 class TestViewController: StudyBoxViewController {
     
     @IBOutlet var testView: UIView!
@@ -13,16 +18,24 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var correctButton: UIButton!
     @IBOutlet weak var incorrectButton: UIButton!
     
+    @IBOutlet weak var previousTipButton: UIButton!
+    @IBOutlet weak var previousTipWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var nextTipButton: UIButton!
+    @IBOutlet weak var nextTipWidth: NSLayoutConstraint!
+    
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var currentQuestionNumber: UILabel!
     
     @IBOutlet weak var answerLeading: NSLayoutConstraint!
     @IBOutlet var answerTrailing: NSLayoutConstraint!
-    var testLogicSource: Test?
     
-    private var dataManager: NewDataManager? = {
-        return UIApplication.appDelegate().dataManager
-    }()
+    var testLogicSource: Test?
+    var tipsForFlashcard = [Tip]()
+    var currentTipNumber = 0
+    var tipOrQuestionMode = TestModeTipOrQuestion.Question
+    
+    private var dataManager = UIApplication.appDelegate().dataManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +78,12 @@ class TestViewController: StudyBoxViewController {
         
         correctButton.imageView?.contentMode = .ScaleAspectFit
         incorrectButton.imageView?.contentMode = .ScaleAspectFit
+        previousTipButton.imageView?.contentMode = .ScaleAspectFit
+        nextTipButton.imageView?.contentMode = .ScaleAspectFit
+        
+        previousTipButton.hidden = true
+        nextTipButton.hidden = true
+        tipOrQuestionMode = .Question
         
         tipButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         correctButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
@@ -76,11 +95,6 @@ class TestViewController: StudyBoxViewController {
         
         currentQuestionNumber.text = "#1"
         
-        //score label displays score; onclick moves to Score View Controller
-        let tapScore = UITapGestureRecognizer(target: self, action: #selector(TestViewController.tapScore(_:)))
-        scoreLabel.userInteractionEnabled = true
-        scoreLabel.addGestureRecognizer(tapScore)
-
         //Alert if passed deck was empty.
         if (testLogicSource?.checkIfPassedDeckIsEmpty()) == true {
             let msg = "Talia jest pusta."
@@ -148,14 +162,13 @@ class TestViewController: StudyBoxViewController {
         }
     }
     
-    func tapScore(sender: UITapGestureRecognizer) {
-        self.performSegueWithIdentifier("ScoreSegue", sender: self)
-    }
-    
     func swipedLeft(){
         view.layoutIfNeeded()
         self.answerLeading.constant = 0
-
+        self.tipOrQuestionMode = .Question
+        self.nextTipButton.hidden = true
+        self.previousTipButton.hidden = true
+        
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
             self.answerTrailing.active = true 
             self.view.layoutIfNeeded()
@@ -196,14 +209,82 @@ class TestViewController: StudyBoxViewController {
     }
     
     @IBAction func showTip(sender: AnyObject) {
-        var message = String()
-        
-        if let _ = testLogicSource?.currentCard {
-            //TODO: get tips for card
+        switch tipOrQuestionMode {
+        case .Question:
+            if let currentCard = testLogicSource?.currentCard {
+                dataManager.allTipsForFlashcard(currentCard.deckId, flashcardID: currentCard.serverID, completion: { response in
+                    switch response {
+                    case .Success(let tipsFromManager):
+                        guard !tipsFromManager.isEmpty else {
+                            self.presentAlertController(withTitle: "Błąd", message: "Fiszka nie ma podpowiedzi", buttonText: "Ok")
+                            return
+                        }
+                        
+                        let sortedTips = tipsFromManager.sort {
+                            return $0.difficulty < $1.difficulty
+                        }
+                        self.tipsForFlashcard = sortedTips
+                        self.questionLabel.text = sortedTips[0].content
+                        self.previousTipButton.tintColor = UIColor.sb_Grey()
+                        self.nextTipButton.tintColor = UIColor.sb_Graphite()
+                        
+                        if self.tipsForFlashcard.count > 1 {
+                            self.previousTipButton.hidden = false
+                            self.nextTipButton.hidden = false
+                        }
+                        
+                        self.tipOrQuestionMode = .Tip
+                        self.currentTipNumber = 0
+                        self.tipButton.setTitle("Pytanie", forState: .Normal)
+                        
+                    case .Error(let err):
+                        print(err)
+                        self.presentAlertController(withTitle: "Błąd", message: "Nie można pobrać podpowiedzi dla fiszki.", buttonText: "OK")
+                    }
+                })
+
+            }
+            
+        case .Tip:
+            previousTipButton.hidden = true
+            nextTipButton.hidden = true
+            tipButton.setTitle("Podpowiedź", forState: .Normal)
+            tipOrQuestionMode = .Question
+            questionLabel.text = testLogicSource?.currentCard?.question
         }
-            message = "Brak podpowiedzi"
-    
-        presentAlertController(withTitle: "Podpowiedź:", message: message, buttonText: "OK")
+    }
+
+    @IBAction func tipButtonTap(sender: AnyObject) {
+        switch sender.tag {
+        case 0: //previous tip
+            currentTipNumber -= 1
+            
+            if currentTipNumber == 0 { //first tip
+                self.previousTipButton.tintColor = UIColor.sb_Grey()
+                self.nextTipButton.tintColor = UIColor.sb_Graphite()
+                self.previousTipButton.userInteractionEnabled = false
+            }
+            if currentTipNumber == tipsForFlashcard.count-2 {
+                self.nextTipButton.tintColor = UIColor.sb_Graphite()
+                self.nextTipButton.userInteractionEnabled = true
+            }
+        case 1: //next tip
+            currentTipNumber += 1
+
+            if currentTipNumber == tipsForFlashcard.count-1 { //last tip
+                self.previousTipButton.tintColor = UIColor.sb_Graphite()
+                self.nextTipButton.tintColor = UIColor.sb_Grey()
+                self.nextTipButton.userInteractionEnabled = false
+            }
+            if currentTipNumber == 1 {
+                self.previousTipButton.userInteractionEnabled = true
+                self.previousTipButton.tintColor = UIColor.sb_Graphite()
+            }
+        default:
+            return
+
+        }
+        self.questionLabel.text = tipsForFlashcard[currentTipNumber].content
     }
     
     func updateQuestionUiForCurrentCard() {
@@ -294,7 +375,6 @@ class TestViewController: StudyBoxViewController {
         questionView.alpha = 0
         questionView.center.x = testView.center.x
         
-        //TODOs: set new question in label before dissolve
         updateQuestionUiForCurrentCard()
         //move answerView outside of the screen
         answerTrailing.active = false
@@ -314,7 +394,6 @@ class TestViewController: StudyBoxViewController {
         incorrectButton.transform = CGAffineTransformIdentity
         correctButton.transform = CGAffineTransformIdentity
         
-        //TODOs: set new answer in label after animation
         updateAnswerUiForCurrentCard()
     }
     @IBAction func editCurrentFlashcard(sender: UIBarButtonItem) {
@@ -334,7 +413,6 @@ class TestViewController: StudyBoxViewController {
         
     }
 }
-
 
 extension TestViewController: UIGestureRecognizerDelegate {
     

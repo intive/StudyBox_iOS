@@ -901,7 +901,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
-				8044F6351CC05555001C9E8A /* ServerCommunication.swift in Sources */,
 				2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,

@@ -299,13 +299,13 @@ public class NewDataManager {
             }, completion: completion)
     }
     
-    func allTipsForFlashcard(deck: Deck, flashcard: Flashcard, completion: (DataManagerResponse<[Tip]>)-> ()) {
+    func allTipsForFlashcard(deckID: String, flashcardID: String, completion: (DataManagerResponse<[Tip]>)-> ()) {
         handleJSONRequest(
             localFetch: {
-                self.localDataManager.filter(Tip.self, predicate: "flashcardID == \(flashcard.serverID) AND deckID == \(deck.serverID)")
+                self.localDataManager.filter(Tip.self, predicate: "flashcardID == \(flashcardID) AND deckID == \(deckID)")
             },
             remoteFetch: {
-                self.remoteDataManager.allTips(deckID: deck.serverID, flashcardID: flashcard.serverID, completion: $0)
+                self.remoteDataManager.allTips(deckID: deckID, flashcardID: flashcardID, completion: $0)
             }, completion: completion)
     }
     
