@@ -101,7 +101,6 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
                 if let date = jsonDict["creationDate"]?.string {
                     let formatter = NSDateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SS"
-                    let datex = formatter.stringFromDate(NSDate())
                     self.createDate = formatter.dateFromString(date)
                 }
                 return

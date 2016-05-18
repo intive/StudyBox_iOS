@@ -2,10 +2,9 @@
 //  DecksViewController.swift
 //  StudyBox_iOS
 //
-//  Created by Kacper Cz on 03.03.2016.
+//  Created by Kacper Cz, Damian Malarczyk on 03.03.2016.
 //  Copyright © 2016 BLStream. All rights reserved.
 //
-
 import UIKit
 
 class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, DecksCollectionLayoutDelegate {
@@ -15,16 +14,17 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
     let refreshControl = UIRefreshControl()
 
-
     var searchBar: UISearchBar {
         return searchController.searchBar
     }
     
-    var decksArray: [Deck]?
-    var searchDecks: [Deck]?
+    var decksArray: [Deck] = []
+    var searchDecks: [Deck] = []
+    var searchDecksHolder: [Deck] = []
+    var searchDelay: NSTimer?
     
-    var decksSource: [Deck]? {
-        return searchDecks ?? decksArray
+    var decksSource: [Deck] {
+        return searchDecks.isEmpty ? decksArray : searchDecks
     }
     
     lazy var dataManager: NewDataManager = {
@@ -35,7 +35,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return UIApplication.sharedApplication().statusBarFrame.height
     }
     
-    private var searchBarHeight: CGFloat {
+    var searchBarHeight: CGFloat {
        return 44
     }
     
@@ -48,7 +48,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     // search bar height + 8 points margin
-    private var topOffset: CGFloat {
+    var topOffset: CGFloat {
         return self.searchBarHeight + searchBarMargin
     }
     
@@ -57,7 +57,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     /**
      * CollectionView content offset is determined by status bar and navigation bar height
      */
-    private var topItemOffset: CGFloat {
+    var topItemOffset: CGFloat {
         return -(self.statusBarHeight + self.navbarHeight)
     }
     
@@ -74,8 +74,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         searchBarWrapper.autoresizingMask = .FlexibleWidth
         searchBarWrapper.addSubview(searchBar)
         view.addSubview(searchBarWrapper)
+        searchBar.delegate = self
         searchController.delegate = self
-        searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         
         definesPresentationContext = true
@@ -195,29 +195,22 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
 
     // Calculate number of decks. If no decks, return 0
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let searchDecksCount = searchDecks?.count {
-            return searchDecksCount
-        } else if let decksCount = decksArray?.count {
-            return  decksCount
-        }
-        return 0
+        return decksSource.count
     }
     
     // Populate cells with decks data. Change cells style
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let source = searchDecks ?? decksArray
         
         let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
         if let cell = view as? DecksViewCell{
             cell.layoutIfNeeded()
             
-            if var deckName = source?[indexPath.row].name {
-                if deckName.isEmpty {
-                    deckName = Utils.DeckViewLayout.DeckWithoutTitle
-                }
-                cell.deckNameLabel.text = deckName
+            var deckName = decksSource[indexPath.row].name
+            if deckName.isEmpty {
+                deckName = Utils.DeckViewLayout.DeckWithoutTitle
             }
+            cell.deckNameLabel.text = deckName
             // changing label UI
             if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
                 cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
@@ -235,71 +228,70 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     
     // When cell tapped, change to test
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let source = searchDecks ?? decksArray
         
-        if let deck = source?[indexPath.row] {
-            let resetSearchUI = {
-                self.searchController.active = false
-            }
-            
-            dataManager.flashcards(deck.serverID) {
-                switch $0 {
-                case .Success(let flashcards):
-                    guard !flashcards.isEmpty else {
-                        self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek", buttonText: "Ok")
-                        return
-                    }
-                    let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
+        let deck = decksSource[indexPath.row]
+        let resetSearchUI = {
+            self.searchController.active = false
+        }
+        
+        dataManager.flashcards(deck.serverID) {
+            switch $0 {
+            case .Success(let flashcards):
+                guard !flashcards.isEmpty else {
+                    self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek", buttonText: "Ok")
+                    return
+                }
+                let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
+                
+                let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
+                    let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
                     
-                    let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                        let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
-                        
-                        let amounts = [ 1, 5, 10, 15, 20 ]
-                        
-                        var amountFlashcardsNotHiden: Int = 0
-                        for flashcard in flashcards {
-                            if flashcard.hidden == false {
-                                amountFlashcardsNotHiden += 1
-                            }
+                    let amounts = [ 1, 5, 10, 15, 20 ]
+                    
+                    var amountFlashcardsNotHiden: Int = 0
+                    for flashcard in flashcards {
+                        if flashcard.hidden == false {
+                            amountFlashcardsNotHiden += 1
                         }
-                        
-                        for amount in amounts {
-                            if amount < amountFlashcardsNotHiden {
-                                alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
-                                    resetSearchUI()
-                                    self.performSegueWithIdentifier("StartTest",
-                                        sender: Test(deck: flashcards, testType: .Test(UInt32(amount)), deckName: deck.name))
-                                    })
-                            } else {
-                                break
-                            }
-                        }
-                        alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
-                            resetSearchUI()
-                            self.performSegueWithIdentifier("StartTest",
-                                sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden)), deckName: deck.name))
-                            })
-                        alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-                        
-                        self.presentViewController(alertAmount, animated: true, completion:nil)
                     }
-                    let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    
+                    for amount in amounts {
+                        if amount < amountFlashcardsNotHiden {
+                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
+                                resetSearchUI()
+                                self.performSegueWithIdentifier("StartTest",
+                                    sender: Test(deck: flashcards, testType: .Test(UInt32(amount)), deckName: deck.name))
+                                })
+                        } else {
+                            break
+                        }
+                    }
+                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
                         resetSearchUI()
-                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn, deckName: deck.name))
-                    }
+                        self.performSegueWithIdentifier("StartTest",
+                            sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden)), deckName: deck.name))
+                        })
+                    alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                     
-                    alert.addAction(testButton)
-                    alert.addAction(studyButton)
-                    alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-                    
-                    self.presentViewController(alert, animated: true, completion:nil)
-                    
-                case .Error(_):
-                    self.presentAlertController(withTitle: "Błąd", message: "Nie udało się pobrać danych", buttonText: "Ok")
+                    self.presentViewController(alertAmount, animated: true, completion:nil)
+                }
+                let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
+                    resetSearchUI()
+                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn, deckName: deck.name))
                 }
                 
+                alert.addAction(testButton)
+                alert.addAction(studyButton)
+                alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
+                
+                self.presentViewController(alert, animated: true, completion:nil)
+                
+            case .Error(_):
+                self.presentAlertController(withTitle: "Błąd", message: "Nie udało się pobrać danych", buttonText: "Ok")
             }
+            
         }
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -313,84 +305,4 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return true
     }
     
-    
-    
-}
-
-extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelegate {
-    
-    
-    func adjustSearchBar(forYOffset offset: CGFloat) {
-        if !searchController.active {
-            if offset < topItemOffset + topOffset {
-            
-                searchBarWrapper.frame.origin.y = -offset
-                
-            } else {
-                searchBarWrapper.frame.origin.y = -searchBarHeight
-            }
-        }
-    }
-    
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        adjustSearchBar(forYOffset: offset)
-        
-    }
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        
-        if let searchText = searchController.searchBar.text where !searchText.characters.isEmpty {
-            let searchLowercase = searchText.lowercaseString
-            let deckWithoutTitleLowercase = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
-            searchDecks = decksArray?
-                .filter {
-                    return $0.name.lowercaseString.containsString(searchLowercase)
-                        || ( $0.name == "" && deckWithoutTitleLowercase.containsString(searchLowercase) )
-                }
-                .sort { a, b in
-                    return a.name < b.name
-                }
-            
-        } else {
-            searchDecks = nil
-        }
-        collectionView?.reloadData()
-        
-
-    }
-    func willPresentSearchController(searchController: UISearchController) {
-        if collectionView?.contentOffset.y > topItemOffset {
-            collectionView?.contentOffset.y = topItemOffset
-        }
-    }
-   
-    func didDismissSearchController(searchController: UISearchController) {
-        searchController.searchBar.sizeToFit()
-    }
-}
-
-// this extension dynamically change the size of the fonts, so text can fit
-extension UILabel {
-    func adjustFontSizeToHeight(font: UIFont, max: CGFloat, min: CGFloat)
-    {
-        var font = font
-        // Initial size is max and the condition the min.
-        for size in max.stride(through: min, by: -0.1) {
-            font = font.fontWithSize(size)
-            if let text = self.text{
-                let attrString = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
-                let rectSize = attrString.boundingRectWithSize(CGSize(width: self.bounds.width, height: CGFloat.max),
-                                                               options: .UsesLineFragmentOrigin, context: nil)
-                
-                if rectSize.size.height <= self.bounds.height
-                {
-                    self.font = font
-                    break
-                }
-            }
-        }
-        // in case, it is better to have the smallest possible font
-        self.font = font
-    }
 }
