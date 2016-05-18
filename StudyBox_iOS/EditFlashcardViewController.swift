@@ -183,7 +183,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        dataManager.decks {
+        dataManager.userDecks {
             switch $0 {
             case .Success(let decks):
                 self.decks = decks
