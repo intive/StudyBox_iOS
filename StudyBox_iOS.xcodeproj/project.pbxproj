@@ -15,7 +15,6 @@
 		2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */; };
 		2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */; };
 		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
-		2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843681C88D03D006E5E21 /* DataManager.swift */; };
 		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
 		2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */; };
 		2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */; };
@@ -35,15 +34,13 @@
 		2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */; };
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
-		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
 		2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */; };
 		2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */; };
 		2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */; };
 		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
-		2DF09D691CD3A64C00AD20F8 /* NewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */; };
-		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
+		2DF09D691CD3A64C00AD20F8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF09D681CD3A64C00AD20F8 /* DataManager.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
 		4FA92EB85A56DD8728330F7E /* Pods_StudyBox_Watch_App_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */; };
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
@@ -163,7 +160,6 @@
 		2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerResourceDisposable.swift; sourceTree = "<group>"; };
 		2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Searchable.swift"; sourceTree = "<group>"; };
 		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		2D2843681C88D03D006E5E21 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
 		2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+appDelegate.swift"; sourceTree = "<group>"; };
 		2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
@@ -183,15 +179,13 @@
 		2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksCollectionViewLayout.swift; sourceTree = "<group>"; };
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
-		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONInitializable.swift; sourceTree = "<group>"; };
 		2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+isConnected.swift"; sourceTree = "<group>"; };
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
 		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
-		2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDataManager.swift; sourceTree = "<group>"; };
-		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
+		2DF09D681CD3A64C00AD20F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
@@ -304,9 +298,7 @@
 				72D50BB01CDA69AC00CB0271 /* Router.swift */,
 				72D50BB41CDA6A4800CB0271 /* LocalDataManager.swift */,
 				72D50BB21CDA69E600CB0271 /* RemoteDataManager.swift */,
-				2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */,
-				2D2843681C88D03D006E5E21 /* DataManager.swift */,
-				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
+				2DF09D681CD3A64C00AD20F8 /* DataManager.swift */,
 				8044F6341CC05555001C9E8A /* ServerCommunication.swift */,
 				2D7E038A1CDB617F003B5294 /* User.swift */,
 			);
@@ -541,7 +533,6 @@
 			children = (
 				A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */,
 				A1341DD91C81E76900AFD04E /* Info.plist */,
-				2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */,
 				AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */,
 			);
 			path = StudyBox_iOSTests;
@@ -946,14 +937,13 @@
 				CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */,
 				2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */,
 				2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */,
-				2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */,
 				72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */,
 				2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
 				2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */,
 				723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */,
 				2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */,
-				2DF09D691CD3A64C00AD20F8 /* NewDataManager.swift in Sources */,
+				2DF09D691CD3A64C00AD20F8 /* DataManager.swift in Sources */,
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
 				2D47DCC41CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift in Sources */,
@@ -974,7 +964,6 @@
 				2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */,
 				AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */,
 				72D50BB51CDA6A4800CB0271 /* LocalDataManager.swift in Sources */,
-				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
 				2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
 				72D50BB31CDA69E600CB0271 /* RemoteDataManager.swift in Sources */,
@@ -989,7 +978,6 @@
 			files = (
 				A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */,
 				AEEAB5701CCE3A5400BB60FA /* TestLogicTests.swift in Sources */,
-				2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
