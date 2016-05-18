@@ -78,7 +78,6 @@
 		72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
 		79EA1987D472DAC7E169D8C4 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */; };
-		8044F6351CC05555001C9E8A /* ServerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044F6341CC05555001C9E8A /* ServerCommunication.swift */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
 		A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC31C81E76900AFD04E /* Main.storyboard */; };
 		A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */; };
@@ -222,7 +221,6 @@
 		72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		8044F6341CC05555001C9E8A /* ServerCommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCommunication.swift; sourceTree = "<group>"; };
 		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,7 +297,6 @@
 				72D50BB41CDA6A4800CB0271 /* LocalDataManager.swift */,
 				72D50BB21CDA69E600CB0271 /* RemoteDataManager.swift */,
 				2DF09D681CD3A64C00AD20F8 /* DataManager.swift */,
-				8044F6341CC05555001C9E8A /* ServerCommunication.swift */,
 				2D7E038A1CDB617F003B5294 /* User.swift */,
 			);
 			name = "Data Manager";
@@ -910,7 +907,6 @@
 			files = (
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
 				2D47DCC61CEC651D00110F85 /* DecksViewController+searching.swift in Sources */,
-				8044F6351CC05555001C9E8A /* ServerCommunication.swift in Sources */,
 				2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
