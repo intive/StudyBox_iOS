@@ -73,7 +73,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto"))
             
             drawerNavigationControllers.append(
-                DrawerNavigationChild(name: "Moje talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
+                DrawerNavigationChild(name: loggedIn ? "Moje talie" : "Wyszukaj talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
                     return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
                 })
             )
@@ -109,8 +109,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                 })
             )
             
-            //always visible
-            drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
+            //not implemented yet
+            //drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
             
             if loggedIn {
                 drawerNavigationControllers.append(

@@ -43,6 +43,8 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         dataSource = self
     }
     
+    //auto login in obligatory -> in standardUserDefaults we store login/pass
+    //based on standardUserDefaults we display different menus
     func autoLoginIfLoggedBefore() {
         let zalogo = NSUserDefaults.standardUserDefaults()
         let email = zalogo.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
