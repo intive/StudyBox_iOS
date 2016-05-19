@@ -880,7 +880,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Cv-mK-csu" userLabel="Stack View1">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-aN-Wdn">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-aN-Wdn">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="353"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrR-w4-98C">
@@ -926,6 +926,9 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="AYi-mT-KA8" firstAttribute="height" secondItem="8Cv-mK-csu" secondAttribute="height" multiplier="0.2" id="2Cg-ct-Lfc"/>
+                                            <constraint firstItem="cqy-aN-Wdn" firstAttribute="top" secondItem="8Cv-mK-csu" secondAttribute="top" id="6hT-Yw-A32"/>
+                                            <constraint firstAttribute="trailing" secondItem="cqy-aN-Wdn" secondAttribute="trailing" id="9O0-Ad-53v"/>
+                                            <constraint firstItem="cqy-aN-Wdn" firstAttribute="leading" secondItem="8Cv-mK-csu" secondAttribute="leading" id="HJz-Om-vtj"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -934,15 +937,9 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="8Cv-mK-csu" secondAttribute="trailing" id="OYm-sK-wwk"/>
                                     <constraint firstItem="8Cv-mK-csu" firstAttribute="leading" secondItem="qd1-B0-NOL" secondAttribute="leading" id="Q3c-SZ-QEN"/>
-                                    <constraint firstItem="8Cv-mK-csu" firstAttribute="top" secondItem="qd1-B0-NOL" secondAttribute="top" id="S7T-Si-he5"/>
                                     <constraint firstAttribute="bottom" secondItem="8Cv-mK-csu" secondAttribute="bottom" id="mMG-45-hBc"/>
                                     <constraint firstItem="8Cv-mK-csu" firstAttribute="top" secondItem="qd1-B0-NOL" secondAttribute="top" id="qVh-wg-lXk"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="S7T-Si-he5"/>
-                                    </mask>
-                                </variation>
                                 <variation key="heightClass=compact" misplaced="YES">
                                     <rect key="frame" x="20" y="62" width="560" height="298"/>
                                 </variation>
