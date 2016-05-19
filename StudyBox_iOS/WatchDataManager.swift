@@ -13,7 +13,7 @@ import UIKit
 class WatchDataManager: NSObject, WCSessionDelegate {
     
     static let watchManager = WatchDataManager()
-    private var dataManager: NewDataManager? = { return UIApplication.appDelegate().dataManager }()
+    private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
     private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
     
     private var validSession: WCSession? {

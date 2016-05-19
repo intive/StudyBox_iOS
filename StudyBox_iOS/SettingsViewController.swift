@@ -17,7 +17,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     @IBOutlet weak var settingsTableView: UITableView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    lazy private var dataManager: NewDataManager = { return UIApplication.appDelegate().dataManager }()
+    lazy private var dataManager: DataManager = { return UIApplication.appDelegate().dataManager }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
@@ -97,25 +97,37 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         }
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
-        var shouldPerformSegue = true
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        guard identifier == "showDetailVCSegue" else {
+            return false
+        }
+        var shouldPerform = false
         var message: (title: String, body: String)?
-        
-        let userDecks = dataManager.localDataManager.getAll(Deck)
-        if  userDecks.isEmpty {
-            message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
+
+        if let section = self.settingsTableView.indexPathForSelectedRow?.section {
+            switch section {
+            case 0:
+                shouldPerform = true
+            case 1:
+                let userDecks = dataManager.localDataManager.getAll(Deck)
+                
+                if !WCSession.isSupported() {
+                    message = (title: "Niekompatybilne urządzenie", body: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch")
+                }
+                if  userDecks.isEmpty {
+                    message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
+                }
+                if let message = message {
+                    presentAlertController(withTitle: message.title, message: message.body, buttonText: "OK")
+                    self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+                } else { //We don't have a message so no error was encountered
+                    shouldPerform = true
+                }
+            default: break
+            }
         }
+        return shouldPerform
         
-        if !WCSession.isSupported() {
-            message = (title: "Niekompatybilne urządzenie", body: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch")
-        }
-        
-        if let message = message {
-            shouldPerformSegue = false
-            presentAlertController(withTitle: message.title, message: message.body, buttonText: "OK")
-            self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-        }
-        return shouldPerformSegue
     }
     
     //Update cells when returning from DetailVC
