@@ -132,6 +132,9 @@ public class DataManager {
 
     func logout() {
         remoteDataManager.logout()
+        let decks = localDataManager.getAll(Deck.self)
+        localDataManager.delete(decks)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
     }
 
     //MARK: Decks
