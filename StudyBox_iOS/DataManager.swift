@@ -132,11 +132,20 @@ public class DataManager {
 
     func logout() {
         remoteDataManager.logout()
+        let decks = localDataManager.getAll(Deck.self)
+        localDataManager.delete(decks)
+        clearUserDefaults()
     }
 
+    func clearUserDefaults() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
+        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey)
+        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
+        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
+    }
+    
     //MARK: Decks
-    
-    
     func deck(withId deckID: String, completion: (DataManagerResponse<Deck>)-> ()) {
         handleJSONRequest(
             localFetch: {
