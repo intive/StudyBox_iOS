@@ -47,8 +47,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     static let DrawerCellId = "DrawerCellId"
     private var loggedIn: Bool {
         get {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            if defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail) != nil {
+            let dataManager = UIApplication.appDelegate().dataManager.remoteDataManager
+            if let _ = dataManager.user?.email {
                 return true
             } else {
                 return false
@@ -124,9 +124,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: loggedIn ? "Wyloguj" : "Zaloguj", viewController: nil) { [weak self] in
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
-                    defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
                     UIApplication.appDelegate().dataManager.logout()
                     
                     if let storyboard = self?.storyboard {

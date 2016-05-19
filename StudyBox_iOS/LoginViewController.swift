@@ -43,15 +43,11 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         dataSource = self
     }
     
-    //auto login in obligatory -> in standardUserDefaults we store login/pass
-    //based on standardUserDefaults we display different menus
     func autoLoginIfLoggedBefore() {
-        let zalogo = NSUserDefaults.standardUserDefaults()
-        let email = zalogo.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
-        let password = zalogo.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
-        
-        if let _ = email, _ = password {
-            loginWithInputData(email as? String, password: password as? String)
+        let myData = UIApplication.appDelegate().dataManager.remoteDataManager.getEmailPassFromDefaults()
+
+        if let email = myData.0, password = myData.1 {
+            loginWithInputData(email, password: password)
         }
     }
     
@@ -63,10 +59,8 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             
             switch response {
             case .Success(let user):
-               
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(user.email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
-                defaults.setObject(user.password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                
+                newDataManager.remoteDataManager.saveEmailPassInDefaults(user.email, pass: user.password)
                 self.successfulLoginTransition()
                 return
                 
