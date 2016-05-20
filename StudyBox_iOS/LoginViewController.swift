@@ -46,7 +46,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
     func autoLoginIfLoggedBefore() {
         let myData = UIApplication.appDelegate().dataManager.remoteDataManager.getEmailPassFromDefaults()
 
-        if let email = myData.0, password = myData.1 {
+        if let email = myData?.email, password = myData?.password {
             loginWithInputData(email, password: password)
         }
     }

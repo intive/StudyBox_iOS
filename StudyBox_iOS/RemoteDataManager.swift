@@ -107,12 +107,15 @@ class RemoteDataManager {
         defaults.setObject(pass, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
     }
     
-    func getEmailPassFromDefaults() -> (String?, String?) {
+    func getEmailPassFromDefaults() -> (email: String, password: String)? {
         let defaults = NSUserDefaults.standardUserDefaults()
-        if let email = defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail), pass = defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword) {
-            return (email as? String, pass as? String)
+        let email = defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail) as? String
+        let password = defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword) as? String
+        
+        if let email = email, password = password {
+            return (email, password)
         } else {
-            return (nil, nil)
+            return nil
         }
     }
     
