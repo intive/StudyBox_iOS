@@ -238,7 +238,17 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             switch $0 {
             case .Success(let flashcards):
                 guard !flashcards.isEmpty else {
-                    self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek", buttonText: "Ok")
+                    self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek.", buttonText: "OK")
+                    return
+                }
+                var amountFlashcardsNotHidden: Int = 0
+                for flashcard in flashcards {
+                    if flashcard.hidden == false {
+                        amountFlashcardsNotHidden += 1
+                    }
+                }
+                guard amountFlashcardsNotHidden != 0 else {
+                    self.presentAlertController(withTitle: "Błąd", message: "Talia ma ukryte wszystkie fiszki.", buttonText: "OK")
                     return
                 }
                 let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
@@ -248,15 +258,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                     
                     let amounts = [ 1, 5, 10, 15, 20 ]
                     
-                    var amountFlashcardsNotHiden: Int = 0
-                    for flashcard in flashcards {
-                        if flashcard.hidden == false {
-                            amountFlashcardsNotHiden += 1
-                        }
-                    }
-                    
                     for amount in amounts {
-                        if amount < amountFlashcardsNotHiden {
+                        if amount < amountFlashcardsNotHidden {
                             alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
                                 resetSearchUI()
                                 self.performSegueWithIdentifier("StartTest",
@@ -266,10 +269,10 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                             break
                         }
                     }
-                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
+                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHidden) + ")", style: .Default) { act in
                         resetSearchUI()
                         self.performSegueWithIdentifier("StartTest",
-                            sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden)), deckName: deck.name))
+                            sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHidden)), deckName: deck.name))
                         })
                     alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                     
