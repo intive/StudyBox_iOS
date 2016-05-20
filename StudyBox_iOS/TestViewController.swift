@@ -19,10 +19,7 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var incorrectButton: UIButton!
     
     @IBOutlet weak var previousTipButton: UIButton!
-    @IBOutlet weak var previousTipWidth: NSLayoutConstraint!
-    
     @IBOutlet weak var nextTipButton: UIButton!
-    @IBOutlet weak var nextTipWidth: NSLayoutConstraint!
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var currentQuestionNumber: UILabel!
@@ -62,10 +59,6 @@ class TestViewController: StudyBoxViewController {
         answerLabel.userInteractionEnabled = true
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
-        if let test = testLogicSource {
-            self.title = test.deckName
-        }
-        
         tipButton.backgroundColor = UIColor.sb_Grey()
         correctButton.backgroundColor = UIColor.sb_Grey()
         incorrectButton.backgroundColor = UIColor.sb_Grey()
@@ -88,22 +81,18 @@ class TestViewController: StudyBoxViewController {
         answerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         scoreLabel.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         currentQuestionNumber.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-        
         currentQuestionNumber.text = "#1"
         
-        //Alert if passed deck was empty.
-        if (testLogicSource?.checkIfPassedDeckIsEmpty()) == true {
-            self.presentAlertController(withTitle: "Uwaga!", message: "Talia jest pusta.", buttonText: "OK")
-        }
-        //Alert if passed deck have all flashcards hidden
-        if (testLogicSource?.checkIfAllFlashcardsHidden()) == true {
-            self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK")
-        }
-        if let _ = testLogicSource {
+        if let test = testLogicSource {
+            self.title = test.deckName
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
-        } else {
-            // TODOs: unhandled case
+            
+            if test.checkIfPassedDeckIsEmpty() {
+                 self.presentAlertController(withTitle: "Uwaga!", message: "Talia jest pusta.", buttonText: "OK")
+            } else if test.checkIfAllFlashcardsHidden() {
+                self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK")
+            }
         }
         answerTrailing.active = false
         answerLeading.constant = view.frame.width
@@ -231,13 +220,16 @@ class TestViewController: StudyBoxViewController {
         currentTipNumber += 1
         
         if currentTipNumber == tipsForFlashcard.count-1 { //last tip
-            self.previousTipButton.tintColor = UIColor.sb_Graphite()
-            self.nextTipButton.tintColor = UIColor.sb_Grey()
+            UIView.animateWithDuration(0.25, animations: {
+                self.previousTipButton.tintColor = UIColor.sb_Graphite()
+                self.nextTipButton.tintColor = UIColor.sb_Grey()
+            })
             self.nextTipButton.userInteractionEnabled = false
         }
         if currentTipNumber == 1 {
             self.previousTipButton.userInteractionEnabled = true
-            self.previousTipButton.tintColor = UIColor.sb_Graphite()
+            UIView.animateWithDuration(0.25, animations: {
+                self.previousTipButton.tintColor = UIColor.sb_Graphite() })
         }
         self.questionLabel.text = tipsForFlashcard[currentTipNumber].content
     }
@@ -246,12 +238,16 @@ class TestViewController: StudyBoxViewController {
         currentTipNumber -= 1
         
         if currentTipNumber == 0 { //first tip
-            self.previousTipButton.tintColor = UIColor.sb_Grey()
-            self.nextTipButton.tintColor = UIColor.sb_Graphite()
+            UIView.animateWithDuration(0.25, animations: {
+                self.previousTipButton.tintColor = UIColor.sb_Grey()
+                self.nextTipButton.tintColor = UIColor.sb_Graphite()
+            })
             self.previousTipButton.userInteractionEnabled = false
         }
         if currentTipNumber == tipsForFlashcard.count-2 {
-            self.nextTipButton.tintColor = UIColor.sb_Graphite()
+            UIView.animateWithDuration(0.25, animations: {
+                self.nextTipButton.tintColor = UIColor.sb_Graphite()
+            })
             self.nextTipButton.userInteractionEnabled = true
         }
         self.questionLabel.text = tipsForFlashcard[currentTipNumber].content

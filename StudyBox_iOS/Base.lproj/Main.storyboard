@@ -819,7 +819,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-uF-MfH" userLabel="Stack View1">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Odpowiedź" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZB-4x-LNY" userLabel="AnswerLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Odpowiedź" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RZB-4x-LNY" userLabel="AnswerLabel">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="353"/>
                                                 <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -890,12 +890,13 @@
                                                             <action selector="previousTipAction:" destination="6tt-KQ-lf6" eventType="touchUpInside" id="p0u-cC-mAZ"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Pytanie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-ua-ypq" userLabel="QuestionLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Pytanie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-ua-ypq" userLabel="QuestionLabel">
                                                         <rect key="frame" x="61" y="0.0" width="438" height="353"/>
                                                         <color key="backgroundColor" red="0.9115265052" green="0.9115265052" blue="0.9115265052" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <size key="shadowOffset" width="0.0" height="0.0"/>
                                                     </label>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6H-nk-iQC">
                                                         <rect key="frame" x="504" y="0.0" width="56" height="353"/>
@@ -906,11 +907,11 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="lrR-w4-98C" firstAttribute="height" secondItem="cqy-aN-Wdn" secondAttribute="height" id="DGg-cQ-d9y"/>
-                                                    <constraint firstItem="N6H-nk-iQC" firstAttribute="height" secondItem="cqy-aN-Wdn" secondAttribute="height" id="KyY-hf-yOU"/>
-                                                    <constraint firstItem="8Tv-ua-ypq" firstAttribute="height" secondItem="cqy-aN-Wdn" secondAttribute="height" id="Uxh-dq-pFp"/>
-                                                    <constraint firstItem="lrR-w4-98C" firstAttribute="width" secondItem="cqy-aN-Wdn" secondAttribute="width" multiplier="0.1" id="dlN-r1-aKl"/>
-                                                    <constraint firstItem="N6H-nk-iQC" firstAttribute="width" secondItem="cqy-aN-Wdn" secondAttribute="width" multiplier="0.1" id="vvv-As-jlx"/>
+                                                    <constraint firstItem="lrR-w4-98C" firstAttribute="height" secondItem="cqy-aN-Wdn" secondAttribute="height" identifier="PreviousTipHeightConst" id="DGg-cQ-d9y"/>
+                                                    <constraint firstItem="N6H-nk-iQC" firstAttribute="height" secondItem="cqy-aN-Wdn" secondAttribute="height" identifier="NextTipButtonHeight" id="KyY-hf-yOU"/>
+                                                    <constraint firstItem="8Tv-ua-ypq" firstAttribute="height" secondItem="cqy-aN-Wdn" secondAttribute="height" identifier="Question Label height" id="Uxh-dq-pFp"/>
+                                                    <constraint firstItem="lrR-w4-98C" firstAttribute="width" secondItem="cqy-aN-Wdn" secondAttribute="width" multiplier="0.1" priority="999" identifier="PreviousTipWidthConst" id="dlN-r1-aKl"/>
+                                                    <constraint firstItem="N6H-nk-iQC" firstAttribute="width" secondItem="cqy-aN-Wdn" secondAttribute="width" multiplier="0.1" priority="999" identifier="NextTipWidth" id="vvv-As-jlx"/>
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYi-mT-KA8">
@@ -999,9 +1000,7 @@
                         <outlet property="currentQuestionNumber" destination="CN8-h0-Hn7" id="F2W-R0-BmT"/>
                         <outlet property="incorrectButton" destination="Wrx-Hp-csN" id="Ajy-BL-dwr"/>
                         <outlet property="nextTipButton" destination="N6H-nk-iQC" id="ei1-2X-Llp"/>
-                        <outlet property="nextTipWidth" destination="vvv-As-jlx" id="xiK-dE-qwW"/>
                         <outlet property="previousTipButton" destination="lrR-w4-98C" id="a77-bD-lGb"/>
-                        <outlet property="previousTipWidth" destination="dlN-r1-aKl" id="Jb9-T8-gfL"/>
                         <outlet property="questionLabel" destination="8Tv-ua-ypq" id="Aaq-Vz-sEy"/>
                         <outlet property="questionView" destination="qd1-B0-NOL" id="MdX-Xc-2go"/>
                         <outlet property="scoreLabel" destination="9qH-5l-kfE" id="Fhc-fP-jJj"/>
