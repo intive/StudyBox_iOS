@@ -35,7 +35,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         switch mode {
         case .DecksForWatch?:
             self.title = "Wybór talii"
-            
             userDecksArray = dataManager.localDataManager.getAll(Deck)
         case .Frequency?:
             self.title = "Powiadomienia"
@@ -164,29 +163,34 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             return
         }
         
-        if let decksToSynchronize = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]{
-            switch indexPath.section {
-            case 0:
-                //Check the "Select/deselect all" cell if all decks are already set to sync
-                if decksToSynchronize.count == userDecksArray.count {
+        let decksToSynchronize: [String]
+        if let decksToSync = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String] {
+            decksToSynchronize = decksToSync
+        } else {
+            decksToSynchronize = []
+        }
+        
+        switch indexPath.section {
+        case 0:
+            //Check the "Select/deselect all" cell if all decks are already set to sync
+            if decksToSynchronize.count == userDecksArray.count {
+                cell.accessoryType = .Checkmark
+            }
+            
+            cell.textLabel?.text = "Zaznacz/Odznacz wszystkie"
+        case 1:
+            let deckName = userDecksArray[indexPath.row].name
+            cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
+            cell.accessoryType = .None
+            
+            //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
+            for deckToSync in decksToSynchronize where !decksToSynchronize.isEmpty {
+                if deckToSync == userDecksArray[indexPath.row].serverID {
                     cell.accessoryType = .Checkmark
                 }
-                
-                cell.textLabel?.text = "Zaznacz/Odznacz wszystkie"
-            case 1:
-                let deckName = userDecksArray[indexPath.row].name
-                cell.textLabel?.text = deckName.isEmpty ? Utils.DeckViewLayout.DeckWithoutTitle : deckName
-                
-                cell.accessoryType = .None
-                //Enable the checkmark if `decksToSynchronize` contains current Deck in cell
-                for deckToSync in decksToSynchronize {
-                    if deckToSync == userDecksArray[indexPath.row].serverID {
-                        cell.accessoryType = .Checkmark
-                    }
-                }
-                
-            default: break
             }
+            
+        default: break
         }
     }
 
