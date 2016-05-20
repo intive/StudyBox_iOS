@@ -39,6 +39,11 @@ class TestViewController: StudyBoxViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
+         Because one Gesture Rec. can be added only to one view, we have to make a second one.
+         There are seperate GR's to avoid situation when user presses the button and
+         moves out of the button upwards because he changes his mind as to answering correct/incorrect or showing the tip.
+        */
         let swipeLeftForAnswer = UISwipeGestureRecognizer()
         swipeLeftForAnswer.direction = .Left
         swipeLeftForAnswer.delegate = self
@@ -220,16 +225,17 @@ class TestViewController: StudyBoxViewController {
         currentTipNumber += 1
         
         if currentTipNumber == tipsForFlashcard.count-1 { //last tip
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animateWithDuration(0.25) {
                 self.previousTipButton.tintColor = UIColor.sb_Graphite()
                 self.nextTipButton.tintColor = UIColor.sb_Grey()
-            })
+            }
             self.nextTipButton.userInteractionEnabled = false
         }
         if currentTipNumber == 1 {
             self.previousTipButton.userInteractionEnabled = true
-            UIView.animateWithDuration(0.25, animations: {
-                self.previousTipButton.tintColor = UIColor.sb_Graphite() })
+            UIView.animateWithDuration(0.25) {
+                self.previousTipButton.tintColor = UIColor.sb_Graphite()
+            }
         }
         self.questionLabel.text = tipsForFlashcard[currentTipNumber].content
     }
@@ -238,16 +244,16 @@ class TestViewController: StudyBoxViewController {
         currentTipNumber -= 1
         
         if currentTipNumber == 0 { //first tip
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animateWithDuration(0.25) {
                 self.previousTipButton.tintColor = UIColor.sb_Grey()
                 self.nextTipButton.tintColor = UIColor.sb_Graphite()
-            })
+            }
             self.previousTipButton.userInteractionEnabled = false
         }
         if currentTipNumber == tipsForFlashcard.count-2 {
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animateWithDuration(0.25) {
                 self.nextTipButton.tintColor = UIColor.sb_Graphite()
-            })
+            }
             self.nextTipButton.userInteractionEnabled = true
         }
         self.questionLabel.text = tipsForFlashcard[currentTipNumber].content
