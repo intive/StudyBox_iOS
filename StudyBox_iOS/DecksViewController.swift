@@ -241,12 +241,9 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                     self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek.", buttonText: "OK")
                     return
                 }
-                var amountFlashcardsNotHidden: Int = 0
-                for flashcard in flashcards {
-                    if flashcard.hidden == false {
-                        amountFlashcardsNotHidden += 1
-                    }
-                }
+                
+                let amountFlashcardsNotHidden = flashcards.reduce(0) { ret, flashcard in flashcard.hidden ? ret : ret + 1}
+                
                 guard amountFlashcardsNotHidden != 0 else {
                     self.presentAlertController(withTitle: "Błąd", message: "Talia ma ukryte wszystkie fiszki.", buttonText: "OK")
                     return
