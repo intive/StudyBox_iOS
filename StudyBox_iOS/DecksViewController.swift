@@ -24,7 +24,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchDelay: NSTimer?
     
     var decksSource: [Deck] {
-        return searchDecks.isEmpty ? decksArray : searchDecks
+        return searchDecks.isEmpty && !searchController.active ? decksArray : searchDecks
     }
     
     lazy var dataManager: DataManager = {

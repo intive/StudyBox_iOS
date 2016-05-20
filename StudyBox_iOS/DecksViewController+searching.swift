@@ -41,14 +41,11 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         
         let searchText = filter.trimWhiteCharacters()
         if !searchText.characters.isEmpty && searchText.characters.count <= 100 {
-            let searchLowercase = searchText.lowercaseString
-            let deckWithoutTitleLowercase = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
             let searchBlock = {
                 let previousSearchWasEmpty = self.searchDecks.isEmpty
                 self.searchDecks = self.searchDecksHolder
                     .filter {
-                        return $0.name.lowercaseString.containsString(searchLowercase)
-                            || ( $0.name == "" && deckWithoutTitleLowercase.containsString(searchLowercase) )
+                        return $0.matches(searchText)
                     }.sort {
                         if let lDate = $0.0.createDate {
                             if let rdate = $0.1.createDate {
