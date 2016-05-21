@@ -18,6 +18,7 @@ class Test {
     private(set) var notPassedInTestDeck: [Flashcard]?
     private(set) var repeatDeck: [Flashcard]?
     private(set) var currentCard: Flashcard?
+    var deckAuthor: String
     private var passedFlashcards = 0
     var index = 1
     private var numberOfFlashcardsInFullDeck: Int
@@ -27,9 +28,10 @@ class Test {
     private var allFlashcardsHidden: Bool = false
     private var passedDeckWasEmpty: Bool = false
     
-    init(deck: [Flashcard], testType: StudyType, deckName: String = "") {
+    init(deck: [Flashcard], testType: StudyType, deckName: String = "", deckAuthor: String = "") {
         
-        self.deckName = deckName 
+        self.deckName = deckName
+        self.deckAuthor = deckAuthor
         if deck.isEmpty {
             passedDeckWasEmpty = true
         } else {

@@ -20,9 +20,7 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet var answerTrailing: NSLayoutConstraint!
     var testLogicSource: Test?
     
-    private var dataManager: DataManager? = {
-        return UIApplication.appDelegate().dataManager
-    }()
+    private lazy var dataManager: DataManager = UIApplication.appDelegate().dataManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -317,21 +315,23 @@ class TestViewController: StudyBoxViewController {
         //TODOs: set new answer in label after animation
         updateAnswerUiForCurrentCard()
     }
+    
     @IBAction func editCurrentFlashcard(sender: UIBarButtonItem) {
-        if let card = testLogicSource?.currentCard,
-            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId) {
-            if let editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
+        
+        if let testLogicSource = testLogicSource, card = testLogicSource.currentCard {
+            guard testLogicSource.deckAuthor == dataManager.remoteDataManager.user?.email else {
+                presentAlertController(withTitle: "Ups!", message: "Nie możesz edytować fiszek w talii która nie należy do ciebie.", buttonText: "OK")
+                return
+            }
+            if let editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId),
+                editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
                 editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
                     self?.updateQuestionUiForCurrentCard()
                     self?.updateAnswerUiForCurrentCard()
-                    
-                })
+                    })
                 presentViewController(editFlashcardNavigation, animated: true, completion: nil)
-                
             }
-          
         }
-        
     }
 }
 
