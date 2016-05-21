@@ -25,18 +25,15 @@ class Test {
     let testType: StudyType
     private var cardsInTest: Int = 0
     //last 2 properties are amde to determinate if passed deck was empty from the beginning or if all flashcards was hidden
-    private var allFlashcardsHidden: Bool = false
-    private var passedDeckWasEmpty: Bool = false
+    private(set) var allFlashcardsHidden: Bool = false
+    private(set) var passedDeckWasEmpty: Bool = false
     
     init(deck: [Flashcard], testType: StudyType, deckName: String = "", deckAuthor: String = "") {
         
         self.deckName = deckName
         self.deckAuthor = deckAuthor
-        if deck.isEmpty {
-            passedDeckWasEmpty = true
-        } else {
-            passedDeckWasEmpty = false
-        }
+        
+        passedDeckWasEmpty = deck.isEmpty
         
         //Making a temporary deck with only not hidden flashcards
         var tmpDeck: [Flashcard] = []
@@ -61,11 +58,7 @@ class Test {
         self.testType = testType
         
         //This parameter helps function to determinate if all flashcards in passed deck are hidden.
-        if numberOfFlashcardsInFullDeck == 0 && passedDeckWasEmpty == false  {
-            allFlashcardsHidden = true
-        } else {
-            allFlashcardsHidden = false
-        }
+        allFlashcardsHidden = numberOfFlashcardsInFullDeck == 0 && passedDeckWasEmpty == false
         
         newFlashcard()
     }
@@ -108,24 +101,6 @@ class Test {
             currentCard = nil
         }
         return currentCard
-    }
-    
-    //Fuction is checking if all of flashcards in test are hidden
-    func checkIfAllFlashcardsHidden() -> Bool {
-        if allFlashcardsHidden {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    //Function is checking if passed deck was empty at the beggining
-    func checkIfPassedDeckIsEmpty() -> Bool {
-        if passedDeckWasEmpty == true {
-            return true
-        } else {
-            return false
-        }
     }
     
     //Function to call when user taps "correct" button, sets a new flashcard and increments `passedFlashcards`

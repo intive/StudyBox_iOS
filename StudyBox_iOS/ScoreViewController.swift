@@ -94,7 +94,8 @@ class ScoreViewController: StudyBoxViewController {
         if segue.identifier == "RepeatTest", let destinationViewController = segue.destinationViewController as? TestViewController,
             testLogicSource = testLogicSource, flashcards = testLogicSource.notPassedInTestDeck {
             
-            destinationViewController.testLogicSource = Test(deck: flashcards, testType: .Test(uint(flashcards.count)), deckName: testLogicSource.deckName)
+            destinationViewController.testLogicSource = Test(deck: flashcards, testType: .Test(uint(flashcards.count)),
+                                                             deckName: testLogicSource.deckName, deckAuthor: testLogicSource.deckAuthor)
         }
     }
 }
