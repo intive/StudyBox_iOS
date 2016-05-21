@@ -96,6 +96,27 @@ class RemoteDataManager {
     
     func logout() {
         user = nil
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail)
+        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword)
+    }
+    
+    func saveEmailPassInDefaults(email: String, pass: String) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
+        defaults.setObject(pass, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
+    }
+    
+    func getEmailPassFromDefaults() -> (email: String, password: String)? {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let email = defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserEmail) as? String
+        let password = defaults.objectForKey(Utils.NSUserDefaultsKeys.LoggedUserPassword) as? String
+        
+        if let email = email, password = password {
+            return (email, password)
+        } else {
+            return nil
+        }
     }
     
     

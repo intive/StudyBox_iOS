@@ -34,11 +34,21 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         disableButton(logInButton)
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        
+        autoLoginIfLoggedBefore()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         dataSource = self
+    }
+    
+    func autoLoginIfLoggedBefore() {
+        let myData = UIApplication.appDelegate().dataManager.remoteDataManager.getEmailPassFromDefaults()
+
+        if let email = myData?.email, password = myData?.password {
+            loginWithInputData(email, password: password)
+        }
     }
     
     func loginToServer(withEmail email: String, password: String) {
@@ -49,10 +59,8 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             
             switch response {
             case .Success(let user):
-               
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(user.email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
-                defaults.setObject(user.password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                
+                newDataManager.remoteDataManager.saveEmailPassInDefaults(user.email, pass: user.password)
                 self.successfulLoginTransition()
                 return
                 
@@ -65,7 +73,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         })
     }
     
-    func loginWithInputData(){
+    func loginWithInputData(login: String? = nil, password: String? = nil) {
         
         var alertMessage: String?
         
@@ -89,8 +97,9 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             presentAlertController(withTitle: "", message: message, buttonText: "Ok")
             return
         }
-        
-        if let email = emailTextField.text, password = passwordTextField.text  {
+        if let login = login, password = password {
+            loginToServer(withEmail: login, password: password)
+        } else if let email = emailTextField.text, password = passwordTextField.text  {
             loginToServer(withEmail: email, password: password)
         }
         
