@@ -56,7 +56,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         dataManager.register(email, password: password, completion: { response in
             var errorMessage = "Błąd Rejestracji"
             let successfullMessageTitle = "Zarejestrowano pomyślnie"
-            let successfullMessage = "Możesz się teraz zalogować"
+            let successfullMessage = "Za chwilę nastąpi automatyczne zalogowanie"
             let ok = "Ok"
             
             switch response {
@@ -65,21 +65,28 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
                 debugPrint("email: \(user.email)")
                 debugPrint("password: \(user.password)")
                 
-                
+
                 let alert: UIAlertController = UIAlertController(title: successfullMessageTitle, message: successfullMessage, preferredStyle: .Alert)
                 
-                let okButton = UIAlertAction(title: ok, style: .Default) { action -> () in
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                func dismissAlert(){
+                    alert.dismissViewControllerAnimated(true, completion: nil)
                 }
-                alert.addAction(okButton)
                 
                 self.presentViewController(alert, animated: true, completion: nil)
+                
+                let delay = 3.0 * Double(NSEC_PER_SEC)
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    dataManager.remoteDataManager.saveEmailPassInDefaults(user.email, pass: user.password)
+                    self.successfulLoginTransition()
+                })
                 
             case .Error(let err):
                 if case .ErrorWithMessage(let txt)? = (err as? ServerError){
                     errorMessage = txt
                 }
-                 self.presentAlertController(withTitle: "", message: errorMessage, buttonText: ok)
+                self.presentAlertController(withTitle: "", message: errorMessage, buttonText: ok)
             }
         })
     }
