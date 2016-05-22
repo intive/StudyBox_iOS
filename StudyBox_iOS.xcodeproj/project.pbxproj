@@ -13,6 +13,8 @@
 		2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0939A61CAD19CF00886A1B /* String+validation.swift */; };
 		2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */; };
 		2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */; };
+		2D22E4A91CF1EA5B008510C2 /* EmptyCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4A81CF1EA5B008510C2 /* EmptyCollectionViewHeader.swift */; };
+		2D22E4AA1CF1EAB3008510C2 /* EmptyCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D22E4A61CF1E9F0008510C2 /* EmptyCollectionViewHeader.xib */; };
 		2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */; };
 		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
 		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
@@ -157,6 +159,8 @@
 		2D0939A61CAD19CF00886A1B /* String+validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
 		2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableTextField.swift; sourceTree = "<group>"; };
 		2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerResourceDisposable.swift; sourceTree = "<group>"; };
+		2D22E4A61CF1E9F0008510C2 /* EmptyCollectionViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyCollectionViewHeader.xib; sourceTree = "<group>"; };
+		2D22E4A81CF1EA5B008510C2 /* EmptyCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCollectionViewHeader.swift; sourceTree = "<group>"; };
 		2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Searchable.swift"; sourceTree = "<group>"; };
 		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
@@ -326,6 +330,7 @@
 			children = (
 				7238493B1C88847F009605EE /* DecksViewController.swift */,
 				2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */,
+				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
 			);
 			name = Decks;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
 				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
 				2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */,
+				2D22E4A81CF1EA5B008510C2 /* EmptyCollectionViewHeader.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -452,7 +458,6 @@
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
 				7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
-				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
 				2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */,
+				2D22E4A61CF1E9F0008510C2 /* EmptyCollectionViewHeader.xib */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -715,6 +721,7 @@
 				CEC47A8D1CD2AB6200B0C9C0 /* expressions.json in Resources */,
 				A1341DCA1C81E76900AFD04E /* Assets.xcassets in Resources */,
 				CEC47A961CD2AEC000B0C9C0 /* pl.json in Resources */,
+				2D22E4AA1CF1EAB3008510C2 /* EmptyCollectionViewHeader.xib in Resources */,
 				CEE9F69A1C8AE1F800961ABA /* Lato-Regular.ttf in Resources */,
 				CEC47A901CD2AD5800B0C9C0 /* base.json in Resources */,
 				CEE9F6991C8AE1F800961ABA /* Lato-Black.ttf in Resources */,
@@ -913,6 +920,7 @@
 				AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */,
 				2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */,
 				2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */,
+				2D22E4A91CF1EA5B008510C2 /* EmptyCollectionViewHeader.swift in Sources */,
 				2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */,
 				72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,

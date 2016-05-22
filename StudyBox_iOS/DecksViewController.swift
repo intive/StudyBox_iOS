@@ -67,6 +67,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        collectionView?.registerNib(UINib(nibName: "EmptyCollectionViewHeader", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: "EmptyView")
         if let decksLayout = collectionView?.collectionViewLayout as? DecksCollectionViewLayout {
             decksLayout.delegate = self 
         }
@@ -192,6 +194,22 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
 
         return 1
     }
+    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+//                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: collectionView.frame.width, height: 100)
+//    }
+    
+//    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
+//                                 atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+//        switch kind {
+//        case UICollectionElementKindSectionHeader:
+//            return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath)
+//        default:
+//            fatalError("Unexpected collection element")
+//            
+//        }
+//    }
 
     // Calculate number of decks. If no decks, return 0
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -733,7 +733,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MyX-iT-hlv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewLayout key="collectionViewLayout" id="42S-ar-lmo" customClass="DecksCollectionViewLayout" customModule="StudyBox_iOS" customModuleProvider="target"/>
+                        <collectionViewLayout key="collectionViewLayout" id="5H9-3Q-1I8"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DecksViewCellID" id="Oet-h2-Oou" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="50" height="50"/>
@@ -1036,6 +1036,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nci-HR-1So"/>
+        <segue reference="gYF-Os-WnF"/>
     </inferredMetricsTieBreakers>
 </document>
