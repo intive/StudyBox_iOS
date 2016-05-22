@@ -14,16 +14,40 @@ protocol UniquelyIdentifiable {
     var serverID: String { get }
 }
 
-enum Tip: CustomStringConvertible, Equatable  {
-    case Text(text:String)
+class Tip: Object, UniquelyIdentifiable, JSONInitializable {
     
-    var description: String {
-        get {
-            switch self {
-            case .Text(let text):
-                return text
+    dynamic private(set) var serverID: String = ""
+    dynamic var flashcardID: String = ""
+    dynamic var deckID: String = ""
+    dynamic var content: String = ""
+    dynamic var difficulty: Int = 0
+    
+    required convenience init?(withJSON json: JSON) {
+        if let jsonDict = json.dictionary {
+            if let id = jsonDict["id"]?.string, essence = jsonDict["essence"]?.string, difficult = jsonDict["difficult"]?.int {
+                self.init(deckID: "", flashcardID: "", serverID: id, content: essence, difficulty: difficult)
+                return
             }
         }
+        return nil
+    }
+    
+    convenience init(deckID: String, flashcardID: String, serverID: String, content: String, difficulty: Int){
+        self.init()
+        self.serverID = serverID
+        self.deckID = deckID
+        self.flashcardID = flashcardID
+        self.content = content
+        self.difficulty = difficulty
+    }
+    
+    override class func primaryKey() -> String? {
+        return "serverID"
+    }
+    
+    func addParentFlashcard(flashcardID: String, deckID: String) {
+        self.deckID = deckID
+        self.flashcardID = flashcardID
     }
 }
 
@@ -35,24 +59,13 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable  {
     }
     dynamic var question: String = ""
     dynamic var answer: String = ""
-    dynamic var tip = Tip.Text(text: "").description
-    var tipEnum: Tip? {
-        get {
-            return Tip.Text(text: tip)
-        }
-        set {
-            if let value = newValue {
-                tip = value.description
-            }
-        }
-    }
     dynamic var hidden: Bool = false
     
     required convenience init?(withJSON json: JSON) {
         if let jsonDict = json.dictionary {
             if let id = jsonDict["id"]?.string, deckId = jsonDict["deckId"]?.string, question = jsonDict["question"]?.string,
                 answer = jsonDict["answer"]?.string, isHidden = jsonDict["isHidden"]?.bool {
-                self.init(serverID: id, deckID: deckId, question: question, answer: answer, tip: nil, isHidden: isHidden)
+                self.init(serverID: id, deckID: deckId, question: question, answer: answer, isHidden: isHidden)
                 return
             }
         }
@@ -63,17 +76,16 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable  {
         return "serverID"
     }
     
-    convenience init(serverID: String, deckID: String, question: String, answer: String, tip: Tip?, isHidden: Bool = false){
+    convenience init(serverID: String, deckID: String, question: String, answer: String, isHidden: Bool = false){
         self.init()
         self.serverID = serverID
         self.deckId = deckID
         self.question = question
         self.answer = answer
-        self.tipEnum = tip
         self.hidden = isHidden
     }
-    convenience init(deckID: String, question: String, answer: String, tip: Tip?, isHidden: Bool = false) {
-        self.init(serverID: "", deckID: deckID, question: question, answer: answer, tip: tip, isHidden: isHidden)
+    convenience init(deckID: String, question: String, answer: String, isHidden: Bool = false) {
+        self.init(serverID: "", deckID: deckID, question: question, answer: answer, isHidden: isHidden)
     }
     
 }
@@ -113,7 +125,7 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
         return "serverID"
     }
     
-    convenience init(serverID: String, name: String, isPublic: Bool = true ){
+    convenience init(serverID: String, name: String, isPublic: Bool = true){
         self.init()
         self.name = name
         self.serverID = serverID
@@ -143,10 +155,10 @@ func == (lhs: Deck, rhs: Deck) -> Bool {
 }
 
 func == (lhs: Flashcard, rhs: Flashcard) -> Bool {
-    return lhs.serverID == rhs.serverID && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer && lhs.tip == rhs.tip
+    return lhs.serverID == rhs.serverID && lhs.deckId == rhs.deckId && lhs.question == rhs.question && lhs.answer == rhs.answer
 }
 
 
 func == (lhs: Tip, rhs: Tip) -> Bool {
-    return lhs.description == rhs.description
+    return lhs.serverID == rhs.serverID
 }

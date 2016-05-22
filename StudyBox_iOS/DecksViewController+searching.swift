@@ -42,7 +42,6 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         let searchText = filter.trimWhiteCharacters()
         if !searchText.characters.isEmpty && searchText.characters.count <= 100 {
             let searchBlock = {
-                let previousSearchWasEmpty = self.searchDecks.isEmpty
                 self.searchDecks = self.searchDecksHolder
                     .filter {
                         return $0.matches(searchText)
@@ -54,10 +53,6 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
                             return true
                         }
                         return false
-                }
-                if !previousSearchWasEmpty && self.searchDecks.isEmpty {
-                    self.presentAlertController(withTitle: "", message: "Brak talii o podanej nazwie", buttonText: "Ok")
-                    
                 }
                 self.collectionView?.reloadData()
                 

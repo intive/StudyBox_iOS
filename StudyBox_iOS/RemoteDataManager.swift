@@ -183,4 +183,50 @@ class RemoteDataManager {
             question: flashcard.question, answer: flashcard.answer, isHidden: flashcard.hidden),
                        completion: completion)
     }
+    
+    //MARK: Tips
+
+    // swiftlint:disable:next function_parameter_count
+    func addTip(deckID deckID: String, flashcardID: String, tipID: String, content: String, difficulty: Int, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.AddTip(deckID: deckID, flashcardID: flashcardID, content: content, difficulty: difficulty), completion: completion)
+    }
+
+    func tip(deckID deckID: String, flashcardID: String, tipID: String, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.GetTip(deckID: deckID, flashcardID: flashcardID, tipID: tipID), completion: completion)
+    }
+    
+    func allTips(deckID deckID: String, flashcardID: String, completion: (ServerResultType<[JSON]>) -> ()) {
+        performRequest(Router.GetAllTips(deckID: deckID, flashcardID: flashcardID), completion: completion)
+    }
+    
+    // swiftlint:disable:next function_parameter_count
+    func updateTip(deckID deckID: String, flashcardID: String, tipID: String,
+                          content: String, difficulty: Int, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.UpdateTip(deckID: deckID, flashcardID: flashcardID, tipID: tipID,
+            content: content, difficulty: difficulty), completion: completion)
+    }
+    
+    func removeTip(deckID deckID: String, flashcardID: String, tipID: String, completion: (ServerResultType<Void>)->()) {
+        performGenericRequest(Router.RemoveTip(deckID: deckID, flashcardID: flashcardID, tipID: tipID), completion: completion){ _ in
+            return
+        }
+    }
+    
+    func addTip(tip: Tip, completion: (ServerResultType<JSON>)->()) {
+        addTip(deckID: tip.deckID, flashcardID: tip.flashcardID, tipID: tip.serverID, content: tip.content, difficulty: tip.difficulty, completion: completion)
+    }
+    
+    func tip(tip: Tip, completion: (ServerResultType<JSON>)->()) {
+        performRequest(Router.GetTip(deckID: tip.deckID, flashcardID: tip.flashcardID, tipID: tip.serverID), completion: completion)
+    }
+    
+    func updateTip(tip: Tip, completion: (ServerResultType<JSON>)->()) {
+        updateTip(deckID: tip.deckID, flashcardID: tip.flashcardID, tipID: tip.serverID,
+                  content: tip.content, difficulty: tip.difficulty, completion: completion)
+    }
+    
+    func removeTip(tip: Tip, completion: (ServerResultType<Void>) -> ()) {
+        removeTip(deckID: tip.deckID, flashcardID: tip.flashcardID, tipID: tip.serverID, completion: completion)
+    }
+    
 }
