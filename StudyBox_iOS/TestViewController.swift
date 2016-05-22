@@ -89,7 +89,7 @@ class TestViewController: StudyBoxViewController {
         currentQuestionNumber.text = "#1"
         
         if let test = testLogicSource {
-            self.title = test.deckName
+            self.title = test.deck.name
             updateQuestionUiForCurrentCard()
             updateAnswerUiForCurrentCard()
             
@@ -114,7 +114,7 @@ class TestViewController: StudyBoxViewController {
                         UIAlertAction(title: "Tak", style: .Default,
                             handler: { _ in
                                 if let repeatDeck = testLogic.repeatDeck {
-                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn, deckName: testLogic.deckName)
+                                    self.testLogicSource = Test(flashcards: repeatDeck, testType: .Learn, deck: testLogic.deck)
                                     self.answeredQuestionTransition()
                                 }
                             })

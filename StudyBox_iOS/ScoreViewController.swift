@@ -69,7 +69,10 @@ class ScoreViewController: StudyBoxViewController {
             
             self.testScoreFraction = Double(cardsResult.0) / Double(cardsResult.1)
             let testScorePercentage = Int(testScoreFraction*100)
-            
+            let manager = UIApplication.appDelegate().dataManager
+            manager.localDataManager.update(
+                TestInfo(deck: testLogic.deck, answeredFlashcardsCount: cardsResult.0, correctlyAnsweredFlashcardsCount: cardsResult.1)
+            )
             scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
             scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n\(testScorePercentage) %"
         }
@@ -94,7 +97,7 @@ class ScoreViewController: StudyBoxViewController {
         if segue.identifier == "RepeatTest", let destinationViewController = segue.destinationViewController as? TestViewController,
             testLogicSource = testLogicSource, flashcards = testLogicSource.notPassedInTestDeck {
             
-            destinationViewController.testLogicSource = Test(deck: flashcards, testType: .Test(uint(flashcards.count)), deckName: testLogicSource.deckName)
+            destinationViewController.testLogicSource = Test(flashcards: flashcards, testType: .Test(uint(flashcards.count)), deck: testLogicSource.deck)
         }
     }
 }

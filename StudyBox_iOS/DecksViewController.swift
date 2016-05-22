@@ -283,7 +283,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                             alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
                                 resetSearchUI()
                                 self.performSegueWithIdentifier("StartTest",
-                                    sender: Test(deck: flashcards, testType: .Test(UInt32(amount)), deckName: deck.name))
+                                    sender: Test(flashcards: flashcards, testType: .Test(UInt32(amount)), deck: deck))
                                 })
                         } else {
                             break
@@ -292,7 +292,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                     alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHidden) + ")", style: .Default) { act in
                         resetSearchUI()
                         self.performSegueWithIdentifier("StartTest",
-                            sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHidden)), deckName: deck.name))
+                            sender: Test(flashcards: flashcards, testType: .Test(UInt32(amountFlashcardsNotHidden)), deck: deck))
                         })
                     alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
                     
@@ -300,7 +300,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                 }
                 let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
                     resetSearchUI()
-                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn, deckName: deck.name))
+                    self.performSegueWithIdentifier("StartTest", sender: Test(flashcards: flashcards, testType: .Learn, deck: deck))
                 }
                 
                 alert.addAction(testButton)

@@ -13,8 +13,8 @@ enum StudyType {
 }
 
 class Test {
-    private var deck: [Flashcard]
-    private(set) var deckName: String
+    private var flashcards: [Flashcard]
+    private(set) var deck: Deck
     private(set) var notPassedInTestDeck: [Flashcard]?
     private(set) var repeatDeck: [Flashcard]?
     private(set) var currentCard: Flashcard?
@@ -27,10 +27,10 @@ class Test {
     private var allFlashcardsHidden: Bool = false
     private var passedDeckWasEmpty: Bool = false
     
-    init(deck: [Flashcard], testType: StudyType, deckName: String = "") {
+    init(flashcards: [Flashcard], testType: StudyType, deck: Deck) {
         
-        self.deckName = deckName 
-        if deck.isEmpty {
+        self.deck = deck
+        if flashcards.isEmpty {
             passedDeckWasEmpty = true
         } else {
             passedDeckWasEmpty = false
@@ -38,7 +38,7 @@ class Test {
         
         //Making a temporary deck with only not hidden flashcards
         var tmpDeck: [Flashcard] = []
-        for flashcard in deck {
+        for flashcard in flashcards {
             if flashcard.hidden == false {
                 tmpDeck.append(flashcard)
             }
@@ -46,16 +46,16 @@ class Test {
         
         switch testType {
         case .Learn:
-            self.deck = tmpDeck.shuffle()
-            cardsInTest = self.deck.count
-            repeatDeck = self.deck
+            self.flashcards = tmpDeck.shuffle()
+            cardsInTest = self.flashcards.count
+            repeatDeck = self.flashcards
         case .Test(let questionsNumber):
             notPassedInTestDeck = [Flashcard]()
-            self.deck = tmpDeck.shuffle(maxElements: Int(questionsNumber))
-            cardsInTest = self.deck.count
+            self.flashcards = tmpDeck.shuffle(maxElements: Int(questionsNumber))
+            cardsInTest = self.flashcards.count
         }
 
-        self.numberOfFlashcardsInFullDeck = self.deck.count
+        self.numberOfFlashcardsInFullDeck = self.flashcards.count
         self.testType = testType
         
         //This parameter helps function to determinate if all flashcards in passed deck are hidden.
@@ -83,7 +83,7 @@ class Test {
             case .Learn:
                 //moves card to end of deck, if currentCard is not nil
                 if let moveCardToEnd = currentCard {
-                    deck.append(moveCardToEnd)
+                    flashcards.append(moveCardToEnd)
                 }
             case .Test:
                 index += 1
@@ -99,9 +99,9 @@ class Test {
     
     //Returns new 'Flashcard?' or nil if there's no Flashcard to set
     private func newFlashcard() -> Flashcard? {
-        if !deck.isEmpty {
-            currentCard = deck.first
-            deck.removeFirst()
+        if !flashcards.isEmpty {
+            currentCard = flashcards.first
+            flashcards.removeFirst()
         } else {
             currentCard = nil
         }
@@ -142,7 +142,7 @@ class Test {
     //Function skips currentCard to end of deck
     func skipCard() -> Flashcard? {
         if let skipCard = currentCard {
-            deck.append(skipCard)
+            flashcards.append(skipCard)
         }
         return newFlashcard()
     }
