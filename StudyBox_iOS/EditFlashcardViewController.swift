@@ -34,7 +34,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     @IBOutlet weak var choosenDeckLabel: UILabel!
     @IBOutlet weak var searchBarWrapper: UIView!
     @IBOutlet weak var questionField: UIPlaceholderTextView!
-    @IBOutlet weak var tipField: UIPlaceholderTextView!
     @IBOutlet weak var answerField: UIPlaceholderTextView!
     @IBOutlet var editFields: [UITextView]!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -82,7 +81,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
       
         decksBar.text = nil
         questionField.text = nil
-        tipField.text = nil
         answerField.text = nil
         deck = nil
         choosenDeckLabel.text = "Wybrana talia"
@@ -96,7 +94,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             deck = card.deck
             choosenDeckLabel.text = card.deck?.uiName
             questionField.text = card.question
-            tipField.text = card.tip
             answerField.text = card.answer
             navigationItem.title = "Edytuj"
             if presentingViewController != nil {
@@ -140,7 +137,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         assert(mode != nil, "mode not choosen!")
         answerField.placeholder = "Odpowiedź"
         questionField.placeholder = "Pytanie"
-        tipField.placeholder = "Podpowiedź"
         updateUiForCurrentMode()
 
         let graphite = UIColor.sb_Graphite().CGColor
@@ -231,19 +227,13 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             return
         }
         
-        var tip: Tip?
-        if let tipText = tipField.text {
-            tip = Tip.Text(text: tipText)
-        }
-        
         guard let mode = mode else {
             return
         }
         
         if case .Add = mode {
             
-            // todo add tips
-            dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, tip: tip)) {
+            dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, isHidden: false)) {
                 switch $0 {
                 case .Success(_):
                     self.presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
@@ -255,14 +245,14 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             }
 
         } else if case .Modify(_, let callback) = mode {
-            modifyAction(question, answer: answer, tip: tip, callback: callback)
+            modifyAction(question, answer: answer, callback: callback)
             
         }
         
     }
     
-    private func modifyAction(question: String, answer: String, tip: Tip?, callback: ((flashcard: Flashcard) -> Void)?) {
-        let updateFlashcardCpy = Flashcard(serverID: flashcard.serverID, deckID: flashcard.deckId, question: question, answer: answer, tip: tip)
+    private func modifyAction(question: String, answer: String, callback: ((flashcard: Flashcard) -> Void)?) {
+        let updateFlashcardCpy = Flashcard(serverID: flashcard.serverID, deckID: flashcard.deckId, question: question, answer: answer, isHidden: false)
         let completion = {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
