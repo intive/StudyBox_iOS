@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmptyCollectionViewHeader: UICollectionReusableView {
+class EmptyCollectionReusableView: UICollectionReusableView {
     
-    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
 }
