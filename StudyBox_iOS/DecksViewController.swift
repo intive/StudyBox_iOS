@@ -70,6 +70,9 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         super.viewDidLoad()
         collectionView?.collectionViewLayout = DecksCollectionViewLayout()
         collectionView?.collectionViewLayout.invalidateLayout()
+        if let decksLayout = collectionView?.collectionViewLayout as? DecksCollectionViewLayout {
+            decksLayout.delegate = self 
+        }
         searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         searchBarWrapper.autoresizingMask = .FlexibleWidth
         searchBarWrapper.addSubview(searchBar)
