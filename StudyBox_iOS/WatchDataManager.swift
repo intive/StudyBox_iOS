@@ -34,7 +34,7 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         var flashcardsQuestions = [String]()
         var flashcardsAnswers = [String]()
         var flashcardsIDs = [String]()
-        var flashcardsTips = [String]()
+        let flashcardsTips = [String]()
         
         if let manager = dataManager {
             for deck in decksIDs {
@@ -44,7 +44,7 @@ class WatchDataManager: NSObject, WCSessionDelegate {
                         flashcardsAnswers.append(flashcard.answer)
                         flashcardsIDs.append(flashcard.serverID)
 //                        flashcardsTips.append(flashcard.tip)
-//TODO: fix handling tips
+//todo: fix handling tips
                     }
                 }
             }

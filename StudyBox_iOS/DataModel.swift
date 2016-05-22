@@ -55,7 +55,7 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable  {
     dynamic private(set) var serverID: String = ""
     dynamic private(set) var deckId: String = ""
     dynamic var deck: Deck? {
-        return realm?.objectForPrimaryKey(Deck.self, key: serverID)
+        return realm?.objectForPrimaryKey(Deck.self, key: deckId)
     }
     dynamic var question: String = ""
     dynamic var answer: String = ""
