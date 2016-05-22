@@ -121,17 +121,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EUD-8B-Kzz">
-                                <rect key="frame" x="0.0" y="64" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="sdI-1y-Jji"/>
+                                    <constraint firstAttribute="height" constant="44" id="sdI-1y-Jji"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhQ-Ae-lE1">
-                                <rect key="frame" x="20" y="122" width="560" height="470"/>
+                                <rect key="frame" x="20" y="108" width="560" height="484"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kfn-pw-SW3">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="416"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="400"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wybrana talia" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-u0-NRa">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -140,16 +140,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUh-bE-pKc" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="36" width="560" height="150"/>
+                                                <rect key="frame" x="0.0" y="36" width="560" height="142"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="DDr-Ej-RHM"/>
+                                                    <constraint firstAttribute="height" constant="142" id="DDr-Ej-RHM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKh-3v-Eq2" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="201" width="560" height="50"/>
+                                                <rect key="frame" x="0.0" y="193" width="560" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="GO8-J9-kN0"/>
@@ -158,10 +158,10 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4A-pd-pc4" customClass="UIPlaceholderTextView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="266" width="560" height="150"/>
+                                                <rect key="frame" x="0.0" y="258" width="560" height="142"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="EWl-5W-SpZ"/>
+                                                    <constraint firstAttribute="height" constant="142" id="EWl-5W-SpZ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -182,7 +182,7 @@
                         <constraints>
                             <constraint firstItem="EUD-8B-Kzz" firstAttribute="top" secondItem="JEz-sa-tXr" secondAttribute="bottom" id="3xf-BU-f1g"/>
                             <constraint firstItem="EUD-8B-Kzz" firstAttribute="leading" secondItem="y4P-X8-cdB" secondAttribute="leading" id="4Uh-kr-NV9"/>
-                            <constraint firstItem="vhQ-Ae-lE1" firstAttribute="top" secondItem="EUD-8B-Kzz" secondAttribute="bottom" constant="8" id="54A-5B-jRT"/>
+                            <constraint firstItem="vhQ-Ae-lE1" firstAttribute="top" secondItem="EUD-8B-Kzz" secondAttribute="bottom" id="54A-5B-jRT"/>
                             <constraint firstItem="aWM-Xy-cjF" firstAttribute="top" secondItem="vhQ-Ae-lE1" secondAttribute="bottom" constant="8" id="POM-qS-tLN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vhQ-Ae-lE1" secondAttribute="trailing" id="Qy0-X2-vN4"/>
                             <constraint firstAttribute="trailing" secondItem="EUD-8B-Kzz" secondAttribute="trailing" id="ZXS-Q9-ljw"/>
@@ -201,6 +201,7 @@
                         <outlet property="choosenDeckLabel" destination="7h0-u0-NRa" id="Sf8-T0-3On"/>
                         <outlet property="questionField" destination="VUh-bE-pKc" id="5FO-lc-LHM"/>
                         <outlet property="scrollView" destination="vhQ-Ae-lE1" id="7ao-wS-0gg"/>
+                        <outlet property="scrollViewTopConstraint" destination="54A-5B-jRT" id="GDa-sK-zpR"/>
                         <outlet property="searchBarWrapper" destination="EUD-8B-Kzz" id="kZR-X1-Xam"/>
                         <outlet property="searchbarWrapperTopConstraint" destination="3xf-BU-f1g" id="JaG-qx-2NV"/>
                         <outlet property="tipField" destination="YKh-3v-Eq2" id="cFg-6n-M29"/>
