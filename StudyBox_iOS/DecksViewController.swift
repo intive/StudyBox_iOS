@@ -27,6 +27,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return searchDecks.isEmpty && !searchController.active ? decksArray : searchDecks
     }
     
+    
     lazy var dataManager: DataManager = {
         return UIApplication.appDelegate().dataManager
     }()
@@ -64,14 +65,11 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     func shouldStrech() -> Bool {
         return !searchController.active
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        collectionView?.registerNib(UINib(nibName: "EmptyCollectionViewHeader", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: "EmptyView")
-        if let decksLayout = collectionView?.collectionViewLayout as? DecksCollectionViewLayout {
-            decksLayout.delegate = self 
-        }
+        collectionView?.collectionViewLayout = DecksCollectionViewLayout()
+        collectionView?.collectionViewLayout.invalidateLayout()
         searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         searchBarWrapper.autoresizingMask = .FlexibleWidth
         searchBarWrapper.addSubview(searchBar)
@@ -195,22 +193,28 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return 1
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-//                        referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: collectionView.frame.width, height: 100)
-//    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset) : CGSize.zero
+    }
     
-//    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
-//                                 atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-//        switch kind {
-//        case UICollectionElementKindSectionHeader:
-//            return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath)
-//        default:
-//            fatalError("Unexpected collection element")
-//            
-//        }
-//    }
-
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
+                                 atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            guard let emptyView = collectionView
+                .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath) as? EmptyCollectionReusableView else {
+                fatalError("Incorrect supplementary view type")
+            }
+            emptyView.messageLabel.text = searchController.active
+                ? "Nie znaleziono talii o podanej nazwie" : "Brak talii, przesuń w górę aby wyszukać"
+            return emptyView
+        default:
+            fatalError("Unexpected collection element")
+            
+        }
+    }
+    
     // Calculate number of decks. If no decks, return 0
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return decksSource.count

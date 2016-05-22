@@ -17,10 +17,10 @@ class DecksCollectionViewLayout: UICollectionViewFlowLayout {
     weak var delegate: DecksCollectionLayoutDelegate?
     
     
-//    override func prepareLayout() {
-//        super.prepareLayout()
-//        self.headerReferenceSize = CGSize(width: self.collectionViewContentSize().width, height: 100)
-//    }
+    override func prepareLayout() {
+        super.prepareLayout()
+        self.headerReferenceSize = CGSize(width: self.collectionViewContentSize().width, height: 100)
+    }
     
     override func collectionViewContentSize() -> CGSize {
         let expectedSize = super.collectionViewContentSize()
