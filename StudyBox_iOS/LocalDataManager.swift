@@ -63,7 +63,11 @@ class LocalDataManager {
             realm.delete(objects)
         }
     }
-    
+   
+    func deleteAll<T: Object>(objects: T.Type) -> Bool {
+        let objs = getAll(objects)
+        return delete(objs)
+    }
     func flashcards(deckID: String) -> [Flashcard] {
         return filter(Flashcard.self, predicate: "serverID == '\(deckID)'")
     }

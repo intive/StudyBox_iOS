@@ -373,7 +373,7 @@ class TestViewController: StudyBoxViewController {
     }
     @IBAction func editCurrentFlashcard(sender: UIBarButtonItem) {
         if let card = testLogicSource?.currentCard,
-            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId) {
+            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerID) {
             if let editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
                 editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
                     self?.updateQuestionUiForCurrentCard()

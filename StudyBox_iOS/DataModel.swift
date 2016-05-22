@@ -153,9 +153,10 @@ class TestInfo: Object {
     dynamic var deck: Deck!
     dynamic var answeredFlashcardsCount: Int = 0
     dynamic var correctlyAnsweredFlashcardsCount: Int = 0
+    dynamic var localID = NSUUID().UUIDString
     
-    required init() {
-        super.init()
+    override class func primaryKey() -> String? {
+        return "localID"
     }
     
     convenience init(deck: Deck, answeredFlashcardsCount: Int, correctlyAnsweredFlashcardsCount: Int) {

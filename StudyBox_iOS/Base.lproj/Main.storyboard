@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="uUO-ii-Urr">
             <objects>
-                <viewController storyboardIdentifier="LoginViewControllerId" id="aM1-56-TXz" customClass="LoginViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerID" id="aM1-56-TXz" customClass="LoginViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KK4-9f-xvf"/>
                         <viewControllerLayoutGuide type="bottom" id="IS7-55-bj5"/>
@@ -215,19 +215,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wG7-8q-qyR">
-                                <rect key="frame" x="216" y="170" width="168" height="261"/>
+                                <rect key="frame" x="210" y="139" width="180" height="322"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poprawne odpowiedzi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxN-Bt-U7Z">
-                                        <rect key="frame" x="0.0" y="0.0" width="168" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratulacje!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxN-Bt-U7Z">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twój wynik:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mau-dA-yg9">
+                                        <rect key="frame" x="0.0" y="31" width="180" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDb-D2-iFj" customClass="CircularLoaderView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="31" width="168" height="168"/>
+                                        <rect key="frame" x="0.0" y="62" width="180" height="180"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rX-H8-gbr">
-                                                <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -249,20 +255,30 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ilość talii:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcb-as-7PG">
-                                        <rect key="frame" x="49" y="209" width="71" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ilość testów:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ww2-Xk-sOl">
-                                        <rect key="frame" x="36" y="240" width="96" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgM-lc-h5I">
+                                        <rect key="frame" x="15" y="252" width="150" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="to5-id-Xw2"/>
+                                        </constraints>
+                                        <state key="normal" title="Powrót do listy talii"/>
+                                        <connections>
+                                            <action selector="deckListButtonAction:" destination="iPr-WN-tEa" eventType="touchUpInside" id="QT8-Qy-att"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nzp-hV-QQH">
+                                        <rect key="frame" x="0.0" y="292" width="180" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="Nti-KF-vXc"/>
+                                        </constraints>
+                                        <state key="normal" title="Test z błędnych fiszek"/>
+                                        <connections>
+                                            <segue destination="6tt-KQ-lf6" kind="custom" identifier="RepeatTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="bb9-zC-jZN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Mau-dA-yg9" secondAttribute="trailing" id="KFf-VY-QWD"/>
+                                    <constraint firstItem="Mau-dA-yg9" firstAttribute="leading" secondItem="wG7-8q-qyR" secondAttribute="leading" id="KY1-9L-xHl"/>
                                     <constraint firstAttribute="trailing" secondItem="lxN-Bt-U7Z" secondAttribute="trailing" id="MiR-Zw-WKB"/>
                                     <constraint firstItem="lxN-Bt-U7Z" firstAttribute="leading" secondItem="wG7-8q-qyR" secondAttribute="leading" id="O8Q-0j-3ue"/>
                                     <constraint firstItem="TDb-D2-iFj" firstAttribute="width" secondItem="wG7-8q-qyR" secondAttribute="width" id="Tfw-Ai-wvk"/>
@@ -297,6 +313,9 @@
                     <connections>
                         <outlet property="circularProgressView" destination="TDb-D2-iFj" id="pdT-hv-3In"/>
                         <outlet property="congratulationsBigLabel" destination="lxN-Bt-U7Z" id="t6y-Sy-HZX"/>
+                        <outlet property="congratulationsSmallLabel" destination="Mau-dA-yg9" id="0yZ-M1-6Xc"/>
+                        <outlet property="deckListButton" destination="tgM-lc-h5I" id="Bs6-cD-g2I"/>
+                        <outlet property="runTestButton" destination="Nzp-hV-QQH" id="Mb6-J4-OyB"/>
                         <outlet property="scoreLabel" destination="1rX-H8-gbr" id="lQT-vc-2w2"/>
                     </connections>
                 </viewController>
@@ -307,7 +326,7 @@
         <!--Drawer View Controller-->
         <scene sceneID="Wwu-sA-nhp">
             <objects>
-                <viewController storyboardIdentifier="DrawerViewControllerId" id="aFL-74-HfG" customClass="DrawerViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DrawerViewControllerID" id="aFL-74-HfG" customClass="DrawerViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ItK-v6-3qq"/>
                         <viewControllerLayoutGuide type="bottom" id="fbU-cd-DcK"/>
@@ -542,10 +561,10 @@
             </objects>
             <point key="canvasLocation" x="2927" y="2581"/>
         </scene>
-        <!--View Controller-->
+        <!--Statistics View Controller-->
         <scene sceneID="m1V-PL-qtM">
             <objects>
-                <viewController id="fJa-Yk-ZVi" sceneMemberID="viewController">
+                <viewController id="fJa-Yk-ZVi" customClass="StatisticsViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qeU-hF-i6a"/>
                         <viewControllerLayoutGuide type="bottom" id="FoU-WO-9Dn"/>
@@ -554,85 +573,90 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="er0-W1-mld">
-                                <rect key="frame" x="210" y="139" width="180" height="322"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EBI-XT-SoF">
+                                <rect key="frame" x="216" y="150" width="168" height="301"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratulacje!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71v-mO-TCY">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poprawne odpowiedzi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dpk-pf-DVj">
+                                        <rect key="frame" x="0.0" y="0.0" width="168" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twój wynik:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VI2-fa-3rJ">
-                                        <rect key="frame" x="0.0" y="31" width="180" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vNs-ec-HSA" customClass="CircularLoaderView" customModule="StudyBox_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="62" width="180" height="180"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAk-4e-kLJ" customClass="CircularLoaderView" customModule="StudyBox_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="31" width="168" height="168"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6B2-zc-AAa">
-                                                <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBG-qt-ep2">
+                                                <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="6B2-zc-AAa" firstAttribute="centerX" secondItem="vNs-ec-HSA" secondAttribute="centerX" id="ZfG-2g-sB3"/>
-                                            <constraint firstAttribute="trailing" secondItem="6B2-zc-AAa" secondAttribute="trailing" id="bG3-wu-jbK"/>
-                                            <constraint firstItem="6B2-zc-AAa" firstAttribute="centerY" secondItem="vNs-ec-HSA" secondAttribute="centerY" id="dbb-aN-gYP"/>
-                                            <constraint firstItem="6B2-zc-AAa" firstAttribute="leading" secondItem="vNs-ec-HSA" secondAttribute="leading" id="ieq-74-lY2"/>
-                                            <constraint firstItem="6B2-zc-AAa" firstAttribute="top" secondItem="vNs-ec-HSA" secondAttribute="top" id="nDn-oj-20x"/>
-                                            <constraint firstAttribute="width" secondItem="vNs-ec-HSA" secondAttribute="height" multiplier="1:1" id="qr3-Lp-sM8"/>
-                                            <constraint firstAttribute="bottom" secondItem="6B2-zc-AAa" secondAttribute="bottom" id="tan-jN-VuW"/>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="top" secondItem="NAk-4e-kLJ" secondAttribute="top" id="4hh-Ne-jke"/>
+                                            <constraint firstAttribute="width" secondItem="NAk-4e-kLJ" secondAttribute="height" multiplier="1:1" id="6Hb-wJ-XSD"/>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="centerX" secondItem="NAk-4e-kLJ" secondAttribute="centerX" id="Dda-iM-i8p"/>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="leading" secondItem="NAk-4e-kLJ" secondAttribute="leading" id="NuV-bO-vkT"/>
+                                            <constraint firstAttribute="bottom" secondItem="YBG-qt-ep2" secondAttribute="bottom" id="Opd-jR-bQ7"/>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="centerY" secondItem="NAk-4e-kLJ" secondAttribute="centerY" id="afm-OH-SIe"/>
+                                            <constraint firstAttribute="trailing" secondItem="YBG-qt-ep2" secondAttribute="trailing" id="zp8-yI-g7n"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="dbb-aN-gYP"/>
-                                                <exclude reference="ZfG-2g-sB3"/>
+                                                <exclude reference="afm-OH-SIe"/>
+                                                <exclude reference="Dda-iM-i8p"/>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ab-1p-GzK">
-                                        <rect key="frame" x="15" y="252" width="150" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ilość talii:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJF-eD-3x5">
+                                        <rect key="frame" x="49" y="209" width="71" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ilość testów:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vs5-HU-sy2">
+                                        <rect key="frame" x="36" y="240" width="96" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKa-BM-ES0">
+                                        <rect key="frame" x="17" y="271" width="135" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="eJU-7M-NNq"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="oXH-CB-UvL"/>
                                         </constraints>
-                                        <state key="normal" title="Powrót do listy talii"/>
+                                        <state key="normal" title="Wyzeruj statystyki"/>
                                         <connections>
-                                            <action selector="deckListButtonAction:" destination="iPr-WN-tEa" eventType="touchUpInside" id="IqK-6h-6tQ"/>
+                                            <action selector="clearStatistics:" destination="fJa-Yk-ZVi" eventType="touchUpInside" id="enz-PW-BdK"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDk-OR-qMd">
-                                        <rect key="frame" x="0.0" y="292" width="180" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="180" id="W1P-zc-Q7R"/>
-                                        </constraints>
-                                        <state key="normal" title="Test z błędnych fiszek"/>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="vNs-ec-HSA" firstAttribute="width" secondItem="er0-W1-mld" secondAttribute="width" id="8xI-iP-kcY"/>
-                                    <constraint firstAttribute="trailing" secondItem="71v-mO-TCY" secondAttribute="trailing" id="D36-e5-KYK"/>
-                                    <constraint firstItem="VI2-fa-3rJ" firstAttribute="leading" secondItem="er0-W1-mld" secondAttribute="leading" id="ltH-RK-mtc"/>
-                                    <constraint firstItem="71v-mO-TCY" firstAttribute="leading" secondItem="er0-W1-mld" secondAttribute="leading" id="srK-Tc-EUn"/>
-                                    <constraint firstAttribute="trailing" secondItem="VI2-fa-3rJ" secondAttribute="trailing" id="tlU-Cb-wTF"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dpk-pf-DVj" secondAttribute="trailing" id="06r-VC-dYk"/>
+                                    <constraint firstItem="NAk-4e-kLJ" firstAttribute="width" secondItem="EBI-XT-SoF" secondAttribute="width" id="Dxf-Qz-cud"/>
+                                    <constraint firstItem="Dpk-pf-DVj" firstAttribute="leading" secondItem="EBI-XT-SoF" secondAttribute="leading" id="oX7-mh-cMV"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="er0-W1-mld" firstAttribute="centerX" secondItem="VCR-9c-5OB" secondAttribute="centerX" id="jqG-X9-XRf"/>
-                            <constraint firstItem="er0-W1-mld" firstAttribute="centerY" secondItem="VCR-9c-5OB" secondAttribute="centerY" id="zYC-Rv-xba"/>
+                            <constraint firstItem="EBI-XT-SoF" firstAttribute="centerX" secondItem="VCR-9c-5OB" secondAttribute="centerX" id="qdT-J4-t4d"/>
+                            <constraint firstItem="EBI-XT-SoF" firstAttribute="centerY" secondItem="VCR-9c-5OB" secondAttribute="centerY" id="x3a-3G-h1r"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="a3V-GX-j6W"/>
+                    <navigationItem key="navigationItem" id="Unw-AU-fKI"/>
+                    <connections>
+                        <outlet property="circularProgressView" destination="NAk-4e-kLJ" id="tOS-VO-tkT"/>
+                        <outlet property="clearButton" destination="SKa-BM-ES0" id="Smw-Og-T2g"/>
+                        <outlet property="decksAmount" destination="dJF-eD-3x5" id="gbH-2a-z5K"/>
+                        <outlet property="flashcardsScore" destination="YBG-qt-ep2" id="bRY-VU-2Sc"/>
+                        <outlet property="infoLabel" destination="Dpk-pf-DVj" id="dPy-EK-UsS"/>
+                        <outlet property="testsAmount" destination="Vs5-HU-sy2" id="wt8-yw-c2N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r8J-b2-vQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2927" y="3270"/>
+            <point key="canvasLocation" x="3737" y="3262"/>
         </scene>
         <!--Random Deck Loading Controller-->
         <scene sceneID="KIJ-m0-3eO">
@@ -883,7 +907,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VXf-gi-gbi">
             <objects>
-                <navigationController storyboardIdentifier="EditFlashcardViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditFlashcardViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivF-VU-xcN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1147,22 +1171,22 @@
             <point key="canvasLocation" x="2941" y="1884"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="UVD-31-9qj">
+        <scene sceneID="2ik-n8-WER">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aU0-hT-acS" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StatisticsViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="k06-Qr-muQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gUc-7j-568">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eGz-yo-bxv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="fJa-Yk-ZVi" kind="relationship" relationship="rootViewController" id="1gw-IX-RFd"/>
+                        <segue destination="fJa-Yk-ZVi" kind="relationship" relationship="rootViewController" id="mnv-Bl-67c"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HnM-Ng-yXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GCK-4M-dXT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2209" y="3262"/>
+            <point key="canvasLocation" x="2925" y="3262"/>
         </scene>
     </scenes>
     <resources>
@@ -1173,6 +1197,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gYF-Os-WnF"/>
+        <segue reference="bb9-zC-jZN"/>
     </inferredMetricsTieBreakers>
 </document>
