@@ -1023,6 +1023,7 @@
                         <outlet property="answerView" destination="mbe-Fw-hsa" id="Lq5-Qs-Jc4"/>
                         <outlet property="correctButton" destination="HKv-dV-bFU" id="Aan-ab-YyV"/>
                         <outlet property="currentQuestionNumber" destination="CN8-h0-Hn7" id="F2W-R0-BmT"/>
+                        <outlet property="editFlashcardBarButton" destination="QAu-5i-Nio" id="5yl-xg-4VO"/>
                         <outlet property="incorrectButton" destination="Wrx-Hp-csN" id="Ajy-BL-dwr"/>
                         <outlet property="nextTipButton" destination="N6H-nk-iQC" id="ei1-2X-Llp"/>
                         <outlet property="previousTipButton" destination="lrR-w4-98C" id="a77-bD-lGb"/>

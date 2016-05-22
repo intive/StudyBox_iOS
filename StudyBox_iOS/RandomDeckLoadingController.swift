@@ -58,7 +58,9 @@ class RandomDeckLoadingController: StudyBoxViewController {
                         if flashcards.isEmpty {
                             self.updateUI(message: "Otrzymano pustą talię.")
                         } else {
-                            self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(uint(flashcards.count))))
+                            self.performSegueWithIdentifier("StartTest",
+                                sender: Test(deck: flashcards, testType: .Test(uint(flashcards.count)),
+                                    deckName: recievedDeck.name, deckAuthor: recievedDeck.owner))
                         }
                     case .Error(let err):
                         print(err)

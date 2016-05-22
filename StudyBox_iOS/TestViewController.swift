@@ -17,6 +17,7 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var correctButton: UIButton!
     @IBOutlet weak var incorrectButton: UIButton!
+    @IBOutlet weak var editFlashcardBarButton: UIBarButtonItem!
     
     @IBOutlet weak var previousTipButton: UIButton!
     @IBOutlet weak var nextTipButton: UIButton!
@@ -28,13 +29,10 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet var answerTrailing: NSLayoutConstraint!
     
     var testLogicSource: Test?
+    private lazy var dataManager: DataManager = UIApplication.appDelegate().dataManager
     var tipsForFlashcard = [Tip]()
     var currentTipNumber = 0
     var tipOrQuestionMode = TestModeTipOrQuestion.Question
-    
-    private var dataManager: DataManager = {
-        return UIApplication.appDelegate().dataManager
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +62,25 @@ class TestViewController: StudyBoxViewController {
         answerLabel.userInteractionEnabled = true
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
+        //Set the navigation bar title to current deck name
+        if let test = testLogicSource {
+            self.title = test.deckName
+            
+            //If user is logged in and emails match, we're the author so we can edit flashcards
+            if let email = dataManager.remoteDataManager.user?.email {
+                editFlashcardBarButton.enabled = test.deckAuthor == email
+            }
+            if test.allFlashcardsHidden {
+                //Alert if passed deck have all flashcards hidden
+                self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK")
+            }
+            if test.passedDeckWasEmpty {
+                //Alert if passed deck was empty.
+                self.presentAlertController(withTitle: "Uwaga!", message: "Talia jest pusta.", buttonText: "OK")
+            }
+
+        }
+        
         tipButton.backgroundColor = UIColor.sb_Grey()
         correctButton.backgroundColor = UIColor.sb_Grey()
         incorrectButton.backgroundColor = UIColor.sb_Grey()
@@ -88,17 +105,9 @@ class TestViewController: StudyBoxViewController {
         currentQuestionNumber.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         currentQuestionNumber.text = "#1"
         
-        if let test = testLogicSource {
-            self.title = test.deckName
-            updateQuestionUiForCurrentCard()
-            updateAnswerUiForCurrentCard()
-            
-            if test.checkIfPassedDeckIsEmpty() {
-                 self.presentAlertController(withTitle: "Uwaga!", message: "Talia jest pusta.", buttonText: "OK")
-            } else if test.checkIfAllFlashcardsHidden() {
-                self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK")
-            }
-        }
+		updateQuestionUiForCurrentCard()
+        updateAnswerUiForCurrentCard()
+
         answerTrailing.active = false
         answerLeading.constant = view.frame.width
     }
@@ -114,17 +123,18 @@ class TestViewController: StudyBoxViewController {
                         UIAlertAction(title: "Tak", style: .Default,
                             handler: { _ in
                                 if let repeatDeck = testLogic.repeatDeck {
-                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn, deckName: testLogic.deckName)
+                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn,
+                                        deckName: testLogic.deckName, deckAuthor: testLogic.deckAuthor)
                                     self.answeredQuestionTransition()
                                 }
-                            })
+                        })
                     )
                     controller.addAction(
                         UIAlertAction(title: "Nie", style: .Default,
                             handler: { _ in
                                 // TODOs: refactor, make enums for DrawerViewControllers menu options
                                 DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
-                            })
+                        })
                     )
                     presentViewController(controller, animated: true, completion: nil)
                     return false
@@ -147,7 +157,7 @@ class TestViewController: StudyBoxViewController {
         self.answerLeading.constant = 0
         
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
-            self.answerTrailing.active = true 
+            self.answerTrailing.active = true
             self.view.layoutIfNeeded()
             self.questionView.center.x = self.testView.center.x - self.testView.frame.size.width
             }, completion: nil)
@@ -168,7 +178,7 @@ class TestViewController: StudyBoxViewController {
                 }
                 self.updateQuestionUiForCurrentCard()
                 self.updateAnswerUiForCurrentCard()
-
+                
                 //set views to show questionView after animation
                 self.questionView.center.x = self.testView.center.x
                 self.answerTrailing.active = false
@@ -280,9 +290,6 @@ class TestViewController: StudyBoxViewController {
         if let testLogic = testLogicSource {
             let points = testLogic.cardsAnsweredAndPossible()
             scoreLabel.text = "\(points.0) / \(points.1)"
-            if let card = testLogic.currentCard {
-                questionLabel.text = card.question
-            }
         }
         updateUIForTipMode(.Question)
     }
@@ -306,12 +313,8 @@ class TestViewController: StudyBoxViewController {
         }
     }
     
-    @IBAction func correctAnswer(sender: AnyObject) {
-        updateForAnswer(true)
-    }
-    @IBAction func incorrectAnswer(sender: AnyObject) {
-        updateForAnswer(false)
-    }
+    @IBAction func correctAnswer(sender: AnyObject) { updateForAnswer(true) }
+    @IBAction func incorrectAnswer(sender: AnyObject) { updateForAnswer(false) }
     ///Global time setting for button scale animations
     let buttonsAnimationTime: NSTimeInterval = 0.1
     ///Global scale setting for button scale animations
@@ -319,33 +322,27 @@ class TestViewController: StudyBoxViewController {
     
     @IBAction func correctButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = self.buttonsScaleWhenPressed
-            }, completion:nil )
+            self.correctButton.transform = self.buttonsScaleWhenPressed }, completion:nil )
     }
     @IBAction func correctTouchDragExit(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.correctButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
     @IBAction func correctTouchCancel(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.correctButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
     @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay:0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = self.buttonsScaleWhenPressed
-            }, completion:nil )
+            self.incorrectButton.transform = self.buttonsScaleWhenPressed }, completion:nil )
     }
     @IBAction func incorrectTouchDragExit(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.incorrectButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
     @IBAction func incorrectTouchCancel(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.incorrectButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
     
     ///Animation sequence to go back to starting point and display `questionView`
@@ -362,7 +359,7 @@ class TestViewController: StudyBoxViewController {
                 self.answerView.alpha = 0
                 self.questionView.alpha = 1
             },
-            completion: { Void in
+            completion: { _ in
                 self.answerView.alpha = 1
         })
         //set buttons size back to normal
@@ -371,16 +368,17 @@ class TestViewController: StudyBoxViewController {
         
         updateAnswerUiForCurrentCard()
     }
+    
     @IBAction func editCurrentFlashcard(sender: UIBarButtonItem) {
-        if let card = testLogicSource?.currentCard,
-            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId) {
-            if let editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
-                editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
-                    self?.updateQuestionUiForCurrentCard()
-                    self?.updateAnswerUiForCurrentCard()
+        
+        if let testLogicSource = testLogicSource, card = testLogicSource.currentCard,
+            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId),
+            editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
+            editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
+                self?.updateQuestionUiForCurrentCard()
+                self?.updateAnswerUiForCurrentCard()
                 })
-                presentViewController(editFlashcardNavigation, animated: true, completion: nil)
-            }
+            presentViewController(editFlashcardNavigation, animated: true, completion: nil)
         }
     }
 }
