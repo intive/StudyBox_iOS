@@ -15,7 +15,8 @@ enum EditFlashcardViewControllerMode {
 class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     
     @IBOutlet weak var searchbarWrapperTopConstraint: NSLayoutConstraint!
-
+    @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
+    
     var dummySearchController: UISearchController?
     
     var searchController: UISearchController!  {
@@ -39,7 +40,19 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     private var flashcard: Flashcard!
-    private var deck: Deck?
+    private var deck: Deck? {
+        didSet {
+            if let name = deck?.name {
+                if name == "" {
+                    choosenDeckLabel.text = "Talia bez nazwy"
+                } else {
+                    choosenDeckLabel.text = name
+                }
+            } else {
+                choosenDeckLabel.text = "Wybierz talię" 
+            }
+        }
+    }
     
     var mode: EditFlashcardViewControllerMode! {
         didSet {
@@ -83,7 +96,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         questionField.text = nil
         answerField.text = nil
         deck = nil
-        choosenDeckLabel.text = "Wybrana talia"
     }
     
     private func updateUiForCurrentMode() {
@@ -101,16 +113,22 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             }
             searchBarWrapper.hidden = true
             searchbarWrapperTopConstraint.constant = -searchBarWrapper.frame.height
-            view.layoutIfNeeded()
+            scrollViewTopConstraint.constant = 8
         case .Add?:
             navigationItem.title = "Stwórz"
             searchBarWrapper.hidden = false
             searchbarWrapperTopConstraint.constant = 0
+            scrollViewTopConstraint.constant = 0
             flashcard = nil
+            deck = nil
+
         default:
             navigationItem.title = nil
             flashcard = nil
             deck = nil
+        }
+        if isViewLoaded() {
+            view.layoutIfNeeded()
         }
     }
     
