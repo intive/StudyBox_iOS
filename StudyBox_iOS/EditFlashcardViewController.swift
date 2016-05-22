@@ -117,7 +117,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             searchBarWrapper.hidden = true
             searchbarWrapperTopConstraint.constant = -searchBarWrapper.frame.height
             scrollViewTopConstraint.constant = 8
-            view.layoutIfNeeded()
         case .Add?:
             navigationItem.title = "Stwórz"
             searchBarWrapper.hidden = false
