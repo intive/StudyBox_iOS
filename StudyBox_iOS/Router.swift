@@ -10,6 +10,7 @@ import Alamofire
 
 private let usersPath = "users"
 private let decksPath = "decks"
+private let tipsPath = "tips"
 private let flashcardsPath = "flashcards"
 
 enum Router: URLRequestConvertible {
@@ -32,17 +33,23 @@ enum Router: URLRequestConvertible {
     case AddSingleFlashcard(deckID: String, question: String, answer: String, isHidden: Bool)
     case RemoveSingleFlashcard(ID: String, deckID: String)
     case UpdateFlashcard(ID: String, deckID: String, question: String, answer: String, isHidden: Bool)
+    
+    case GetAllTips(deckID: String, flashcardID: String)
+    case AddTip(deckID: String, flashcardID: String, content: String, difficulty: Int)
+    case GetTip(deckID: String, flashcardID: String, tipID: String)
+    case UpdateTip(deckID: String, flashcardID: String, tipID: String, content: String, difficulty: Int)
+    case RemoveTip(deckID: String, flashcardID: String, tipID: String)
 
     var method: Alamofire.Method {
         switch self {
         case .GetAllDecks, .GetSingleDeck, .GetAllFlashcards, .GetSingleFlashcard, .GetCurrentUser, .GetAllUsersDecks,
-             .GetRandomDeck:
+             .GetRandomDeck, .GetTip, .GetAllTips:
             return .GET
-        case .AddSingleFlashcard, .AddSingleDeck, AddUser, .ChangeAccessToDeck:
+        case .AddSingleFlashcard, .AddSingleDeck, AddUser, .ChangeAccessToDeck, .AddTip:
             return .POST
-        case .RemoveSingleFlashcard, .RemoveSingleDeck:
+        case .RemoveSingleFlashcard, .RemoveSingleDeck, .RemoveTip:
             return .DELETE
-        case .UpdateDeck, .UpdateFlashcard:
+        case .UpdateDeck, .UpdateFlashcard, .UpdateTip:
             return .PUT
         }
     }
@@ -95,6 +102,23 @@ enum Router: URLRequestConvertible {
         
         case .UpdateFlashcard(let ID, let deckID, _, _, _):
             return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, ID)
+          
+        //Tips
+        case GetAllTips(let deckID, let flashcardID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, flashcardID, tipsPath)
+        
+        case AddTip(let deckID, let flashcardID, _, _):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, flashcardID, tipsPath)
+    
+        case GetTip(let deckID, let flashcardID, let tipID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, flashcardID, tipsPath, tipID)
+            
+        case UpdateTip(let deckID, let flashcardID, let tipID, _, _):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, flashcardID, tipsPath, tipID)
+            
+        case RemoveTip(let deckID, let flashcardID, let tipID):
+            return Router.serverURL.URLByAppendingPathComponents(decksPath, deckID, flashcardsPath, flashcardID, tipsPath, tipID)
+        
         }
     }
     
@@ -152,6 +176,14 @@ enum Router: URLRequestConvertible {
         
         case .UpdateFlashcard(_, _, let question, let answer, let isHidden):
             return ParameterEncoding.JSON.encode(request, parameters: ["question": question, "answer": answer, "isHidden": isHidden]).0
+            
+        
+        //Tips
+        case .UpdateTip(let deckID, let flashcardID, let tipID, _, _ ):
+            return ParameterEncoding.JSON.encode(request, parameters: ["deckId": deckID, "flashcardId": flashcardID, "tipId": tipID]).0
+        
+        case .RemoveTip(let deckID, let flashcardID, let tipID):
+            return ParameterEncoding.JSON.encode(request, parameters: ["deckId": deckID, "flashcardId": flashcardID, "tipId": tipID]).0
             
             
         default: //For methods that don't use parameters

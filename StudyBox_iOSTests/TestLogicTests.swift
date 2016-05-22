@@ -13,7 +13,7 @@ class TestLogicTests: XCTestCase {
     
     // number of flashcards in array. Bigger than one
     let flashcardsNumber = 10
-    let flashcard = Flashcard(serverID: "serverID", deckID: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
+    let flashcard = Flashcard(serverID: "serverID", deckID: "deckID", question: "question", answer: "answer", isHidden: false)
     
 // checkIfAllFlashcardsHidden()
     
@@ -220,7 +220,7 @@ class TestLogicTests: XCTestCase {
         var hiddenNumber = (hidden > amount) ? amount : hidden;
         
         for _ in 1...amount {
-            let current = Flashcard(serverID: "serverID", deckID: "deckID", question: "question", answer: "answer", tip: Tip.Text(text: "Tip"))
+            let current = Flashcard(serverID: "serverID", deckID: "deckID", question: "question", answer: "answer", isHidden: false)
             
             if hiddenNumber > 0 {
                 current.hidden = true

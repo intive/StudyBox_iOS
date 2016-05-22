@@ -270,4 +270,50 @@ public class DataManager {
                 self.remoteDataManager.updateFlashcard(flashcard, completion: $0)
             }, completion: completion)
     }
+
+    //Tips
+    func addTip(tip: Tip, completion: (DataManagerResponse<Tip>)-> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.addTip(tip, completion: $0)
+            }, completion: completion)
+    }
+    
+    func removeTip(tip: Tip, completion: (DataManagerResponse<Void>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.removeTip(tip, completion: $0)
+            },
+            remoteParsing: {
+                _ = self.localDataManager.delete(tip)
+            }, completion: completion)
+    }
+    
+    func tip(withID tipID: String, deckID: String, flashcardID: String, completion: (DataManagerResponse<Tip>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.get(Tip.self, withId: tipID)
+            },
+            remoteFetch: {
+                self.remoteDataManager.tip(deckID: deckID, flashcardID: flashcardID, tipID: tipID, completion: $0)
+            }, completion: completion)
+    }
+    
+    func updateTip(tip: Tip, completion: (DataManagerResponse<Tip>) -> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.updateTip(tip, completion: $0)
+            }, completion: completion)
+    }
+    
+    func allTipsForFlashcard(deckID: String, flashcardID: String, completion: (DataManagerResponse<[Tip]>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.filter(Tip.self, predicate: "flashcardID == \(flashcardID) AND deckID == \(deckID)")
+            },
+            remoteFetch: {
+                self.remoteDataManager.allTips(deckID: deckID, flashcardID: flashcardID, completion: $0)
+            }, completion: completion)
+    }
+    
 }
