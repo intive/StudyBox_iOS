@@ -23,7 +23,7 @@ enum DataManagerResponse<T> {
 }
 
 enum DataManagerError: ErrorType {
-    case JSONParseError, NoLocalData, ErrorSavingData, ErrorWith(message: String)
+    case JSONParseError, NoLocalData, ErrorSavingData, ErrorWith(message: String), UserNotLoggedIn
 }
 
 public class DataManager {
@@ -174,13 +174,26 @@ public class DataManager {
     }
     
     func userDecks(flashcardsCount: Bool? = nil, withDependecies: Bool = true, completion: (DataManagerResponse<[Deck]>) -> ()) {
+        guard let email = self.remoteDataManager.user?.email else {
+            completion(DataManagerResponse.Error(obj: DataManagerError.UserNotLoggedIn))
+            return
+        }
+        
         handleJSONRequest(
             localFetch: {
-                self.localDataManager.getAll(Deck)
+                self.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
             },
             remoteFetch: {
                 self.remoteDataManager.userDecks(completion: $0)
-            }, completion: completion)
+            },
+            remoteParsing: {
+                let decks =  Deck.arrayWithJSONArray($0)
+                decks.forEach {
+                    $0.owner = email
+                }
+                return decks
+            },
+            completion: completion)
     }
 
     
