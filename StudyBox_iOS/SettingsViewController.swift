@@ -109,14 +109,22 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             case 0:
                 shouldPerform = true
             case 1:
-                let userDecks = dataManager.localDataManager.getAll(Deck)
-                
                 if !WCSession.isSupported() {
-                    message = (title: "Niekompatybilne urządzenie", body: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch")
+                    presentAlertController(withTitle: "Niekompatybilne urządzenie",
+                                           message: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch", buttonText: "OK")
+                    self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+                    break
                 }
-                if  userDecks.isEmpty {
-                    message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
+                
+                if let email = dataManager.remoteDataManager.user?.email {
+                    let userDecks = dataManager.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
+                    if userDecks.isEmpty {
+                        message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji. ")
+                    }
+                } else {
+                    message = (title: "Błąd", body: "Musisz być zalogowany oraz posiadać talie aby synchronizować je z Apple Watch.")
                 }
+                
                 if let message = message {
                     presentAlertController(withTitle: message.title, message: message.body, buttonText: "OK")
                     self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
