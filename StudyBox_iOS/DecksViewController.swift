@@ -98,7 +98,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                 self.decksArray = obj
             case .Error(let err):
                 print(err)
-                self.presentAlertController(withTitle: "Błąd", message: "Błąd pobierania danych", buttonText: "Ok")
+                SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
             }
             self.refreshControl.endRefreshing()
             self.collectionView?.reloadData()

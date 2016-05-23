@@ -104,35 +104,29 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             return false
         }
         var shouldPerform = false
-        var message: (title: String, body: String)?
-
+        
         if let section = self.settingsTableView.indexPathForSelectedRow?.section {
             switch section {
             case 0:
                 shouldPerform = true
             case 1:
                 if !WCSession.isSupported() {
-                    presentAlertController(withTitle: "Niekompatybilne urządzenie",
-                                           message: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch", buttonText: "OK")
-                    self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-                    break
+                    SVProgressHUD.showInfoWithStatus("Twoje urządzenie nie obsługuje komunikacji z Apple Watch.")
                 }
-                
                 if let email = dataManager.remoteDataManager.user?.email {
                     let userDecks = dataManager.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
                     if userDecks.isEmpty {
-                        message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji. ")
+                        SVProgressHUD.showInfoWithStatus("Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
+                    } else { //We have decks
+                        shouldPerform = true
                     }
-                } else {
-                    message = (title: "Błąd", body: "Musisz być zalogowany oraz posiadać talie aby synchronizować je z Apple Watch.")
+                } else { //User is not logged in
+                    SVProgressHUD.showInfoWithStatus("Musisz być zalogowany oraz posiadać talie aby synchronizować je z Apple Watch.")
                 }
-                
-                if let message = message {
-                    presentAlertController(withTitle: message.title, message: message.body, buttonText: "OK")
+                if !shouldPerform {
                     self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-                } else { //We don't have a message so no error was encountered
-                    shouldPerform = true
                 }
+
             default: break
             }
         }
@@ -157,11 +151,9 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                     switch $0 {
                     case .Success(let flashcards):
                         for flashcard in flashcards {
-                            print(flashcard)
                             self.dataManager.allTipsForFlashcard(deck, flashcardID: flashcard.serverID) {
                                 switch $0 {
-                                case .Success(let tips):
-                                    print(tips)
+                                case .Success(_):
                                     SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
                                     //TODO: send everything to Watch
                                     
@@ -182,9 +174,6 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.setDefaultStyle(.Light)
-        SVProgressHUD.setDefaultMaskType(.Gradient)
-        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
         self.title = "Ustawienia"
         settingsTableView.backgroundColor = UIColor.sb_Grey()
         if let count = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ScoreViewController: StudyBoxViewController {
     
@@ -86,7 +87,7 @@ class ScoreViewController: StudyBoxViewController {
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "RepeatTest" {
             if let flashcards = testLogicSource?.notPassedInTestDeck where flashcards.isEmpty {
-                presentAlertController(withTitle: "Błąd", message: "Brak fiszek do powtórzenia", buttonText: "Ok")
+                SVProgressHUD.showInfoWithStatus("Brak fiszek do powtórzenia")
                 return false
             }
         }

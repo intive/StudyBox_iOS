@@ -157,8 +157,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         answerField.placeholder = "Odpowiedź"
         questionField.placeholder = "Pytanie"
         updateUiForCurrentMode()
-        
-        SVProgressHUD.setDefaultMaskType(.Gradient)
 
         let graphite = UIColor.sb_Graphite().CGColor
         for field in editFields {

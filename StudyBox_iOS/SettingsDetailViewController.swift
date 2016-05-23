@@ -242,7 +242,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
         } catch let e {
             print(e)
-            presentAlertController(withTitle: "Błąd", message: "Nie można obecnie przesłać talii do Apple Watch.", buttonText: "OK")
+            SVProgressHUD.showErrorWithStatus("Nie można obecnie przesłać talii do Apple Watch.")
         }
     }
 

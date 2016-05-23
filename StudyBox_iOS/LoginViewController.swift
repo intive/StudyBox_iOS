@@ -31,9 +31,6 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             }
         }
         
-        SVProgressHUD.setDefaultMaskType(.Gradient)
-        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
-        
         logInButton.layer.cornerRadius = 10.0
         logInButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         disableButton(logInButton)

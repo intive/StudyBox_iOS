@@ -23,7 +23,6 @@ class RandomDeckLoadingController: StudyBoxViewController {
         
         statusLabelOutlet.hidden = true
         retryButton.hidden = true
-        SVProgressHUD.setDefaultStyle(.Light)
         
         if !Reachability.isConnected() {
             updateUI(message: "Nie jesteś połączony z Internetem.")
