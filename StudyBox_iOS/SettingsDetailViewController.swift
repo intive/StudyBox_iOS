@@ -36,7 +36,9 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         switch mode {
         case .DecksForWatch?:
             self.title = "Wybór talii"
-            userDecksArray = dataManager.localDataManager.getAll(Deck)
+            if let email = dataManager.remoteDataManager.user?.email {
+                userDecksArray = dataManager.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
+            }
         case .Frequency?:
             self.title = "Powiadomienia"
         default:
