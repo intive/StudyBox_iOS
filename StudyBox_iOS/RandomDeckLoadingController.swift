@@ -36,15 +36,13 @@ class RandomDeckLoadingController: StudyBoxViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        SVProgressHUD.show()
         statusLabelOutlet.hidden = true
         retryButton.hidden = true
     }
     
     @IBAction func retryAction(sender: AnyObject) {
-        SVProgressHUD.show()
+        
         if !Reachability.isConnected() {
-            SVProgressHUD.dismiss()
             updateUI(message: "Nie jesteś połączony z Internetem.")
         } else {
             recieveFlashcardsAndPerformSegue()
@@ -52,7 +50,7 @@ class RandomDeckLoadingController: StudyBoxViewController {
     }
     
     func recieveFlashcardsAndPerformSegue() {
-        
+        SVProgressHUD.show()
         dataManager.randomDeck({ deckResponse in
             switch deckResponse {
             case .Success(let recievedDeck):

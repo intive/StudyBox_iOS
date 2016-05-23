@@ -143,10 +143,9 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     override func viewDidAppear(animated: Bool) {
         if let decksAfter = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]
             where decksBeforeChangingSettings != decksAfter.count && !decksAfter.isEmpty {
-            
+            //FIXME: handle case when user did have N decks but selects N other decks
             SVProgressHUD.show()
             for deck in decksAfter {
-                
                 dataManager.flashcards(deck) {
                     switch $0 {
                     case .Success(let flashcards):
@@ -154,9 +153,8 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                             self.dataManager.allTipsForFlashcard(deck, flashcardID: flashcard.serverID) {
                                 switch $0 {
                                 case .Success(_):
-                                    SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
-                                    //TODO: send everything to Watch
-                                    
+                                    break
+                                    //TODO: Send to an array and then to Watch
                                 case .Error(let tipErr):
                                     print (tipErr)
                                     SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu podpowiedzi.")
@@ -169,6 +167,8 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                     }
                 }
             }
+            //TODO: check when syncing is complete
+            SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
         }
     }
     
