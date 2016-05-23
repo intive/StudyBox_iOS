@@ -8,6 +8,7 @@
 
 import UIKit
 import WatchConnectivity
+import SVProgressHUD
 
 enum SettingsDetailVCMode {
     case Frequency
@@ -217,7 +218,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         let decksToSynchronizeIDs = convertSelectedDecksToIDs()
         
         defaults.setObject(decksToSynchronizeIDs, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-        sendDecksToWatch(decksToSynchronizeIDs)
+        //sendDecksToWatch(decksToSynchronizeIDs)
     }
     
     //Converts decks selected in `detailTableView` to array of their IDs
@@ -236,11 +237,12 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     
     //Sending to Watch
     func sendDecksToWatch(decksToSynchronizeIDs: [String]) {
+        //TODO: move this to main SettVC
         do {
             try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
         } catch let e {
             print(e)
-            presentAlertController(withTitle: "Błąd", message: "Nie można obecnie przesłać talii do Apple Watch.", buttonText: "OK")
+            SVProgressHUD.showErrorWithStatus("Nie można obecnie przesłać talii do Apple Watch.")
         }
     }
 

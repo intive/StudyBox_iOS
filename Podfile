@@ -9,6 +9,7 @@ def shared_pods
     pod 'Alamofire', '~> 3.0'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     pod 'Swifternalization', '~> 1.3.1'
+    pod 'SVProgressHUD', '~> 2.0.3'
 end
 
 target 'StudyBox_iOS' do

@@ -699,8 +699,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="J1B-U8-sda"/>
                     <connections>
-                        <outlet property="loadingLabelOutlet" destination="jt5-ct-dHD" id="98N-XS-up3"/>
                         <outlet property="retryButton" destination="2To-hz-cFR" id="a11-Bj-wEb"/>
+                        <outlet property="statusLabelOutlet" destination="jt5-ct-dHD" id="WED-tg-GBk"/>
                         <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="Nci-HR-1So"/>
                     </connections>
                 </viewController>

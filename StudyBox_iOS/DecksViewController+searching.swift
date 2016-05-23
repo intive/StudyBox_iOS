@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import SVProgressHUD
 
 extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
@@ -32,7 +33,7 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func filterOnlineDecks(timer: NSTimer) {
         
         guard Reachability.isConnected() else {
-            presentAlertController(withTitle: "Błąd", message: "Brak połączenia z internetem", buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus("Brak połączenia z internetem")
             return
         }
         guard let filter = timer.userInfo?["searchText"] as? String else {
@@ -65,7 +66,7 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
                         searchBlock()
                         
                     case .Error:
-                        self.presentAlertController(withTitle: "Błąd", message: "Pobranie danych nie było możliwe, spróbuj później", buttonText: "Ok")
+                        SVProgressHUD.showErrorWithStatus("Pobranie danych nie było możliwe, spróbuj później")
                     }
                 }
             } else {
