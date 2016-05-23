@@ -6,6 +6,7 @@
 //  Copyright © 2016 BLStream. All rights reserved.
 //
 import UIKit
+import SVProgressHUD
 
 class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, DecksCollectionLayoutDelegate {
     
@@ -254,7 +255,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     
     // When cell tapped, change to test
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        SVProgressHUD.show()
         let deck = decksSource[indexPath.row]
         let resetSearchUI = {
             self.searchController.active = false
@@ -264,14 +265,14 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             switch $0 {
             case .Success(let flashcards):
                 guard !flashcards.isEmpty else {
-                    self.presentAlertController(withTitle: "Błąd", message: "Talia nie ma fiszek.", buttonText: "OK")
+                    SVProgressHUD.showInfoWithStatus("Talia nie ma fiszek.")
                     return
                 }
                 
                 let amountFlashcardsNotHidden = flashcards.reduce(0) { ret, flashcard in flashcard.hidden ? ret : ret + 1}
                 
                 guard amountFlashcardsNotHidden != 0 else {
-                    self.presentAlertController(withTitle: "Błąd", message: "Talia ma ukryte wszystkie fiszki.", buttonText: "OK")
+                    SVProgressHUD.showInfoWithStatus("Talia ma ukryte wszystkie fiszki.")
                     return
                 }
                 let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
@@ -313,11 +314,9 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                 self.presentViewController(alert, animated: true, completion:nil)
                 
             case .Error(_):
-                self.presentAlertController(withTitle: "Błąd", message: "Nie udało się pobrać danych", buttonText: "Ok")
+                SVProgressHUD.showErrorWithStatus("Nie udało się pobrać danych.")
             }
-            
         }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

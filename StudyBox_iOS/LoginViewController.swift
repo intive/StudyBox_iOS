@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import Reachability 
+import Reachability
+import SVProgressHUD
+
 class LoginViewController: UserViewController, InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
@@ -47,7 +49,9 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         let myData = UIApplication.appDelegate().dataManager.remoteDataManager.getEmailPassFromDefaults()
 
         if let email = myData?.email, password = myData?.password {
+            
             loginWithInputData(email, password: password)
+            
         }
     }
     
@@ -69,7 +73,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
                     errorMessage = txt
                 }
             }
-            self.presentAlertController(withTitle: "", message: errorMessage, buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus(errorMessage)
         })
     }
     
@@ -94,7 +98,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             alertMessage = "Wypełnij wszystkie pola!"
         }
         if let message = alertMessage {
-            presentAlertController(withTitle: "", message: message, buttonText: "Ok")
+            SVProgressHUD.showInfoWithStatus(message)
             return
         }
         if let login = login, password = password {
@@ -102,10 +106,11 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         } else if let email = emailTextField.text, password = passwordTextField.text  {
             loginToServer(withEmail: email, password: password)
         }
-        
+        SVProgressHUD.dismiss()
     }
 
     @IBAction func login(sender: UIButton) {
+        SVProgressHUD.showWithStatus("Logowanie...")
         loginWithInputData()
     }
     
