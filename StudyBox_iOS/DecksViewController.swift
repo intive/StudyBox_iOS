@@ -275,6 +275,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                     SVProgressHUD.showInfoWithStatus("Talia ma ukryte wszystkie fiszki.")
                     return
                 }
+                SVProgressHUD.dismiss()
                 let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
                 
                 let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in

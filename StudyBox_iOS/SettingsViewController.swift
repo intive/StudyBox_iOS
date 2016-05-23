@@ -144,28 +144,27 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             
             SVProgressHUD.show()
             for deck in decksAfter {
+                
                 dataManager.flashcards(deck) {
                     switch $0 {
                     case .Success(let flashcards):
                         for flashcard in flashcards {
+                            print(flashcard)
                             self.dataManager.allTipsForFlashcard(deck, flashcardID: flashcard.serverID) {
                                 switch $0 {
                                 case .Success(let tips):
                                     print(tips)
-                                    //SVProgressHUD.dismiss()
                                     SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
                                     //TODO: send everything to Watch
                                     
                                 case .Error(let tipErr):
                                     print (tipErr)
-                                    //SVProgressHUD.dismiss()
                                     SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu podpowiedzi.")
                                 }
                             }
                         }
                     case .Error(let deckErr):
                         print(deckErr)
-                        //SVProgressHUD.dismiss()
                         SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu fiszek.")
                     }
                 }

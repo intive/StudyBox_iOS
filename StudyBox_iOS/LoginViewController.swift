@@ -31,6 +31,9 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             }
         }
         
+        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
+        
         logInButton.layer.cornerRadius = 10.0
         logInButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         disableButton(logInButton)
@@ -49,9 +52,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         let myData = UIApplication.appDelegate().dataManager.remoteDataManager.getEmailPassFromDefaults()
 
         if let email = myData?.email, password = myData?.password {
-            
             loginWithInputData(email, password: password)
-            
         }
     }
     

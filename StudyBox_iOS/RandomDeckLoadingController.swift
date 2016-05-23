@@ -43,6 +43,7 @@ class RandomDeckLoadingController: StudyBoxViewController {
     }
     
     @IBAction func retryAction(sender: AnyObject) {
+        SVProgressHUD.show()
         if !Reachability.isConnected() {
             SVProgressHUD.dismiss()
             updateUI(message: "Nie jesteś połączony z Internetem.")
