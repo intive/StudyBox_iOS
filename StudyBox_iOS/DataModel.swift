@@ -149,6 +149,26 @@ class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
     
 }
 
+class TestInfo: Object {
+    dynamic var deck: Deck!
+    dynamic var answeredFlashcardsCount: Int = 0
+    dynamic var correctlyAnsweredFlashcardsCount: Int = 0
+    dynamic var localID = NSUUID().UUIDString
+    
+    override class func primaryKey() -> String? {
+        return "localID"
+    }
+    
+    convenience init(deck: Deck, answeredFlashcardsCount: Int, correctlyAnsweredFlashcardsCount: Int) {
+        self.init()
+        self.deck = deck
+        self.answeredFlashcardsCount = answeredFlashcardsCount
+        self.correctlyAnsweredFlashcardsCount = correctlyAnsweredFlashcardsCount
+    }
+    
+    
+}
+
 
 func == (lhs: Deck, rhs: Deck) -> Bool {
     return lhs.serverID == rhs.serverID && lhs.name == rhs.name

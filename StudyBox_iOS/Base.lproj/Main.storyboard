@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="uUO-ii-Urr">
             <objects>
-                <viewController storyboardIdentifier="LoginViewControllerId" id="aM1-56-TXz" customClass="LoginViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerID" id="aM1-56-TXz" customClass="LoginViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KK4-9f-xvf"/>
                         <viewControllerLayoutGuide type="bottom" id="IS7-55-bj5"/>
@@ -327,7 +327,7 @@
         <!--Drawer View Controller-->
         <scene sceneID="Wwu-sA-nhp">
             <objects>
-                <viewController storyboardIdentifier="DrawerViewControllerId" id="aFL-74-HfG" customClass="DrawerViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DrawerViewControllerID" id="aFL-74-HfG" customClass="DrawerViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ItK-v6-3qq"/>
                         <viewControllerLayoutGuide type="bottom" id="fbU-cd-DcK"/>
@@ -561,6 +561,103 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oa-qo-Bp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2927" y="2581"/>
+        </scene>
+        <!--Statistics View Controller-->
+        <scene sceneID="m1V-PL-qtM">
+            <objects>
+                <viewController id="fJa-Yk-ZVi" customClass="StatisticsViewController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qeU-hF-i6a"/>
+                        <viewControllerLayoutGuide type="bottom" id="FoU-WO-9Dn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VCR-9c-5OB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EBI-XT-SoF">
+                                <rect key="frame" x="216" y="150" width="168" height="301"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poprawne odpowiedzi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dpk-pf-DVj">
+                                        <rect key="frame" x="0.0" y="0.0" width="168" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAk-4e-kLJ" customClass="CircularLoaderView" customModule="StudyBox_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="31" width="168" height="168"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBG-qt-ep2">
+                                                <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="top" secondItem="NAk-4e-kLJ" secondAttribute="top" id="4hh-Ne-jke"/>
+                                            <constraint firstAttribute="width" secondItem="NAk-4e-kLJ" secondAttribute="height" multiplier="1:1" id="6Hb-wJ-XSD"/>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="centerX" secondItem="NAk-4e-kLJ" secondAttribute="centerX" id="Dda-iM-i8p"/>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="leading" secondItem="NAk-4e-kLJ" secondAttribute="leading" id="NuV-bO-vkT"/>
+                                            <constraint firstAttribute="bottom" secondItem="YBG-qt-ep2" secondAttribute="bottom" id="Opd-jR-bQ7"/>
+                                            <constraint firstItem="YBG-qt-ep2" firstAttribute="centerY" secondItem="NAk-4e-kLJ" secondAttribute="centerY" id="afm-OH-SIe"/>
+                                            <constraint firstAttribute="trailing" secondItem="YBG-qt-ep2" secondAttribute="trailing" id="zp8-yI-g7n"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="afm-OH-SIe"/>
+                                                <exclude reference="Dda-iM-i8p"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ilość talii:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJF-eD-3x5">
+                                        <rect key="frame" x="49" y="209" width="71" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ilość testów:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vs5-HU-sy2">
+                                        <rect key="frame" x="36" y="240" width="96" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKa-BM-ES0">
+                                        <rect key="frame" x="17" y="271" width="135" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="oXH-CB-UvL"/>
+                                        </constraints>
+                                        <state key="normal" title="Wyzeruj statystyki"/>
+                                        <connections>
+                                            <action selector="clearStatistics:" destination="fJa-Yk-ZVi" eventType="touchUpInside" id="enz-PW-BdK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Dpk-pf-DVj" secondAttribute="trailing" id="06r-VC-dYk"/>
+                                    <constraint firstItem="NAk-4e-kLJ" firstAttribute="width" secondItem="EBI-XT-SoF" secondAttribute="width" id="Dxf-Qz-cud"/>
+                                    <constraint firstItem="Dpk-pf-DVj" firstAttribute="leading" secondItem="EBI-XT-SoF" secondAttribute="leading" id="oX7-mh-cMV"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EBI-XT-SoF" firstAttribute="centerX" secondItem="VCR-9c-5OB" secondAttribute="centerX" id="qdT-J4-t4d"/>
+                            <constraint firstItem="EBI-XT-SoF" firstAttribute="centerY" secondItem="VCR-9c-5OB" secondAttribute="centerY" id="x3a-3G-h1r"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Unw-AU-fKI"/>
+                    <connections>
+                        <outlet property="circularProgressView" destination="NAk-4e-kLJ" id="tOS-VO-tkT"/>
+                        <outlet property="clearButton" destination="SKa-BM-ES0" id="Smw-Og-T2g"/>
+                        <outlet property="decksAmount" destination="dJF-eD-3x5" id="gbH-2a-z5K"/>
+                        <outlet property="flashcardsScore" destination="YBG-qt-ep2" id="bRY-VU-2Sc"/>
+                        <outlet property="infoLabel" destination="Dpk-pf-DVj" id="dPy-EK-UsS"/>
+                        <outlet property="testsAmount" destination="Vs5-HU-sy2" id="wt8-yw-c2N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r8J-b2-vQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3737" y="3262"/>
         </scene>
         <!--Random Deck Loading Controller-->
         <scene sceneID="KIJ-m0-3eO">
@@ -811,7 +908,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VXf-gi-gbi">
             <objects>
-                <navigationController storyboardIdentifier="EditFlashcardViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditFlashcardViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="E2E-9N-8TM" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivF-VU-xcN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1075,6 +1172,24 @@
             </objects>
             <point key="canvasLocation" x="2941" y="1884"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2ik-n8-WER">
+            <objects>
+                <navigationController storyboardIdentifier="StatisticsViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="k06-Qr-muQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eGz-yo-bxv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fJa-Yk-ZVi" kind="relationship" relationship="rootViewController" id="mnv-Bl-67c"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GCK-4M-dXT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2925" y="3262"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Logo" width="381" height="539"/>
@@ -1084,6 +1199,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gYF-Os-WnF"/>
+        <segue reference="bb9-zC-jZN"/>
     </inferredMetricsTieBreakers>
 </document>

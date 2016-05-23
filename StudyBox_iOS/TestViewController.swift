@@ -64,11 +64,11 @@ class TestViewController: StudyBoxViewController {
         
         //Set the navigation bar title to current deck name
         if let test = testLogicSource {
-            self.title = test.deckName
+            self.title = test.deck.name
             
             //If user is logged in and emails match, we're the author so we can edit flashcards
             if let email = dataManager.remoteDataManager.user?.email {
-                editFlashcardBarButton.enabled = test.deckAuthor == email
+                editFlashcardBarButton.enabled = test.deck.owner == email
             }
             if test.allFlashcardsHidden {
                 //Alert if passed deck have all flashcards hidden
@@ -123,8 +123,7 @@ class TestViewController: StudyBoxViewController {
                         UIAlertAction(title: "Tak", style: .Default,
                             handler: { _ in
                                 if let repeatDeck = testLogic.repeatDeck {
-                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn,
-                                        deckName: testLogic.deckName, deckAuthor: testLogic.deckAuthor)
+                                    self.testLogicSource = Test(flashcards: repeatDeck, testType: .Learn, deck: testLogic.deck)
                                     self.answeredQuestionTransition()
                                 }
                         })
@@ -372,7 +371,7 @@ class TestViewController: StudyBoxViewController {
     @IBAction func editCurrentFlashcard(sender: UIBarButtonItem) {
         
         if let testLogicSource = testLogicSource, card = testLogicSource.currentCard,
-            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId),
+            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerID),
             editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
             editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
                 self?.updateQuestionUiForCurrentCard()

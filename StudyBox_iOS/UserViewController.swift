@@ -14,7 +14,7 @@ class UserViewController: InputViewController {
     func successfulLoginTransition(){
 
         if let board = storyboard {
-            guard let drawerNav = board.instantiateViewControllerWithIdentifier(Utils.UIIds.DrawerViewControllerId) as? DrawerViewController else {
+            guard let drawerNav = board.instantiateViewControllerWithIdentifier(Utils.UIIds.DrawerViewControllerID) as? DrawerViewController else {
                 fatalError("DrawerViewController has wrong id in the storybard")
             }
             
