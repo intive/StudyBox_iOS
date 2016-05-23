@@ -9,10 +9,12 @@
 import UIKit
 import Swifternalization
 import WatchConnectivity
+import SVProgressHUD
 
 class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
     
     let settingsMainCellID = "settingsMainCell"
+    var decksBeforeChangingSettings = 0
     
     @IBOutlet weak var settingsTableView: UITableView!
     
@@ -136,9 +138,51 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         settingsTableView.reloadData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if let decksAfter = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]
+            where decksBeforeChangingSettings != decksAfter.count && !decksAfter.isEmpty {
+            
+            SVProgressHUD.show()
+            for deck in decksAfter {
+                dataManager.flashcards(deck) {
+                    switch $0 {
+                    case .Success(let flashcards):
+                        for flashcard in flashcards {
+                            self.dataManager.allTipsForFlashcard(deck, flashcardID: flashcard.serverID) {
+                                switch $0 {
+                                case .Success(let tips):
+                                    print(tips)
+                                    //SVProgressHUD.dismiss()
+                                    SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
+                                    //TODO: send everything to Watch
+                                    
+                                case .Error(let tipErr):
+                                    print (tipErr)
+                                    //SVProgressHUD.dismiss()
+                                    SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu podpowiedzi.")
+                                }
+                            }
+                        }
+                    case .Error(let deckErr):
+                        print(deckErr)
+                        //SVProgressHUD.dismiss()
+                        SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu fiszek.")
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.setDefaultStyle(.Light)
+        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
         self.title = "Ustawienia"
         settingsTableView.backgroundColor = UIColor.sb_Grey()
+        if let count = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
+            decksBeforeChangingSettings = count
+        }
+        
     }
 }
