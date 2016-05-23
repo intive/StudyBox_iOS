@@ -62,14 +62,17 @@ class ScoreViewController: StudyBoxViewController {
         circularProgressView.animateProgress(CGFloat(testScoreFraction))
     }
     
-    ///Sets labels and `testScoreFraction` based on test results
+    ///Sets labels and `testScoreFraction` based on test results and save statistics data
     func completeData() {
         if let testLogic = testLogicSource {
             let cardsResult = testLogic.cardsAnsweredAndPossible()
             
             self.testScoreFraction = Double(cardsResult.0) / Double(cardsResult.1)
             let testScorePercentage = Int(testScoreFraction*100)
-            
+            let manager = UIApplication.appDelegate().dataManager
+            manager.localDataManager.update(
+                TestInfo(deck: testLogic.deck, answeredFlashcardsCount: cardsResult.1, correctlyAnsweredFlashcardsCount: cardsResult.0)
+            )
             scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
             scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n\(testScorePercentage) %"
         }
@@ -94,8 +97,7 @@ class ScoreViewController: StudyBoxViewController {
         if segue.identifier == "RepeatTest", let destinationViewController = segue.destinationViewController as? TestViewController,
             testLogicSource = testLogicSource, flashcards = testLogicSource.notPassedInTestDeck {
             
-            destinationViewController.testLogicSource = Test(deck: flashcards, testType: .Test(uint(flashcards.count)),
-                                                             deckName: testLogicSource.deckName, deckAuthor: testLogicSource.deckAuthor)
+            destinationViewController.testLogicSource = Test(flashcards: flashcards, testType: .Test(uint(flashcards.count)), deck: testLogicSource.deck)
         }
     }
 }

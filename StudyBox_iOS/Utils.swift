@@ -11,14 +11,15 @@ import UIKit
 class Utils {
 
     struct UIIds {
-        static let LoginControllerId = "LoginViewControllerId"
-        static let DrawerViewControllerId = "DrawerViewControllerId"
+        static let LoginControllerID = "LoginViewControllerID"
+        static let DrawerViewControllerID = "DrawerViewControllerID"
         static let DecksViewControllerID = "DecksViewControllerID"
         static let TestViewControllerID = "TestViewControllerID"
         static let DecksViewCellID = "DecksViewCellID"
-        static let EditFlashcardViewControllerId = "EditFlashcardViewControllerId"
+        static let EditFlashcardViewControllerID = "EditFlashcardViewControllerID"
         static let SettingsViewControllerID = "SettingsViewControllerID"
         static let RandomDeckViewControllerID = "RandomDeckViewControllerID"
+        static let StatisticsViewControllerID = "StatisticsViewControllerID"
 
     }
     struct DeckViewLayout{

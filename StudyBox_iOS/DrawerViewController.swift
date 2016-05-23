@@ -82,7 +82,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                 drawerNavigationControllers.append(
                     DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,
                         lazyLoadViewControllerBlock: {[weak self] in
-                            let vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerId) as? UINavigationController
+                            let vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerID) as? UINavigationController
                             
                             if let editVC = vc?.childViewControllers[0] as? EditFlashcardViewController {
                                 editVC.mode = .Add
@@ -109,8 +109,12 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                 })
             )
             
-            //not implemented yet
-            //drawerNavigationControllers.append(DrawerNavigationChild(name: "Statystyki"))
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Statystyki", viewController: nil,
+                lazyLoadViewControllerBlock: { [weak self] in
+                    return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.StatisticsViewControllerID)
+                })
+            )
             
             if loggedIn {
                 drawerNavigationControllers.append(
@@ -127,7 +131,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                     UIApplication.appDelegate().dataManager.logout()
                     
                     if let storyboard = self?.storyboard {
-                        UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerId)
+                        UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerID)
                     }
                 })
 

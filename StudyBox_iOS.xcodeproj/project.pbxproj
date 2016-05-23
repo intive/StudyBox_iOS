@@ -14,6 +14,7 @@
 		2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */; };
 		2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */; };
 		2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */; };
+		2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */; };
 		2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */; };
 		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
 		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
@@ -159,6 +160,7 @@
 		2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableTextField.swift; sourceTree = "<group>"; };
 		2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerResourceDisposable.swift; sourceTree = "<group>"; };
 		2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCollectionReusableView.swift; sourceTree = "<group>"; };
+		2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Searchable.swift"; sourceTree = "<group>"; };
 		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
 				7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
+				2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -917,6 +920,7 @@
 				2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */,
 				2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */,
 				2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */,
+				2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */,
 				2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */,
 				72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
