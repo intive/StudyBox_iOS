@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
@@ -45,6 +45,20 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="291"/>
+        </scene>
+        <!--TipViewController-->
+        <scene sceneID="2KL-Xo-PzD">
+            <objects>
+                <controller identifier="TipViewController" id="1ib-vb-8iZ" customClass="TipViewController" customModule="StudyBox_Watch_App_Extension">
+                    <items>
+                        <label width="1" alignment="left" text="Tip" textAlignment="center" numberOfLines="0" id="Wje-J6-QjF"/>
+                    </items>
+                    <connections>
+                        <outlet property="tipLabel" destination="Wje-J6-QjF" id="oSz-rn-qnS"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="468" y="4"/>
         </scene>
         <!--QuestionViewController-->
         <scene sceneID="cZX-BV-P1z">
@@ -99,31 +113,18 @@
             <objects>
                 <notificationController id="YCC-NB-fut">
                     <items>
-                        <label alignment="left" text="Najwyższy czas poćwiczyć fiszki!" textAlignment="left" numberOfLines="2" id="IdU-wH-bcW"/>
+                        <label alignment="left" text="Czas poćwiczyć pamięć! Kliknij aby otworzyć aplikację." textAlignment="left" numberOfLines="0" id="IdU-wH-bcW">
+                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                        </label>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <color key="backgroundColor" red="0.0" green="0.40784313729999999" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
-                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
                     </connections>
                 </notificationController>
             </objects>
             <point key="canvasLocation" x="220" y="599"/>
-        </scene>
-        <!--Notification Controller-->
-        <scene sceneID="ZPc-GJ-vnh">
-            <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="StudyBox_Watch_App" customModuleProvider="target">
-                    <items>
-                        <group width="1" alignment="left" id="4fd-h9-Qki">
-                            <items>
-                                <label alignment="left" text="Label" id="efN-Nd-Q4O"/>
-                            </items>
-                        </group>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="496" y="599"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.090196078430000007" green="0.32156862749999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>

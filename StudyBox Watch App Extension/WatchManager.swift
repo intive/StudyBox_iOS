@@ -38,9 +38,13 @@ class WatchManager: NSObject, WCSessionDelegate {
                     if let flashcardsQ = applicationContext[Utils.WatchAppContextType.FlashcardsQuestions] as? [String],
                         let flashcardsA = applicationContext[Utils.WatchAppContextType.FlashcardsAnswers] as? [String],
                         let flashcardIDs = applicationContext[Utils.WatchAppContextType.FlashcardsIDs] as? [String],
-                        let flashcardsTips = applicationContext[Utils.WatchAppContextType.FlashcardsTips] as? [String] {
+                        let flashcardsTips = applicationContext[Utils.WatchAppContextType.FlashcardsTips] as? [[String]] {
                         for i in 0..<flashcardsQ.count {
-                            flashcardsToSave.append(WatchFlashcard(serverID: flashcardIDs[i], question: flashcardsQ[i], answer: flashcardsA[i], tip: flashcardsTips[i]))
+                            flashcardsToSave.append(WatchFlashcard(serverID: flashcardIDs[i],
+                                question: flashcardsQ[i],
+                                answer: flashcardsA[i],
+                                tips: convertToWatchTips(flashcardsTips[i])
+                                ))
                         }
                         realm.deleteAll()
                         realm.add(flashcardsToSave)
@@ -50,6 +54,24 @@ class WatchManager: NSObject, WCSessionDelegate {
                 debugPrint(e)
             }
         }
+    }
+    
+    func convertToWatchTips(contents: [String]) -> List<WatchTip> {
+        let tipsToSave = List<WatchTip>()
+        for content in contents {
+            tipsToSave.append(WatchTip(content: content))
+        }
+        return tipsToSave
+    }
+    
+    func tipsForFlashcard(flashcardID: String) -> [String] {
+        var tipsForFlashcard = [String]()
+        if let realm = try? Realm(), flashcard = realm.objects(WatchFlashcard.self).filter("serverID = '\(flashcardID)'").first {
+            for tip in flashcard.tips {
+                tipsForFlashcard.append(tip.content)
+            }
+        }
+        return tipsForFlashcard
     }
 }
 

@@ -11,10 +11,10 @@ import Swifternalization
 import WatchConnectivity
 import SVProgressHUD
 
-class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
+class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate, SettingsDetailVCChangeDecksDelegate {
     
     let settingsMainCellID = "settingsMainCell"
-    var decksBeforeChangingSettings = 0
+    var decksToSync = [String]()
     
     @IBOutlet weak var settingsTableView: UITableView!
     
@@ -87,13 +87,14 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     //Set the mode of SettingsDetailVC based on tapped cell
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let detailViewController = segue.destinationViewController as? SettingsDetailViewController
-        if let section = self.settingsTableView.indexPathForSelectedRow?.section {
+        if let section = self.settingsTableView.indexPathForSelectedRow?.section,
+            detailViewController = segue.destinationViewController as? SettingsDetailViewController {
             switch section {
             case 0:
-                detailViewController?.mode = .Frequency
+                detailViewController.mode = .Frequency
             case 1:
-                detailViewController?.mode = .DecksForWatch
+                detailViewController.mode = .DecksForWatch
+                detailViewController.delegate = self
             default: break
             }
         }
@@ -126,7 +127,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
                 if !shouldPerform {
                     self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
                 }
-
+                
             default: break
             }
         }
@@ -137,48 +138,45 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     //Update cells when returning from DetailVC
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if let decksFromDefaults = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String] {
+            decksToSync = decksFromDefaults
+        }
         settingsTableView.reloadData()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        if let decksAfter = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String]
-            where decksBeforeChangingSettings != decksAfter.count && !decksAfter.isEmpty {
-            //FIXME: handle case when user did have N decks but selects N other decks
-            SVProgressHUD.show()
-            for deck in decksAfter {
-                dataManager.flashcards(deck) {
-                    switch $0 {
-                    case .Success(let flashcards):
-                        for flashcard in flashcards {
-                            self.dataManager.allTipsForFlashcard(deck, flashcardID: flashcard.serverID) {
-                                switch $0 {
-                                case .Success(_):
-                                    break
-                                    //TODO: Send to an array and then to Watch
-                                case .Error(let tipErr):
-                                    print (tipErr)
-                                    SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu podpowiedzi.")
-                                }
-                            }
-                        }
-                    case .Error(let deckErr):
-                        print(deckErr)
-                        SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu fiszek.")
-                    }
+    func updateDecks() {
+        SVProgressHUD.show()
+        if let decksToSync = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String] {
+            guard !decksToSync.isEmpty else {
+                SVProgressHUD.dismiss()
+                return
+            }
+            WatchDataManager.watchManager.downloadSelectedDecksFlashcardsTips(decksToSync) {
+                switch $0 {
+                case .Success:
+                    SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
+                    self.sendDecksToWatch(self.decksToSync)
+                case .Failure:
+                    SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu danych.")
                 }
             }
-            //TODO: check when syncing is complete
-            SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
+        } else {
+            SVProgressHUD.dismiss()
         }
     }
     
+    func sendDecksToWatch(decksToSynchronizeIDs: [String]) {
+        do {
+            try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
+        } catch let e {
+            debugPrint(e)
+            SVProgressHUD.showErrorWithStatus("Nie można obecnie przesłać talii do Apple Watch.")
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Ustawienia"
         settingsTableView.backgroundColor = UIColor.sb_Grey()
-        if let count = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
-            decksBeforeChangingSettings = count
-        }
-        
     }
 }

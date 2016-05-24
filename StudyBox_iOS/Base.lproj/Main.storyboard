@@ -604,8 +604,8 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="afm-OH-SIe"/>
                                                 <exclude reference="Dda-iM-i8p"/>
+                                                <exclude reference="afm-OH-SIe"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -1199,6 +1199,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bb9-zC-jZN"/>
+        <segue reference="Nci-HR-1So"/>
     </inferredMetricsTieBreakers>
 </document>

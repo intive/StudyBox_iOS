@@ -8,6 +8,7 @@
 
 import WatchKit
 import WatchConnectivity
+import RealmSwift
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
@@ -21,8 +22,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     let detailTextNotAvailable = "Nie zostały wybrane żadne talie do synchronizacji z zegarkiem lub nie zostały one jeszcze zsynchronizowane."
     let detailTextError = "Błąd w otrzymanych danych. Zsynchronizuj talie ponownie."
-    let detailTextSuccess = "Masz dobrą pamięć!"
-    let detailTextFailure = "Następnym razem się uda."
+    let detailTextSuccess = "Dobrze!"
+    let detailTextFailure = "Nie udało się..."
     
     var storedFlashcards = [WatchFlashcard]()
     
@@ -54,14 +55,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func startButtonPress() {
         let random = randomFlashcard()
         presentControllerWithNames(["QuestionViewController", "AnswerViewController"], contexts:
-            [["segue": "pagebased", "question": random.question, "tip": random.tip],
+            [["segue": "pagebased", "question": random.question, "flashcardID": random.serverID],
                 ["segue": "pagebased", "answer": random.answer, "dismissContext": self]])
     }
     
     @IBAction func refreshButtonPress() {
+        self.userAnswer = nil
         updateStoredFlashcards()
         updateButtonAndLabels()
-        self.userAnswer = nil
     }
     
     func randomFlashcard() -> WatchFlashcard {

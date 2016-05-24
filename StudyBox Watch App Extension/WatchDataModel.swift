@@ -9,16 +9,25 @@
 import RealmSwift
 
 class WatchFlashcard: Object {
-    dynamic private(set) var serverID: String = NSUUID().UUIDString
+    dynamic private(set) var serverID: String = ""
     dynamic var question: String = ""
     dynamic var answer: String = ""
-    dynamic var tip: String = ""
+    var tips = List<WatchTip>()
     
-    convenience init(serverID: String, question: String, answer: String, tip: String){
+    convenience init(serverID: String, question: String, answer: String, tips: List<WatchTip>){
         self.init()
         self.serverID = serverID
         self.question = question
         self.answer = answer
-        self.tip = tip
+        self.tips = tips
+    }
+}
+
+class WatchTip: Object {
+    dynamic var content: String = ""
+
+    convenience init(content: String){
+        self.init()
+        self.content = content
     }
 }
