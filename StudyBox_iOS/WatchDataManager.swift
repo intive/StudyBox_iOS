@@ -73,30 +73,29 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         
         for deckID in decksToSync {
         dispatch_group_enter(group)
+            
             dataManager.flashcards(deckID) {
                 switch $0 {
                 case .Success(let flashcards):
                     for flashcard in flashcards {
-                        
                         dispatch_group_enter(group)
+                        
                         self.dataManager.allTipsForFlashcard(deckID, flashcardID: flashcard.serverID) {
                             switch $0 {
                             case .Success(_):
-                                dispatch_group_leave(group)
+                                break
                             case .Error(let tipErr):
                                 debugPrint(tipErr)
                                 completion(.Failure)
-                                return
                             }
+                            dispatch_group_leave(group)
                         }
                     }
-                    dispatch_group_leave(group)
-                    
                 case .Error(let deckErr):
                     debugPrint(deckErr)
                     completion(.Failure)
-                    return
                 }
+                dispatch_group_leave(group)
             }
         }
         
