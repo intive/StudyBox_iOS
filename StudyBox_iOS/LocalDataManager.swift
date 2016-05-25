@@ -72,4 +72,14 @@ class LocalDataManager {
         return filter(Flashcard.self, predicate: "serverID == '\(deckID)'")
     }
     
+    func gravatar() -> NSData? {
+        return NSData(contentsOfURL: self.gravatarDestinationURL)
+    }
+    
+    var gravatarDestinationURL: NSURL {
+        let fileManager = NSFileManager.defaultManager()
+        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        return directoryURL.URLByAppendingPathComponent("gravatarImage")
+    }
+    
 }

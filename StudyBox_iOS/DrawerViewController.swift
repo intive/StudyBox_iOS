@@ -44,7 +44,11 @@ struct DrawerNavigationChild {
 class DrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var gravatarImageView: UIImageView!
     static let DrawerCellId = "DrawerCellId"
+    var dataManager: DataManager = UIApplication.appDelegate().dataManager
+    
     private var loggedIn: Bool {
         get {
             let dataManager = UIApplication.appDelegate().dataManager.remoteDataManager
@@ -57,8 +61,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     private var drawerNavigationControllers = [DrawerNavigationChild]()
-    private static var initialControllerIndex = 1
-    private var currentControllerIndex = 1
+    private static var initialControllerIndex = 0
+    private var currentControllerIndex = 0
     var barStyle = UIStatusBarStyle.Default
     private func lazyLoadViewController(withStoryboardId idStoryboard: String) -> UIViewController? {
         if let board = self.storyboard {
@@ -70,7 +74,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     
     func setupDrawer() {
         if drawerNavigationControllers.isEmpty {
-            drawerNavigationControllers.append(DrawerNavigationChild(name: "Moje konto"))
             
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: loggedIn ? "Moje talie" : "Wyszukaj talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
@@ -157,6 +160,21 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         setupDrawer()
         tableView.backgroundColor = UIColor.sb_Graphite()
+        view.backgroundColor = UIColor.sb_Graphite()
+        if let email = self.dataManager.remoteDataManager.user?.email {
+            self.emailLabel.text = email
+        }
+        
+        dataManager.gravatar {
+            
+            if case .Success(let obj) = $0, let image = UIImage(data: obj) { //swiftlint:disable:this conditional_binding_cascade
+                self.gravatarImageView.image = image
+            } else {
+                self.gravatarImageView.removeConstraints(self.gravatarImageView.constraints)
+                self.gravatarImageView.hidden = true
+                self.emailLabel.hidden = true
+            }
+        }
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

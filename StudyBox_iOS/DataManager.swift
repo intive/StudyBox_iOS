@@ -133,6 +133,25 @@ public class DataManager {
     func logout() {
         remoteDataManager.logout()
         clearUserDefaults()
+        let fm = NSFileManager()
+        do {
+           try fm.removeItemAtURL(localDataManager.gravatarDestinationURL)
+        } catch {}
+    }
+    
+    func gravatar(completion: (DataManagerResponse<NSData>) -> ()) {
+        if let gravatar = self.localDataManager.gravatar() {
+            completion(.Success(obj: gravatar))
+        } else {
+            remoteDataManager.gravatar(localDataManager.gravatarDestinationURL) {
+                switch $0 {
+                case .Success(let obj):
+                    completion(.Success(obj: obj))
+                case .Error(let err):
+                    completion(.Error(obj: err))
+                }
+            }
+        }
     }
 
     func clearUserDefaults() {

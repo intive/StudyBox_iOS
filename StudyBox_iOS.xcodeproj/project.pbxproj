@@ -12,6 +12,7 @@
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0939A61CAD19CF00886A1B /* String+validation.swift */; };
 		2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */; };
+		2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFB91CF5884200503433 /* String+md5.swift */; };
 		2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */; };
 		2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */; };
 		2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */; };
@@ -158,6 +159,8 @@
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2D0939A61CAD19CF00886A1B /* String+validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
 		2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableTextField.swift; sourceTree = "<group>"; };
+		2D15AFB61CF5881500503433 /* StudyBox_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StudyBox_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D15AFB91CF5884200503433 /* String+md5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
 		2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerResourceDisposable.swift; sourceTree = "<group>"; };
 		2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCollectionReusableView.swift; sourceTree = "<group>"; };
 		2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -448,6 +451,7 @@
 			children = (
 				2D47DCC71CEC659900110F85 /* Decks */,
 				7238493F1C88851A009605EE /* EditFlashcardViewController.swift */,
+				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
 				723849391C8882DE009605EE /* StudyBoxController.swift */,
 				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
 				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
@@ -476,11 +480,11 @@
 				2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */,
 				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
 				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
-				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
 				725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */,
 				725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */,
 				2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */,
 				2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */,
+				2D15AFB91CF5884200503433 /* String+md5.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -527,6 +531,7 @@
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
 				2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */,
+				2D15AFB61CF5881500503433 /* StudyBox_iOS-Bridging-Header.h */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -961,6 +966,7 @@
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
+				2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
@@ -1221,11 +1227,14 @@
 			baseConfigurationReference = 218E2E16B606C528CF03A0ED /* Pods-StudyBox_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StudyBox_iOS/StudyBox_iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1234,10 +1243,12 @@
 			baseConfigurationReference = D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StudyBox_iOS/StudyBox_iOS-Bridging-Header.h";
 			};
 			name = Release;
 		};

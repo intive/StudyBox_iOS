@@ -133,7 +133,6 @@ enum Router: URLRequestConvertible {
     var URLRequest: NSMutableURLRequest {
         let request = NSMutableURLRequest(URL: self.path)
         request.HTTPMethod = self.method.rawValue
-        request.URL = self.path
         var parameters: [String: AnyObject] = [:]
         switch self {
             //Add only methods that use parameters (check in Apiary)
