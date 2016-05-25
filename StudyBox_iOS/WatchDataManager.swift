@@ -70,6 +70,7 @@ class WatchDataManager: NSObject, WCSessionDelegate {
     func downloadSelectedDecksFlashcardsTips(decksToSync: [String], completion: (DecksSyncingResult) -> ()) {
         
         let group = dispatch_group_create()
+        var tmpCompletion = DecksSyncingResult.Success
         
         for deckID in decksToSync {
         dispatch_group_enter(group)
@@ -86,21 +87,21 @@ class WatchDataManager: NSObject, WCSessionDelegate {
                                 break
                             case .Error(let tipErr):
                                 debugPrint(tipErr)
-                                completion(.Failure)
+                                tmpCompletion = .Failure
                             }
                             dispatch_group_leave(group)
                         }
                     }
                 case .Error(let deckErr):
                     debugPrint(deckErr)
-                    completion(.Failure)
+                    tmpCompletion = .Failure
                 }
                 dispatch_group_leave(group)
             }
         }
         
         dispatch_group_notify(group, dispatch_get_main_queue()) {
-            completion(.Success)
+            completion(tmpCompletion)
         }
     }
 }
