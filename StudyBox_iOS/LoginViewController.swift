@@ -35,20 +35,11 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         
-        autoLoginIfLoggedBefore()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         dataSource = self
-    }
-    
-    func autoLoginIfLoggedBefore() {
-        let myData = UIApplication.appDelegate().dataManager.remoteDataManager.getEmailPassFromDefaults()
-
-        if let email = myData?.email, password = myData?.password {
-            loginWithInputData(email, password: password)
-        }
     }
     
     func loginToServer(withEmail email: String, password: String) {

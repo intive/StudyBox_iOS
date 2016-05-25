@@ -18,6 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
+        let dataManager = UIApplication.appDelegate().dataManager
+        let userData = dataManager.remoteDataManager.getEmailPassFromDefaults()
+        
+        if let email = userData?.email, password = userData?.password, storyboard = window?.rootViewController?.storyboard {
+            dataManager.remoteDataManager.user = User(email: email, password: password)
+            window?.rootViewController = SBDrawerController.basicSBDrawer(storyboard: storyboard)
+        }
         return true
     }
     
