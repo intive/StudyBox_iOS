@@ -8,52 +8,33 @@
 
 import WatchKit
 
-enum QuestionVCMode {
-    case Question, Tip
-}
 
 class QuestionViewController: WKInterfaceController {
     
     @IBOutlet var questionLabel: WKInterfaceLabel!
-    var mode = QuestionVCMode.Question
     var questionText = String()
-    var tipText = String()
+    var flashcardID = String()
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        if let questionFromContext = context?["question"] as? String, let tipFromContext = context?["tip"] as? String {
+        if let questionFromContext = context?["question"] as? String, flashcardIDFromContext = context?["flashcardID"] as? String {
             questionText = questionFromContext
-            tipText = tipFromContext
+            flashcardID = flashcardIDFromContext
         }
-        addMenuItemWithItemIcon(.Info, title: "Podpowiedź", action: #selector(QuestionViewController.updateLabel))
+        addMenuItemWithItemIcon(.Info, title: "Podpowiedzi", action: #selector(QuestionViewController.showTips))
         questionLabel.setText(questionText)
     }
     
-    func updateLabel() {
-        switch mode {
-        case .Question:
-            //Current mode is Question, so we'll show the tip
-            if tipText.isEmpty {
-                questionLabel.setText("Do tej fiszki nie ma podpowiedzi.")
-            } else {
-                questionLabel.setText("Podpowiedź:\n\(tipText)")
-            }
-        case .Tip:
-            questionLabel.setText(questionText)
+    func showTips() {
+        let tipsFromRealm = WatchManager.sharedManager.tipsForFlashcard(flashcardID)
+        
+        if !tipsFromRealm.isEmpty {
+            let controllers = Array(count: tipsFromRealm.count, repeatedValue: "TipViewController")
+            presentControllerWithNames(controllers, contexts: tipsFromRealm)
+        } else {
+            presentAlertControllerWithTitle("Uwaga", message: "Fiszka nie ma podpowiedzi.", preferredStyle: .Alert, actions: [])
         }
-        updateMenuAndMode()
-    }
-    
-    func updateMenuAndMode() {
-        switch mode {
-        case .Question:
-            mode = .Tip
-            clearAllMenuItems()
-            addMenuItemWithItemIcon(.Maybe, title: "Pytanie", action: #selector(QuestionViewController.updateLabel))
-        case .Tip:
-            mode = .Question
-            clearAllMenuItems()
-            addMenuItemWithItemIcon(.Info, title: "Podpowiedź", action: #selector(QuestionViewController.updateLabel))
-        }
+
+        
     }
 }

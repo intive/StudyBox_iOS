@@ -8,19 +8,20 @@
 
 import UIKit
 import Reachability
+import SVProgressHUD
 
 class RandomDeckLoadingController: StudyBoxViewController {
     
-    @IBOutlet weak var loadingLabelOutlet: UILabel!
+    @IBOutlet weak var statusLabelOutlet: UILabel!
     @IBOutlet weak var retryButton: UIButton!
     var flashcards = [Flashcard]()
-
+    
     var dataManager = UIApplication.appDelegate().dataManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadingLabelOutlet.text = "Ładowanie..."
+        statusLabelOutlet.hidden = true
         retryButton.hidden = true
         
         if !Reachability.isConnected() {
@@ -35,11 +36,12 @@ class RandomDeckLoadingController: StudyBoxViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        loadingLabelOutlet.text = "Ładowanie..."
+        statusLabelOutlet.hidden = true
         retryButton.hidden = true
     }
     
     @IBAction func retryAction(sender: AnyObject) {
+        
         if !Reachability.isConnected() {
             updateUI(message: "Nie jesteś połączony z Internetem.")
         } else {
@@ -48,7 +50,7 @@ class RandomDeckLoadingController: StudyBoxViewController {
     }
     
     func recieveFlashcardsAndPerformSegue() {
-        
+        SVProgressHUD.show()
         dataManager.randomDeck({ deckResponse in
             switch deckResponse {
             case .Success(let recievedDeck):
@@ -58,25 +60,28 @@ class RandomDeckLoadingController: StudyBoxViewController {
                         if flashcards.isEmpty {
                             self.updateUI(message: "Otrzymano pustą talię.")
                         } else {
+                            SVProgressHUD.dismiss()
                             self.performSegueWithIdentifier("StartTest",
                                 sender: Test(flashcards: flashcards, testType: .Test(uint(flashcards.count)), deck: recievedDeck))
                         }
                     case .Error(let err):
-                        print(err)
+                        debugPrint(err)
                         self.updateUI(message: "Błąd pobierania fiszek.")
                     }
                 })
                 
             case .Error(let err):
-                print(err)
+                debugPrint(err)
                 self.updateUI(message: "Błąd pobierania talii.")
             }
         })
     }
     
     func updateUI(message message: String) {
-            loadingLabelOutlet.text = message
-            retryButton.hidden = false
+        statusLabelOutlet.text = message
+        statusLabelOutlet.hidden = false
+        retryButton.hidden = false
+        SVProgressHUD.dismiss()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

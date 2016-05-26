@@ -13,10 +13,5 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidFinishLaunching() {
         WatchManager.sharedManager.startSession()
     }
-    
-//TODO: Send message to Watch to schedule a new notification?
-//    func didReceiveLocalNotification(notification: UILocalNotification) {
-//        
-//    }
 
 }

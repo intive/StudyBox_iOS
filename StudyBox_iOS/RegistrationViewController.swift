@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import Reachability
+import SVProgressHUD
 
 var userDataForRegistration = [String : String]()
 
@@ -86,7 +87,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
                 if case .ErrorWithMessage(let txt)? = (err as? ServerError){
                     errorMessage = txt
                 }
-                self.presentAlertController(withTitle: "", message: errorMessage, buttonText: ok)
+                SVProgressHUD.showErrorWithStatus(errorMessage)
             }
         })
     }
@@ -112,7 +113,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         }
         
         if let message = alertMessage {
-            presentAlertController(withTitle: "", message: message, buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus(message)
         } else {
             if let email = self.emailTextField.text, password = self.passwordTextField.text  {
                 self.registerNewUser(email, password: password)

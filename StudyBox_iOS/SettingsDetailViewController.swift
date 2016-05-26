@@ -8,10 +8,15 @@
 
 import UIKit
 import WatchConnectivity
+import SVProgressHUD
 
 enum SettingsDetailVCMode {
     case Frequency
     case DecksForWatch
+}
+
+protocol SettingsDetailVCChangeDecksDelegate {
+    func updateDecks()
 }
 
 class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate, WCSessionDelegate {
@@ -21,6 +26,7 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
     let checkmarkCellID = "checkmarkCell"
     let switchCellID = "switchCell"
     var mode: SettingsDetailVCMode!
+    var delegate: SettingsDetailVCChangeDecksDelegate?
     lazy private var dataManager: DataManager = { return UIApplication.appDelegate().dataManager }()
     
     ///Array that holds all user's local decks
@@ -45,7 +51,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         }
         
         detailTableView.backgroundColor = UIColor.sb_Grey()
-        
         WatchDataManager.watchManager.startSession()
     }
     
@@ -58,7 +63,10 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
                 UIApplication.appDelegate().scheduleNotification()
             }
         case .DecksForWatch?:
-            saveSelectedDecksToUserDefaultsAndWatch()
+            saveSelectedDecksToUserDefaults()
+            if let delegate = delegate {
+                delegate.updateDecks()
+            }
         default:
             break
         }
@@ -210,14 +218,10 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
         cell.accessoryType = toState
     }
 
-    
-//MARK: Watch-related methods
     ///Sends decks selected in TableView to NSUD and Watch
-    func saveSelectedDecksToUserDefaultsAndWatch() {
+    func saveSelectedDecksToUserDefaults() {
         let decksToSynchronizeIDs = convertSelectedDecksToIDs()
-        
         defaults.setObject(decksToSynchronizeIDs, forKey: Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-        sendDecksToWatch(decksToSynchronizeIDs)
     }
     
     //Converts decks selected in `detailTableView` to array of their IDs
@@ -232,16 +236,6 @@ class SettingsDetailViewController: StudyBoxViewController, UITableViewDataSourc
             }
         }
         return decksToSynchronize
-    }
-    
-    //Sending to Watch
-    func sendDecksToWatch(decksToSynchronizeIDs: [String]) {
-        do {
-            try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
-        } catch let e {
-            print(e)
-            presentAlertController(withTitle: "Błąd", message: "Nie można obecnie przesłać talii do Apple Watch.", buttonText: "OK")
-        }
     }
 
 }

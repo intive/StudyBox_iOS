@@ -9,12 +9,17 @@
 import WatchConnectivity
 import UIKit
 
+enum DecksSyncingResult {
+    case Success, Failure
+}
+
 //WatchDataManager is implemented because updating the Watch data will occur in Settings and later when user edits a deck or flashcard data.
 class WatchDataManager: NSObject, WCSessionDelegate {
     
     static let watchManager = WatchDataManager()
-    private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    private var dataManager: DataManager = { return UIApplication.appDelegate().dataManager }()
     private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     private var validSession: WCSession? {
         if let session = session where session.paired && session.watchAppInstalled {
@@ -34,18 +39,16 @@ class WatchDataManager: NSObject, WCSessionDelegate {
         var flashcardsQuestions = [String]()
         var flashcardsAnswers = [String]()
         var flashcardsIDs = [String]()
-        let flashcardsTips = [String]()
+        //This is an array of arrays because one flashcard can contain multiple tips
+        var flashcardsTips = [[String]]()
         
-        if let manager = dataManager {
-            for deck in decksIDs {
-                if let deckFromManager = manager.localDataManager.get(Deck.self, withId: deck) {
-                    for flashcard in deckFromManager.flashcards where !flashcard.hidden {
-                        flashcardsQuestions.append(flashcard.question)
-                        flashcardsAnswers.append(flashcard.answer)
-                        flashcardsIDs.append(flashcard.serverID)
-//                        flashcardsTips.append(flashcard.tip)
-//todo: fix handling tips
-                    }
+        for deck in decksIDs {
+            if let deckFromManager = dataManager.localDataManager.get(Deck.self, withId: deck) {
+                for flashcard in deckFromManager.flashcards where !flashcard.hidden {
+                    flashcardsQuestions.append(flashcard.question)
+                    flashcardsAnswers.append(flashcard.answer)
+                    flashcardsIDs.append(flashcard.serverID)
+                    flashcardsTips.append(dataManager.localDataManager.tips(deck, flashcardID: flashcard.serverID).map({$0.content}))
                 }
             }
         }
@@ -61,6 +64,44 @@ class WatchDataManager: NSObject, WCSessionDelegate {
                 print("Sending to Watch failed: \(error)")
                 throw error
             }
+        }
+    }
+    
+    func downloadSelectedDecksFlashcardsTips(decksToSync: [String], completion: (DecksSyncingResult) -> ()) {
+        
+        let group = dispatch_group_create()
+        var tmpCompletion = DecksSyncingResult.Success
+        
+        for deckID in decksToSync {
+        dispatch_group_enter(group)
+            
+            dataManager.flashcards(deckID) {
+                switch $0 {
+                case .Success(let flashcards):
+                    for flashcard in flashcards {
+                        dispatch_group_enter(group)
+                        
+                        self.dataManager.allTipsForFlashcard(deckID, flashcardID: flashcard.serverID) {
+                            switch $0 {
+                            case .Success(_):
+                                break
+                            case .Error(let tipErr):
+                                debugPrint(tipErr)
+                                tmpCompletion = .Failure
+                            }
+                            dispatch_group_leave(group)
+                        }
+                    }
+                case .Error(let deckErr):
+                    debugPrint(deckErr)
+                    tmpCompletion = .Failure
+                }
+                dispatch_group_leave(group)
+            }
+        }
+        
+        dispatch_group_notify(group, dispatch_get_main_queue()) {
+            completion(tmpCompletion)
         }
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 enum EditFlashcardViewControllerMode {
     case Add, Modify(flashcard: Flashcard, updateCallback: ((flashcard: Flashcard) -> Void)?)
@@ -202,7 +203,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             case .Success(let decks):
                 self.decks = decks
             case .Error(_):
-                self.presentAlertController(withTitle: "Błąd", message: "Nie udało się pobrać aktualnej listy talii", buttonText: "Ok")
+                SVProgressHUD.showErrorWithStatus("Nie udało się pobrać aktualnej listy talii")
             }
         }
         searchBarWrapper.addSubview(decksBar)
@@ -236,12 +237,12 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     @IBAction func saveAction(sender: UIBarButtonItem) {
         
         guard let answer = answerField.text, question = questionField.text where !answer.isEmpty && !question.isEmpty else {
-            presentAlertController(withTitle: "Błąd", message: "Pola odpowiedzi i pytania nie mogą być puste", buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus("Pola odpowiedzi i pytania nie mogą być puste")
             return
         }
         
         guard let flashcardDeck = deck else {
-            presentAlertController(withTitle: "Błąd", message: "Wybierz talię", buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus("Wybierz talię do której chcesz dodać fiszkę")
             return
         }
         
@@ -254,11 +255,10 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, isHidden: false)) {
                 switch $0 {
                 case .Success(_):
-                    self.presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
+                    SVProgressHUD.showSuccessWithStatus("Dodano fiszkę")
                     self.clearInput()
                 case .Error(_):
-                    self.presentAlertController(withTitle: "Błąd", message: "Nie udało się dodać fiszki", buttonText: "Ok")
-                    
+                    SVProgressHUD.showErrorWithStatus("Nie udało się dodać fiszki")
                 }
             }
 
@@ -279,7 +279,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             switch $0 {
             case .Success(let updatedFlashcard):
                 callback?(flashcard:updatedFlashcard)
-                self.presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok",
+                self.presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "OK",
                                             actionCompletion: completion,
                                             dismissCompletion: nil)
             case .Error(let err):
@@ -288,7 +288,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
                     errMessage = serverErrMessage
                 }
                 
-                self.presentAlertController(withTitle: "Błąd", message: errMessage, buttonText: "Ok",
+                self.presentAlertController(withTitle: "Błąd", message: errMessage, buttonText: "OK",
                                             actionCompletion: completion,
                                             dismissCompletion: nil)
             }
