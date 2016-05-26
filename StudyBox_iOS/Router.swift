@@ -14,7 +14,7 @@ private let tipsPath = "tips"
 private let flashcardsPath = "flashcards"
 
 enum Router: URLRequestConvertible {
-    private static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:3000")! //swiftlint:disable:this force_unwrapping
+    private static var serverURL = NSURL(string: "http://dev.patronage2016.blstream.com:2000")! //swiftlint:disable:this force_unwrapping
 
     case GetCurrentUser
     case AddUser(email: String, password: String)
