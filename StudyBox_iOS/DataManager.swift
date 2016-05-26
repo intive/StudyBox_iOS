@@ -133,6 +133,7 @@ public class DataManager {
     func logout() {
         remoteDataManager.logout()
         clearUserDefaults()
+        clearLocalDataManager()
     }
 
     func clearUserDefaults() {
@@ -141,6 +142,12 @@ public class DataManager {
         defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey)
         defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
         defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
+    }
+    
+    func clearLocalDataManager() {
+        localDataManager.deleteAll(Deck.self)
+        localDataManager.deleteAll(Flashcard.self)
+        localDataManager.deleteAll(Tip.self)
     }
     
     //MARK: Decks
