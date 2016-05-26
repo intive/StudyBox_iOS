@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
         SVProgressHUD.setDefaultStyle(.Light)
         
+        self.window?.tintColor = UIColor.sb_DarkBlue()
+        
         return true
     }
     
@@ -46,11 +48,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey) {
             let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
             switch type  {
-            case "minut":
+            case "minuty":
                 if let newDate = calendar.dateByAddingUnit(.Minute, value: number, toDate: now, options: [.MatchStrictly]){
                     newFireDate = newDate
                 }
-            case "godzin":
+            case "godziny":
                 if let newDate = calendar.dateByAddingUnit(.Hour, value: number, toDate: now, options: [.MatchStrictly]){
                     newFireDate = newDate
                 }
