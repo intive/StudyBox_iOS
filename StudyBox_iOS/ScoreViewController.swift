@@ -80,7 +80,7 @@ class ScoreViewController: StudyBoxViewController {
     
     @IBAction func deckListButtonAction(sender: UIButton) {
         // TODOs: refactor for Drawer menu options
-        DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
+        DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 0)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
