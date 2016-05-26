@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
+
+        self.window?.tintColor = UIColor.sb_DarkBlue()
+        
         return true
     }
     
@@ -40,11 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey) {
             let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
             switch type  {
-            case "minut":
+            case "minuty":
                 if let newDate = calendar.dateByAddingUnit(.Minute, value: number, toDate: now, options: [.MatchStrictly]){
                     newFireDate = newDate
                 }
-            case "godzin":
+            case "godziny":
                 if let newDate = calendar.dateByAddingUnit(.Hour, value: number, toDate: now, options: [.MatchStrictly]){
                     newFireDate = newDate
                 }
