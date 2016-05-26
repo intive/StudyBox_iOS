@@ -132,9 +132,9 @@ class RemoteDataManager {
             request = ParameterEncoding.URL.encode(request, parameters: ["d":"retro"]).0
             Alamofire.download(request) { _, _ in
                 return saveURL
-                }.response { _, _, data, err in
-                    // Alamofire bug? error is nil, data is nil, yet file is saved
-                    if let contents = NSData(contentsOfURL: saveURL) {
+                }.response { _, _, _, err in
+                    
+                    if err == nil, let contents = NSData(contentsOfURL: saveURL)  {
                         completion(.Success(obj: contents))
                     } else {
                         completion(.Error(err: ServerError.FetchError))

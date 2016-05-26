@@ -151,6 +151,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDrawer()
+        gravatarImageView.layer.cornerRadius = gravatarImageView.bounds.width / 2
+        gravatarImageView.clipsToBounds = true
         tableView.backgroundColor = UIColor.sb_Graphite()
         view.backgroundColor = UIColor.sb_Graphite()
         if let email = self.dataManager.remoteDataManager.user?.email {
@@ -162,7 +164,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             if case .Success(let obj) = $0, let image = UIImage(data: obj) { //swiftlint:disable:this conditional_binding_cascade
                 self.gravatarImageView.image = image
             } else {
-                self.gravatarImageView.removeConstraints(self.gravatarImageView.constraints)
                 self.gravatarImageView.hidden = true
                 self.emailLabel.hidden = true
             }

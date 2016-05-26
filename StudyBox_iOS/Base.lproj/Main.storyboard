@@ -370,8 +370,8 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eDU-3C-fSu">
                                         <rect key="frame" x="18" y="0.0" width="80" height="80"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="Cg1-xX-A08"/>
-                                            <constraint firstAttribute="height" constant="80" id="nGX-Rr-PUf"/>
+                                            <constraint firstAttribute="width" priority="999" constant="80" id="Cg1-xX-A08"/>
+                                            <constraint firstAttribute="height" priority="999" constant="80" id="nGX-Rr-PUf"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Niezalogowany" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hS9-zb-rbs">
