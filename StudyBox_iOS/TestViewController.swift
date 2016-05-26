@@ -1,8 +1,8 @@
 import UIKit
+import SVProgressHUD
 
 enum TestModeTipOrQuestion {
-    case Tip
-    case Question
+    case Tip, Question
 }
 
 class TestViewController: StudyBoxViewController {
@@ -202,7 +202,7 @@ class TestViewController: StudyBoxViewController {
                     switch response {
                     case .Success(let tipsFromManager):
                         guard !tipsFromManager.isEmpty else {
-                            self.presentAlertController(withTitle: "Błąd", message: "Fiszka nie ma podpowiedzi", buttonText: "Ok")
+                            SVProgressHUD.showInfoWithStatus("Fiszka nie ma podpowiedzi")
                             return
                         }
                         self.tipsForFlashcard = tipsFromManager.sort {
@@ -219,7 +219,7 @@ class TestViewController: StudyBoxViewController {
                         
                     case .Error(let err):
                         print(err)
-                        self.presentAlertController(withTitle: "Błąd", message: "Nie można pobrać podpowiedzi dla fiszki.", buttonText: "OK")
+                        SVProgressHUD.showErrorWithStatus("Nie można pobrać podpowiedzi dla fiszki.")
                     }
                 })
             }

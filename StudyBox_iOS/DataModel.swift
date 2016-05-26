@@ -24,8 +24,10 @@ class Tip: Object, UniquelyIdentifiable, JSONInitializable {
     
     required convenience init?(withJSON json: JSON) {
         if let jsonDict = json.dictionary {
-            if let id = jsonDict["id"]?.string, essence = jsonDict["essence"]?.string, difficult = jsonDict["difficult"]?.int {
-                self.init(deckID: "", flashcardID: "", serverID: id, content: essence, difficulty: difficult)
+            if let id = jsonDict["id"]?.string, essence = jsonDict["essence"]?.string,
+                difficult = jsonDict["difficult"]?.int, flashcardId = jsonDict["flashcardId"]?.string,
+                deckId = jsonDict["deckId"]?.string {
+                self.init(deckID: deckId, flashcardID: flashcardId, serverID: id, content: essence, difficulty: difficult)
                 return
             }
         }

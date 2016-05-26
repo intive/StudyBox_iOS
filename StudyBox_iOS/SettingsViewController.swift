@@ -9,10 +9,12 @@
 import UIKit
 import Swifternalization
 import WatchConnectivity
+import SVProgressHUD
 
-class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
+class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate, SettingsDetailVCChangeDecksDelegate {
     
     let settingsMainCellID = "settingsMainCell"
+    var decksToSync = [String]()
     
     @IBOutlet weak var settingsTableView: UITableView!
     
@@ -85,13 +87,14 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     //Set the mode of SettingsDetailVC based on tapped cell
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let detailViewController = segue.destinationViewController as? SettingsDetailViewController
-        if let section = self.settingsTableView.indexPathForSelectedRow?.section {
+        if let section = self.settingsTableView.indexPathForSelectedRow?.section,
+            detailViewController = segue.destinationViewController as? SettingsDetailViewController {
             switch section {
             case 0:
-                detailViewController?.mode = .Frequency
+                detailViewController.mode = .Frequency
             case 1:
-                detailViewController?.mode = .DecksForWatch
+                detailViewController.mode = .DecksForWatch
+                detailViewController.delegate = self
             default: break
             }
         }
@@ -102,35 +105,29 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             return false
         }
         var shouldPerform = false
-        var message: (title: String, body: String)?
-
+        
         if let section = self.settingsTableView.indexPathForSelectedRow?.section {
             switch section {
             case 0:
                 shouldPerform = true
             case 1:
                 if !WCSession.isSupported() {
-                    presentAlertController(withTitle: "Niekompatybilne urządzenie",
-                                           message: "Twoje urządzenie nie obsługuje komunikacji z Apple Watch", buttonText: "OK")
-                    self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-                    break
+                    SVProgressHUD.showInfoWithStatus("Twoje urządzenie nie obsługuje komunikacji z Apple Watch.")
                 }
-                
                 if let email = dataManager.remoteDataManager.user?.email {
                     let userDecks = dataManager.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
                     if userDecks.isEmpty {
-                        message = (title: "Brak talii", body: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji. ")
+                        SVProgressHUD.showInfoWithStatus("Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
+                    } else { //We have decks
+                        shouldPerform = true
                     }
-                } else {
-                    message = (title: "Błąd", body: "Musisz być zalogowany oraz posiadać talie aby synchronizować je z Apple Watch.")
+                } else { //User is not logged in
+                    SVProgressHUD.showInfoWithStatus("Musisz być zalogowany oraz posiadać talie aby synchronizować je z Apple Watch.")
+                }
+                if !shouldPerform {
+                    self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
                 }
                 
-                if let message = message {
-                    presentAlertController(withTitle: message.title, message: message.body, buttonText: "OK")
-                    self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
-                } else { //We don't have a message so no error was encountered
-                    shouldPerform = true
-                }
             default: break
             }
         }
@@ -141,9 +138,42 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     //Update cells when returning from DetailVC
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if let decksFromDefaults = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String] {
+            decksToSync = decksFromDefaults
+        }
         settingsTableView.reloadData()
     }
     
+    func updateDecks() {
+        SVProgressHUD.show()
+        if let decksToSync = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String] {
+            guard !decksToSync.isEmpty else {
+                SVProgressHUD.dismiss()
+                return
+            }
+            WatchDataManager.watchManager.downloadSelectedDecksFlashcardsTips(decksToSync) {
+                switch $0 {
+                case .Success:
+                    SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
+                    self.sendDecksToWatch(self.decksToSync)
+                case .Failure:
+                    SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu danych.")
+                }
+            }
+        } else {
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func sendDecksToWatch(decksToSynchronizeIDs: [String]) {
+        do {
+            try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
+        } catch let e {
+            debugPrint(e)
+            SVProgressHUD.showErrorWithStatus("Nie można obecnie przesłać talii do Apple Watch.")
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Ustawienia"

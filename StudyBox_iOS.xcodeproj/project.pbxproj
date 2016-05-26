@@ -71,6 +71,7 @@
 		726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */; };
 		726EA9CD1CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */; };
 		726EA9D11CBBFAE5008C90CD /* StudyBox Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */; };
+		726F37D51CF1A98F0006939A /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F37D41CF1A98F0006939A /* TipViewController.swift */; };
 		729310021CC01E9E002BF87A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
@@ -219,6 +220,7 @@
 		726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		726EA9CE1CBBFAE5008C90CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		726F37D41CF1A98F0006939A /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72D50BB01CDA69AC00CB0271 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */,
 				723772191CBC159800DE0F6D /* QuestionViewController.swift */,
 				7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */,
+				726F37D41CF1A98F0006939A /* TipViewController.swift */,
 				726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */,
 			);
 			name = "View Controllers";
@@ -906,6 +909,7 @@
 				72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */,
 				726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */,
 				7214E0921CCD0355003E919C /* WatchDataModel.swift in Sources */,
+				726F37D51CF1A98F0006939A /* TipViewController.swift in Sources */,
 				729310021CC01E9E002BF87A /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -329,7 +329,7 @@ public class DataManager {
     func allTipsForFlashcard(deckID: String, flashcardID: String, completion: (DataManagerResponse<[Tip]>)-> ()) {
         handleJSONRequest(
             localFetch: {
-                self.localDataManager.filter(Tip.self, predicate: "flashcardID == \(flashcardID) AND deckID == \(deckID)")
+                self.localDataManager.filter(Tip.self, predicate: "flashcardID == '\(flashcardID)' AND deckID == '\(deckID)'")
             },
             remoteFetch: {
                 self.remoteDataManager.allTips(deckID: deckID, flashcardID: flashcardID, completion: $0)

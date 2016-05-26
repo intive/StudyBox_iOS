@@ -72,4 +72,8 @@ class LocalDataManager {
         return filter(Flashcard.self, predicate: "serverID == '\(deckID)'")
     }
     
+    func tips(deckID: String, flashcardID: String) -> [Tip] {
+        return filter(Tip.self, predicate: "deckID == '\(deckID)' AND flashcardID == '\(flashcardID)'")
+    }
+    
 }
