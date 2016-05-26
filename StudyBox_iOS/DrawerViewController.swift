@@ -49,16 +49,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
     static let DrawerCellId = "DrawerCellId"
     var dataManager: DataManager = UIApplication.appDelegate().dataManager
     
-    private var loggedIn: Bool {
-        get {
-            let dataManager = UIApplication.appDelegate().dataManager.remoteDataManager
-            if let _ = dataManager.user?.email {
-                return true
-            } else {
-                return false
-            }
-        }
-    }
     
     private var drawerNavigationControllers = [DrawerNavigationChild]()
     private static var initialControllerIndex = 0
@@ -76,34 +66,36 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         if drawerNavigationControllers.isEmpty {
             
             drawerNavigationControllers.append(
-                DrawerNavigationChild(name: loggedIn ? "Moje talie" : "Wyszukaj talie", viewController: nil, lazyLoadViewControllerBlock: {[weak self] in
-                    return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
+                DrawerNavigationChild(name: UIApplication.isUserLoggedIn ? "Moje talie" : "Wyszukaj talie", viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        return self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.DecksViewControllerID)
                 })
             )
             
-            if loggedIn {
-                drawerNavigationControllers.append(
-                    DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,
-                        lazyLoadViewControllerBlock: {[weak self] in
-                            let vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerID) as? UINavigationController
-                            
-                            if let editVC = vc?.childViewControllers[0] as? EditFlashcardViewController {
-                                editVC.mode = .Add
-                                return vc
-                            }
-                            return nil 
-                        })
-                )
-            } else {
-                drawerNavigationControllers.append(
-                    DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil, lazyLoadViewControllerBlock: nil,
-                        viewControllerBlock: {
-                            let alert = UIAlertController(title: "Uwaga", message: "Musisz być zalogowany", preferredStyle: .Alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-                            self.presentViewController(alert, animated: true, completion: nil)
-                    })
-                )
-            }
+            drawerNavigationControllers.append(
+                DrawerNavigationChild(name: "Stwórz nową fiszkę", viewController: nil,
+                    lazyLoadViewControllerBlock: {[weak self] in
+                        guard UIApplication.isUserLoggedIn else {
+                            return nil
+                        }
+                        let vc = self?.lazyLoadViewController(withStoryboardId: Utils.UIIds.EditFlashcardViewControllerID) as? UINavigationController
+                        
+                        if let editVC = vc?.childViewControllers[0] as? EditFlashcardViewController {
+                            editVC.mode = .Add
+                            return vc
+                        }
+                        return nil 
+                }) { [weak self] in
+                    let alert = UIAlertController(title: "Uwaga", message: "Musisz być zalogowany", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Przejdź do logowania", style: .Default) { _ in
+                            self?.selectMenuOptionAtIndex(5)
+                        }
+                    )
+                    self?.presentViewController(alert, animated: true, completion: nil)
+                }
+            )
+            
             
             drawerNavigationControllers.append(
                 DrawerNavigationChild(name: "Odkryj losową talię", viewController: nil,
@@ -119,7 +111,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                 })
             )
             
-            if loggedIn {
+            if UIApplication.isUserLoggedIn {
                 drawerNavigationControllers.append(
                     DrawerNavigationChild(name: "Ustawienia", viewController: nil,
                         lazyLoadViewControllerBlock: {[weak self] in
@@ -130,7 +122,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
             
             
             drawerNavigationControllers.append(
-                DrawerNavigationChild(name: loggedIn ? "Wyloguj" : "Zaloguj", viewController: nil) { [weak self] in
+                DrawerNavigationChild(name: UIApplication.isUserLoggedIn ? "Wyloguj" : "Zaloguj", viewController: nil) { [weak self] in
                     UIApplication.appDelegate().dataManager.logout()
                     
                     if let storyboard = self?.storyboard {
