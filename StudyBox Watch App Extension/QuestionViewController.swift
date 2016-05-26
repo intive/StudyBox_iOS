@@ -32,9 +32,7 @@ class QuestionViewController: WKInterfaceController {
             let controllers = Array(count: tipsFromRealm.count, repeatedValue: "TipViewController")
             presentControllerWithNames(controllers, contexts: tipsFromRealm)
         } else {
-            presentAlertControllerWithTitle("Uwaga", message: "Fiszka nie ma podpowiedzi.", preferredStyle: .Alert, actions: [])
+            presentControllerWithName("TipViewController", context: "Fiszka nie ma podpowiedzi.")
         }
-
-        
     }
 }

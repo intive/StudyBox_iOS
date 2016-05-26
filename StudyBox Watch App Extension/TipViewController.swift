@@ -15,7 +15,7 @@ class TipViewController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         if let tipText = context as? String {
-            tipLabel.setText(tipText)
+            tipLabel.setText("Podpowiedź:\n\(tipText)")
         }
     }
 }
