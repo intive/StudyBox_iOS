@@ -26,6 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.tintColor = UIColor.sb_DarkBlue()
         
+        let dataManager = UIApplication.appDelegate().dataManager
+        let userData = dataManager.remoteDataManager.getEmailPassFromDefaults()
+        
+        if let email = userData?.email, password = userData?.password, storyboard = window?.rootViewController?.storyboard {
+            dataManager.remoteDataManager.user = User(email: email, password: password)
+            window?.rootViewController = SBDrawerController.basicSBDrawer(storyboard: storyboard)
+        }
         return true
     }
     

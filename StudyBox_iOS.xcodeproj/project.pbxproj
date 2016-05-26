@@ -12,6 +12,7 @@
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0939A61CAD19CF00886A1B /* String+validation.swift */; };
 		2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */; };
+		2D15AFBC1CF5B46A00503433 /* SBDrawerController+basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */; };
 		2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFB91CF5884200503433 /* String+md5.swift */; };
 		2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */; };
 		2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */; };
@@ -161,6 +162,7 @@
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2D0939A61CAD19CF00886A1B /* String+validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
 		2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableTextField.swift; sourceTree = "<group>"; };
+		2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SBDrawerController+basic.swift"; sourceTree = "<group>"; };
 		2D15AFB61CF5881500503433 /* StudyBox_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StudyBox_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D15AFB91CF5884200503433 /* String+md5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
 		2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerResourceDisposable.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */,
 				2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */,
 				2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */,
+				2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */,
 				2D15AFB91CF5884200503433 /* String+md5.swift */,
 			);
 			name = Extensions;
@@ -968,6 +971,7 @@
 				72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */,
+				2D15AFBC1CF5B46A00503433 /* SBDrawerController+basic.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
 				7269FCF81CC159CC0075CBAC /* WatchDataManager.swift in Sources */,
 				2D7E038F1CDBC37E003B5294 /* UIPlaceholderTextView.swift in Sources */,
