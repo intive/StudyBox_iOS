@@ -11,8 +11,8 @@ import CoreData
 import Fabric
 import Crashlytics
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+//@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
 
     var window: UIWindow?
 

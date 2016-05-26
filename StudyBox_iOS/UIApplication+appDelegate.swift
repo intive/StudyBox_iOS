@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol AppDelegateProtocol {
+    var dataManager: DataManager {get}
+    var newDataManager: NewDataManager {get}
+    func scheduleNotification()
+}
+
+
 extension UIApplication {
-    static func appDelegate() -> AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate //swiftlint:disable:this force_cast
+    static func appDelegate() -> AppDelegateProtocol {
+        return UIApplication.sharedApplication().delegate as! AppDelegateProtocol //swiftlint:disable:this force_cast
     }
 }
