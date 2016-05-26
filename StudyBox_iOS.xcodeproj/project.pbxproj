@@ -39,6 +39,7 @@
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
+		2DD166D31CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */; };
 		2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */; };
 		2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */; };
 		2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */; };
@@ -186,6 +187,7 @@
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+isUserLoggedin.swift"; sourceTree = "<group>"; };
 		2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONInitializable.swift; sourceTree = "<group>"; };
 		2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+isConnected.swift"; sourceTree = "<group>"; };
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */,
 				2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */,
 				2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */,
+				2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */,
 				2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */,
 			);
 			name = Extensions;
@@ -917,6 +920,7 @@
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
 				2D47DCC61CEC651D00110F85 /* DecksViewController+searching.swift in Sources */,
 				2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */,
+				2DD166D31CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
 				AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */,
