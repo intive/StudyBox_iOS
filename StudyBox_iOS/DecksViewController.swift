@@ -199,14 +199,14 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
         return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset) : CGSize.zero
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
                                  atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionElementKindSectionFooter:
             guard let emptyView = collectionView
                 .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath) as? EmptyCollectionReusableView else {
                 fatalError("Incorrect supplementary view type")
