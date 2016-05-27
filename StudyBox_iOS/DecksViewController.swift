@@ -214,9 +214,15 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             emptyView.messageLabel.text = searchController.active
                 ? "Nie znaleziono talii o podanej nazwie" : "Brak talii, przesuń w górę aby wyszukać"
             return emptyView
+        case UICollectionElementKindSectionHeader:
+            guard let filterView = collectionView
+                .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "FilterView", forIndexPath: indexPath) as? CollectionReusableFilterView else {
+                    fatalError("Incorrect supplementary view type")
+            }
+            return filterView
+            
         default:
             fatalError("Unexpected collection element")
-            
         }
     }
     

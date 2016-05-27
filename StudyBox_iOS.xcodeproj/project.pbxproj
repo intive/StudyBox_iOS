@@ -38,6 +38,8 @@
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
+		2DBE1A8E1CF859A800683D98 /* CollectionReusableFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE1A8D1CF859A800683D98 /* CollectionReusableFilterView.swift */; };
+		2DBE1A901CF85BDE00683D98 /* DecksFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
 		2DD166D31CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */; };
 		2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */; };
@@ -187,6 +189,8 @@
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
+		2DBE1A8D1CF859A800683D98 /* CollectionReusableFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionReusableFilterView.swift; sourceTree = "<group>"; };
+		2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksFilter.swift; sourceTree = "<group>"; };
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+isUserLoggedin.swift"; sourceTree = "<group>"; };
 		2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONInitializable.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 				7238493B1C88847F009605EE /* DecksViewController.swift */,
 				2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */,
 				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
+				2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */,
 			);
 			name = Decks;
 			sourceTree = "<group>";
@@ -446,6 +451,7 @@
 				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
 				2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */,
 				2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */,
+				2DBE1A8D1CF859A800683D98 /* CollectionReusableFilterView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -933,6 +939,7 @@
 				2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */,
 				2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */,
 				2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */,
+				2DBE1A901CF85BDE00683D98 /* DecksFilter.swift in Sources */,
 				72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
 				2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */,
@@ -973,6 +980,7 @@
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
 				2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
+				2DBE1A8E1CF859A800683D98 /* CollectionReusableFilterView.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
