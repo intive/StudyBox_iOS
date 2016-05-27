@@ -51,7 +51,11 @@
             <objects>
                 <controller identifier="TipViewController" id="1ib-vb-8iZ" customClass="TipViewController" customModule="StudyBox_Watch_App_Extension">
                     <items>
-                        <label width="1" alignment="left" text="Tip" textAlignment="center" numberOfLines="0" id="Wje-J6-QjF"/>
+                        <label width="1" alignment="center" text="Podpowiedź:" textAlignment="center" id="cDi-wk-Xd4">
+                            <color key="textColor" red="0.9007411858974359" green="0.9007411858974359" blue="0.9007411858974359" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                        </label>
+                        <label width="1" alignment="center" text="Tip" textAlignment="center" numberOfLines="0" id="Wje-J6-QjF"/>
                     </items>
                     <connections>
                         <outlet property="tipLabel" destination="Wje-J6-QjF" id="oSz-rn-qnS"/>
@@ -70,10 +74,16 @@
                                 <label width="1" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="Z2z-eJ-Xce"/>
                             </items>
                         </group>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Podpowiedź" id="qAg-8T-XPi">
+                            <connections>
+                                <action selector="showTip" destination="pbX-d6-PWg" id="xhl-mz-UQX"/>
+                            </connections>
+                        </button>
                     </items>
                     <menu key="menu" id="vdo-9X-kSR"/>
                     <connections>
                         <outlet property="questionLabel" destination="Z2z-eJ-Xce" id="rZN-6n-vrh"/>
+                        <outlet property="tipButton" destination="qAg-8T-XPi" id="Ue7-5C-lFN"/>
                         <segue destination="fIA-P1-TDZ" kind="relationship" relationship="nextPage" id="BaM-Bc-uia"/>
                     </connections>
                 </controller>

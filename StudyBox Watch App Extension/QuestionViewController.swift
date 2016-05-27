@@ -14,6 +14,8 @@ class QuestionViewController: WKInterfaceController {
     @IBOutlet var questionLabel: WKInterfaceLabel!
     var questionText = String()
     var flashcardID = String()
+    var tipsFromRealm = [String]()
+    @IBOutlet var tipButton: WKInterfaceButton!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -21,20 +23,17 @@ class QuestionViewController: WKInterfaceController {
             questionText = questionFromContext
             flashcardID = flashcardIDFromContext
         }
-        addMenuItemWithItemIcon(.Info, title: "Podpowiedzi", action: #selector(QuestionViewController.showTips))
+        tipsFromRealm = WatchManager.sharedManager.tipsForFlashcard(flashcardID)
+        
+        if tipsFromRealm.isEmpty {
+            tipButton.setHidden(true)
+        }
+        
         questionLabel.setText(questionText)
     }
     
-    func showTips() {
-        let tipsFromRealm = WatchManager.sharedManager.tipsForFlashcard(flashcardID)
-        
-        if !tipsFromRealm.isEmpty {
-            let controllers = Array(count: tipsFromRealm.count, repeatedValue: "TipViewController")
-            presentControllerWithNames(controllers, contexts: tipsFromRealm)
-        } else {
-            presentAlertControllerWithTitle("Uwaga", message: "Fiszka nie ma podpowiedzi.", preferredStyle: .Alert, actions: [])
-        }
-
-        
+    @IBAction func showTip() {
+        let controllers = Array(count: tipsFromRealm.count, repeatedValue: "TipViewController")
+        presentControllerWithNames(controllers, contexts: tipsFromRealm)
     }
 }
