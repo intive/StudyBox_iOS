@@ -36,8 +36,16 @@ class LocalDataManager {
         return realm?.objects(T.self).toArray() ?? []
     }
     
+    private func filteredResults<T: Object>(type: T.Type, predicate: String) -> Results<T>? {
+        return realm?.objects(T.self).filter(predicate)
+    }
+    
     func filter<T: Object>(type: T.Type, predicate: String) -> [T] {
-        return realm?.objects(T.self).filter(predicate).toArray() ?? []
+        return filteredResults(T.self, predicate: predicate)?.toArray() ?? []
+    }
+    
+    func filterCount<T: Object>(type: T.Type, predicate: String) -> Int {
+        return filteredResults(T.self, predicate: predicate)?.count ?? 0
     }
     
     func update(object: Object) -> Bool {

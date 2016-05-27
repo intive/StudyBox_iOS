@@ -18,6 +18,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchBar: UISearchBar {
         return searchController.searchBar
     }
+    var currentSortingOption: DecksSortingOption = .CreateDate
     
     var decksArray: [Deck] = []
     var searchDecks: [Deck] = []
@@ -95,7 +96,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         dataManager.userDecks {
             switch $0 {
             case .Success(let obj):
-                self.decksArray = obj
+                self.decksArray = self.currentSortingOption.sort(obj)
             case .Error(let err):
                 print(err)
                 SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
@@ -184,7 +185,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         
         let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)
         
-        flow.sectionInset = UIEdgeInsets(top: topOffset, left: spacing, bottom: spacing, right: spacing)
+        flow.sectionInset = UIEdgeInsets(top: 8, left: spacing, bottom: spacing, right: spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
@@ -203,6 +204,11 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset) : CGSize.zero
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 85)
+    }
+    
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
                                  atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
@@ -216,8 +222,21 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             return emptyView
         case UICollectionElementKindSectionHeader:
             guard let filterView = collectionView
-                .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "FilterView", forIndexPath: indexPath) as? CollectionReusableFilterView else {
+                .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "FilterView", forIndexPath: indexPath) as?
+                CollectionReusableFilterView else {
                     fatalError("Incorrect supplementary view type")
+            }
+            filterView.filterButton.setTitle(currentSortingOption.description, forState: .Normal)
+            filterView.filterAction = { [weak self] _, completion in
+                let alert = UIAlertController(title: "Typ filtrowania", message: "", preferredStyle: .ActionSheet)
+                let availableFilters: [DecksSortingOption] = [.CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false), .Name]
+                availableFilters.forEach { option in
+                    alert.addAction(UIAlertAction(title: option.description, style: .Default) { _ in
+                        self?.changeSortingOption(option)
+                        completion(option.description)
+                    })
+                }
+                self?.presentViewController(alert, animated: true, completion: nil)
             }
             return filterView
             
@@ -226,7 +245,6 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         }
     }
     
-    // Calculate number of decks. If no decks, return 0
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return decksSource.count
     }

@@ -854,20 +854,23 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Tzt-fO-e4N" customClass="CollectionReusableFilterView" customModule="StudyBox_iOS" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterView" id="Tzt-fO-e4N" customClass="CollectionReusableFilterView" customModule="StudyBox_iOS" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="64" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="558-ah-8yf">
-                                    <rect key="frame" x="283" y="10" width="35" height="30"/>
-                                    <state key="normal" title="Filter"/>
+                                    <rect key="frame" x="175" y="56" width="250" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="yqO-8S-Lp3"/>
+                                    </constraints>
+                                    <state key="normal" title="Filtr"/>
                                     <connections>
                                         <action selector="filterButtonTouch:" destination="Tzt-fO-e4N" eventType="touchUpInside" id="FfE-GP-QhC"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="558-ah-8yf" firstAttribute="centerY" secondItem="Tzt-fO-e4N" secondAttribute="centerY" id="un4-NZ-LMw"/>
+                                <constraint firstItem="558-ah-8yf" firstAttribute="top" secondItem="Tzt-fO-e4N" secondAttribute="topMargin" constant="48" id="n0m-F3-wI2"/>
                                 <constraint firstItem="558-ah-8yf" firstAttribute="centerX" secondItem="Tzt-fO-e4N" secondAttribute="centerX" id="zqd-2w-gOv"/>
                             </constraints>
                             <connections>
