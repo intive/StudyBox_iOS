@@ -153,6 +153,8 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
         setupDrawer()
         gravatarImageView.layer.cornerRadius = gravatarImageView.bounds.width / 2
         gravatarImageView.clipsToBounds = true
+        gravatarImageView.layer.borderColor = UIColor.sb_White().CGColor
+        gravatarImageView.layer.borderWidth = 3
         tableView.backgroundColor = UIColor.sb_Graphite()
         view.backgroundColor = UIColor.sb_Graphite()
         if let email = self.dataManager.remoteDataManager.user?.email {
