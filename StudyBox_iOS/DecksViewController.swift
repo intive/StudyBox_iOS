@@ -20,19 +20,17 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     var currentSortingOption: DecksSortingOption = .CreateDate
     
-    var decksArray: [Deck] = []
-    var searchDecks: [Deck] = []
-    var searchDecksHolder: [Deck] = []
+    var decksArray: [(Deck, Int)] = []
+    var searchDecks: [(Deck, Int)] = []
+    var searchDecksHolder: [(Deck, Int)] = []
     var searchDelay: NSTimer?
     
-    var decksSource: [Deck] {
+    var decksSource: [(Deck, Int)] {
         return searchDecks.isEmpty && !searchController.active ? decksArray : searchDecks
     }
     
     
-    lazy var dataManager: DataManager = {
-        return UIApplication.appDelegate().dataManager
-    }()
+    lazy var dataManager: DataManager = UIApplication.appDelegate().dataManager
 
     private var statusBarHeight: CGFloat {
         return UIApplication.sharedApplication().statusBarFrame.height
@@ -93,7 +91,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
    
     func reloadData() {
         
-        dataManager.userDecks {
+        dataManager.userDecksWithFlashcardsCount {
             switch $0 {
             case .Success(let obj):
                 self.decksArray = self.currentSortingOption.sort(obj)
@@ -201,7 +199,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
-        return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset) : CGSize.zero
+        return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset - 85) : CGSize.zero
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -235,7 +233,9 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                         self?.changeSortingOption(option)
                         completion(option.description)
                     })
+
                 }
+                alert.addAction(UIAlertAction(title: "Anuluj", style: .Cancel, handler: nil))
                 self?.presentViewController(alert, animated: true, completion: nil)
             }
             return filterView
@@ -257,7 +257,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         if let cell = view as? DecksViewCell{
             cell.layoutIfNeeded()
             
-            var deckName = decksSource[indexPath.row].name
+            var deckName = decksSource[indexPath.row].0.name
             if deckName.isEmpty {
                 deckName = Utils.DeckViewLayout.DeckWithoutTitle
             }
@@ -280,7 +280,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     // When cell tapped, change to test
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         SVProgressHUD.show()
-        let deck = decksSource[indexPath.row]
+        let deck = decksSource[indexPath.row].0
         let resetSearchUI = {
             self.searchController.active = false
         }
@@ -353,6 +353,13 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+    
+    func changeSortingOption(option: DecksSortingOption) {
+        currentSortingOption = option
+        decksArray = currentSortingOption.sort(decksArray)
+        searchDecks = currentSortingOption.sort(searchDecks)
+        collectionView?.reloadData()
     }
     
 }
