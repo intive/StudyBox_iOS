@@ -11,8 +11,9 @@ import SwiftyJSON
 import Reachability
 
 enum ServerError: ErrorType {
-    case ErrorWithMessage(text: String), NoInternetAccess
+    case ErrorWithMessage(text: String), NoInternetAccess, NoUser, FetchError
 }
+
 
 enum ServerResultType<T> {
     case Success(obj: T)
@@ -119,6 +120,28 @@ class RemoteDataManager {
         }
     }
     
+    func gravatar(saveURL: NSURL, completion: (ServerResultType<NSData>) -> ()) {
+        guard let user = user else {
+            completion(.Error(err: ServerError.NoUser))
+            return
+        }
+        let emailHash = user.email.lowercaseString.md5
+        if let url = NSURL(string: "https://www.gravatar.com/avatar/\(emailHash)") {
+           var request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "GET"
+            request = ParameterEncoding.URL.encode(request, parameters: ["d":"retro"]).0
+            Alamofire.download(request) { _, _ in
+                return saveURL
+                }.response { _, _, _, err in
+                    
+                    if err == nil, let contents = NSData(contentsOfURL: saveURL)  {
+                        completion(.Success(obj: contents))
+                    } else {
+                        completion(.Error(err: ServerError.FetchError))
+                    }
+            }
+        }
+    }
     
     //MARK: Decks
     func findDecks(includeOwn includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil, completion: (ServerResultType<[JSON]>)->()) {

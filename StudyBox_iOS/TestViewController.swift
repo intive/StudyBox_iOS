@@ -132,7 +132,7 @@ class TestViewController: StudyBoxViewController {
                         UIAlertAction(title: "Nie", style: .Default,
                             handler: { _ in
                                 // TODOs: refactor, make enums for DrawerViewControllers menu options
-                                DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
+                                DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 0)
                         })
                     )
                     presentViewController(controller, animated: true, completion: nil)

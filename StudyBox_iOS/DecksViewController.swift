@@ -74,6 +74,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         if let decksLayout = collectionView?.collectionViewLayout as? DecksCollectionViewLayout {
             decksLayout.delegate = self 
         }
+        navigationItem.title = "Moje talie"
         searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         searchBarWrapper.autoresizingMask = .FlexibleWidth
         searchBarWrapper.addSubview(searchBar)
@@ -92,12 +93,17 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
    
     func reloadData() {
         
+        guard let _ = dataManager.remoteDataManager.user else {
+            refreshControl.endRefreshing()
+            collectionView?.reloadData()
+            return
+        }
         dataManager.userDecks {
             switch $0 {
             case .Success(let obj):
                 self.decksArray = obj
             case .Error(let err):
-                print(err)
+                debugPrint(err)
                 SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
             }
             self.refreshControl.endRefreshing()
@@ -257,6 +263,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         SVProgressHUD.show()
         let deck = decksSource[indexPath.row]
+        searchBar.resignFirstResponder()
         let resetSearchUI = {
             self.searchController.active = false
         }
