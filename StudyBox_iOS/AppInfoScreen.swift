@@ -19,6 +19,6 @@ class AppInfoScreen: StudyBoxViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "O programie"
-        infoTextView.contentInset.top = -navbarHeight - 20 //because of status bar
+        infoTextView.contentInset.top = -navbarHeight - UIApplication.sharedApplication().statusBarFrame.height
     }
 }
