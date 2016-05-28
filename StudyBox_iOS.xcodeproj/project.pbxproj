@@ -82,6 +82,7 @@
 		72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */; };
 		72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
+		72FFF08B1CF98ACD009078E7 /* AppInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FFF08A1CF98ACD009078E7 /* AppInfoScreen.swift */; };
 		79EA1987D472DAC7E169D8C4 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
 		A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC31C81E76900AFD04E /* Main.storyboard */; };
@@ -231,6 +232,7 @@
 		72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		72FFF08A1CF98ACD009078E7 /* AppInfoScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoScreen.swift; sourceTree = "<group>"; };
 		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -424,6 +426,7 @@
 				72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */,
 				72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */,
 				72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */,
+				72FFF08A1CF98ACD009078E7 /* AppInfoScreen.swift */,
 			);
 			name = "Settings Classes";
 			sourceTree = "<group>";
@@ -933,6 +936,7 @@
 				2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */,
 				2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */,
 				2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */,
+				72FFF08B1CF98ACD009078E7 /* AppInfoScreen.swift in Sources */,
 				72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
 				2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */,

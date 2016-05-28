@@ -16,6 +16,8 @@ class Utils {
         static let DecksViewControllerID = "DecksViewControllerID"
         static let TestViewControllerID = "TestViewControllerID"
         static let DecksViewCellID = "DecksViewCellID"
+        static let SettingsAppInfoCellID = "SettingsAppInfoCellID"
+        static let SettingsMainCellID = "SettingsMainCellID"
         static let EditFlashcardViewControllerID = "EditFlashcardViewControllerID"
         static let SettingsViewControllerID = "SettingsViewControllerID"
         static let RandomDeckViewControllerID = "RandomDeckViewControllerID"
