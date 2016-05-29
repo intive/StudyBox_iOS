@@ -932,7 +932,13 @@
                             <outlet property="delegate" destination="k4V-mQ-vqt" id="Fl3-GL-Max"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Pd5-T1-zfh"/>
+                    <navigationItem key="navigationItem" id="Pd5-T1-zfh">
+                        <barButtonItem key="rightBarButtonItem" image="filterButton" id="scA-rv-OsK">
+                            <connections>
+                                <action selector="sortButtonPress:" destination="k4V-mQ-vqt" id="K8P-gV-coy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="6tt-KQ-lf6" kind="custom" identifier="StartTest" customClass="SBReplaceSegue" customModule="StudyBox_iOS" customModuleProvider="target" id="gYF-Os-WnF"/>
                     </connections>
@@ -1250,6 +1256,7 @@
         <image name="arrow_left" width="283" height="418"/>
         <image name="arrow_right" width="283" height="418"/>
         <image name="correct" width="512" height="512"/>
+        <image name="filterButton" width="22" height="22"/>
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>

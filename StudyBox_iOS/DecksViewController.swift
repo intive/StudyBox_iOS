@@ -361,6 +361,21 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return true
     }
     
+    @IBAction func sortButtonPress(sender: AnyObject) {
+        
+        let alert = UIAlertController(title: "Typ filtrowania", message: "Aktualnie:\n\(currentSortingOption.description)", preferredStyle: .ActionSheet)
+        let availableFilters: [DecksSortingOption] = [.CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false), .Name]
+        availableFilters.forEach { option in
+            alert.addAction(UIAlertAction(title: option.description, style: .Default) { _ in
+                self.changeSortingOption(option)
+                })
+            
+        }
+        alert.addAction(UIAlertAction(title: "Anuluj", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
     func changeSortingOption(option: DecksSortingOption) {
         currentSortingOption = option
         decksArray = currentSortingOption.sort(decksArray)
