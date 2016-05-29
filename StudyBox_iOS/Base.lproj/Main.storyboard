@@ -833,10 +833,10 @@
             </objects>
             <point key="canvasLocation" x="4398" y="2553"/>
         </scene>
-        <!--App Info Screen-->
+        <!--O programie-->
         <scene sceneID="RSd-Eo-qcq">
             <objects>
-                <viewController id="0ut-uN-Epb" customClass="AppInfoScreen" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="O programie" id="0ut-uN-Epb" customClass="AppInfoScreen" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="esZ-NB-pnU"/>
                         <viewControllerLayoutGuide type="bottom" id="5bm-fK-IkQ"/>
@@ -846,7 +846,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1r-kb-sX4">
-                                <rect key="frame" x="30" y="72" width="540" height="520"/>
+                                <rect key="frame" x="30" y="0.0" width="540" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="scrollIndicatorInsets" minX="-3" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <attributedString key="attributedText">
@@ -1215,8 +1215,8 @@ Cg
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5bm-fK-IkQ" firstAttribute="top" secondItem="V1r-kb-sX4" secondAttribute="bottom" constant="8" id="IuS-1h-MBY"/>
-                            <constraint firstItem="V1r-kb-sX4" firstAttribute="top" secondItem="esZ-NB-pnU" secondAttribute="bottom" constant="8" id="Wka-5B-dOY"/>
+                            <constraint firstItem="V1r-kb-sX4" firstAttribute="top" secondItem="jVH-dg-T3a" secondAttribute="top" id="GGt-sz-ggx"/>
+                            <constraint firstItem="V1r-kb-sX4" firstAttribute="bottom" secondItem="jVH-dg-T3a" secondAttribute="bottom" id="J3a-m0-SGa"/>
                             <constraint firstItem="V1r-kb-sX4" firstAttribute="width" secondItem="jVH-dg-T3a" secondAttribute="width" multiplier="0.9" id="dif-97-0Oo"/>
                             <constraint firstItem="V1r-kb-sX4" firstAttribute="centerX" secondItem="jVH-dg-T3a" secondAttribute="centerX" id="iJQ-Wf-9jK"/>
                         </constraints>
