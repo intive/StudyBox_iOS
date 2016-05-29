@@ -337,7 +337,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-Xe-scq">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="159" width="600" height="441"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrawerCellId" textLabel="m86-hQ-g9n" style="IBUITableViewCellStyleDefault" id="yFe-bm-kgx">
@@ -364,16 +364,38 @@
                                     <outlet property="delegate" destination="aFL-74-HfG" id="OgG-Ue-d1v"/>
                                 </connections>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HQz-oF-IKh">
+                                <rect key="frame" x="242" y="50" width="116" height="109"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eDU-3C-fSu">
+                                        <rect key="frame" x="18" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="999" constant="80" id="Cg1-xX-A08"/>
+                                            <constraint firstAttribute="height" priority="999" constant="80" id="nGX-Rr-PUf"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Niezalogowany" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hS9-zb-rbs">
+                                        <rect key="frame" x="0.0" y="88" width="116" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Pk0-Xe-scq" firstAttribute="top" secondItem="HQz-oF-IKh" secondAttribute="bottom" id="A2z-Un-MRY"/>
                             <constraint firstItem="Pk0-Xe-scq" firstAttribute="bottom" secondItem="fbU-cd-DcK" secondAttribute="top" id="FST-yy-je3"/>
                             <constraint firstItem="Pk0-Xe-scq" firstAttribute="leading" secondItem="R85-9L-oY1" secondAttribute="leading" id="cBH-Bd-BJS"/>
-                            <constraint firstItem="Pk0-Xe-scq" firstAttribute="top" secondItem="R85-9L-oY1" secondAttribute="top" id="rWQ-Nf-A83"/>
+                            <constraint firstItem="HQz-oF-IKh" firstAttribute="top" secondItem="ItK-v6-3qq" secondAttribute="bottom" constant="30" id="gAG-IN-78Y"/>
+                            <constraint firstItem="HQz-oF-IKh" firstAttribute="centerX" secondItem="R85-9L-oY1" secondAttribute="centerX" id="yqw-mq-jWq"/>
                             <constraint firstAttribute="trailing" secondItem="Pk0-Xe-scq" secondAttribute="trailing" id="z5U-Yf-H2r"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailLabel" destination="hS9-zb-rbs" id="NKh-dU-pUc"/>
+                        <outlet property="gravatarImageView" destination="eDU-3C-fSu" id="MX3-Eq-N0k"/>
                         <outlet property="tableView" destination="Pk0-Xe-scq" id="5om-ya-fhB"/>
                     </connections>
                 </viewController>
@@ -577,7 +599,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EBI-XT-SoF">
                                 <rect key="frame" x="216" y="150" width="168" height="301"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poprawne odpowiedzi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dpk-pf-DVj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poprawne odpowiedzi" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dpk-pf-DVj">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1162,7 +1184,7 @@
         <!--Navigation Controller-->
         <scene sceneID="HCu-pL-rIy">
             <objects>
-                <navigationController storyboardIdentifier="SettingsViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="74V-t9-8v8" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SettingsViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="74V-t9-8v8" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RG2-KG-PCS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1198,7 +1220,7 @@
         <!--Navigation Controller-->
         <scene sceneID="2ik-n8-WER">
             <objects>
-                <navigationController storyboardIdentifier="StatisticsViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="k06-Qr-muQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StatisticsViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="k06-Qr-muQ" customClass="SBNavigationController" customModule="StudyBox_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eGz-yo-bxv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -11,10 +11,8 @@ import SwiftyJSON
 
 struct ManagerMode: OptionSetType {
     var rawValue: Int
-
     static let Local = ManagerMode(rawValue: 1 << 0)
     static let Remote = ManagerMode(rawValue: 1 << 1)
-
 }
 
 enum DataManagerResponse<T> {
@@ -43,7 +41,6 @@ public class DataManager {
                 return .Error(obj: DataManagerError.ErrorSavingData)
             }
         }
-        
         return .Success(obj: parsedObject)
     }
 
@@ -90,7 +87,6 @@ public class DataManager {
                    remoteParsing: (obj: JSON) -> DataManagerResponseObject? = { DataManagerResponseObject(withJSON: $0) },
                    completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
         handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
-
     }
 
     //convenience method with automated parsing data where remote object is [JSON] and local object conforms to [JSONInitializable]
@@ -123,7 +119,6 @@ public class DataManager {
                 self.remoteDataManager.register(email, password: password, completion: $0)
             },
             remoteParsing: {
-                
                 self.remoteDataManager.user = User(email: $0["email"].stringValue, password: password)
                 return self.remoteDataManager.user
             },
@@ -134,6 +129,25 @@ public class DataManager {
         remoteDataManager.logout()
         clearUserDefaults()
         clearLocalDataManager()
+        let fm = NSFileManager()
+        do {
+           try fm.removeItemAtURL(localDataManager.gravatarDestinationURL)
+        } catch {}
+    }
+    
+    func gravatar(completion: (DataManagerResponse<NSData>) -> ()) {
+        if let gravatar = self.localDataManager.gravatar() {
+            completion(.Success(obj: gravatar))
+        } else {
+            remoteDataManager.gravatar(localDataManager.gravatarDestinationURL) {
+                switch $0 {
+                case .Success(let obj):
+                    completion(.Success(obj: obj))
+                case .Error(let err):
+                    completion(.Error(obj: err))
+                }
+            }
+        }
     }
 
     func clearUserDefaults() {
@@ -145,9 +159,10 @@ public class DataManager {
     }
     
     func clearLocalDataManager() {
-        localDataManager.deleteAll(Deck.self)
-        localDataManager.deleteAll(Flashcard.self)
-        localDataManager.deleteAll(Tip.self)
+        localDataManager.deleteAll(Deck)
+        localDataManager.deleteAll(Flashcard)
+        localDataManager.deleteAll(Tip)
+        localDataManager.deleteAll(TestInfo)
     }
     
     //MARK: Decks
@@ -198,7 +213,6 @@ public class DataManager {
                 }
                 return Array(Zip2Sequence(decks, counts))
             }, completion: completion)
-        
     }
     
     func decksWithFlashcardsCount(includeOwn: Bool? = nil, name: String? = nil,
@@ -218,7 +232,6 @@ public class DataManager {
             completion(DataManagerResponse.Error(obj: DataManagerError.UserNotLoggedIn))
             return
         }
-        
         decksWithFlashCount(
             localFetch: {
                 self.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
@@ -234,7 +247,6 @@ public class DataManager {
             completion(DataManagerResponse.Error(obj: DataManagerError.UserNotLoggedIn))
             return
         }
-        
         handleJSONRequest(
             localFetch: {
                 self.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
@@ -251,7 +263,6 @@ public class DataManager {
             },
             completion: completion)
     }
-
     
     func removeDeck(withId deck: Deck, completion: (DataManagerResponse<Void>)-> ()) {
         handleRequest(
