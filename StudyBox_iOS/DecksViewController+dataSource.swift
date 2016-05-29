@@ -17,10 +17,11 @@ extension DecksViewController {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if searchController.active {
-            return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset) : CGSize.zero
+        if decksSource.isEmpty && (UIApplication.isUserLoggedIn || searchController.active){
+            return CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset)
         }
-        return CGSize.zero
+        
+        return  CGSize.zero
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
@@ -31,39 +32,30 @@ extension DecksViewController {
                 .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath) as? EmptyCollectionReusableView else {
                     fatalError("Incorrect supplementary view type")
             }
-            emptyView.messageLabel.text = "Nie znaleziono talii o podanej nazwie"
+            if searchController.active {
+                emptyView.messageLabel.text = "Nie znaleziono talii o podanej nazwie"
+                
+            } else {
+                emptyView.messageLabel.text = "Nie dodałeś jeszcze żadnej talii"
+            }
             return emptyView
         default:
             fatalError("Unexpected collection element")
             
         }
     }
-    
-    enum DummySearchingCellStates {
-        case Pre
-        case Current
-        case Post
-        
-    }
-    
-    func dummySearchingCellState(row: Int) -> DummySearchingCellStates {
-        if !searchController.active && !UIApplication.isUserLoggedIn, let collectionView = collectionView {
-            let cellsInRow = Int(DecksViewController.numberOfCellsInRow(collectionView.frame.width, cellSize: Utils.DeckViewLayout.CellSquareSize)) - 1
-            if  row == cellsInRow || decksSource.isEmpty || (row < cellsInRow && row == decksSource.count) {
-                return .Current
-            } else if row > cellsInRow {
-                return .Post
-            }
-        }
-        return .Pre
+
+    private func withDummySearchingCell() -> Bool {
+        return !searchController.active && !UIApplication.isUserLoggedIn
+  
     }
     
     // Calculate number of decks. If no decks, return 0
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if UIApplication.isUserLoggedIn || searchController.active {
-            return decksSource.count
+        if withDummySearchingCell() {
+            return decksSource.count + 1
         }
-        return decksSource.count + 1
+        return decksSource.count
     }
     
     // Populate cells with decks data. Change cells style
@@ -86,25 +78,23 @@ extension DecksViewController {
             }
             cell.layoutIfNeeded()
             
-            var srcIndex = indexPath.row
             
             cell.contentView.backgroundColor = UIColor.sb_Graphite()
-            switch dummySearchingCellState(indexPath.row) {
-            case .Current:
-                cell.contentView.backgroundColor = UIColor.sb_White()
-                cell.setupBorderLayer()
-                cell.deckNameLabel.textColor = UIColor.sb_Graphite()
-                cell.deckNameLabel.text = "Przesuń w górę aby wyszukać więcej talii"
-                
-                return cell
-            case .Post:
-                srcIndex -= 1
-            default:
-                break
+            
+            if withDummySearchingCell() {
+                if indexPath.row == decksSource.count  {
+                    cell.contentView.backgroundColor = UIColor.sb_White()
+                    cell.setupBorderLayer()
+                    cell.deckNameLabel.textColor = UIColor.sb_Graphite()
+                    cell.deckNameLabel.text = "Przesuń w górę aby wyszukać więcej talii"
+                    
+                    return cell
+                }
             }
+            
             cell.deckNameLabel.textColor = UIColor.whiteColor()
             
-            var deckName = decksSource[srcIndex].name
+            var deckName = decksSource[indexPath.row].name
             if deckName.isEmpty {
                 deckName = Utils.DeckViewLayout.DeckWithoutTitle
             }
@@ -118,19 +108,13 @@ extension DecksViewController {
     // When cell tapped, change to test
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        var srcIndex = indexPath.row
-        switch dummySearchingCellState(indexPath.row) {
-        case .Current:
+        if indexPath.row == decksSource.count {
             collectionView.setContentOffset(CGPoint(x: 0, y: -collectionView.contentInset.top), animated: true)
             return
-        case .Post:
-            srcIndex -= 1
-        default:
-            break
         }
         
         SVProgressHUD.show()
-        let deck = decksSource[srcIndex]
+        let deck = decksSource[indexPath.row]
         searchBar.resignFirstResponder()
         let resetSearchUI = {
             self.searchController.active = false
