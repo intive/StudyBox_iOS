@@ -18,7 +18,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchBar: UISearchBar {
         return searchController.searchBar
     }
-    var currentSortingOption: DecksSortingOption = .CreateDate
+    var currentSortingOption: DecksSortingOption = .Name
     
     var decksArray: [(Deck, Int)] = []
     var searchDecks: [(Deck, Int)] = []
@@ -189,7 +189,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         
         let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)
         
-        flow.sectionInset = UIEdgeInsets(top: 8, left: spacing, bottom: spacing, right: spacing)
+        flow.sectionInset = UIEdgeInsets(top: -topItemOffset, left: spacing, bottom: spacing, right: spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
@@ -208,11 +208,6 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset - 85) : CGSize.zero
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 85)
-    }
-    
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
                                  atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
@@ -224,28 +219,6 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             emptyView.messageLabel.text = searchController.active
                 ? "Nie znaleziono talii o podanej nazwie" : "Brak talii, przesuń w górę aby wyszukać"
             return emptyView
-        case UICollectionElementKindSectionHeader:
-            guard let filterView = collectionView
-                .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "FilterView", forIndexPath: indexPath) as?
-                CollectionReusableFilterView else {
-                    fatalError("Incorrect supplementary view type")
-            }
-            filterView.filterButton.setTitle(currentSortingOption.description, forState: .Normal)
-            filterView.filterAction = { [weak self] _, completion in
-                let alert = UIAlertController(title: "Typ filtrowania", message: "", preferredStyle: .ActionSheet)
-                let availableFilters: [DecksSortingOption] = [.CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false), .Name]
-                availableFilters.forEach { option in
-                    alert.addAction(UIAlertAction(title: option.description, style: .Default) { _ in
-                        self?.changeSortingOption(option)
-                        completion(option.description)
-                    })
-
-                }
-                alert.addAction(UIAlertAction(title: "Anuluj", style: .Cancel, handler: nil))
-                self?.presentViewController(alert, animated: true, completion: nil)
-            }
-            return filterView
-            
         default:
             fatalError("Unexpected collection element")
         }

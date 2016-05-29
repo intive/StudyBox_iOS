@@ -12,8 +12,8 @@
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0939A61CAD19CF00886A1B /* String+validation.swift */; };
 		2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */; };
-		2D15AFBC1CF5B46A00503433 /* SBDrawerController+basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */; };
 		2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFB91CF5884200503433 /* String+md5.swift */; };
+		2D15AFBC1CF5B46A00503433 /* SBDrawerController+basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */; };
 		2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */; };
 		2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */; };
 		2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */; };
@@ -39,7 +39,6 @@
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
-		2DBE1A8E1CF859A800683D98 /* CollectionReusableFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE1A8D1CF859A800683D98 /* CollectionReusableFilterView.swift */; };
 		2DBE1A901CF85BDE00683D98 /* DecksFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
 		2DD166D31CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */; };
@@ -164,9 +163,9 @@
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2D0939A61CAD19CF00886A1B /* String+validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
 		2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableTextField.swift; sourceTree = "<group>"; };
-		2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SBDrawerController+basic.swift"; sourceTree = "<group>"; };
 		2D15AFB61CF5881500503433 /* StudyBox_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StudyBox_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D15AFB91CF5884200503433 /* String+md5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
+		2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SBDrawerController+basic.swift"; sourceTree = "<group>"; };
 		2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerResourceDisposable.swift; sourceTree = "<group>"; };
 		2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCollectionReusableView.swift; sourceTree = "<group>"; };
 		2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +191,6 @@
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
-		2DBE1A8D1CF859A800683D98 /* CollectionReusableFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionReusableFilterView.swift; sourceTree = "<group>"; };
 		2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksFilter.swift; sourceTree = "<group>"; };
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+isUserLoggedin.swift"; sourceTree = "<group>"; };
@@ -454,7 +452,6 @@
 				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
 				2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */,
 				2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */,
-				2DBE1A8D1CF859A800683D98 /* CollectionReusableFilterView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -986,7 +983,6 @@
 				2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */,
-				2DBE1A8E1CF859A800683D98 /* CollectionReusableFilterView.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
