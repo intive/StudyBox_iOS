@@ -171,21 +171,24 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         adjustCollectionLayout(forSize: size)
-        
-        
+        let cellCount = DecksViewController.numberOfCellsInRow(size.width, cellSize: Utils.DeckViewLayout.CellSquareSize)
+        let cellSquareSize = (size.width - ((cellCount + 1) * Utils.DeckViewLayout.DecksSpacing)) / cellCount
+        let cellSize = CGSize(width: cellSquareSize, height: cellSquareSize)
+        if let visibleCells = collectionView?.visibleCells() as? [DecksViewCell] {
+            
+            for cell in visibleCells {
+                cell.reloadBorderLayer(forCellSize: cellSize)
+            }
+        }
         
     }
+    
     func orientationChanged(notification: NSNotification) {
-        
         if traitCollection.horizontalSizeClass != .Compact {
             initialLayout = true
             
         }
-        if let visibleCells = collectionView?.visibleCells() as? [DecksViewCell] {
-            for cell in visibleCells {
-                cell.reloadBorderLayer()
-            }
-        }
+        
     }
    
     func initialOffset(animated: Bool) {

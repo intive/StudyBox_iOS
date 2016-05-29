@@ -25,13 +25,13 @@ class DecksViewCell: UICollectionViewCell {
             borderLayer?.masksToBounds = true
 
         }
-        reloadBorderLayer()
+        reloadBorderLayer(forCellSize: bounds.size)
     }
     
-    func reloadBorderLayer() {
-        
-        borderLayer?.path = UIBezierPath(rect: contentView.bounds).CGPath
-        borderLayer?.frame = bounds
+    func reloadBorderLayer(forCellSize size: CGSize) {
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+        borderLayer?.path = UIBezierPath(rect: rect).CGPath
+        borderLayer?.frame = rect
         borderLayer?.setNeedsDisplay()
         
     }
