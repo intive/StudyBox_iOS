@@ -11,5 +11,7 @@ import UIKit
 class DecksViewCell: UICollectionViewCell {
     
     @IBOutlet weak var deckNameLabel: UILabel!
+    @IBOutlet weak var deckFlashcardsCountLabel: UILabel!
+    
     
 }

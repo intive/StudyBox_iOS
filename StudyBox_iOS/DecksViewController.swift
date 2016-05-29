@@ -257,27 +257,26 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     
     // Populate cells with decks data. Change cells style
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
-        
         let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
         if let cell = view as? DecksViewCell{
             cell.layoutIfNeeded()
+            cell.contentView.backgroundColor = UIColor.sb_Graphite()
             
-            var deckName = decksSource[indexPath.row].0.name
-            if deckName.isEmpty {
-                deckName = Utils.DeckViewLayout.DeckWithoutTitle
-            }
-            cell.deckNameLabel.text = deckName
-            // changing label UI
-            if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
-                cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
-            }
+            let deckName = decksSource[indexPath.row].0.name
+            let deckFlashcardsCount = decksSource[indexPath.row].1
+            
+            cell.deckNameLabel.text = deckName ?? Utils.DeckViewLayout.DeckWithoutTitle
             cell.deckNameLabel.textColor = UIColor.whiteColor()
-            cell.deckNameLabel.numberOfLines = 0
-            // adding line breaks
             cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
             cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
-            cell.contentView.backgroundColor = UIColor.sb_Graphite()
+            if let nameFont = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
+                cell.deckNameLabel.adjustFontSizeToHeight(nameFont, max: sbFontSizeLarge, min: sbFontSizeSmall)
+            }
+            cell.deckFlashcardsCountLabel.text = String(deckFlashcardsCount)
+            cell.deckFlashcardsCountLabel.textColor = UIColor.whiteColor()
+            if let countFont = UIFont.sbFont(size: sbFontSizeSmall, bold: false){
+                cell.deckFlashcardsCountLabel.font = countFont
+            }
             return cell
         }
         return view
