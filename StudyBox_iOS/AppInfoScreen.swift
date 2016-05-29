@@ -12,8 +12,13 @@ class AppInfoScreen: StudyBoxViewController, UITextViewDelegate {
     
     @IBOutlet weak var infoTextView: UITextView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.infoTextView.contentOffset = CGPoint(x: infoTextView.contentInset.left, y: infoTextView.contentInset.top)
+    private var navbarHeight: CGFloat  {
+        return self.navigationController?.navigationBar.frame.height ?? 0
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let navBarAndStatus = navbarHeight + UIApplication.sharedApplication().statusBarFrame.height
+        self.infoTextView.setContentOffset(CGPoint(x: 0, y: -navBarAndStatus), animated: false)
     }
 }
