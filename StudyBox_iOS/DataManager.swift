@@ -164,9 +164,10 @@ public class DataManager {
     }
     
     func clearLocalDataManager() {
-        localDataManager.deleteAll(Deck.self)
-        localDataManager.deleteAll(Flashcard.self)
-        localDataManager.deleteAll(Tip.self)
+        localDataManager.deleteAll(Deck)
+        localDataManager.deleteAll(Flashcard)
+        localDataManager.deleteAll(Tip)
+        localDataManager.deleteAll(TestInfo)
     }
     
     //MARK: Decks
