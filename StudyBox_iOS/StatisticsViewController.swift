@@ -24,8 +24,13 @@ class StatisticsViewController: StudyBoxViewController {
         circularProgressView.progress = 0
         clearButton.backgroundColor = UIColor.sb_Raspberry()
         clearButton.setTitleColor(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), forState: UIControlState.Normal)
-        clearButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        clearButton.titleLabel?.font = UIFont.sbFont(bold: false)
         clearButton.layer.cornerRadius = 10
+        
+        infoLabel.font = UIFont.sbFont(bold: false)
+        decksAmount.font = UIFont.sbFont(bold: false)
+        testsAmount.font = UIFont.sbFont(bold: false)
+        flashcardsScore.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -41,13 +46,13 @@ class StatisticsViewController: StudyBoxViewController {
             flashcardsScore.text = nil
             decksAmount.text = nil
             testsAmount.text = nil
-            infoLabel.text = "Zbyt mało danych"
+            infoLabel.text = "Nie przeprowadzono \njeszcze żadnego testu."
             circularProgressView.animateProgress(0)
             clearButton.hidden = true
             return
         }
         clearButton.hidden = false
-        infoLabel.text = "Poprawne odpowiedzi"
+        infoLabel.text = "Poprawne odpowiedzi:"
         let allFlashcards = tests.reduce(0) {
             return $0.0 + $0.1.answeredFlashcardsCount
         }
@@ -57,7 +62,7 @@ class StatisticsViewController: StudyBoxViewController {
         flashcardsScore.text = "\(correctlyAnsweredFlashcards)/\(allFlashcards)"
         
         let decks = tests.map { $0.deck }.unqiueElements()
-        decksAmount.text = "Ilość talii: \(decks.count)"
+        decksAmount.text = "Ilość testowanych talii: \(decks.count)"
         testsAmount.text = "Ilość testów: \(tests.count)"
         circularProgressView.animateProgress(CGFloat(correctlyAnsweredFlashcards) / CGFloat(allFlashcards))
     }
