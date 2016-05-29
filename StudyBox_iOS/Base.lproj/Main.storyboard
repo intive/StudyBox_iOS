@@ -843,23 +843,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mHk-QE-YKH">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="95" height="105"/>
                             <size key="headerReferenceSize" width="50" height="50"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="50"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DecksViewCellID" id="Oet-h2-Oou" customClass="DecksViewCell" customModule="StudyBox_iOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="114" width="95" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="95" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pW-OJ-jk1">
-                                            <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pW-OJ-jk1">
+                                            <rect key="frame" x="8" y="8" width="79" height="68"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTq-KI-jxv">
+                                            <rect key="frame" x="45" y="76" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -868,19 +874,45 @@
                                 <constraints>
                                     <constraint firstItem="5pW-OJ-jk1" firstAttribute="top" secondItem="Oet-h2-Oou" secondAttribute="top" constant="8" id="6dA-FM-w43"/>
                                     <constraint firstAttribute="trailing" secondItem="5pW-OJ-jk1" secondAttribute="trailing" constant="8" id="6yV-3G-uvY"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="OTq-KI-jxv" secondAttribute="bottom" id="Fdt-uB-sUj"/>
                                     <constraint firstItem="5pW-OJ-jk1" firstAttribute="leading" secondItem="Oet-h2-Oou" secondAttribute="leading" constant="8" id="Fn8-JX-Nsv"/>
-                                    <constraint firstAttribute="bottom" secondItem="5pW-OJ-jk1" secondAttribute="bottom" constant="8" id="j1L-5J-yWm"/>
+                                    <constraint firstItem="OTq-KI-jxv" firstAttribute="top" secondItem="5pW-OJ-jk1" secondAttribute="bottom" id="Wzt-VT-Kmq"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="OTq-KI-jxv" secondAttribute="trailing" id="b1g-e0-4cB"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="deckFlashcardsCountLabel" destination="OTq-KI-jxv" id="9Zs-0C-1vE"/>
                                     <outlet property="deckNameLabel" destination="5pW-OJ-jk1" id="hWq-Yg-oVq"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyView" id="nwi-t2-4l2" customClass="EmptyCollectionReusableView" customModule="StudyBox_iOS" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterView" id="Tzt-fO-e4N" customClass="CollectionReusableFilterView" customModule="StudyBox_iOS" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="64" width="600" height="50"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brak talii, przesuń w górę aby wyszukać" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INu-Gv-A4Q">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="558-ah-8yf">
+                                    <rect key="frame" x="175" y="53" width="250" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="yqO-8S-Lp3"/>
+                                    </constraints>
+                                    <state key="normal" title="Filtr"/>
+                                    <connections>
+                                        <action selector="filterButtonTouch:" destination="Tzt-fO-e4N" eventType="touchUpInside" id="FfE-GP-QhC"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="558-ah-8yf" firstAttribute="top" secondItem="Tzt-fO-e4N" secondAttribute="topMargin" constant="45" id="n0m-F3-wI2"/>
+                                <constraint firstItem="558-ah-8yf" firstAttribute="centerX" secondItem="Tzt-fO-e4N" secondAttribute="centerX" id="zqd-2w-gOv"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="filterButton" destination="558-ah-8yf" id="ly4-h5-T5Y"/>
+                            </connections>
+                        </collectionReusableView>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyView" id="o2Y-j2-dgr" customClass="EmptyCollectionReusableView" customModule="StudyBox_iOS" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="219" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brak talii, przesuń w górę aby wyszukać" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9j-qd-LeE">
                                     <rect key="frame" x="148" y="14" width="304" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -888,11 +920,11 @@
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="INu-Gv-A4Q" firstAttribute="centerY" secondItem="nwi-t2-4l2" secondAttribute="centerY" id="AaW-wf-lIj"/>
-                                <constraint firstItem="INu-Gv-A4Q" firstAttribute="centerX" secondItem="nwi-t2-4l2" secondAttribute="centerX" id="uE8-k2-sfJ"/>
+                                <constraint firstItem="W9j-qd-LeE" firstAttribute="centerX" secondItem="o2Y-j2-dgr" secondAttribute="centerX" id="Ak8-fI-A4P"/>
+                                <constraint firstItem="W9j-qd-LeE" firstAttribute="centerY" secondItem="o2Y-j2-dgr" secondAttribute="centerY" id="ftN-O6-J54"/>
                             </constraints>
                             <connections>
-                                <outlet property="messageLabel" destination="INu-Gv-A4Q" id="jZQ-m5-S87"/>
+                                <outlet property="messageLabel" destination="W9j-qd-LeE" id="IaS-fy-nzv"/>
                             </connections>
                         </collectionReusableView>
                         <connections>
@@ -1221,6 +1253,6 @@
         <image name="incorrect" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nci-HR-1So"/>
+        <segue reference="gYF-Os-WnF"/>
     </inferredMetricsTieBreakers>
 </document>

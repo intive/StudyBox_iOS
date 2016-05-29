@@ -18,20 +18,19 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchBar: UISearchBar {
         return searchController.searchBar
     }
+    var currentSortingOption: DecksSortingOption = .CreateDate
     
-    var decksArray: [Deck] = []
-    var searchDecks: [Deck] = []
-    var searchDecksHolder: [Deck] = []
+    var decksArray: [(Deck, Int)] = []
+    var searchDecks: [(Deck, Int)] = []
+    var searchDecksHolder: [(Deck, Int)] = []
     var searchDelay: NSTimer?
     
-    var decksSource: [Deck] {
+    var decksSource: [(Deck, Int)] {
         return searchDecks.isEmpty && !searchController.active ? decksArray : searchDecks
     }
     
     
-    lazy var dataManager: DataManager = {
-        return UIApplication.appDelegate().dataManager
-    }()
+    lazy var dataManager: DataManager = UIApplication.appDelegate().dataManager
 
     private var statusBarHeight: CGFloat {
         return UIApplication.sharedApplication().statusBarFrame.height
@@ -98,10 +97,10 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             collectionView?.reloadData()
             return
         }
-        dataManager.userDecks {
+        dataManager.userDecksWithFlashcardsCount {
             switch $0 {
             case .Success(let obj):
-                self.decksArray = obj
+                self.decksArray = self.currentSortingOption.sort(obj)
             case .Error(let err):
                 debugPrint(err)
                 SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
@@ -190,7 +189,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         
         let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)
         
-        flow.sectionInset = UIEdgeInsets(top: topOffset, left: spacing, bottom: spacing, right: spacing)
+        flow.sectionInset = UIEdgeInsets(top: 8, left: spacing, bottom: spacing, right: spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
@@ -205,14 +204,19 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
+        return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset - 85) : CGSize.zero
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset) : CGSize.zero
+        return CGSize(width: collectionView.frame.width, height: 85)
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
                                  atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionElementKindSectionFooter:
             guard let emptyView = collectionView
                 .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath) as? EmptyCollectionReusableView else {
                 fatalError("Incorrect supplementary view type")
@@ -220,40 +224,59 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             emptyView.messageLabel.text = searchController.active
                 ? "Nie znaleziono talii o podanej nazwie" : "Brak talii, przesuń w górę aby wyszukać"
             return emptyView
+        case UICollectionElementKindSectionHeader:
+            guard let filterView = collectionView
+                .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "FilterView", forIndexPath: indexPath) as?
+                CollectionReusableFilterView else {
+                    fatalError("Incorrect supplementary view type")
+            }
+            filterView.filterButton.setTitle(currentSortingOption.description, forState: .Normal)
+            filterView.filterAction = { [weak self] _, completion in
+                let alert = UIAlertController(title: "Typ filtrowania", message: "", preferredStyle: .ActionSheet)
+                let availableFilters: [DecksSortingOption] = [.CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false), .Name]
+                availableFilters.forEach { option in
+                    alert.addAction(UIAlertAction(title: option.description, style: .Default) { _ in
+                        self?.changeSortingOption(option)
+                        completion(option.description)
+                    })
+
+                }
+                alert.addAction(UIAlertAction(title: "Anuluj", style: .Cancel, handler: nil))
+                self?.presentViewController(alert, animated: true, completion: nil)
+            }
+            return filterView
+            
         default:
             fatalError("Unexpected collection element")
-            
         }
     }
     
-    // Calculate number of decks. If no decks, return 0
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return decksSource.count
     }
     
     // Populate cells with decks data. Change cells style
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
-        
         let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
         if let cell = view as? DecksViewCell{
             cell.layoutIfNeeded()
+            cell.contentView.backgroundColor = UIColor.sb_Graphite()
             
-            var deckName = decksSource[indexPath.row].name
-            if deckName.isEmpty {
-                deckName = Utils.DeckViewLayout.DeckWithoutTitle
-            }
-            cell.deckNameLabel.text = deckName
-            // changing label UI
-            if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
-                cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
-            }
+            let deckName = decksSource[indexPath.row].0.name
+            let deckFlashcardsCount = decksSource[indexPath.row].1
+            
+            cell.deckNameLabel.text = deckName ?? Utils.DeckViewLayout.DeckWithoutTitle
             cell.deckNameLabel.textColor = UIColor.whiteColor()
-            cell.deckNameLabel.numberOfLines = 0
-            // adding line breaks
             cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
             cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
-            cell.contentView.backgroundColor = UIColor.sb_Graphite()
+            if let nameFont = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
+                cell.deckNameLabel.adjustFontSizeToHeight(nameFont, max: sbFontSizeLarge, min: sbFontSizeSmall)
+            }
+            cell.deckFlashcardsCountLabel.text = String(deckFlashcardsCount)
+            cell.deckFlashcardsCountLabel.textColor = UIColor.whiteColor()
+            if let countFont = UIFont.sbFont(size: sbFontSizeSmall, bold: false){
+                cell.deckFlashcardsCountLabel.font = countFont
+            }
             return cell
         }
         return view
@@ -262,7 +285,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     // When cell tapped, change to test
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         SVProgressHUD.show()
-        let deck = decksSource[indexPath.row]
+        let deck = decksSource[indexPath.row].0
         searchBar.resignFirstResponder()
         let resetSearchUI = {
             self.searchController.active = false
@@ -336,6 +359,13 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+    
+    func changeSortingOption(option: DecksSortingOption) {
+        currentSortingOption = option
+        decksArray = currentSortingOption.sort(decksArray)
+        searchDecks = currentSortingOption.sort(searchDecks)
+        collectionView?.reloadData()
     }
     
 }

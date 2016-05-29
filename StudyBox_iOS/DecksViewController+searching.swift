@@ -45,24 +45,16 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
             let searchBlock = {
                 self.searchDecks = self.searchDecksHolder
                     .filter {
-                        return $0.matches(searchText)
-                    }.sort {
-                        if let lDate = $0.0.createDate {
-                            if let rdate = $0.1.createDate {
-                                return lDate.timeIntervalSinceDate(rdate) > 0
-                            }
-                            return true
-                        }
-                        return false
-                }
+                        return $0.0.matches(searchText)
+                    }
                 self.collectionView?.reloadData()
                 
             }
             if searchDecksHolder.isEmpty {
-                dataManager.decks(true) {
+                dataManager.decksWithFlashcardsCount(true) {
                     switch $0 {
                     case .Success(let obj):
-                        self.searchDecksHolder = obj
+                        self.searchDecksHolder = self.currentSortingOption.sort(obj)
                         searchBlock()
                         
                     case .Error:
@@ -93,13 +85,20 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         }
     }
     
+    func didPresentSearchController(searchController: UISearchController) {
+        searchBarWrapper.hidden = true
+        
+    }
     func willDismissSearchController(searchController: UISearchController) {
         searchDecks = []
         collectionView?.reloadData()
+        searchBarWrapper.hidden = false 
     }
     
     func didDismissSearchController(searchController: UISearchController) {
         searchController.searchBar.sizeToFit()
         searchDecksHolder = []
     }
+    
+    
 }
