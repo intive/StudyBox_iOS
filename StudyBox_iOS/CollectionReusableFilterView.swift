@@ -18,8 +18,6 @@ class CollectionReusableFilterView: UICollectionReusableView {
     @IBAction func filterButtonTouch(sender: UIButton) {
         filterAction?(sender: sender) { [weak self] newTitle in
             self?.filterButton.setTitle(newTitle, forState: .Normal)
-            self?.layoutIfNeeded()
-            self?.layoutSubviews()
         }
     }
     
