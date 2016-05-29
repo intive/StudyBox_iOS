@@ -90,24 +90,45 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         refreshControl.addTarget(self, action: #selector(reloadData), forControlEvents: .ValueChanged)
         reloadData()
     }
-   
+    
     func reloadData() {
-        
-        guard let _ = dataManager.remoteDataManager.user else {
-            refreshControl.endRefreshing()
-            collectionView?.reloadData()
-            return
+        let reloadBlock = { [weak self] in
+            self?.refreshControl.endRefreshing()
+            self?.collectionView?.reloadData()
         }
-        dataManager.userDecks {
-            switch $0 {
-            case .Success(let obj):
-                self.decksArray = obj
-            case .Error(let err):
-                debugPrint(err)
-                SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
+        
+        let completion:(userDecks: Bool) -> (DataManagerResponse<[Deck]> -> ()) = { userDecks in
+            return {
+                switch $0 {
+                case .Success(let obj):
+                    if userDecks {
+                        self.decksArray = obj
+                    } else {
+                        let schuffled = obj.shuffle()
+                        self.decksArray = Array(schuffled.prefix(3))
+
+                    }
+                case .Error(let err):
+                    self.decksArray = []
+                    debugPrint(err)
+                    SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
+                }
+                reloadBlock()
             }
-            self.refreshControl.endRefreshing()
-            self.collectionView?.reloadData()
+        }
+        
+        if UIApplication.isUserLoggedIn  {
+            dataManager.userDecks(completion: completion(userDecks: true))
+            
+        } else {
+            if let collectionView = collectionView {
+                if DecksViewController.numberOfCellsInRow(collectionView.frame.width, cellSize: Utils.DeckViewLayout.CellSquareSize) < 2 {
+                    decksArray = []
+                    reloadBlock()
+                }
+            }
+            
+            dataManager.decks(completion: completion(userDecks: false))
         }
     }
     
@@ -151,12 +172,19 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         adjustCollectionLayout(forSize: size)
         
+        
+        
     }
     func orientationChanged(notification: NSNotification) {
         
         if traitCollection.horizontalSizeClass != .Compact {
             initialLayout = true
             
+        }
+        if let visibleCells = collectionView?.visibleCells() as? [DecksViewCell] {
+            for cell in visibleCells {
+                cell.reloadBorderLayer()
+            }
         }
     }
    
@@ -199,133 +227,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
     }
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return decksSource.isEmpty ? CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset) : CGSize.zero
-    }
-    
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
-                                 atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            guard let emptyView = collectionView
-                .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath) as? EmptyCollectionReusableView else {
-                fatalError("Incorrect supplementary view type")
-            }
-            emptyView.messageLabel.text = searchController.active
-                ? "Nie znaleziono talii o podanej nazwie" : "Brak talii, przesuń w górę aby wyszukać"
-            return emptyView
-        default:
-            fatalError("Unexpected collection element")
-            
-        }
-    }
-    
-    // Calculate number of decks. If no decks, return 0
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return decksSource.count
-    }
-    
-    // Populate cells with decks data. Change cells style
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
-        
-        let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
-        if let cell = view as? DecksViewCell{
-            cell.layoutIfNeeded()
-            
-            var deckName = decksSource[indexPath.row].name
-            if deckName.isEmpty {
-                deckName = Utils.DeckViewLayout.DeckWithoutTitle
-            }
-            cell.deckNameLabel.text = deckName
-            // changing label UI
-            if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
-                cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
-            }
-            cell.deckNameLabel.textColor = UIColor.whiteColor()
-            cell.deckNameLabel.numberOfLines = 0
-            // adding line breaks
-            cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-            cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
-            cell.contentView.backgroundColor = UIColor.sb_Graphite()
-            return cell
-        }
-        return view
-    }
-    
-    // When cell tapped, change to test
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        SVProgressHUD.show()
-        let deck = decksSource[indexPath.row]
-        searchBar.resignFirstResponder()
-        let resetSearchUI = {
-            self.searchController.active = false
-        }
-        
-        dataManager.flashcards(deck.serverID) {
-            switch $0 {
-            case .Success(let flashcards):
-                guard !flashcards.isEmpty else {
-                    SVProgressHUD.showInfoWithStatus("Talia nie ma fiszek.")
-                    return
-                }
-                
-                let amountFlashcardsNotHidden = flashcards.reduce(0) { ret, flashcard in flashcard.hidden ? ret : ret + 1}
-                
-                guard amountFlashcardsNotHidden != 0 else {
-                    SVProgressHUD.showInfoWithStatus("Talia ma ukryte wszystkie fiszki.")
-                    return
-                }
-                SVProgressHUD.dismiss()
-                let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
-                
-                let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                    let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
-                    
-                    let amounts = [ 1, 5, 10, 15, 20 ]
-                    
-                    for amount in amounts {
-                        if amount < amountFlashcardsNotHidden {
-                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
-                                resetSearchUI()
-                                self.performSegueWithIdentifier("StartTest",
-                                    sender: Test(flashcards: flashcards, testType: .Test(UInt32(amount)), deck: deck))
-                                })
-                        } else {
-                            break
-                        }
-                    }
-                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHidden) + ")", style: .Default) { act in
-                        resetSearchUI()
-                        self.performSegueWithIdentifier("StartTest",
-                            sender: Test(flashcards: flashcards, testType: .Test(UInt32(amountFlashcardsNotHidden)), deck: deck))
-                        })
-                    alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-                    
-                    self.presentViewController(alertAmount, animated: true, completion:nil)
-                }
-                let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    resetSearchUI()
-                    self.performSegueWithIdentifier("StartTest", sender: Test(flashcards: flashcards, testType: .Learn, deck: deck))
-                }
-                
-                alert.addAction(testButton)
-                alert.addAction(studyButton)
-                alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-                
-                self.presentViewController(alert, animated: true, completion:nil)
-                
-            case .Error(_):
-                SVProgressHUD.showErrorWithStatus("Nie udało się pobrać danych.")
-            }
-        }
-    }
+   
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, testLogic = sender as? Test {
