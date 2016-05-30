@@ -45,6 +45,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
     }
     
     func loginToServer(withEmail email: String, password: String) {
+        SVProgressHUD.show()
         let newDataManager = UIApplication.appDelegate().dataManager
         
         newDataManager.login(email, password: password, completion: { response in
@@ -54,15 +55,15 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             case .Success(let user):
                 
                 newDataManager.remoteDataManager.saveEmailPassInDefaults(user.email, pass: user.password)
+                SVProgressHUD.dismiss()
                 self.successfulLoginTransition()
-                return
                 
             case .Error(let err):
                 if case .ErrorWithMessage(let txt)? = (err as? ServerError){
                     errorMessage = txt
                 }
+                SVProgressHUD.showErrorWithStatus(errorMessage)
             }
-            SVProgressHUD.showErrorWithStatus(errorMessage)
         })
     }
     
@@ -87,15 +88,17 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             alertMessage = "Wypełnij wszystkie pola!"
         }
         if let message = alertMessage {
-            SVProgressHUD.showInfoWithStatus(message)
+            SVProgressHUD.showErrorWithStatus(message)
             return
         }
+        inputViews.forEach { $0.resignFirstResponder() }
+        
         if let login = login, password = password {
             loginToServer(withEmail: login, password: password)
         } else if let email = emailTextField.text, password = passwordTextField.text  {
             loginToServer(withEmail: email, password: password)
         }
-        SVProgressHUD.dismiss()
+
     }
 
     @IBAction func login(sender: UIButton) {

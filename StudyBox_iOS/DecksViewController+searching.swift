@@ -60,9 +60,11 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
             }
             if searchDecksHolder.isEmpty {
                 dataManager.decks(true) {
+                    SVProgressHUD.show()
                     switch $0 {
                     case .Success(let obj):
                         self.searchDecksHolder = obj
+                        SVProgressHUD.dismiss()
                         searchBlock()
                         
                     case .Error:
