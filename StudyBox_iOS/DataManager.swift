@@ -9,23 +9,6 @@ import RealmSwift
 import Alamofire
 import SwiftyJSON
 
-struct ManagerMode: OptionSetType {
-    var rawValue: Int
-
-    static let Local = ManagerMode(rawValue: 1 << 0)
-    static let Remote = ManagerMode(rawValue: 1 << 1)
-
-}
-
-enum DataManagerResponse<T> {
-    case Success(obj: T)
-    case Error(obj: ErrorType)
-}
-
-enum DataManagerError: ErrorType {
-    case JSONParseError, NoLocalData, ErrorSavingData, ErrorWith(message: String), UserNotLoggedIn
-}
-
 public class DataManager {
 
     let remoteDataManager = RemoteDataManager()
@@ -42,8 +25,12 @@ public class DataManager {
             if !self.localDataManager.update(realmObjects) {
                 return .Error(obj: DataManagerError.ErrorSavingData)
             }
+        } else if let realmObjects = parsedObject as? NSDictionary as? [Object: AnyObject] {
+            let toSave = realmObjects.keys
+            if !self.localDataManager.update(toSave) {
+                return .Error(obj: DataManagerError.ErrorSavingData)
+            }
         }
-        
         return .Success(obj: parsedObject)
     }
 
@@ -90,7 +77,6 @@ public class DataManager {
                    remoteParsing: (obj: JSON) -> DataManagerResponseObject? = { DataManagerResponseObject(withJSON: $0) },
                    completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
         handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
-
     }
 
     //convenience method with automated parsing data where remote object is [JSON] and local object conforms to [JSONInitializable]
@@ -123,22 +109,13 @@ public class DataManager {
                 self.remoteDataManager.register(email, password: password, completion: $0)
             },
             remoteParsing: {
-                
                 self.remoteDataManager.user = User(email: $0["email"].stringValue, password: password)
                 return self.remoteDataManager.user
             },
             completion: completion)
     }
 
-    func logout() {
-        remoteDataManager.logout()
-        clearUserDefaults()
-        clearLocalDataManager()
-        let fm = NSFileManager()
-        do {
-           try fm.removeItemAtURL(localDataManager.gravatarDestinationURL)
-        } catch {}
-    }
+ 
     
     func gravatar(completion: (DataManagerResponse<NSData>) -> ()) {
         if let gravatar = self.localDataManager.gravatar() {
@@ -153,21 +130,6 @@ public class DataManager {
                 }
             }
         }
-    }
-
-    func clearUserDefaults() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)
-        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey)
-        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
-        defaults.removeObjectForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
-    }
-    
-    func clearLocalDataManager() {
-        localDataManager.deleteAll(Deck)
-        localDataManager.deleteAll(Flashcard)
-        localDataManager.deleteAll(Tip)
-        localDataManager.deleteAll(TestInfo)
     }
     
     //MARK: Decks
@@ -188,24 +150,97 @@ public class DataManager {
             }, completion: completion)
     }
     
-    func decks(includeOwn: Bool? = nil, flashcardsCount: Bool? = nil, name: String? = nil,
-               completion: (DataManagerResponse<[Deck]> -> ())) {
+    func decks(includeOwn: Bool? = nil, name: String? = nil, completion: (DataManagerResponse<[Deck]> -> ())) {
         handleJSONRequest(
             localFetch: {
                 self.localDataManager.getAll(Deck)
             },
             remoteFetch: {
-                self.remoteDataManager.findDecks(includeOwn: includeOwn, flashcardsCount: flashcardsCount,
+                self.remoteDataManager.findDecks(includeOwn: includeOwn,
                     name: name, completion: $0)
             }, completion: completion)
     }
     
-    func userDecks(flashcardsCount: Bool? = nil, withDependecies: Bool = true, completion: (DataManagerResponse<[Deck]>) -> ()) {
+    private func decksFlashCount(localFetch localFetch: (() -> [Deck])  ,
+                                            remoteFetch: ((ServerResultType<[JSON]>) -> ()) -> (),
+                                            completion: (DataManagerResponse<([Deck: Int])> -> ())) {
+        handleRequest(
+            localFetch: {
+                let decks = localFetch()
+                let count = decks.map {
+                    return self.localDataManager.filterCount(Flashcard.self, predicate: "deckId = '\($0.serverID)'")
+                }
+                return Dictionary(Zip2Sequence(decks, count))
+            },
+            remoteFetch: remoteFetch,
+            remoteParsing: {
+                let decks = Deck.arrayWithJSONArray($0)
+                let counts = $0.flatMap {
+                    return $0["flashcardsCount"].int
+                }
+                return Dictionary(Zip2Sequence(decks, counts))
+            }, completion: completion)
+    }
+    
+   private func decksWithFlashCount(includeOwn: Bool? = nil, name: String? = nil,
+                                  completion: (DataManagerResponse<([Deck: Int])> -> ())) {
+        decksFlashCount(
+            localFetch: {
+                self.localDataManager.getAll(Deck)
+            },
+            remoteFetch:  {
+                self.remoteDataManager.findDecks(flashcardsCount: true, includeOwn: includeOwn,
+                    name: name, completion: $0)
+            }, completion: completion)
+    }
+    
+    private func userDecksWithFlashCount(completion: (DataManagerResponse<[Deck: Int]> -> ())) {
         guard let email = self.remoteDataManager.user?.email else {
             completion(DataManagerResponse.Error(obj: DataManagerError.UserNotLoggedIn))
             return
         }
+        decksFlashCount(
+            localFetch: {
+                self.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
+            },
+            remoteFetch:  {
+                self.remoteDataManager.userDecks(flashcardsCount: true, completion: $0)
+            }, completion: completion)
         
+    }
+    
+    private func parsingDecksCompletion(response: DataManagerResponse<[Deck: Int]>,
+                                        completion: DataManagerResponse<[(Deck, Int)]> -> ()) -> ()  {
+        switch response {
+        case .Success(let obj):
+            
+            let tuplesSequence: [(Deck, Int)] = obj.flatMap { $0 }
+            completion(.Success(obj: tuplesSequence))
+            break
+            
+        case .Error(let err):
+            completion(DataManagerResponse<[(Deck, Int)]>.Error(obj: err))
+        }
+    }
+    
+    func userDecksWithFlashcardsCount(completion: (DataManagerResponse<[(Deck, Int)]> -> ())) {
+        userDecksWithFlashCount { [weak self] in
+            self?.parsingDecksCompletion($0, completion: completion)
+        }
+    }
+   
+    func decksWithFlashcardsCount(includeOwn: Bool? = nil,
+                                  name: String? = nil, completion: DataManagerResponse<[(Deck, Int)]> -> ()) {
+        decksWithFlashCount(includeOwn, name: name) { [weak self] in
+            self?.parsingDecksCompletion($0, completion: completion)
+        }
+    }
+    
+    func userDecks(completion: (DataManagerResponse<[Deck]>) -> ()) {
+        guard let email = self.remoteDataManager.user?.email else {
+            completion(DataManagerResponse.Error(obj: DataManagerError.UserNotLoggedIn))
+            return
+        }
         handleJSONRequest(
             localFetch: {
                 self.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
@@ -222,7 +257,6 @@ public class DataManager {
             },
             completion: completion)
     }
-
     
     func removeDeck(withId deck: Deck, completion: (DataManagerResponse<Void>)-> ()) {
         handleRequest(
