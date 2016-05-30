@@ -29,6 +29,7 @@
 		2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */; };
 		2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100141CC0522300F9CB2A /* Searchable.swift */; };
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
+		2D62F4AB1CFB103C00D5143F /* DecksViewController+dataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62F4AA1CFB103C00D5143F /* DecksViewController+dataSource.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
 		2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */; };
 		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
@@ -181,6 +182,7 @@
 		2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+SBRepresentable.swift"; sourceTree = "<group>"; };
 		2D6100141CC0522300F9CB2A /* Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Searchable.swift; sourceTree = "<group>"; };
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
+		2D62F4AA1CFB103C00D5143F /* DecksViewController+dataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecksViewController+dataSource.swift"; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
 		2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalParentStoreable.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				7238493B1C88847F009605EE /* DecksViewController.swift */,
 				2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */,
 				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
+				2D62F4AA1CFB103C00D5143F /* DecksViewController+dataSource.swift */,
 				2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */,
 			);
 			name = Decks;
@@ -980,6 +983,7 @@
 				7269FCF81CC159CC0075CBAC /* WatchDataManager.swift in Sources */,
 				2D7E038F1CDBC37E003B5294 /* UIPlaceholderTextView.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
+				2D62F4AB1CFB103C00D5143F /* DecksViewController+dataSource.swift in Sources */,
 				2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */,

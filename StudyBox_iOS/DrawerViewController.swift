@@ -89,7 +89,7 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                     let alert = UIAlertController(title: "Uwaga", message: "Musisz być zalogowany", preferredStyle: .Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
                     alert.addAction(UIAlertAction(title: "Przejdź do logowania", style: .Default) { _ in
-                            self?.selectMenuOptionAtIndex(5)
+                            self?.selectMenuOptionAtIndex(4)
                         }
                     )
                     self?.presentViewController(alert, animated: true, completion: nil)

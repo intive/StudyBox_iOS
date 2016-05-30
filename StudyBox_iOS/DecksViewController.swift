@@ -89,24 +89,45 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         refreshControl.addTarget(self, action: #selector(reloadData), forControlEvents: .ValueChanged)
         reloadData()
     }
-   
+    
     func reloadData() {
-        
-        guard let _ = dataManager.remoteDataManager.user else {
-            refreshControl.endRefreshing()
-            collectionView?.reloadData()
-            return
+        let reloadBlock = { [weak self] in
+            self?.refreshControl.endRefreshing()
+            self?.collectionView?.reloadData()
         }
-        dataManager.userDecksWithFlashcardsCount {
-            switch $0 {
-            case .Success(let obj):
-                self.decksArray = self.currentSortingOption.sort(obj)
-            case .Error(let err):
-                debugPrint(err)
-                SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
+        
+        let completion:(userDecks: Bool) -> (DataManagerResponse<[Deck]> -> ()) = { userDecks in
+            return {
+                switch $0 {
+                case .Success(let obj):
+                    if userDecks {
+                        self.decksArray = obj
+                    } else {
+                        let schuffled = obj.shuffle()
+                        self.decksArray = Array(schuffled.prefix(3))
+
+                    }
+                case .Error(let err):
+                    self.decksArray = []
+                    debugPrint(err)
+                    SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
+                }
+                reloadBlock()
             }
-            self.refreshControl.endRefreshing()
-            self.collectionView?.reloadData()
+        }
+        
+        if UIApplication.isUserLoggedIn  {
+            dataManager.userDecksWithFlashcardsCount(completion: completion(userDecks: true))
+            
+        } else {
+            if let collectionView = collectionView {
+                if DecksViewController.numberOfCellsInRow(collectionView.frame.width, cellSize: Utils.DeckViewLayout.CellSquareSize) < 2 {
+                    decksArray = []
+                    reloadBlock()
+                }
+            }
+            
+            dataManager.decksWithFlashcardsCount(completion: completion(userDecks: false))
         }
     }
     
@@ -149,14 +170,24 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         adjustCollectionLayout(forSize: size)
+        let cellCount = DecksViewController.numberOfCellsInRow(size.width, cellSize: Utils.DeckViewLayout.CellSquareSize)
+        let cellSquareSize = (size.width - ((cellCount + 1) * Utils.DeckViewLayout.DecksSpacing)) / cellCount
+        let cellSize = CGSize(width: cellSquareSize, height: cellSquareSize)
+        if let visibleCells = collectionView?.visibleCells() as? [DecksViewCell] {
+            
+            for cell in visibleCells {
+                cell.reloadBorderLayer(forCellSize: cellSize)
+            }
+        }
         
     }
+    
     func orientationChanged(notification: NSNotification) {
-        
         if traitCollection.horizontalSizeClass != .Compact {
             initialLayout = true
             
         }
+        
     }
    
     func initialOffset(animated: Bool) {
@@ -198,10 +229,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
     }
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-
-        return 1
-    }
+   
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
