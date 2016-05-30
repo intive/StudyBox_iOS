@@ -18,20 +18,20 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     var searchBar: UISearchBar {
         return searchController.searchBar
     }
+    var currentSortingOption: DecksSortingOption = .Name
     
-    var decksArray: [Deck] = []
-    var searchDecks: [Deck] = []
-    var searchDecksHolder: [Deck] = []
+    var decksArray: [(Deck, Int)] = []
+    var searchDecks: [(Deck, Int)] = []
+    var searchDecksHolder: [(Deck, Int)] = []
     var searchDelay: NSTimer?
+    var emptySearch: Bool = true
     
-    var decksSource: [Deck] {
+    var decksSource: [(Deck, Int)] {
         return searchDecks.isEmpty && !searchController.active ? decksArray : searchDecks
     }
     
     
-    lazy var dataManager: DataManager = {
-        return UIApplication.appDelegate().dataManager
-    }()
+    lazy var dataManager: DataManager = UIApplication.appDelegate().dataManager
 
     private var statusBarHeight: CGFloat {
         return UIApplication.sharedApplication().statusBarFrame.height
@@ -97,7 +97,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
             self?.collectionView?.reloadData()
         }
         
-        let completion:(userDecks: Bool) -> (DataManagerResponse<[Deck]> -> ()) = { userDecks in
+        let completion:(userDecks: Bool) -> (DataManagerResponse<[(Deck, Int)]> -> ()) = { userDecks in
             return {
                 switch $0 {
                 case .Success(let obj):
@@ -118,7 +118,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         }
         
         if UIApplication.isUserLoggedIn  {
-            dataManager.userDecks(completion: completion(userDecks: true))
+            dataManager.userDecksWithFlashcardsCount(completion(userDecks: true))
             
         } else {
             if let collectionView = collectionView {
@@ -128,7 +128,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                 }
             }
             
-            dataManager.decks(completion: completion(userDecks: false))
+            dataManager.decksWithFlashcardsCount(true, completion: completion(userDecks: false))
         }
     }
     
@@ -186,9 +186,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     func orientationChanged(notification: NSNotification) {
         if traitCollection.horizontalSizeClass != .Compact {
             initialLayout = true
-            
         }
-        
     }
    
     func initialOffset(animated: Bool) {
@@ -229,8 +227,6 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         // size for every deck
         flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
     }
-
-   
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, testLogic = sender as? Test {
@@ -241,6 +237,29 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+    
+    @IBAction func sortButtonPress(sender: UIBarButtonItem) {
+        
+        let alert = UIAlertController(title: "Typ filtrowania", message: "Aktualnie:\n\(currentSortingOption.description)", preferredStyle: .ActionSheet)
+        let availableFilters: [DecksSortingOption] = [.CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false), .Name]
+        availableFilters.forEach { option in
+            alert.addAction(UIAlertAction(title: option.description, style: .Default) { _ in
+                self.changeSortingOption(option)
+                })
+            
+        }
+        alert.addAction(UIAlertAction(title: "Anuluj", style: .Cancel, handler: nil))
+        alert.popoverPresentationController?.barButtonItem = sender
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func changeSortingOption(option: DecksSortingOption) {
+        currentSortingOption = option
+        decksArray = currentSortingOption.sort(decksArray)
+        searchDecks = currentSortingOption.sort(searchDecks)
+        collectionView?.reloadData()
     }
     
 }

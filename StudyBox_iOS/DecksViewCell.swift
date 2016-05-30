@@ -11,6 +11,7 @@ import UIKit
 class DecksViewCell: UICollectionViewCell {
     
     @IBOutlet weak var deckNameLabel: UILabel!
+    @IBOutlet weak var deckFlashcardsCountLabel: UILabel!
     private(set) var borderLayer: CAShapeLayer? = nil
     
     func setupBorderLayer() {
@@ -22,8 +23,6 @@ class DecksViewCell: UICollectionViewCell {
             borderLayer?.strokeColor = UIColor.sb_Graphite().CGColor
             borderLayer?.fillColor = nil
             borderLayer?.lineDashPattern = [10, 5]
-            borderLayer?.masksToBounds = true
-
         }
         reloadBorderLayer(forCellSize: bounds.size)
     }

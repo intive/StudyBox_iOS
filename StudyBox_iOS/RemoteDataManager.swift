@@ -156,7 +156,7 @@ class RemoteDataManager {
         performRequest(Router.GetRandomDeck(flashcardsCount: flashcardsCount), completion: completion)
     }
     
-    func userDecks(flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>) -> ()) {
+    func userDecks(flashcardsCount flashcardsCount: Bool? = nil, completion: (ServerResultType<[JSON]>) -> ()) {
         performRequest(Router.GetAllUsersDecks(flashcardsCount: flashcardsCount), completion: completion)
     }
 

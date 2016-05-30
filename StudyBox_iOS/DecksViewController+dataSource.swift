@@ -16,7 +16,7 @@ extension DecksViewController {
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
         if decksSource.isEmpty && (UIApplication.isUserLoggedIn || searchController.active){
             return CGSize(width: collectionView.frame.width, height: view.frame.height + topItemOffset)
         }
@@ -27,13 +27,13 @@ extension DecksViewController {
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
                                  atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionElementKindSectionFooter:
             guard let emptyView = collectionView
                 .dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyView", forIndexPath: indexPath) as? EmptyCollectionReusableView else {
                     fatalError("Incorrect supplementary view type")
             }
             if searchController.active {
-                emptyView.messageLabel.text = "Nie znaleziono talii o podanej nazwie"
+                emptyView.messageLabel.text = emptySearch ? "Wpisz szukaną frazę" : "Nie znaleziono talii o podanej nazwie"
                 
             } else {
                 emptyView.messageLabel.text = "Nie dodałeś jeszcze żadnej talii"
@@ -87,18 +87,24 @@ extension DecksViewController {
                     cell.setupBorderLayer()
                     cell.deckNameLabel.textColor = UIColor.sb_Graphite()
                     cell.deckNameLabel.text = "Przesuń w górę aby wyszukać więcej talii"
-                    
+                    cell.deckFlashcardsCountLabel.text = nil 
                     return cell
                 }
             }
             
             cell.deckNameLabel.textColor = UIColor.whiteColor()
             
-            var deckName = decksSource[indexPath.row].name
+            var deckName = decksSource[indexPath.row].0.name
             if deckName.isEmpty {
                 deckName = Utils.DeckViewLayout.DeckWithoutTitle
             }
+            let deckFlashcardsCount = decksSource[indexPath.row].1
             cell.deckNameLabel.text = deckName
+            cell.deckFlashcardsCountLabel.text = String(deckFlashcardsCount)
+            cell.deckFlashcardsCountLabel.textColor = UIColor.whiteColor()
+            if let countFont = UIFont.sbFont(size: sbFontSizeSmall, bold: false){
+                cell.deckFlashcardsCountLabel.font = countFont
+            }
             cell.removeBorderLayer()
             return cell
         }
@@ -114,7 +120,7 @@ extension DecksViewController {
         }
         
         SVProgressHUD.show()
-        let deck = decksSource[indexPath.row]
+        let deck = decksSource[indexPath.row].0
         searchBar.resignFirstResponder()
         let resetSearchUI = {
             self.searchController.active = false

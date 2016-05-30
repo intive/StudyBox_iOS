@@ -129,9 +129,6 @@ class DrawerViewController: UIViewController, UITableViewDataSource, UITableView
                         UIApplication.sharedRootViewController =  storyboard.instantiateViewControllerWithIdentifier(Utils.UIIds.LoginControllerID)
                     }
                 })
-
-            
-            
         }
     }
     

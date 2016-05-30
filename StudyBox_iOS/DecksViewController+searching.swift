@@ -42,27 +42,20 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         
         let searchText = filter.trimWhiteCharacters()
         if !searchText.characters.isEmpty && searchText.characters.count <= 100 {
+            emptySearch = false 
             let searchBlock = {
                 self.searchDecks = self.searchDecksHolder
                     .filter {
-                        return $0.matches(searchText)
-                    }.sort {
-                        if let lDate = $0.0.createDate {
-                            if let rdate = $0.1.createDate {
-                                return lDate.timeIntervalSinceDate(rdate) > 0
-                            }
-                            return true
-                        }
-                        return false
-                }
+                        return $0.0.matches(searchText)
+                    }
                 self.collectionView?.reloadData()
                 
             }
             if searchDecksHolder.isEmpty {
-                dataManager.decks(true) {
+                dataManager.decksWithFlashcardsCount(true) {
                     switch $0 {
                     case .Success(let obj):
-                        self.searchDecksHolder = obj
+                        self.searchDecksHolder = self.currentSortingOption.sort(obj)
                         searchBlock()
                         
                     case .Error:
@@ -73,6 +66,7 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
                 searchBlock()
             }
         } else {
+            emptySearch = true
             searchDecks = []
             collectionView?.reloadData()
         }
@@ -91,10 +85,12 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         if collectionView?.contentOffset.y > topItemOffset {
             collectionView?.contentOffset.y = topItemOffset
         }
+        collectionView?.reloadData()
     }
     
     func willDismissSearchController(searchController: UISearchController) {
         searchDecks = []
+        emptySearch = true
         collectionView?.reloadData()
     }
     
@@ -102,4 +98,6 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         searchController.searchBar.sizeToFit()
         searchDecksHolder = []
     }
+    
+    
 }
