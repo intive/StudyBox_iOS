@@ -69,7 +69,10 @@ class TestViewController: StudyBoxViewController {
             //If user is logged in and emails match, we're the author so we can edit flashcards
             if let email = dataManager.remoteDataManager.user?.email {
                 editFlashcardBarButton.enabled = test.deck.owner == email
+            } else { //user is not logged in
+                editFlashcardBarButton.enabled = false
             }
+            
             if test.allFlashcardsHidden {
                 //Alert if passed deck have all flashcards hidden
                 self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK")
