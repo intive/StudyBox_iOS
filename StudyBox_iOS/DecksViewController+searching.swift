@@ -42,6 +42,7 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         
         let searchText = filter.trimWhiteCharacters()
         if !searchText.characters.isEmpty && searchText.characters.count <= 100 {
+            emptySearch = false 
             let searchBlock = {
                 self.searchDecks = self.searchDecksHolder
                     .filter {
@@ -65,6 +66,7 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
                 searchBlock()
             }
         } else {
+            emptySearch = true
             searchDecks = []
             collectionView?.reloadData()
         }
@@ -83,16 +85,13 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
         if collectionView?.contentOffset.y > topItemOffset {
             collectionView?.contentOffset.y = topItemOffset
         }
+        collectionView?.reloadData()
     }
     
-    func didPresentSearchController(searchController: UISearchController) {
-        searchBarWrapper.hidden = true
-        
-    }
     func willDismissSearchController(searchController: UISearchController) {
         searchDecks = []
+        emptySearch = true
         collectionView?.reloadData()
-        searchBarWrapper.hidden = false 
     }
     
     func didDismissSearchController(searchController: UISearchController) {
