@@ -110,16 +110,6 @@ class TestViewController: StudyBoxViewController {
         answerLeading.constant = view.frame.width
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        SVProgressHUD.setDefaultMaskType(.None)
-
-    }
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        SVProgressHUD.setDefaultMaskType(.Gradient)
-    }
-    
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if let testLogic = testLogicSource {
             if identifier == "ScoreSegue" {
@@ -205,7 +195,7 @@ class TestViewController: StudyBoxViewController {
     @IBAction func showTip(sender: AnyObject) {
         switch tipOrQuestionMode {
         case .Question: //If current is Question, we're switching to Tip mode
-            SVProgressHUD.show()
+
             if let currentCard = testLogicSource?.currentCard {
                 dataManager.allTipsForFlashcard(currentCard.deckId, flashcardID: currentCard.serverID, completion: { response in
                     switch response {
@@ -225,7 +215,6 @@ class TestViewController: StudyBoxViewController {
                         self.currentTipNumber = 0
                         self.tipButton.setTitle("Pytanie", forState: .Normal)
                         self.updateUIForTipMode(.Tip)
-                        SVProgressHUD.dismiss()
                         
                     case .Error(let err):
                         print(err)

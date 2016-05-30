@@ -86,7 +86,7 @@ extension DecksViewController {
                     cell.contentView.backgroundColor = UIColor.sb_White()
                     cell.setupBorderLayer()
                     cell.deckNameLabel.textColor = UIColor.sb_Graphite()
-                    cell.deckNameLabel.text = "Przesuń w górę aby wyszukać więcej talii"
+                    cell.deckNameLabel.text = "Przesuń w dół aby wyszukać więcej talii"
                     cell.deckFlashcardsCountLabel.text = nil 
                     return cell
                 }

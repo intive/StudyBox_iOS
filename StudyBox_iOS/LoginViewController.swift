@@ -45,7 +45,6 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
     }
     
     func loginToServer(withEmail email: String, password: String) {
-        SVProgressHUD.show()
         let newDataManager = UIApplication.appDelegate().dataManager
         
         newDataManager.login(email, password: password, completion: { response in
