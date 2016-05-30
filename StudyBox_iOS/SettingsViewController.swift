@@ -12,8 +12,6 @@ import WatchConnectivity
 import SVProgressHUD
 
 class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate, SettingsDetailVCChangeDecksDelegate {
-    
-    let settingsMainCellID = "settingsMainCell"
     var decksToSync = [String]()
     
     @IBOutlet weak var settingsTableView: UITableView!
@@ -27,7 +25,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         switch (indexPath.section, indexPath.row){
         case (0, 0):
             //Frequency cell configuration
-            cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier(Utils.UIIds.SettingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Powiadomienia co"
             //Set detail label to data from NSUD
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
@@ -44,13 +42,16 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             
         case (1, 0):
             //Deck choice cell configuration
-            cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier(Utils.UIIds.SettingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
             if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
                 cell.detailTextLabel?.text = "\(decksCount) \(I18n.localizedString("amount-decks", intValue: decksCount))"
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
+        case (2, 0):
+            cell = tableView.dequeueReusableCellWithIdentifier(Utils.UIIds.SettingsAppInfoCellID, forIndexPath: indexPath)
+            cell.textLabel?.text = "Informacje"
             
         default: break
         }
@@ -62,7 +63,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,6 +74,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         switch section {
         case 0 : return "Powiadomienia"
         case 1 : return "Apple Watch"
+        case 2 : return "O programie"
         default: return ""
         }
     }
@@ -101,14 +103,11 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        guard identifier == "showDetailVCSegue" else {
-            return false
-        }
         var shouldPerform = false
         
         if let section = self.settingsTableView.indexPathForSelectedRow?.section {
             switch section {
-            case 0:
+            case 0, 2:
                 shouldPerform = true
             case 1:
                 if !WCSession.isSupported() {
