@@ -128,7 +128,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
                 }
             }
             
-            dataManager.decksWithFlashcardsCount(completion: completion(userDecks: false))
+            dataManager.decksWithFlashcardsCount(true, completion: completion(userDecks: false))
         }
     }
     
