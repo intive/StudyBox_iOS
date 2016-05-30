@@ -36,7 +36,6 @@ class TestViewController: StudyBoxViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         /*
          Because one Gesture Rec. can be added only to one view, we have to make a second one.
          There are seperate GR's to avoid situation when user presses the button and
@@ -81,7 +80,6 @@ class TestViewController: StudyBoxViewController {
                 //Alert if passed deck was empty.
                 self.presentAlertController(withTitle: "Uwaga!", message: "Talia jest pusta.", buttonText: "OK")
             }
-
         }
         
         tipButton.backgroundColor = UIColor.sb_Grey()
@@ -200,6 +198,7 @@ class TestViewController: StudyBoxViewController {
     @IBAction func showTip(sender: AnyObject) {
         switch tipOrQuestionMode {
         case .Question: //If current is Question, we're switching to Tip mode
+
             if let currentCard = testLogicSource?.currentCard {
                 dataManager.allTipsForFlashcard(currentCard.deckId, flashcardID: currentCard.serverID, completion: { response in
                     switch response {
@@ -314,7 +313,6 @@ class TestViewController: StudyBoxViewController {
             }
         }
     }
-    
     @IBAction func correctAnswer(sender: AnyObject) { updateForAnswer(true) }
     @IBAction func incorrectAnswer(sender: AnyObject) { updateForAnswer(false) }
     ///Global time setting for button scale animations
@@ -367,6 +365,7 @@ class TestViewController: StudyBoxViewController {
         //set buttons size back to normal
         incorrectButton.transform = CGAffineTransformIdentity
         correctButton.transform = CGAffineTransformIdentity
+        tipOrQuestionMode = .Question
         
         updateAnswerUiForCurrentCard()
     }
@@ -384,9 +383,7 @@ class TestViewController: StudyBoxViewController {
         }
     }
 }
-
 extension TestViewController: UIGestureRecognizerDelegate {
-    
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

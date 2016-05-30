@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         
         SVProgressHUD.setDefaultMaskType(.Gradient)
-        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
+        SVProgressHUD.setMinimumDismissTimeInterval(1)
         SVProgressHUD.setDefaultStyle(.Light)
         
         self.window?.tintColor = UIColor.sb_DarkBlue()

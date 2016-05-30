@@ -53,9 +53,11 @@ extension DecksViewController: UISearchControllerDelegate, UISearchBarDelegate {
             }
             if searchDecksHolder.isEmpty {
                 dataManager.decksWithFlashcardsCount(true) {
+                    SVProgressHUD.show()
                     switch $0 {
                     case .Success(let obj):
                         self.searchDecksHolder = self.currentSortingOption.sort(obj)
+                        SVProgressHUD.dismiss()
                         searchBlock()
                         
                     case .Error:

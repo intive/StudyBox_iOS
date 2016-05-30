@@ -52,6 +52,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
     }
     
     func registerNewUser(email: String, password: String) {
+        SVProgressHUD.show()
         let dataManager = UIApplication.appDelegate().dataManager
         
         dataManager.register(email, password: password, completion: { response in
@@ -78,6 +79,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
                 let delay = 3.0 * Double(NSEC_PER_SEC)
                 let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 dispatch_after(time, dispatch_get_main_queue(), {
+                    SVProgressHUD.dismiss()
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     dataManager.remoteDataManager.saveEmailPassInDefaults(user.email, pass: user.password)
                     self.successfulLoginTransition()
@@ -116,6 +118,7 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
             SVProgressHUD.showErrorWithStatus(message)
         } else {
             if let email = self.emailTextField.text, password = self.passwordTextField.text  {
+                inputViews.forEach { $0.resignFirstResponder() }
                 self.registerNewUser(email, password: password)
             }
         }
