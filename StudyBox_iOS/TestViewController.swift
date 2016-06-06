@@ -74,7 +74,9 @@ class TestViewController: StudyBoxViewController {
             
             if test.allFlashcardsHidden {
                 //Alert if passed deck have all flashcards hidden
-                self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK")
+                self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK", actionCompletion: {
+                    DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 0)
+                    })
             }
             if test.passedDeckWasEmpty {
                 //Alert if passed deck was empty.

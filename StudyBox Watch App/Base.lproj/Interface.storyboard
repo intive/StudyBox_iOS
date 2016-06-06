@@ -51,6 +51,9 @@
             <objects>
                 <controller identifier="TipViewController" id="1ib-vb-8iZ" customClass="TipViewController" customModule="StudyBox_Watch_App_Extension">
                     <items>
+                        <separator alignment="left" id="Mbq-eJ-5QR">
+                            <color key="color" red="0.0" green="0.40784313729999999" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
                         <label width="1" alignment="center" text="Podpowiedź:" textAlignment="center" id="cDi-wk-Xd4">
                             <color key="textColor" red="0.9007411858974359" green="0.9007411858974359" blue="0.9007411858974359" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
@@ -69,11 +72,10 @@
             <objects>
                 <controller identifier="QuestionViewController" id="pbX-d6-PWg" customClass="QuestionViewController" customModule="StudyBox_Watch_App_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" spacing="20" id="Vfq-JY-t3O">
-                            <items>
-                                <label width="1" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="Z2z-eJ-Xce"/>
-                            </items>
-                        </group>
+                        <separator alignment="left" id="mIH-gc-dZj">
+                            <color key="color" red="0.0" green="0.40784313729999999" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
+                        <label width="1" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="Z2z-eJ-Xce"/>
                         <button width="1" alignment="left" verticalAlignment="bottom" title="Podpowiedź" id="qAg-8T-XPi">
                             <connections>
                                 <action selector="showTip" destination="pbX-d6-PWg" id="xhl-mz-UQX"/>
@@ -95,6 +97,9 @@
             <objects>
                 <controller identifier="AnswerViewController" id="fIA-P1-TDZ" customClass="AnswerViewController" customModule="StudyBox_Watch_App_Extension">
                     <items>
+                        <separator alignment="left" id="o8k-L7-L1D">
+                            <color key="color" red="0.0" green="0.40784313729999999" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
                         <label width="1" alignment="center" text="Answer" textAlignment="center" numberOfLines="0" id="4D9-iy-k3F"/>
                         <group width="1" alignment="left" verticalAlignment="bottom" id="6f8-gr-Pr8">
                             <items>

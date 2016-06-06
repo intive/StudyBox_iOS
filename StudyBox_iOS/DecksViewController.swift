@@ -94,7 +94,12 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     func reloadData() {
         let reloadBlock = { [weak self] in
             self?.refreshControl.endRefreshing()
-            self?.collectionView?.reloadData()
+            if let sorting = self?.currentSortingOption {
+                self?.changeSortingOption(sorting)
+            } else {
+               self?.collectionView?.reloadData()
+            }
+            
         }
         
         let completion:(userDecks: Bool) -> (DataManagerResponse<[(Deck, Int)]> -> ()) = { userDecks in
@@ -242,7 +247,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     @IBAction func sortButtonPress(sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "Typ filtrowania", message: "Aktualnie:\n\(currentSortingOption.description)", preferredStyle: .ActionSheet)
-        let availableFilters: [DecksSortingOption] = [.CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false), .Name]
+        let availableFilters: [DecksSortingOption] = [ .Name, .CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false)]
         availableFilters.forEach { option in
             alert.addAction(UIAlertAction(title: option.description, style: .Default) { _ in
                 self.changeSortingOption(option)
