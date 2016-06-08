@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 enum EditFlashcardViewControllerMode {
     case Add, Modify(flashcard: Flashcard, updateCallback: ((flashcard: Flashcard) -> Void)?)
@@ -15,7 +16,8 @@ enum EditFlashcardViewControllerMode {
 class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     
     @IBOutlet weak var searchbarWrapperTopConstraint: NSLayoutConstraint!
-
+    @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
+    
     var dummySearchController: UISearchController?
     
     var searchController: UISearchController!  {
@@ -34,13 +36,24 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     @IBOutlet weak var choosenDeckLabel: UILabel!
     @IBOutlet weak var searchBarWrapper: UIView!
     @IBOutlet weak var questionField: UIPlaceholderTextView!
-    @IBOutlet weak var tipField: UIPlaceholderTextView!
     @IBOutlet weak var answerField: UIPlaceholderTextView!
     @IBOutlet var editFields: [UITextView]!
     @IBOutlet weak var scrollView: UIScrollView!
     
     private var flashcard: Flashcard!
-    private var deck: Deck?
+    private var deck: Deck? {
+        didSet {
+            if let name = deck?.name {
+                if name == "" {
+                    choosenDeckLabel.text = "Talia bez nazwy"
+                } else {
+                    choosenDeckLabel.text = name
+                }
+            } else {
+                choosenDeckLabel.text = "Wybierz talię" 
+            }
+        }
+    }
     
     var mode: EditFlashcardViewControllerMode! {
         didSet {
@@ -54,9 +67,7 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         return UIApplication.appDelegate().dataManager
     }()
     
-    lazy private var decks: [Deck] = {
-        return self.dataManager.decks(true)
-    }()
+    private var decks: [Deck] = [Deck]()
     
     var searchDecks: [Deck]?
     
@@ -84,10 +95,8 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
       
         decksBar.text = nil
         questionField.text = nil
-        tipField.text = nil
         answerField.text = nil
         deck = nil
-        choosenDeckLabel.text = "Wybrana talia"
     }
     
     private func updateUiForCurrentMode() {
@@ -98,7 +107,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             deck = card.deck
             choosenDeckLabel.text = card.deck?.uiName
             questionField.text = card.question
-            tipField.text = card.tip
             answerField.text = card.answer
             navigationItem.title = "Edytuj"
             if presentingViewController != nil {
@@ -106,16 +114,22 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
             }
             searchBarWrapper.hidden = true
             searchbarWrapperTopConstraint.constant = -searchBarWrapper.frame.height
-            view.layoutIfNeeded()
+            scrollViewTopConstraint.constant = 8
         case .Add?:
             navigationItem.title = "Stwórz"
             searchBarWrapper.hidden = false
             searchbarWrapperTopConstraint.constant = 0
+            scrollViewTopConstraint.constant = 0
             flashcard = nil
+            deck = nil
+
         default:
             navigationItem.title = nil
             flashcard = nil
             deck = nil
+        }
+        if isViewLoaded() {
+            view.layoutIfNeeded()
         }
     }
     
@@ -142,7 +156,6 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
         assert(mode != nil, "mode not choosen!")
         answerField.placeholder = "Odpowiedź"
         questionField.placeholder = "Pytanie"
-        tipField.placeholder = "Podpowiedź"
         updateUiForCurrentMode()
 
         let graphite = UIColor.sb_Graphite().CGColor
@@ -161,7 +174,12 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     
     func keyboardWillShow(notification: NSNotification) {
         if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
-            guard frame.size.height > 0 && mm_drawerController.openSide == .None, let textView = currentlyEditedTextView else {
+            if let mmDrawer = mm_drawerController {
+                guard  mmDrawer.openSide == .None else {
+                    return
+                }
+            }
+            guard frame.size.height > 0, let textView = currentlyEditedTextView else {
                 return
             }
             scrollView.contentInset.bottom = frame.size.height
@@ -180,6 +198,14 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        dataManager.userDecks {
+            switch $0 {
+            case .Success(let decks):
+                self.decks = decks
+            case .Error(_):
+                SVProgressHUD.showErrorWithStatus("Nie udało się pobrać aktualnej listy talii")
+            }
+        }
         searchBarWrapper.addSubview(decksBar)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
@@ -211,63 +237,62 @@ class EditFlashcardViewController: StudyBoxViewController, UITextViewDelegate {
     @IBAction func saveAction(sender: UIBarButtonItem) {
         
         guard let answer = answerField.text, question = questionField.text where !answer.isEmpty && !question.isEmpty else {
-            presentAlertController(withTitle: "Błąd", message: "Pola odpowiedzi i pytania nie mogą być puste", buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus("Pola odpowiedzi i pytania nie mogą być puste")
             return
         }
         
         guard let flashcardDeck = deck else {
-            presentAlertController(withTitle: "Błąd", message: "Wybierz talię", buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus("Wybierz talię do której chcesz dodać fiszkę")
             return
         }
         
-        var tip: Tip?
-        if let tipText = tipField.text {
-            tip = Tip.Text(text: tipText)
+        guard let mode = mode else {
+            return
         }
         
-        if case .Add? = mode {
+        if case .Add = mode {
             
-            if let flashcardDeck = deck {
-                do {
-                    try dataManager.addFlashcard(forDeckWithId: flashcardDeck.serverID, question: question, answer: answer, tip: tip)
-                    presentAlertController(withTitle: "Sukces", message: "Dodano fiszkę", buttonText: "Ok")
-                    clearInput()
-                } catch _ as DataManagerError {
-                    presentAlertController(withTitle: "Błąd", message: "Nie udało się dodać fiszki", buttonText: "Ok")
-                } catch let err {
-                    print("EditFlashcardViewController adding error : \(err)")
+            dataManager.addFlashcard(Flashcard(deckID: flashcardDeck.serverID, question: question, answer: answer, isHidden: false)) {
+                switch $0 {
+                case .Success(_):
+                    SVProgressHUD.showSuccessWithStatus("Dodano fiszkę")
+                    self.clearInput()
+                case .Error(_):
+                    SVProgressHUD.showErrorWithStatus("Nie udało się dodać fiszki")
                 }
+            }
 
-            }
-        } else if case .Modify? = mode {
+        } else if case .Modify(_, let callback) = mode {
+            modifyAction(question, answer: answer, callback: callback)
             
-            flashcard.question = question
-            flashcard.answer = answer
-            flashcard.tipEnum = tip
-            if flashcardDeck.serverID != flashcard.deckId {
-                flashcard.deck? = flashcardDeck
-            }
-            let completion = {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            
-            do {
-                try dataManager.updateFlashcard(flashcard)
-                
-                
-                presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "Ok",
-                                       actionCompletion: completion,
-                                       dismissCompletion: nil)
-            } catch _ {
-                presentAlertController(withTitle: "Błąd", message: "Nie udało się zapisać zmian", buttonText: "Ok",
-                                       actionCompletion: completion,
-                                       dismissCompletion: nil)
-            }
-            if let mode = mode {
-                if case let EditFlashcardViewControllerMode.Modify( _, callback) = mode {
-                    callback?(flashcard:flashcard)
+        }
+        
+    }
+    
+    private func modifyAction(question: String, answer: String, callback: ((flashcard: Flashcard) -> Void)?) {
+        let updateFlashcardCpy = Flashcard(serverID: flashcard.serverID, deckID: flashcard.deckId, question: question, answer: answer, isHidden: false)
+        let completion = {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        dataManager.updateFlashcard(updateFlashcardCpy) {
+            switch $0 {
+            case .Success(let updatedFlashcard):
+                callback?(flashcard:updatedFlashcard)
+                self.presentAlertController(withTitle: "Sukces", message: "Zaktualizowano fiszkę", buttonText: "OK",
+                                            actionCompletion: completion,
+                                            dismissCompletion: nil)
+            case .Error(let err):
+                var errMessage = "Nie udało się zapisać zmian"
+                if case ServerError.ErrorWithMessage(let serverErrMessage) = err {
+                    errMessage = serverErrMessage
                 }
+                
+                self.presentAlertController(withTitle: "Błąd", message: errMessage, buttonText: "OK",
+                                            actionCompletion: completion,
+                                            dismissCompletion: nil)
             }
+            
         }
         
     }

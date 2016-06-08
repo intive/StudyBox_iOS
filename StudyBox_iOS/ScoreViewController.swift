@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ScoreViewController: StudyBoxViewController {
     
@@ -62,14 +63,17 @@ class ScoreViewController: StudyBoxViewController {
         circularProgressView.animateProgress(CGFloat(testScoreFraction))
     }
     
-    ///Sets labels and `testScoreFraction` based on test results
+    ///Sets labels and `testScoreFraction` based on test results and save statistics data
     func completeData() {
         if let testLogic = testLogicSource {
             let cardsResult = testLogic.cardsAnsweredAndPossible()
             
             self.testScoreFraction = Double(cardsResult.0) / Double(cardsResult.1)
             let testScorePercentage = Int(testScoreFraction*100)
-            
+            let manager = UIApplication.appDelegate().dataManager
+            manager.localDataManager.update(
+                TestInfo(deck: testLogic.deck, answeredFlashcardsCount: cardsResult.1, correctlyAnsweredFlashcardsCount: cardsResult.0)
+            )
             scoreLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: true)
             scoreLabel.text = "\(cardsResult.0) / \(cardsResult.1)\n\(testScorePercentage) %"
         }
@@ -77,13 +81,13 @@ class ScoreViewController: StudyBoxViewController {
     
     @IBAction func deckListButtonAction(sender: UIButton) {
         // TODOs: refactor for Drawer menu options
-        DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
+        DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 0)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "RepeatTest" {
             if let flashcards = testLogicSource?.notPassedInTestDeck where flashcards.isEmpty {
-                presentAlertController(withTitle: "Błąd", message: "Brak fiszek do powtórzenia", buttonText: "Ok")
+                SVProgressHUD.showInfoWithStatus("Brak fiszek do powtórzenia")
                 return false
             }
         }
@@ -92,9 +96,9 @@ class ScoreViewController: StudyBoxViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "RepeatTest", let destinationViewController = segue.destinationViewController as? TestViewController,
-            let flashcards = testLogicSource?.notPassedInTestDeck {
+            testLogicSource = testLogicSource, flashcards = testLogicSource.notPassedInTestDeck {
             
-            destinationViewController.testLogicSource = Test(deck: flashcards, testType: .Test(uint(flashcards.count)))
+            destinationViewController.testLogicSource = Test(flashcards: flashcards, testType: .Test(uint(flashcards.count)), deck: testLogicSource.deck)
         }
     }
 }

@@ -2,38 +2,42 @@
 //  DecksViewController.swift
 //  StudyBox_iOS
 //
-//  Created by Kacper Cz on 03.03.2016.
+//  Created by Kacper Cz, Damian Malarczyk on 03.03.2016.
 //  Copyright © 2016 BLStream. All rights reserved.
 //
-
 import UIKit
+import SVProgressHUD
 
 class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, DecksCollectionLayoutDelegate {
     
     var searchBarWrapper: UIView!
     var searchBarTopConstraint: NSLayoutConstraint!
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
+    let refreshControl = UIRefreshControl()
 
     var searchBar: UISearchBar {
         return searchController.searchBar
     }
+    var currentSortingOption: DecksSortingOption = .Name
     
-    var decksArray: [Deck]?
-    var searchDecks: [Deck]?
+    var decksArray: [(Deck, Int)] = []
+    var searchDecks: [(Deck, Int)] = []
+    var searchDecksHolder: [(Deck, Int)] = []
+    var searchDelay: NSTimer?
+    var emptySearch: Bool = true
     
-    var decksSource: [Deck]? {
-        return searchDecks ?? decksArray
+    var decksSource: [(Deck, Int)] {
+        return searchDecks.isEmpty && !searchController.active ? decksArray : searchDecks
     }
     
-    lazy var dataManager: DataManager = {
-        return UIApplication.appDelegate().dataManager
-    }()
+    
+    lazy var dataManager: DataManager = UIApplication.appDelegate().dataManager
 
     private var statusBarHeight: CGFloat {
         return UIApplication.sharedApplication().statusBarFrame.height
     }
     
-    private var searchBarHeight: CGFloat {
+    var searchBarHeight: CGFloat {
        return 44
     }
     
@@ -46,7 +50,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     // search bar height + 8 points margin
-    private var topOffset: CGFloat {
+    var topOffset: CGFloat {
         return self.searchBarHeight + searchBarMargin
     }
     
@@ -55,42 +59,95 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     /**
      * CollectionView content offset is determined by status bar and navigation bar height
      */
-    private var topItemOffset: CGFloat {
+    var topItemOffset: CGFloat {
         return -(self.statusBarHeight + self.navbarHeight)
     }
     
     func shouldStrech() -> Bool {
         return !searchController.active
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView?.collectionViewLayout = DecksCollectionViewLayout()
+        collectionView?.collectionViewLayout.invalidateLayout()
         if let decksLayout = collectionView?.collectionViewLayout as? DecksCollectionViewLayout {
             decksLayout.delegate = self 
         }
+        navigationItem.title = "Moje talie"
         searchBarWrapper = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: searchBarHeight))
         searchBarWrapper.autoresizingMask = .FlexibleWidth
         searchBarWrapper.addSubview(searchBar)
         view.addSubview(searchBarWrapper)
+        searchBar.delegate = self
         searchController.delegate = self
-        searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         
         definesPresentationContext = true
         collectionView?.backgroundColor = UIColor.sb_White()
         collectionView?.alwaysBounceVertical = true
+        refreshControl.tintColor = UIColor.sb_Graphite()
+        refreshControl.addTarget(self, action: #selector(reloadData), forControlEvents: .ValueChanged)
+        reloadData()
     }
-   
+    
+    func reloadData() {
+        let reloadBlock = { [weak self] in
+            self?.refreshControl.endRefreshing()
+            if let sorting = self?.currentSortingOption {
+                self?.changeSortingOption(sorting)
+            } else {
+               self?.collectionView?.reloadData()
+            }
+            
+        }
+        
+        let completion:(userDecks: Bool) -> (DataManagerResponse<[(Deck, Int)]> -> ()) = { userDecks in
+            return {
+                switch $0 {
+                case .Success(let obj):
+                    if userDecks {
+                        self.decksArray = obj
+                    } else {
+                        let schuffled = obj.shuffle()
+                        self.decksArray = Array(schuffled.prefix(3))
+
+                    }
+                case .Error(let err):
+                    self.decksArray = []
+                    debugPrint(err)
+                    SVProgressHUD.showErrorWithStatus("Błąd pobierania danych")
+                }
+                reloadBlock()
+            }
+        }
+        
+        if UIApplication.isUserLoggedIn  {
+            dataManager.userDecksWithFlashcardsCount(completion(userDecks: true))
+            
+        } else {
+            if let collectionView = collectionView {
+                if DecksViewController.numberOfCellsInRow(collectionView.frame.width, cellSize: Utils.DeckViewLayout.CellSquareSize) < 2 {
+                    decksArray = []
+                    reloadBlock()
+                }
+            }
+            
+            dataManager.decksWithFlashcardsCount(true, completion: completion(userDecks: false))
+        }
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         searchBar.sizeToFit()
+        self.collectionView?.addSubview(refreshControl)
         if let drawer = UIApplication.sharedRootViewController as? SBDrawerController {
             drawer.addObserver(self, forKeyPath: "openSide", options: [.New, .Old], context: nil)
         }
         NSNotificationCenter.defaultCenter()
             .addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        decksArray = dataManager.decks(true)
+        
         if initialLayout {
             adjustCollectionLayout(forSize: view.bounds.size)
             initialOffset(false)
@@ -119,10 +176,22 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         adjustCollectionLayout(forSize: size)
+        let cellCount = DecksViewController.numberOfCellsInRow(size.width, cellSize: Utils.DeckViewLayout.CellSquareSize)
+        let cellSquareSize = (size.width - ((cellCount + 1) * Utils.DeckViewLayout.DecksSpacing)) / cellCount
+        let cellSize = CGSize(width: cellSquareSize, height: cellSquareSize)
+        if let visibleCells = collectionView?.visibleCells() as? [DecksViewCell] {
+            
+            for cell in visibleCells {
+                cell.reloadBorderLayer(forCellSize: cellSize)
+            }
+        }
         
     }
+    
     func orientationChanged(notification: NSNotification) {
-        initialLayout = true
+        if traitCollection.horizontalSizeClass != .Compact {
+            initialLayout = true
+        }
     }
    
     func initialOffset(animated: Bool) {
@@ -138,7 +207,7 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == "openSide", let newSide = change?["new"] as? Int, let oldSide = change?["old"] as? Int where newSide != oldSide {
+        if keyPath == "openSide", let newSide = change?["new"] as? Int, oldSide = change?["old"] as? Int where newSide != oldSide {
             initialOffset(true)
         }
     }
@@ -154,7 +223,8 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         let crNumber = DecksViewController.numberOfCellsInRow(screenSize.width, cellSize: cellSize)
         
         let deckWidth = screenSize.width / crNumber - (spacing + spacing/crNumber)
-        flow.sectionInset = UIEdgeInsetsMake(topOffset, spacing, spacing, spacing)
+        
+        flow.sectionInset = UIEdgeInsets(top: topOffset, left: spacing, bottom: spacing, right: spacing)
         // spacing between decks
         flow.minimumInteritemSpacing = spacing
         // spacing between rows
@@ -162,114 +232,9 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         // size for every deck
         flow.itemSize = CGSize(width: deckWidth, height: deckWidth)
     }
-
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-
-        return 1
-    }
-
-    // Calculate number of decks. If no decks, return 0
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let searchDecksCount = searchDecks?.count {
-            return searchDecksCount
-        } else if let decksCount = decksArray?.count {
-            return  decksCount
-        }
-        return 0
-    }
-    
-    // Populate cells with decks data. Change cells style
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
-        let source = searchDecks ?? decksArray
-        
-        let view = collectionView.dequeueReusableCellWithReuseIdentifier(Utils.UIIds.DecksViewCellID, forIndexPath: indexPath)
-        if let cell = view as? DecksViewCell{
-            cell.layoutIfNeeded()
-            
-            if var deckName = source?[indexPath.row].name {
-                if deckName.isEmpty {
-                    deckName = Utils.DeckViewLayout.DeckWithoutTitle
-                }
-                cell.deckNameLabel.text = deckName
-            }
-            // changing label UI
-            if let font = UIFont.sbFont(size: sbFontSizeLarge, bold: false) {
-                cell.deckNameLabel.adjustFontSizeToHeight(font, max: sbFontSizeLarge, min: sbFontSizeSmall)
-            }
-            cell.deckNameLabel.textColor = UIColor.whiteColor()
-            cell.deckNameLabel.numberOfLines = 0
-            // adding line breaks
-            cell.deckNameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-            cell.deckNameLabel.preferredMaxLayoutWidth = cell.bounds.size.width
-            cell.contentView.backgroundColor = UIColor.sb_Graphite()
-            return cell
-        }
-        return view
-    }
-    
-    // When cell tapped, change to test
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let source = searchDecks ?? decksArray
-        
-        if let deck = source?[indexPath.row] {
-            let resetSearchUI = {
-                self.searchController.active = false
-            }
-            do {
-                let flashcards = try dataManager.flashcards(forDeckWithId: deck.serverID)
-                   
-                let alert = UIAlertController(title: "Test czy nauka?", message: "Wybierz tryb, który chcesz uruchomić", preferredStyle: .Alert)
-                
-                let testButton = UIAlertAction(title: "Test", style: .Default){ (alert: UIAlertAction!) -> Void in
-                    let alertAmount = UIAlertController(title: "Jaka ilość fiszek?", message: "Wybierz ilość fiszek w teście", preferredStyle: .Alert)
-                    
-                    let amounts = [ 1, 5, 10, 15, 20 ]
-                    
-                    var amountFlashcardsNotHiden: Int = 0
-                    for flashcard in flashcards {
-                        if flashcard.hidden == false {
-                            amountFlashcardsNotHiden += 1
-                        }
-                    }
-                    
-                    for amount in amounts {
-                        if amount < amountFlashcardsNotHiden {
-                            alertAmount.addAction(UIAlertAction(title: String(amount), style: .Default) { act in
-                                resetSearchUI()
-                                self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amount))))
-                            })
-                        } else {
-                            break
-                        }
-                    }
-                    alertAmount.addAction(UIAlertAction(title: "Wszystkie (" + String(amountFlashcardsNotHiden) + ")", style: .Default) { act in
-                        resetSearchUI()
-                        self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Test(UInt32(amountFlashcardsNotHiden))))
-                        })
-                    alertAmount.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-                    
-                    self.presentViewController(alertAmount, animated: true, completion:nil)
-                }
-                let studyButton = UIAlertAction(title: "Nauka", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    resetSearchUI()
-                    self.performSegueWithIdentifier("StartTest", sender: Test(deck: flashcards, testType: .Learn))
-                }
-                
-                alert.addAction(testButton)
-                alert.addAction(studyButton)
-                alert.addAction(UIAlertAction(title: "Anuluj", style: UIAlertActionStyle.Cancel, handler: nil))
-
-                presentViewController(alert, animated: true, completion:nil)
-                
-            } catch let e {
-                debugPrint(e)
-            }
-        }
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, let testLogic = sender as? Test {
+        if segue.identifier == "StartTest", let testViewController = segue.destinationViewController as? TestViewController, testLogic = sender as? Test {
             testViewController.testLogicSource = testLogic
         }
     }
@@ -279,88 +244,27 @@ class DecksViewController: StudyBoxCollectionViewController, UIGestureRecognizer
         return true
     }
     
-    
-    
-}
-
-extension DecksViewController: UISearchResultsUpdating, UISearchControllerDelegate {
-    
-    
-    func adjustSearchBar(forYOffset offset: CGFloat) {
-        if !searchController.active {
-            if offset < topItemOffset + topOffset {
-                
-                if offset > topItemOffset{
-                    searchBarWrapper.frame.origin.y = -offset
-                } else {
-                    searchBarWrapper.frame.origin.y = -topItemOffset
-                }
-                
-            } else {
-                searchBarWrapper.frame.origin.y = -searchBarHeight
-            }
-        }
-    }
-    
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        adjustSearchBar(forYOffset: offset)
+    @IBAction func sortButtonPress(sender: UIBarButtonItem) {
         
-    }
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        
-        if let searchText = searchController.searchBar.text where !searchText.characters.isEmpty {
-            let searchLowercase = searchText.lowercaseString
-            let deckWithoutTitleLowercase = Utils.DeckViewLayout.DeckWithoutTitle.lowercaseString
-            searchDecks = decksArray?
-                .filter {
-                    return $0.name.lowercaseString.containsString(searchLowercase)
-                        || ( $0.name == "" && deckWithoutTitleLowercase.containsString(searchLowercase) )
-                }
-                .sort { a, b in
-                    return a.name < b.name
-                }
+        let alert = UIAlertController(title: "Typ filtrowania", message: "Aktualnie:\n\(currentSortingOption.description)", preferredStyle: .ActionSheet)
+        let availableFilters: [DecksSortingOption] = [ .Name, .CreateDate, .FlashcardsCount(ascending: true), .FlashcardsCount(ascending: false)]
+        availableFilters.forEach { option in
+            alert.addAction(UIAlertAction(title: option.description, style: .Default) { _ in
+                self.changeSortingOption(option)
+                })
             
-        } else {
-            searchDecks = nil
         }
+        alert.addAction(UIAlertAction(title: "Anuluj", style: .Cancel, handler: nil))
+        alert.popoverPresentationController?.barButtonItem = sender
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func changeSortingOption(option: DecksSortingOption) {
+        currentSortingOption = option
+        decksArray = currentSortingOption.sort(decksArray)
+        searchDecks = currentSortingOption.sort(searchDecks)
         collectionView?.reloadData()
-        
-
     }
-    func willPresentSearchController(searchController: UISearchController) {
-        if collectionView?.contentOffset.y > topItemOffset {
-            collectionView?.contentOffset.y = topItemOffset
-        }
-    }
-   
-    func didDismissSearchController(searchController: UISearchController) {
-        searchController.searchBar.sizeToFit()
-    }
-}
-
-// this extension dynamically change the size of the fonts, so text can fit
-extension UILabel {
-    func adjustFontSizeToHeight(font: UIFont, max: CGFloat, min: CGFloat)
-    {
-        var font = font
-        // Initial size is max and the condition the min.
-        for size in max.stride(through: min, by: -0.1) {
-            font = font.fontWithSize(size)
-            if let text = self.text{
-                let attrString = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
-                let rectSize = attrString.boundingRectWithSize(CGSize(width: self.bounds.width, height: CGFloat.max),
-                                                               options: .UsesLineFragmentOrigin, context: nil)
-                
-                if rectSize.size.height <= self.bounds.height
-                {
-                    self.font = font
-                    break
-                }
-            }
-        }
-        // in case, it is better to have the smallest possible font
-        self.font = font
-    }
+    
 }

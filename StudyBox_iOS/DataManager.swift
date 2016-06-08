@@ -1,8 +1,6 @@
 //
-//  DataManager.swift
 //  StudyBox_iOS
-//
-//  Created by Damian Malarczyk on 03.03.2016.
+//  Created by Kacper Czapp and Damian Malarczyk
 //  Copyright © 2016 BLStream. All rights reserved.
 //
 
@@ -11,371 +9,385 @@ import RealmSwift
 import Alamofire
 import SwiftyJSON
 
-enum DataManagerError: ErrorType {
-    case NoDeckWithGivenId, NoFlashcardWithGivenId, NoRealm
-}
-enum Result {
-    case Success, Failed
-}
+public class DataManager {
 
-/**
- Class responisble for handling data model stored in memory
-*/
-class DataManager {
-    
-    private var decks = [Deck]()
-    private let server = ServerCommunication()
-    // private var flashcards = [Flashcard]()
-    private let realm = try? Realm()
-    // dzięki deckDBChanged talie będą wczytywane z bazy tylko w przypadku zmiany tabeli Deck
-    // !!! Zmiana tabeli Flashcard nie jest brana pod uwagę
-    private var deckDBChanged: Bool = true
-    
-    func decks(sorted: Bool) -> [Deck] {
-        
-        // wczytuje talie jeśli nastąpiła zmiana w tabeli talii w bazie lub puste
-        if deckDBChanged || decks.isEmpty {
-            loadDecksFromDatabase()
-        }
+    let remoteDataManager = RemoteDataManager()
+    let localDataManager = LocalDataManager()
 
-        if sorted {
-            return decks.sort {
-                $0.name < $1.name
+    // Metoda ta obsługuje zapisywanie obiektów do bazy danych
+    private func updateInLocalDatabase<DataManagerResponseObject>(parsedObject: DataManagerResponseObject) -> DataManagerResponse<DataManagerResponseObject> {
+        if let realmObject = parsedObject as? Object {
+            if !self.localDataManager.update(realmObject) {
+                return .Error(obj: DataManagerError.ErrorSavingData)
+            }
+            
+        } else if let realmObjects = parsedObject as? NSArray as? [Object] {
+            if !self.localDataManager.update(realmObjects) {
+                return .Error(obj: DataManagerError.ErrorSavingData)
+            }
+        } else if let realmObjects = parsedObject as? NSDictionary as? [Object: AnyObject] {
+            let toSave = realmObjects.keys
+            if !self.localDataManager.update(toSave) {
+                return .Error(obj: DataManagerError.ErrorSavingData)
             }
         }
-        return decks.copy()
-    }
-    
-    // loading decks from Realm. Used for refresh after changing decks in db
-    func loadDecksFromDatabase(forced: Bool = false) {
-        
-        if !decks.isEmpty || forced {
-            decks.removeAll()
-        }
-        
-        if let realm = realm {
-            decks = realm.objects(Deck).toArray()
-        }
-        
-        // jako że załadowane talie z pamięci zgadzają się z tymi z bazy, to false
-        deckDBChanged = false
-    }
-    
-    func removeDecksFromDatabase() {
-        if let realm = realm {
-            do {
-                try realm.write() {
-                    realm.deleteAll()
-                }
-            } catch let e {
-                debugPrint(e)
-            }
-        }
-        deckDBChanged = true
-    }
-    
-    func deck(withId idDeck: String) -> Deck? {
-        
-        if let realm = realm {
-            if let deck = realm.objects(Deck).filter("serverID == '\(idDeck)'").first {
-                return deck
-            } else {
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }
-    
-    func deck(withName name: String, caseSensitive: Bool = false) -> Deck? {
-        let decksData = decks(false)
-        
-        if caseSensitive {
-            for deck in decksData {
-                if deck.name == name {
-                    return deck
-                }
-            }
-        } else {
-            let lowercaseName = name.lowercaseString
-            for deck in decksData {
-                if deck.name.lowercaseString == lowercaseName {
-                    return deck
-                }
-            }
-        }
-        
-        return nil
-    }
-    
-    func updateDeck(deck: Deck) throws {
-        
-        if let realm = realm {
-            if let updatingDeck = realm.objects(Deck).filter("serverID == '\(deck.serverID)'").first{
-                do {
-                    try realm.write {
-                        updatingDeck.name = deck.name
-                        deckDBChanged = true
-                    }
-                } catch let e {
-                    debugPrint(e)
-                }
-            } else {
-                DataManagerError.NoDeckWithGivenId
-            }
-        } else {
-            throw DataManagerError.NoRealm
-        }
-    }
-    
-    func updateDeckFromServer(callback: ((result: Result) -> Void)?){
-        server.getDecksFromServer({ completion in
-            switch completion {
-            case .Success(let DecksArray):
-                
-                if let realm = self.realm {
-                    for deck in DecksArray{
-                        do {
-                            if let updatingDeck = realm.objects(Deck).filter("serverID == '\(deck.serverID)'").first{
-                                try realm.write {updatingDeck.name = deck.name}
-                                self.deckDBChanged = true
-                            } else{
-                                try realm.write {realm.add(deck)}
-                                self.deckDBChanged = true
-                            }
-                        } catch let e {
-                              debugPrint(e)
-                        }
-                    }
-                }
-                if let callback = callback {
-                    callback(result: Result.Success)
-                }
-                
-            case .Failure(let error):
-                debugPrint(error.description)
-                if let callback = callback {
-                    callback(result: Result.Failed)
-                }
-            }
-        })
+        return .Success(obj: parsedObject)
     }
 
-    func addDeck(name: String) -> String {
+    // Metoda ta obsługuje generycznie błędy, które mogą wystąpić podczas łączenia się z serwerem
+    // jeśli został przekazany parametr localFetch, w przypadku gdy nie uda się połączenie z serwerem dane są pobierane z lokalnej bazy danych
+    //
+    // localFetch - blok powinien zwrócić dane z lokalnej bazy danych
+    // remoteFetch - blok powinien zawołać przekazany blok z danymi z serwera
+    // remoteParsing - blok przyjmuje dane typu, który przychodzi z serwera i powinien zwrócić dane typu lokalnego, np. JSON do Deck
+    // completion - ten blok jest wołany z obiektem typu lokalnego, np. Deck
+    private func handleRequest<ServerResponseObject, DataManagerResponseObject>(
+        localFetch localFetch: (() -> (DataManagerResponseObject?))? = nil,
+                   remoteFetch: ((ServerResultType<ServerResponseObject>) -> ())->(),
+                   remoteParsing: (obj: ServerResponseObject) -> (DataManagerResponseObject?),
+                   completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
 
-        let id = decks.generateNewId()
-        let newDeck = Deck(serverID: id, name: name)
-        
-        if let realm = realm {
-            do {
-                try realm.write() {
-                    realm.add(newDeck)
-                }
-            } catch let e {
-                debugPrint(e)
-            }
-        }
-        deckDBChanged = true
-        return id
-    }
-
-    func removeDeck(withId idDeck: String) throws {
-        
-        if let realm = realm {
-                if let deck = realm.objects(Deck).filter("serverID == '\(idDeck)'").first {
-                    let toRemove = deck.flashcards
-                    do {
-                        try realm.write {
-                            realm.delete(toRemove)
-                            realm.delete(deck)
-                        }
-                    } catch let e {
-                        debugPrint(e)
-                    }
-                    deckDBChanged = true
+        remoteFetch { response in
+            switch response {
+            case.Success(let object):
+                if let parsedObject = remoteParsing(obj: object) {
+                    completion(self.updateInLocalDatabase(parsedObject))
+                    
                 } else {
-                    throw DataManagerError.NoDeckWithGivenId
+                    completion(.Error(obj: DataManagerError.JSONParseError))
                 }
-            
-        } else {
-            throw DataManagerError.NoRealm
+            case .Error(let error):
+                if let localFetch = localFetch {
+                    if let object = localFetch() {
+                        completion(.Success(obj: object))
+                    } else {
+                        completion(.Error(obj: DataManagerError.NoLocalData))
+                    }
+                } else {
+                    completion(.Error(obj: error))
+                }
+            }
         }
     }
-    
-    func removeDeck(deck: Deck) throws {
-        return try removeDeck(withId: deck.serverID)
+
+    //convenience method with automated parsing data where remote object is JSON and local object conforms to JSONInitializable
+    private func handleJSONRequest<DataManagerResponseObject: JSONInitializable>(
+        localFetch localFetch: (() -> DataManagerResponseObject?)? = nil,
+                   remoteFetch: ((ServerResultType<JSON>) -> ()) -> (),
+                   remoteParsing: (obj: JSON) -> DataManagerResponseObject? = { DataManagerResponseObject(withJSON: $0) },
+                   completion: (DataManagerResponse<DataManagerResponseObject>) -> ()) {
+        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
     }
-    
-    func flashcard(withId idFlashcard: String) -> Flashcard? {
-        
-        if let realm = realm {
-            if let flashcard = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first{
-                return flashcard
-            } else {
+
+    //convenience method with automated parsing data where remote object is [JSON] and local object conforms to [JSONInitializable]
+    private func handleJSONRequest<DataManagerResponseObject: JSONInitializable>(
+        localFetch localFetch: (() -> [DataManagerResponseObject])? = nil,
+                   remoteFetch: ((ServerResultType<[JSON]>) -> ()) -> (),
+                   remoteParsing: (obj: [JSON]) -> [DataManagerResponseObject] = { DataManagerResponseObject.arrayWithJSONArray($0) },
+                   completion: (DataManagerResponse<[DataManagerResponseObject]>) -> ()) {
+        handleRequest(localFetch: localFetch, remoteFetch: remoteFetch, remoteParsing: remoteParsing, completion: completion)
+    }
+
+    //MARK: users
+    func login(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.login(email, password: password, completion: $0)
+            },
+            remoteParsing: {
+                if let jsonDict = $0.dictionary where jsonDict["email"]?.string == email {
+                    self.remoteDataManager.user = User(email: email, password: password)
+                    return self.remoteDataManager.user
+                }
                 return nil
-            }
-        } else {
-            return nil
-        }
-    }
-    
-    
-    func flashcards(forDeckWithId deckId: String) throws ->[Flashcard] {
-        if let realm = realm {
-            if let deck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
-                return deck.flashcards.copy()
-            } else {
-                throw DataManagerError.NoDeckWithGivenId
-            }
-        } else {
-            throw DataManagerError.NoRealm
-        }
-    }
-    
-    func flashcards(forDeck deck: Deck) throws ->[Flashcard] {
-        return try flashcards(forDeckWithId: deck.serverID)
+            }, completion: completion)
     }
 
-    func updateFlashcard(data: Flashcard) throws {
-        if let realm = realm {
-            if let flashcard = realm.objects(Flashcard).filter("serverID == '\(data.serverID)'").first {
-                do {
-                    try realm.write {
-                        flashcard.question = data.question
-                        flashcard.answer = data.answer
-                        flashcard.tip = data.tip
-                        flashcard.hidden = data.hidden
-                        flashcard.deck = data.deck
-                    }
-                } catch let e {
-                    debugPrint(e)
-                }
-            } else {
-                throw DataManagerError.NoFlashcardWithGivenId
-            }
+    func register(email: String, password: String, completion: (DataManagerResponse<User>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.register(email, password: password, completion: $0)
+            },
+            remoteParsing: {
+                self.remoteDataManager.user = User(email: $0["email"].stringValue, password: password)
+                return self.remoteDataManager.user
+            },
+            completion: completion)
+    }
+
+ 
+    
+    func gravatar(completion: (DataManagerResponse<NSData>) -> ()) {
+        if let gravatar = self.localDataManager.gravatar() {
+            completion(.Success(obj: gravatar))
         } else {
-            throw DataManagerError.NoRealm
+            remoteDataManager.gravatar(localDataManager.gravatarDestinationURL) {
+                switch $0 {
+                case .Success(let obj):
+                    completion(.Success(obj: obj))
+                case .Error(let err):
+                    completion(.Error(obj: err))
+                }
+            }
         }
     }
     
-    func updateFlashcardsFromServer(deckId: String, callback: ((result: Result) -> Void)?){
-        server.getFlashcardsFromServer(deckId, completion: { (completion: ServerResult<[Flashcard]>) in
-            switch completion {
-            case .Success(let flashcardsArray):
-                
-                if let realm = self.realm {
-                    for flashcard in flashcardsArray {
-                        do {
-                            if let updatingFlashcard = realm.objects(Flashcard).filter("serverID == '\(flashcard.serverID)'").first {
-                                try realm.write {
-                                    updatingFlashcard.question = flashcard.question
-                                    updatingFlashcard.answer = flashcard.answer
-                                    updatingFlashcard.tip = flashcard.tip
-                                    updatingFlashcard.hidden = flashcard.hidden
-                                    updatingFlashcard.deck = flashcard.deck
-                                }
-                            } else{
-                                try self.addFlashcard(forDeckWithId: flashcard.deckId, question: flashcard.question, answer: flashcard.answer, tip: nil)
-                            }
-                        } catch let e {
-                            debugPrint(e)
-                        }
-                    }
-                }
-                    callback?(result: Result.Success)
-                
-            case .Failure(let error):
-                debugPrint(error.description)
-                    callback?(result: Result.Failed)
-            }
-        })
+    //MARK: Decks
+    func deck(withId deckID: String, completion: (DataManagerResponse<Deck>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.get(Deck.self, withId: deckID)
+            },
+            remoteFetch: {
+                self.remoteDataManager.deck(deckID, completion: $0)
+            }, completion: completion)
     }
 
+    func addDeck(deck: Deck, completion: (DataManagerResponse<Deck>)-> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.addDeck(deck, completion: $0)
+            }, completion: completion)
+    }
     
-    func addFlashcard(forDeckWithId deckId: String, question: String, answer: String, tip: Tip?)throws -> String  {
-        let flashcardId = NSUUID().UUIDString
-        if let realm = realm {
-            if let selectedDeck = realm.objects(Deck).filter("serverID == '\(deckId)'").first {
-                let newFlashcard = Flashcard(serverID: flashcardId, deckId: deckId, question: question, answer: answer, tip: tip)
+    func decks(includeOwn: Bool? = nil, name: String? = nil, completion: (DataManagerResponse<[Deck]> -> ())) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.getAll(Deck)
+            },
+            remoteFetch: {
+                self.remoteDataManager.findDecks(includeOwn: includeOwn,
+                    name: name, completion: $0)
+            }, completion: completion)
+    }
+    
+    private func decksFlashCount(localFetch localFetch: (() -> [Deck])  ,
+                                            remoteFetch: ((ServerResultType<[JSON]>) -> ()) -> (),
+                                            completion: (DataManagerResponse<([Deck: Int])> -> ())) {
+        handleRequest(
+            localFetch: {
+                let decks = localFetch()
+                let count = decks.map {
+                    return self.localDataManager.filterCount(Flashcard.self, predicate: "deckId = '\($0.serverID)'")
+                }
+                return Dictionary(Zip2Sequence(decks, count))
+            },
+            remoteFetch: remoteFetch,
+            remoteParsing: {
+                let decks = Deck.arrayWithJSONArray($0)
+                let counts = $0.flatMap {
+                    return $0["flashcardsCount"].int
+                }
+                return Dictionary(Zip2Sequence(decks, counts))
+            }, completion: completion)
+    }
+    
+   private func decksWithFlashCount(includeOwn: Bool? = nil, name: String? = nil,
+                                  completion: (DataManagerResponse<([Deck: Int])> -> ())) {
+        decksFlashCount(
+            localFetch: {
+                self.localDataManager.getAll(Deck)
+            },
+            remoteFetch:  {
+                self.remoteDataManager.findDecks(flashcardsCount: true, includeOwn: includeOwn,
+                    name: name, completion: $0)
+            }, completion: completion)
+    }
+    
+    private func userDecksWithFlashCount(completion: (DataManagerResponse<[Deck: Int]> -> ())) {
+        guard let email = self.remoteDataManager.user?.email else {
+            completion(DataManagerResponse.Error(obj: DataManagerError.UserNotLoggedIn))
+            return
+        }
+        decksFlashCount(
+            localFetch: {
+                self.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
+            },
+            remoteFetch:  {
+                self.remoteDataManager.userDecks(flashcardsCount: true, completion: $0)
+            }, completion: completion)
+        
+    }
+    
+    private func parsingDecksCompletion(response: DataManagerResponse<[Deck: Int]>,
+                                        completion: DataManagerResponse<[(Deck, Int)]> -> ()) -> ()  {
+        switch response {
+        case .Success(let obj):
             
-                newFlashcard.deck = selectedDeck
-                do {
-                    try realm.write {
-                        realm.add(newFlashcard)
-                    }
-                } catch let e {
-                    debugPrint(e)
-                }
-                
-            } else {
-                throw DataManagerError.NoDeckWithGivenId
-            }
-        } else {
-            throw DataManagerError.NoRealm
-        }
-        return flashcardId
-    }
-    
-    func addFlashcard(forDeck deck: Deck, question: String, answer: String, tip: Tip?)throws -> String  {
-        return try addFlashcard(forDeckWithId: deck.serverID, question: question, answer: answer, tip: tip)
-    }
-    
-    func removeFlashcard(withId idFlashcard: String) throws {
-        if let realm = realm {
-            if let flashcardToremove = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first {
-                do {
-                    try realm.write {
-                        realm.delete(flashcardToremove)
-                    }
-                } catch let e {
-                    debugPrint(e)
-                }
-            } else {
-                throw DataManagerError.NoFlashcardWithGivenId
-            }
-        } else {
-            throw DataManagerError.NoRealm
+            let tuplesSequence: [(Deck, Int)] = obj.flatMap { $0 }
+            completion(.Success(obj: tuplesSequence))
+            break
+            
+        case .Error(let err):
+            completion(DataManagerResponse<[(Deck, Int)]>.Error(obj: err))
         }
     }
     
-    func removeFlashcard(data: Flashcard)throws {
-        return try removeFlashcard(withId: data.serverID)
+    func userDecksWithFlashcardsCount(completion: (DataManagerResponse<[(Deck, Int)]> -> ())) {
+        userDecksWithFlashCount { [weak self] in
+            self?.parsingDecksCompletion($0, completion: completion)
+        }
     }
-    
-    func hideFlashcard(withId idFlashcard: String) throws {
-        if let realm = realm {
-            if let flashcardToUnHide = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first {
-                do {
-                    try realm.write {
-                        flashcardToUnHide.hidden = true
-                    }
-                } catch let e {
-                    debugPrint(e)
-                }
-                
-            } else {
-                throw DataManagerError.NoFlashcardWithGivenId
-            }
-        } else {
-            throw DataManagerError.NoRealm
+   
+    func decksWithFlashcardsCount(includeOwn: Bool? = nil,
+                                  name: String? = nil, completion: DataManagerResponse<[(Deck, Int)]> -> ()) {
+        decksWithFlashCount(includeOwn, name: name) { [weak self] in
+            self?.parsingDecksCompletion($0, completion: completion)
         }
     }
     
-    func unhideFlashcard(withId idFlashcard: String) throws {
-        if let realm = realm {
-            if let flashcardToHide = realm.objects(Flashcard).filter("serverID == '\(idFlashcard)'").first {
-                do {
-                    try realm.write {
-                        flashcardToHide.hidden = false
-                    }
-                } catch let e {
-                    debugPrint(e)
-                }
-            } else {
-                throw DataManagerError.NoFlashcardWithGivenId
-            }
-        } else {
-            throw DataManagerError.NoRealm
+    func userDecks(completion: (DataManagerResponse<[Deck]>) -> ()) {
+        guard let email = self.remoteDataManager.user?.email else {
+            completion(DataManagerResponse.Error(obj: DataManagerError.UserNotLoggedIn))
+            return
         }
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
+            },
+            remoteFetch: {
+                self.remoteDataManager.userDecks(completion: $0)
+            },
+            remoteParsing: {
+                let decks =  Deck.arrayWithJSONArray($0)
+                decks.forEach {
+                    $0.owner = email
+                }
+                return decks
+            },
+            completion: completion)
     }
+    
+    func removeDeck(withId deck: Deck, completion: (DataManagerResponse<Void>)-> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.removeDeck(deck.serverID, completion: $0)
+            },
+            remoteParsing: {
+                _ = self.localDataManager.delete(deck)
+            }, completion: completion)
+    }
+    
+    func randomDeck(completion: (DataManagerResponse<Deck>)-> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.findRandomDeck(completion: $0)
+            }, completion: completion)
+    }
+    
+    func updateDeck(deck: Deck, completion: (DataManagerResponse<Deck>)-> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.updateDeck(deck, completion: $0)
+            }, completion: completion)
+    }
+    
+    func changeAccessToDeck(deckID: String, isPublic: Bool, completion: (DataManagerResponse<Void>)-> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.changeAccessToDeck(deckID, isPublic: isPublic, completion: $0)
+            },
+            remoteParsing: {
+                if let deck = self.localDataManager.get(Deck.self, withId: deckID){
+                    deck.isPublic = isPublic
+                    self.localDataManager.update(deck)
+                }
+                return nil
+            }, completion: completion)
+    }
+    
+    //MARK: Flashcards
+    func flashcard(withId flashcardID: String, deckID: String, completion: (DataManagerResponse<Flashcard>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.get(Flashcard.self, withId: flashcardID)
+            },
+            remoteFetch: {
+                self.remoteDataManager.flashcard(deckID, flashcardID: flashcardID, completion: $0)
+            }, completion: completion)
+    }
+    
+    func flashcards(deckID: String, completion: (DataManagerResponse<[Flashcard]>) -> ()) {
+        handleJSONRequest(
+            localFetch: {
+                if let deck = self.localDataManager.get(Deck.self, withId: deckID){
+                    return deck.flashcards
+                } else {
+                    return []
+                }
+            },
+            remoteFetch: {
+                self.remoteDataManager.findFlashcards(deckID, completion: $0)
+            }, completion: completion)
+    }
+    
+    func addFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.addFlashcard(flashcard, completion: $0)
+            }, completion: completion)
+    }
+    
+    func removeFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Void>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.removeFlashcard(flashcard.deckId, flashcardID: flashcard.serverID, completion: $0)
+            },
+            remoteParsing: {
+                _ = self.localDataManager.delete(flashcard)
+            }, completion: completion)
+    }
+    
+    func updateFlashcard(flashcard: Flashcard, completion: (DataManagerResponse<Flashcard>) -> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.updateFlashcard(flashcard, completion: $0)
+            }, completion: completion)
+    }
+
+    //Tips
+    func addTip(tip: Tip, completion: (DataManagerResponse<Tip>)-> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.addTip(tip, completion: $0)
+            }, completion: completion)
+    }
+    
+    func removeTip(tip: Tip, completion: (DataManagerResponse<Void>) -> ()) {
+        handleRequest(
+            remoteFetch: {
+                self.remoteDataManager.removeTip(tip, completion: $0)
+            },
+            remoteParsing: {
+                _ = self.localDataManager.delete(tip)
+            }, completion: completion)
+    }
+    
+    func tip(withID tipID: String, deckID: String, flashcardID: String, completion: (DataManagerResponse<Tip>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.get(Tip.self, withId: tipID)
+            },
+            remoteFetch: {
+                self.remoteDataManager.tip(deckID: deckID, flashcardID: flashcardID, tipID: tipID, completion: $0)
+            }, completion: completion)
+    }
+    
+    func updateTip(tip: Tip, completion: (DataManagerResponse<Tip>) -> ()) {
+        handleJSONRequest(
+            remoteFetch: {
+                self.remoteDataManager.updateTip(tip, completion: $0)
+            }, completion: completion)
+    }
+    
+    func allTipsForFlashcard(deckID: String, flashcardID: String, completion: (DataManagerResponse<[Tip]>)-> ()) {
+        handleJSONRequest(
+            localFetch: {
+                self.localDataManager.filter(Tip.self, predicate: "flashcardID == '\(flashcardID)' AND deckID == '\(deckID)'")
+            },
+            remoteFetch: {
+                self.remoteDataManager.allTips(deckID: deckID, flashcardID: flashcardID, completion: $0)
+            }, completion: completion)
+    }
+    
 }

@@ -34,11 +34,11 @@ echo "Create constants"
 
 PLIST_BUDDY="/usr/libexec/PlistBuddy"
 INFO_PLIST="$PWD/StudyBox_iOS/Info.plist"
+INFO_PLIST_WATCH="$PWD/StudyBox Watch App/Info.plist"
 
 WORKSPACE="StudyBox_iOS.xcworkspace"
 SCHEME="StudyBox_iOS"
 APP_NAME="StudyBox_iOS"
-SDK="iphoneos"
 CONFIGURATION="Release"
 
 UUID=`$PLIST_BUDDY -c Print:UUID /dev/stdin <<< \`security cms -D -i $PROFILE\``
@@ -60,6 +60,7 @@ FABRIC_GROUP_ALIASES="patronage-2016-qa"
 echo "Update build number"
 
 "$PLIST_BUDDY" -c "Set :CFBundleVersion travis-$TRAVIS_BUILD_NUMBER" "$INFO_PLIST"
+"$PLIST_BUDDY" -c "Set :CFBundleVersion travis-$TRAVIS_BUILD_NUMBER" "$INFO_PLIST_WATCH"
 
 echo "Setting up certificates and keys"
 
@@ -81,15 +82,16 @@ cp "$PROFILE" "$PROFILE_TARGET"
 
 echo "Building and archiving"
 
-xctool \
+xcodebuild \
     -workspace "$WORKSPACE" \
     -scheme "$SCHEME" \
-    -sdk "$SDK" \
     -configuration "$CONFIGURATION" \
+	-hideShellScriptEnvironment \
     ONLY_ACTIVE_ARCH="NO" \
     CODE_SIGN_IDENTITY="$DEVELOPER_NAME" \
     PROVISIONING_PROFILE="$UUID" \
-    archive -archivePath "$ARCHIVE_PATH"
+    archive -archivePath "$ARCHIVE_PATH" \
+	| xcpretty
 
 echo "Creating IPA"
 
@@ -98,7 +100,8 @@ xcrun xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportPath "$IPA_PATH" \
     -exportFormat ipa \
-    -hideShellScriptEnvironment
+    -hideShellScriptEnvironment \
+	| xcpretty
 
 echo "Uploading IPA"
 

@@ -29,8 +29,14 @@ extension Array where Element: UniquelyIdentifiable {
         return nil 
     }
     
-    func generateNewId() -> String {
-        return NSUUID().UUIDString
+    func unqiueElements() -> [Element] {
+        var uniques = [Element]()
+        self.forEach {
+            if uniques.findUniqe(withId: $0.serverID) == nil {
+                uniques.append($0)
+            }
+        }
+        return uniques
     }
     
 }

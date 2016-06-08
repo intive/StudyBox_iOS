@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import Reachability 
+import Reachability
+import SVProgressHUD
+
 class LoginViewController: UserViewController, InputViewControllerDataSource {
 
     @IBOutlet weak var logInButton: UIButton!
@@ -34,6 +36,7 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
         disableButton(logInButton)
         unregisteredUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         registerUserButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -42,30 +45,28 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
     }
     
     func loginToServer(withEmail email: String, password: String) {
-        let newDataManager = UIApplication.appDelegate().newDataManager
+        let newDataManager = UIApplication.appDelegate().dataManager
         
         newDataManager.login(email, password: password, completion: { response in
             var errorMessage = "Błąd logowania"
             
             switch response {
             case .Success(let user):
-               
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(user.email, forKey: Utils.NSUserDefaultsKeys.LoggedUserEmail)
-                defaults.setObject(user.password, forKey: Utils.NSUserDefaultsKeys.LoggedUserPassword)
+                
+                newDataManager.remoteDataManager.saveEmailPassInDefaults(user.email, pass: user.password)
+                SVProgressHUD.dismiss()
                 self.successfulLoginTransition()
-                return
                 
             case .Error(let err):
                 if case .ErrorWithMessage(let txt)? = (err as? ServerError){
                     errorMessage = txt
                 }
+                SVProgressHUD.showErrorWithStatus(errorMessage)
             }
-            self.presentAlertController(withTitle: "", message: errorMessage, buttonText: "Ok")
         })
     }
     
-    func loginWithInputData(){
+    func loginWithInputData(login: String? = nil, password: String? = nil) {
         
         var alertMessage: String?
         
@@ -86,17 +87,21 @@ class LoginViewController: UserViewController, InputViewControllerDataSource {
             alertMessage = "Wypełnij wszystkie pola!"
         }
         if let message = alertMessage {
-            presentAlertController(withTitle: "", message: message, buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus(message)
             return
         }
+        inputViews.forEach { $0.resignFirstResponder() }
         
-        if let email = emailTextField.text, password = passwordTextField.text  {
+        if let login = login, password = password {
+            loginToServer(withEmail: login, password: password)
+        } else if let email = emailTextField.text, password = passwordTextField.text  {
             loginToServer(withEmail: email, password: password)
         }
-        
+
     }
 
     @IBAction func login(sender: UIButton) {
+        SVProgressHUD.showWithStatus("Logowanie...")
         loginWithInputData()
     }
     

@@ -1,4 +1,9 @@
 import UIKit
+import SVProgressHUD
+
+enum TestModeTipOrQuestion {
+    case Tip, Question
+}
 
 class TestViewController: StudyBoxViewController {
     
@@ -12,21 +17,30 @@ class TestViewController: StudyBoxViewController {
     @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var correctButton: UIButton!
     @IBOutlet weak var incorrectButton: UIButton!
+    @IBOutlet weak var editFlashcardBarButton: UIBarButtonItem!
+    
+    @IBOutlet weak var previousTipButton: UIButton!
+    @IBOutlet weak var nextTipButton: UIButton!
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var currentQuestionNumber: UILabel!
     
     @IBOutlet weak var answerLeading: NSLayoutConstraint!
     @IBOutlet var answerTrailing: NSLayoutConstraint!
-    var testLogicSource: Test?
     
-    private var dataManager: DataManager? = {
-        return UIApplication.appDelegate().dataManager
-    }()
+    var testLogicSource: Test?
+    private lazy var dataManager: DataManager = UIApplication.appDelegate().dataManager
+    var tipsForFlashcard = [Tip]()
+    var currentTipNumber = 0
+    var tipOrQuestionMode = TestModeTipOrQuestion.Question
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
+         Because one Gesture Rec. can be added only to one view, we have to make a second one.
+         There are seperate GR's to avoid situation when user presses the button and
+         moves out of the button upwards because he changes his mind as to answering correct/incorrect or showing the tip.
+        */
         let swipeLeftForAnswer = UISwipeGestureRecognizer()
         swipeLeftForAnswer.direction = .Left
         swipeLeftForAnswer.delegate = self
@@ -41,11 +55,6 @@ class TestViewController: StudyBoxViewController {
         questionLabel.userInteractionEnabled = true
         questionLabel.addGestureRecognizer(swipeUpQuestionLabel)
         
-        /*
-         Because one Gesture Rec. can be added only to one view, we have to make a second one. 
-         There are seperate GR's to avoid situation when user presses the button and 
-         moves out of the button upwards because he changes his mind as to answering correct/incorrect or showing the tip.
-         */
         let swipeUpAnswerLabel = UISwipeGestureRecognizer()
         swipeUpAnswerLabel.direction = .Up
         swipeUpAnswerLabel.addTarget(self, action: #selector(TestViewController.swipedUp))
@@ -53,10 +62,28 @@ class TestViewController: StudyBoxViewController {
         answerLabel.addGestureRecognizer(swipeUpAnswerLabel)
         
         //Set the navigation bar title to current deck name
-        if let test = testLogicSource, deckID = test.currentCard?.deckId, manager = dataManager {
-            self.title = manager.deck(withId: deckID)?.name
+        if let test = testLogicSource {
+            self.title = test.deck.name
+            
+            //If user is logged in and emails match, we're the author so we can edit flashcards
+            if let email = dataManager.remoteDataManager.user?.email {
+                editFlashcardBarButton.enabled = test.deck.owner == email
+            } else { //user is not logged in
+                editFlashcardBarButton.enabled = false
+            }
+            
+            if test.allFlashcardsHidden {
+                //Alert if passed deck have all flashcards hidden
+                self.presentAlertController(withTitle: "Uwaga!", message: "Wszystkie fiszki w tali są ukryte", buttonText: "OK", actionCompletion: {
+                    DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 0)
+                    })
+            }
+            if test.passedDeckWasEmpty {
+                //Alert if passed deck was empty.
+                self.presentAlertController(withTitle: "Uwaga!", message: "Talia jest pusta.", buttonText: "OK")
+            }
         }
-
+        
         tipButton.backgroundColor = UIColor.sb_Grey()
         correctButton.backgroundColor = UIColor.sb_Grey()
         incorrectButton.backgroundColor = UIColor.sb_Grey()
@@ -65,6 +92,12 @@ class TestViewController: StudyBoxViewController {
         
         correctButton.imageView?.contentMode = .ScaleAspectFit
         incorrectButton.imageView?.contentMode = .ScaleAspectFit
+        previousTipButton.imageView?.contentMode = .ScaleAspectFit
+        nextTipButton.imageView?.contentMode = .ScaleAspectFit
+        
+        previousTipButton.hidden = true
+        nextTipButton.hidden = true
+        tipOrQuestionMode = .Question
         
         tipButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         correctButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
@@ -73,24 +106,11 @@ class TestViewController: StudyBoxViewController {
         answerLabel.font = UIFont.sbFont(size: sbFontSizeLarge, bold: false)
         scoreLabel.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
         currentQuestionNumber.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
-        
         currentQuestionNumber.text = "#1"
         
-        //score label displays score; onclick moves to Score View Controller
-        let tapScore = UITapGestureRecognizer(target: self, action: #selector(TestViewController.tapScore(_:)))
-        scoreLabel.userInteractionEnabled = true
-        scoreLabel.addGestureRecognizer(tapScore)
+		updateQuestionUiForCurrentCard()
+        updateAnswerUiForCurrentCard()
 
-        displayAlertIfPassedDeskIsEmpty()
-        displayAlertIfPassedDeskHasAllFlashcardsHidden()
-
-        
-        if let _ = testLogicSource {
-            updateQuestionUiForCurrentCard()
-            updateAnswerUiForCurrentCard()
-        } else {
-            // TODOs: unhandled case
-        }
         answerTrailing.active = false
         answerLeading.constant = view.frame.width
     }
@@ -106,17 +126,17 @@ class TestViewController: StudyBoxViewController {
                         UIAlertAction(title: "Tak", style: .Default,
                             handler: { _ in
                                 if let repeatDeck = testLogic.repeatDeck {
-                                    self.testLogicSource = Test(deck: repeatDeck, testType: .Learn)
+                                    self.testLogicSource = Test(flashcards: repeatDeck, testType: .Learn, deck: testLogic.deck)
                                     self.answeredQuestionTransition()
                                 }
-                            })
+                        })
                     )
                     controller.addAction(
                         UIAlertAction(title: "Nie", style: .Default,
                             handler: { _ in
                                 // TODOs: refactor, make enums for DrawerViewControllers menu options
-                                DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 1)
-                            })
+                                DrawerViewController.sharedSbDrawerViewControllerChooseMenuOption(atIndex: 0)
+                        })
                     )
                     presentViewController(controller, animated: true, completion: nil)
                     return false
@@ -134,16 +154,12 @@ class TestViewController: StudyBoxViewController {
         }
     }
     
-    func tapScore(sender: UITapGestureRecognizer) {
-        self.performSegueWithIdentifier("ScoreSegue", sender: self)
-    }
-    
     func swipedLeft(){
         view.layoutIfNeeded()
         self.answerLeading.constant = 0
-
+        
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseOut], animations: {
-            self.answerTrailing.active = true 
+            self.answerTrailing.active = true
             self.view.layoutIfNeeded()
             self.questionView.center.x = self.testView.center.x - self.testView.frame.size.width
             }, completion: nil)
@@ -158,13 +174,13 @@ class TestViewController: StudyBoxViewController {
             //set alpha to 0 to prepare for next animation +fade-out effect
             self.questionView.alpha = 0
             self.answerView.alpha = 0
-            }, completion: { finished in
+            }, completion: { _ in
                 if let testLogic = self.testLogicSource {
                     testLogic.skipCard()
                 }
                 self.updateQuestionUiForCurrentCard()
                 self.updateAnswerUiForCurrentCard()
-
+                
                 //set views to show questionView after animation
                 self.questionView.center.x = self.testView.center.x
                 self.answerTrailing.active = false
@@ -182,25 +198,103 @@ class TestViewController: StudyBoxViewController {
     }
     
     @IBAction func showTip(sender: AnyObject) {
-        var message = String()
-        
-        if let tip = testLogicSource?.currentCard?.tip where !tip.isEmpty {
-            message = tip
-        } else {
-            message = "Brak podpowiedzi"
+        switch tipOrQuestionMode {
+        case .Question: //If current is Question, we're switching to Tip mode
+
+            if let currentCard = testLogicSource?.currentCard {
+                dataManager.allTipsForFlashcard(currentCard.deckId, flashcardID: currentCard.serverID, completion: { response in
+                    switch response {
+                    case .Success(let tipsFromManager):
+                        guard !tipsFromManager.isEmpty else {
+                            SVProgressHUD.showInfoWithStatus("Fiszka nie ma podpowiedzi")
+                            return
+                        }
+                        self.tipsForFlashcard = tipsFromManager.sort {
+                            return $0.difficulty < $1.difficulty
+                        }
+                        self.previousTipButton.tintColor = UIColor.sb_Grey()
+                        self.previousTipButton.userInteractionEnabled = false
+                        self.nextTipButton.userInteractionEnabled = true
+                        self.nextTipButton.tintColor = UIColor.sb_Graphite()
+                        self.tipOrQuestionMode = .Tip
+                        self.currentTipNumber = 0
+                        self.tipButton.setTitle("Pytanie", forState: .Normal)
+                        self.updateUIForTipMode(.Tip)
+                        
+                    case .Error(let err):
+                        print(err)
+                        SVProgressHUD.showErrorWithStatus("Nie można pobrać podpowiedzi dla fiszki.")
+                    }
+                })
+            }
+        case .Tip: //If current is Tip, we're switching to Question mode
+            updateUIForTipMode(.Question)
+            currentTipNumber = 0
+            tipOrQuestionMode = .Question
         }
-        presentAlertController(withTitle: "Podpowiedź:", message: message, buttonText: "OK")
+    }
+    
+    @IBAction func nextTipAction(sender: AnyObject) {
+        currentTipNumber += 1
+        
+        if currentTipNumber == tipsForFlashcard.count-1 { //last tip
+            UIView.animateWithDuration(0.25) {
+                self.previousTipButton.tintColor = UIColor.sb_Graphite()
+                self.nextTipButton.tintColor = UIColor.sb_Grey()
+            }
+            self.nextTipButton.userInteractionEnabled = false
+        }
+        if currentTipNumber == 1 {
+            self.previousTipButton.userInteractionEnabled = true
+            UIView.animateWithDuration(0.25) {
+                self.previousTipButton.tintColor = UIColor.sb_Graphite()
+            }
+        }
+        self.questionLabel.text = tipsForFlashcard[currentTipNumber].content
+    }
+    
+    @IBAction func previousTipAction(sender: AnyObject) {
+        currentTipNumber -= 1
+        
+        if currentTipNumber == 0 { //first tip
+            UIView.animateWithDuration(0.25) {
+                self.previousTipButton.tintColor = UIColor.sb_Grey()
+                self.nextTipButton.tintColor = UIColor.sb_Graphite()
+            }
+            self.previousTipButton.userInteractionEnabled = false
+        }
+        if currentTipNumber == tipsForFlashcard.count-2 {
+            UIView.animateWithDuration(0.25) {
+                self.nextTipButton.tintColor = UIColor.sb_Graphite()
+            }
+            self.nextTipButton.userInteractionEnabled = true
+        }
+        self.questionLabel.text = tipsForFlashcard[currentTipNumber].content
+    }
+
+    func updateUIForTipMode(mode: TestModeTipOrQuestion) {
+        switch mode {
+        case .Question:
+            previousTipButton.hidden = true
+            nextTipButton.hidden = true
+            tipButton.setTitle("Podpowiedź", forState: .Normal)
+            questionLabel.text = testLogicSource?.currentCard?.question
+        case .Tip:
+            if self.tipsForFlashcard.count > 1 {
+                self.previousTipButton.hidden = false
+                self.nextTipButton.hidden = false
+            }
+            tipButton.setTitle("Pytanie", forState: .Normal)
+            questionLabel.text = tipsForFlashcard[currentTipNumber].content
+        }
     }
     
     func updateQuestionUiForCurrentCard() {
         if let testLogic = testLogicSource {
             let points = testLogic.cardsAnsweredAndPossible()
             scoreLabel.text = "\(points.0) / \(points.1)"
-            
-            if let card = testLogic.currentCard {
-                questionLabel.text = card.question
-            }
         }
+        updateUIForTipMode(.Question)
     }
     
     func updateAnswerUiForCurrentCard() {
@@ -211,9 +305,7 @@ class TestViewController: StudyBoxViewController {
     }
     
     func updateForAnswer(correct: Bool) {
-        
         if let testLogic = testLogicSource {
-            
             if (correct ? testLogic.correctAnswer() : testLogic.incorrectAnswer()) != nil {
                 answeredQuestionTransition()
             } else {
@@ -223,34 +315,8 @@ class TestViewController: StudyBoxViewController {
             }
         }
     }
-    
-    //Alert if passed deck was empty.
-    func displayAlertIfPassedDeskIsEmpty() {
-        if testLogicSource?.checkIfPassedDeckIsEmpty() == true {
-            let msg = "Talia jest pusta."
-            let alert = UIAlertController(title: "Uwaga!", message: msg, preferredStyle: .Alert)
-            let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    
-    //Alert if passed deck have all flashcards hidden
-    func displayAlertIfPassedDeskHasAllFlashcardsHidden() {
-        if testLogicSource?.checkIfAllFlashcardsHidden() == true {
-            let msg = "Wszystkie fiszki w tali są ukryte"
-            let alert = UIAlertController(title: "Uwaga!", message: msg, preferredStyle: .Alert)
-            let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    
-    //ouchUpInside event
-    @IBAction func correctAnswer(sender: AnyObject) {
-        updateForAnswer(true)
-    }
-    
+    @IBAction func correctAnswer(sender: AnyObject) { updateForAnswer(true) }
+    @IBAction func incorrectAnswer(sender: AnyObject) { updateForAnswer(false) }
     ///Global time setting for button scale animations
     let buttonsAnimationTime: NSTimeInterval = 0.1
     ///Global scale setting for button scale animations
@@ -258,96 +324,68 @@ class TestViewController: StudyBoxViewController {
     
     @IBAction func correctButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = self.buttonsScaleWhenPressed
-            }, completion:nil )
+            self.correctButton.transform = self.buttonsScaleWhenPressed }, completion:nil )
     }
-    
     @IBAction func correctTouchDragExit(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.correctButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
-    
-    //TouchUpInside event [not TouchCancel]
     @IBAction func correctTouchCancel(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.correctButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.correctButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
-    
-    //TouchUpInside event
-    @IBAction func incorrectAnswer(sender: AnyObject) {
-        updateForAnswer(false)
-    }
-    
     @IBAction func incorrectButtonTouchDown(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay:0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = self.buttonsScaleWhenPressed
-            }, completion:nil )
+            self.incorrectButton.transform = self.buttonsScaleWhenPressed }, completion:nil )
     }
-    
     @IBAction func incorrectTouchDragExit(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.incorrectButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
-    
-    //TouchUpInside event [not TouchCancel]
     @IBAction func incorrectTouchCancel(sender: AnyObject) {
         UIView.animateWithDuration(buttonsAnimationTime, delay: 0, options: .CurveEaseOut, animations: {
-            self.incorrectButton.transform = CGAffineTransformIdentity
-            }, completion:nil)
+            self.incorrectButton.transform = CGAffineTransformIdentity }, completion:nil )
     }
     
     ///Animation sequence to go back to starting point and display `questionView`
     func answeredQuestionTransition(){
         questionView.alpha = 0
         questionView.center.x = testView.center.x
-        
-        //TODOs: set new question in label before dissolve
         updateQuestionUiForCurrentCard()
         //move answerView outside of the screen
         answerTrailing.active = false
         answerLeading.constant = view.frame.width
-        
         //animate dissolving of views
         UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut],
             animations: {
                 self.answerView.alpha = 0
                 self.questionView.alpha = 1
             },
-            completion: { Void in
+            completion: { _ in
                 self.answerView.alpha = 1
         })
-        
         //set buttons size back to normal
         incorrectButton.transform = CGAffineTransformIdentity
         correctButton.transform = CGAffineTransformIdentity
+        tipOrQuestionMode = .Question
         
-        //TODOs: set new answer in label after animation
         updateAnswerUiForCurrentCard()
     }
+    
     @IBAction func editCurrentFlashcard(sender: UIBarButtonItem) {
-        if let card = testLogicSource?.currentCard,
-            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerId) {
-            if let editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
-                editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
-                    self?.updateQuestionUiForCurrentCard()
-                    self?.updateAnswerUiForCurrentCard()
-                    
-                })
-                presentViewController(editFlashcardNavigation, animated: true, completion: nil)
-                
-            }
-          
-        }
         
+        if let testLogicSource = testLogicSource, card = testLogicSource.currentCard,
+            editFlashcardNavigation = storyboard?.instantiateViewControllerWithIdentifier(Utils.UIIds.EditFlashcardViewControllerID),
+            editFlashcardViewController = editFlashcardNavigation.childViewControllers[0] as? EditFlashcardViewController {
+            editFlashcardViewController.mode = EditFlashcardViewControllerMode.Modify(flashcard: card, updateCallback: {[weak self] ( _ ) in
+                self?.updateQuestionUiForCurrentCard()
+                self?.updateAnswerUiForCurrentCard()
+                })
+            presentViewController(editFlashcardNavigation, animated: true, completion: nil)
+        }
     }
 }
-
-
 extension TestViewController: UIGestureRecognizerDelegate {
-    
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

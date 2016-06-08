@@ -12,19 +12,27 @@
 		2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0939A61CAD19CF00886A1B /* String+validation.swift */; };
 		2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */; };
+		2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFB91CF5884200503433 /* String+md5.swift */; };
+		2D15AFBC1CF5B46A00503433 /* SBDrawerController+basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */; };
 		2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */; };
+		2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */; };
+		2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */; };
 		2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */; };
 		2D2843671C88CEEC006E5E21 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843661C88CEEC006E5E21 /* DataModel.swift */; };
-		2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2843681C88D03D006E5E21 /* DataManager.swift */; };
 		2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */; };
+		2D3C74FE1CFC6E4C00E4B891 /* DataManager+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3C74FD1CFC6E4C00E4B891 /* DataManager+utils.swift */; };
 		2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */; };
 		2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */; };
+		2D47DCC41CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */; };
+		2D47DCC61CEC651D00110F85 /* DecksViewController+searching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */; };
 		2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */; };
 		2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */; };
 		2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */; };
 		2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100141CC0522300F9CB2A /* Searchable.swift */; };
 		2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6100161CC0527500F9CB2A /* SBRepresentable.swift */; };
+		2D62F4AB1CFB103C00D5143F /* DecksViewController+dataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62F4AA1CFB103C00D5143F /* DecksViewController+dataSource.swift */; };
 		2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */; };
+		2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */; };
 		2D7D927D1CB960700087CC78 /* UIColor+colorFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */; };
 		2D7E038B1CDB617F003B5294 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E038A1CDB617F003B5294 /* User.swift */; };
 		2D7E038D1CDBADB6003B5294 /* String+base64Encoded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */; };
@@ -32,22 +40,26 @@
 		2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */; };
 		2D9DA46D1CB7C33E0070AEB0 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */; };
 		2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */; };
-		2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */; };
 		2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */; };
+		2DBE1A901CF85BDE00683D98 /* DecksFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */; };
 		2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */; };
+		2DD166D31CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */; };
 		2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */; };
 		2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */; };
 		2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */; };
 		2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */; };
-		2DF09D691CD3A64C00AD20F8 /* NewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */; };
-		2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */; };
+		2DF09D691CD3A64C00AD20F8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF09D681CD3A64C00AD20F8 /* DataManager.swift */; };
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
-		636392851CDA0882008E33D0 /* TestViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636392841CDA0882008E33D0 /* TestViewControllerTests.swift */; };
-		637F74141CF726460053633F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F74131CF726460053633F /* main.swift */; };
-		637F74161CF7265F0053633F /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F74151CF7265F0053633F /* TestingAppDelegate.swift */; };
+		4FA92EB85A56DD8728330F7E /* Pods_StudyBox_Watch_App_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */; };
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
+		7200E4311CCE1C8300C96BA4 /* Results+toArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
+		7214E0921CCD0355003E919C /* WatchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7214E0911CCD0355003E919C /* WatchDataModel.swift */; };
+		72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72311BB21CCA0FA800C49723 /* WatchManager.swift */; };
+		7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723772191CBC159800DE0F6D /* QuestionViewController.swift */; };
+		7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */; };
+		7237FCCE1CE8F5550015BA78 /* RandomDeckLoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */; };
 		7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849391C8882DE009605EE /* StudyBoxController.swift */; };
 		7238493C1C88847F009605EE /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493B1C88847F009605EE /* DecksViewController.swift */; };
 		7238493E1C8884DD009605EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238493D1C8884DD009605EE /* TestViewController.swift */; };
@@ -55,6 +67,17 @@
 		723849421C8885F7009605EE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723849411C8885F7009605EE /* ScoreViewController.swift */; };
 		725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */; };
 		725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */; };
+		7269FCF81CC159CC0075CBAC /* WatchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */; };
+		726EA9B71CBBFAE5008C90CD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B51CBBFAE5008C90CD /* Interface.storyboard */; };
+		726EA9B91CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9B81CBBFAE5008C90CD /* Assets.xcassets */; };
+		726EA9C01CBBFAE5008C90CD /* StudyBox Watch App Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */; };
+		726EA9C91CBBFAE5008C90CD /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */; };
+		726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */; };
+		726EA9CD1CBBFAE5008C90CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */; };
+		726EA9D11CBBFAE5008C90CD /* StudyBox Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */; };
+		726F37D51CF1A98F0006939A /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726F37D41CF1A98F0006939A /* TipViewController.swift */; };
+		729310021CC01E9E002BF87A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D07C02D1C82FC5E00BF0107 /* Utils.swift */; };
 		72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CA9E881CB10B37005631DC /* SettingsViewController.swift */; };
 		72D1644A1CAFAC7D00AA32EE /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */; };
 		72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D50BB01CDA69AC00CB0271 /* Router.swift */; };
@@ -63,8 +86,8 @@
 		72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */; };
 		72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */; };
 		72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */; };
+		72FFF08B1CF98ACD009078E7 /* AppInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FFF08A1CF98ACD009078E7 /* AppInfoScreen.swift */; };
 		79EA1987D472DAC7E169D8C4 /* Pods_StudyBox_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */; };
-		8044F6351CC05555001C9E8A /* ServerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044F6341CC05555001C9E8A /* ServerCommunication.swift */; };
 		A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1341DBF1C81E76900AFD04E /* AppDelegate.swift */; };
 		A1341DC51C81E76900AFD04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1341DC31C81E76900AFD04E /* Main.storyboard */; };
 		A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */; };
@@ -87,6 +110,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		726EA9C11CBBFAE5008C90CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1341DB41C81E76800AFD04E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 726EA9BE1CBBFAE5008C90CD;
+			remoteInfo = "StudyBox Watch App Extension";
+		};
+		726EA9CF1CBBFAE5008C90CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1341DB41C81E76800AFD04E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 726EA9B21CBBFAE5008C90CD;
+			remoteInfo = "StudyBox Watch App";
+		};
 		A1341DD41C81E76900AFD04E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A1341DB41C81E76800AFD04E /* Project object */;
@@ -96,6 +133,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		726EA9B01CBBFAA7008C90CD /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				726EA9D11CBBFAE5008C90CD /* StudyBox Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		726EA9D51CBBFAE5008C90CD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				726EA9C01CBBFAE5008C90CD /* StudyBox Watch App Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		15DF27037DBE00D8638065FC /* Pods-StudyBox_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		218E2E16B606C528CF03A0ED /* Pods-StudyBox_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,19 +166,28 @@
 		2D07C02D1C82FC5E00BF0107 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2D0939A61CAD19CF00886A1B /* String+validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
 		2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableTextField.swift; sourceTree = "<group>"; };
+		2D15AFB61CF5881500503433 /* StudyBox_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StudyBox_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D15AFB91CF5884200503433 /* String+md5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
+		2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SBDrawerController+basic.swift"; sourceTree = "<group>"; };
 		2D1B52751CC1279600F71163 /* DrawerResourceDisposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerResourceDisposable.swift; sourceTree = "<group>"; };
+		2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCollectionReusableView.swift; sourceTree = "<group>"; };
+		2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		2D2746F11CBE64FD000D5148 /* Array+Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Searchable.swift"; sourceTree = "<group>"; };
 		2D2843661C88CEEC006E5E21 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		2D2843681C88D03D006E5E21 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D3A23901C99EEBD00CC90FF /* UIViewController+presentAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+presentAlertController.swift"; sourceTree = "<group>"; };
+		2D3C74FD1CFC6E4C00E4B891 /* DataManager+utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+utils.swift"; sourceTree = "<group>"; };
 		2D40788E1CA19E4300A782A9 /* UIApplication+appDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+appDelegate.swift"; sourceTree = "<group>"; };
 		2D45ABAA1C8CB855009C3CF4 /* DrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
+		2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+adjustFontSizeToHeight.swift"; sourceTree = "<group>"; };
+		2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecksViewController+searching.swift"; sourceTree = "<group>"; };
 		2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBDrawerController.swift; sourceTree = "<group>"; };
 		2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBNavigationController.swift; sourceTree = "<group>"; };
 		2D6100121CC04EC200F9CB2A /* Deck+SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+SBRepresentable.swift"; sourceTree = "<group>"; };
 		2D6100141CC0522300F9CB2A /* Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Searchable.swift; sourceTree = "<group>"; };
 		2D6100161CC0527500F9CB2A /* SBRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBRepresentable.swift; sourceTree = "<group>"; };
+		2D62F4AA1CFB103C00D5143F /* DecksViewController+dataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecksViewController+dataSource.swift"; sourceTree = "<group>"; };
 		2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBReplaceSegue.swift; sourceTree = "<group>"; };
+		2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalParentStoreable.swift; sourceTree = "<group>"; };
 		2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorFade.swift"; sourceTree = "<group>"; };
 		2D7E038A1CDB617F003B5294 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+base64Encoded.swift"; sourceTree = "<group>"; };
@@ -124,21 +195,24 @@
 		2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksCollectionViewLayout.swift; sourceTree = "<group>"; };
 		2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		2DB984961C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+sharedRootViewController.swift"; sourceTree = "<group>"; };
-		2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		2DBC00171C89AAF5006B4DC0 /* Array+FindUnique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindUnique.swift"; sourceTree = "<group>"; };
+		2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksFilter.swift; sourceTree = "<group>"; };
 		2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+isUserLoggedin.swift"; sourceTree = "<group>"; };
 		2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONInitializable.swift; sourceTree = "<group>"; };
 		2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reachability+isConnected.swift"; sourceTree = "<group>"; };
 		2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+isEmpty.swift"; sourceTree = "<group>"; };
 		2DE1840D1CB27DD600E77F2F /* EmailValidatableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidatableTextField.swift; sourceTree = "<group>"; };
-		2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDataManager.swift; sourceTree = "<group>"; };
-		2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataManager+DummyData.swift"; sourceTree = "<group>"; };
-		636392841CDA0882008E33D0 /* TestViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewControllerTests.swift; sourceTree = "<group>"; };
-		637F74131CF726460053633F /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		637F74151CF7265F0053633F /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		2DF09D681CD3A64C00AD20F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7214E0911CCD0355003E919C /* WatchDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataModel.swift; sourceTree = "<group>"; };
+		72311BB21CCA0FA800C49723 /* WatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchManager.swift; sourceTree = "<group>"; };
+		723772191CBC159800DE0F6D /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
+		7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomDeckLoadingController.swift; sourceTree = "<group>"; };
 		723849391C8882DE009605EE /* StudyBoxController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyBoxController.swift; sourceTree = "<group>"; };
 		7238493B1C88847F009605EE /* DecksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		7238493D1C8884DD009605EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +220,19 @@
 		723849411C8885F7009605EE /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge+flat.swift"; sourceTree = "<group>"; };
 		725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+URLByAppendingElements.swift"; sourceTree = "<group>"; };
+		7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataManager.swift; sourceTree = "<group>"; };
+		726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StudyBox Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		726EA9B61CBBFAE5008C90CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		726EA9B81CBBFAE5008C90CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		726EA9BA1CBBFAE5008C90CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "StudyBox Watch App Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		726EA9C51CBBFAE5008C90CD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		726EA9CE1CBBFAE5008C90CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		726F37D41CF1A98F0006939A /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		72CA9E881CB10B37005631DC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72D164491CAFAC7D00AA32EE /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		72D50BB01CDA69AC00CB0271 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -154,11 +241,11 @@
 		72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		8044F6341CC05555001C9E8A /* ServerCommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCommunication.swift; sourceTree = "<group>"; };
+		72FFF08A1CF98ACD009078E7 /* AppInfoScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoScreen.swift; sourceTree = "<group>"; };
 		874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBox_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A1341DBF1C81E76900AFD04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A1341DC41C81E76900AFD04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A1341DC71C81E76900AFD04E /* StudyBox_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyBox_iOS.xcdatamodel; sourceTree = "<group>"; };
 		A1341DC91C81E76900AFD04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,6 +258,7 @@
 		AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
 		AEE35B8D1CA4BCA800D17A3C /* DataModel+NSCopying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataModel+NSCopying.swift"; sourceTree = "<group>"; };
 		AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogicTests.swift; sourceTree = "<group>"; };
+		BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.release.xcconfig"; sourceTree = "<group>"; };
 		CE96BC6E1C92F09F0026F80F /* UIColor+StudyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+StudyBox.swift"; sourceTree = "<group>"; };
 		CEC47A8C1CD2AB6200B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/expressions.json; sourceTree = "<group>"; };
 		CEC47A8F1CD2AD5800B0C9C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = Base; path = Base.lproj/base.json; sourceTree = "<group>"; };
@@ -183,10 +271,26 @@
 		CEE9F6971C8AE1F800961ABA /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
 		CEE9F6981C8AE1F800961ABA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOS/Pods-StudyBox_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyBox_Watch_App_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5BA2448978A3424AEC6B8EB /* Pods-StudyBox_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox_iOSTests/Pods-StudyBox_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		12A96303BBB776DC9C6D6009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		726EA9BC1CBBFAE5008C90CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FA92EB85A56DD8728330F7E /* Pods_StudyBox_Watch_App_Extension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1341DB91C81E76900AFD04E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,11 +317,9 @@
 				72D50BB01CDA69AC00CB0271 /* Router.swift */,
 				72D50BB41CDA6A4800CB0271 /* LocalDataManager.swift */,
 				72D50BB21CDA69E600CB0271 /* RemoteDataManager.swift */,
-				2DF09D681CD3A64C00AD20F8 /* NewDataManager.swift */,
-				2D2843681C88D03D006E5E21 /* DataManager.swift */,
-				2DFB7B221C88F7EE00164464 /* DataManager+DummyData.swift */,
-				8044F6341CC05555001C9E8A /* ServerCommunication.swift */,
+				2DF09D681CD3A64C00AD20F8 /* DataManager.swift */,
 				2D7E038A1CDB617F003B5294 /* User.swift */,
+				2D3C74FD1CFC6E4C00E4B891 /* DataManager+utils.swift */,
 			);
 			name = "Data Manager";
 			sourceTree = "<group>";
@@ -236,8 +338,21 @@
 				2D6100161CC0527500F9CB2A /* SBRepresentable.swift */,
 				2D6100141CC0522300F9CB2A /* Searchable.swift */,
 				2DD330C91CDBE79E00C52539 /* JSONInitializable.swift */,
+				2D7778741CE0F260006A63D6 /* LocalParentStoreable.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		2D47DCC71CEC659900110F85 /* Decks */ = {
+			isa = PBXGroup;
+			children = (
+				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				2D47DCC51CEC651D00110F85 /* DecksViewController+searching.swift */,
+				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
+				2D62F4AA1CFB103C00D5143F /* DecksViewController+dataSource.swift */,
+				2DBE1A8F1CF85BDE00683D98 /* DecksFilter.swift */,
+			);
+			name = Decks;
 			sourceTree = "<group>";
 		};
 		2DA0E6981C949AE200DAB6B5 /* Utils */ = {
@@ -254,13 +369,67 @@
 				7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */,
 				874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */,
 				93108AACD4A9AE5D7B5710CB /* Pods_StudyBox_iOSTests.framework */,
+				E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7214E0941CCD036B003E919C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				726EA9C61CBBFAE5008C90CD /* InterfaceController.swift */,
+				723772191CBC159800DE0F6D /* QuestionViewController.swift */,
+				7237721B1CBC17E100DE0F6D /* AnswerViewController.swift */,
+				726F37D41CF1A98F0006939A /* TipViewController.swift */,
+				726EA9CA1CBBFAE5008C90CD /* NotificationController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		7214E0951CCD0376003E919C /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				72311BB21CCA0FA800C49723 /* WatchManager.swift */,
+				7214E0911CCD0355003E919C /* WatchDataModel.swift */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		726EA9B41CBBFAE5008C90CD /* StudyBox Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				726EA9B51CBBFAE5008C90CD /* Interface.storyboard */,
+				726EA9B81CBBFAE5008C90CD /* Assets.xcassets */,
+				726EA9BA1CBBFAE5008C90CD /* Info.plist */,
+			);
+			path = "StudyBox Watch App";
+			sourceTree = "<group>";
+		};
+		726EA9C31CBBFAE5008C90CD /* StudyBox Watch App Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7214E0941CCD036B003E919C /* View Controllers */,
+				726EA9C81CBBFAE5008C90CD /* ExtensionDelegate.swift */,
+				7214E0951CCD0376003E919C /* Data Model */,
+				726EA9CC1CBBFAE5008C90CD /* Assets.xcassets */,
+				726EA9CE1CBBFAE5008C90CD /* Info.plist */,
+				726EA9C41CBBFAE5008C90CD /* Supporting Files */,
+			);
+			path = "StudyBox Watch App Extension";
+			sourceTree = "<group>";
+		};
+		726EA9C41CBBFAE5008C90CD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				726EA9C51CBBFAE5008C90CD /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		72F089111CB7A87300BB4898 /* Settings Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7269FCF71CC159CC0075CBAC /* WatchDataManager.swift */,
 				72CA9E881CB10B37005631DC /* SettingsViewController.swift */,
 				CEC47A8E1CD2AD5800B0C9C0 /* base.json */,
 				CEC47A971CD2B69800B0C9C0 /* en.json */,
@@ -269,6 +438,7 @@
 				72EA44001CB16925001DFDE5 /* PickerTableViewCell.swift */,
 				72F0890E1CB7A4BF00BB4898 /* SwitchTableViewCell.swift */,
 				72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */,
+				72FFF08A1CF98ACD009078E7 /* AppInfoScreen.swift */,
 			);
 			name = "Settings Classes";
 			sourceTree = "<group>";
@@ -290,6 +460,7 @@
 				2D70F7BE1C9FFBF1003DF156 /* SBReplaceSegue.swift */,
 				2D0F98281CAB28B2003D1857 /* ValidatableTextField.swift */,
 				2D7E038E1CDBC37E003B5294 /* UIPlaceholderTextView.swift */,
+				2D22E4A81CF1EA5B008510C2 /* EmptyCollectionReusableView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -297,8 +468,9 @@
 		9E6F89231CC505690027045A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7238493B1C88847F009605EE /* DecksViewController.swift */,
+				2D47DCC71CEC659900110F85 /* Decks */,
 				7238493F1C88851A009605EE /* EditFlashcardViewController.swift */,
+				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
 				723849391C8882DE009605EE /* StudyBoxController.swift */,
 				2D07C02B1C82FC5E00BF0107 /* InputViewController.swift */,
 				2D07C02C1C82FC5E00BF0107 /* LoginViewController.swift */,
@@ -307,8 +479,9 @@
 				2DD02DAA1C8CCE2B00A6FED9 /* UserViewController.swift */,
 				7238493D1C8884DD009605EE /* TestViewController.swift */,
 				2D53E2FF1C9F41CB00436588 /* SBDrawerController.swift */,
+				7237FCCD1CE8F5550015BA78 /* RandomDeckLoadingController.swift */,
 				72F23FEC1C836E0A0063BD43 /* RegistrationViewController.swift */,
-				2D8E42CE1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift */,
+				2D22E4AE1CF215CB008510C2 /* StatisticsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -326,10 +499,13 @@
 				2D7D927C1CB960700087CC78 /* UIColor+colorFade.swift */,
 				2DE184071CB252C400E77F2F /* Reachability+isConnected.swift */,
 				2DE184091CB2739600E77F2F /* UITextField+isEmpty.swift */,
-				2D5B88F51CB8EF0700CBB85D /* SBNavigationController.swift */,
 				725E3C111CD89A810081470D /* Dictionary+merge+flat.swift */,
 				725E3C131CD89AAC0081470D /* NSURL+URLByAppendingElements.swift */,
 				2D7E038C1CDBADB6003B5294 /* String+base64Encoded.swift */,
+				2D47DCC31CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift */,
+				2DD166D21CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift */,
+				2D15AFBB1CF5B46A00503433 /* SBDrawerController+basic.swift */,
+				2D15AFB91CF5884200503433 /* String+md5.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -339,6 +515,8 @@
 			children = (
 				A1341DBE1C81E76900AFD04E /* StudyBox_iOS */,
 				A1341DD61C81E76900AFD04E /* StudyBox_iOSTests */,
+				726EA9B41CBBFAE5008C90CD /* StudyBox Watch App */,
+				726EA9C31CBBFAE5008C90CD /* StudyBox Watch App Extension */,
 				A1341DBD1C81E76900AFD04E /* Products */,
 				38B1F5B29A6C985E3C63E020 /* Frameworks */,
 				CEE9F6901C8A159100961ABA /* Fonts */,
@@ -351,6 +529,8 @@
 			children = (
 				A1341DBC1C81E76900AFD04E /* StudyBox_iOS.app */,
 				A1341DD31C81E76900AFD04E /* StudyBox_iOSTests.xctest */,
+				726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */,
+				726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -364,16 +544,15 @@
 				9E6F89211CC505180027045A /* Logic */,
 				2DA0E6981C949AE200DAB6B5 /* Utils */,
 				2D2843651C88CEDE006E5E21 /* Model */,
+				72F089111CB7A87300BB4898 /* Settings Classes */,
 				A1341DCE1C81E76900AFD04E /* Info.plist */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
-				72F089111CB7A87300BB4898 /* Settings Classes */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
 				A1341DC61C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld */,
 				2D9DA46C1CB7C33E0070AEB0 /* BasicTableViewCell.xib */,
-				637F74131CF726460053633F /* main.swift */,
-				637F74151CF7265F0053633F /* TestingAppDelegate.swift */,
+				2D15AFB61CF5881500503433 /* StudyBox_iOS-Bridging-Header.h */,
 			);
 			path = StudyBox_iOS;
 			sourceTree = "<group>";
@@ -383,9 +562,7 @@
 			children = (
 				A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */,
 				A1341DD91C81E76900AFD04E /* Info.plist */,
-				2DBB4D3A1C88E020004F4725 /* DataManagerTests.swift */,
 				AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */,
-				636392841CDA0882008E33D0 /* TestViewControllerTests.swift */,
 			);
 			path = StudyBox_iOSTests;
 			sourceTree = "<group>";
@@ -406,6 +583,8 @@
 				D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */,
 				15DF27037DBE00D8638065FC /* Pods-StudyBox_iOSTests.debug.xcconfig */,
 				F5BA2448978A3424AEC6B8EB /* Pods-StudyBox_iOSTests.release.xcconfig */,
+				4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */,
+				BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -413,6 +592,44 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		726EA9B21CBBFAE5008C90CD /* StudyBox Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 726EA9D61CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App" */;
+			buildPhases = (
+				726EA9B11CBBFAE5008C90CD /* Resources */,
+				726EA9D51CBBFAE5008C90CD /* Embed App Extensions */,
+				12A96303BBB776DC9C6D6009 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				726EA9C21CBBFAE5008C90CD /* PBXTargetDependency */,
+			);
+			name = "StudyBox Watch App";
+			productName = "StudyBox Watch App";
+			productReference = 726EA9B31CBBFAE5008C90CD /* StudyBox Watch App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		726EA9BE1CBBFAE5008C90CD /* StudyBox Watch App Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 726EA9D21CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App Extension" */;
+			buildPhases = (
+				FB8CD2E1C6E3F20C97DB86C0 /* 📦 Check Pods Manifest.lock */,
+				726EA9BB1CBBFAE5008C90CD /* Sources */,
+				726EA9BC1CBBFAE5008C90CD /* Frameworks */,
+				726EA9BD1CBBFAE5008C90CD /* Resources */,
+				F90BE758B6B3A5F7FCD836E2 /* 📦 Embed Pods Frameworks */,
+				4194F7871595FCE832476EE0 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "StudyBox Watch App Extension";
+			productName = "StudyBox Watch App Extension";
+			productReference = 726EA9BF1CBBFAE5008C90CD /* StudyBox Watch App Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		A1341DBB1C81E76900AFD04E /* StudyBox_iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1341DDC1C81E76900AFD04E /* Build configuration list for PBXNativeTarget "StudyBox_iOS" */;
@@ -424,10 +641,12 @@
 				5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */,
 				8B6D99404CB7CCFB761DCAD2 /* 📦 Copy Pods Resources */,
 				23AEC3FD1CB06407004358AB /* Swiftlint */,
+				726EA9B01CBBFAA7008C90CD /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				726EA9D01CBBFAE5008C90CD /* PBXTargetDependency */,
 			);
 			name = StudyBox_iOS;
 			productName = StudyBox_iOS;
@@ -461,10 +680,16 @@
 		A1341DB41C81E76800AFD04E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = BLStream;
 				TargetAttributes = {
+					726EA9B21CBBFAE5008C90CD = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					726EA9BE1CBBFAE5008C90CD = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					A1341DBB1C81E76900AFD04E = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -489,11 +714,30 @@
 			targets = (
 				A1341DBB1C81E76900AFD04E /* StudyBox_iOS */,
 				A1341DD21C81E76900AFD04E /* StudyBox_iOSTests */,
+				726EA9B21CBBFAE5008C90CD /* StudyBox Watch App */,
+				726EA9BE1CBBFAE5008C90CD /* StudyBox Watch App Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		726EA9B11CBBFAE5008C90CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				726EA9B91CBBFAE5008C90CD /* Assets.xcassets in Resources */,
+				726EA9B71CBBFAE5008C90CD /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		726EA9BD1CBBFAE5008C90CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				726EA9CD1CBBFAE5008C90CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1341DBA1C81E76900AFD04E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -548,6 +792,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4194F7871595FCE832476EE0 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5C3E9CCBC83BECADB9D6E52F /* 📦 Embed Pods Frameworks */ = {
@@ -625,32 +884,86 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F90BE758B6B3A5F7FCD836E2 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB8CD2E1C6E3F20C97DB86C0 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		726EA9BB1CBBFAE5008C90CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				726EA9CB1CBBFAE5008C90CD /* NotificationController.swift in Sources */,
+				7200E4311CCE1C8300C96BA4 /* Results+toArray.swift in Sources */,
+				726EA9C91CBBFAE5008C90CD /* ExtensionDelegate.swift in Sources */,
+				7237721C1CBC17E100DE0F6D /* AnswerViewController.swift in Sources */,
+				7237721A1CBC159800DE0F6D /* QuestionViewController.swift in Sources */,
+				72311BB31CCA0FA800C49723 /* WatchManager.swift in Sources */,
+				726EA9C71CBBFAE5008C90CD /* InterfaceController.swift in Sources */,
+				7214E0921CCD0355003E919C /* WatchDataModel.swift in Sources */,
+				726F37D51CF1A98F0006939A /* TipViewController.swift in Sources */,
+				729310021CC01E9E002BF87A /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1341DB81C81E76900AFD04E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CEC69B531C946CC100295808 /* TestLogic.swift in Sources */,
-				8044F6351CC05555001C9E8A /* ServerCommunication.swift in Sources */,
+				2D47DCC61CEC651D00110F85 /* DecksViewController+searching.swift in Sources */,
+				2D7778751CE0F260006A63D6 /* LocalParentStoreable.swift in Sources */,
+				2DD166D31CF7570A0090EA12 /* UIApplication+isUserLoggedin.swift in Sources */,
 				7238493E1C8884DD009605EE /* TestViewController.swift in Sources */,
 				2D3A23911C99EEBD00CC90FF /* UIViewController+presentAlertController.swift in Sources */,
 				AEE35B8C1CA4747200D17A3C /* Results+toArray.swift in Sources */,
 				2DE184081CB252C400E77F2F /* Reachability+isConnected.swift in Sources */,
 				2D6100151CC0522400F9CB2A /* Searchable.swift in Sources */,
+				2D22E4A91CF1EA5B008510C2 /* EmptyCollectionReusableView.swift in Sources */,
+				2D22E4AF1CF215CB008510C2 /* StatisticsViewController.swift in Sources */,
 				2D6100131CC04EC200F9CB2A /* Deck+SBRepresentable.swift in Sources */,
+				72FFF08B1CF98ACD009078E7 /* AppInfoScreen.swift in Sources */,
+				2DBE1A901CF85BDE00683D98 /* DecksFilter.swift in Sources */,
 				72D50BB11CDA69AC00CB0271 /* Router.swift in Sources */,
 				2DE1840A1CB2739600E77F2F /* UITextField+isEmpty.swift in Sources */,
 				2D8E42CF1CCFD8A5003D86E9 /* DecksCollectionViewLayout.swift in Sources */,
 				2DD02DAB1C8CCE2B00A6FED9 /* UserViewController.swift in Sources */,
 				7238493A1C8882DE009605EE /* StudyBoxController.swift in Sources */,
 				2D70F7BF1C9FFBF1003DF156 /* SBReplaceSegue.swift in Sources */,
+				7237FCCE1CE8F5550015BA78 /* RandomDeckLoadingController.swift in Sources */,
 				72CA9E891CB10B37005631DC /* SettingsViewController.swift in Sources */,
 				72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */,
 				725E3C141CD89AAC0081470D /* NSURL+URLByAppendingElements.swift in Sources */,
-				637F74141CF726460053633F /* main.swift in Sources */,
 				2D6100171CC0527500F9CB2A /* SBRepresentable.swift in Sources */,
+				2D3C74FE1CFC6E4C00E4B891 /* DataManager+utils.swift in Sources */,
 				CE96BC6F1C92F09F0026F80F /* UIColor+StudyBox.swift in Sources */,
 				2D0F98291CAB28B2003D1857 /* ValidatableTextField.swift in Sources */,
 				2D7E038B1CDB617F003B5294 /* User.swift in Sources */,
@@ -659,26 +972,29 @@
 				CEE9F6961C8A231D00961ABA /* UIFont+sbFont.swift in Sources */,
 				2D1B52761CC1279600F71163 /* DrawerResourceDisposable.swift in Sources */,
 				2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */,
-				2D2843691C88D03D006E5E21 /* DataManager.swift in Sources */,
 				72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */,
 				2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
 				2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */,
 				723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */,
 				2D0939A71CAD19CF00886A1B /* String+validation.swift in Sources */,
-				2DF09D691CD3A64C00AD20F8 /* NewDataManager.swift in Sources */,
+				2DF09D691CD3A64C00AD20F8 /* DataManager.swift in Sources */,
 				2DB984971C9161E300BFBF72 /* UIApplication+sharedRootViewController.swift in Sources */,
 				A1341DC01C81E76900AFD04E /* AppDelegate.swift in Sources */,
+				2D47DCC41CEC64D200110F85 /* UILabel+adjustFontSizeToHeight.swift in Sources */,
 				2D07C02F1C82FC5E00BF0107 /* LoginViewController.swift in Sources */,
 				72F0890F1CB7A4BF00BB4898 /* SwitchTableViewCell.swift in Sources */,
 				72F23FED1C836E0A0063BD43 /* RegistrationViewController.swift in Sources */,
 				63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */,
+				2D15AFBC1CF5B46A00503433 /* SBDrawerController+basic.swift in Sources */,
 				2D07C02E1C82FC5E00BF0107 /* InputViewController.swift in Sources */,
+				7269FCF81CC159CC0075CBAC /* WatchDataManager.swift in Sources */,
 				2D7E038F1CDBC37E003B5294 /* UIPlaceholderTextView.swift in Sources */,
 				2D07C0301C82FC5E00BF0107 /* Utils.swift in Sources */,
+				2D62F4AB1CFB103C00D5143F /* DecksViewController+dataSource.swift in Sources */,
 				2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */,
-				637F74161CF7265F0053633F /* TestingAppDelegate.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
+				2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
@@ -686,7 +1002,6 @@
 				2D2746F21CBE64FD000D5148 /* Array+Searchable.swift in Sources */,
 				AEE35B8E1CA4BCA800D17A3C /* DataModel+NSCopying.swift in Sources */,
 				72D50BB51CDA6A4800CB0271 /* LocalDataManager.swift in Sources */,
-				2DFB7B231C88F7EE00164464 /* DataManager+DummyData.swift in Sources */,
 				2DE1840E1CB27DD700E77F2F /* EmailValidatableTextField.swift in Sources */,
 				7238493C1C88847F009605EE /* DecksViewController.swift in Sources */,
 				72D50BB31CDA69E600CB0271 /* RemoteDataManager.swift in Sources */,
@@ -701,14 +1016,22 @@
 			files = (
 				A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */,
 				AEEAB5701CCE3A5400BB60FA /* TestLogicTests.swift in Sources */,
-				636392851CDA0882008E33D0 /* TestViewControllerTests.swift in Sources */,
-				2DBB4D3B1C88E020004F4725 /* DataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		726EA9C21CBBFAE5008C90CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 726EA9BE1CBBFAE5008C90CD /* StudyBox Watch App Extension */;
+			targetProxy = 726EA9C11CBBFAE5008C90CD /* PBXContainerItemProxy */;
+		};
+		726EA9D01CBBFAE5008C90CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 726EA9B21CBBFAE5008C90CD /* StudyBox Watch App */;
+			targetProxy = 726EA9CF1CBBFAE5008C90CD /* PBXContainerItemProxy */;
+		};
 		A1341DD51C81E76900AFD04E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A1341DBB1C81E76900AFD04E /* StudyBox_iOS */;
@@ -717,6 +1040,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		726EA9B51CBBFAE5008C90CD /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				726EA9B61CBBFAE5008C90CD /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		A1341DC31C81E76900AFD04E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -770,6 +1101,72 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		726EA9D31CBBFAE5008C90CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "StudyBox Watch App Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		726EA9D41CBBFAE5008C90CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD0F81FE6204E80DAD2D6886 /* Pods-StudyBox Watch App Extension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "StudyBox Watch App Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		726EA9D71CBBFAE5008C90CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = StudyBox_Watch_App_Extension;
+				INFOPLIST_FILE = "StudyBox Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		726EA9D81CBBFAE5008C90CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = StudyBox_Watch_App_Extension;
+				INFOPLIST_FILE = "StudyBox Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 		A1341DDA1C81E76900AFD04E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -858,11 +1255,14 @@
 			baseConfigurationReference = 218E2E16B606C528CF03A0ED /* Pods-StudyBox_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StudyBox_iOS/StudyBox_iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -871,10 +1271,12 @@
 			baseConfigurationReference = D2A38267A7050B994A7F8CC6 /* Pods-StudyBox_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = StudyBox_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blstream.StudyBox-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StudyBox_iOS/StudyBox_iOS-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -907,6 +1309,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		726EA9D21CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				726EA9D31CBBFAE5008C90CD /* Debug */,
+				726EA9D41CBBFAE5008C90CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		726EA9D61CBBFAE5008C90CD /* Build configuration list for PBXNativeTarget "StudyBox Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				726EA9D71CBBFAE5008C90CD /* Debug */,
+				726EA9D81CBBFAE5008C90CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A1341DB71C81E76800AFD04E /* Build configuration list for PBXProject "StudyBox_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

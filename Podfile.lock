@@ -21,6 +21,7 @@ PODS:
   - Realm/Headers (0.98.6)
   - RealmSwift (0.98.6):
     - Realm (= 0.98.6)
+  - SVProgressHUD (2.0.3)
   - Swifternalization (1.3.1)
   - SwiftyJSON (2.3.2)
 
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - MMDrawerController (from `https://github.com/osjup/MMDrawerController.git`)
   - Reachability (~> 3.2)
   - RealmSwift (~> 0.98.5)
+  - SVProgressHUD (~> 2.0.3)
   - Swifternalization (~> 1.3.1)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
@@ -56,9 +58,10 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: 44803f35418c5d89b27825a564247fcd190de37e
   RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   Swifternalization: 1576a7774f3395dad016c8fc2d61cee2a49b271f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: c3b3960464b4a40cef836c0bab44df5b6b26fad8
+PODFILE CHECKSUM: 27335c0c3bb37abed71349be2c7d52528bd5b8d2
 
-COCOAPODS: 1.0.0.beta.8
+COCOAPODS: 1.0.0

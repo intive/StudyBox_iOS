@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import Reachability
+import SVProgressHUD
 
 var userDataForRegistration = [String : String]()
 
@@ -50,6 +51,48 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         registerButton.titleLabel?.font = UIFont.sbFont(size: sbFontSizeMedium, bold: false)
     }
     
+    func registerNewUser(email: String, password: String) {
+        SVProgressHUD.show()
+        let dataManager = UIApplication.appDelegate().dataManager
+        
+        dataManager.register(email, password: password, completion: { response in
+            var errorMessage = "Błąd Rejestracji"
+            let successfullMessageTitle = "Zarejestrowano pomyślnie"
+            let successfullMessage = "Za chwilę nastąpi automatyczne zalogowanie"
+            let ok = "Ok"
+            
+            switch response {
+            case .Success(let user):
+                
+                debugPrint("email: \(user.email)")
+                debugPrint("password: \(user.password)")
+                
+
+                let alert: UIAlertController = UIAlertController(title: successfullMessageTitle, message: successfullMessage, preferredStyle: .Alert)
+                
+                func dismissAlert(){
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                }
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                let delay = 3.0 * Double(NSEC_PER_SEC)
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    SVProgressHUD.dismiss()
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    dataManager.remoteDataManager.saveEmailPassInDefaults(user.email, pass: user.password)
+                    self.successfulLoginTransition()
+                })
+                
+            case .Error(let err):
+                if case .ErrorWithMessage(let txt)? = (err as? ServerError){
+                    errorMessage = txt
+                }
+                SVProgressHUD.showErrorWithStatus(errorMessage)
+            }
+        })
+    }
     
     func registerWithInputData() {
         var alertMessage: String?
@@ -72,10 +115,11 @@ class RegistrationViewController: UserViewController, InputViewControllerDataSou
         }
         
         if let message = alertMessage {
-            presentAlertController(withTitle: "", message: message, buttonText: "Ok")
+            SVProgressHUD.showErrorWithStatus(message)
         } else {
-            dismissViewControllerAnimated(true) {[unowned self] in
-                self.successfulLoginTransition()
+            if let email = self.emailTextField.text, password = self.passwordTextField.text  {
+                inputViews.forEach { $0.resignFirstResponder() }
+                self.registerNewUser(email, password: password)
             }
         }
     }

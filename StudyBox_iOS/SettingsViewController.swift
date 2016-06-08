@@ -8,15 +8,16 @@
 
 import UIKit
 import Swifternalization
+import WatchConnectivity
+import SVProgressHUD
 
-class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    let settingsMainCellID = "settingsMainCell"
+class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UITableViewDelegate, SettingsDetailVCChangeDecksDelegate {
+    var decksToSync = [String]()
     
     @IBOutlet weak var settingsTableView: UITableView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    lazy private var dataManager: DataManager? = { return UIApplication.appDelegate().dataManager }()
+    lazy private var dataManager: DataManager = { return UIApplication.appDelegate().dataManager }()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
@@ -24,12 +25,12 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         switch (indexPath.section, indexPath.row){
         case (0, 0):
             //Frequency cell configuration
-            cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier(Utils.UIIds.SettingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Powiadomienia co"
             //Set detail label to data from NSUD
             if defaults.boolForKey(Utils.NSUserDefaultsKeys.NotificationsEnabledKey) {
                 if let number = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey),
-                    let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
+                    type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey)
                 {
                     cell.detailTextLabel?.text = "\(number) \(I18n.localizedString(type, stringValue: number))"
                 } else {
@@ -41,14 +42,16 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
             
         case (1, 0):
             //Deck choice cell configuration
-            cell = tableView.dequeueReusableCellWithIdentifier(settingsMainCellID, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier(Utils.UIIds.SettingsMainCellID, forIndexPath: indexPath)
             cell.textLabel?.text = "Talie"
             if let decksCount = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey)?.count {
                 cell.detailTextLabel?.text = "\(decksCount) \(I18n.localizedString("amount-decks", intValue: decksCount))"
             } else {
                 cell.detailTextLabel?.text = "Nie wybrano"
             }
-            //TODOs: enable or disable cell based on whether Watch is available
+        case (2, 0):
+            cell = tableView.dequeueReusableCellWithIdentifier(Utils.UIIds.SettingsAppInfoCellID, forIndexPath: indexPath)
+            cell.textLabel?.text = "Informacje"
             
         default: break
         }
@@ -60,7 +63,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,6 +74,7 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
         switch section {
         case 0 : return "Powiadomienia"
         case 1 : return "Apple Watch"
+        case 2 : return "O programie"
         default: return ""
         }
     }
@@ -85,37 +89,90 @@ class SettingsViewController: StudyBoxViewController, UITableViewDataSource, UIT
     
     //Set the mode of SettingsDetailVC based on tapped cell
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let detailViewController = segue.destinationViewController as? SettingsDetailViewController
-        if let section = self.settingsTableView.indexPathForSelectedRow?.section {
+        if let section = self.settingsTableView.indexPathForSelectedRow?.section,
+            detailViewController = segue.destinationViewController as? SettingsDetailViewController {
             switch section {
             case 0:
-                detailViewController?.mode = .Frequency
+                detailViewController.mode = .Frequency
             case 1:
-                detailViewController?.mode = .DecksForWatch
+                detailViewController.mode = .DecksForWatch
+                detailViewController.delegate = self
             default: break
             }
         }
     }
     
-    //Check if user has any decks on device before performing segue on second TableViewCell
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
-        var doesUserHaveDecks = true
-        if let userDecks = dataManager?.decks(false) {
-            if userDecks.isEmpty {
-                presentAlertController(withTitle: "Brak talii", message: "Nie masz na swoim urządzeniu żadnych talii do synchronizacji.", buttonText: "OK")
-                doesUserHaveDecks = false
-                self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        var shouldPerform = false
+        
+        if let section = self.settingsTableView.indexPathForSelectedRow?.section {
+            switch section {
+            case 0, 2:
+                shouldPerform = true
+            case 1:
+                if !WCSession.isSupported() {
+                    SVProgressHUD.showInfoWithStatus("Twoje urządzenie nie obsługuje komunikacji z Apple Watch.")
+                }
+                if let email = dataManager.remoteDataManager.user?.email {
+                    let userDecks = dataManager.localDataManager.filter(Deck.self, predicate: "owner = '\(email)'")
+                    if userDecks.isEmpty {
+                        SVProgressHUD.showInfoWithStatus("Nie masz na swoim urządzeniu żadnych talii do synchronizacji.")
+                    } else { //We have decks
+                        shouldPerform = true
+                    }
+                } else { //User is not logged in
+                    SVProgressHUD.showInfoWithStatus("Musisz być zalogowany oraz posiadać talie aby synchronizować je z Apple Watch.")
+                }
+                if !shouldPerform {
+                    self.settingsTableView.deselectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: true)
+                }
+                
+            default: break
             }
         }
-        return doesUserHaveDecks
+        return shouldPerform
+        
     }
     
     //Update cells when returning from DetailVC
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if let decksFromDefaults = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String] {
+            decksToSync = decksFromDefaults
+        }
         settingsTableView.reloadData()
     }
     
+    func updateDecks() {
+        SVProgressHUD.show()
+        if let decksToSync = defaults.objectForKey(Utils.NSUserDefaultsKeys.DecksToSynchronizeKey) as? [String] {
+            guard !decksToSync.isEmpty else {
+                SVProgressHUD.dismiss()
+                return
+            }
+            WatchDataManager.watchManager.downloadSelectedDecksFlashcardsTips(decksToSync) {
+                switch $0 {
+                case .Success:
+                    SVProgressHUD.showSuccessWithStatus("Zsynchronizowano talie z serwera.")
+                    self.sendDecksToWatch(self.decksToSync)
+                case .Failure:
+                    SVProgressHUD.showErrorWithStatus("Błąd przy pobieraniu danych.")
+                }
+            }
+        } else {
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func sendDecksToWatch(decksToSynchronizeIDs: [String]) {
+        do {
+            try WatchDataManager.watchManager.sendDecksToAppleWatch(decksToSynchronizeIDs)
+        } catch let e {
+            debugPrint(e)
+            SVProgressHUD.showErrorWithStatus("Nie można obecnie przesłać talii do Apple Watch.")
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Ustawienia"

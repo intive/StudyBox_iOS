@@ -8,6 +8,7 @@
 
 import RealmSwift
 
+
 class LocalDataManager {
     private let realm = try? Realm()
     
@@ -35,8 +36,16 @@ class LocalDataManager {
         return realm?.objects(T.self).toArray() ?? []
     }
     
-    func filter<T: Object>(type: T.Type, predicate: String, args: AnyObject...) -> [T] {
-        return realm?.objects(T.self).filter(predicate, args).toArray() ?? []
+    private func filteredResults<T: Object>(type: T.Type, predicate: String) -> Results<T>? {
+        return realm?.objects(T.self).filter(predicate)
+    }
+    
+    func filter<T: Object>(type: T.Type, predicate: String) -> [T] {
+        return filteredResults(T.self, predicate: predicate)?.toArray() ?? []
+    }
+    
+    func filterCount<T: Object>(type: T.Type, predicate: String) -> Int {
+        return filteredResults(T.self, predicate: predicate)?.count ?? 0
     }
     
     func update(object: Object) -> Bool {
@@ -61,6 +70,28 @@ class LocalDataManager {
         return write { realm in
             realm.delete(objects)
         }
+    }
+   
+    func deleteAll<T: Object>(objects: T.Type) -> Bool {
+        let objs = getAll(objects)
+        return delete(objs)
+    }
+    func flashcards(deckID: String) -> [Flashcard] {
+        return filter(Flashcard.self, predicate: "serverID == '\(deckID)'")
+    }
+    
+    func tips(deckID: String, flashcardID: String) -> [Tip] {
+        return filter(Tip.self, predicate: "deckID == '\(deckID)' AND flashcardID == '\(flashcardID)'")
+    }
+    
+    func gravatar() -> NSData? {
+        return NSData(contentsOfURL: self.gravatarDestinationURL)
+    }
+    
+    var gravatarDestinationURL: NSURL {
+        let fileManager = NSFileManager.defaultManager()
+        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        return directoryURL.URLByAppendingPathComponent("gravatarImage")
     }
     
 }

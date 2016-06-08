@@ -68,7 +68,7 @@ class InputViewController: UIViewController, UITextFieldDelegate  {
      // With keyboard disappearance vertical origin is set to it's initial position
     func keyboardChangedFrame(notification: NSNotification) {
         dataSourcePrecondition()
-        if let rect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(), let lowestView = currentLowestInputView {
+        if let rect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(), lowestView = currentLowestInputView {
             
             switch notification.name {
                 

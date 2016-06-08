@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Fabric
 import Crashlytics
+import SVProgressHUD
 
 //@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
@@ -19,6 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
         
+        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.setMinimumDismissTimeInterval(1)
+        SVProgressHUD.setDefaultStyle(.Light)
+        
+        self.window?.tintColor = UIColor.sb_DarkBlue()
+        
+        let dataManager = UIApplication.appDelegate().dataManager
+        let userData = dataManager.remoteDataManager.getEmailPassFromDefaults()
+        
+        if let email = userData?.email, password = userData?.password, storyboard = window?.rootViewController?.storyboard {
+            dataManager.remoteDataManager.user = User(email: email, password: password)
+            window?.rootViewController = SBDrawerController.basicSBDrawer(storyboard: storyboard)
+        }
         return true
     }
     
@@ -41,11 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
         if let type = defaults.stringForKey(Utils.NSUserDefaultsKeys.PickerFrequencyTypeKey) {
             let number = defaults.integerForKey(Utils.NSUserDefaultsKeys.PickerFrequencyNumberKey)
             switch type  {
-            case "minut":
+            case "minuty":
                 if let newDate = calendar.dateByAddingUnit(.Minute, value: number, toDate: now, options: [.MatchStrictly]){
                     newFireDate = newDate
                 }
-            case "godzin":
+            case "godziny":
                 if let newDate = calendar.dateByAddingUnit(.Hour, value: number, toDate: now, options: [.MatchStrictly]){
                     newFireDate = newDate
                 }
@@ -100,8 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
     
     // MARK: - DataManager stack 
     
-    private(set) var dataManager: DataManager = DataManager.managerWithDummyData()
-    private(set) var newDataManager = NewDataManager()
+    private(set) var dataManager = DataManager()
     
 
     // MARK: - Core Data stack

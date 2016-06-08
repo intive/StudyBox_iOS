@@ -13,6 +13,7 @@ class CircularLoaderView: UIView {
     let foregroundCircleLayer = CAShapeLayer()
     let backgroundCircleLayer = CAShapeLayer()
     var circleRadius: CGFloat = 0
+    let lineWidth: CGFloat = 20
     
     var progress: CGFloat {
         get {
@@ -45,12 +46,12 @@ class CircularLoaderView: UIView {
     ///Sets colors, end caps and width; adds circles to the view's `layer`
     func setupLayer() {
         foregroundCircleLayer.lineCap = kCALineCapRound
-        foregroundCircleLayer.lineWidth = 20
+        foregroundCircleLayer.lineWidth = lineWidth
         foregroundCircleLayer.fillColor = UIColor.clearColor().CGColor
         foregroundCircleLayer.strokeColor = UIColor.sb_DarkBlue().CGColor
         
         backgroundCircleLayer.lineCap = kCALineCapRound
-        backgroundCircleLayer.lineWidth = 20
+        backgroundCircleLayer.lineWidth = lineWidth
         backgroundCircleLayer.fillColor = UIColor.clearColor().CGColor
         backgroundCircleLayer.strokeColor = UIColor.sb_DarkBlue().colorWithAlphaComponent(0.3).CGColor
         
@@ -59,35 +60,15 @@ class CircularLoaderView: UIView {
         backgroundColor = UIColor.clearColor()
     }
     
-    //Draws the circle inside `circleFrame`
+    //Draws the circle
     func drawPath() -> UIBezierPath {
         
         //Draw circle in its frame
-        let path = UIBezierPath(ovalInRect: circleFrame())
+        let layer = foregroundCircleLayer.bounds
+        let centerPoint = CGPoint(x: layer.midX, y: layer.midY)
+        let radius = (foregroundCircleLayer.bounds.width / 2) - lineWidth
         
-        //Apply transforms to rotate shape around its center
-        let bounds = CGPathGetBoundingBox(path.CGPath)
-        let center = CGPoint(x:CGRectGetMidX(bounds), y:CGRectGetMidY(bounds))
-        
-        let toOrigin = CGAffineTransformMakeTranslation(-center.x, -center.y)
-        path.applyTransform(toOrigin)
-        
-        //Rotate by -90 degrees
-        let rotate: CGAffineTransform = CGAffineTransformMakeRotation(CGFloat(-M_PI / 2))
-        path.applyTransform(rotate)
-        
-        let fromOrigin = CGAffineTransformMakeTranslation(center.x, center.y)
-        path.applyTransform(fromOrigin)
-        
-        return path
-    }
-    
-    //Returns a frame in which the circle will be drawn
-    func circleFrame() -> CGRect {
-        var circleFrame = CGRect(x: 0, y: 0, width: circleRadius, height: circleRadius)
-        circleFrame.origin.x = CGRectGetMidX(foregroundCircleLayer.bounds) - CGRectGetMidX(circleFrame)
-        circleFrame.origin.y = CGRectGetMidY(foregroundCircleLayer.bounds) - CGRectGetMidY(circleFrame)
-        return circleFrame
+        return UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(M_PI*3/2), clockwise: true)
     }
     
     //Animates the `foregroundCircleLayer` to `toValue`
