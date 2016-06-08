@@ -14,11 +14,13 @@ class TestViewControllerTests: XCTestCase {
     var sut: TestViewController!
     override func setUp() {
         super.setUp()
+        let window = UIWindow()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         sut = storyboard.instantiateViewControllerWithIdentifier("TestViewControllerID") as! TestViewController
-        UIApplication.sharedApplication().keyWindow?.rootViewController = sut
         _ = sut.view
         
+        //add TestViewController to view hierarchy
+        window.addSubview(sut.view)
     }
     
     override func tearDown() {
