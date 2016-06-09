@@ -10,7 +10,6 @@ import UIKit
 
 protocol AppDelegateProtocol {
     var dataManager: DataManager {get}
-    var newDataManager: NewDataManager {get}
     func scheduleNotification()
 }
 

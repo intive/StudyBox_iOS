@@ -12,10 +12,8 @@ import UIKit
 class TestingAppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
     var window: UIWindow?
     
-    //apple-clock
     func scheduleNotification() {}
-    private(set) var dataManager: DataManager = DataManager.managerWithDummyData()
-    private(set) var newDataManager = NewDataManager()
+    private(set) var dataManager: DataManager = DataManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         self.window?.rootViewController = UIViewController()

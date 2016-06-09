@@ -52,6 +52,9 @@
 		33E3825F287BBE538984A59F /* Pods_StudyBox_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E052467FABF5BEC1FDDDC /* Pods_StudyBox_iOS.framework */; };
 		4FA92EB85A56DD8728330F7E /* Pods_StudyBox_Watch_App_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20DFD78828E71DE611E8EC4 /* Pods_StudyBox_Watch_App_Extension.framework */; };
 		63A1D4901CC7BC4F00EE141B /* CollectionType+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */; };
+		63B10C911D094FF20018E886 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B10C8F1D094FF20018E886 /* main.swift */; };
+		63B10C921D094FF20018E886 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B10C901D094FF20018E886 /* TestingAppDelegate.swift */; };
+		63B10C941D09500B0018E886 /* TestViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B10C931D09500B0018E886 /* TestViewControllerTests.swift */; };
 		7200E4311CCE1C8300C96BA4 /* Results+toArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE35B8B1CA4747200D17A3C /* Results+toArray.swift */; };
 		72012FF11CB420D800289C5F /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */; };
 		7206C0EE1C94586B0030FA0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */; };
@@ -206,6 +209,9 @@
 		2DF09D681CD3A64C00AD20F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4A01D0B7D3A19716A39A81E9 /* Pods-StudyBox Watch App Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyBox Watch App Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyBox Watch App Extension/Pods-StudyBox Watch App Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		63A1D48F1CC7BC4F00EE141B /* CollectionType+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+shuffle.swift"; sourceTree = "<group>"; };
+		63B10C8F1D094FF20018E886 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		63B10C901D094FF20018E886 /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		63B10C931D09500B0018E886 /* TestViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewControllerTests.swift; sourceTree = "<group>"; };
 		72012FF01CB420D800289C5F /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		7206C0ED1C94586B0030FA0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7214E0911CCD0355003E919C /* WatchDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataModel.swift; sourceTree = "<group>"; };
@@ -546,7 +552,9 @@
 				2D2843651C88CEDE006E5E21 /* Model */,
 				72F089111CB7A87300BB4898 /* Settings Classes */,
 				A1341DCE1C81E76900AFD04E /* Info.plist */,
+				63B10C8F1D094FF20018E886 /* main.swift */,
 				A1341DBF1C81E76900AFD04E /* AppDelegate.swift */,
+				63B10C901D094FF20018E886 /* TestingAppDelegate.swift */,
 				A1341DC91C81E76900AFD04E /* Assets.xcassets */,
 				A1341DCB1C81E76900AFD04E /* LaunchScreen.storyboard */,
 				A1341DC31C81E76900AFD04E /* Main.storyboard */,
@@ -560,6 +568,7 @@
 		A1341DD61C81E76900AFD04E /* StudyBox_iOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				63B10C931D09500B0018E886 /* TestViewControllerTests.swift */,
 				A1341DD71C81E76900AFD04E /* StudyBox_iOSTests.swift */,
 				A1341DD91C81E76900AFD04E /* Info.plist */,
 				AEEAB56F1CCE3A5400BB60FA /* TestLogicTests.swift */,
@@ -974,6 +983,7 @@
 				2DBC00181C89AAF5006B4DC0 /* Array+FindUnique.swift in Sources */,
 				72EA44011CB16925001DFDE5 /* PickerTableViewCell.swift in Sources */,
 				2D53E3001C9F41CB00436588 /* SBDrawerController.swift in Sources */,
+				63B10C911D094FF20018E886 /* main.swift in Sources */,
 				A1341DC81C81E76900AFD04E /* StudyBox_iOS.xcdatamodeld in Sources */,
 				2D45ABAB1C8CB855009C3CF4 /* DrawerViewController.swift in Sources */,
 				723849401C88851A009605EE /* EditFlashcardViewController.swift in Sources */,
@@ -995,6 +1005,7 @@
 				2DD330CA1CDBE79E00C52539 /* JSONInitializable.swift in Sources */,
 				2D5B88F61CB8EF0700CBB85D /* SBNavigationController.swift in Sources */,
 				2D15AFBA1CF5884200503433 /* String+md5.swift in Sources */,
+				63B10C921D094FF20018E886 /* TestingAppDelegate.swift in Sources */,
 				AE2AFB751C8DC274003EF985 /* DecksViewCell.swift in Sources */,
 				725E3C121CD89A810081470D /* Dictionary+merge+flat.swift in Sources */,
 				2D40788F1CA19E4300A782A9 /* UIApplication+appDelegate.swift in Sources */,
@@ -1014,6 +1025,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63B10C941D09500B0018E886 /* TestViewControllerTests.swift in Sources */,
 				A1341DD81C81E76900AFD04E /* StudyBox_iOSTests.swift in Sources */,
 				AEEAB5701CCE3A5400BB60FA /* TestLogicTests.swift in Sources */,
 			);
