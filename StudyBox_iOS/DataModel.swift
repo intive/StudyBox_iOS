@@ -93,7 +93,7 @@ class Flashcard: Object, UniquelyIdentifiable, JSONInitializable  {
 }
 
 
-class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable {
+class Deck: Object, UniquelyIdentifiable, Searchable, JSONInitializable, Hashable {
     
     dynamic private(set) var serverID: String = ""
     dynamic var name: String = ""

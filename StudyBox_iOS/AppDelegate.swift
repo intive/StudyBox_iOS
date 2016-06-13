@@ -12,8 +12,8 @@ import Fabric
 import Crashlytics
 import SVProgressHUD
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+//@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
 
     var window: UIWindow?
 
